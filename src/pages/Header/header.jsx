@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Bird, Camera, Send, Video } from 'lucide-react'
+import { Bird, Instagram, Send, Video } from 'lucide-react'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
@@ -32,7 +32,7 @@ const socialLinks = [
 	},
 	{
 		href: 'https://instagram.com/toshkent_metro',
-		icon: <Camera size={20} />,
+		icon: <Instagram size={20} />,
 		title: 'Instagram',
 	},
 	{
@@ -64,7 +64,7 @@ export default function MetroCarousel() {
 					key={index}
 					initial={{ opacity: 0 }}
 					animate={{ opacity: current === index ? 1 : 0 }}
-					transition={{ duration: 5 }}
+					transition={{ duration: 4 }}
 					className='absolute inset-0 w-full h-full'
 				>
 					<img

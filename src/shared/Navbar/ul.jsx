@@ -83,17 +83,17 @@ export default function MetroNavbar() {
 	const [activeIndex, setActiveIndex] = useState(null)
 
 	return (
-		<ul className='flex gap-4 flex-wrap'>
+		<ul className='flex gap-4 flex-wrap cursor-pointer'>
 			{menuItems.map((item, index) => (
 				<li
 					key={index}
-					className='relative group'
+					className='relative group cursor-pointer'
 					onMouseEnter={() => item.dropdown && setActiveIndex(index)}
 					onMouseLeave={() => item.dropdown && setActiveIndex(null)}
 				>
 					<Link
 						href={item.href}
-						className='text-[12px] font-bold border-l-2 border-blue-600 pl-1 pr-1 2xl:pl-3 2xl:pr-2 py-1 rounded-sm hover:text-blue-600 hover:border-blue-800 transition-all duration-300 ease-in-out'
+						className='text-[12px] font-bold border-l-2 border-blue-600 pl-1 pr-1 2xl:pl-3 2xl:pr-2 py-1 rounded-sm hover:text-blue-600 hover:border-blue-800 transition-all duration-300 ease-in-out cursor-pointer'
 					>
 						{item.label}
 					</Link>
@@ -105,7 +105,7 @@ export default function MetroNavbar() {
 								animate={{ opacity: 1, y: 0 }}
 								exit={{ opacity: 0, y: 10 }}
 								transition={{ duration: 0.3, ease: 'easeOut' }}
-								className='absolute top-full left-0 bg-white text-black shadow-lg rounded-lg mt-2 py-2 w-56 z-50 border border-gray-200'
+								className='absolute top-full left-0 bg-white cursor-pointer text-black shadow-lg rounded-lg mt-2 py-2 w-56 z-50 border border-gray-200'
 								onMouseEnter={() => setActiveIndex(index)}
 								onMouseLeave={() => setActiveIndex(null)}
 							>
@@ -113,7 +113,7 @@ export default function MetroNavbar() {
 									<li key={subIndex}>
 										<Link
 											href={subItem.href}
-											className='block px-4 py-2 rounded-md hover:bg-blue-100 hover:text-blue-800 transition-all duration-200'
+											className='block px-4 py-2 rounded-md hover:bg-blue-100 hover:text-blue-800 transition-all duration-200 cursor-pointer'
 										>
 											{subItem.label}
 										</Link>

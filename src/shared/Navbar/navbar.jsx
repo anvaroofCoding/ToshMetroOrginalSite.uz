@@ -239,30 +239,30 @@ export default function Navbar() {
 									<Link
 										href='https://t.me/toshkent_metro'
 										target='_blank'
-										className='flex items-center gap-2 hover:text-blue-400 transition'
+										className='flex items-center gap-2 hover:text-blue-400 transition cursor-pointer'
 									>
-										<Send size={18} /> Telegram
+										<Send size={18} className='cursor-pointer' /> Telegram
 									</Link>
 									<Link
 										href='https://instagram.com/toshkent_metro'
 										target='_blank'
-										className='flex items-center gap-2 hover:text-pink-400 transition'
+										className='flex items-center gap-2 hover:text-pink-400 transition cursor-pointer'
 									>
-										<Camera size={18} /> Instagram
+										<Camera size={18} className='cursor-pointer' /> Instagram
 									</Link>
 									<Link
 										href='https://twitter.com/toshkent_metro'
 										target='_blank'
-										className='flex items-center gap-2 hover:text-blue-300 transition'
+										className='flex items-center gap-2 hover:text-blue-300 transition cursor-pointer'
 									>
-										<Bird size={18} /> Twitter
+										<Bird size={18} className='cursor-pointer' /> Twitter
 									</Link>
 									<Link
 										href='https://youtube.com/toshkent_metro'
 										target='_blank'
-										className='flex items-center gap-2 hover:text-red-500 transition'
+										className='flex items-center gap-2 hover:text-red-500 transition cursor-pointer'
 									>
-										<Video size={18} /> YouTube
+										<Video size={18} className='cursor-pointer' /> YouTube
 									</Link>
 								</div>
 							</div>

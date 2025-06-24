@@ -13,3 +13,33 @@
 .roboto {
 	font-family: 'Roboto', sans-serif;
 }
+
+/* Body background and text color */
+body {
+	background-color: #ffffff; /* oq fon */
+	color: #0e327f; /* ko'k matn rangi */
+}
+
+/* Scrollbar styling (works in modern browsers) */
+::-webkit-scrollbar {
+	width: 8px; /* scrollbar eni */
+}
+
+::-webkit-scrollbar-track {
+	background: #f1f1f1; /* track oqish rang */
+}
+
+::-webkit-scrollbar-thumb {
+	background: #0e327f; /* ko'k scrollbar thumb */
+	border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: #1453c8; /* hover qilinganda ko'kroq rang */
+}
+
+/* Firefox uchun scrollbar */
+body {
+	scrollbar-width: thin;
+	scrollbar-color: #0e327f #f1f1f1;
+}
