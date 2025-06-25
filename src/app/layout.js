@@ -1,4 +1,4 @@
-import FloatingChat from '@/components/Flowechat/FloatingChat'
+import AIFloatingChat from '@/components/Flowechat/FloatingChat'
 import SplashScreen from '@/components/splashScreen/splashScreen'
 import Layout from '@/layout/Layout'
 import Footer from '@/shared/footer/footer'
@@ -45,7 +45,7 @@ export default function RootLayout({ children }) {
 					<Navbar />
 					<SplashScreen>{children}</SplashScreen>
 					<Footer />
-					<FloatingChat />
+					<AIFloatingChat />
 				</Layout>
 			</body>
 		</html>

@@ -1,155 +1,556 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { Send, X } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { openai } from '@ai-sdk/openai'
+import { generateText } from 'ai'
+import { AnimatePresence, motion } from 'framer-motion'
+import {
+	Bot,
+	MessageCircle,
+	Send,
+	Sparkles,
+	Volume2,
+	VolumeX,
+	X,
+} from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
 
 const quickReplies = [
-	'Salom!',
-	'Qanday yordam bera olaman?',
-	'Rahmat!',
-	'Xayr!',
+	'Salom! 👋',
+	'Yordam kerak',
+	'Rahmat! 🙏',
+	'Xayr! 👋',
+	'Qanday hollar?',
+	'Tushundim ✅',
 ]
-const reactions = ['🔥', '👍', '👎', '😂']
 
-export default function FloatingChat() {
+const reactionCategories = {
+	emotions: ['😊', '😂', '😍', '🥰', '😎', '🤔'],
+	gestures: ['👍', '👎', '👏', '🙌', '👋', '🤝'],
+	symbols: ['❤️', '🔥', '⭐', '✨', '💯', '🎉'],
+}
+
+const notificationSounds = {
+	message: '/api/placeholder-audio?type=message',
+	notification: '/api/placeholder-audio?type=notification',
+	alert: '/api/placeholder-audio?type=alert',
+}
+
+export default function AIFloatingChat() {
 	const [isOpen, setIsOpen] = useState(false)
 	const [messages, setMessages] = useState([])
 	const [input, setInput] = useState('')
+	const [isLoading, setIsLoading] = useState(false)
 	const [alert, setAlert] = useState(false)
+	const [soundEnabled, setSoundEnabled] = useState(true)
+	const [showReactions, setShowReactions] = useState(false)
+	const [selectedCategory, setSelectedCategory] = useState('emotions')
 
-	const toggleChat = () => setIsOpen(prev => !prev)
+	const messagesEndRef = useRef(null)
+	const audioRef = useRef(null)
+	const chatRef = useRef(null)
 
-	const sendMessage = msg => {
-		if (!msg.trim()) return
-		setMessages(prev => [...prev, msg])
-		setInput('')
+	const playSound = soundType => {
+		if (!soundEnabled) return
+		try {
+			const audio = new Audio()
+			audio.volume = 0.3
+			// Simulate sound with a beep for demo purposes
+			const context = new AudioContext()
+			const oscillator = context.createOscillator()
+			const gainNode = context.createGain()
+
+			oscillator.connect(gainNode)
+			gainNode.connect(context.destination)
+
+			oscillator.frequency.value =
+				soundType === 'message' ? 800 : soundType === 'notification' ? 600 : 400
+			oscillator.type = 'sine'
+
+			gainNode.gain.setValueAtTime(0.1, context.currentTime)
+			gainNode.gain.exponentialRampToValueAtTime(
+				0.01,
+				context.currentTime + 0.2
+			)
+
+			oscillator.start(context.currentTime)
+			oscillator.stop(context.currentTime + 0.2)
+		} catch (error) {
+			console.log('Sound not available')
+		}
 	}
 
+	const scrollToBottom = () => {
+		messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+	}
+
+	useEffect(() => {
+		scrollToBottom()
+	}, [messages])
+
+	const generateAIResponse = async userMessage => {
+		try {
+			setIsLoading(true)
+			const { text } = await generateText({
+				model: openai('gpt-4o'),
+				system: `Siz Uzbek tilida javob beradigan yordamchi AI assistantsiz. Har doim do'stona, samimiy va foydali javoblar bering. Uzbek tilining o'zbekcha so'zlarini ishlating. Qisqa va aniq javoblar bering.`,
+				prompt: `Foydalanuvchi sizga shunday dedi: "${userMessage}". Uzbek tilida javob bering.`,
+			})
+
+			const aiMessage = {
+				id: Date.now().toString() + '_ai',
+				text: text,
+				isUser: false,
+				timestamp: new Date(),
+			}
+
+			setMessages(prev => [...prev, aiMessage])
+			playSound('message')
+		} catch (error) {
+			const errorMessage = {
+				id: Date.now().toString() + '_error',
+				text: "Kechirasiz, hozir javob bera olmayman. Keyinroq urinib ko'ring.",
+				isUser: false,
+				timestamp: new Date(),
+			}
+			setMessages(prev => [...prev, errorMessage])
+		} finally {
+			setIsLoading(false)
+		}
+	}
+
+	const toggleChat = () => {
+		setIsOpen(prev => !prev)
+		if (!isOpen) {
+			playSound('notification')
+		}
+	}
+
+	const sendMessage = async msg => {
+		if (!msg.trim()) return
+
+		const userMessage = {
+			id: Date.now().toString(),
+			text: msg,
+			isUser: true,
+			timestamp: new Date(),
+		}
+
+		setMessages(prev => [...prev, userMessage])
+		setInput('')
+		setShowReactions(false)
+
+		// Generate AI response
+		await generateAIResponse(msg)
+	}
+
+	const addReaction = (messageId, reaction) => {
+		setMessages(prev =>
+			prev.map(msg =>
+				msg.id === messageId
+					? { ...msg, reactions: [...(msg.reactions || []), reaction] }
+					: msg
+			)
+		)
+		playSound('notification')
+	}
+
+	// Alert animation every 10 seconds
 	useEffect(() => {
 		let interval
 		if (!isOpen) {
 			interval = setInterval(() => {
 				setAlert(true)
-				// 3 sekund sakrash
-				setTimeout(() => setAlert(false), 3000)
+				playSound('alert')
+				// Shake animation
+				if (chatRef.current) {
+					chatRef.current.style.animation = 'shake 0.5s ease-in-out'
+					setTimeout(() => {
+						if (chatRef.current) {
+							chatRef.current.style.animation = ''
+						}
+					}, 500)
+				}
+				setTimeout(() => setAlert(false), 4000)
 			}, 10000)
 		}
 		return () => clearInterval(interval)
 	}, [isOpen])
 
 	return (
-		<motion.div
-			drag
-			dragConstraints={{ left: 0, top: 0, right: 1000, bottom: 1000 }}
-			className='fixed bottom-4 right-4 z-[100]'
-		>
-			{isOpen ? (
-				<motion.div
-					initial={{ opacity: 0, y: 50 }}
-					animate={{ opacity: 1, y: 0 }}
-					exit={{ opacity: 0, y: 50 }}
-					transition={{ duration: 0.3 }}
-					className='w-72 h-96 bg-[#0E327F] text-white rounded-xl shadow-xl flex flex-col overflow-hidden'
-				>
-					<div className='flex justify-between items-center p-3 bg-[#0E327F]'>
-						<span className='font-bold'>Chat</span>
-						<button onClick={toggleChat}>
-							<X />
-						</button>
-					</div>
+		<>
+			<style jsx>{`
+				@keyframes shake {
+					0%,
+					100% {
+						transform: translateX(0);
+					}
+					25% {
+						transform: translateX(-5px);
+					}
+					75% {
+						transform: translateX(5px);
+					}
+				}
 
-					<div className='flex-1 p-2 overflow-y-auto bg-white text-black'>
-						{messages.length === 0 ? (
-							<p className='text-sm text-gray-500'>Hali xabar yo'q...</p>
-						) : (
-							messages.map((msg, idx) => (
-								<div
-									key={idx}
-									className='mb-1 bg-blue-100 p-2 rounded-lg max-w-[80%]'
-								>
-									{msg}
+				@keyframes pulse-glow {
+					0%,
+					100% {
+						box-shadow: 0 0 20px rgba(14, 50, 127, 0.5);
+					}
+					50% {
+						box-shadow: 0 0 30px rgba(14, 50, 127, 0.8),
+							0 0 40px rgba(14, 50, 127, 0.6);
+					}
+				}
+
+				.pulse-glow {
+					animation: pulse-glow 2s infinite;
+				}
+			`}</style>
+
+			<motion.div
+				ref={chatRef}
+				drag
+				dragConstraints={{ left: 0, top: 0, right: 1000, bottom: 1000 }}
+				className='fixed bottom-4 right-4 z-[100]'
+			>
+				<AnimatePresence>
+					{isOpen ? (
+						<motion.div
+							initial={{ opacity: 0, y: 50, scale: 0.9 }}
+							animate={{ opacity: 1, y: 0, scale: 1 }}
+							exit={{ opacity: 0, y: 50, scale: 0.9 }}
+							transition={{ duration: 0.3, type: 'spring', stiffness: 300 }}
+							className='w-80 h-[500px] bg-gradient-to-br from-[#0E327F] via-[#1e40af] to-[#3b82f6] text-white rounded-2xl shadow-2xl flex flex-col overflow-hidden backdrop-blur-lg border border-white/20'
+						>
+							{/* Header */}
+							<div className='flex justify-between items-center p-4 bg-gradient-to-r from-[#0E327F]/90 to-[#1e40af]/90 backdrop-blur-md border-b border-white/10'>
+								<div className='flex items-center gap-3'>
+									<div className='relative'>
+										<Bot className='w-8 h-8 text-yellow-400' />
+										<motion.div
+											animate={{ scale: [1, 1.2, 1] }}
+											transition={{
+												duration: 2,
+												repeat: Number.POSITIVE_INFINITY,
+											}}
+											className='absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full'
+										/>
+									</div>
+									<div>
+										<h3 className='font-bold text-lg'>AI Yordamchi</h3>
+										<p className='text-xs text-blue-200'>
+											Onlayn • Javob bermoqda
+										</p>
+									</div>
 								</div>
-							))
-						)}
-					</div>
+								<div className='flex items-center gap-2'>
+									<motion.button
+										whileHover={{ scale: 1.1 }}
+										whileTap={{ scale: 0.9 }}
+										onClick={() => setSoundEnabled(!soundEnabled)}
+										className='p-2 hover:bg-white/10 rounded-full transition-colors'
+									>
+										{soundEnabled ? (
+											<Volume2 size={18} />
+										) : (
+											<VolumeX size={18} />
+										)}
+									</motion.button>
+									<motion.button
+										whileHover={{ scale: 1.1 }}
+										whileTap={{ scale: 0.9 }}
+										onClick={toggleChat}
+										className='p-2 hover:bg-white/10 rounded-full transition-colors'
+									>
+										<X size={18} />
+									</motion.button>
+								</div>
+							</div>
 
-					<div className='flex gap-1 p-2 bg-[#0E327F]'>
-						{reactions.map((r, i) => (
-							<button
-								key={i}
-								onClick={() => sendMessage(r)}
-								className='text-lg hover:scale-125 transition'
+							{/* Messages */}
+							<div className='flex-1 p-4 overflow-y-auto bg-gradient-to-b from-slate-50 to-blue-50 text-gray-800 space-y-3'>
+								{messages.length === 0 ? (
+									<motion.div
+										initial={{ opacity: 0, y: 20 }}
+										animate={{ opacity: 1, y: 0 }}
+										className='text-center py-8'
+									>
+										<Sparkles className='w-12 h-12 text-blue-500 mx-auto mb-3' />
+										<p className='text-gray-500 text-sm'>
+											Salom! Men sizga Uzbek tilida yordam beraman.
+										</p>
+										<p className='text-gray-400 text-xs mt-1'>
+											Savolingizni yozing...
+										</p>
+									</motion.div>
+								) : (
+									messages.map(msg => (
+										<motion.div
+											key={msg.id}
+											initial={{ opacity: 0, y: 20, scale: 0.9 }}
+											animate={{ opacity: 1, y: 0, scale: 1 }}
+											transition={{ duration: 0.3 }}
+											className={`flex ${
+												msg.isUser ? 'justify-end' : 'justify-start'
+											}`}
+										>
+											<div className={`max-w-[80%] group relative`}>
+												<div
+													className={`p-3 rounded-2xl shadow-md ${
+														msg.isUser
+															? 'bg-gradient-to-r from-[#0E327F] to-[#1e40af] text-white rounded-br-md'
+															: 'bg-white text-gray-800 rounded-bl-md border border-gray-200'
+													}`}
+												>
+													<p className='text-sm leading-relaxed'>{msg.text}</p>
+													<p
+														className={`text-xs mt-1 ${
+															msg.isUser ? 'text-blue-200' : 'text-gray-400'
+														}`}
+													>
+														{msg.timestamp.toLocaleTimeString('uz-UZ', {
+															hour: '2-digit',
+															minute: '2-digit',
+														})}
+													</p>
+												</div>
+
+												{/* Reactions */}
+												{msg.reactions && msg.reactions.length > 0 && (
+													<div className='flex gap-1 mt-1 flex-wrap'>
+														{msg.reactions.map((reaction, idx) => (
+															<span
+																key={idx}
+																className='text-lg bg-white/80 rounded-full px-2 py-1 shadow-sm'
+															>
+																{reaction}
+															</span>
+														))}
+													</div>
+												)}
+
+												{/* Add reaction button */}
+												<motion.button
+													initial={{ opacity: 0 }}
+													whileHover={{ opacity: 1 }}
+													className='absolute -bottom-2 right-0 opacity-0 group-hover:opacity-100 bg-gray-200 hover:bg-gray-300 rounded-full p-1 text-xs transition-all'
+													onClick={() => addReaction(msg.id, '👍')}
+												>
+													+
+												</motion.button>
+											</div>
+										</motion.div>
+									))
+								)}
+
+								{/* Loading indicator */}
+								{isLoading && (
+									<motion.div
+										initial={{ opacity: 0, y: 20 }}
+										animate={{ opacity: 1, y: 0 }}
+										className='flex justify-start'
+									>
+										<div className='bg-white p-3 rounded-2xl rounded-bl-md shadow-md border border-gray-200'>
+											<div className='flex gap-1'>
+												{[0, 1, 2].map(i => (
+													<motion.div
+														key={i}
+														animate={{ scale: [1, 1.2, 1] }}
+														transition={{
+															duration: 0.6,
+															repeat: Number.POSITIVE_INFINITY,
+															delay: i * 0.2,
+														}}
+														className='w-2 h-2 bg-blue-500 rounded-full'
+													/>
+												))}
+											</div>
+										</div>
+									</motion.div>
+								)}
+
+								<div ref={messagesEndRef} />
+							</div>
+
+							{/* Reactions Panel */}
+							<AnimatePresence>
+								{showReactions && (
+									<motion.div
+										initial={{ opacity: 0, y: 20 }}
+										animate={{ opacity: 1, y: 0 }}
+										exit={{ opacity: 0, y: 20 }}
+										className='p-3 bg-white/95 backdrop-blur-md border-t border-gray-200'
+									>
+										<div className='flex gap-2 mb-2'>
+											{Object.keys(reactionCategories).map(category => (
+												<button
+													key={category}
+													onClick={() => setSelectedCategory(category)}
+													className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
+														selectedCategory === category
+															? 'bg-[#0E327F] text-white'
+															: 'bg-gray-200 text-gray-600 hover:bg-gray-300'
+													}`}
+												>
+													{category === 'emotions'
+														? 'Hissiyot'
+														: category === 'gestures'
+														? 'Harakat'
+														: 'Belgi'}
+												</button>
+											))}
+										</div>
+										<div className='flex gap-2 flex-wrap'>
+											{reactionCategories[selectedCategory].map(reaction => (
+												<motion.button
+													key={reaction}
+													whileHover={{ scale: 1.2 }}
+													whileTap={{ scale: 0.9 }}
+													onClick={() => sendMessage(reaction)}
+													className='text-2xl hover:bg-gray-100 rounded-lg p-2 transition-colors'
+												>
+													{reaction}
+												</motion.button>
+											))}
+										</div>
+									</motion.div>
+								)}
+							</AnimatePresence>
+
+							{/* Quick Replies */}
+							<div className='p-3 bg-gradient-to-r from-[#0E327F]/90 to-[#1e40af]/90 backdrop-blur-md border-t border-white/10'>
+								<div className='flex flex-wrap gap-2 mb-3'>
+									{quickReplies.map((txt, idx) => (
+										<motion.button
+											key={idx}
+											whileHover={{ scale: 1.05 }}
+											whileTap={{ scale: 0.95 }}
+											onClick={() => sendMessage(txt)}
+											className='bg-white/20 backdrop-blur-sm text-white text-xs rounded-full px-3 py-1.5 hover:bg-white/30 transition-all border border-white/20'
+										>
+											{txt}
+										</motion.button>
+									))}
+								</div>
+
+								{/* Input */}
+								<div className='flex gap-2'>
+									<motion.button
+										whileHover={{ scale: 1.1 }}
+										whileTap={{ scale: 0.9 }}
+										onClick={() => setShowReactions(!showReactions)}
+										className='bg-white/20 backdrop-blur-sm text-white p-2.5 rounded-full hover:bg-white/30 transition-all border border-white/20'
+									>
+										😊
+									</motion.button>
+
+									<div className='flex-1 bg-white/20 backdrop-blur-sm rounded-full overflow-hidden border border-white/20 focus-within:ring-2 focus-within:ring-white/50 transition-all'>
+										<input
+											type='text'
+											value={input}
+											onChange={e => setInput(e.target.value)}
+											className='w-full p-2.5 text-sm text-white placeholder-white/70 bg-transparent focus:outline-none'
+											placeholder='Xabar yozing...'
+											onKeyDown={e =>
+												e.key === 'Enter' && !isLoading && sendMessage(input)
+											}
+											disabled={isLoading}
+										/>
+									</div>
+
+									<motion.button
+										whileHover={{ scale: 1.1 }}
+										whileTap={{ scale: 0.9 }}
+										onClick={() => sendMessage(input)}
+										disabled={isLoading || !input.trim()}
+										className='bg-gradient-to-r from-yellow-400 to-orange-500 text-white p-2.5 rounded-full shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed'
+									>
+										<Send size={18} />
+									</motion.button>
+								</div>
+							</div>
+						</motion.div>
+					) : (
+						<motion.button
+							initial={{ opacity: 0, scale: 0 }}
+							animate={{
+								opacity: 1,
+								scale: 1,
+								y: alert ? [0, -10, 0, -10, 0] : 0,
+							}}
+							whileHover={{ scale: 1.1 }}
+							whileTap={{ scale: 0.9 }}
+							onClick={() => {
+								toggleChat()
+								setAlert(false)
+							}}
+							className={`bg-gradient-to-r from-[#0E327F] to-[#1e40af] text-white rounded-full w-16 h-16 shadow-2xl flex flex-col justify-center items-center relative overflow-hidden ${
+								alert ? 'pulse-glow' : ''
+							}`}
+						>
+							<motion.div
+								animate={
+									alert
+										? {
+												rotate: [0, -10, 10, -10, 0],
+												scale: [1, 1.1, 1],
+										  }
+										: {}
+								}
+								transition={{
+									duration: 0.5,
+									repeat: alert ? Number.POSITIVE_INFINITY : 0,
+									repeatDelay: 1,
+								}}
+								className='flex flex-col items-center'
 							>
-								{r}
-							</button>
-						))}
-					</div>
+								<MessageCircle size={24} />
+								<span className='text-xs font-medium mt-1'>Chat</span>
+							</motion.div>
 
-					<div className='flex flex-wrap gap-1 p-2 bg-[#0E327F]'>
-						{quickReplies.map((txt, idx) => (
-							<button
-								key={idx}
-								onClick={() => sendMessage(txt)}
-								className='bg-white text-[#0E327F] text-xs rounded-full px-3 py-1 hover:bg-blue-100 transition'
-							>
-								{txt}
-							</button>
-						))}
-					</div>
+							{alert && (
+								<motion.div
+									initial={{ opacity: 0, y: 10 }}
+									animate={{ opacity: 1, y: 0 }}
+									exit={{ opacity: 0, y: 10 }}
+									className='absolute -top-12 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-xs px-3 py-2 rounded-lg shadow-lg whitespace-nowrap'
+								>
+									<div className='flex items-center gap-1'>
+										<Sparkles size={12} />
+										Savolingiz bormi?
+									</div>
+									<div className='absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-blue-600'></div>
+								</motion.div>
+							)}
 
-					<div className='p-2 bg-[#0E327F]'>
-						<div className='flex bg-white rounded-full overflow-hidden shadow-inner focus-within:ring-2 focus-within:ring-blue-300 transition'>
-							<input
-								type='text'
-								value={input}
-								onChange={e => setInput(e.target.value)}
-								className='flex-1 p-2 text-sm text-black focus:outline-none'
-								placeholder='Xabar yozing...'
-								onKeyDown={e => e.key === 'Enter' && sendMessage(input)}
-							/>
-							<motion.button
-								whileTap={{ scale: 1.2 }}
-								onClick={() => sendMessage(input)}
-								className='bg-[#0E327F] text-white p-2 flex items-center justify-center'
-							>
-								<Send size={18} />
-							</motion.button>
-						</div>
-					</div>
-				</motion.div>
-			) : (
-				<motion.button
-					initial={{ opacity: 0, scale: 0 }}
-					animate={{
-						opacity: 1,
-						scale: 1,
-					}}
-					whileHover={{ scale: 1.1 }}
-					onClick={() => {
-						toggleChat()
-						setAlert(false)
-					}}
-					className='bg-[#0E327F] text-white rounded-full w-12 h-12 shadow-lg flex justify-center items-center relative'
-				>
-					<motion.div
-						animate={alert ? { y: [0, -5, 0, -5, 0] } : {}}
-						transition={{
-							duration: 0.5,
-							repeat: alert ? Infinity : 0,
-							repeatDelay: 0,
-						}}
-					>
-						Chat
-					</motion.div>
-
-					{alert && (
-						<span className='absolute -top-6 bg-blue-700 text-xs px-2 py-1 rounded shadow'>
-							Murojaat uchun
-						</span>
+							{/* Floating particles */}
+							{alert && (
+								<div className='absolute inset-0 pointer-events-none'>
+									{[...Array(6)].map((_, i) => (
+										<motion.div
+											key={i}
+											initial={{ opacity: 0, scale: 0 }}
+											animate={{
+												opacity: [0, 1, 0],
+												scale: [0, 1, 0],
+												x: [0, (Math.random() - 0.5) * 100],
+												y: [0, (Math.random() - 0.5) * 100],
+											}}
+											transition={{
+												duration: 2,
+												repeat: Number.POSITIVE_INFINITY,
+												delay: i * 0.3,
+											}}
+											className='absolute top-1/2 left-1/2 w-2 h-2 bg-yellow-400 rounded-full'
+										/>
+									))}
+								</div>
+							)}
+						</motion.button>
 					)}
-				</motion.button>
-			)}
-		</motion.div>
+				</AnimatePresence>
+			</motion.div>
+		</>
 	)
 }
