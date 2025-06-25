@@ -48,12 +48,12 @@ const Cards = () => {
 				</h1>
 				<Button />
 			</div>
-			<div className='container grid lg:grid-cols-5 grid-cols-1  gap-5'>
+			<div className='container grid lg:grid-cols-5 grid-cols-1 gap-5  '>
 				<div className='lg:col-span-3 grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6'>
 					{news.map((item, idx) => (
 						<div
 							key={idx}
-							className='relative rounded-sm overflow-hidden group shadow hover:shadow-lg transition'
+							className='relative  rounded-sm overflow-hidden group shadow hover:shadow-lg transition'
 						>
 							<div
 								className='h-48 relative cursor-pointer'
@@ -70,33 +70,41 @@ const Cards = () => {
 									<Eye className='text-white w-8 h-8' />
 								</div>
 							</div>
-							<div className='bg-white p-3 flex flex-col justify-between h-24'>
-								<h2 className='font-bold text-sm line-clamp-2'>{item.title}</h2>
+							<div className='bg-white p-3 flex flex-col gap-3 h-[50%]'>
+								<h2 className='font-bold text-sm 2xl:text-xl line-clamp-2'>
+									{item.title}
+								</h2>
 								<div className='flex justify-between items-center'>
-									<p className='text-xs text-gray-500'>{item.date}</p>
+									<p className='text-xs xl:text-lg text-gray-500'>
+										{item.date}
+									</p>
 									<MoveRight className='transition-transform duration-300 group-hover:translate-x-1' />
 								</div>
 							</div>
 						</div>
 					))}
 				</div>
-				<div className='col-span-2  flex  flex-col items-center justify-between'>
+				<div className='col-span-2 grid md:grid-cols-2 lg:grid-cols-1 gap-6'>
 					{news.slice(0, 5).map((item, index) => (
 						<div
 							key={index}
-							className='h-[19%] w-full flex rounded-[5px] overflow-hidden bg-gray-100 group'
+							className='h-[100%] relative w-full flex flex-start justify-start rounded-[5px] overflow-hidden bg-gray-100 group'
 						>
-							<div className='relative h-full w-[150px]'>
+							<div className='h-[140px] sm:h-[120px] md:h-[160px] lg:h-[110px] w-[50%]  sm:w-[30%] md:w-[60%] lg:w-[40%] 2xl:w-[30%]  overflow-hidden'>
 								<img
 									src={item.img}
 									alt={item.title}
 									className='h-full w-full object-cover rounded-[5px]'
 								/>
-								<div className='absolute inset-0 bg-black/0 group-hover:bg-black/40 transition duration-300'></div>
+								<div className='absolute inset-0 bg-black/0 group-hover:bg-black/20 transition duration-300'></div>
 							</div>
-							<div className='p-2 flex flex-col justify-start'>
-								<h2 className='font-bold text-sm'>{item.title}</h2>
-								<p className='text-xs text-gray-500'>{item.date}</p>
+							<div className='w-[60%] p-2 flex flex-col gap-2 2xl:gap-2 justify-start'>
+								<h2 className='font-bold text-sm sm:text-lg md:text-sm 2xl:text-xl'>
+									{item.title}
+								</h2>
+								<p className='text-[12px] text-md 2xl:text-lg text-gray-500'>
+									{item.date}
+								</p>
 							</div>
 						</div>
 					))}

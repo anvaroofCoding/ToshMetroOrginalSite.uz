@@ -14,9 +14,9 @@ const MetroInfo = () => {
 	]
 
 	return (
-		<div className='h-[50px] container flex flex-col sm:flex-row items-center justify-between bg-blue-50 shadow-sm gap-2 px-2'>
+		<div className='h-[50px] container flex flex-col sm:flex-row items-center justify-between  shadow-sm gap-2 px-2'>
 			{/* Qidiruv input */}
-			<div className='relative w-full sm:w-1/3'>
+			<div className='relative w-3/3 sm:w-3/3 2xl:w-1/3'>
 				<input
 					type='text'
 					value={search}
@@ -28,7 +28,7 @@ const MetroInfo = () => {
 			</div>
 
 			{/* Metro vaqtlar */}
-			<div className='flex flex-wrap gap-2 text-xs sm:text-sm text-blue-900 font-medium overflow-x-auto'>
+			<div className='2xl:flex hidden items-center justify-between gap-2 text-sm sm:text-sm text-blue-900 font-medium overflow-x-auto'>
 				{metroSchedule.map((s, i) => {
 					const isMatch = s.station.toLowerCase().includes(search.toLowerCase())
 					return (
