@@ -43,3 +43,7 @@ body {
 	scrollbar-width: thin;
 	scrollbar-color: #0e327f #f1f1f1;
 }
+
+.under-none {
+	text-transform: none;
+}

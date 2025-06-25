@@ -1,4 +1,5 @@
 import Cards from '@/pages/cards/cards'
+import CompanySlider from '@/pages/company/CompanySlider'
 import MetroCarousel from '@/pages/Header/header'
 import YoutubeGrid from '@/pages/youtube/youtube'
 import MetroInfo from '@/work/metroTime/metroTime'
@@ -24,6 +25,9 @@ const Home = () => {
 			</div>
 			<div className='my-10'>
 				<FaqAccordion />
+			</div>
+			<div className='my-10'>
+				<CompanySlider />
 			</div>
 		</div>
 	)
