@@ -7,7 +7,7 @@ import { useState } from 'react'
 const menuItems = [
 	{
 		label: 'Metro xaritasi',
-		href: '/xarita',
+		href: '/metro-maps',
 		dropdown: false,
 		dropdownItems: [],
 	},
@@ -16,9 +16,9 @@ const menuItems = [
 		href: '/tolovlar',
 		dropdown: true,
 		dropdownItems: [
-			{ label: 'Chipta narxlari', href: '/tolovlar/chipta-narxlari' },
-			{ label: 'To‘lov usullari', href: '/tolovlar/usullar' },
-			{ label: 'Chegirmalar', href: '/tolovlar/chegirmalar' },
+			{ label: `To'lov turlari`, href: '/tolovlar/chipta-narxlari' },
+			{ label: 'ATTO kartalari', href: '/tolovlar/usullar' },
+			{ label: 'ATTO mobile ilovasi', href: '/tolovlar/chegirmalar' },
 		],
 	},
 	{

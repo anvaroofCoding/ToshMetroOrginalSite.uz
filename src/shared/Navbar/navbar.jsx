@@ -24,7 +24,7 @@ export default function Navbar() {
 	const menuItems = [
 		{
 			label: 'Metro xaritasi',
-			href: '/xarita',
+			href: '/metro-maps',
 			dropdown: false,
 			dropdownItems: [],
 		},

@@ -10,7 +10,6 @@ const quickReplies = [
 	'Rahmat!',
 	'Xayr!',
 ]
-
 const reactions = ['🔥', '👍', '👎', '😂']
 
 export default function FloatingChat() {
@@ -28,11 +27,15 @@ export default function FloatingChat() {
 	}
 
 	useEffect(() => {
-		const timer = setTimeout(() => {
-			if (!isOpen) setAlert(true)
-		}, 7000)
-
-		return () => clearTimeout(timer)
+		let interval
+		if (!isOpen) {
+			interval = setInterval(() => {
+				setAlert(true)
+				// 3 sekund sakrash
+				setTimeout(() => setAlert(false), 3000)
+			}, 10000)
+		}
+		return () => clearInterval(interval)
 	}, [isOpen])
 
 	return (
@@ -49,7 +52,6 @@ export default function FloatingChat() {
 					transition={{ duration: 0.3 }}
 					className='w-72 h-96 bg-[#0E327F] text-white rounded-xl shadow-xl flex flex-col overflow-hidden'
 				>
-					{/* Header */}
 					<div className='flex justify-between items-center p-3 bg-[#0E327F]'>
 						<span className='font-bold'>Chat</span>
 						<button onClick={toggleChat}>
@@ -57,7 +59,6 @@ export default function FloatingChat() {
 						</button>
 					</div>
 
-					{/* Messages */}
 					<div className='flex-1 p-2 overflow-y-auto bg-white text-black'>
 						{messages.length === 0 ? (
 							<p className='text-sm text-gray-500'>Hali xabar yo'q...</p>
@@ -73,7 +74,6 @@ export default function FloatingChat() {
 						)}
 					</div>
 
-					{/* Reactions */}
 					<div className='flex gap-1 p-2 bg-[#0E327F]'>
 						{reactions.map((r, i) => (
 							<button
@@ -86,7 +86,6 @@ export default function FloatingChat() {
 						))}
 					</div>
 
-					{/* Quick replies */}
 					<div className='flex flex-wrap gap-1 p-2 bg-[#0E327F]'>
 						{quickReplies.map((txt, idx) => (
 							<button
@@ -99,7 +98,6 @@ export default function FloatingChat() {
 						))}
 					</div>
 
-					{/* Input */}
 					<div className='p-2 bg-[#0E327F]'>
 						<div className='flex bg-white rounded-full overflow-hidden shadow-inner focus-within:ring-2 focus-within:ring-blue-300 transition'>
 							<input
@@ -126,11 +124,6 @@ export default function FloatingChat() {
 					animate={{
 						opacity: 1,
 						scale: 1,
-						...(alert && { y: [0, -5, 0] }), // sakrash effekti
-					}}
-					transition={{
-						duration: alert ? 0.5 : 0.3,
-						repeat: alert ? 3 : 0,
 					}}
 					whileHover={{ scale: 1.1 }}
 					onClick={() => {
@@ -139,7 +132,17 @@ export default function FloatingChat() {
 					}}
 					className='bg-[#0E327F] text-white rounded-full w-12 h-12 shadow-lg flex justify-center items-center relative'
 				>
-					Chat
+					<motion.div
+						animate={alert ? { y: [0, -5, 0, -5, 0] } : {}}
+						transition={{
+							duration: 0.5,
+							repeat: alert ? Infinity : 0,
+							repeatDelay: 0,
+						}}
+					>
+						Chat
+					</motion.div>
+
 					{alert && (
 						<span className='absolute -top-6 bg-blue-700 text-xs px-2 py-1 rounded shadow'>
 							Murojaat uchun
