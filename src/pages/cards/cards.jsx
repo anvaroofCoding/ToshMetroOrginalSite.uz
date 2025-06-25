@@ -1,5 +1,6 @@
 'use client'
 
+import Button from '@/work/buttons/ndsButoon'
 import { Eye, MoveRight, X } from 'lucide-react'
 import { useState } from 'react'
 
@@ -41,10 +42,11 @@ const Cards = () => {
 
 	return (
 		<div>
-			<div className='container py-8'>
+			<div className='container py-8 flex justify-between items-center'>
 				<h1 className='text-[36px] font-bold'>
 					So'ngi <span className='text-blue-800'>yangiliklar</span>
 				</h1>
+				<Button />
 			</div>
 			<div className='container grid lg:grid-cols-5 grid-cols-1  gap-5'>
 				<div className='lg:col-span-3 grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6'>

@@ -41,9 +41,6 @@ export default function YoutubeGrid() {
 						className='w-full h-64 lg:h-full rounded-md shadow'
 						allowFullScreen
 					></iframe>
-					<div className='absolute inset-0 bg-blue-800/0 group-hover:bg-blue-800/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 rounded-md'>
-						<p className='text-white text-xl font-bold'>{videos[0].title}</p>
-					</div>
 				</div>
 
 				{/* RIGHT SMALL VIDEOS */}
@@ -53,14 +50,9 @@ export default function YoutubeGrid() {
 							<iframe
 								src={video.url}
 								title={video.title}
-								className='w-full h-32 lg:h-40 rounded-md shadow'
+								className='w-full h-32 lg:h-50 rounded-md shadow'
 								allowFullScreen
 							></iframe>
-							<div className='absolute inset-0 bg-blue-800/0 group-hover:bg-blue-800/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 rounded-md'>
-								<p className='text-white text-sm font-semibold'>
-									{video.title}
-								</p>
-							</div>
 						</div>
 					))}
 				</div>

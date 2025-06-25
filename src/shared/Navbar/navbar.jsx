@@ -10,6 +10,8 @@ import logo from '../../../public/MetroLogo.png'
 import MetroHamburger from './navbarHamburger'
 import MetroNavbar from './ul'
 
+import { useEffect } from 'react'
+
 import { Bird, Camera, Send, Video } from 'lucide-react'
 
 export default function Navbar() {
@@ -94,11 +96,59 @@ export default function Navbar() {
 		},
 	]
 
+	const [isScrolled, setIsScrolled] = useState(false)
+
+	useEffect(() => {
+		const onScroll = () => {
+			setIsScrolled(window.scrollY > 10)
+		}
+		window.addEventListener('scroll', onScroll)
+		return () => window.removeEventListener('scroll', onScroll)
+	}, [])
+
 	return (
 		<>
 			{/* NAVBAR */}
-			<div className='fixed top-5 left-0 w-full z-[100]'>
+			{/* <div className='fixed top-0 left-0 w-full z-[100] bg-[#0E327F]'>
 				<div className='container  h-[70px] flex justify-between items-center bg-[#0E327F] text-white rounded shadow-lg px-4'>
+					<div className='flex items-center gap-2'>
+						<Link href={'/'}>
+							<Image src={logo} alt='Toshkent metro logo' height={50} />
+						</Link>
+
+						<div className='h-[50px] flex flex-col justify-center'>
+							<div className='border border-[#00B0FF] h-[30%] w-full'></div>
+							<div className='border border-[#FF454B] h-[5%] w-full'></div>
+							<div className='border border-white h-[30%] w-full'></div>
+							<div className='border border-[#FF454B] h-[5%] w-full'></div>
+							<div className='border border-[#00B100] h-[30%] w-full'></div>
+						</div>
+
+						<h1 className='md:w-[200px] w-[150px] text-[10px] md:text-sm text-white'>
+							O‘zbekiston Respublikasi{' '}
+							<span className='font-extrabold'>"Toshkent Metropoliteni"</span>{' '}
+							DUK
+						</h1>
+					</div>
+
+					<div className='hidden 2xl:block'>
+						<MetroNavbar />
+					</div>
+
+					<MetroHamburger />
+					<div className='xl:block 2xl:hidden flex justify-center items-center'>
+						<button onClick={toggleMenu}>
+							{isOpen ? <X size={28} /> : <Menu size={28} />}
+						</button>
+					</div>
+				</div>
+			</div> */}
+			<div
+				className={`fixed left-0 w-full z-[100] transition-all duration-300 ${
+					isScrolled ? 'top-0 bg-[#0E327F]' : 'top-2'
+				}`}
+			>
+				<div className='container h-[70px] flex justify-between items-center bg-[#0E327F] text-white rounded shadow-lg px-4'>
 					<div className='flex items-center gap-2'>
 						<Link href={'/'}>
 							<Image src={logo} alt='Toshkent metro logo' height={50} />
