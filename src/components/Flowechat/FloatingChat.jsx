@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { Send, X } from 'lucide-react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const quickReplies = [
 	'Salom!',
@@ -11,10 +11,13 @@ const quickReplies = [
 	'Xayr!',
 ]
 
+const reactions = ['🔥', '👍', '👎', '😂']
+
 export default function FloatingChat() {
 	const [isOpen, setIsOpen] = useState(false)
 	const [messages, setMessages] = useState([])
 	const [input, setInput] = useState('')
+	const [alert, setAlert] = useState(false)
 
 	const toggleChat = () => setIsOpen(prev => !prev)
 
@@ -23,6 +26,14 @@ export default function FloatingChat() {
 		setMessages(prev => [...prev, msg])
 		setInput('')
 	}
+
+	useEffect(() => {
+		const timer = setTimeout(() => {
+			if (!isOpen) setAlert(true)
+		}, 7000)
+
+		return () => clearTimeout(timer)
+	}, [isOpen])
 
 	return (
 		<motion.div
@@ -62,6 +73,19 @@ export default function FloatingChat() {
 						)}
 					</div>
 
+					{/* Reactions */}
+					<div className='flex gap-1 p-2 bg-[#0E327F]'>
+						{reactions.map((r, i) => (
+							<button
+								key={i}
+								onClick={() => sendMessage(r)}
+								className='text-lg hover:scale-125 transition'
+							>
+								{r}
+							</button>
+						))}
+					</div>
+
 					{/* Quick replies */}
 					<div className='flex flex-wrap gap-1 p-2 bg-[#0E327F]'>
 						{quickReplies.map((txt, idx) => (
@@ -99,12 +123,28 @@ export default function FloatingChat() {
 			) : (
 				<motion.button
 					initial={{ opacity: 0, scale: 0 }}
-					animate={{ opacity: 1, scale: 1 }}
+					animate={{
+						opacity: 1,
+						scale: 1,
+						...(alert && { y: [0, -5, 0] }), // sakrash effekti
+					}}
+					transition={{
+						duration: alert ? 0.5 : 0.3,
+						repeat: alert ? 3 : 0,
+					}}
 					whileHover={{ scale: 1.1 }}
-					onClick={toggleChat}
-					className='bg-[#0E327F] text-white rounded-full w-12 h-12 shadow-lg flex justify-center items-center'
+					onClick={() => {
+						toggleChat()
+						setAlert(false)
+					}}
+					className='bg-[#0E327F] text-white rounded-full w-12 h-12 shadow-lg flex justify-center items-center relative'
 				>
 					Chat
+					{alert && (
+						<span className='absolute -top-6 bg-blue-700 text-xs px-2 py-1 rounded shadow'>
+							Murojaat uchun
+						</span>
+					)}
 				</motion.button>
 			)}
 		</motion.div>
