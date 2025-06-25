@@ -14,7 +14,7 @@ const MetroInfo = () => {
 	]
 
 	return (
-		<div className='h-[50px] container flex flex-col sm:flex-row items-center justify-between  shadow-sm gap-2 px-2'>
+		<div className='h-[50px] container flex flex-col sm:flex-row items-center justify-between   gap-2 px-2'>
 			{/* Qidiruv input */}
 			<div className='relative w-3/3 sm:w-3/3 2xl:w-1/3'>
 				<input

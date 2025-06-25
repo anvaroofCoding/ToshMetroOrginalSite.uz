@@ -1,5 +1,6 @@
 import FloatingChat from '@/components/Flowechat/FloatingChat'
 import SplashScreen from '@/components/splashScreen/splashScreen'
+import Footer from '@/shared/footer/footer'
 import Navbar from '@/shared/Navbar/navbar'
 import './globals.css'
 
@@ -41,6 +42,7 @@ export default function RootLayout({ children }) {
 			<body className='roboto'>
 				<Navbar />
 				<SplashScreen>{children}</SplashScreen>
+				<Footer />
 				<FloatingChat />
 			</body>
 		</html>
