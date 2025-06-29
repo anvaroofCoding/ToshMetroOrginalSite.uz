@@ -1,7 +1,5 @@
 'use client'
 
-import { openai } from '@ai-sdk/openai'
-import { generateText } from 'ai'
 import { AnimatePresence, motion } from 'framer-motion'
 import {
 	Bot,
@@ -12,7 +10,43 @@ import {
 	VolumeX,
 	X,
 } from 'lucide-react'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useTransition } from 'react'
+
+// Server action for AI responses (you'll need to implement this)
+async function generateAIResponse(userMessage) {
+	try {
+		const response = await fetch('/api/chat', {
+			// TO'G'RI YO'L
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({ message: userMessage }),
+		})
+
+		if (!response.ok) {
+			throw new Error(`Server error: ${response.status}`)
+		}
+
+		const data = await response.json()
+
+		if (data.success) {
+			return {
+				success: true,
+				message: data.message,
+			}
+		} else {
+			throw new Error(data.error || 'Failed to get AI response')
+		}
+	} catch (error) {
+		console.error('AI Response Error:', error)
+		return {
+			success: false,
+			message:
+				"Kechirasiz, hozir javob bera olmayman. Keyinroq urinib ko'ring.",
+		}
+	}
+}
 
 const quickReplies = [
 	'Salom! 👋',
@@ -29,41 +63,30 @@ const reactionCategories = {
 	symbols: ['❤️', '🔥', '⭐', '✨', '💯', '🎉'],
 }
 
-const notificationSounds = {
-	message: '/api/placeholder-audio?type=message',
-	notification: '/api/placeholder-audio?type=notification',
-	alert: '/api/placeholder-audio?type=alert',
-}
-
 export default function AIFloatingChat() {
 	const [isOpen, setIsOpen] = useState(false)
 	const [messages, setMessages] = useState([])
 	const [input, setInput] = useState('')
-	const [isLoading, setIsLoading] = useState(false)
+	const [isPending, startTransition] = useTransition()
 	const [alert, setAlert] = useState(false)
 	const [soundEnabled, setSoundEnabled] = useState(true)
 	const [showReactions, setShowReactions] = useState(false)
 	const [selectedCategory, setSelectedCategory] = useState('emotions')
 
 	const messagesEndRef = useRef(null)
-	const audioRef = useRef(null)
 	const chatRef = useRef(null)
 
-	const playSound = soundType => {
+	const playSound = (frequency = 800) => {
 		if (!soundEnabled) return
 		try {
-			const audio = new Audio()
-			audio.volume = 0.3
-			// Simulate sound with a beep for demo purposes
-			const context = new AudioContext()
+			const context = new (window.AudioContext || window.webkitAudioContext)()
 			const oscillator = context.createOscillator()
 			const gainNode = context.createGain()
 
 			oscillator.connect(gainNode)
 			gainNode.connect(context.destination)
 
-			oscillator.frequency.value =
-				soundType === 'message' ? 800 : soundType === 'notification' ? 600 : 400
+			oscillator.frequency.value = frequency
 			oscillator.type = 'sine'
 
 			gainNode.gain.setValueAtTime(0.1, context.currentTime)
@@ -87,46 +110,15 @@ export default function AIFloatingChat() {
 		scrollToBottom()
 	}, [messages])
 
-	const generateAIResponse = async userMessage => {
-		try {
-			setIsLoading(true)
-			const { text } = await generateText({
-				model: openai('gpt-4o'),
-				system: `Siz Uzbek tilida javob beradigan yordamchi AI assistantsiz. Har doim do'stona, samimiy va foydali javoblar bering. Uzbek tilining o'zbekcha so'zlarini ishlating. Qisqa va aniq javoblar bering.`,
-				prompt: `Foydalanuvchi sizga shunday dedi: "${userMessage}". Uzbek tilida javob bering.`,
-			})
-
-			const aiMessage = {
-				id: Date.now().toString() + '_ai',
-				text: text,
-				isUser: false,
-				timestamp: new Date(),
-			}
-
-			setMessages(prev => [...prev, aiMessage])
-			playSound('message')
-		} catch (error) {
-			const errorMessage = {
-				id: Date.now().toString() + '_error',
-				text: "Kechirasiz, hozir javob bera olmayman. Keyinroq urinib ko'ring.",
-				isUser: false,
-				timestamp: new Date(),
-			}
-			setMessages(prev => [...prev, errorMessage])
-		} finally {
-			setIsLoading(false)
-		}
-	}
-
 	const toggleChat = () => {
 		setIsOpen(prev => !prev)
 		if (!isOpen) {
-			playSound('notification')
+			playSound(600)
 		}
 	}
 
 	const sendMessage = async msg => {
-		if (!msg.trim()) return
+		if (!msg.trim() || isPending) return
 
 		const userMessage = {
 			id: Date.now().toString(),
@@ -138,9 +130,32 @@ export default function AIFloatingChat() {
 		setMessages(prev => [...prev, userMessage])
 		setInput('')
 		setShowReactions(false)
+		playSound(800)
 
 		// Generate AI response
-		await generateAIResponse(msg)
+		startTransition(async () => {
+			try {
+				const result = await generateAIResponse(msg)
+
+				const aiMessage = {
+					id: Date.now().toString() + '_ai',
+					text: result.message,
+					isUser: false,
+					timestamp: new Date(),
+				}
+
+				setMessages(prev => [...prev, aiMessage])
+				playSound(600)
+			} catch (error) {
+				const errorMessage = {
+					id: Date.now().toString() + '_error',
+					text: "Kechirasiz, hozir javob bera olmayman. Keyinroq urinib ko'ring.",
+					isUser: false,
+					timestamp: new Date(),
+				}
+				setMessages(prev => [...prev, errorMessage])
+			}
+		})
 	}
 
 	const addReaction = (messageId, reaction) => {
@@ -151,47 +166,25 @@ export default function AIFloatingChat() {
 					: msg
 			)
 		)
-		playSound('notification')
+		playSound(400)
 	}
 
-	// Alert animation every 10 seconds
+	// Alert animation every 15 seconds when chat is closed
 	useEffect(() => {
 		let interval
 		if (!isOpen) {
 			interval = setInterval(() => {
 				setAlert(true)
-				playSound('alert')
-				// Shake animation
-				if (chatRef.current) {
-					chatRef.current.style.animation = 'shake 0.5s ease-in-out'
-					setTimeout(() => {
-						if (chatRef.current) {
-							chatRef.current.style.animation = ''
-						}
-					}, 500)
-				}
+				playSound(400)
 				setTimeout(() => setAlert(false), 4000)
-			}, 10000)
+			}, 15000)
 		}
 		return () => clearInterval(interval)
-	}, [isOpen])
+	}, [isOpen, soundEnabled])
 
 	return (
 		<>
 			<style jsx>{`
-				@keyframes shake {
-					0%,
-					100% {
-						transform: translateX(0);
-					}
-					25% {
-						transform: translateX(-5px);
-					}
-					75% {
-						transform: translateX(5px);
-					}
-				}
-
 				@keyframes pulse-glow {
 					0%,
 					100% {
@@ -202,7 +195,6 @@ export default function AIFloatingChat() {
 							0 0 40px rgba(14, 50, 127, 0.6);
 					}
 				}
-
 				.pulse-glow {
 					animation: pulse-glow 2s infinite;
 				}
@@ -211,7 +203,7 @@ export default function AIFloatingChat() {
 			<motion.div
 				ref={chatRef}
 				drag
-				dragConstraints={{ left: 0, top: 0, right: 1000, bottom: 1000 }}
+				dragConstraints={{ left: -200, top: -200, right: 200, bottom: 200 }}
 				className='fixed bottom-4 right-4 z-[100]'
 			>
 				<AnimatePresence>
@@ -240,7 +232,7 @@ export default function AIFloatingChat() {
 									<div>
 										<h3 className='font-bold text-lg'>AI Yordamchi</h3>
 										<p className='text-xs text-blue-200'>
-											Onlayn • Javob bermoqda
+											{isPending ? 'Javob yozmoqda...' : 'Onlayn • Tayyor'}
 										</p>
 									</div>
 								</div>
@@ -295,7 +287,7 @@ export default function AIFloatingChat() {
 												msg.isUser ? 'justify-end' : 'justify-start'
 											}`}
 										>
-											<div className={`max-w-[80%] group relative`}>
+											<div className='max-w-[80%] group relative'>
 												<div
 													className={`p-3 rounded-2xl shadow-md ${
 														msg.isUser
@@ -331,21 +323,23 @@ export default function AIFloatingChat() {
 												)}
 
 												{/* Add reaction button */}
-												<motion.button
-													initial={{ opacity: 0 }}
-													whileHover={{ opacity: 1 }}
-													className='absolute -bottom-2 right-0 opacity-0 group-hover:opacity-100 bg-gray-200 hover:bg-gray-300 rounded-full p-1 text-xs transition-all'
-													onClick={() => addReaction(msg.id, '👍')}
-												>
-													+
-												</motion.button>
+												{!msg.isUser && (
+													<motion.button
+														initial={{ opacity: 0 }}
+														whileHover={{ opacity: 1 }}
+														className='absolute -bottom-2 right-0 opacity-0 group-hover:opacity-100 bg-gray-200 hover:bg-gray-300 rounded-full p-1 text-xs transition-all'
+														onClick={() => addReaction(msg.id, '👍')}
+													>
+														+
+													</motion.button>
+												)}
 											</div>
 										</motion.div>
 									))
 								)}
 
 								{/* Loading indicator */}
-								{isLoading && (
+								{isPending && (
 									<motion.div
 										initial={{ opacity: 0, y: 20 }}
 										animate={{ opacity: 1, y: 0 }}
@@ -418,7 +412,7 @@ export default function AIFloatingChat() {
 								)}
 							</AnimatePresence>
 
-							{/* Quick Replies */}
+							{/* Quick Replies & Input */}
 							<div className='p-3 bg-gradient-to-r from-[#0E327F]/90 to-[#1e40af]/90 backdrop-blur-md border-t border-white/10'>
 								<div className='flex flex-wrap gap-2 mb-3'>
 									{quickReplies.map((txt, idx) => (
@@ -427,7 +421,8 @@ export default function AIFloatingChat() {
 											whileHover={{ scale: 1.05 }}
 											whileTap={{ scale: 0.95 }}
 											onClick={() => sendMessage(txt)}
-											className='bg-white/20 backdrop-blur-sm text-white text-xs rounded-full px-3 py-1.5 hover:bg-white/30 transition-all border border-white/20'
+											disabled={isPending}
+											className='bg-white/20 backdrop-blur-sm text-white text-xs rounded-full px-3 py-1.5 hover:bg-white/30 transition-all border border-white/20 disabled:opacity-50'
 										>
 											{txt}
 										</motion.button>
@@ -453,9 +448,9 @@ export default function AIFloatingChat() {
 											className='w-full p-2.5 text-sm text-white placeholder-white/70 bg-transparent focus:outline-none'
 											placeholder='Xabar yozing...'
 											onKeyDown={e =>
-												e.key === 'Enter' && !isLoading && sendMessage(input)
+												e.key === 'Enter' && !isPending && sendMessage(input)
 											}
-											disabled={isLoading}
+											disabled={isPending}
 										/>
 									</div>
 
@@ -463,7 +458,7 @@ export default function AIFloatingChat() {
 										whileHover={{ scale: 1.1 }}
 										whileTap={{ scale: 0.9 }}
 										onClick={() => sendMessage(input)}
-										disabled={isLoading || !input.trim()}
+										disabled={isPending || !input.trim()}
 										className='bg-gradient-to-r from-yellow-400 to-orange-500 text-white p-2.5 rounded-full shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed'
 									>
 										<Send size={18} />

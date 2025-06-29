@@ -1,25 +1,25 @@
 'use client'
 
 import { AnimatePresence, motion } from 'framer-motion'
-import { Menu, X, Bird, Camera, Send, Video } from 'lucide-react'
+import { Bird, Camera, Menu, Send, Video, X } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
 
 const menuItems = [
 	{
 		label: 'Metro xaritasi',
-		href: '/xarita',
+		href: '/metro-maps',
 		dropdown: false,
 		dropdownItems: [],
 	},
 	{
 		label: "To'lovlar",
-		href: '/tolovlar',
+		href: '/',
 		dropdown: true,
 		dropdownItems: [
-			{ label: 'Chipta narxlari', href: '/tolovlar/chipta-narxlari' },
-			{ label: 'To‘lov usullari', href: '/tolovlar/usullar' },
-			{ label: 'Chegirmalar', href: '/tolovlar/chegirmalar' },
+			{ label: `To'lov turlari`, href: '/tolov-turi' },
+			{ label: 'ATTO kartalari', href: '/atto-kartalari' },
+			{ label: 'ATTO mobile ilovasi', href: '/atto-mobile-ilovasi' },
 		],
 	},
 	{
