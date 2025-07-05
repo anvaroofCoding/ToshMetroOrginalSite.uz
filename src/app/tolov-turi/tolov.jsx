@@ -180,7 +180,7 @@ export default function TransportDashboard() {
 	]
 
 	return (
-		<div className=' container bg-gradient-to-br from-blue-50 to-indigo-100 '>
+		<div className=' container '>
 			<div className='mx-auto space-y-8'>
 				{/* Header */}
 
@@ -195,10 +195,10 @@ export default function TransportDashboard() {
 				</div>
 
 				<Tabs defaultValue='cards' className='w-full'>
-					<TabsList className='grid h-auto w-full grid-cols-2 rounded-lg bg-gray-100 p-1 sm:h-auto sm:grid-cols-3'>
+					<TabsList className='grid h-auto w-full grid-cols-2 rounded-lg p-1 sm:h-auto sm:grid-cols-3 gap-3'>
 						<TabsTrigger
 							value='cards'
-							className='relative rounded-md px-3 py-2 text-sm font-medium text-gray-600 transition-colors data-[state=active]:text-[#0E327F]'
+							className='relative rounded-md px-3 py-2 text-sm font-medium text-gray-600 transition-colors data-[state=active]:text-[#0E327F] border'
 						>
 							{activeTab === 'cards' && (
 								<motion.div
@@ -214,7 +214,7 @@ export default function TransportDashboard() {
 						</TabsTrigger>
 						<TabsTrigger
 							value='payments'
-							className='relative rounded-md px-3 py-2 text-sm font-medium text-gray-600 transition-colors data-[state=active]:text-[#0E327F]'
+							className='relative rounded-md px-3 py-2 text-sm font-medium text-gray-600 transition-colors data-[state=active]:text-[#0E327F] border'
 						>
 							{activeTab === 'payments' && (
 								<motion.div
@@ -230,7 +230,7 @@ export default function TransportDashboard() {
 						</TabsTrigger>
 						<TabsTrigger
 							value='gallery'
-							className='relative rounded-md px-3 py-2 text-sm font-medium text-gray-600 transition-colors data-[state=active]:text-[#0E327F]'
+							className='relative rounded-md px-3 py-2 text-sm font-medium text-gray-600 transition-colors data-[state=active]:text-[#0E327F] border'
 						>
 							{activeTab === 'gallery' && (
 								<motion.div

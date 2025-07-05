@@ -87,7 +87,7 @@ export default function AttoDetailedPage() {
 		<div className='w-full container overflow-x-hidden bg-white'>
 			{/* Hero Section */}
 			<section
-				className='relative w-full h-[700px] flex flex-col items-center justify-center text-center text-white p-4 overflow-hidden'
+				className='relative w-full h-[600px] flex flex-col items-center justify-center text-center text-white p-4 overflow-hidden'
 				// style={{ backgroundColor: mainColor }}
 			>
 				<div className='absolute inset-0 bg-opacity-20' />

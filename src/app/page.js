@@ -2,14 +2,14 @@ import Cards from '@/pages/cards/cards'
 import CompanySlider from '@/pages/company/CompanySlider'
 import MetroCarousel from '@/pages/Header/header'
 import YoutubeGrid from '@/pages/youtube/youtube'
-import MetroInfo from '@/work/metroTime/metroTime'
+import { MetroCommandBar } from '@/work/metroTime/metroTime'
 import FaqAccordion from '@/work/test/questions'
 
 const Home = () => {
 	return (
 		<div>
 			<div className='my-5'>
-				<MetroInfo />
+				<MetroCommandBar />
 			</div>
 			<div className='mt-5'>
 				<MetroCarousel />
