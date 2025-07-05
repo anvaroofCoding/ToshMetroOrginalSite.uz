@@ -367,7 +367,10 @@ const menuItems = [
 		href: '/yolovchilar',
 		dropdown: true,
 		dropdownItems: [
-			{ label: 'Qoidalar', href: '/yolovchilar/qoidalar' },
+			{
+				label: 'Metrodan foydalanish qoidalari',
+				href: '/Metrodab-foydalanish-qoidalari',
+			},
 			{ label: 'Huquq va majburiyatlar', href: '/yolovchilar/huquq' },
 			{ label: 'Imtiyozlar', href: '/yolovchilar/imtiyozlar' },
 		],
@@ -393,7 +396,7 @@ const menuItems = [
 		href: '/metro-haqida',
 		dropdown: true,
 		dropdownItems: [
-			{ label: 'Tarixi', href: '/metro-haqida/tarix' },
+			{ label: 'Tashkilod haqida', href: '/metro-tarixi' },
 			{ label: 'Rivojlanish', href: '/metro-haqida/rivojlanish' },
 			{ label: 'Yangi loyihalar', href: '/metro-haqida/loyihalar' },
 		],
