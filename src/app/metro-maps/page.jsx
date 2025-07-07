@@ -1,9 +1,9 @@
-import MetroStationSlider from './stations'
+import StationMetro from './metroClassic'
 
 const Page = () => {
 	return (
 		<div>
-			<div>
+			{/* <div>
 				<MetroStationSlider />
 			</div>
 			<div className='container'>
@@ -16,7 +16,8 @@ const Page = () => {
 						alt='Toshkent metro xaritasi'
 					/>
 				</div>
-			</div>
+			</div> */}
+			<StationMetro />
 		</div>
 	)
 }

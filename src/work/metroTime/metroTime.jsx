@@ -21,14 +21,14 @@ const metroSchedule = [
 	{
 		station: 'Yunusobod',
 		line: 'Yunusobod yoli',
-		open: '06:00',
-		close: '23:00',
+		open: '05:00',
+		close: '00:00',
 	},
 	{
 		station: 'Yerusti h.',
 		line: 'Yerusti halqa yoli',
-		open: '06:00',
-		close: '23:00',
+		open: '05:00',
+		close: '00:00',
 	},
 ]
 

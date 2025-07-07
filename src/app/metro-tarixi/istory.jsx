@@ -433,7 +433,7 @@ export default function TashkentMetroPage() {
 									<div className='inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-[#0E327F] to-blue-600 mb-6 group-hover:scale-110 transition-transform duration-300'>
 										<stat.icon className='w-8 h-8 text-white' />
 									</div>
-									<div className='text-4xl font-bold text-[#0E327F] mb-3 group-hover:scale-110 transition-transform duration-300'>
+									<div className='xl:text-4xl md:text-3xl text-2xl font-bold text-[#0E327F] mb-3 group-hover:scale-110 transition-transform duration-300'>
 										{stat.value}
 										{stat.unit}
 									</div>
@@ -619,7 +619,7 @@ export default function TashkentMetroPage() {
 										</CardContent>
 									</Card>
 								</div>
-								<div className='absolute left-8 md:left-1/2 transform md:-translate-x-1/2 w-6 h-6 bg-gradient-to-r from-[#0E327F] to-blue-600 rounded-full border-4 border-white shadow-xl z-10 group-hover:scale-125 transition-transform duration-300'>
+								<div className='absolute xl:block hidden left-8 md:left-1/2 transform md:-translate-x-1/2 w-6 h-6 bg-gradient-to-r from-[#0E327F] to-blue-600 rounded-full border-4 border-white shadow-xl z-10 group-hover:scale-125 transition-transform duration-300'>
 									<div className='absolute inset-0 bg-gradient-to-r from-[#0E327F] to-blue-600 rounded-full animate-ping opacity-20'></div>
 								</div>
 							</div>
