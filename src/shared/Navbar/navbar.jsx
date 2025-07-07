@@ -393,7 +393,7 @@ const menuItems = [
 	},
 	{
 		label: 'Metro haqida',
-		href: '/metro-haqida',
+		href: '/',
 		dropdown: true,
 		dropdownItems: [
 			{ label: 'Tashkilod haqida', href: '/metro-tarixi' },
@@ -476,7 +476,7 @@ export default function MetroNavbar() {
 		<>
 			<header
 				className={`sticky top-0 left-0 w-full z-50 transition-all duration-300 ${
-					isScrolled ? 'pt-0' : 'pt-5'
+					isScrolled ? 'bg-[#0E327F] pt-0 shadow-md' : 'bg-transparent pt-5'
 				}`}
 			>
 				<div className='container mx-auto'>

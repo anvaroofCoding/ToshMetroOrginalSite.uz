@@ -319,13 +319,13 @@ export default function TashkentMetroPage() {
 							transportning kelajagini ta&apos;minlaydi.
 						</p>
 						<div className='flex flex-wrap justify-center gap-4'>
-							<Badge className='bg-[#0E327F] text-white px-6 py-2 text-lg animate-bounce'>
+							<Badge className='bg-[#0E327F] text-white px-6 py-2 text-lg animate-pulse duration-300'>
 								🚇 Markaziy Osiyoning Yagona Metrosi
 							</Badge>
-							<Badge className='bg-blue-600 text-white px-6 py-2 text-lg animate-bounce delay-100'>
+							<Badge className='bg-blue-600 text-white px-6 py-2 text-lg animate-pulse delay-100'>
 								🌟 50+ Yillik Mukammallik
 							</Badge>
-							<Badge className='bg-green-600 text-white px-6 py-2 text-lg animate-bounce delay-200'>
+							<Badge className='bg-green-600 text-white px-6 py-2 text-lg animate-pulse delay-200'>
 								🌱 Ekologik Toza Transport
 							</Badge>
 						</div>
@@ -353,7 +353,7 @@ export default function TashkentMetroPage() {
 							>
 								<div className='aspect-[4/3] bg-gradient-to-br from-[#0E327F] via-blue-600 to-blue-800 flex items-center justify-center relative'>
 									<img
-										src={`/placeholder.svg?height=400&width=500&text=Metro+Bekati+${
+										src={`https://cdn1.img.sputniknews.uz/img/07e7/08/1e/38378409_0:67:1280:787_1920x0_80_0_0_5a0d93c22a77a08b2f68d80cbfba6ff5.jpg?height=400&width=500&text=Metro+Bekati+${
 											index + 1
 										}`}
 										alt={`Toshkent Metro Bekati ${index + 1}`}
