@@ -397,7 +397,7 @@ const menuItems = [
 		dropdown: true,
 		dropdownItems: [
 			{ label: 'Tashkilod haqida', href: '/metro-tarixi' },
-			{ label: 'Rivojlanish', href: '/metro-haqida/rivojlanish' },
+			{ label: 'Rahbariyat', href: '/Raxbariyat' },
 			{ label: 'Yangi loyihalar', href: '/metro-haqida/loyihalar' },
 		],
 	},
