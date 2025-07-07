@@ -1,4 +1,5 @@
 import AIFloatingChat from '@/components/Flowechat/FloatingChat'
+import RouteLoader from '@/components/route-loader'
 import SplashScreen from '@/components/splashScreen/splashScreen'
 import Layout from '@/layout/Layout'
 import Footer from '@/shared/footer/footer'
@@ -41,6 +42,7 @@ export default function RootLayout({ children }) {
 	return (
 		<html lang='uz'>
 			<body className='roboto'>
+				<RouteLoader />
 				<Layout>
 					<Navbar />
 					<SplashScreen>{children}</SplashScreen>

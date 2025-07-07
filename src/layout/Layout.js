@@ -1,6 +1,6 @@
 'use client'
 
-import Loading from '@/app/loading'
+import Loading from '@/app/management/loading'
 import { useEffect, useState } from 'react'
 
 export default function Layout({ children }) {
