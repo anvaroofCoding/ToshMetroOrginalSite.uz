@@ -73,7 +73,7 @@ const menuItems = [
 		dropdownItems: [
 			{ label: 'Tashkilod haqida', href: '/metro-tarixi' },
 			{ label: 'Rahbariyat', href: '/Raxbariyat' },
-			{ label: 'Yangi loyihalar', href: '/metro-haqida/loyihalar' },
+			{ label: "Tarkibiy bo'linmalar", href: '/tarkibiy-bolinmalar' },
 		],
 	},
 	{
