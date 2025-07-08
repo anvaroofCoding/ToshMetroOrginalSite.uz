@@ -183,7 +183,7 @@ export default function AttoDetailedPage() {
 	]
 
 	return (
-		<div className='w-full  bg-white container'>
+		<div className='bg-white container'>
 			{/* Hero Section - White Background */}
 			<section className='relative min-h-screen flex items-center justify-center  bg-white'>
 				{/* Unique Background Pattern */}
@@ -228,7 +228,7 @@ export default function AttoDetailedPage() {
 					</div>
 				</div>
 
-				<div className='relative z-10 max-w-7xl mx-auto px-4 py-20'>
+				<div className='relative z-10 mx-auto  py-20'>
 					<div className='grid lg:grid-cols-2 gap-12 items-center'>
 						{/* Left Content */}
 						<motion.div
@@ -435,7 +435,7 @@ export default function AttoDetailedPage() {
 
 			{/* Card Types Section - Enhanced */}
 			<section className='py-20 bg-gradient-to-b from-gray-50 to-white'>
-				<div className='max-w-7xl mx-auto'>
+				<div className=' mx-auto'>
 					<motion.div
 						initial={{ opacity: 0, y: 30 }}
 						whileInView={{ opacity: 1, y: 0 }}
@@ -521,8 +521,8 @@ export default function AttoDetailedPage() {
 			</section>
 
 			{/* How to Use Section - Enhanced */}
-			<section className='py-20 px-4 bg-white'>
-				<div className='max-w-6xl mx-auto'>
+			<section className='py-20 bg-white'>
+				<div className=' mx-auto'>
 					<motion.div
 						initial={{ opacity: 0, y: 30 }}
 						whileInView={{ opacity: 1, y: 0 }}
@@ -608,8 +608,8 @@ export default function AttoDetailedPage() {
 			</section>
 
 			{/* Detailed Services Section - Enhanced */}
-			<section className='py-20 px-4 bg-gradient-to-b from-gray-50 to-white'>
-				<div className='max-w-6xl mx-auto'>
+			<section className='py-20 bg-gradient-to-b from-gray-50 to-white'>
+				<div className=' mx-auto'>
 					<motion.div
 						initial={{ opacity: 0, y: 30 }}
 						whileInView={{ opacity: 1, y: 0 }}
@@ -674,8 +674,8 @@ export default function AttoDetailedPage() {
 			</section>
 
 			{/* Enhanced FAQ Section with Custom Animations */}
-			<section className='py-20 px-4 bg-white'>
-				<div className='max-w-4xl mx-auto'>
+			<section className='py-20 bg-white'>
+				<div className=' mx-auto'>
 					<motion.div
 						initial={{ opacity: 0, y: 30 }}
 						whileInView={{ opacity: 1, y: 0 }}
@@ -769,7 +769,7 @@ export default function AttoDetailedPage() {
 			</section>
 
 			{/* Enhanced CTA Section */}
-			<section className='py-20 px-4 relative overflow-hidden'>
+			<section className='py-20  relative overflow-hidden'>
 				{/* Background Animation */}
 				<div className='absolute inset-0'>
 					{[...Array(6)].map((_, i) => (
