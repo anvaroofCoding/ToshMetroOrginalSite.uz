@@ -16,60 +16,84 @@ import {
 	X,
 } from 'lucide-react'
 import Image from 'next/image'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import sxema from '../../../public/images/sxema.jpg'
 
 // Real Tashkent Metro Lines with actual stations
 const metroLines = [
 	{
 		id: 1,
-		name: 'Chilonzor Line',
+		name: 'Chilonzor liniyasi',
 		color: '#0E327F',
 		stations: [
+			'Yangi hayot',
+			'Sergili',
+			"O'zgarish",
+			'Choshtepa',
+			'Olmazor',
 			'Chilonzor',
 			'Mirzo Ulugbek',
 			'Novza',
-			'Ming Orik',
-			'Abdulla Qodiriy',
-			'Pakhtakor',
+			"Milliy bog'",
+			"Xalqlar do'stligi",
+			'Paxtakor',
 			'Mustakillik Maydoni',
-			'Amir Temur Hiyoboni',
-			'Alisher Navoiy',
-			'Chorsu',
+			'Hamid Olimjon',
+			'Pushkin',
+			"Buyuk ipak yo'li",
 		],
 	},
 	{
 		id: 2,
-		name: 'Yunusobod Line',
+		name: 'Yunusobod Liniyasi',
 		color: '#FF6B35',
 		stations: [
-			'Yunusobod',
+			'Turkiston',
+			'Yunisobod',
 			'Shahriston',
-			'Kosmonavtlar',
-			'Oybek',
-			'Toshkent',
-			'Ming Orik',
-			'Hamid Olimjon',
-			'Pushkin',
-			'Gafur Gulom',
-			'Buyuk Ipak Yoli',
+			'Bodomzor',
+			'Minor',
+			'Abdulla Qodiriy',
+			'Yunus Rajabiy',
+			"Ming o'rik",
 		],
 	},
 	{
 		id: 3,
-		name: 'Sergeli Line',
+		name: "O'zbekiston liniyasi",
 		color: '#4ECDC4',
 		stations: [
-			'Sergeli',
-			'Qoyliq',
-			'Dustlik',
-			'Olmazor',
-			'Chilonzor',
-			'Mirabad',
+			'Beruniy',
+			'Tinchlik',
+			'Chorsu',
+			"G'afur G'ulom",
 			'Alisher Navoiy',
-			'Milliy Bog',
-			'Bodomzor',
-			'Minor',
+			"O'zbekiston",
+			'Kosmonavtlar',
+			'Oybek',
+			'Toshkent',
+			'Mashinasozlar',
+		],
+	},
+	{
+		id: 4,
+		name: "Yer usti halqa yo'li",
+		color: '#008B00',
+		stations: [
+			'Texnopark',
+			'Yashnobod',
+			'Tuzel',
+			'Olmos',
+			'Rohat',
+			'Yangiobod',
+			"Qo'yliq",
+			'Matonat',
+			'Qiyot',
+			'Tolariq',
+			'Xonobod',
+			'Quruvchilar',
+			'Turon',
+			'Qiyot',
 		],
 	},
 ]
@@ -85,7 +109,7 @@ const allStations = metroLines.flatMap(line =>
 		nextTrain: Math.floor(Math.random() * 8) + 1,
 		rating: (Math.random() * 1.5 + 3.5).toFixed(1),
 		isTransfer: transferStations.includes(station),
-		openTime: '05:30',
+		openTime: '05:00',
 		closeTime: '00:00',
 	}))
 )
@@ -95,10 +119,9 @@ export default function StationMetro() {
 	const [selectedLine, setSelectedLine] = useState(null)
 	const [selectedStation, setSelectedStation] = useState(null)
 	const [zoom, setZoom] = useState(1)
-	const [isFullscreen, setIsFullscreen] = useState(false)
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 	const [isMobile, setIsMobile] = useState(false)
-	const mapRef = useRef(null)
+	const [isOpen, setIsOpen] = useState(false)
 
 	useEffect(() => {
 		const checkMobile = () => {
@@ -117,10 +140,6 @@ export default function StationMetro() {
 				metroLines.find(line => line.name === station.line)?.id ===
 					selectedLine)
 	)
-
-	const handleZoomIn = () => setZoom(prev => Math.min(prev + 0.3, 4))
-	const handleZoomOut = () => setZoom(prev => Math.max(prev - 0.3, 0.5))
-	const handleResetZoom = () => setZoom(1)
 
 	const containerVariants = {
 		hidden: { opacity: 0 },
@@ -148,7 +167,7 @@ export default function StationMetro() {
 
 	return (
 		<motion.div
-			className='min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50'
+			className='min-h-screen '
 			initial='hidden'
 			animate='visible'
 			variants={containerVariants}
@@ -156,9 +175,9 @@ export default function StationMetro() {
 			{/* Mobile-Optimized Header */}
 			<motion.header
 				variants={itemVariants}
-				className='bg-white/95 backdrop-blur-lg border-b border-blue-100 top-0 z-50 shadow-sm'
+				className=' backdrop-blur-lg border-b border-blue-100 top-0 z-50 shadow-sm'
 			>
-				<div className='container mx-auto px-4 sm:px-6 py-3 sm:py-4'>
+				<div className='container mx-auto  py-3 sm:py-4'>
 					<div className='flex items-center justify-between'>
 						<motion.div
 							className='flex items-center space-x-3'
@@ -176,7 +195,7 @@ export default function StationMetro() {
 									Toshkent Metro
 								</h1>
 								<p className='text-xs sm:text-sm text-gray-600 font-medium hidden sm:block'>
-									Interactive Metro Navigation
+									Interaktiv metro navigatsiyasi
 								</p>
 							</div>
 						</motion.div>
@@ -196,38 +215,14 @@ export default function StationMetro() {
 								)}
 							</Button>
 
-							{/* Desktop Search */}
-							{/* <div className='relative hidden sm:block'>
-								<Search className='absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4' />
-								<Input
-									placeholder='Search stations...'
-									value={searchTerm}
-									onChange={e => setSearchTerm(e.target.value)}
-									className='pl-10 w-48 sm:w-64 lg:w-72 border-blue-200 focus:border-[#0E327F] focus:ring-[#0E327F] bg-white/80'
-								/>
-							</div> */}
-
 							<Badge
 								variant='secondary'
 								className='bg-blue-100 text-[#0E327F] px-2 py-1 text-xs sm:text-sm hidden sm:inline-flex'
 							>
-								{allStations.length} Stations
+								{allStations.length}ta Stansiya
 							</Badge>
 						</div>
 					</div>
-
-					{/* Mobile Search */}
-					{/* <div className='mt-3 sm:hidden'>
-						<div className='relative'>
-							<Search className='absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4' />
-							<Input
-								placeholder='Search stations...'
-								value={searchTerm}
-								onChange={e => setSearchTerm(e.target.value)}
-								className='pl-10 w-full border-blue-200 focus:border-[#0E327F] focus:ring-[#0E327F] bg-white/80'
-							/>
-						</div>
-					</div> */}
 				</div>
 			</motion.header>
 
@@ -239,13 +234,14 @@ export default function StationMetro() {
 						animate={{ opacity: 1, x: 0 }}
 						exit={{ opacity: 0, x: '100%' }}
 						transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-						className='inset-y-0 right-0 z-50 w-80 bg-white shadow-2xl lg:hidden'
+						className='inset-y-0 right-0 z-50 w-full bg-white shadow-2xl lg:hidden'
 					>
 						<div className='p-6 border-b border-gray-200'>
 							<div className='flex items-center justify-between'>
 								<h3 className='text-lg font-semibold text-[#0E327F]'>
 									Metro Lines
 								</h3>
+
 								<Button
 									variant='ghost'
 									size='sm'
@@ -267,7 +263,7 @@ export default function StationMetro() {
 								className={`w-full p-4 rounded-xl text-left transition-all duration-300 ${
 									selectedLine === null
 										? 'bg-gradient-to-r from-[#0E327F] to-blue-600 text-white shadow-lg'
-										: 'bg-gray-50 hover:bg-gray-100 border border-gray-200'
+										: 'hover:bg-gray-100 border border-gray-200'
 								}`}
 							>
 								<div className='font-medium'>All Lines</div>
@@ -316,7 +312,7 @@ export default function StationMetro() {
 														: 'text-gray-500'
 												}`}
 											>
-												{line.stations.length} stations
+												{line.stations.length} Stansiya
 											</div>
 										</div>
 									</div>
@@ -332,111 +328,41 @@ export default function StationMetro() {
 					{/* Metro Map Display - Mobile First */}
 					<motion.div variants={itemVariants} className='lg:col-span-8 order-1'>
 						<Card className='border-blue-200 shadow-xl overflow-hidden'>
-							{/* <CardHeader className='bg-gradient-to-r from-[#0E327F] to-blue-600 text-white p-4 sm:p-6'>
-								<div className='flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-3 sm:space-y-0'>
-									{/* <div>
-										<CardTitle className='text-lg sm:text-xl lg:text-2xl flex items-center space-x-2'>
-											<MapPin className='w-5 h-5 sm:w-6 sm:h-6' />
-											<span>Official Metro Map</span>
-										</CardTitle>
-										<CardDescription className='text-blue-100 text-sm'>
-											Interactive Tashkent Metro System Map
-										</CardDescription>
-									</div> */}
-
-							{/* Map Controls */}
-							{/* <div className='flex items-center space-x-2'>
-										<Button
-											size='sm'
-											variant='secondary'
-											onClick={handleZoomIn}
-											className='bg-white/20 hover:bg-white/30 text-white border-white/30 p-2'
-										>
-											<ZoomIn className='w-4 h-4' />
-										</Button>
-										<Button
-											size='sm'
-											variant='secondary'
-											onClick={handleZoomOut}
-											className='bg-white/20 hover:bg-white/30 text-white border-white/30 p-2'
-										>
-											<ZoomOut className='w-4 h-4' />
-										</Button>
-										<Button
-											size='sm'
-											variant='secondary'
-											onClick={handleResetZoom}
-											className='bg-white/20 hover:bg-white/30 text-white border-white/30 p-2'
-										>
-											<RotateCcw className='w-4 h-4' />
-										</Button>
-										<Button
-											size='sm'
-											variant='secondary'
-											onClick={() => setIsFullscreen(!isFullscreen)}
-											className='bg-white/20 hover:bg-white/30 text-white border-white/30 p-2'
-										>
-											<Maximize2 className='w-4 h-4' />
-										</Button>
-									</div> */}
-							{/* </div>
-							</CardHeader> */}
-
-							{/* <CardContent className='p-0 bg-gradient-to-br from-gray-50 to-blue-50'>
-								<div
-									ref={mapRef}
-									className={`relative overflow-auto ${
-										isFullscreen
-											? 'fixed inset-0 z-50 bg-white'
-											: 'h-64 sm:h-80 lg:h-[600px]'
-									} bg-white touch-pan-x touch-pan-y`}
-									style={{
-										background:
-											'radial-gradient(circle at center, #f8fafc 0%, #e2e8f0 100%)',
-									}}
-								>
-									{isFullscreen && (
-										<div className='absolute top-4 right-4 z-10'>
-											<Button
-												onClick={() => setIsFullscreen(false)}
-												className='bg-white/90 text-gray-800 hover:bg-white'
-											>
-												<X className='w-4 h-4' />
-											</Button>
-										</div>
-									)}
-
-									
-								</div>
-							</CardContent> */}
 							<motion.div
 								className='relative min-w-full min-h-full flex items-center justify-center p-2 sm:p-4'
 								animate={{ scale: zoom }}
 								transition={{ type: 'spring', stiffness: 300, damping: 30 }}
 							>
-								<div className='relative w-full max-w-full p-10'>
+								<div className='relative w-full  p-10'>
 									<Image
 										src={sxema}
 										alt='Tashkent Metro Map'
 										width={1200}
 										height={800}
-										className='rounded-lg w-full h-auto object-cover'
+										onClick={() => setIsOpen(true)}
+										className='rounded-lg w-full h-auto object-cover cursor-pointer'
 										style={{
 											filter: 'contrast(1.1) saturate(1.1) brightness(1.05)',
-											maxWidth: '100%',
-											height: 'auto',
 										}}
 										priority
 										sizes='(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw'
 									/>
 
-									{/* Mobile-Optimized Overlay Information */}
-									{/* <div className='absolute top-2 left-2 sm:top-4 sm:left-4 bg-white/95 backdrop-blur-sm rounded-lg p-2 sm:p-3 shadow-lg'>
-										<div className='text-xs sm:text-sm font-medium text-gray-800 mb-1'>
-											Zoom: {Math.round(zoom * 100)}%
+									{/* Modal oddiy ko‘rinishda */}
+									{isOpen && (
+										<div
+											onClick={() => setIsOpen(false)}
+											className='fixed inset-0 bg-black/80 flex items-center justify-center z-50 cursor-zoom-out'
+										>
+											<Image
+												src={sxema}
+												alt='Tashkent Metro Full'
+												width={1600}
+												height={1000}
+												className='max-w-full max-h-full rounded-lg'
+											/>
 										</div>
-										<div className='text-xs text-gray-600'>Pinch to zoom</div>
-									</div> */}
+									)}
 								</div>
 							</motion.div>
 						</Card>
@@ -578,11 +504,11 @@ export default function StationMetro() {
 														</div>
 													</div>
 													<div className='text-right'>
-														<div className='text-sm font-medium text-green-600'>
+														{/* <div className='text-sm font-medium text-green-600'>
 															{station.nextTrain} min
-														</div>
+														</div> */}
 														<div className='text-xs text-gray-500'>
-															Next train
+															Ishlamoqda
 														</div>
 													</div>
 												</div>
@@ -772,7 +698,7 @@ export default function StationMetro() {
 					className='mt-6 sm:mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-6'
 				>
 					{[
-						{ icon: Train, label: 'Metro Lines', value: '3', color: '#0E327F' },
+						{ icon: Train, label: 'Metro Lines', value: '4', color: '#0E327F' },
 						{
 							icon: MapPin,
 							label: 'Total Stations',

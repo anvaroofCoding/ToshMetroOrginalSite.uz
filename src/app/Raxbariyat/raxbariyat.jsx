@@ -189,7 +189,8 @@ export default function ManagementPage() {
 												<div className='absolute inset-0  bg-opacity-0 group-hover:bg-opacity-90 transition-all duration-300 flex items-end justify-center'>
 													<div className='text-gray-300 w-full bg-[#0E327F] text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0 py-3 rounded-t-[10px]'>
 														<h3 className='text-xl font-bold mb-2'>
-															{member.firstName} {member.lastName}
+															{member.firstName} {member.middleName}{' '}
+															{member.lastName}
 														</h3>
 														<p className='text-sm text-gray-200 flex justify-center items-center'>
 															<Eye />
