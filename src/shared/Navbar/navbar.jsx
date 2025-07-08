@@ -46,8 +46,8 @@ const menuItems = [
 				label: 'Davlat ramzlari',
 				href: '/davlat-ramzlari',
 			},
-			{ label: 'Huquq va majburiyatlar', href: '/yolovchilar/huquq' },
-			{ label: 'Imtiyozlar', href: '/yolovchilar/imtiyozlar' },
+			// { label: 'Huquq va majburiyatlar', href: '/yolovchilar/huquq' },
+			// { label: 'Imtiyozlar', href: '/yolovchilar/imtiyozlar' },
 		],
 	},
 	{
@@ -56,8 +56,8 @@ const menuItems = [
 		dropdown: true,
 		dropdownItems: [
 			{ label: 'Yangiliklar', href: '/yangiliklar' },
-			{ label: 'Matbuot bayonotlari', href: '/pressa/bayonotlar' },
-			{ label: 'Foto galereya', href: '/pressa/galereya' },
+			// { label: 'Matbuot bayonotlari', href: '/pressa/bayonotlar' },
+			// { label: 'Foto galereya', href: '/pressa/galereya' },
 		],
 	},
 	{
@@ -81,9 +81,9 @@ const menuItems = [
 		href: '/gender',
 		dropdown: true,
 		dropdownItems: [
-			{ label: 'Dasturlar', href: '/gender/dasturlar' },
-			{ label: 'Statistika', href: '/gender/statistika' },
-			{ label: 'Tadbirlar', href: '/gender/tadbirlar' },
+			// { label: 'Dasturlar', href: '/gender/dasturlar' },
+			// { label: 'Statistika', href: '/gender/statistika' },
+			// { label: 'Tadbirlar', href: '/gender/tadbirlar' },
 		],
 	},
 	{
@@ -91,9 +91,9 @@ const menuItems = [
 		href: '/aloqa',
 		dropdown: true,
 		dropdownItems: [
-			{ label: 'Kontaktlar', href: '/aloqa/kontaktlar' },
-			{ label: 'Manzil', href: '/aloqa/manzil' },
-			{ label: 'Fikr bildirish', href: '/aloqa/fikr' },
+			// { label: 'Kontaktlar', href: '/aloqa/kontaktlar' },
+			// { label: 'Manzil', href: '/aloqa/manzil' },
+			// { label: 'Fikr bildirish', href: '/aloqa/fikr' },
 		],
 	},
 ]
