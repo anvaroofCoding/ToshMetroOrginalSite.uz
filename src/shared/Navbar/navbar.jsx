@@ -89,10 +89,10 @@ const menuItems = [
 	},
 	{
 		label: 'Aloqa',
-		href: '/aloqa',
+		href: '',
 		dropdown: true,
 		dropdownItems: [
-			// { label: 'Kontaktlar', href: '/aloqa/kontaktlar' },
+			{ label: 'Aloqa', href: '/contact' },
 			// { label: 'Manzil', href: '/aloqa/manzil' },
 			// { label: 'Fikr bildirish', href: '/aloqa/fikr' },
 		],

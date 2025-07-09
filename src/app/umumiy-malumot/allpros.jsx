@@ -106,14 +106,8 @@ export default function TashkentMetroDashboard() {
 			<div className='bg-white border-b border-gray-100 py-12 px-4'>
 				<div className='max-w-7xl mx-auto'>
 					<div className='text-center space-y-6'>
-						<div className='inline-flex items-center gap-3 bg-[#0E327F] text-white rounded-full px-8 py-4 shadow-lg hover:shadow-xl transition-all duration-300'>
-							<Users className='w-6 h-6' />
-							<span className='font-semibold text-lg'>
-								Toshkent Metropoliteni
-							</span>
-						</div>
 						<h1 className='text-5xl md:text-7xl font-bold bg-gradient-to-r from-[#0E327F] via-blue-600 to-[#0E327F] bg-clip-text text-transparent leading-tight'>
-							Gender Tenglik Dashboard
+							Gender Tenglik
 						</h1>
 						<p className='text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed'>
 							Ayollar va erkaklar uchun teng huquq va imkoniyatlarni ta'minlash
