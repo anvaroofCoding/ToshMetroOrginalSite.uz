@@ -255,14 +255,9 @@ export default function ContactPage() {
 						animate='visible'
 						className='mb-8'
 					>
-						<motion.h1
-							variants={letterVariants}
-							className='text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-[#0E327F] mb-4'
-						>
-							<h1 className='text-5xl md:text-7xl font-bold bg-gradient-to-r from-[#0E327F] via-blue-600 to-[#0E327F] bg-clip-text text-transparent leading-tight'>
-								Gender Tenglik Dashboard
-							</h1>
-						</motion.h1>
+						<h1 className='text-5xl md:text-7xl font-bold bg-gradient-to-r from-[#0E327F] via-blue-600 to-[#0E327F] bg-clip-text text-transparent leading-tight'>
+							Aloqa
+						</h1>
 					</motion.div>
 
 					<motion.div

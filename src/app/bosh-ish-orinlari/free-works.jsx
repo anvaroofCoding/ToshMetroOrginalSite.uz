@@ -169,10 +169,10 @@ export default function Component() {
 	const y = useTransform(scrollYProgress, [0, 1], [0, -50])
 
 	return (
-		<div className='min-h-screen container bg-gradient-to-br from-slate-50 to-blue-50'>
+		<div className='min-h-screen container'>
 			{/* Hero Section */}
 			<motion.section
-				className='relative overflow-hidden bg-white'
+				className='relative overflow-hidden '
 				initial={{ opacity: 0 }}
 				animate={{ opacity: 1 }}
 				transition={{ duration: 1 }}
