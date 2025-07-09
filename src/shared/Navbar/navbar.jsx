@@ -74,14 +74,15 @@ const menuItems = [
 			{ label: 'Tashkilod haqida', href: '/metro-tarixi' },
 			{ label: 'Rahbariyat', href: '/Raxbariyat' },
 			{ label: "Tarkibiy bo'linmalar", href: '/tarkibiy-bolinmalar' },
+			{ label: "Bo'sh ish o'rinlari", href: '/bosh-ish-orinlari' },
 		],
 	},
 	{
 		label: 'Gender tenglik',
-		href: '/gender',
+		href: '',
 		dropdown: true,
 		dropdownItems: [
-			// { label: 'Dasturlar', href: '/gender/dasturlar' },
+			{ label: "Umumiy ma'lumot", href: 'umumiy-malumot' },
 			// { label: 'Statistika', href: '/gender/statistika' },
 			// { label: 'Tadbirlar', href: '/gender/tadbirlar' },
 		],

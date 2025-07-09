@@ -3,6 +3,7 @@
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
+import { motion } from 'framer-motion'
 import {
 	Calendar,
 	Flag,
@@ -35,7 +36,7 @@ export default function UzbekistanSymbols() {
 			{/* Header */}
 			<header className='text-[#0E327F] bg-white/80 backdrop-blur-sm'>
 				<div className='max-w-7xl mx-auto px-6 py-8'>
-					<div className='text-center'>
+					<div className='text-center mb-5'>
 						<h1 className='text-4xl font-bold mb-2 drop-shadow-md'>
 							O'ZBEKISTON RESPUBLIKASI
 						</h1>
@@ -45,14 +46,14 @@ export default function UzbekistanSymbols() {
 					</div>
 
 					{/* Navigation Tabs */}
-					<div className='flex justify-evenly mt-8 space-x-1 bg-[#0E327F] p-1 rounded-lg max-w-md mx-auto'>
+					{/* <div className='flex justify-evenly  mt-8 space-x-1 bg-[#0E327F] p-1 rounded-lg mx-auto'>
 						{tabs.map(tab => {
 							const Icon = tab.icon
 							return (
 								<button
 									key={tab.id}
 									onClick={() => setActiveTab(tab.id)}
-									className={`flex items-center space-x-2 px-6 py-3 rounded-md transition-all duration-300 ${
+									className={`flex items-center space-x-2 md:px-6 px-2 py-3 rounded-md transition-all duration-300 text-sm ${
 										activeTab === tab.id
 											? 'bg-white text-[#0E327F] shadow-lg transform scale-105'
 											: 'text-blue-100 hover:text-white hover:bg-blue-800/50 hover:shadow-md'
@@ -61,6 +62,89 @@ export default function UzbekistanSymbols() {
 									<Icon className='w-4 h-4' />
 									<span className='font-medium'>{tab.label}</span>
 								</button>
+							)
+						})}
+					</div> */}
+					<div className='relative container flex bg-[#0E327F] p-1 rounded-lg'>
+						{/* Animated background indicator */}
+						<motion.div
+							className='absolute top-1 bottom-1 bg-white rounded-md shadow-lg'
+							initial={false}
+							animate={{
+								left: `${
+									(tabs.findIndex(tab => tab.id === activeTab) * 100) /
+									tabs.length
+								}%`,
+								width: `${100 / tabs.length}%`,
+							}}
+							transition={{
+								type: 'spring',
+								stiffness: 300,
+								damping: 30,
+							}}
+							style={{
+								marginLeft: '0.125rem',
+								marginRight: '0.125rem',
+								width: `calc(${100 / tabs.length}% - 0.25rem)`,
+							}}
+						/>
+
+						{/* Tab buttons */}
+						{tabs.map((tab, index) => {
+							const Icon = tab.icon
+							const isActive = activeTab === tab.id
+
+							return (
+								<motion.button
+									key={tab.id}
+									onClick={() => setActiveTab(tab.id)}
+									className={`
+                relative z-10 flex-1 flex items-center justify-center space-x-2 
+                py-3 px-2 rounded-md transition-colors duration-200 text-sm font-medium
+                ${
+									isActive ? 'text-[#0E327F]' : 'text-blue-100 hover:text-white'
+								}
+              `}
+									whileHover={{ scale: isActive ? 1 : 1.02 }}
+									whileTap={{ scale: 0.98 }}
+									transition={{ duration: 0.1 }}
+								>
+									<motion.div
+										animate={{
+											scale: isActive ? 1.1 : 1,
+											rotate: isActive ? [0, -5, 5, 0] : 0,
+										}}
+										transition={{
+											duration: 0.3,
+											rotate: { duration: 0.5 },
+										}}
+									>
+										<Icon className='w-4 h-4' />
+									</motion.div>
+
+									<motion.span
+										animate={{
+											fontWeight: isActive ? 600 : 500,
+										}}
+										transition={{ duration: 0.2 }}
+										className='hidden sm:inline'
+									>
+										{tab.label}
+									</motion.span>
+
+									{/* Mobile: Show label on active tab only */}
+									<motion.span
+										initial={{ opacity: 0, width: 0 }}
+										animate={{
+											opacity: isActive ? 1 : 0,
+											width: isActive ? 'auto' : 0,
+										}}
+										transition={{ duration: 0.2 }}
+										className='sm:hidden text-xs overflow-hidden whitespace-nowrap'
+									>
+										{tab.label}
+									</motion.span>
+								</motion.button>
 							)
 						})}
 					</div>
