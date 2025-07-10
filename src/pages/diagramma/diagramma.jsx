@@ -119,11 +119,11 @@ export default function Component() {
 	const selectedStats = selectedStation ? stationStats[selectedStation] : null
 
 	return (
-		<div className='h-[700px] bg-white pt-10 overflow-hidden'>
+		<div className='md:h-[700px] h-auto bg-white pt-10 overflow-hidden'>
 			<div className='container'>
 				<div className='mb-8 text-start'>
 					<h1 className='text-3xl md:text-4xl font-bold text-blue-900 mb-2'>
-						Toshkent Metro Boshqaruv Paneli
+						Metrodan foydalanuvchilar statistikasi
 					</h1>
 					<p className='text-gray-600'>
 						Yo'lovchilar statistikasi va bekat ma'lumotlari

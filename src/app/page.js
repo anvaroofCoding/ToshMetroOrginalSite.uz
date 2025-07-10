@@ -17,7 +17,7 @@ const Home = () => {
 			<div className='my-5'>
 				<Component />
 			</div>
-			<div className='my-10 mt-15'>
+			<div className='my-5'>
 				<div className='container'>
 					<h2 className='text-[36px] font-bold'>Qiziqarli lavhalar</h2>
 				</div>
