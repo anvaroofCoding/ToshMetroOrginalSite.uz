@@ -101,6 +101,9 @@ export default function Component() {
 		})
 		setStationStats(stats)
 
+		// ✅ Avtomatik tanlanadigan stansiyani belgilaymiz (Buyuk Ipak Yo‘li)
+		setSelectedStation("Buyuk Ipak Yo'li")
+
 		// Trigger card animation
 		setTimeout(() => setAnimatedCards(true), 100)
 	}, [])
@@ -119,7 +122,7 @@ export default function Component() {
 	const selectedStats = selectedStation ? stationStats[selectedStation] : null
 
 	return (
-		<div className='md:h-[700px] h-auto bg-white pt-10 overflow-hidden'>
+		<div className='md:h-[650px] py-5 h-auto bg-white pt-10 overflow-hidden'>
 			<div className='container'>
 				<div className='mb-8 text-start'>
 					<h1 className='text-3xl md:text-4xl font-bold text-blue-900 mb-2'>
@@ -265,7 +268,7 @@ export default function Component() {
 
 					{/* Right Side - Metro Stations List */}
 					<div className='lg:col-span-1'>
-						<Card className='h-[600px] lg:h-[500px] border-0 shadow-2xl pb-2 rounded-[10px]'>
+						<Card className='h-[600px] lg:h-[460px] border-0 shadow-2xl pb-2 rounded-[10px]'>
 							<CardHeader>
 								<CardTitle className='text-lg'>Metro bekatlari</CardTitle>
 								<p className='text-sm text-gray-600'>
@@ -273,7 +276,7 @@ export default function Component() {
 								</p>
 							</CardHeader>
 							<CardContent className='p-0'>
-								<ScrollArea className='h-[500px] lg:h-[380px] px-4'>
+								<ScrollArea className='h-[500px] lg:h-[350px] px-4'>
 									<div className='space-y-6'>
 										{Object.entries(metroLines).map(
 											([lineKey, line], lineIndex) => (
