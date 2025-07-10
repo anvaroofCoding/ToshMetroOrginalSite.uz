@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion'
 import {
-	ChevronUp,
 	Clock,
 	Facebook,
 	Instagram,
@@ -250,9 +249,9 @@ export default function SimpleFooter() {
 			</div>
 
 			{/* Scroll to Top Button */}
-			<motion.button
+			{/* <motion.button
 				onClick={scrollToTop}
-				className='fixed bottom-6 right-6 w-12 h-12 bg-[#00B0FF] text-white rounded-full shadow-lg flex items-center justify-center z-50'
+				className='fixed bottom-23 right-6 w-12 h-12 bg-[#00B0FF] text-white rounded-full shadow-lg lg:flex items-center justify-center z-50 hidden'
 				whileHover={{ scale: 1.1 }}
 				whileTap={{ scale: 0.9 }}
 				initial={{ opacity: 0, y: 20 }}
@@ -260,7 +259,7 @@ export default function SimpleFooter() {
 				transition={{ duration: 0.3 }}
 			>
 				<ChevronUp className='w-5 h-5' />
-			</motion.button>
+			</motion.button> */}
 		</footer>
 	)
 }

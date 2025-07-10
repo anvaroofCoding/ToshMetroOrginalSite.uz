@@ -158,7 +158,7 @@ export default function ManagementPage() {
 				<div className='container mx-auto pt-10'>
 					<div className='text-start'>
 						<h1 className='text-4xl md:text-4xl font-bold mb-4'>
-							Metropoliten rahbariyati
+							Metropoliteni rahbariyati
 						</h1>
 					</div>
 				</div>
