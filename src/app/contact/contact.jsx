@@ -427,7 +427,7 @@ export default function ContactPage() {
 						transition={{ delay: 0.5, duration: 0.8 }}
 						style={{ y: springY }}
 					>
-						<Card className='bg-white border-2 border-gray-200 shadow-2xl overflow-hidden relative sticky top-8'>
+						<Card className='bg-white border-2 mt-10 lg:mt-0 border-gray-200 shadow-2xl overflow-hidden relative  top-8'>
 							<motion.div
 								className='absolute top-0 left-0 w-full h-2 bg-[#0E327F]'
 								initial={{ scaleX: 0 }}

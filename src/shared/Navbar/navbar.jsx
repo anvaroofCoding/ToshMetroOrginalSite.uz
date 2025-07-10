@@ -25,7 +25,7 @@ const menuItems = [
 	},
 	{
 		label: "To'lovlar",
-		href: '/',
+		href: '',
 		dropdown: true,
 		dropdownItems: [
 			{ label: `To'lov turlari`, href: '/tolov-turi' },
@@ -35,7 +35,7 @@ const menuItems = [
 	},
 	{
 		label: "Yo'lovchilar",
-		href: '/yolovchilar',
+		href: '',
 		dropdown: true,
 		dropdownItems: [
 			{
@@ -62,13 +62,13 @@ const menuItems = [
 	},
 	{
 		label: 'Hamkorlik',
-		href: '/hamkorlik',
+		href: '',
 		dropdown: false,
 		dropdownItems: [],
 	},
 	{
 		label: 'Metro haqida',
-		href: '/',
+		href: '',
 		dropdown: true,
 		dropdownItems: [
 			{ label: 'Tashkilod haqida', href: '/metro-tarixi' },
@@ -347,7 +347,11 @@ export default function MetroNavbar() {
 								className='flex flex-col text-xl text-white'
 							>
 								{menuItems.map(item => (
-									<MobileNavItem key={item.label} item={item} />
+									<MobileNavItem
+										key={item.label}
+										item={item}
+										closeMenu={() => setIsMenuOpen(false)}
+									/>
 								))}
 							</motion.ul>
 						</nav>
@@ -395,7 +399,7 @@ export default function MetroNavbar() {
 	)
 }
 
-const MobileNavItem = ({ item }) => {
+const MobileNavItem = ({ item, closeMenu }) => {
 	const [isOpen, setIsOpen] = useState(false)
 
 	return (
@@ -410,7 +414,11 @@ const MobileNavItem = ({ item }) => {
 				className='flex justify-between items-center cursor-pointer py-4'
 				onClick={() => (item.dropdown ? setIsOpen(!isOpen) : null)}
 			>
-				<Link href={item.href} className='hover:opacity-80 transition-opacity'>
+				<Link
+					href={item.href}
+					onClick={item.href === '/metro-maps' ? closeMenu : undefined}
+					className='hover:opacity-80 transition-opacity'
+				>
 					{item.label}
 				</Link>
 				{item.dropdown && (
@@ -440,6 +448,7 @@ const MobileNavItem = ({ item }) => {
 							>
 								<Link
 									href={subItem.href}
+									onClick={closeMenu}
 									className='text-white/80 hover:text-white transition-colors text-lg'
 								>
 									{subItem.label}
