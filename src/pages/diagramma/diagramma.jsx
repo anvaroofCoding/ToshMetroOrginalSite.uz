@@ -119,7 +119,7 @@ export default function Component() {
 	const selectedStats = selectedStation ? stationStats[selectedStation] : null
 
 	return (
-		<div className='h-[700px] bg-white pt-20 overflow-hidden'>
+		<div className='h-[700px] bg-white pt-10 overflow-hidden'>
 			<div className='container'>
 				<div className='mb-8 text-start'>
 					<h1 className='text-3xl md:text-4xl font-bold text-blue-900 mb-2'>
