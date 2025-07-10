@@ -1,18 +1,18 @@
 import Cards from '@/pages/cards/cards'
 import CompanySlider from '@/pages/company/CompanySlider'
-import MetroCarousel from '@/pages/Header/header'
+import MetroCarouselWithNews from '@/pages/Header/header'
 import YoutubeGrid from '@/pages/youtube/youtube'
-import { MetroCommandBar } from '@/work/metroTime/metroTime'
+import MetroSystem from '@/work/metroTime/metroTime'
 import FaqAccordion from '@/work/test/questions'
 
 const Home = () => {
 	return (
 		<div>
 			<div className='my-5'>
-				<MetroCommandBar />
+				<MetroSystem />
 			</div>
 			<div className='mt-5'>
-				<MetroCarousel />
+				<MetroCarouselWithNews />
 			</div>
 			<div className='my-10'>
 				<Cards />

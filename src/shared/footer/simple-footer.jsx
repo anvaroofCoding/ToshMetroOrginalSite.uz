@@ -102,7 +102,7 @@ export default function SimpleFooter() {
 	}
 
 	return (
-		<footer className='bg-[#0E327F] text-white mt-16'>
+		<footer className='bg-gradient-to-r from-[#0E327F] to-blue-800 text-white mt-16'>
 			<motion.div
 				variants={containerVariants}
 				initial='hidden'
@@ -183,7 +183,7 @@ export default function SimpleFooter() {
 						<h3 className='text-lg font-semibold mb-4 text-[#00B0FF]'>
 							Ijtimoiy Tarmoqlar
 						</h3>
-						<div className='grid grid-cols-2 gap-3'>
+						<div className='grid grid-cols-2 gap-2 w-[100px]'>
 							{socialLinks.map((item, idx) => (
 								<motion.div
 									key={idx}
@@ -194,10 +194,9 @@ export default function SimpleFooter() {
 										href={item.href}
 										target='_blank'
 										aria-label={item.title}
-										className='flex items-center justify-center text-[14px]  gap-2 p-3 bg-white/10 rounded-lg hover:bg-white/20 transition-colors '
+										className='flex items-center justify-center text-[14px]  gap-2 p-1 bg-white/10 rounded-lg hover:bg-white/20 transition-colors '
 									>
 										{item.icon}
-										<span className='hidden sm:inline'>{item.title}</span>
 									</Link>
 								</motion.div>
 							))}
@@ -231,7 +230,7 @@ export default function SimpleFooter() {
 			</motion.div>
 
 			{/* Bottom Bar */}
-			<div className='bg-[#0b295d] border-t border-white/10'>
+			<div className='bg-blue-900 border-t border-white/10'>
 				<div className='container mx-auto px-4 py-4'>
 					<div className='flex flex-col md:flex-row items-center justify-between gap-4'>
 						<p className='text-xs text-gray-400 text-center md:text-left'>

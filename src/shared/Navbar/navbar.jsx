@@ -152,13 +152,21 @@ export default function MetroNavbar() {
 		<>
 			<header
 				className={`sticky top-0 left-0 w-full z-50 transition-all duration-300 ${
-					isScrolled ? 'bg-[#0E327F] pt-0 shadow-md' : 'bg-transparent pt-5'
+					isScrolled
+						? 'bg-gradient-to-r from-[#0E327F] to-blue-800 pt-0 shadow-md'
+						: 'bg-transparent pt-5'
 				}`}
 			>
 				<div className='container mx-auto'>
 					<motion.div
 						layout
-						className='flex items-center justify-between h-[70px] bg-[#0E327F] text-white rounded-lg shadow-lg px-4'
+						className={`flex items-center justify-between h-[70px]  text-white rounded-lg  px-4
+							${
+								isScrolled
+									? 'bg-transparent'
+									: 'bg-gradient-to-r from-[#0E327F] to-blue-800 shadow-lg'
+							}
+							`}
 					>
 						<div className='flex items-center gap-3'>
 							<Link href={'/'}>

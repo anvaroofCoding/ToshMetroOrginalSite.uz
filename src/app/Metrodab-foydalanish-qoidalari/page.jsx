@@ -1,9 +1,9 @@
-import MetroRegulations from './qoida'
+import MetroRegulations2 from './yangi-qoidalar'
 
 const Page = () => {
 	return (
 		<div>
-			<MetroRegulations />
+			<MetroRegulations2 />
 		</div>
 	)
 }
