@@ -244,7 +244,7 @@ export default function MetroRegulations2() {
 								<Train className='w-12 h-12 text-white' />
 							</div>
 						</div>
-						<h1 className='text-4xl md:text-6xl font-bold text-gray-900 mb-4 animate-fade-in'>
+						<h1 className='text-4xl md:text-6xl font-bold text-blue-900 mb-4 animate-fade-in'>
 							Metropoliten Qoidalari
 						</h1>
 						<p className='text-xl text-gray-700 mb-6 font-medium'>

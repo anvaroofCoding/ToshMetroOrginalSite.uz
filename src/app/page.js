@@ -1,5 +1,5 @@
-import Cards from '@/pages/cards/cards'
 import CompanySlider from '@/pages/company/CompanySlider'
+import Component from '@/pages/diagramma/diagramma'
 import MetroCarouselWithNews from '@/pages/Header/header'
 import YoutubeGrid from '@/pages/youtube/youtube'
 import MetroSystem from '@/work/metroTime/metroTime'
@@ -14,8 +14,8 @@ const Home = () => {
 			<div className='mt-5'>
 				<MetroCarouselWithNews />
 			</div>
-			<div className='my-10'>
-				<Cards />
+			<div className='my-5'>
+				<Component />
 			</div>
 			<div className='my-10 mt-15'>
 				<div className='container'>

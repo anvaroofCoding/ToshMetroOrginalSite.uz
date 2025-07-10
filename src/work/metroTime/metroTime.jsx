@@ -191,7 +191,7 @@ export default function MetroSystem() {
 			{/* Enhanced Command Bar */}
 			<motion.div
 				ref={searchRef}
-				className='relative bg-white border border-gray-200 shadow-2xl overflow-hidden'
+				className='relative bg-white border-gray-200 shadow-2xl overflow-hidden'
 				initial={{ opacity: 0, y: -20 }}
 				animate={{ opacity: 1, y: 0 }}
 			>

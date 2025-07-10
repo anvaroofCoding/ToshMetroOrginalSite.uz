@@ -23,16 +23,8 @@ O‘z-o‘ziga xizmat ko‘rsatish terminallarida-infokiosklar.
 			a: `+998 78 140 08 08 raqamiga qo'ng'roq qilish yoki elektron pochta orqali info@atto.uz`,
 		},
 		{
-			q: 'To‘lov narxlari haqida',
-			a: 'To‘lov narxlari xizmat turiga qarab farqlanadi.',
-		},
-		{
-			q: `Ishga joylashish bo'yicha qayerga murojaat qilsam bo'ladi`,
-			a: 'Toshkent shahar Metro Politeniga',
-		},
-		{
-			q: 'Hamkorlik takliflari',
-			a: 'Hamkorlik bo‘yicha biz bilan bog‘laning.',
+			q: "Bazi bekatlarda kassa operator joylari yopilgan to'lovni qayerda qilsam bo'ladi?",
+			a: 'Yopilgan bekatlarda to‘lovni ATTO, MyUzcard, Payme, Upay, Apelsin va boshqa elektron to‘lov tizimlarining mobil ilovalari orqali amalga oshirish mumkin. Yoki paynet terminali orqali to‘lovni amalga oshirish mumkin.',
 		},
 	]
 

@@ -1,6 +1,6 @@
 'use client'
 
-import Button from '@/work/buttons/ndsButoon'
+import { Button } from '@/components/ui/button'
 import { AnimatePresence, motion } from 'framer-motion'
 import {
 	ArrowRight,
@@ -9,6 +9,7 @@ import {
 	ChevronRight,
 	Clock,
 	Instagram,
+	Newspaper,
 	Send,
 	Twitter,
 	Youtube,
@@ -132,7 +133,7 @@ export default function MetroCarouselWithNews() {
 	useEffect(() => {
 		const newsInterval = setInterval(() => {
 			setCurrentNewsIndex(prev => (prev + 1) % newsData.length)
-		}, 3000)
+		}, 4000)
 		return () => clearInterval(newsInterval)
 	}, [])
 
@@ -152,20 +153,35 @@ export default function MetroCarouselWithNews() {
 	const getCategoryColor = category => {
 		switch (category) {
 			case 'Yangilik':
-				return 'bg-green-500'
+				return 'bg-emerald-500'
 			case 'Xizmat':
 				return 'bg-blue-500'
 			case "E'lon":
-				return 'bg-yellow-500'
+				return 'bg-amber-500'
 			case 'Chegirma':
-				return 'bg-red-500'
+				return 'bg-rose-500'
 			default:
 				return 'bg-blue-900'
 		}
 	}
 
+	const getCategoryColorLight = category => {
+		switch (category) {
+			case 'Yangilik':
+				return 'bg-emerald-50 text-emerald-700 border-emerald-200'
+			case 'Xizmat':
+				return 'bg-blue-50 text-blue-700 border-blue-200'
+			case "E'lon":
+				return 'bg-amber-50 text-amber-700 border-amber-200'
+			case 'Chegirma':
+				return 'bg-rose-50 text-rose-700 border-rose-200'
+			default:
+				return 'bg-blue-50 text-blue-700 border-blue-200'
+		}
+	}
+
 	return (
-		<div className='container mx-auto'>
+		<div className='container mx-auto py-2'>
 			<div className='grid grid-cols-1 lg:grid-cols-2 gap-8'>
 				{/* Carousel Section */}
 				<div className='relative h-[300px] md:h-[400px] overflow-hidden rounded-2xl shadow-2xl bg-blue-900'>
@@ -276,114 +292,137 @@ export default function MetroCarouselWithNews() {
 					</div>
 				</div>
 
-				{/* News Timeline Section */}
-				<div className='bg-white rounded-2xl shadow-2xl p-6 h-[300px] md:h-[400px] overflow-hidden'>
-					<div className='flex md:flex-row flex-col items-start md:items-center justify-between gap-3 mb-6'>
-						<div className='flex items-center gap-2'>
-							<div className='w-8 h-8 bg-blue-900 rounded-full flex items-center justify-center'>
-								<Calendar className='w-4 h-4 text-white' />
+				{/* Redesigned News Section */}
+				<div className='bg-gradient-to-br from-slate-50 to-white rounded-2xl shadow-2xl border border-slate-200 h-[300px] md:h-[400px] flex flex-col overflow-hidden'>
+					{/* Header */}
+					<div className='flex items-center justify-between p-6 border-b border-slate-200 bg-white/80 backdrop-blur-sm'>
+						<div className='flex items-center gap-3'>
+							<div className='w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl flex items-center justify-center shadow-lg'>
+								<Newspaper className='w-6 h-6 text-white' />
 							</div>
-							<h3 className='text-2xl font-bold text-blue-900'>
-								So'nggi Yangiliklar
-							</h3>
+							<div>
+								<h3 className='text-xl font-bold text-slate-800'>
+									So'nggi Yangiliklar
+								</h3>
+								<p className='text-sm text-slate-500'>Eng muhim xabarlar</p>
+							</div>
 						</div>
 						<Link href={'/yangiliklar'}>
-							<Button />
+							<Button
+								variant='outline'
+								size='sm'
+								className='text-blue-600 border-blue-200 hover:bg-blue-50 hover:border-blue-300 bg-transparent font-medium'
+							>
+								Barchasi
+								<ArrowRight className='w-4 h-4 ml-1' />
+							</Button>
 						</Link>
 					</div>
 
-					<div className='relative h-full overflow-hidden'>
+					{/* News Content */}
+					<div className='flex-1 relative overflow-hidden'>
 						<AnimatePresence mode='wait'>
 							<motion.div
 								key={currentNewsIndex}
-								initial={{ opacity: 0, x: 50 }}
-								animate={{ opacity: 1, x: 0 }}
-								exit={{ opacity: 0, x: -50 }}
-								transition={{ duration: 0.5 }}
-								className='absolute inset-0'
+								initial={{ opacity: 0, y: 20 }}
+								animate={{ opacity: 1, y: 0 }}
+								exit={{ opacity: 0, y: -20 }}
+								transition={{ duration: 0.6, ease: 'easeInOut' }}
+								className='absolute inset-0 p-6'
 							>
-								<div className='space-y-4'>
-									{/* Current News Item */}
-									<div className='bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl p-4 border-l-4 border-blue-900'>
-										<div className='flex items-start gap-3'>
+								{/* Featured News */}
+								<div className='mb-6'>
+									<div className='bg-white rounded-xl p-5 shadow-sm border border-slate-200 hover:shadow-md transition-all duration-300'>
+										<div className='flex items-start gap-4'>
 											<div className='flex-shrink-0'>
 												<div
-													className={`w-3 h-3 rounded-full ${getCategoryColor(
+													className={`w-12 h-12 rounded-xl ${getCategoryColor(
 														newsData[currentNewsIndex].category
-													)} animate-pulse`}
-												/>
+													)} flex items-center justify-center shadow-sm`}
+												>
+													<Calendar className='w-6 h-6 text-white' />
+												</div>
 											</div>
-											<div className='flex-1'>
-												<div className='flex items-center gap-2 mb-2'>
+											<div className='flex-1 min-w-0'>
+												<div className='flex items-center gap-2 mb-3'>
 													<span
-														className={`px-2 py-1 text-xs font-medium text-white rounded-full ${getCategoryColor(
+														className={`px-3 py-1 text-xs font-semibold rounded-full border ${getCategoryColorLight(
 															newsData[currentNewsIndex].category
 														)}`}
 													>
 														{newsData[currentNewsIndex].category}
 													</span>
-													<div className='flex items-center gap-1 text-xs text-gray-500'>
+													<div className='flex items-center gap-1 text-xs text-slate-500'>
 														<Clock className='w-3 h-3' />
 														{newsData[currentNewsIndex].time}
 													</div>
 												</div>
-												<h4 className='text-lg font-bold text-blue-900 mb-2'>
+												<h4 className='text-lg font-bold text-slate-800 mb-2 leading-tight'>
 													{newsData[currentNewsIndex].title}
 												</h4>
-												<p className='text-gray-600 text-sm leading-relaxed mb-3'>
+												<p className='text-slate-600 text-sm leading-relaxed mb-4'>
 													{newsData[currentNewsIndex].description}
 												</p>
 												<div className='flex items-center justify-between'>
-													<span className='text-xs text-gray-400'>
+													<span className='text-xs text-slate-400 font-medium'>
 														{newsData[currentNewsIndex].date}
 													</span>
-													<button className='flex items-center gap-1 text-blue-900 hover:text-blue-700 transition-colors text-sm font-medium'>
+													<button className='flex items-center gap-1 text-blue-600 hover:text-blue-700 transition-colors text-sm font-semibold group'>
 														Batafsil
-														<ArrowRight className='w-3 h-3' />
+														<ArrowRight className='w-3 h-3 group-hover:translate-x-1 transition-transform' />
 													</button>
 												</div>
 											</div>
 										</div>
 									</div>
+								</div>
 
-									{/* Timeline Preview */}
-									<div className='space-y-3'>
-										<h5 className='text-sm font-semibold text-gray-700 mb-3'>
-											Boshqa yangiliklar:
-										</h5>
+								{/* Related News */}
+								<div className='space-y-3'>
+									<h5 className='text-sm font-semibold text-slate-700 mb-3 flex items-center gap-2'>
+										<div className='w-1 h-4 bg-blue-600 rounded-full'></div>
+										Boshqa yangiliklar
+									</h5>
+									<div className='space-y-2'>
 										{newsData
 											.filter((_, index) => index !== currentNewsIndex)
-											.slice(0, 3)
+											.slice(0, 2)
 											.map((news, index) => (
 												<motion.div
 													key={news.id}
-													initial={{ opacity: 0, y: 20 }}
-													animate={{ opacity: 1, y: 0 }}
-													transition={{ delay: index * 0.1 }}
-													className='flex items-start gap-3 p-3 hover:bg-gray-50 rounded-lg transition-colors cursor-pointer'
+													initial={{ opacity: 0, x: 20 }}
+													animate={{ opacity: 1, x: 0 }}
+													transition={{
+														delay: index * 0.1,
+														duration: 0.4,
+														ease: 'easeOut',
+													}}
+													className='bg-slate-50 hover:bg-white rounded-lg p-3 border border-slate-100 hover:border-slate-200 transition-all duration-300 cursor-pointer group'
 												>
-													<div className='flex-shrink-0 mt-1'>
-														<div
-															className={`w-2 h-2 rounded-full ${getCategoryColor(
-																news.category
-															)}`}
-														/>
-													</div>
-													<div className='flex-1 min-w-0'>
-														<h6 className='text-sm font-medium text-gray-900 truncate'>
-															{news.title}
-														</h6>
-														<div className='flex items-center gap-2 mt-1'>
-															<span className='text-xs text-gray-500'>
-																{news.date}
-															</span>
-															<span
-																className={`px-1.5 py-0.5 text-xs text-white rounded ${getCategoryColor(
+													<div className='flex items-start gap-3'>
+														<div className='flex-shrink-0 mt-1'>
+															<div
+																className={`w-2 h-2 rounded-full ${getCategoryColor(
 																	news.category
 																)}`}
-															>
-																{news.category}
-															</span>
+															/>
+														</div>
+														<div className='flex-1 min-w-0'>
+															<h6 className='text-sm font-semibold text-slate-800 group-hover:text-blue-600 transition-colors line-clamp-1'>
+																{news.title}
+															</h6>
+															<div className='flex items-center gap-2 mt-1'>
+																<span className='text-xs text-slate-500'>
+																	{news.date}
+																</span>
+																<span
+																	className={`px-2 py-0.5 text-xs rounded-full border ${getCategoryColorLight(
+																		news.category
+																	)}`}
+																>
+																	{news.category}
+																</span>
+															</div>
 														</div>
 													</div>
 												</motion.div>
@@ -392,18 +431,26 @@ export default function MetroCarouselWithNews() {
 								</div>
 							</motion.div>
 						</AnimatePresence>
+					</div>
 
-						{/* News Progress Indicators */}
-						<div className='absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1'>
-							{newsData.map((_, index) => (
-								<div
-									key={index}
-									className={`w-2 h-2 rounded-full transition-all duration-300 ${
-										index === currentNewsIndex ? 'bg-blue-900' : 'bg-gray-300'
-									}`}
-								/>
-							))}
-						</div>
+					{/* Progress Indicators */}
+					<div className='flex justify-center gap-2 p-4 bg-white/50 backdrop-blur-sm border-t border-slate-200'>
+						{newsData.map((_, index) => (
+							<motion.div
+								key={index}
+								className={`h-1.5 rounded-full transition-all duration-500 ${
+									index === currentNewsIndex
+										? 'bg-blue-600 w-8'
+										: 'bg-slate-300 w-2'
+								}`}
+								animate={{
+									width: index === currentNewsIndex ? 32 : 8,
+									backgroundColor:
+										index === currentNewsIndex ? '#2563eb' : '#cbd5e1',
+								}}
+								transition={{ duration: 0.3 }}
+							/>
+						))}
 					</div>
 				</div>
 			</div>
