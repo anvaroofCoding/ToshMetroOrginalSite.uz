@@ -37,3 +37,5 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 Sayt har bir bosqichda test qili ishlanmoqda.
 Saytning asosiy navbar qismiga e'tiborimiz juda yaxshi berilgan va davlat tashkilodlariga mos qila ishlatilgan
+
+Saytdagi ma'lumotlarda broz xatoliklar bor hali tog'rlanmanagan bu ustida ishlanadi
