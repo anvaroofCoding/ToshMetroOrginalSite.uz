@@ -11,8 +11,10 @@ import {
 	X,
 	Youtube,
 } from 'lucide-react'
+import { useLocale } from 'next-intl'
 import Image from 'next/image'
 import Link from 'next/link'
+import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import logo from '../../../public/MetroLogo.png'
 
@@ -46,19 +48,13 @@ const menuItems = [
 				label: 'Davlat ramzlari',
 				href: '/davlat-ramzlari',
 			},
-			// { label: 'Huquq va majburiyatlar', href: '/yolovchilar/huquq' },
-			// { label: 'Imtiyozlar', href: '/yolovchilar/imtiyozlar' },
 		],
 	},
 	{
 		label: 'Pressa',
 		href: '',
 		dropdown: true,
-		dropdownItems: [
-			{ label: 'Yangiliklar', href: '/yangiliklar' },
-			// { label: 'Matbuot bayonotlari', href: '/pressa/bayonotlar' },
-			// { label: 'Foto galereya', href: '/pressa/galereya' },
-		],
+		dropdownItems: [{ label: 'Yangiliklar', href: '/yangiliklar' }],
 	},
 	{
 		label: 'Hamkorlik',
@@ -81,21 +77,13 @@ const menuItems = [
 		label: 'Gender tenglik',
 		href: '',
 		dropdown: true,
-		dropdownItems: [
-			{ label: "Umumiy ma'lumot", href: 'umumiy-malumot' },
-			// { label: 'Statistika', href: '/gender/statistika' },
-			// { label: 'Tadbirlar', href: '/gender/tadbirlar' },
-		],
+		dropdownItems: [{ label: "Umumiy ma'lumot", href: 'umumiy-malumot' }],
 	},
 	{
 		label: 'Aloqa',
 		href: '',
 		dropdown: true,
-		dropdownItems: [
-			{ label: 'Aloqa', href: '/contact' },
-			// { label: 'Manzil', href: '/aloqa/manzil' },
-			// { label: 'Fikr bildirish', href: '/aloqa/fikr' },
-		],
+		dropdownItems: [{ label: 'Aloqa', href: '/contact' }],
 	},
 ]
 
@@ -131,9 +119,18 @@ const languages = ['UZ', 'RU', 'EN']
 export default function MetroNavbar() {
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
 	const [isScrolled, setIsScrolled] = useState(false)
-	const [hoveredIndex, setHoveredIndex] = useState()
+	const [activeDropdown, setActiveDropdown] = useState(null)
+	const locale = useLocale()
 	const [isLangOpen, setIsLangOpen] = useState(false)
-	const [currentLang, setCurrentLang] = useState('UZ')
+	const [currentLang, setCurrentLang] = useState(locale.toUpperCase())
+
+	const router = useRouter()
+	const pathname = usePathname()
+	const changeLanguage = lang => {
+		const segments = pathname.split('/')
+		segments[1] = lang.toLowerCase() // locale ni almashtiramiz
+		router.push(segments.join('/'))
+	}
 
 	useEffect(() => {
 		const handleScroll = () => setIsScrolled(window.scrollY > 20)
@@ -141,11 +138,48 @@ export default function MetroNavbar() {
 		return () => window.removeEventListener('scroll', handleScroll)
 	}, [])
 
+	useEffect(() => {
+		const handleClickOutside = event => {
+			const target = event.target
+			if (!target.closest('.dropdown-container')) {
+				setActiveDropdown(null)
+				setIsLangOpen(false)
+			}
+		}
+
+		document.addEventListener('click', handleClickOutside)
+		return () => document.removeEventListener('click', handleClickOutside)
+	}, [])
+
 	const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
+
+	const handleDropdownClick = index => {
+		setActiveDropdown(activeDropdown === index ? null : index)
+	}
+
+	const handleLangClick = () => {
+		setIsLangOpen(!isLangOpen)
+		setActiveDropdown(null)
+	}
 
 	const menuVariants = {
 		hidden: { opacity: 0 },
 		visible: { opacity: 1, transition: { duration: 0.3 } },
+	}
+
+	const dropdownVariants = {
+		hidden: {
+			opacity: 0,
+			y: -10,
+			scale: 0.95,
+			transition: { duration: 0.2 },
+		},
+		visible: {
+			opacity: 1,
+			y: 0,
+			scale: 1,
+			transition: { duration: 0.2, ease: 'easeOut' },
+		},
 	}
 
 	return (
@@ -160,18 +194,16 @@ export default function MetroNavbar() {
 				<div className='container mx-auto'>
 					<motion.div
 						layout
-						className={`flex items-center justify-between h-[70px]  text-white rounded-lg  px-4
-							${
-								isScrolled
-									? 'bg-transparent'
-									: 'bg-gradient-to-r from-[#0E327F] to-blue-800 shadow-lg'
-							}
-							`}
+						className={`flex items-center justify-between h-[70px] text-white rounded-lg px-4 ${
+							isScrolled
+								? 'bg-transparent'
+								: 'bg-gradient-to-r from-[#0E327F] to-blue-800 shadow-lg'
+						}`}
 					>
 						<div className='flex items-center gap-3'>
 							<Link href={'/'}>
 								<Image
-									src={logo}
+									src={logo || '/placeholder.svg'}
 									alt='Toshkent metro logo'
 									width={50}
 									height={50}
@@ -185,7 +217,7 @@ export default function MetroNavbar() {
 								<div className='border-l border-[#00B100] h-[30%] w-full'></div>
 							</div>
 							<h1 className='hidden md:block text-[11px] lg:text-xs w-[150px] lg:w-[200px]'>
-								O‘zbekiston Respublikasi{' '}
+								O'zbekiston Respublikasi{' '}
 								<span className='font-bold'>"Toshkent Metropoliteni"</span> DUK
 							</h1>
 						</div>
@@ -194,47 +226,52 @@ export default function MetroNavbar() {
 							{menuItems.map((item, index) => (
 								<div
 									key={item.label}
-									className='relative h-full flex items-center'
-									onMouseEnter={() => setHoveredIndex(index)}
-									onMouseLeave={() => setHoveredIndex(null)}
+									className='relative h-full flex items-center dropdown-container'
 								>
-									<Link
-										href={item.href}
-										className='px-2.5 py-2 text-[12px] text-gray-300 hover:text-white transition-colors relative flex items-center gap-1'
-									>
-										{item.label}
-										{item.dropdown && (
+									{item.dropdown ? (
+										<button
+											onClick={() => handleDropdownClick(index)}
+											className='px-2.5 py-2 text-[12px] text-gray-300 hover:text-white transition-colors relative flex items-center gap-1'
+										>
+											{item.label}
 											<ChevronDown
-												className='h-4 w-4 transition-transform'
+												className='h-4 w-4 transition-transform duration-200'
 												style={{
 													transform:
-														hoveredIndex === index
+														activeDropdown === index
 															? 'rotate(180deg)'
 															: 'rotate(0deg)',
 												}}
 											/>
-										)}
-									</Link>
-
+										</button>
+									) : (
+										<Link
+											href={item.href}
+											className='px-2.5 py-2 text-[12px] text-gray-300 hover:text-white transition-colors relative flex items-center gap-1'
+										>
+											{item.label}
+										</Link>
+									)}
 									{index < menuItems.length - 1 && (
 										<span className='text-gray-600'>|</span>
 									)}
 
 									<AnimatePresence>
-										{item.dropdown && hoveredIndex === index && (
+										{item.dropdown && activeDropdown === index && (
 											<motion.div
-												initial={{ opacity: 0, y: 15 }}
-												animate={{ opacity: 1, y: 0 }}
-												exit={{ opacity: 0, y: 15 }}
-												transition={{ duration: 0.3, ease: 'easeOut' }}
-												className='absolute top-full left-1/2 -translate-x-1/2 mt-2 w-56'
+												variants={dropdownVariants}
+												initial='hidden'
+												animate='visible'
+												exit='hidden'
+												className='absolute top-full left-1/2 -translate-x-1/2 mt-2 w-56 z-50'
 											>
-												<div className='bg-[#0E327F]/80 backdrop-blur-lg rounded-lg shadow-xl border border-white/10 overflow-hidden'>
+												<div className='bg-[#0E327F]/95 backdrop-blur-lg rounded-lg shadow-xl border border-white/20 overflow-hidden'>
 													{item.dropdownItems.map(subItem => (
 														<Link
 															key={subItem.label}
 															href={subItem.href}
-															className='block px-4 py-2 text-sm text-gray-300 hover:bg-white/10 hover:text-white transition-colors'
+															onClick={() => setActiveDropdown(null)}
+															className='block px-4 py-3 text-sm text-gray-300 hover:bg-white/15 hover:text-white transition-all duration-200 border-b border-white/10 last:border-b-0'
 														>
 															{subItem.label}
 														</Link>
@@ -248,41 +285,46 @@ export default function MetroNavbar() {
 						</nav>
 
 						<div className='flex items-center gap-4'>
-							<div
-								className='hidden xl:flex items-center relative'
-								onMouseEnter={() => setIsLangOpen(true)}
-								onMouseLeave={() => setIsLangOpen(false)}
-							>
-								<button className='flex items-center gap-2 text-sm text-gray-300 hover:text-white transition-colors'>
+							<div className='hidden xl:flex items-center relative dropdown-container'>
+								<button
+									onClick={handleLangClick}
+									className='flex items-center gap-2 text-sm text-gray-300 hover:text-white transition-colors'
+								>
 									<Globe size={20} />
 									{currentLang}
 									<ChevronDown
 										size={16}
-										className={`transition-transform ${
+										className={`transition-transform duration-200 ${
 											isLangOpen ? 'rotate-180' : ''
 										}`}
 									/>
 								</button>
+
 								<AnimatePresence>
 									{isLangOpen && (
 										<motion.div
-											initial={{ opacity: 0, y: 15 }}
-											animate={{ opacity: 1, y: 0 }}
-											exit={{ opacity: 0, y: 15 }}
-											className='absolute top-full right-0 mt-2 w-24 bg-[#0E327F]/80 backdrop-blur-lg rounded-lg shadow-xl border border-white/10 overflow-hidden'
+											variants={dropdownVariants}
+											initial='hidden'
+											animate='visible'
+											exit='hidden'
+											className='absolute top-full right-0 mt-2 w-24 bg-[#0E327F]/95 backdrop-blur-lg rounded-lg shadow-xl border border-white/20 overflow-hidden z-50'
 										>
-											{languages.map(lang => (
-												<button
-													key={lang}
-													onClick={() => {
-														setCurrentLang(lang)
-														setIsLangOpen(false)
-													}}
-													className='block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-white/10 hover:text-white transition-colors'
-												>
-													{lang}
-												</button>
-											))}
+											{/* Desktop til tanlash */}
+											{languages
+												.filter(lang => lang !== currentLang)
+												.map(lang => (
+													<button
+														key={lang}
+														onClick={() => {
+															setCurrentLang(lang)
+															setIsLangOpen(false)
+															changeLanguage(lang)
+														}}
+														className='block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-white/15 hover:text-white transition-all duration-200 border-b border-white/10 last:border-b-0'
+													>
+														{lang}
+													</button>
+												))}
 										</motion.div>
 									)}
 								</AnimatePresence>
@@ -315,7 +357,7 @@ export default function MetroNavbar() {
 								<div className='flex items-center gap-3 justify-center'>
 									<Link href={'/'}>
 										<Image
-											src={logo}
+											src={logo || '/placeholder.svg'}
 											alt='Toshkent metro logo'
 											width={50}
 											height={50}
@@ -329,12 +371,11 @@ export default function MetroNavbar() {
 										<div className='border-l border-[#00B100] h-[30%] w-full'></div>
 									</div>
 									<h2 className='text-white text-[10px]'>
-										O‘zbekiston Respublikasi
+										O'zbekiston Respublikasi
 										<span className='font-bold'> "Toshkent Metropoliteni"</span>
 										DUK
 									</h2>
 								</div>
-
 								<button
 									onClick={toggleMenu}
 									className='text-white'
@@ -354,10 +395,13 @@ export default function MetroNavbar() {
 								}}
 								className='flex flex-col text-xl text-white'
 							>
-								{menuItems.map(item => (
+								{menuItems.map((item, index) => (
 									<MobileNavItem
 										key={item.label}
 										item={item}
+										index={index}
+										activeDropdown={activeDropdown}
+										setActiveDropdown={setActiveDropdown}
 										closeMenu={() => setIsMenuOpen(false)}
 									/>
 								))}
@@ -371,19 +415,26 @@ export default function MetroNavbar() {
 							className='container mx-auto px-4 py-6'
 						>
 							<div className='flex justify-center gap-4 mb-6'>
-								{languages.map(lang => (
-									<button
-										key={lang}
-										onClick={() => setCurrentLang(lang)}
-										className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors ${
-											currentLang === lang
-												? 'bg-white text-[#0E327F]'
-												: 'bg-white/10 text-white hover:bg-white/20'
-										}`}
-									>
-										{lang}
-									</button>
-								))}
+								{/* Mobile til tanlash */}
+								{languages
+									.filter(lang => lang !== currentLang)
+									.map(lang => (
+										<button
+											key={lang}
+											onClick={() => {
+												setCurrentLang(lang)
+												changeLanguage(lang)
+												setIsMenuOpen(false)
+											}}
+											className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors ${
+												currentLang === lang
+													? 'bg-white text-[#0E327F]'
+													: 'bg-white/10 text-white hover:bg-white/20'
+											}`}
+										>
+											{lang}
+										</button>
+									))}
 							</div>
 							<div className='w-full h-px bg-white/20 mb-6' />
 							<div className='flex justify-center gap-8'>
@@ -407,8 +458,22 @@ export default function MetroNavbar() {
 	)
 }
 
-const MobileNavItem = ({ item, closeMenu }) => {
-	const [isOpen, setIsOpen] = useState(false)
+const MobileNavItem = ({
+	item,
+	index,
+	activeDropdown,
+	setActiveDropdown,
+	closeMenu,
+}) => {
+	const isOpen = activeDropdown === index
+
+	const handleClick = () => {
+		if (item.dropdown) {
+			setActiveDropdown(isOpen ? null : index)
+		} else {
+			closeMenu()
+		}
+	}
 
 	return (
 		<motion.li
@@ -420,29 +485,36 @@ const MobileNavItem = ({ item, closeMenu }) => {
 		>
 			<div
 				className='flex justify-between items-center cursor-pointer py-4'
-				onClick={() => (item.dropdown ? setIsOpen(!isOpen) : null)}
+				onClick={handleClick}
 			>
-				<Link
-					href={item.href}
-					onClick={item.href === '/metro-maps' ? closeMenu : undefined}
-					className='hover:opacity-80 transition-opacity'
-				>
-					{item.label}
-				</Link>
+				{item.dropdown ? (
+					<span className='hover:opacity-80 transition-opacity'>
+						{item.label}
+					</span>
+				) : (
+					<Link
+						href={item.href}
+						className='hover:opacity-80 transition-opacity'
+					>
+						{item.label}
+					</Link>
+				)}
 				{item.dropdown && (
 					<ChevronDown
-						className={`h-6 w-6 text-white/70 transition-transform ${
+						className={`h-6 w-6 text-white/70 transition-transform duration-200 ${
 							isOpen ? 'rotate-180' : ''
 						}`}
 					/>
 				)}
 			</div>
+
 			<AnimatePresence>
 				{isOpen && item.dropdown && (
 					<motion.ul
 						initial={{ height: 0, opacity: 0 }}
 						animate={{ height: 'auto', opacity: 1 }}
 						exit={{ height: 0, opacity: 0 }}
+						transition={{ duration: 0.3, ease: 'easeInOut' }}
 						className='overflow-hidden pl-4'
 					>
 						{item.dropdownItems.map(subItem => (

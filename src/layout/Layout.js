@@ -1,7 +1,7 @@
 'use client'
 
-import Loading from '@/app/management/loading'
 import { useEffect, useState } from 'react'
+import Loading from '../components/management/loading'
 
 export default function Layout({ children }) {
 	const [loading, setLoading] = useState(true)

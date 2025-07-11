@@ -4,12 +4,11 @@ import { Button } from '@/components/ui/button'
 import { AnimatePresence, motion } from 'framer-motion'
 import {
 	ArrowRight,
-	Calendar,
 	ChevronLeft,
 	ChevronRight,
 	Clock,
+	Info,
 	Instagram,
-	Newspaper,
 	Send,
 	Twitter,
 	Youtube,
@@ -36,50 +35,69 @@ const slides = [
 	},
 ]
 
-const newsData = [
+const announcements = [
 	{
 		id: 1,
-		title: 'Yangi metro liniyasi ochildi',
+		title: 'Chilonzor liniyasi - normal ish rejimi',
 		description:
-			"Toshkent metrosining yangi liniyasi rasmiy ravishda ochildi va yo'lovchilar xizmatiga taqdim etildi.",
-		date: '2024-01-15',
+			"Barcha bekatlar normal ishlayapti. Poyezdlar 2-3 daqiqa oralig'ida harakat qilmoqda.",
 		time: '14:30',
-		category: 'Yangilik',
+		status: 'Normal',
+		line: 'Chilonzor',
 	},
 	{
 		id: 2,
-		title: 'Metro bekatlarida Wi-Fi xizmati',
+		title: 'Yunusobod liniyasi - texnik ishlar',
 		description:
-			'Barcha metro bekatlarida bepul Wi-Fi internet xizmati ishga tushirildi.',
-		date: '2024-01-12',
+			'Bugun kechqurun 23:00 dan texnik ishlar olib boriladi. Xizmat vaqti qisqartiriladi.',
 		time: '10:15',
-		category: 'Xizmat',
+		status: 'Ogohlantirish',
+		line: 'Yunusobod',
 	},
 	{
 		id: 3,
-		title: 'Metro ish vaqti uzaytirildi',
-		description: 'Dam olish kunlarida metro ish vaqti kechgacha uzaytirildi.',
-		date: '2024-01-10',
+		title: "O'zbekiston liniyasi - yangi jadval",
+		description:
+			'Ish kunlarida birinchi poyezd 05:30 da, oxirgi poyezd 00:30 da harakat qiladi.',
 		time: '16:45',
-		category: "E'lon",
+		status: 'Yangilanish',
+		line: "O'zbekiston",
 	},
 	{
 		id: 4,
-		title: 'Yangi poyezdlar keldi',
+		title: 'Sergeli liniyasi - yangi bekat',
 		description:
-			'Zamonaviy va qulay yangi metro poyezdlari xizmatga kiritildi.',
-		date: '2024-01-08',
+			"Sergeli liniyasida yangi 'Qo'yliq' bekati ochildi va yo'lovchilar xizmatiga taqdim etildi.",
 		time: '09:20',
-		category: 'Yangilik',
+		status: 'Yangilik',
+		line: 'Sergeli',
 	},
 	{
 		id: 5,
-		title: 'Metro kartasi chegirma',
+		title: 'Talabalar uchun chegirma',
 		description:
-			"Talabalar uchun metro kartasida maxsus chegirma e'lon qilindi.",
-		date: '2024-01-05',
+			"Talaba guvohnomasi bo'yicha metro kartasida 50% chegirma amal qiladi.",
 		time: '11:30',
-		category: 'Chegirma',
+		status: 'Chegirma',
+		line: 'Barcha',
+	},
+	{
+		id: 6,
+		title: 'Kechki vaqtda xavfsizlik',
+		description:
+			'22:00 dan keyin har bir vagon va bekatda xavfsizlik xodimlari navbatchilik qiladi.',
+		time: '13:15',
+		status: 'Xavfsizlik',
+		line: 'Barcha',
+	},
+	{
+		id: 7,
+		title: 'Ekologik transport tanlovi',
+		description:
+			"Metro - shaharning eng toza va ekologik transport turi. Kuniga 2 million yo'lovchi.",
+		time: '08:45',
+		status: "Ma'lumot",
+		line: 'Barcha',
 	},
 ]
 
@@ -105,7 +123,6 @@ const socialLinks = [
 export default function MetroCarouselWithNews() {
 	const [currentSlide, setCurrentSlide] = useState(0)
 	const [direction, setDirection] = useState(0)
-	const [currentNewsIndex, setCurrentNewsIndex] = useState(0)
 
 	const nextSlide = useCallback(() => {
 		setDirection(1)
@@ -130,13 +147,6 @@ export default function MetroCarouselWithNews() {
 		return () => clearInterval(interval)
 	}, [nextSlide])
 
-	useEffect(() => {
-		const newsInterval = setInterval(() => {
-			setCurrentNewsIndex(prev => (prev + 1) % newsData.length)
-		}, 4000)
-		return () => clearInterval(newsInterval)
-	}, [])
-
 	const slideVariants = {
 		enter: direction => ({
 			opacity: 0,
@@ -148,36 +158,6 @@ export default function MetroCarouselWithNews() {
 		exit: direction => ({
 			opacity: 0,
 		}),
-	}
-
-	const getCategoryColor = category => {
-		switch (category) {
-			case 'Yangilik':
-				return 'bg-emerald-500'
-			case 'Xizmat':
-				return 'bg-blue-500'
-			case "E'lon":
-				return 'bg-amber-500'
-			case 'Chegirma':
-				return 'bg-rose-500'
-			default:
-				return 'bg-blue-900'
-		}
-	}
-
-	const getCategoryColorLight = category => {
-		switch (category) {
-			case 'Yangilik':
-				return 'bg-emerald-50 text-emerald-700 border-emerald-200'
-			case 'Xizmat':
-				return 'bg-blue-50 text-blue-700 border-blue-200'
-			case "E'lon":
-				return 'bg-amber-50 text-amber-700 border-amber-200'
-			case 'Chegirma':
-				return 'bg-rose-50 text-rose-700 border-rose-200'
-			default:
-				return 'bg-blue-50 text-blue-700 border-blue-200'
-		}
 	}
 
 	return (
@@ -292,166 +272,94 @@ export default function MetroCarouselWithNews() {
 					</div>
 				</div>
 
-				{/* Redesigned News Section */}
+				{/* Metro Announcements Section */}
 				<div className='bg-gradient-to-br from-slate-50 to-white rounded-2xl shadow-2xl border border-slate-200 h-[300px] md:h-[400px] flex flex-col overflow-hidden'>
 					{/* Header */}
-					<div className='flex items-center justify-between p-6 border-b border-slate-200 bg-white/80 backdrop-blur-sm'>
+					<div className='flex items-center justify-between p-4 border-b border-slate-200 bg-white/80 backdrop-blur-sm flex-shrink-0'>
 						<div className='flex items-center gap-3'>
-							<div className='w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl flex items-center justify-center shadow-lg'>
-								<Newspaper className='w-6 h-6 text-white' />
+							<div className='w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl flex items-center justify-center shadow-lg'>
+								<Info className='w-5 h-5 text-white' />
 							</div>
 							<div>
-								<h3 className='text-xl font-bold text-slate-800'>
-									So'nggi Yangiliklar
+								<h3 className='text-lg font-bold text-slate-800'>
+									Metro Ma'lumotlari
 								</h3>
-								<p className='text-sm text-slate-500'>Eng muhim xabarlar</p>
+								<p className='text-xs text-slate-500'>
+									Joriy holat va e'lonlar
+								</p>
 							</div>
 						</div>
-						<Link href={'/yangiliklar'}>
+						<Link href={'/yangiliklar'} className='flex items-center'>
 							<Button
 								variant='outline'
 								size='sm'
-								className='text-blue-600 border-blue-200 hover:bg-blue-50 hover:border-blue-300 bg-transparent font-medium'
+								className='text-blue-600 border-blue-200 hover:bg-blue-50 hover:border-blue-300 bg-transparent font-medium text-xs'
 							>
 								Barchasi
-								<ArrowRight className='w-4 h-4 ml-1' />
+								<ArrowRight className='w-3 h-3 ml-1' />
 							</Button>
 						</Link>
 					</div>
 
-					{/* News Content */}
+					{/* Scrolling Container */}
 					<div className='flex-1 relative overflow-hidden'>
-						<AnimatePresence mode='wait'>
-							<motion.div
-								key={currentNewsIndex}
-								initial={{ opacity: 0, y: 20 }}
-								animate={{ opacity: 1, y: 0 }}
-								exit={{ opacity: 0, y: -20 }}
-								transition={{ duration: 0.6, ease: 'easeInOut' }}
-								className='absolute inset-0 p-6'
-							>
-								{/* Featured News */}
-								<div className='mb-6'>
-									<div className='bg-white rounded-xl p-5 shadow-sm border border-slate-200 hover:shadow-md transition-all duration-300'>
-										<div className='flex items-start gap-4'>
-											<div className='flex-shrink-0'>
-												<div
-													className={`w-12 h-12 rounded-xl ${getCategoryColor(
-														newsData[currentNewsIndex].category
-													)} flex items-center justify-center shadow-sm`}
-												>
-													<Calendar className='w-6 h-6 text-white' />
-												</div>
+						<motion.div
+							className='space-y-3 p-4'
+							animate={{
+								y: [0, -announcements.length * 100],
+							}}
+							transition={{
+								duration: announcements.length * 3,
+								ease: 'linear',
+								repeat: Number.POSITIVE_INFINITY,
+							}}
+						>
+							{[...announcements, ...announcements].map(
+								(announcement, index) => (
+									<div
+										key={`${announcement.id}-${Math.floor(
+											index / announcements.length
+										)}`}
+										className='bg-white rounded-xl p-4 shadow-sm border border-slate-200 hover:shadow-md transition-all duration-300 cursor-pointer group flex-shrink-0 min-h-[90px]'
+									>
+										<div className='flex items-start gap-3'>
+											<div className='flex-shrink-0 mt-1'>
+												<div className='w-3 h-3 rounded-full bg-blue-600 shadow-sm' />
 											</div>
 											<div className='flex-1 min-w-0'>
-												<div className='flex items-center gap-2 mb-3'>
-													<span
-														className={`px-3 py-1 text-xs font-semibold rounded-full border ${getCategoryColorLight(
-															newsData[currentNewsIndex].category
-														)}`}
-													>
-														{newsData[currentNewsIndex].category}
+												<div className='flex items-center gap-2 mb-2'>
+													<span className='px-2 py-1 text-xs font-semibold rounded-full border bg-blue-50 text-blue-700 border-blue-200'>
+														{announcement.status}
 													</span>
-													<div className='flex items-center gap-1 text-xs text-slate-500'>
+													{announcement.line !== 'Barcha' && (
+														<div className='flex items-center gap-1'>
+															<div className='w-2 h-2 rounded-full bg-blue-500' />
+															<span className='text-xs text-slate-600 font-medium'>
+																{announcement.line}
+															</span>
+														</div>
+													)}
+													<div className='flex items-center gap-1 text-xs text-slate-500 ml-auto'>
 														<Clock className='w-3 h-3' />
-														{newsData[currentNewsIndex].time}
+														{announcement.time}
 													</div>
 												</div>
-												<h4 className='text-lg font-bold text-slate-800 mb-2 leading-tight'>
-													{newsData[currentNewsIndex].title}
+												<h4 className='text-sm font-semibold text-slate-800 group-hover:text-blue-600 transition-colors mb-1'>
+													{announcement.title}
 												</h4>
-												<p className='text-slate-600 text-sm leading-relaxed mb-4'>
-													{newsData[currentNewsIndex].description}
+												<p className='text-xs text-slate-600 leading-relaxed'>
+													{announcement.description}
 												</p>
-												<div className='flex items-center justify-between'>
-													<span className='text-xs text-slate-400 font-medium'>
-														{newsData[currentNewsIndex].date}
-													</span>
-													<button className='flex items-center gap-1 text-blue-600 hover:text-blue-700 transition-colors text-sm font-semibold group'>
-														Batafsil
-														<ArrowRight className='w-3 h-3 group-hover:translate-x-1 transition-transform' />
-													</button>
-												</div>
 											</div>
 										</div>
 									</div>
-								</div>
-
-								{/* Related News */}
-								<div className='space-y-3'>
-									<h5 className='text-sm font-semibold text-slate-700 mb-3 flex items-center gap-2'>
-										<div className='w-1 h-4 bg-blue-600 rounded-full'></div>
-										Boshqa yangiliklar
-									</h5>
-									<div className='space-y-2'>
-										{newsData
-											.filter((_, index) => index !== currentNewsIndex)
-											.slice(0, 2)
-											.map((news, index) => (
-												<motion.div
-													key={news.id}
-													initial={{ opacity: 0, x: 20 }}
-													animate={{ opacity: 1, x: 0 }}
-													transition={{
-														delay: index * 0.1,
-														duration: 0.4,
-														ease: 'easeOut',
-													}}
-													className='bg-slate-50 hover:bg-white rounded-lg p-3 border border-slate-100 hover:border-slate-200 transition-all duration-300 cursor-pointer group'
-												>
-													<div className='flex items-start gap-3'>
-														<div className='flex-shrink-0 mt-1'>
-															<div
-																className={`w-2 h-2 rounded-full ${getCategoryColor(
-																	news.category
-																)}`}
-															/>
-														</div>
-														<div className='flex-1 min-w-0'>
-															<h6 className='text-sm font-semibold text-slate-800 group-hover:text-blue-600 transition-colors line-clamp-1'>
-																{news.title}
-															</h6>
-															<div className='flex items-center gap-2 mt-1'>
-																<span className='text-xs text-slate-500'>
-																	{news.date}
-																</span>
-																<span
-																	className={`px-2 py-0.5 text-xs rounded-full border ${getCategoryColorLight(
-																		news.category
-																	)}`}
-																>
-																	{news.category}
-																</span>
-															</div>
-														</div>
-													</div>
-												</motion.div>
-											))}
-									</div>
-								</div>
-							</motion.div>
-						</AnimatePresence>
+								)
+							)}
+						</motion.div>
 					</div>
 
-					{/* Progress Indicators */}
-					<div className='flex justify-center gap-2 p-4 bg-white/50 backdrop-blur-sm border-t border-slate-200'>
-						{newsData.map((_, index) => (
-							<motion.div
-								key={index}
-								className={`h-1.5 rounded-full transition-all duration-500 ${
-									index === currentNewsIndex
-										? 'bg-blue-600 w-8'
-										: 'bg-slate-300 w-2'
-								}`}
-								animate={{
-									width: index === currentNewsIndex ? 32 : 8,
-									backgroundColor:
-										index === currentNewsIndex ? '#2563eb' : '#cbd5e1',
-								}}
-								transition={{ duration: 0.3 }}
-							/>
-						))}
-					</div>
+					{/* Bottom Gradient Overlay */}
+					<div className='absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none' />
 				</div>
 			</div>
 		</div>

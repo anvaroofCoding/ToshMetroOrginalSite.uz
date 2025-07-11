@@ -4,6 +4,7 @@ import SplashScreen from '@/components/splashScreen/splashScreen'
 import Layout from '@/layout/Layout'
 import Footer from '@/shared/footer/footer'
 import Navbar from '@/shared/Navbar/navbar'
+import { NextIntlClientProvider, useMessages } from 'next-intl'
 import './globals.css'
 
 export const metadata = {
@@ -38,18 +39,24 @@ export const metadata = {
 	},
 }
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children, params: { locale } }) {
+	const messages = useMessages()
+
+	if (!['uz', 'en', 'ru'].includes(locale)) notFound()
+
 	return (
-		<html lang='uz'>
-			<body className='roboto'>
-				<RouteLoader />
-				<Layout>
-					<Navbar />
-					<SplashScreen>{children}</SplashScreen>
-					<Footer />
-					<AIFloatingChat />
-				</Layout>
-			</body>
-		</html>
+		<NextIntlClientProvider locale={locale} messages={messages}>
+			<html lang={locale}>
+				<body className='roboto'>
+					<RouteLoader />
+					<Layout>
+						<Navbar />
+						<SplashScreen>{children}</SplashScreen>
+						<Footer />
+						<AIFloatingChat />
+					</Layout>
+				</body>
+			</html>
+		</NextIntlClientProvider>
 	)
 }
