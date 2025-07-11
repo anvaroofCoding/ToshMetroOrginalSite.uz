@@ -7,7 +7,7 @@ import FaqAccordion from '@/work/test/questions'
 
 const Home = () => {
 	return (
-		<div>
+		<div className='relative z-[10]'>
 			<div className='my-5'>
 				<MetroSystem />
 			</div>

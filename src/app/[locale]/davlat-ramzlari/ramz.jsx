@@ -18,8 +18,8 @@ import {
 } from 'lucide-react'
 import Image from 'next/image'
 import { useState } from 'react'
-import flag from '../../../public/ramzlar/Ozbekiston-bayrogi.jpg'
-import gerb from '../../../public/ramzlar/gerb_big.jpg'
+import flag from '../../../../public/ramzlar/Ozbekiston-bayrogi.jpg'
+import gerb from '../../../../public/ramzlar/gerb_big.jpg'
 
 export default function UzbekistanSymbols() {
 	const [isPlaying, setIsPlaying] = useState(false)

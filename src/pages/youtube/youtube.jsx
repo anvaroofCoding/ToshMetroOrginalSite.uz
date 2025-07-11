@@ -57,7 +57,7 @@ function VideoCard({ video, isLarge = false, onPlay }) {
 
 	return (
 		<div
-			className={`relative group cursor-pointer transition-all duration-300 ease-out transform hover:scale-[1.02] ${
+			className={`relative group cursor-pointer ${
 				isLarge ? 'h-64 sm:h-80 lg:h-full' : 'h-32 sm:h-40 lg:h-48'
 			}`}
 			onMouseEnter={() => setIsHovered(true)}
@@ -65,38 +65,34 @@ function VideoCard({ video, isLarge = false, onPlay }) {
 			onClick={() => onPlay(video)}
 		>
 			{/* Thumbnail */}
-			<div className='relative w-full h-full rounded-lg overflow-hidden shadow-lg'>
+			<div className='relative w-full h-full rounded-lg overflow-hidden'>
 				<img
 					src={video.thumbnail || '/placeholder.svg'}
 					alt={video.title}
-					className='w-full h-full object-cover transition-transform duration-500 group-hover:scale-110'
+					className='w-full h-full object-cover'
 				/>
-
 				{/* Gradient overlay */}
-				<div className='absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300' />
-
+				<div className='absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100' />
 				{/* Play button */}
 				<div
-					className={`absolute inset-0 flex items-center justify-center transition-all duration-300 ${
-						isHovered ? 'opacity-100 scale-100' : 'opacity-70 scale-90'
+					className={`absolute inset-0 flex items-center justify-center ${
+						isHovered ? 'opacity-100' : 'opacity-0'
 					}`}
 				>
-					<div className='bg-red-600 rounded-full p-3 sm:p-4 shadow-2xl transform transition-all duration-300 hover:bg-red-700 hover:scale-110'>
+					<div className='bg-red-600 rounded-full p-3 sm:p-4'>
 						<Play className='w-4 h-4 sm:w-6 sm:h-6 text-white fill-white ml-1' />
 					</div>
 				</div>
-
 				{/* Duration badge */}
 				<div className='absolute bottom-2 right-2 bg-black/80 text-white text-xs px-2 py-1 rounded flex items-center gap-1'>
 					<Clock className='w-3 h-3' />
 					{video.duration}
 				</div>
 			</div>
-
 			{/* Video info */}
 			<div
-				className={`absolute bottom-0 left-0 right-0 p-3 sm:p-4 text-white transform transition-all duration-300 ${
-					isHovered ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-0'
+				className={`absolute bottom-0 left-0 right-0 p-3 sm:p-4 text-white ${
+					isHovered ? 'opacity-100' : 'opacity-0'
 				}`}
 			>
 				<h3
@@ -130,24 +126,13 @@ export default function YoutubeGrid() {
 	}
 
 	return (
-		<div className='container mx-auto py-5'>
-			{/* Header */}
-			{/* <div className='mb-8 text-center'>
-				<h1 className='text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-2'>
-					Toshkent Metrosi
-				</h1>
-				<p className='text-gray-600 text-sm sm:text-base'>
-					Discover the fascinating world of Tashkent Metro system
-				</p>
-			</div> */}
-
+		<div className='container py-5'>
 			{/* Video Grid */}
 			<div className='grid grid-cols-1 lg:grid-cols-5 gap-4 lg:gap-6 mb-8'>
 				{/* Main large video */}
 				<div className='col-span-1 lg:col-span-3'>
 					<VideoCard video={videos[0]} isLarge={true} onPlay={handlePlay} />
 				</div>
-
 				{/* Smaller videos grid */}
 				<div className='grid grid-cols-2 gap-3 sm:gap-4 col-span-1 lg:col-span-2'>
 					{videos.slice(1).map(video => (
@@ -159,7 +144,7 @@ export default function YoutubeGrid() {
 			{/* Video Modal */}
 			{selectedVideo && (
 				<div className='fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4'>
-					<div className='relative w-full max-w-4xl bg-black rounded-lg overflow-hidden'>
+					<div className='relative w-full max-w-4xl bg-black rounded-lg overflow-hidden aspect-video'>
 						<button
 							onClick={closeModal}
 							className='absolute top-4 right-4 z-10 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 transition-colors'
@@ -181,7 +166,7 @@ export default function YoutubeGrid() {
 						<iframe
 							src={`${selectedVideo.url}?autoplay=1`}
 							title={selectedVideo.title}
-							className='w-full aspect-video'
+							className='w-full h-full'
 							allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
 							allowFullScreen
 						/>

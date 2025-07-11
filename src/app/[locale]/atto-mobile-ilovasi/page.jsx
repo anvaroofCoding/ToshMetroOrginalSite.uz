@@ -4,8 +4,8 @@ import { Button } from '@/components/ui/button'
 import { motion, useMotionValue, useTransform } from 'framer-motion'
 import { Bell, ChevronRight, Menu, QrCode } from 'lucide-react'
 import Image from 'next/image'
-import img1 from '../../images/AppStore.png'
-import img2 from '../../images/PlayMarket.png'
+import img1 from '../../../images/AppStore.png'
+import img2 from '../../../images/PlayMarket.png'
 
 export default function AttoLandingPage() {
 	const x = useMotionValue(200)

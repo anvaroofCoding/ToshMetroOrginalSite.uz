@@ -17,7 +17,7 @@ import {
 } from 'lucide-react'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import sxema from '../../../public/images/sxema.jpg'
+import sxema from '../../../../public/images/sxema.jpg'
 
 // Real Tashkent Metro Lines with actual stations
 const metroLines = [

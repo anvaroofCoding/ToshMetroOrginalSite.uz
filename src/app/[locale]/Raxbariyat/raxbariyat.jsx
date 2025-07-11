@@ -8,14 +8,14 @@ import { ChevronDown, ChevronUp, Clock, Eye, Mail, Phone } from 'lucide-react'
 import Image from 'next/image'
 
 import { useState } from 'react'
-import rasm1 from '../../../public/raxbariyat/1.jpg'
-import rasm2 from '../../../public/raxbariyat/2.jpg'
-import rasm3 from '../../../public/raxbariyat/3.jpg'
-import rasm4 from '../../../public/raxbariyat/4.jpg'
-import rasm5 from '../../../public/raxbariyat/5.jpg'
-import rasm6 from '../../../public/raxbariyat/6.jpg'
-import rasm7 from '../../../public/raxbariyat/7.jpg'
-import rasm8 from '../../../public/raxbariyat/8.jpg'
+import rasm1 from '../../../../public/raxbariyat/1.jpg'
+import rasm2 from '../../../../public/raxbariyat/2.jpg'
+import rasm3 from '../../../../public/raxbariyat/3.jpg'
+import rasm4 from '../../../../public/raxbariyat/4.jpg'
+import rasm5 from '../../../../public/raxbariyat/5.jpg'
+import rasm6 from '../../../../public/raxbariyat/6.jpg'
+import rasm7 from '../../../../public/raxbariyat/7.jpg'
+import rasm8 from '../../../../public/raxbariyat/8.jpg'
 
 const managementData = [
 	{
