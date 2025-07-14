@@ -282,7 +282,7 @@ export default function MetroCarouselWithNews() {
 							</div>
 							<div>
 								<h3 className='text-lg font-bold text-slate-800'>
-									Metro Ma'lumotlari
+									Metrodagi so'ngi yangiliklar
 								</h3>
 								<p className='text-xs text-slate-500'>
 									Joriy holat va e'lonlar

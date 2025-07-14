@@ -21,15 +21,15 @@ import { useMemo, useState } from 'react'
 const newsData = [
 	{
 		id: 1,
-		title: 'Revolutionary AI Technology Transforms Healthcare Industry',
+		title: '“Korrupsiya va monopoliyaga qarshi kurashish”',
 		description:
-			'A groundbreaking artificial intelligence system has been developed that can diagnose diseases with unprecedented accuracy, potentially saving millions of lives worldwide.',
+			'“Toshkent metropoliteni” DUK “Korrupsiya va monopoliyaga qarshi kurashish” xizmati boshlig‘i tomonidan Toshkent metropoliteni linyalarni qurish direksiyasi xodimlari uchun “Korrupsiyaning oldini olish va korrupsiya xavfiga eng ko‘p moyil bo‘lgan lavozimlar” mavzusida rejadan tashqari yig‘ilish o‘tkazildi.',
 		fullContent:
-			'A groundbreaking artificial intelligence system has been developed that can diagnose diseases with unprecedented accuracy, potentially saving millions of lives worldwide. The new technology, developed by a team of researchers at leading medical institutions, uses advanced machine learning algorithms to analyze medical images and patient data. Early trials have shown a 95% accuracy rate in detecting various conditions, including cancer, heart disease, and neurological disorders. The system is expected to be rolled out to hospitals globally within the next two years, marking a significant milestone in medical technology advancement.',
+			'“Toshkent metropoliteni” DUK “Korrupsiya va monopoliyaga qarshi kurashish” xizmati boshlig‘i tomonidan Toshkent metropoliteni linyalarni qurish direksiyasi xodimlari uchun “Korrupsiyaning oldini olish va korrupsiya xavfiga eng ko‘p moyil bo‘lgan lavozimlar” mavzusida rejadan tashqari yig‘ilish o‘tkazildi.',
 		images: [
-			'/placeholder.svg?height=400&width=600',
-			'/placeholder.svg?height=400&width=600&text=AI+Diagnosis',
-			'/placeholder.svg?height=400&width=600&text=Medical+Technology',
+			'https://tashmetro.uz/wp-content/uploads/2025/04/photo_2025-04-08_17-00-44.jpg',
+			'https://tashmetro.uz/wp-content/uploads/2025/04/photo_2025-04-08_17-00-40.jpg',
+			'https://tashmetro.uz/wp-content/uploads/2025/04/photo_2025-04-08_17-00-34.jpg',
 		],
 		publishedAt: '2024-01-15T10:30:00Z',
 		likes: 1247,
@@ -53,15 +53,16 @@ const newsData = [
 	},
 	{
 		id: 2,
-		title: 'Climate Change Summit Reaches Historic Agreement',
+		title:
+			'Transport vazirligi mutasaddilari hamda “Toshkent metropoliteni” DUK bosh muhandisi boshchiligidagi bir guruh metropoliten mas’ul xodimlari Janubiy Koreya davlatiga tashrif buyurdi.',
 		description:
-			'World leaders unite in unprecedented climate action plan that promises to reduce global emissions by 50% within the next decade.',
+			'Transport vazirligi mutasaddilari hamda “Toshkent metropoliteni” DUK bosh muhandisi boshchiligidagi bir guruh metropoliten mas’ul xodimlari Janubiy Koreya davlatiga tashrif buyurdi.',
 		fullContent:
-			'World leaders unite in unprecedented climate action plan that promises to reduce global emissions by 50% within the next decade. The historic agreement, signed by 195 countries, includes binding commitments to transition to renewable energy sources, protect biodiversity, and invest in green technologies. The summit also established a $100 billion fund to help developing nations adapt to climate change impacts. Environmental activists have praised the agreement as a crucial step toward preventing catastrophic global warming, while economists predict significant job creation in the green energy sector.',
+			'Tashrif davomida “Toshkent metropoliteni” DUK hamda Hyundai Movex kompaniyasi o’rtasida hamkorlik memorandumi imzolandi. Jumladan, mas’ullar Hyundai Movex kompaniya tajribasini o’rganish barobarida Toshkent metropolitenidagi mavjud vaziyatlarni bartaraf etish choralarini ham ko’rib chiqishmoqda. Shuningdek, kelgusida Janubiy Koreya tajribasiga asosan Toshkent metropolitenini yanada rivojlantirish ko’zda tutildi.',
 		images: [
-			'/placeholder.svg?height=400&width=600&text=Climate+Summit',
-			'/placeholder.svg?height=400&width=600&text=World+Leaders',
-			'/placeholder.svg?height=400&width=600&text=Green+Energy',
+			'https://tashmetro.uz/wp-content/uploads/2025/03/photo_2025-03-12_12-28-00.jpg',
+			'https://tashmetro.uz/wp-content/uploads/2025/03/photo_2025-03-12_12-28-12.jpg',
+			'https://tashmetro.uz/wp-content/uploads/2025/03/photo_2025-03-12_12-28-21.jpg',
 		],
 		publishedAt: '2024-01-14T14:45:00Z',
 		likes: 892,
@@ -78,16 +79,17 @@ const newsData = [
 	},
 	{
 		id: 3,
-		title: 'Space Exploration Milestone: First Human Colony on Mars',
+		title:
+			'«Toshkent metropoliteni» DUK rahbari hamda mas’ul xodimlari Toshkent Davlat Transport universitetiga tashrif buyurdi.',
 		description:
-			'After years of preparation, the first permanent human settlement on Mars has been successfully established, marking a new era in space exploration.',
+			'Uchrashuvni tashkil etishdan asosiy ko‘zlangan maqsad, metropolitenda xodimlar uchun yaratilgan qulayliklar bilan tanishtirish barobarida oliygoh bitiruvchilarini  ishga taklif etishdan iboratdir.',
 		fullContent:
-			"After years of preparation, the first permanent human settlement on Mars has been successfully established, marking a new era in space exploration. The colony, consisting of 50 carefully selected astronauts and scientists, has been operational for six months and is thriving in the harsh Martian environment. Advanced life support systems, sustainable food production, and innovative habitat designs have made long-term survival possible. The mission represents humanity's first step toward becoming a multi-planetary species and opens up new possibilities for scientific research and resource utilization.",
+			'Uchrashuvni tashkil etishdan asosiy ko‘zlangan maqsad, metropolitenda xodimlar uchun yaratilgan qulayliklar bilan tanishtirish barobarida oliygoh bitiruvchilarini  ishga taklif etishdan iboratdir.',
 		images: [
-			'/placeholder.svg?height=400&width=600&text=Mars+Colony',
-			'/placeholder.svg?height=400&width=600&text=Space+Habitat',
-			'/placeholder.svg?height=400&width=600&text=Mars+Surface',
-			'/placeholder.svg?height=400&width=600&text=Astronauts',
+			'https://tashmetro.uz/wp-content/uploads/2025/02/AN0A0565-copy-2048x1365.jpg',
+			'https://tashmetro.uz/wp-content/uploads/2025/02/AN0A0518-copy-scaled.jpg',
+			'https://tashmetro.uz/wp-content/uploads/2025/02/AN0A0675-scaled.jpg',
+			'https://tashmetro.uz/wp-content/uploads/2025/02/AN0A0648-copy-scaled.jpg',
 		],
 		publishedAt: '2024-01-13T09:15:00Z',
 		likes: 2156,
@@ -372,15 +374,15 @@ export default function NewsSection() {
 							className='group cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl border-0 shadow-lg overflow-hidden'
 							onClick={() => handleModalOpen(news)}
 						>
-							<div className='relative overflow-hidden'>
+							<div className='relative overflow-hidden '>
 								<Image
-									src={news.images?.[0] || '/placeholder.svg'}
+									src={news.images?.[0]}
 									alt={news.title}
 									width={300}
 									height={200}
 									className='w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110'
 								/>
-								<div className='absolute inset-0 bg-[#0E327F] bg-opacity-20 transition-opacity duration-300 group-hover:bg-opacity-30' />
+								<div className='absolute inset-0  bg-opacity-20 transition-opacity duration-300 group-hover:bg-opacity-30' />
 								<Badge
 									className={`absolute top-3 left-3 ${getCategoryColor(
 										news.category
@@ -498,7 +500,7 @@ export default function NewsSection() {
 										height={400}
 										className='w-full h-full object-cover'
 									/>
-									<div className='absolute inset-0 bg-[#0E327F] bg-opacity-30' />
+									<div className='absolute inset-0  bg-opacity-30' />
 
 									{/* Image Navigation */}
 									{selectedNews.images && selectedNews.images.length > 1 && (

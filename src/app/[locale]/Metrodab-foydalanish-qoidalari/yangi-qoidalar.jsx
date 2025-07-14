@@ -221,7 +221,7 @@ export default function MetroRegulations2() {
 				})
 			},
 			{
-				threshold: 0.3,
+				threshold: 0,
 				rootMargin: '-50px 0px -50px 0px',
 			}
 		)

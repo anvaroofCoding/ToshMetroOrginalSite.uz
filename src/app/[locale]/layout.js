@@ -1,10 +1,13 @@
+// src/app/[locale]/layout.js
+
 import AIFloatingChat from '@/components/Flowechat/FloatingChat'
 import RouteLoader from '@/components/route-loader'
 import SplashScreen from '@/components/splashScreen/splashScreen'
 import Layout from '@/layout/Layout'
 import Footer from '@/shared/footer/footer'
 import Navbar from '@/shared/Navbar/navbar'
-import { NextIntlClientProvider, useMessages } from 'next-intl'
+import { NextIntlClientProvider } from 'next-intl'
+import { notFound } from 'next/navigation'
 import './globals.css'
 
 export const metadata = {
@@ -25,7 +28,7 @@ export const metadata = {
 		siteName: 'Toshkent Metropoliteni',
 		images: [
 			{
-				url: '/logo.png', // Quyida logoni qanday qo‘shishni ko‘rsataman
+				url: '/logo.png',
 				width: 800,
 				height: 600,
 				alt: 'Toshkent Metropoliteni Logosi',
@@ -39,24 +42,30 @@ export const metadata = {
 	},
 }
 
-export default function RootLayout({ children, params: { locale } }) {
-	const messages = useMessages()
+export async function generateStaticParams() {
+	return [{ locale: 'uz' }, { locale: 'ru' }, { locale: 'en' }]
+}
 
-	if (!['uz', 'en', 'ru'].includes(locale)) notFound()
+export default async function RootLayout(props) {
+	const locale = props.params?.locale // ✅ to‘g‘ri usul
+
+	if (!['uz', 'ru', 'en'].includes(locale)) notFound()
+
+	const messages = (await import(`../../../messages/${locale}.json`)).default
 
 	return (
-		<NextIntlClientProvider locale={locale} messages={messages}>
-			<html lang={locale}>
-				<body className='roboto'>
+		<html lang={locale}>
+			<body className='roboto'>
+				<NextIntlClientProvider locale={locale} messages={messages}>
 					<RouteLoader />
 					<Layout>
 						<Navbar />
-						<SplashScreen>{children}</SplashScreen>
+						<SplashScreen>{props.children}</SplashScreen>
 						<Footer />
 						<AIFloatingChat />
 					</Layout>
-				</body>
-			</html>
-		</NextIntlClientProvider>
+				</NextIntlClientProvider>
+			</body>
+		</html>
 	)
 }

@@ -16,7 +16,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import logo from '../../../public/MetroLogo.png'
+import logo from '../../../public/MetroLogo.png' // Assuming this path is correct relative to the component
 
 const menuItems = [
 	{
@@ -120,12 +120,17 @@ export default function MetroNavbar() {
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
 	const [isScrolled, setIsScrolled] = useState(false)
 	const [activeDropdown, setActiveDropdown] = useState(null)
-	const locale = useLocale()
 	const [isLangOpen, setIsLangOpen] = useState(false)
-	const [currentLang, setCurrentLang] = useState(locale.toUpperCase())
-
+	const [currentLang, setCurrentLang] = useState('UZ') // Default to UZ, consider getting from locale
+	const locale = useLocale()
 	const router = useRouter()
 	const pathname = usePathname()
+
+	useEffect(() => {
+		// Set initial language based on locale
+		setCurrentLang(locale.toUpperCase())
+	}, [locale])
+
 	const changeLanguage = lang => {
 		const segments = pathname.split('/')
 		segments[1] = lang.toLowerCase() // locale ni almashtiramiz
@@ -141,15 +146,16 @@ export default function MetroNavbar() {
 	useEffect(() => {
 		const handleClickOutside = event => {
 			const target = event.target
-			if (!target.closest('.dropdown-container')) {
+			// Only close desktop dropdowns and language selector if mobile menu is not open
+			// and the click is outside the dropdown containers.
+			if (!isMenuOpen && !target.closest('.dropdown-container')) {
 				setActiveDropdown(null)
 				setIsLangOpen(false)
 			}
 		}
-
 		document.addEventListener('click', handleClickOutside)
 		return () => document.removeEventListener('click', handleClickOutside)
-	}, [])
+	}, [isMenuOpen]) // Re-run effect when isMenuOpen changes
 
 	const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
 
@@ -221,7 +227,6 @@ export default function MetroNavbar() {
 								<span className='font-bold'>"Toshkent Metropoliteni"</span> DUK
 							</h1>
 						</div>
-
 						<nav className='hidden xl:flex items-center'>
 							{menuItems.map((item, index) => (
 								<div
@@ -255,7 +260,6 @@ export default function MetroNavbar() {
 									{index < menuItems.length - 1 && (
 										<span className='text-gray-600'>|</span>
 									)}
-
 									<AnimatePresence>
 										{item.dropdown && activeDropdown === index && (
 											<motion.div
@@ -283,7 +287,6 @@ export default function MetroNavbar() {
 								</div>
 							))}
 						</nav>
-
 						<div className='flex items-center gap-4'>
 							<div className='hidden xl:flex items-center relative dropdown-container'>
 								<button
@@ -299,7 +302,6 @@ export default function MetroNavbar() {
 										}`}
 									/>
 								</button>
-
 								<AnimatePresence>
 									{isLangOpen && (
 										<motion.div
@@ -329,7 +331,6 @@ export default function MetroNavbar() {
 									)}
 								</AnimatePresence>
 							</div>
-
 							<button
 								onClick={toggleMenu}
 								className='xl:hidden z-50 text-white'
@@ -341,7 +342,6 @@ export default function MetroNavbar() {
 					</motion.div>
 				</div>
 			</header>
-
 			{/* Mobile Menu */}
 			<AnimatePresence>
 				{isMenuOpen && (
@@ -372,7 +372,10 @@ export default function MetroNavbar() {
 									</div>
 									<h2 className='text-white text-[10px]'>
 										O'zbekiston Respublikasi
-										<span className='font-bold'> "Toshkent Metropoliteni"</span>
+										<span className='font-bold'>
+											{' '}
+											"Toshkent Metropoliteni"
+										</span>{' '}
 										DUK
 									</h2>
 								</div>
@@ -385,7 +388,6 @@ export default function MetroNavbar() {
 								</button>
 							</div>
 						</div>
-
 						<nav className='flex-grow overflow-y-auto container mx-auto px-4'>
 							<motion.ul
 								initial='hidden'
@@ -407,7 +409,6 @@ export default function MetroNavbar() {
 								))}
 							</motion.ul>
 						</nav>
-
 						<motion.div
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
@@ -466,8 +467,8 @@ const MobileNavItem = ({
 	closeMenu,
 }) => {
 	const isOpen = activeDropdown === index
-
-	const handleClick = () => {
+	const handleClick = e => {
+		e.stopPropagation() // Prevent event from bubbling up to document listener
 		if (item.dropdown) {
 			setActiveDropdown(isOpen ? null : index)
 		} else {
@@ -507,7 +508,6 @@ const MobileNavItem = ({
 					/>
 				)}
 			</div>
-
 			<AnimatePresence>
 				{isOpen && item.dropdown && (
 					<motion.ul
