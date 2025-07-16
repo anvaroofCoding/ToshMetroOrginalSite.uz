@@ -75,7 +75,7 @@ export default function CompanySlider() {
 	}
 
 	return (
-		<div className='relative overflow-hidden bg-white shadow-inner py-6'>
+		<div className='relative overflow-hidden bg-white  py-6'>
 			<div className='flex container justify-between items-center mb-4'>
 				<h2 className='text-[36px] font-bold text-blue-900'>
 					Foydali havolalar
@@ -83,13 +83,13 @@ export default function CompanySlider() {
 				<div className='flex gap-2'>
 					<button
 						onClick={() => shift(1)}
-						className='bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700 transition'
+						className='bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700 transition border-none'
 					>
 						<ChevronLeft size={20} />
 					</button>
 					<button
 						onClick={() => shift(-1)}
-						className='bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700 transition'
+						className='bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700 transition border-none'
 					>
 						<ChevronRight size={20} />
 					</button>
@@ -112,7 +112,7 @@ export default function CompanySlider() {
 						.map((company, i) => (
 							<div
 								key={i}
-								className='min-w-[160px] sm:min-w-[200px] md:min-w-[240px] bg-blue-50 border border-blue-100 rounded-lg p-2 sm:p-3 shadow hover:shadow-lg transition'
+								className='min-w-[160px] sm:min-w-[200px] md:min-w-[240px] bg-blue-50  border-blue-100 rounded-lg p-2 sm:p-3 shadow hover:shadow-lg transition'
 							>
 								<img
 									src={company.logo}

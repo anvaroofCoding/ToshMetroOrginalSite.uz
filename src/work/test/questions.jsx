@@ -37,7 +37,7 @@ O‘z-o‘ziga xizmat ko‘rsatish terminallarida-infokiosklar.
 			{items.map((item, index) => (
 				<div
 					key={index}
-					className={`rounded-lg border transition-colors duration-300 shadow ${
+					className={`rounded-lg  transition-colors duration-300 shadow ${
 						openIndex === index
 							? 'border-blue-700 bg-blue-50'
 							: 'border-gray-300 bg-white'
@@ -45,7 +45,7 @@ O‘z-o‘ziga xizmat ko‘rsatish terminallarida-infokiosklar.
 				>
 					<button
 						onClick={() => toggle(index)}
-						className='w-full flex justify-between items-center p-4 text-left font-semibold text-blue-900 hover:bg-gray-200 rounded-lg transition'
+						className='w-full flex justify-between items-center p-4 text-left font-semibold text-blue-900 hover:bg-blue-200 rounded-lg transition'
 					>
 						<span>{item.q}</span>
 						<motion.span
