@@ -1,17 +1,30 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import Loading from '../components/management/loading'
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
+import Loading from '@/components/management/loading'
 
-export default function Layout({ children }) {
-	const [loading, setLoading] = useState(true)
+export default function RouteLoading({ children }) {
+  const router = useRouter()
+  const [loading, setLoading] = useState(false)
 
-	useEffect(() => {
-		const timeout = setTimeout(() => setLoading(false), 1000)
-		return () => clearTimeout(timeout)
-	}, [])
+  useEffect(() => {
+    const handleStart = () => setLoading(true)
+    const handleComplete = () => setLoading(false)
 
-	if (loading) return <Loading />
+    // Sahifa almashish hodisalari
+    window.addEventListener('routeChangeStart', handleStart)
+    window.addEventListener('routeChangeComplete', handleComplete)
+    window.addEventListener('routeChangeError', handleComplete)
 
-	return <>{children}</>
+    return () => {
+      window.removeEventListener('routeChangeStart', handleStart)
+      window.removeEventListener('routeChangeComplete', handleComplete)
+      window.removeEventListener('routeChangeError', handleComplete)
+    }
+  }, [])
+
+  if (loading) return <Loading />
+
+  return <>{children}</>
 }

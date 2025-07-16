@@ -1,6 +1,6 @@
 // src/app/[locale]/layout.js
 
-import AIFloatingChat from '@/components/Flowechat/FloatingChat'
+import AIFloatingChat from '../../components/Flowechat/FloatingChat'
 import RouteLoader from '@/components/route-loader'
 import SplashScreen from '@/components/splashScreen/splashScreen'
 import Layout from '@/layout/Layout'

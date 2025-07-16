@@ -169,7 +169,7 @@ export default function Component() {
 	const y = useTransform(scrollYProgress, [0, 1], [0, -50])
 
 	return (
-		<div className='min-h-screen container'>
+		<div className='min-h-screen'>
 			{/* Hero Section */}
 			<motion.section
 				className='relative overflow-hidden '
@@ -214,7 +214,7 @@ export default function Component() {
 					/>
 				</div>
 
-				<div className='relative mx-auto px-4 py-20 lg:py-10'>
+				<div className='relative container py-20 lg:py-10'>
 					<motion.div
 						initial={{ y: 50, opacity: 0 }}
 						animate={{ y: 0, opacity: 1 }}
@@ -310,7 +310,7 @@ export default function Component() {
 			</motion.section>
 
 			{/* Jobs Section */}
-			<section className=' mx-auto px-4 py-16'>
+			<section className='container py-16'>
 				<motion.div
 					initial={{ y: 50, opacity: 0 }}
 					whileInView={{ y: 0, opacity: 1 }}

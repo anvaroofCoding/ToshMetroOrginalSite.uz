@@ -718,8 +718,8 @@ export default function TashkentMetroMap() {
 
 	return (
 		<div className='container'>
-			<Card className='border-none mt-10'>
-				<CardHeader className='text-center'>
+			<Card className='border-none mt-10 shadow-none'>
+				<CardHeader className='text-center border-none shadow-none px-0'>
 					<CardTitle className='text-5xl font-bold text-blue-900 mb-2'>
 						Toshkent Metropoliteni
 					</CardTitle>
@@ -877,7 +877,7 @@ export default function TashkentMetroMap() {
 						</div>
 					</div>
 				</CardHeader>
-				<CardContent>
+				<CardContent className="px-0" >
 					<div className='mb-4 flex justify-center gap-2'>
 						<Button
 							onClick={handleZoomIn}
@@ -899,13 +899,13 @@ export default function TashkentMetroMap() {
 							onClick={handleReset}
 							size='sm'
 							variant='outline'
-							className='border-2 border-blue-300 text-blue-700 hover:bg-blue-100 hover:border-blue-400 transition-all duration-200 bg-transparent'
+							className=' text-blue-700 hover:bg-blue-100 hover:border-blue-100 transition-all duration-200 bg-transparent'
 						>
 							<RotateCcw className='w-4 h-4' />
 						</Button>
 					</div>
 					<div
-						className='relative overflow-hidden border-2 border-blue-200 rounded-xl bg-gradient-to-br from-blue-50 to-indigo-100 shadow-lg'
+						className='relative overflow-hidden  rounded-xl  shadow-lg'
 						style={{ height: '600px' }}
 						onMouseDown={handleMouseDown}
 						onMouseMove={handleMouseMove}
@@ -1146,7 +1146,7 @@ export default function TashkentMetroMap() {
 											}`}
 											style={{ fontSize: isOnRoute ? '10px' : '9px' }}
 										>
-											{station.nameEn}
+											{/* {station.nameEn} */}
 										</text>
 									</g>
 								)
@@ -1196,7 +1196,7 @@ export default function TashkentMetroMap() {
 
 			{/* Station Details Sidebar */}
 			<div
-				className={`fixed inset-y-0 right-0 w-full md:w-1/2 lg:w-1/3 bg-white shadow-lg z-50 transform transition-transform duration-300 ease-in-out ${
+				className={`fixed inset-y-0 right-0 w-full md:w-1/2 lg:w-1/3  bg-white shadow-lg z-50 transform transition-transform duration-300 ease-in-out ${
 					showSidebar ? 'translate-x-0' : 'translate-x-full'
 				} overflow-y-auto`}
 			>
@@ -1228,7 +1228,7 @@ export default function TashkentMetroMap() {
 
 						<div className='flex-1 overflow-y-auto p-6 space-y-6'>
 							{/* Station Image */}
-							<div className='relative h-64 bg-gradient-to-r from-blue-100 to-blue-50 rounded-lg overflow-hidden shadow-lg border border-blue-100'>
+							<div className='relative h-64 bg-gradient-to-r from-blue-100 to-blue-50 rounded-lg overflow-hidden shadow-lg '>
 								<img
 									src={`/placeholder.svg?height=256&width=600&text=${encodeURIComponent(
 										sidebarStationDetails.nameUz + ' Stansiyasi'

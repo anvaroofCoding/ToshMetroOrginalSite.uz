@@ -32,10 +32,10 @@ export default function UzbekistanSymbols() {
 	]
 
 	return (
-		<div className='min-h-screen bg-gradient-to-br from-gray-50 to-gray-100'>
+		<div className='min-h-screen'>
 			{/* Header */}
 			<header className='text-[#0E327F] bg-white/80 backdrop-blur-sm'>
-				<div className='max-w-7xl mx-auto px-6 py-8'>
+				<div className='mt-10 py-8'>
 					<div className='text-center mb-5'>
 						<h1 className='text-4xl font-bold mb-2 drop-shadow-md'>
 							O'ZBEKISTON RESPUBLIKASI
@@ -151,7 +151,7 @@ export default function UzbekistanSymbols() {
 				</div>
 			</header>
 
-			<main className='max-w-7xl mx-auto px-6 py-8'>
+			<main className='container py-8'>
 				{/* Flag Section */}
 				{activeTab === 'flag' && (
 					<div className='space-y-8'>

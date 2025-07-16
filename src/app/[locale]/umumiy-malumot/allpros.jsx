@@ -101,9 +101,9 @@ export default function TashkentMetroDashboard() {
 	]
 
 	return (
-		<div className='min-h-screen container bg-gradient-to-br from-slate-50 to-blue-50'>
+		<div className='min-h-screen container '>
 			{/* Header */}
-			<div className='bg-white border-b border-gray-100 py-12 px-4'>
+			<div className='bg-white  py-12 px-4'>
 				<div className='max-w-7xl mx-auto'>
 					<div className='text-center space-y-6'>
 						<h1 className='text-5xl md:text-7xl font-bold bg-gradient-to-r from-[#0E327F] via-blue-600 to-[#0E327F] bg-clip-text text-transparent leading-tight'>
@@ -128,10 +128,10 @@ export default function TashkentMetroDashboard() {
 				</div>
 			</div>
 
-			<div className='max-w-7xl mx-auto px-4 py-12 space-y-12'>
+			<div className=' py-12 space-y-12 '>
 				{/* Main Statistics */}
 				<div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
-					<Card className='relative overflow-hidden group hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 border-0 bg-gradient-to-br from-white via-blue-50/30 to-white shadow-xl'>
+					<Card className='relative overflow-hidden group hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 border-0   shadow-xl'>
 						<CardHeader className='pb-3'>
 							<CardTitle className='flex items-center gap-2 text-[#0E327F]'>
 								<Users className='w-5 h-5' />

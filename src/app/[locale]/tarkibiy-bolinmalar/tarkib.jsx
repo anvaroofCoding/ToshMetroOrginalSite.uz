@@ -127,15 +127,12 @@ export default function TransportDirectory() {
 	]
 
 	return (
-		<div className='min-h-screen bg-gradient-to-br from-slate-50 to-blue-50'>
+		<div className='min-h-screen '>
 			{/* Header */}
-			<div className='relative overflow-hidden bg-white border-b border-gray-200'>
-				<div className='absolute inset-0 bg-gradient-to-br from-blue-50/50 to-slate-50/50'></div>
-				<div className='relative max-w-7xl mx-auto px-6 py-16'>
+			<div className='relative overflow-hidden bg-white  border-gray-200'>
+				<div className='absolute '></div>
+				<div className='relative  mx-auto px-6 py-16'>
 					<div className='text-center'>
-						<div className='inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-[#0E327F] to-[#1e4a9f] rounded-full mb-6 shadow-2xl'>
-							<Train className='w-8 h-8 text-white' />
-						</div>
 						<h1 className='text-4xl md:text-6xl font-bold mb-4 text-[#0E327F] drop-shadow-sm'>
 							Transport Ma'lumotnomasi
 						</h1>
@@ -145,11 +142,11 @@ export default function TransportDirectory() {
 						</p>
 					</div>
 				</div>
-				<div className='absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent'></div>
+				<div className='absolute bottom-0 left-0 right-0 h-px '></div>
 			</div>
 
 			{/* Directory Grid */}
-			<div className='container mx-auto px-6 py-16'>
+			<div className='container  py-16'>
 				<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
 					{departments.map((dept, index) => (
 						<div
@@ -238,7 +235,7 @@ export default function TransportDirectory() {
 			</div>
 
 			{/* Footer */}
-			<div className='bg-white border-t border-gray-200 py-12'>
+			<div className='bg-white py-12'>
 				<div className='max-w-7xl mx-auto px-6 text-center'>
 					<div className='inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-[#0E327F] to-[#1e4a9f] rounded-full mb-4 shadow-lg'>
 						<Train className='w-6 h-6 text-white' />

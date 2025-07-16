@@ -276,7 +276,7 @@ export default function TashkentMetroPage() {
 	}
 
 	return (
-		<div className='min-h-screen mt-10 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 overflow-hidden'>
+		<div className='min-h-screen mt-10  overflow-hidden'>
 			{/* Floating Background Elements */}
 			<div className='fixed inset-0 pointer-events-none'>
 				<div
