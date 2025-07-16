@@ -1,3 +1,4 @@
+import MetroMapAdCard from '@/components/MetroReklamakartasi/metro-map-kars'
 import CompanySlider from '@/pages/company/CompanySlider'
 import Component from '@/pages/diagramma/diagramma'
 import MetroCarouselWithNews from '@/pages/Header/header'
@@ -16,6 +17,9 @@ const Home = () => {
 			</div>
 			<div className='my-5'>
 				<Component />
+			</div>
+			<div className='my-10 mb-15'>
+				<MetroMapAdCard />
 			</div>
 			<div>
 				<div className='container'>

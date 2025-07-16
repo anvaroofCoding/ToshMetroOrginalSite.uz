@@ -259,20 +259,6 @@ export default function ContactPage() {
 							Aloqa
 						</h1>
 					</motion.div>
-
-					<motion.div
-						initial={{ opacity: 0, y: 30 }}
-						animate={{ opacity: 1, y: 0 }}
-						transition={{ delay: 0.8, duration: 0.8 }}
-						className='relative max-w-4xl mx-auto'
-					>
-						<div className='bg-gray-50 rounded-2xl px-8 py-6 border border-gray-200 shadow-lg'>
-							<p className='text-lg sm:text-xl text-gray-700 font-medium'>
-								Metropolitenda reklama joylashtirish masalalari bo'yicha
-								quyidagi aloqa vositalari orqali murojaat qilishingiz mumkin
-							</p>
-						</div>
-					</motion.div>
 				</motion.div>
 
 				<div className='grid lg:grid-cols-3 gap-12'>

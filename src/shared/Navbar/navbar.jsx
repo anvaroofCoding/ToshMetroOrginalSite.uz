@@ -21,7 +21,7 @@ import logo from '../../../public/MetroLogo.png' // Assuming this path is correc
 const menuItems = [
 	{
 		label: 'Metro xaritasi',
-		href: '/metro-maps',
+		href: '/metro-xaritasis',
 		dropdown: false,
 		dropdownItems: [],
 	},

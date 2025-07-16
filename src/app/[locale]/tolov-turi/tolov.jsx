@@ -18,7 +18,6 @@ import {
 	Heart,
 	QrCode,
 	Smartphone,
-	Sparkles,
 	Users,
 	Wallet,
 } from 'lucide-react'
@@ -175,7 +174,7 @@ export default function TransportDashboard() {
 						animate={{ opacity: 1 }}
 						transition={{ duration: 0.6, delay: 0.6 }}
 					>
-						<Sparkles className='w-6 h-6 sm:w-8 sm:h-8 text-blue-500 animate-pulse' />
+						{/* <Sparkles className='w-6 h-6 sm:w-8 sm:h-8 text-blue-500 animate-pulse' /> */}
 					</motion.div>
 				</motion.div>
 

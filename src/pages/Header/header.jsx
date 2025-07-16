@@ -1,6 +1,7 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
+import { Card, CardContent } from '@/components/ui/card'
 import { AnimatePresence, motion } from 'framer-motion'
 import {
 	ArrowRight,
@@ -38,66 +39,80 @@ const slides = [
 const announcements = [
 	{
 		id: 1,
-		title: 'Chilonzor liniyasi - normal ish rejimi',
+		title:
+			'“Toshkent metropoliteni” DUKda 14-yanvar — Vatan himoyachilari kuniga bag’ishlangan bayram tadbiri bo’lib o’tdi.',
 		description:
-			"Barcha bekatlar normal ishlayapti. Poyezdlar 2-3 daqiqa oralig'ida harakat qilmoqda.",
+			'Dastavval so’zga chiqqanlar sana munosabati bilan barchani tabriklab, yanada shijoat bilan kasbiy vazifalarini bajarishda zafarlar tilashdi.Tadbir davomida o’zining shijoati bilan fuqarolar xavsizligini ta’minlashda mehnat qilib kelayotgan bir guruh xodimlar taqdirlandi. Shundan so’ng, harbiy orkestr ijrosidagi taronalar yangrab, yig’ilganlarga bayramona kayfiyat ulashdi.',
 		time: '14:30',
 		status: 'Normal',
 		line: 'Chilonzor',
+		img: 'https://tashmetro.uz/wp-content/uploads/2025/01/AN0A6642-scaled.jpg',
 	},
 	{
 		id: 2,
-		title: 'Yunusobod liniyasi - texnik ishlar',
+		title:
+			'«Toshkent metropoliteni» DUK rahbari hamda mas’ul xodimlari Toshkent Davlat Transport universitetiga tashrif buyurdi.',
 		description:
-			'Bugun kechqurun 23:00 dan texnik ishlar olib boriladi. Xizmat vaqti qisqartiriladi.',
+			'Uchrashuvni tashkil etishdan asosiy ko‘zlangan maqsad, metropolitenda xodimlar uchun yaratilgan qulayliklar bilan tanishtirish barobarida oliygoh bitiruvchilarini  ishga taklif etishdan iboratdir.',
 		time: '10:15',
-		status: 'Ogohlantirish',
+		status: 'Yangilik',
 		line: 'Yunusobod',
+		img: 'https://tashmetro.uz/wp-content/uploads/2025/02/AN0A0565-copy-scaled.jpg',
 	},
 	{
 		id: 3,
-		title: "O'zbekiston liniyasi - yangi jadval",
+		title:
+			'Transport vazirligi mutasaddilari hamda “Toshkent metropoliteni” DUK bosh muhandisi boshchiligidagi bir guruh metropoliten mas’ul xodimlari Janubiy Koreya davlatiga tashrif buyurdi',
 		description:
-			'Ish kunlarida birinchi poyezd 05:30 da, oxirgi poyezd 00:30 da harakat qiladi.',
+			'Tashrif davomida “Toshkent metropoliteni” DUK hamda Hyundai Movex kompaniyasi o’rtasida hamkorlik memorandumi imzolandi. Jumladan, mas’ullar Hyundai Movex kompaniya tajribasini o’rganish barobarida Toshkent metropolitenidagi mavjud vaziyatlarni bartaraf etish choralarini ham ko’rib chiqishmoqda.Shuningdek, kelgusida Janubiy Koreya tajribasiga asosan Toshkent metropolitenini yanada rivojlantirish ko’zda tutildi.',
 		time: '16:45',
 		status: 'Yangilanish',
 		line: "O'zbekiston",
+		img: 'https://tashmetro.uz/wp-content/uploads/2025/03/photo_2025-03-12_12-28-00.jpg',
 	},
 	{
 		id: 4,
-		title: 'Sergeli liniyasi - yangi bekat',
+		title:
+			'Toshpo’latov Feruz G’olib o’g’li “Toshkent metropoliteni” DUK “Axborot xavfsizligini ta’minlash va texnik xizmat ko’rsatish” xizmati boshlig’i vazifasini bajaruvchi lavozimiga tayinlandi.',
 		description:
-			"Sergeli liniyasida yangi 'Qo'yliq' bekati ochildi va yo'lovchilar xizmatiga taqdim etildi.",
+			'Feruz Toshpo’latov 1996-yilda tug’ilgan. Ma’lumoti – oliy. 2021-yilda Toshkent davlat transport universiteti bakalavr bosqichini, 2023-yilda Toshkent davlat transport universiteti magistratura bosqichini tamomlagan.Tayinlovga qadar, F.Toshpo’latov “Axborot xavfsizligini ta’minlash va texnik xizmat ko’rsatish” xizmati boshlig’i o’rinbosari — Axborot xavfsizligi bo’limi boshlig’i lavozimida faoliyat yuritgan.',
 		time: '09:20',
 		status: 'Yangilik',
 		line: 'Sergeli',
+		img: 'https://tashmetro.uz/wp-content/uploads/2024/08/photo_2024-08-02_15-53-49.jpg',
 	},
 	{
 		id: 5,
-		title: 'Talabalar uchun chegirma',
+		title:
+			'Ergashev Dostonjon Qobiljonovich  “Toshkent metropoliteni” DUK boshlig’i o’rinbosari — Harakat xavfsizligi bo’yicha bosh taftishchi lavozimiga tayinlandi.',
 		description:
-			"Talaba guvohnomasi bo'yicha metro kartasida 50% chegirma amal qiladi.",
+			'Ergashev Dostonjon Qobiljonovich  “Toshkent metropoliteni” DUK boshlig’i o’rinbosari — Harakat xavfsizligi bo’yicha bosh taftishchi lavozimiga tayinlandi. Ma’lumoti – oliy. 2014-yilda Toshkent temir yo’l muhandislik instituti bakalavr bosqichini, 2016-yilda Toshkent temir yo’l muhandislik instituti magistr bosqichini, 2019-yilda O’zbekiston Respublikasi Prezidenti huzuridagi Davlat boshqaruv akademiyasini tamomlagan.Tayinlovga qadar D.Ergashev “Toshkent metropoliteni” DUK bosh muhandisining yer usti metro liniyalarini tasarruf etish bo’yicha o’rinbosari lavozimida faoliyat yuritgan.',
 		time: '11:30',
-		status: 'Chegirma',
+		status: 'Yangilik',
 		line: 'Barcha',
+		img: 'https://tashmetro.uz/wp-content/uploads/2024/07/photo_2024-07-24_16-24-17-1-1.jpg',
 	},
 	{
 		id: 6,
-		title: 'Kechki vaqtda xavfsizlik',
+		title:
+			'“Toshkent metropoliteni” DUK da “Korrupsiyaga qarshi kurashish – davr talabi” mavzusida davra suhbati bo’lib o’tdi.',
 		description:
-			'22:00 dan keyin har bir vagon va bekatda xavfsizlik xodimlari navbatchilik qiladi.',
+			'     Жорий йилнинг 28 март куни “Тошкент метрополитени” давлат унитар корхонаси раҳбар ходимлари билан Ўзбекистон Республикаси Давлат хавфсизлик хизмати ҳамда Ўзбекистон Республикаси Коррупцияга қарshi kurashish agentligi mutaxassis xodimlari ishtirokida “Korrupцияга qarshi kurashish – davr talabi” mavzusida davra suhbati o’tkazildi.Suhbat davomida ishtirokchilar korrupцияning turli, korrupцияviy omillar, kelib chiqishi sabablari, qonuniylik, fuqarolar huquqlari, erkinliklari va qonuniy manfaatlariining ustuvorligini, ochiqlik va shaffoflikni ta’minlash, aholining huquqiy ongi va huquqiy madaniyatini yuksaltirish, jamiyatda korrupцияga nisbatan murosasiz munosabatni shakllantirish, davlat va jamiyatning barcha sohalarida korrupцияning oldini olishga doir chora-tadbirllarni amalga oshirish, korrupцияga oid huquqbuzarliklarni o’z vaqtida aniqlash, ularning oqibatlarini va imkon beruvchi shart-sharoitlarni bartaraf etish haqida keng ma’noda fikr va mulohazalar yuritdilar.',
 		time: '13:15',
 		status: 'Xavfsizlik',
 		line: 'Barcha',
+		img: 'https://tashmetro.uz/wp-content/uploads/2024/04/korupsiya-tadbiri.jpg',
 	},
 	{
 		id: 7,
-		title: 'Ekologik transport tanlovi',
+		title:
+			'Xabaringiz bor, joriy yilning 10-iyulidan 10-avgustiga qadar “Yong’in xavfsizligini ta’minlash bo’yicha Dolzarb 30 kun” loyihasi doirasida joylarda turli tadbirlar bo’lib o’tmoqda.',
 		description:
-			"Metro - shaharning eng toza va ekologik transport turi. Kuniga 2 million yo'lovchi.",
+			'Albatta bu kabi tadbirlar aholini ehtiyot choralarini ko’rish va yong’in ro’y bergan holatlarda to’g’ri harakatlanish qoidalari bilan xabardor etish uchun ayni muddaodir.Shu munosabat bilan Toshkent metropolitenining “O’zbekiston” elektrodeposida ham ishchi xodimlarning malakasini oshirish maqsadida yong’in xavsizligini ta’minlash, favqulotda sodir bo’lgan yong’inni bartaraf etish qoidalarini tadbiq etishni ko’zda tutgan holda o’quv amaliy mashg’uloti o’tkazildi.',
 		time: '08:45',
 		status: "Ma'lumot",
 		line: 'Barcha',
+		img: 'https://tashmetro.uz/wp-content/uploads/2023/07/photo_2023-07-21_13-45-48.jpg',
 	},
 ]
 
@@ -160,6 +175,17 @@ export default function MetroCarouselWithNews() {
 		}),
 	}
 
+	// Calculate approximate height of each announcement card for scrolling animation
+	// New layout: image w-24 h-24 (96px) on left, text on right.
+	// CardContent: p-4 (16px top/bottom padding) = 32px
+	// Inner content height (max of image or text block):
+	//   Image: 96px
+	//   Text block: Status/Line/Time (~20px) + Title (~20px) + Description (3 lines * 16px/line = 48px) = 88px
+	//   So, effective content height is 96px (from image height)
+	// Total card height: 96px (content) + 32px (CardContent padding) = 128px
+	// Plus space-y-4 (16px) between cards.
+	const cardHeightWithSpacing = 128 + 16 // 144px
+
 	return (
 		<div className='container mx-auto py-2'>
 			<div className='grid grid-cols-1 lg:grid-cols-2 gap-8'>
@@ -174,7 +200,6 @@ export default function MetroCarouselWithNews() {
 							animate='center'
 							exit='exit'
 							transition={{
-								x: { type: 'spring', stiffness: 300, damping: 30 },
 								opacity: { duration: 0.3 },
 							}}
 							className='absolute inset-0'
@@ -188,7 +213,6 @@ export default function MetroCarouselWithNews() {
 							<div className='absolute inset-0 bg-gradient-to-t from-blue-900/80 via-blue-900/20 to-transparent' />
 						</motion.div>
 					</AnimatePresence>
-
 					{/* Content Overlay */}
 					<div className='absolute bottom-0 left-0 right-0 p-4 md:p-6'>
 						<motion.h2
@@ -202,7 +226,6 @@ export default function MetroCarouselWithNews() {
 							{slides[currentSlide].title}
 						</motion.h2>
 					</div>
-
 					{/* Navigation Buttons */}
 					<button
 						onClick={prevSlide}
@@ -211,7 +234,6 @@ export default function MetroCarouselWithNews() {
 					>
 						<ChevronLeft className='w-5 h-5' />
 					</button>
-
 					<button
 						onClick={nextSlide}
 						className='absolute top-1/2 right-4 -translate-y-1/2 bg-blue-900/20 backdrop-blur-sm text-white p-2 rounded-full hover:bg-blue-900/30 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-300'
@@ -219,7 +241,6 @@ export default function MetroCarouselWithNews() {
 					>
 						<ChevronRight className='w-5 h-5' />
 					</button>
-
 					{/* Slide Indicators */}
 					<div className='absolute bottom-4 right-4 flex gap-2'>
 						{slides.map((_, index) => (
@@ -235,7 +256,6 @@ export default function MetroCarouselWithNews() {
 							/>
 						))}
 					</div>
-
 					{/* Social Links */}
 					<div className='absolute top-4 left-4 flex gap-2 bg-blue-900/30 backdrop-blur-sm p-2 rounded-full'>
 						{socialLinks.map((social, index) => {
@@ -253,13 +273,12 @@ export default function MetroCarouselWithNews() {
 									</Link>
 									<div className='absolute top-10 left-1/2 -translate-x-1/2 bg-blue-900 text-white text-xs px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-lg'>
 										{social.title}
-										<div className='absolute left-1/2 -translate-x-1/2 -top-1 w-0 h-0 border-l-2 border-r-2 border-b-2 border-l-transparent border-r-transparent border-b-blue-900' />
+										<div className='absolute left-1/2 -translate-x-1/2 -top-1 w-0 h-0 border-l-2 border-r-2 border-b-2 border-l-transparent border-r-transparent b' />
 									</div>
 								</div>
 							)
 						})}
 					</div>
-
 					{/* Progress Bar */}
 					<div className='absolute bottom-0 left-0 right-0 h-1 bg-blue-900/20'>
 						<motion.div
@@ -300,33 +319,35 @@ export default function MetroCarouselWithNews() {
 							</Button>
 						</Link>
 					</div>
-
 					{/* Scrolling Container */}
 					<div className='flex-1 relative overflow-hidden'>
 						<motion.div
-							className='space-y-3 p-4'
+							className='space-y-4 p-4'
 							animate={{
-								y: [0, -announcements.length * 100],
+								y: [0, -announcements.length * cardHeightWithSpacing],
 							}}
 							transition={{
-								duration: announcements.length * 3,
+								duration: announcements.length * 4, // Adjusted duration for smoother scroll with smaller cards
 								ease: 'linear',
 								repeat: Number.POSITIVE_INFINITY,
 							}}
 						>
 							{[...announcements, ...announcements].map(
 								(announcement, index) => (
-									<div
+									<Card
 										key={`${announcement.id}-${Math.floor(
 											index / announcements.length
 										)}`}
-										className='bg-white rounded-xl p-4 shadow-sm border border-slate-200 hover:shadow-md transition-all duration-300 cursor-pointer group flex-shrink-0 min-h-[90px]'
+										className='w-full overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 border-none'
 									>
-										<div className='flex items-start gap-3'>
-											<div className='flex-shrink-0 mt-1'>
-												<div className='w-3 h-3 rounded-full bg-blue-600 shadow-sm' />
-											</div>
-											<div className='flex-1 min-w-0'>
+										<CardContent className='p-4 flex gap-4 items-start'>
+											<img
+												src={announcement.img || '/placeholder.svg'}
+												alt={announcement.title}
+												className='w-24 h-24 object-cover rounded-md flex-shrink-0'
+												loading='lazy'
+											/>
+											<div className='flex-1'>
 												<div className='flex items-center gap-2 mb-2'>
 													<span className='px-2 py-1 text-xs font-semibold rounded-full border bg-blue-50 text-blue-700 border-blue-200'>
 														{announcement.status}
@@ -347,17 +368,16 @@ export default function MetroCarouselWithNews() {
 												<h4 className='text-sm font-semibold text-slate-800 group-hover:text-blue-600 transition-colors mb-1'>
 													{announcement.title}
 												</h4>
-												<p className='text-xs text-slate-600 leading-relaxed'>
+												<p className='text-xs text-slate-600 leading-relaxed line-clamp-3'>
 													{announcement.description}
 												</p>
 											</div>
-										</div>
-									</div>
+										</CardContent>
+									</Card>
 								)
 							)}
 						</motion.div>
 					</div>
-
 					{/* Bottom Gradient Overlay */}
 					<div className='absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none' />
 				</div>
