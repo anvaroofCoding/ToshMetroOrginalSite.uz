@@ -361,7 +361,7 @@ export default function MetroNavbar() {
 								<div className="flex items-center gap-3 justify-center">
 									<Link href={"/"}>
 										<Image
-											src={"/placeholder.svg?height=50&width=50&text=Metro+Logo"}
+											src={logo}
 											alt="Toshkent metro logo"
 											width={50}
 											height={50}
