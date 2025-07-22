@@ -357,9 +357,6 @@ export default function Component() {
 									<CardTitle className='text-lg font-bold text-gray-900 group-hover:text-[#0E327F] transition-colors'>
 										{job.title}
 									</CardTitle>
-									<CardDescription className='text-sm text-gray-600'>
-										{job.titleEn}
-									</CardDescription>
 								</CardHeader>
 
 								<CardContent className='pt-0'>

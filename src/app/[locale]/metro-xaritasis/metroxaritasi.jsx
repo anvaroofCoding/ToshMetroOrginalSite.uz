@@ -1408,12 +1408,13 @@
 // 		</div>
 // 	)
 // }
+
+
 "use client"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Separator } from "@/components/ui/separator"
 import {
   Clock,
   MapPin,
@@ -1437,7 +1438,7 @@ export default function TashkentMetroMap() {
   const [selectedDestination, setSelectedDestination] = useState("")
   const [showDirections, setShowDirections] = useState(false)
   const [selectedStationName, setSelectedStationName] = useState(null)
-  const [showSidebar, setShowSidebar] = useState(false)
+  const [showModal, setShowModal] = useState(false)
   const [isFullscreen, setIsFullscreen] = useState(false)
   const svgRef = useRef(null)
   const containerRef = useRef(null)
@@ -2002,20 +2003,70 @@ export default function TashkentMetroMap() {
   // Handle escape key for fullscreen
   useEffect(() => {
     const handleKeyDown = (event) => {
-      if (event.key === "Escape" && isFullscreen) {
-        setIsFullscreen(false)
-        setTransform({ x: 0, y: 0, scale: 1 })
+      if (event.key === "Escape") {
+        if (showModal) {
+          setShowModal(false)
+        } else if (isFullscreen) {
+          setIsFullscreen(false)
+          setTransform({ x: 0, y: 0, scale: 1 })
+        }
       }
     }
 
     document.addEventListener("keydown", handleKeyDown)
     return () => document.removeEventListener("keydown", handleKeyDown)
-  }, [isFullscreen])
+  }, [isFullscreen, showModal])
 
-  // Improved mouse and touch handlers with better performance
+  // Setup non-passive touch event listeners
+  useEffect(() => {
+    const container = containerRef.current
+    if (!container) return
+
+    const handleTouchStart = (e) => {
+      if (e.touches.length === 1) {
+        const touch = e.touches[0]
+        setIsDragging(true)
+        setDragStart({
+          x: touch.clientX - transform.x,
+          y: touch.clientY - transform.y,
+        })
+        e.preventDefault()
+      }
+    }
+
+    const handleTouchMove = (e) => {
+      if (!isDragging || e.touches.length !== 1) return
+      const touch = e.touches[0]
+      const newX = touch.clientX - dragStart.x
+      const newY = touch.clientY - dragStart.y
+      setTransform((prev) => ({
+        ...prev,
+        x: newX,
+        y: newY,
+      }))
+      e.preventDefault()
+    }
+
+    const handleTouchEnd = (e) => {
+      setIsDragging(false)
+      e.preventDefault()
+    }
+
+    // Add non-passive event listeners
+    container.addEventListener("touchstart", handleTouchStart, { passive: false })
+    container.addEventListener("touchmove", handleTouchMove, { passive: false })
+    container.addEventListener("touchend", handleTouchEnd, { passive: false })
+
+    return () => {
+      container.removeEventListener("touchstart", handleTouchStart)
+      container.removeEventListener("touchmove", handleTouchMove)
+      container.removeEventListener("touchend", handleTouchEnd)
+    }
+  }, [isDragging, dragStart, transform])
+
+  // Mouse handlers
   const handleMouseDown = useCallback(
     (e) => {
-      e.preventDefault()
       setIsDragging(true)
       setDragStart({ x: e.clientX - transform.x, y: e.clientY - transform.y })
     },
@@ -2025,7 +2076,6 @@ export default function TashkentMetroMap() {
   const handleMouseMove = useCallback(
     (e) => {
       if (!isDragging) return
-      e.preventDefault()
       const newX = e.clientX - dragStart.x
       const newY = e.clientY - dragStart.y
       setTransform((prev) => ({
@@ -2038,42 +2088,6 @@ export default function TashkentMetroMap() {
   )
 
   const handleMouseUp = useCallback(() => {
-    setIsDragging(false)
-  }, [])
-
-  const handleTouchStart = useCallback(
-    (e) => {
-      if (e.touches.length === 1) {
-        e.preventDefault()
-        const touch = e.touches[0]
-        setIsDragging(true)
-        setDragStart({
-          x: touch.clientX - transform.x,
-          y: touch.clientY - transform.y,
-        })
-      }
-    },
-    [transform],
-  )
-
-  const handleTouchMove = useCallback(
-    (e) => {
-      if (!isDragging || e.touches.length !== 1) return
-      e.preventDefault()
-      const touch = e.touches[0]
-      const newX = touch.clientX - dragStart.x
-      const newY = touch.clientY - dragStart.y
-      setTransform((prev) => ({
-        ...prev,
-        x: newX,
-        y: newY,
-      }))
-    },
-    [isDragging, dragStart],
-  )
-
-  const handleTouchEnd = useCallback((e) => {
-    e.preventDefault()
     setIsDragging(false)
   }, [])
 
@@ -2095,7 +2109,7 @@ export default function TashkentMetroMap() {
   const handleStationClick = (stationName, e) => {
     e.stopPropagation()
     setSelectedStationName(stationName)
-    setShowSidebar(true)
+    setShowModal(true)
   }
 
   // Get station details with fallback
@@ -2128,53 +2142,65 @@ export default function TashkentMetroMap() {
   const sidebarStationDetails = selectedStationName ? getStationDetails(selectedStationName) : null
 
   return (
-    <div className={`${isFullscreen ? "fixed inset-0 z-50 bg-white" : "container"}`}>
-      <Card className={`border-none ${isFullscreen ? "h-full" : "mt-10"} shadow-none`}>
+    <div className={`${isFullscreen ? "fixed inset-0 z-50 bg-white" : "container mx-auto px-2 sm:px-4 lg:px-6"}`}>
+      <Card className={`border-none ${isFullscreen ? "h-full" : "mt-4 sm:mt-10"} shadow-none`}>
         {!isFullscreen && (
-          <CardHeader className="text-center border-none shadow-none px-0">
-            <CardTitle className="text-5xl font-bold text-blue-900 mb-2">Toshkent Metropoliteni</CardTitle>
+          <CardHeader className="text-center border-none shadow-none px-2 sm:px-4 lg:px-0">
+            <CardTitle className="text-2xl sm:text-4xl lg:text-5xl font-bold text-blue-900 mb-2">
+              Toshkent Metropoliteni
+            </CardTitle>
             {/* Route Planning Section */}
-            <div className="mt-6 p-6 rounded-xl shadow-sm">
-              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2 text-blue-900">
-                <Navigation className="w-5 h-5 text-blue-700" />
+            <div className="mt-4 sm:mt-6 p-3 sm:p-4 lg:p-6 rounded-xl shadow-sm bg-white border border-gray-100">
+              <h3 className="text-sm sm:text-base lg:text-lg font-semibold mb-3 sm:mb-4 flex items-center justify-center gap-2 text-blue-900">
+                <Navigation className="w-4 h-4 sm:w-5 sm:h-5 text-blue-700" />
                 Yo'nalish olish
               </h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
-                <div>
-                  <label className="block text-sm font-semibold mb-2 text-blue-900">Qayerdan:</label>
-                  <Select value={selectedOrigin} onValueChange={setSelectedOrigin}>
-                    <SelectTrigger className="bg-transparent border-2 border-blue-900 text-blue-900 placeholder:text-blue-700 focus:ring-blue-900 data-[state=open]:border-blue-900 data-[state=open]:ring-blue-900">
-                      <SelectValue placeholder="Stansiyani tanlang" />
-                    </SelectTrigger>
-                    <SelectContent className="border-blue-900 bg-white text-blue-900">
-                      {Object.entries(stations).map(([key, station]) => (
-                        <SelectItem key={key} value={key} className="text-blue-900 hover:bg-blue-100 focus:bg-blue-100">
-                          {station.nameUz}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+              <div className="space-y-3 sm:space-y-0 sm:grid sm:grid-cols-1 lg:grid-cols-3 sm:gap-4 items-end">
+                <div className="space-y-3 sm:space-y-4 sm:col-span-1 lg:col-span-2 sm:grid sm:grid-cols-2 sm:gap-4">
+                  <div>
+                    <label className="block text-xs sm:text-sm font-semibold mb-2 text-blue-900">Qayerdan:</label>
+                    <Select value={selectedOrigin} onValueChange={setSelectedOrigin}>
+                      <SelectTrigger className="w-full bg-transparent border-2 border-blue-900 text-blue-900 placeholder:text-blue-700 focus:ring-blue-900 data-[state=open]:border-blue-900 data-[state=open]:ring-blue-900 h-10 sm:h-11">
+                        <SelectValue placeholder="Stansiyani tanlang" />
+                      </SelectTrigger>
+                      <SelectContent className="border-blue-900 bg-white text-blue-900 max-h-60">
+                        {Object.entries(stations).map(([key, station]) => (
+                          <SelectItem
+                            key={key}
+                            value={key}
+                            className="text-blue-900 hover:bg-blue-100 focus:bg-blue-100"
+                          >
+                            {station.nameUz}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div>
+                    <label className="block text-xs sm:text-sm font-semibold mb-2 text-blue-900">Qayerga:</label>
+                    <Select value={selectedDestination} onValueChange={setSelectedDestination}>
+                      <SelectTrigger className="w-full bg-transparent border-2 border-blue-900 text-blue-900 placeholder:text-blue-700 focus:ring-blue-900 data-[state=open]:border-blue-900 data-[state=open]:ring-blue-900 h-10 sm:h-11">
+                        <SelectValue placeholder="Stansiyani tanlang" />
+                      </SelectTrigger>
+                      <SelectContent className="border-blue-900 bg-white text-blue-900 max-h-60">
+                        {Object.entries(stations).map(([key, station]) => (
+                          <SelectItem
+                            key={key}
+                            value={key}
+                            className="text-blue-900 hover:bg-blue-100 focus:bg-blue-100"
+                          >
+                            {station.nameUz}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
                 </div>
-                <div>
-                  <label className="block text-sm font-semibold mb-2 text-blue-900">Qayerga:</label>
-                  <Select value={selectedDestination} onValueChange={setSelectedDestination}>
-                    <SelectTrigger className="bg-transparent border-2 border-blue-900 text-blue-900 placeholder:text-blue-700 focus:ring-blue-900 data-[state=open]:border-blue-900 data-[state=open]:ring-blue-900">
-                      <SelectValue placeholder="Stansiyani tanlang" />
-                    </SelectTrigger>
-                    <SelectContent className="border-blue-900 bg-white text-blue-900">
-                      {Object.entries(stations).map(([key, station]) => (
-                        <SelectItem key={key} value={key} className="text-blue-900 hover:bg-blue-100 focus:bg-blue-100">
-                          {station.nameUz}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div className="flex gap-2">
+                <div className="flex gap-2 sm:col-span-1">
                   <Button
                     onClick={handleGetDirections}
                     disabled={!selectedOrigin || !selectedDestination}
-                    className="flex-1 bg-blue-900 hover:bg-blue-800 text-white font-semibold py-2.5 px-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 disabled:bg-blue-300 disabled:cursor-not-allowed"
+                    className="flex-1 bg-blue-900 hover:bg-blue-800 text-white font-semibold py-2.5 px-3 sm:px-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 disabled:bg-blue-300 disabled:cursor-not-allowed text-sm sm:text-base h-10 sm:h-11"
                   >
                     Yo'nalish
                   </Button>
@@ -2183,7 +2209,7 @@ export default function TashkentMetroMap() {
                       onClick={handleClearDirections}
                       variant="outline"
                       size="icon"
-                      className="border-2 border-blue-300 text-blue-700 hover:bg-blue-100 hover:border-blue-400 transition-all duration-200 bg-transparent"
+                      className="border-2 border-blue-300 text-blue-700 hover:bg-blue-100 hover:border-blue-400 transition-all duration-200 bg-transparent h-10 w-10 sm:h-11 sm:w-11"
                     >
                       <X className="w-4 h-4" />
                     </Button>
@@ -2193,19 +2219,19 @@ export default function TashkentMetroMap() {
             </div>
             {/* Directions Display */}
             {showDirections && route && (
-              <div className="mt-4 p-4 bg-green-50 rounded-lg text-left">
-                <h4 className="font-semibold text-green-800 mb-3">
+              <div className="mt-4 p-3 sm:p-4 bg-green-50 rounded-lg text-left border border-green-200">
+                <h4 className="font-semibold text-green-800 mb-3 text-sm sm:text-base">
                   {stations[selectedOrigin].nameUz} dan {stations[selectedDestination].nameUz} ga yo'nalish:
                 </h4>
                 <div className="space-y-2">
                   {directions.map((dir, index) => (
                     <div key={index} className="flex items-start gap-3">
-                      <div className="w-6 h-6 bg-green-600 text-white rounded-full flex items-center justify-center text-sm font-bold mt-0.5">
+                      <div className="w-5 h-5 sm:w-6 sm:h-6 bg-green-600 text-white rounded-full flex items-center justify-center text-xs sm:text-sm font-bold mt-0.5 flex-shrink-0">
                         {index + 1}
                       </div>
-                      <div className="flex-1">
+                      <div className="flex-1 min-w-0">
                         {dir.type === "travel" ? (
-                          <p className="text-sm">
+                          <p className="text-xs sm:text-sm">
                             <span className="font-medium" style={{ color: lineColors[dir.line] }}>
                               {lineNames[dir.line]}
                             </span>{" "}
@@ -2213,7 +2239,7 @@ export default function TashkentMetroMap() {
                             <span className="text-gray-600"> ({dir.stations} stansiya)</span>
                           </p>
                         ) : (
-                          <p className="text-sm">
+                          <p className="text-xs sm:text-sm">
                             <span className="font-medium">{stations[dir.station].nameUz}</span> da{" "}
                             <span style={{ color: lineColors[dir.fromLine] }}>{lineNames[dir.fromLine]}</span> dan{" "}
                             <span style={{ color: lineColors[dir.toLine] }}>{lineNames[dir.toLine]}</span> ga o'ting
@@ -2224,86 +2250,95 @@ export default function TashkentMetroMap() {
                   ))}
                 </div>
                 <div className="mt-3 pt-3 border-t border-green-200">
-                  <p className="text-sm text-green-700">
+                  <p className="text-xs sm:text-sm text-green-700">
                     <strong>Jami:</strong> {route.length - 1} stansiya, taxminan {Math.ceil((route.length - 1) * 2)}{" "}
                     daqiqa
                   </p>
                 </div>
               </div>
             )}
-            <div className="flex flex-wrap justify-center gap-4 mt-4">
-              <div className="flex items-center gap-2">
-                <div className="w-4 h-4 bg-red-600 rounded"></div>
-                <span className="text-sm text-blue-800">Chilonzor liniyasi</span>
+            {/* Line Legend */}
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-3 lg:gap-4 mt-4 px-2">
+              <div className="flex items-center gap-1 sm:gap-2">
+                <div className="w-3 h-3 sm:w-4 sm:h-4 bg-red-600 rounded flex-shrink-0"></div>
+                <span className="text-xs sm:text-sm text-blue-800 whitespace-nowrap">Chilonzor liniyasi</span>
               </div>
-              <div className="flex items-center gap-2">
-                <div className="w-4 h-4 bg-blue-600 rounded"></div>
-                <span className="text-sm text-blue-800">O'zbekiston liniyasi</span>
+              <div className="flex items-center gap-1 sm:gap-2">
+                <div className="w-3 h-3 sm:w-4 sm:h-4 bg-blue-600 rounded flex-shrink-0"></div>
+                <span className="text-xs sm:text-sm text-blue-800 whitespace-nowrap">O'zbekiston liniyasi</span>
               </div>
-              <div className="flex items-center gap-2">
-                <div className="w-4 h-4 bg-green-600 rounded"></div>
-                <span className="text-sm text-blue-800">Yunusobod liniyasi</span>
+              <div className="flex items-center gap-1 sm:gap-2">
+                <div className="w-3 h-3 sm:w-4 sm:h-4 bg-green-600 rounded flex-shrink-0"></div>
+                <span className="text-xs sm:text-sm text-blue-800 whitespace-nowrap">Yunusobod liniyasi</span>
               </div>
-              <div className="flex items-center gap-2">
-                <div className="w-4 h-4 bg-yellow-600 rounded"></div>
-                <span className="text-sm text-blue-800">Sirg'ali liniyasi</span>
+              <div className="flex items-center gap-1 sm:gap-2">
+                <div className="w-3 h-3 sm:w-4 sm:h-4 bg-yellow-600 rounded flex-shrink-0"></div>
+                <span className="text-xs sm:text-sm text-blue-800 whitespace-nowrap">Sirg'ali liniyasi</span>
               </div>
             </div>
           </CardHeader>
         )}
-        <CardContent className={`${isFullscreen ? "h-full p-0" : "px-0"}`}>
+        <CardContent className={`${isFullscreen ? "h-full p-0" : "px-2 sm:px-4 lg:px-0"}`}>
           <div
-            className={`${isFullscreen ? "mb-2" : "mb-4"} flex justify-center gap-2 ${isFullscreen ? "absolute top-4 left-1/2 transform -translate-x-1/2 z-10 bg-white/90 backdrop-blur-sm rounded-lg p-2" : ""}`}
+            className={`${isFullscreen ? "mb-2" : "mb-4"} flex justify-center gap-1 sm:gap-2 ${
+              isFullscreen
+                ? "absolute top-2 sm:top-4 left-1/2 transform -translate-x-1/2 z-10 bg-white/95 backdrop-blur-sm rounded-lg p-1 sm:p-2 shadow-lg"
+                : ""
+            }`}
           >
             <Button
               onClick={handleZoomIn}
               size="sm"
               variant="outline"
-              className="border-2 border-blue-300 text-blue-700 hover:bg-blue-100 hover:border-blue-400 transition-all duration-200 bg-white/90"
+              className="border-2 border-blue-300 text-blue-700 hover:bg-blue-100 hover:border-blue-400 transition-all duration-200 bg-white/95 h-8 w-8 sm:h-10 sm:w-10 p-0"
             >
-              <ZoomIn className="w-4 h-4" />
+              <ZoomIn className="w-3 h-3 sm:w-4 sm:h-4" />
             </Button>
             <Button
               onClick={handleZoomOut}
               size="sm"
               variant="outline"
-              className="border-2 border-blue-300 text-blue-700 hover:bg-blue-100 hover:border-blue-400 transition-all duration-200 bg-white/90"
+              className="border-2 border-blue-300 text-blue-700 hover:bg-blue-100 hover:border-blue-400 transition-all duration-200 bg-white/95 h-8 w-8 sm:h-10 sm:w-10 p-0"
             >
-              <ZoomOut className="w-4 h-4" />
+              <ZoomOut className="w-3 h-3 sm:w-4 sm:h-4" />
             </Button>
             <Button
               onClick={handleReset}
               size="sm"
               variant="outline"
-              className="text-blue-700 hover:bg-blue-100 hover:border-blue-100 transition-all duration-200 bg-white/90"
+              className="text-blue-700 hover:bg-blue-100 hover:border-blue-100 transition-all duration-200 bg-white/95 h-8 w-8 sm:h-10 sm:w-10 p-0"
             >
-              <RotateCcw className="w-4 h-4" />
+              <RotateCcw className="w-3 h-3 sm:w-4 sm:h-4" />
             </Button>
             <Button
               onClick={toggleFullscreen}
               size="sm"
               variant="outline"
-              className="border-2 border-blue-300 text-blue-700 hover:bg-blue-100 hover:border-blue-400 transition-all duration-200 bg-white/90"
+              className="border-2 border-blue-300 text-blue-700 hover:bg-blue-100 hover:border-blue-400 transition-all duration-200 bg-white/95 h-8 w-8 sm:h-10 sm:w-10 p-0"
             >
-              {isFullscreen ? <Minimize className="w-4 h-4" /> : <Maximize className="w-4 h-4" />}
+              {isFullscreen ? (
+                <Minimize className="w-3 h-3 sm:w-4 sm:h-4" />
+              ) : (
+                <Maximize className="w-3 h-3 sm:w-4 sm:h-4" />
+              )}
             </Button>
           </div>
           <div
             ref={containerRef}
-            className={`relative overflow-hidden rounded-xl shadow-lg ${isFullscreen ? "h-screen" : ""}`}
-            style={{ height: isFullscreen ? "100vh" : "600px" }}
+            className={`relative overflow-hidden rounded-xl shadow-lg bg-gray-50 ${isFullscreen ? "h-screen" : ""}`}
+            style={{
+              height: isFullscreen ? "100vh" : "500px",
+              minHeight: isFullscreen ? "100vh" : "400px",
+            }}
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
             onMouseLeave={handleMouseUp}
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
             onWheel={handleWheel}
           >
             <svg
               ref={svgRef}
-              viewBox="0 0 900 950"
+              viewBox="0 0 900 1000"
               className="w-full h-full cursor-grab active:cursor-grabbing select-none"
               style={{
                 transform: `translate(${transform.x}px, ${transform.y}px) scale(${transform.scale})`,
@@ -2475,7 +2510,10 @@ export default function TashkentMetroMap() {
                       className={`text-xs font-semibold pointer-events-none ${
                         isOnRoute ? "fill-green-800" : "fill-blue-900"
                       }`}
-                      style={{ fontSize: isOnRoute ? "12px" : "11px" }}
+                      style={{
+                        fontSize: isOnRoute ? "12px" : "10px",
+                        textShadow: "1px 1px 2px rgba(255,255,255,0.9), -1px -1px 2px rgba(255,255,255,0.9)",
+                      }}
                     >
                       {station.nameUz}
                     </text>
@@ -2502,7 +2540,10 @@ export default function TashkentMetroMap() {
                       x={station.x + 25}
                       y={station.y - 25}
                       className="text-xs font-bold fill-blue-800"
-                      style={{ fontSize: "10px" }}
+                      style={{
+                        fontSize: "10px",
+                        textShadow: "1px 1px 2px rgba(255,255,255,0.9)",
+                      }}
                     >
                       Transfer
                     </text>
@@ -2512,7 +2553,7 @@ export default function TashkentMetroMap() {
             </svg>
           </div>
           {!isFullscreen && (
-            <div className="mt-6 text-center text-sm text-blue-700">
+            <div className="mt-4 sm:mt-6 text-center text-xs sm:text-sm text-blue-700">
               <p className="mt-1">
                 Zoom: {Math.round(transform.scale * 100)}% | Pan va zoom uchun suring | Stansiya ma'lumotlari uchun
                 bosing
@@ -2521,166 +2562,212 @@ export default function TashkentMetroMap() {
           )}
         </CardContent>
       </Card>
-      {/* Station Details Sidebar */}
-      <div
-        className={`fixed inset-y-0 right-0 w-full md:w-1/2 lg:w-1/3 bg-white shadow-lg ${isFullscreen ? "z-60" : "z-50"} transform transition-transform duration-300 ease-in-out ${
-          showSidebar ? "translate-x-0" : "translate-x-full"
-        } overflow-y-auto`}
-      >
-        {sidebarStationDetails && (
-          <div className="h-full flex flex-col">
-            <div className="bg-blue-900 p-4 flex items-center justify-between flex-shrink-0">
-              <h2 className="flex items-center gap-3 text-white text-2xl font-bold">
+      {/* Station Details Modal */}
+      {showModal && sidebarStationDetails && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4  bg-opacity-50 backdrop-blur-sm"
+          onClick={() => setShowModal(false)}
+        >
+          <div
+            className="relative w-full max-w-4xl max-h-[90vh] bg-white rounded-xl shadow-2xl overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Header */}
+            <div className="bg-blue-900 p-4 sm:p-6 flex items-center justify-between">
+              <div className="flex items-center gap-3 min-w-0 flex-1">
                 <div
-                  className="w-6 h-6 rounded-full"
+                  className="w-6 h-6 sm:w-8 sm:h-8 rounded-full flex-shrink-0"
                   style={{
                     backgroundColor: lineColors[sidebarStationDetails.line],
                   }}
                 />
-                <span>{sidebarStationDetails.nameUz}</span>
-                <span className="text-lg text-blue-200">({sidebarStationDetails.nameEn})</span>
-              </h2>
+                <div className="min-w-0 flex-1">
+                  <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white truncate">
+                    {sidebarStationDetails.nameUz}
+                  </h2>
+                  <p className="text-sm sm:text-base text-blue-200 truncate">({sidebarStationDetails.nameEn})</p>
+                </div>
+              </div>
               <Button
                 variant="ghost"
                 size="icon"
-                onClick={() => setShowSidebar(false)}
-                className="text-white hover:bg-blue-800 rounded-full w-8 h-8"
+                onClick={() => setShowModal(false)}
+                className="text-white hover:bg-blue-800 rounded-full w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0"
                 aria-label="Yopish"
               >
-                <X className="w-5 h-5" />
+                <X className="w-5 h-5 sm:w-6 sm:h-6" />
               </Button>
             </div>
-            <div className="flex-1 overflow-y-auto p-6 space-y-6">
-              {/* Station Image */}
-              <div className="relative h-64 bg-gradient-to-r from-blue-100 to-blue-50 rounded-lg overflow-hidden shadow-lg ">
-                <img
-                  src={`/placeholder.svg?height=256&width=600&text=${encodeURIComponent(
-                    sidebarStationDetails.nameUz + " Stansiyasi",
-                  )}`}
-                  alt={`${sidebarStationDetails.nameUz} stansiyasi`}
-                  className="w-full h-full object-cover opacity-80"
-                />
-                <div className="absolute inset-0 bg-black bg-opacity-20 flex items-end">
-                  <div className="p-4 text-white">
-                    <h3 className="text-xl font-bold">{sidebarStationDetails.nameUz}</h3>
-                    <p className="text-sm opacity-90">{lineNames[sidebarStationDetails.line]}</p>
+
+            {/* Modal Content */}
+            <div className="overflow-y-auto max-h-[calc(90vh-120px)]">
+              <div className="p-4 sm:p-6 space-y-6">
+                {/* Station Image */}
+                <div className="relative h-48 sm:h-64 lg:h-80 bg-gradient-to-r from-blue-100 to-blue-50 rounded-lg overflow-hidden shadow-lg">
+                  <img
+                    src={`/placeholder.svg?height=320&width=800&text=${encodeURIComponent(
+                      sidebarStationDetails.nameUz + " Stansiyasi",
+                    )}`}
+                    alt={`${sidebarStationDetails.nameUz} stansiyasi`}
+                    className="w-full h-full object-cover opacity-80"
+                  />
+                  <div className="absolute inset-0 bg-black bg-opacity-20 flex items-end">
+                    <div className="p-4 sm:p-6 text-white">
+                      <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold">{sidebarStationDetails.nameUz}</h3>
+                      <p className="text-sm sm:text-base opacity-90">{lineNames[sidebarStationDetails.line]}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-              {/* Quick Stats */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div className="bg-blue-50 p-4 rounded-lg text-center shadow-sm border border-blue-100">
-                  <Clock className="w-6 h-6 mx-auto mb-2 text-blue-600" />
-                  <div className="text-sm text-gray-600">Ochilgan</div>
-                  <div className="font-semibold text-blue-900">{sidebarStationDetails.opened}</div>
-                </div>
-                <div className="bg-blue-50 p-4 rounded-lg text-center shadow-sm border border-blue-100">
-                  <MapPin className="w-6 h-6 mx-auto mb-2 text-blue-600" />
-                  <div className="text-sm text-gray-600">Chuqurlik</div>
-                  <div className="font-semibold text-blue-900">{sidebarStationDetails.depth}</div>
-                </div>
-                <div className="bg-blue-50 p-4 rounded-lg text-center shadow-sm border border-blue-100">
-                  <Users className="w-6 h-6 mx-auto mb-2 text-blue-600" />
-                  <div className="text-sm text-gray-600">Kunlik yo'lovchi</div>
-                  <div className="font-semibold text-blue-900">{sidebarStationDetails.dailyPassengers}</div>
-                </div>
-                <div className="bg-blue-50 p-4 rounded-lg text-center shadow-sm border border-blue-100">
-                  <Train className="w-6 h-6 mx-auto mb-2 text-blue-600" />
-                  <div className="text-sm text-gray-600">Liniya</div>
-                  <div
-                    className="font-semibold text-blue-900"
-                    style={{ color: lineColors[sidebarStationDetails.line] }}
-                  >
-                    {lineNames[sidebarStationDetails.line].split(" ")[0]}
+
+                {/* Quick Stats Grid */}
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                  <div className="bg-blue-50 p-4 sm:p-6 rounded-lg text-center shadow-sm border border-blue-100">
+                    <Clock className="w-6 h-6 sm:w-8 sm:h-8 mx-auto mb-3 text-blue-600" />
+                    <div className="text-sm text-gray-600 mb-1">Ochilgan</div>
+                    <div className="font-semibold text-blue-900 text-lg">{sidebarStationDetails.opened}</div>
+                  </div>
+                  <div className="bg-blue-50 p-4 sm:p-6 rounded-lg text-center shadow-sm border border-blue-100">
+                    <MapPin className="w-6 h-6 sm:w-8 sm:h-8 mx-auto mb-3 text-blue-600" />
+                    <div className="text-sm text-gray-600 mb-1">Chuqurlik</div>
+                    <div className="font-semibold text-blue-900 text-lg">{sidebarStationDetails.depth}</div>
+                  </div>
+                  <div className="bg-blue-50 p-4 sm:p-6 rounded-lg text-center shadow-sm border border-blue-100">
+                    <Users className="w-6 h-6 sm:w-8 sm:h-8 mx-auto mb-3 text-blue-600" />
+                    <div className="text-sm text-gray-600 mb-1">Kunlik yo'lovchi</div>
+                    <div className="font-semibold text-blue-900 text-lg">{sidebarStationDetails.dailyPassengers}</div>
+                  </div>
+                  <div className="bg-blue-50 p-4 sm:p-6 rounded-lg text-center shadow-sm border border-blue-100">
+                    <Train className="w-6 h-6 sm:w-8 sm:h-8 mx-auto mb-3 text-blue-600" />
+                    <div className="text-sm text-gray-600 mb-1">Liniya</div>
+                    <div className="font-semibold text-lg" style={{ color: lineColors[sidebarStationDetails.line] }}>
+                      {lineNames[sidebarStationDetails.line].split(" ")[0]}
+                    </div>
                   </div>
                 </div>
-              </div>
-              {/* History Section */}
-              <div className="bg-blue-50 p-6 rounded-lg shadow-md border border-blue-100">
-                <h4 className="text-lg font-semibold mb-3 text-blue-900">Tarix</h4>
-                <p className="text-gray-800 leading-relaxed">{sidebarStationDetails.history}</p>
-                <div className="mt-4">
-                  <Badge variant="outline" className="mr-2 border-blue-300 text-blue-700 bg-blue-100">
-                    Arxitektor: {sidebarStationDetails.architect}
-                  </Badge>
-                </div>
-              </div>
-              {/* Features */}
-              <div>
-                <h4 className="text-lg font-semibold mb-3 text-blue-900">Xususiyatlar</h4>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                  {sidebarStationDetails.features.map((feature, index) => (
-                    <div key={index} className="bg-blue-100 p-3 rounded-lg shadow-sm border border-blue-200">
-                      <div className="text-sm font-medium text-blue-800">{feature}</div>
+
+                {/* Two Column Layout for larger screens */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  {/* Left Column */}
+                  <div className="space-y-6">
+                    {/* History Section */}
+                    <div className="bg-blue-50 p-4 sm:p-6 rounded-lg shadow-md border border-blue-100">
+                      <h4 className="text-lg sm:text-xl font-semibold mb-4 text-blue-900 flex items-center gap-2">
+                        <Clock className="w-5 h-5" />
+                        Tarix
+                      </h4>
+                      <p className="text-gray-800 leading-relaxed text-sm sm:text-base mb-4">
+                        {sidebarStationDetails.history}
+                      </p>
+                      <Badge variant="outline" className="border-blue-300 text-blue-700 bg-blue-100 text-sm">
+                        Arxitektor: {sidebarStationDetails.architect}
+                      </Badge>
                     </div>
-                  ))}
-                </div>
-              </div>
-              {/* Gallery */}
-              <div>
-                <h4 className="text-lg font-semibold mb-3 text-blue-900">Galereya</h4>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                  {[1, 2, 3].map((i) => (
-                    <div
-                      key={i}
-                      className="relative h-32 bg-gray-200 rounded-lg overflow-hidden hover:scale-105 transition-transform duration-200 shadow-md border border-gray-300"
-                    >
-                      <img
-                        src={`/placeholder.svg?height=128&width=200&text=Galereya ${i}`}
-                        alt={`${sidebarStationDetails.nameUz} galereyasi ${i}`}
-                        className="w-full h-full object-cover opacity-80"
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
-              {/* Video Section */}
-              <div>
-                <h4 className="text-lg font-semibold mb-3 text-blue-900">Video</h4>
-                <div className="relative h-64 bg-gray-200 rounded-lg overflow-hidden shadow-md border border-gray-300">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-center text-gray-800">
-                      <div className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-4 cursor-pointer hover:bg-red-700 transition-colors">
-                        <svg className="w-6 h-6 ml-1 text-white" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M8 5v14l11-7z" />
-                        </svg>
+
+                    {/* Features */}
+                    <div>
+                      <h4 className="text-lg sm:text-xl font-semibold mb-4 text-blue-900 flex items-center gap-2">
+                        <Train className="w-5 h-5" />
+                        Xususiyatlar
+                      </h4>
+                      <div className="space-y-3">
+                        {sidebarStationDetails.features.map((feature, index) => (
+                          <div
+                            key={index}
+                            className="bg-blue-100 p-4 rounded-lg shadow-sm border border-blue-200 flex items-center gap-3"
+                          >
+                            <div className="w-2 h-2 bg-blue-600 rounded-full flex-shrink-0"></div>
+                            <div className="text-sm sm:text-base font-medium text-blue-800">{feature}</div>
+                          </div>
+                        ))}
                       </div>
-                      <p className="text-sm">Virtual tur: {sidebarStationDetails.nameUz}</p>
+                    </div>
+                  </div>
+
+                  {/* Right Column */}
+                  <div className="space-y-6">
+                    {/* Gallery */}
+                    <div>
+                      <h4 className="text-lg sm:text-xl font-semibold mb-4 text-blue-900 flex items-center gap-2">
+                        <MapPin className="w-5 h-5" />
+                        Galereya
+                      </h4>
+                      <div className="grid grid-cols-2 gap-4">
+                        {[1, 2, 3, 4].map((i) => (
+                          <div
+                            key={i}
+                            className="relative h-24 sm:h-32 bg-gray-200 rounded-lg overflow-hidden hover:scale-105 transition-transform duration-200 shadow-md border border-gray-300 cursor-pointer"
+                          >
+                            <img
+                              src={`/placeholder.svg?height=128&width=200&text=Galereya ${i}`}
+                              alt={`${sidebarStationDetails.nameUz} galereyasi ${i}`}
+                              className="w-full h-full object-cover opacity-80"
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Nearby Attractions */}
+                    <div>
+                      <h4 className="text-lg sm:text-xl font-semibold mb-4 text-blue-900 flex items-center gap-2">
+                        <MapPin className="w-5 h-5" />
+                        Yaqin atrofdagi joylar
+                      </h4>
+                      <div className="space-y-3">
+                        {sidebarStationDetails.nearbyAttractions.map((attraction, index) => (
+                          <div
+                            key={index}
+                            className="flex items-center gap-3 p-3 sm:p-4 bg-blue-100 rounded-lg shadow-sm border border-blue-200 hover:bg-blue-200 transition-colors cursor-pointer"
+                          >
+                            <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 flex-shrink-0" />
+                            <span className="text-sm sm:text-base text-blue-800">{attraction}</span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              {/* Nearby Attractions */}
-              <div>
-                <h4 className="text-lg font-semibold mb-3 text-blue-900">Yaqin atrofdagi joylar</h4>
-                <div className="space-y-2">
-                  {sidebarStationDetails.nearbyAttractions.map((attraction, index) => (
-                    <div
-                      key={index}
-                      className="flex items-center gap-3 p-3 bg-blue-100 rounded-lg shadow-sm border border-blue-200"
-                    >
-                      <MapPin className="w-4 h-4 text-blue-600 flex-shrink-0" />
-                      <span className="text-sm text-blue-800">{attraction}</span>
-                    </div>
-                  ))}
+
+                {/* Description - Full Width */}
+                <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-4 sm:p-6 rounded-lg shadow-md border border-blue-100">
+                  <h4 className="text-lg sm:text-xl font-semibold mb-4 text-blue-900 flex items-center gap-2">
+                    <Users className="w-5 h-5" />
+                    Batafsil ma'lumot
+                  </h4>
+                  <p className="text-gray-800 leading-relaxed text-sm sm:text-base">
+                    {sidebarStationDetails.description}
+                  </p>
                 </div>
-              </div>
-              <Separator className="bg-blue-200" />
-              {/* Description */}
-              <div className="bg-blue-50 p-6 rounded-lg shadow-md border border-blue-100">
-                <h4 className="text-lg font-semibold mb-3 text-blue-900">Batafsil ma'lumot</h4>
-                <p className="text-gray-800 leading-relaxed">{sidebarStationDetails.description}</p>
+
+                {/* Video Section */}
+                <div>
+                  <h4 className="text-lg sm:text-xl font-semibold mb-4 text-blue-900 flex items-center gap-2">
+                    <Train className="w-5 h-5" />
+                    Virtual tur
+                  </h4>
+                  <div className="relative h-48 sm:h-64 bg-gray-200 rounded-lg overflow-hidden shadow-md border border-gray-300">
+                    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-blue-100 to-blue-200">
+                      <div className="text-center text-gray-800">
+                        <div className="w-16 h-16 sm:w-20 sm:h-20 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-4 cursor-pointer hover:bg-red-700 transition-colors shadow-lg">
+                          <svg
+                            className="w-6 h-6 sm:w-8 sm:h-8 ml-1 text-white"
+                            fill="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path d="M8 5v14l11-7z" />
+                          </svg>
+                        </div>
+                        <p className="text-sm sm:text-base font-medium">Virtual tur: {sidebarStationDetails.nameUz}</p>
+                        <p className="text-xs sm:text-sm text-gray-600 mt-1">360° ko'rinish</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   )
 }
-
-
-
-
-
-

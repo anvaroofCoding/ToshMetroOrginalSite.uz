@@ -18,6 +18,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import logo from '../../../public/MetroLogo.png' // Assuming this path is correct relative to the component
 
+
 const menuItems = [
 	{
 		label: 'Metro xaritasi',
@@ -116,6 +117,7 @@ const socialLinks = [
 
 const languages = ['UZ', 'RU', 'EN']
 
+
 export default function MetroNavbar() {
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
 	const [isScrolled, setIsScrolled] = useState(false)
@@ -125,6 +127,11 @@ export default function MetroNavbar() {
 	const locale = useLocale()
 	const router = useRouter()
 	const pathname = usePathname()
+	const parts = pathname.split('/').filter(Boolean)
+	const isHiddenPath = parts[1] === 'metro-xaritasis'
+
+	
+
 
 	useEffect(() => {
 		// Set initial language based on locale
@@ -191,20 +198,21 @@ export default function MetroNavbar() {
 	return (
 		<>
 			<header
-				className={`sticky top-0 left-0 w-full z-50 transition-all duration-300 ${
-					isScrolled
-						? 'bg-gradient-to-r from-[#0E327F] to-blue-800 pt-0 shadow-md'
-						: 'bg-transparent pt-5'
-				}`}
+				className={`sticky top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled
+					? 'bg-gradient-to-r from-[#0E327F] to-blue-800 pt-0 shadow-md'
+					: 'bg-transparent pt-5'
+					}
+					${isHiddenPath ? "hidden" : "block"}
+					`
+				}
 			>
 				<div className='container mx-auto'>
 					<motion.div
 						layout
-						className={`flex items-center justify-between h-[70px] text-white rounded-lg px-4 ${
-							isScrolled
-								? 'bg-transparent'
-								: 'bg-gradient-to-r from-[#0E327F] to-blue-800 shadow-lg'
-						}`}
+						className={`flex items-center justify-between h-[70px] text-white rounded-lg px-4 ${isScrolled
+							? 'bg-transparent'
+							: 'bg-gradient-to-r from-[#0E327F] to-blue-800 shadow-lg'
+							}`}
 					>
 						<div className='flex items-center gap-3'>
 							<Link href={'/'}>
@@ -297,9 +305,8 @@ export default function MetroNavbar() {
 									{currentLang}
 									<ChevronDown
 										size={16}
-										className={`transition-transform duration-200 ${
-											isLangOpen ? 'rotate-180' : ''
-										}`}
+										className={`transition-transform duration-200 ${isLangOpen ? 'rotate-180' : ''
+											}`}
 									/>
 								</button>
 								<AnimatePresence>
@@ -427,11 +434,10 @@ export default function MetroNavbar() {
 												changeLanguage(lang)
 												setIsMenuOpen(false)
 											}}
-											className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors ${
-												currentLang === lang
-													? 'bg-white text-[#0E327F]'
-													: 'bg-white/10 text-white hover:bg-white/20'
-											}`}
+											className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors ${currentLang === lang
+												? 'bg-white text-[#0E327F]'
+												: 'bg-white/10 text-white hover:bg-white/20'
+												}`}
 										>
 											{lang}
 										</button>
@@ -502,9 +508,8 @@ const MobileNavItem = ({
 				)}
 				{item.dropdown && (
 					<ChevronDown
-						className={`h-6 w-6 text-white/70 transition-transform duration-200 ${
-							isOpen ? 'rotate-180' : ''
-						}`}
+						className={`h-6 w-6 text-white/70 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''
+							}`}
 					/>
 				)}
 			</div>

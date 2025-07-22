@@ -15,6 +15,8 @@ import {
 import Image from 'next/image'
 import Link from 'next/link'
 import logos from '../../../public/MetroLogo.png'
+import { usePathname } from 'next/navigation'
+import { useEffect, useState } from 'react'
 
 // Mock logo - replace with your actual logo
 const logo = '/placeholder.svg?height=50&width=50'
@@ -97,12 +99,16 @@ const itemVariants = {
 }
 
 export default function SimpleFooter() {
-	const scrollToTop = () => {
-		window.scrollTo({ top: 0, behavior: 'smooth' })
-	}
+	const pathname = usePathname()
+	const parts = pathname.split('/').filter(Boolean)
+	const isHiddenPath = parts[1] === 'metro-xaritasis'
+
+
 
 	return (
-		<footer className='bg-gradient-to-r from-[#0E327F] to-blue-800 text-white mt-16'>
+		<footer className={`bg-gradient-to-r from-[#0E327F] to-blue-800 text-white mt-16
+  ${isHiddenPath ? 'hidden' : 'block'}
+`}>
 			<motion.div
 				variants={containerVariants}
 				initial='hidden'

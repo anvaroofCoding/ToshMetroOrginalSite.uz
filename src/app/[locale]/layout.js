@@ -11,27 +11,27 @@ import { notFound } from 'next/navigation'
 import './globals.css'
 
 export const metadata = {
-	title: '"TOSHKENT METROPOLITENI" DUK | Rasmiy veb-sayt',
+	title: 'Toshkent shahar metropoliteni | Rasmiy veb-sayt',
 	description:
-		'Toshkent metropolitenining rasmiy veb-sayti: yo‘nalishlar, tariflar, yangiliklar va ko‘proq ma’lumot.',
+		'Toshkent shahar metropolitenining rasmiy veb-sayti. Yo‘nalishlar, tariflar, yangiliklar, xizmatlar va boshqa foydali ma’lumotlar.',
 	keywords:
-		'Toshkent metro, Toshkent metropoliteni, metro yo‘nalishlari, metro tariflar, metro yangiliklar',
-	authors: [{ name: 'Toshkent Metropoliteni IT bo‘limi' }],
-	creator: 'Toshkent Metropoliteni',
-	publisher: 'Toshkent Metropoliteni',
+		'Toshkent metro, Toshkent metropoliteni, metro yo‘nalishlari, metro tariflari, metro yangiliklari, metro xizmatlari',
+	authors: [{ name: 'Toshkent metropoliteni IT bo‘limi' }],
+	creator: 'Toshkent shahar metropoliteni',
+	publisher: 'Toshkent shahar metropoliteni',
 	metadataBase: new URL('https://toshmetro.uz'),
 	openGraph: {
-		title: '"TOSHKENT METROPOLITENI" DUK | Rasmiy veb-sayt',
+		title: 'Toshkent shahar metropoliteni | Rasmiy veb-sayt',
 		description:
-			'Toshkent metropolitenining rasmiy veb-sayti: yo‘nalishlar, tariflar, yangiliklar va ko‘proq ma’lumot.',
+			'Toshkent shahar metropolitenining rasmiy veb-sayti. Yo‘nalishlar, tariflar, yangiliklar, xizmatlar va boshqa foydali ma’lumotlar.',
 		url: 'https://toshmetro.uz',
-		siteName: 'Toshkent Metropoliteni',
+		siteName: 'Toshkent shahar metropoliteni',
 		images: [
 			{
 				url: '/logo.png',
 				width: 800,
 				height: 600,
-				alt: 'Toshkent Metropoliteni Logosi',
+				alt: 'Toshkent metropoliteni logotipi',
 			},
 		],
 		locale: 'uz_UZ',
@@ -40,18 +40,16 @@ export const metadata = {
 	icons: {
 		icon: '/MetroLogo.png',
 	},
-}
+};
 
-export async function generateStaticParams() {
-	return [{ locale: 'uz' }, { locale: 'ru' }, { locale: 'en' }]
-}
 
-export default async function RootLayout(props) {
-	const locale = props.params?.locale // ✅ to‘g‘ri usul
+export default async function RootLayout({ children, params }) {
+	const locale = params?.locale;
 
-	if (!['uz', 'ru', 'en'].includes(locale)) notFound()
+	if (!['uz', 'ru', 'en'].includes(locale)) notFound();
 
-	const messages = (await import(`../../../messages/${locale}.json`)).default
+	const messages = (await import(`../../../messages/${locale}.json`)).default;
+	const hideLayout = ['/metro-xaritasis'];
 
 	return (
 		<html lang={locale}>
@@ -60,12 +58,12 @@ export default async function RootLayout(props) {
 					<RouteLoader />
 					<Layout>
 						<Navbar />
-						<SplashScreen>{props.children}</SplashScreen>
+						<SplashScreen>{children}</SplashScreen>
 						<Footer />
 						<AIFloatingChat />
 					</Layout>
 				</NextIntlClientProvider>
 			</body>
 		</html>
-	)
+	);
 }

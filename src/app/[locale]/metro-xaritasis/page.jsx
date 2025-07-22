@@ -1,4 +1,4 @@
-import TashkentMetroMap from './metroxaritasi'
+import TashkentMetroMap from "./newmaps"
 
 const Page = () => {
 	return (
