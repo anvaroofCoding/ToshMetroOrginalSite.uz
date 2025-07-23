@@ -9,6 +9,7 @@ import Navbar from '@/shared/Navbar/navbar'
 import { NextIntlClientProvider } from 'next-intl'
 import { notFound } from 'next/navigation'
 import './globals.css'
+import TashkentMetroChat from '../../components/Flowechat/FloatingChat'
 
 export const metadata = {
 	title: 'Toshkent shahar metropoliteni | Rasmiy veb-sayt',
@@ -60,7 +61,7 @@ export default async function RootLayout({ children, params }) {
 						<Navbar />
 						<SplashScreen>{children}</SplashScreen>
 						<Footer />
-						<MetroChat />
+						<TashkentMetroChat />
 					</Layout>
 				</NextIntlClientProvider>
 			</body>
