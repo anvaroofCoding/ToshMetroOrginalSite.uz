@@ -29,15 +29,15 @@ O‘z-o‘ziga xizmat ko‘rsatish terminallarida-infokiosklar.
 	]
 
 	return (
-		<div className='container mx-auto p-4 space-y-4'>
+		<div className='container'>
 			<h2 className='text-start text-[36px] font-bold text-blue-900 mb-6'>
-				Ko‘p beriladigan <span className='text-blue-800'>savollar</span>
+				Ko‘p beriladigan <span className='text-blue-900'>savollar</span>
 			</h2>
 
 			{items.map((item, index) => (
 				<div
 					key={index}
-					className={`rounded-lg  transition-colors duration-300 shadow ${
+					className={`rounded-lg  transition-colors mt-4 duration-300 shadow ${
 						openIndex === index
 							? 'border-blue-700 bg-blue-50'
 							: 'border-gray-300 bg-white'

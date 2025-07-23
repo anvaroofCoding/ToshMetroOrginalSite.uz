@@ -22,7 +22,7 @@ const Home = () => {
 				<MetroMapAdCard />
 			</div>
 			<div>
-				<div className='container'>
+				<div className='container py-5'>
 					<h2 className='text-[36px] font-bold'>Qiziqarli lavhalar</h2>
 				</div>
 				<YoutubeGrid />
