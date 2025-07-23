@@ -1,75 +1,113 @@
+"use client"
 
-  "use client"
-
-import { AnimatePresence, motion } from "framer-motion"
-import { Bot, MessageCircle, Send, Sparkles, Volume2, VolumeX, X } from "lucide-react"
-import { useEffect, useRef, useState, useTransition } from "react"
-
-// Server action for AI responses
-async function generateAIResponse(userMessage) {
-  try {
-    const response = await fetch("/api/chat", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ message: userMessage }),
-    })
-    if (!response.ok) {
-      throw new Error(`Server error: ${response.status}`)
-    }
-    const data = await response.json()
-    if (data.success) {
-      return {
-        success: true,
-        message: data.message,
-      }
-    } else {
-      throw new Error(data.error || "Failed to get AI response")
-    }
-  } catch (error) {
-    console.error("AI Response Error:", error)
-    return {
-      success: false,
-      message: "Kechirasiz, hozir javob bera olmayman. Keyinroq urinib ko'ring.",
-    }
-  }
-}
+import { useState, useRef, useEffect } from "react"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { X, Bot, User, Clock, MapPin, CreditCard, Route, Shield, Navigation } from "lucide-react"
 
 
+const predefinedQuestionsAndAnswers = [
+  {
+    id: 1,
+    question: "Toshkent metrosi qancha vaqt ishlaydi?",
+    answer:
+      "Toshkent metrosi har kuni soat 5:00 dan 24:00 (yarim tungacha) gacha ishlaydi. Bu 19 soat davomida xizmat ko'rsatishni anglatadi. Birinchi poyezd soat 5:00 da, oxirgi poyezd esa soat 23:45 atrofida jo'naydi. Dam olish kunlari ham xuddi shu jadval bo'yicha ishlaydi.",
+    icon: Clock,
+    category: "Jadval",
+  },
+  {
+    id: 2,
+    question: "Metro chiptasi qancha turadi?",
+    answer:
+      "Hozirgi vaqtda Toshkent metrosida bir marta sayohat uchun chipta narxi 1400 so'm. Plastik karta (transport kartasi) orqali to'lov qilsangiz biroz arzonroq bo'ladi. Shuningdek, oylik va kunlik abonement kartalar ham mavjud bo'lib, ular muntazam foydalanuvchilar uchun tejamkor.",
+    icon: CreditCard,
+    category: "Chiptallar",
+  },
+  {
+    id: 3,
+    question: "Toshkent metrosining asosiy liniyalari qaysilar?",
+    answer:
+      "Toshkent metrosida 3 ta asosiy liniya mavjud:\n1. **Chilonzor liniyasi** (ko'k rang) - Chilonzordan Olmazorgacha\n2. **O'zbekiston liniyasi** (qizil rang) - Buyuk Ipak Yo'lidan Toshkent stansiyasigacha\n3. **Yunusobod liniyasi** (yashil rang) - Yunusoboddan Ming O'rikgacha\n\nJami 43 ta stansiya mavjud va liniyalar bir-biri bilan kesishadi.",
+    icon: Route,
+    category: "Liniyalar",
+  },
+  {
+    id: 4,
+    question: "Amir Temur Hiyobonidan Chorsuga qanday borish mumkin?",
+    answer:
+      "Amir Temur Hiyoboni stansiyasidan Chorsu stansiyasiga borish uchun:\n1. Amir Temur Hiyoboni stansiyasidan O'zbekiston liniyasi bo'yicha Alisher Navoiy stansiyasiga boring\n2. Alisher Navoiy stansiyasida Chilonzor liniyasiga o'ting\n3. Chilonzor liniyasi bo'yicha Chorsu stansiyasiga boring\n\nJami sayohat vaqti taxminan 15-20 daqiqa.",
+    icon: Navigation,
+    category: "Yo'nalish",
+  },
+  {
+    id: 5,
+    question: "Qaysi stansiyalar nogironlar uchun qulay?",
+    answer:
+      "Quyidagi stansiyalar nogironlar uchun maxsus jihozlangan:\n- Toshkent (markaziy vokzal)\n- Alisher Navoiy\n- Amir Temur Hiyoboni\n- Mustaqillik maydoni\n- Buyuk Ipak Yo'li\n\nBu stansiyalarda lift, maxsus yo'laklar va audio e'lonlar mavjud.",
+    icon: Shield,
+    category: "Qulaylik",
+  },
+  {
+    id: 6,
+    question: "Qanday to'lov usullari qabul qilinadi?",
+    answer:
+      "Metro uchun quyidagi to'lov usullari mavjud:\n- Naqd pul (1400 so'm)\n- Transport kartasi (plastik karta)\n- Mobil to'lov (ayrim stansiyalarda)\n- Oylik abonement kartalar\n- Kunlik kartalar\n\nTransport kartasi eng qulay va tejamkor usul hisoblanadi.",
+    icon: CreditCard,
+    category: "To'lov",
+  },
+  {
+    id: 7,
+    question: "Eng gavjum vaqtlarda poyezdlar qancha tez-tez yuradi?",
+    answer:
+      "Poyezdlar harakati jadvali:\n- Eng gavjum vaqtlarda (7:00-9:00 va 17:00-19:00): har 2-3 daqiqada\n- Oddiy vaqtlarda: 4-5 daqiqa oraliqda\n- Kechqurun: 6-8 daqiqa oraliqda\n\nDam olish kunlari biroz kamroq tez-tez harakat qiladi.",
+    icon: Clock,
+    category: "Jadval",
+  },
+  {
+    id: 8,
+    question: "Toshkent Markaziy vokzali qayerda joylashgan?",
+    answer:
+      "Toshkent Markaziy vokzali \"Toshkent\" metro stansiyasi yonida joylashgan. Bu O'zbekiston liniyasining oxirgi stansiyasi. Vokzaldan barcha shaharlararo poyezdlar jo'naydi va u shaharning markaziy qismida joylashgan.",
+    icon: MapPin,
+    category: "Stansiyalar",
+  },
+  {
+    id: 9,
+    question: "Metro qoidalari va xavfsizlik choralari qanday?",
+    answer:
+      "Metro xavfsizlik qoidalari:\n- Poyezd kelayotganda sariq chiziqdan orqaga turing\n- Eshiklar ochilishini kuting\n- Avval chiquvchilarga yo'l bering\n- Bagajingizga e'tibor bering\n- Noma'lum narsalarni ko'rsangiz xodimlarni xabardor qiling\n- Chekish va ovqatlanish taqiqlanadi",
+    icon: Shield,
+    category: "Xavfsizlik",
+  },
+  {
+    id: 10,
+    question: "Yangi metro liniyalari qurilishi haqida ma'lumot bering",
+    answer:
+      "Hozirgi vaqtda Toshkent metrosini kengaytirish loyihalari amalga oshirilmoqda:\n- Yangi stansiyalar qurilmoqda\n- Mavjud liniyalar uzaytirilmoqda\n- Shaharning yangi hududlariga metro yetkazish rejalashtirilgan\n\nAniq ma'lumotlar uchun rasmiy e'lonlarni kuzatib boring.",
+    icon: Route,
+    category: "Yangiliklar",
+  },
+  {
+    id: 11,
+    question: "Mustaqillik maydoni stansiyasidan Olmazor stansiyasiga qanday borish mumkin?",
+    answer:
+      "Mustaqillik maydoni stansiyasidan Olmazor stansiyasiga borish:\n1. Mustaqillik maydoni stansiyasidan O'zbekiston liniyasi bo'yicha Alisher Navoiy stansiyasiga boring\n2. Alisher Navoiy stansiyasida Chilonzor liniyasiga o'ting\n3. Chilonzor liniyasi bo'yicha Olmazor stansiyasiga boring\n\nSayohat vaqti taxminan 20-25 daqiqa.",
+    icon: Navigation,
+    category: "Yo'nalish",
+  },
+  {
+    id: 12,
+    question: "Metro stansiyalarida qanday xizmatlar mavjud?",
+    answer:
+      "Metro stansiyalarida mavjud xizmatlar:\n- Kichik do'konlar va bufetlar\n- Telefon zaryad qilish joylari\n- Wi-Fi internet\n- Hojatxonalar (ayrim stansiyalarda)\n- Ma'lumot stendlari\n- Xavfsizlik xizmati\n- Yo'qolgan narsalar bo'limi",
+    icon: MapPin,
+    category: "Xizmatlar",
+  },
+]
 
-
-export default function AIFloatingChat({ initialMessage }) {
-  const [isOpen, setIsOpen] = useState(false)
+export function MetroChat( isOpen, onClose ) {
   const [messages, setMessages] = useState([])
-  const [input, setInput] = useState("")
-  const [isPending, startTransition] = useTransition()
-  const [alert, setAlert] = useState(false)
-  const [soundEnabled, setSoundEnabled] = useState(true)
   const messagesEndRef = useRef(null)
-  const chatRef = useRef(null)
-
-  const playSound = (frequency, type = "sine", duration = 0.1) => {
-    if (!soundEnabled) return
-    try {
-      const context = new (window.AudioContext || window.webkitAudioContext)()
-      const oscillator = context.createOscillator()
-      const gainNode = context.createGain()
-
-      oscillator.connect(gainNode)
-      gainNode.connect(context.destination)
-
-      oscillator.frequency.value = frequency
-      oscillator.type = type
-      gainNode.gain.setValueAtTime(0.1, context.currentTime)
-      gainNode.gain.exponentialRampToValueAtTime(0.001, context.currentTime + duration)
-
-      oscillator.start(context.currentTime)
-      oscillator.stop(context.currentTime + duration)
-    } catch (error) {
-      console.log("Sound not available:", error)
-    }
-  }
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
@@ -79,318 +117,123 @@ export default function AIFloatingChat({ initialMessage }) {
     scrollToBottom()
   }, [messages])
 
-  useEffect(() => {
-    if (initialMessage && messages.length === 0) {
-      setMessages([
-        {
-          id: "initial-ai",
-          text: initialMessage,
-          isUser: false,
-          timestamp: new Date(),
-        },
-      ])
-    }
-  }, [initialMessage, messages.length])
-
-  const toggleChat = () => {
-    setIsOpen((prev) => !prev)
-    if (!isOpen) {
-      playSound(440, "square", 0.15) // Robotic open sound
-    }
-  }
-
-  const sendMessage = async (msg) => {
-    if (!msg.trim() || isPending) return
-
+  const handleQuestionClick = (questionData) => {
+    // Add user question
     const userMessage = {
       id: Date.now().toString(),
-      text: msg,
-      isUser: true,
-      timestamp: new Date(),
+      role: "user",
+      content: questionData.question,
     }
-    setMessages((prev) => [...prev, userMessage])
-    setInput("")
-    playSound(880, "square", 0.1) // Robotic send sound
 
-    startTransition(async () => {
-      try {
-        const result = await generateAIResponse(msg)
-        const aiMessage = {
-          id: Date.now().toString() + "_ai",
-          text: result.message,
-          isUser: false,
-          timestamp: new Date(),
-        }
-        setMessages((prev) => [...prev, aiMessage])
-        playSound(660, "square", 0.1) // Robotic receive sound
-      } catch (error) {
-        const errorMessage = {
-          id: Date.now().toString() + "_error",
-          text: "Kechirasiz, hozir javob bera olmayman. Keyinroq urinib ko'ring.",
-          isUser: false,
-          timestamp: new Date(),
-        }
-        setMessages((prev) => [...prev, errorMessage])
-      }
-    })
+    // Add bot answer
+    const botMessage = {
+      id: (Date.now() + 1).toString(),
+      role: "assistant",
+      content: questionData.answer,
+    }
+
+    setMessages((prev) => [...prev, userMessage, botMessage])
   }
 
-  // Alert animation every 15 seconds when chat is closed
-  useEffect(() => {
-    let alertId   // interval ID shu yerda saqlanadi
-
-    if (!isOpen) {
-      alertId = setInterval(() => {
-        setAlert(true)
-        playSound(400, 'triangle', 0.2)
-        setTimeout(() => setAlert(false), 4000)
-      }, 15_000)
-    }
-
-    // cleanup
-    return () => clearInterval(alertId)
-  }, [isOpen, soundEnabled])
+  if (!isOpen) return null
 
   return (
-    <>
-      <style jsx>{`
-            @keyframes pulse-glow {
-              0%,
-              100% {
-                box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
-              }
-              50% {
-                box-shadow: 0 0 30px rgba(59, 130, 246, 0.8),
-                  0 0 40px rgba(59, 130, 246, 0.6);
-              }
-            }
-            .pulse-glow {
-              animation: pulse-glow 2s infinite;
-            }
-          `}</style>
-      <motion.div
-        ref={chatRef}
-        drag
-        dragConstraints={{ left: -200, top: -200, right: 200, bottom: 200 }}
-        className="fixed bottom-4 right-4 z-[100]"
-      >
-        <AnimatePresence>
-          {isOpen ? (
-            <motion.div
-              initial={{ opacity: 0, y: 50, scale: 0.9 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 50, scale: 0.9 }}
-              transition={{ duration: 0.3, type: "spring", stiffness: 300 }}
-              className="w-80 h-[500px] bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white rounded-2xl shadow-2xl flex flex-col overflow-hidden backdrop-blur-lg border border-gray-700"
-            >
-              {/* Header */}
-              <div className="flex justify-between items-center p-4 bg-gray-900/90 backdrop-blur-md border-b border-gray-700">
-                <div className="flex items-center gap-3">
-                  <div className="relative">
-                    <Bot className="w-8 h-8 text-blue-400" />
-                    <motion.div
-                      animate={{ scale: [1, 1.2, 1] }}
-                      transition={{
-                        duration: 2,
-                        repeat: Number.POSITIVE_INFINITY,
-                      }}
-                      className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full"
-                    />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-lg">AI Yordamchi</h3>
-                    <p className="text-xs text-gray-400">{isPending ? "Javob yozmoqda..." : "Onlayn • Tayyor"}</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2">
-                  <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    onClick={() => setSoundEnabled(!soundEnabled)}
-                    className="p-2 hover:bg-white/10 rounded-full transition-colors"
-                  >
-                    {soundEnabled ? <Volume2 size={18} /> : <VolumeX size={18} />}
-                  </motion.button>
-                  <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    onClick={toggleChat}
-                    className="p-2 hover:bg-white/10 rounded-full transition-colors"
-                  >
-                    <X size={18} />
-                  </motion.button>
-                </div>
+    <div className="fixed bottom-6 right-6 w-96 h-[600px] z-50 shadow-2xl">
+      <Card className="h-full flex flex-col">
+        <CardHeader className="bg-blue-900 text-white rounded-t-lg">
+          <div className="flex items-center justify-between">
+            <CardTitle className="text-lg flex items-center">
+              <Bot className="w-5 h-5 mr-2" />
+              Tashkent Metro Assistant
+            </CardTitle>
+            <Button variant="ghost" size="icon" onClick={onClose} className="text-white hover:bg-blue-800">
+              <X className="w-4 h-4" />
+            </Button>
+          </div>
+        </CardHeader>
+
+        <CardContent className="flex-1 overflow-y-auto p-4 space-y-4">
+          {messages.length === 0 && (
+            <div className="space-y-4">
+              <div className="text-center text-gray-500 py-4">
+                <Bot className="w-12 h-12 mx-auto mb-4 text-blue-400" />
+                <p className="text-sm font-medium">Toshkent Metro Yordamchisiga xush kelibsiz!</p>
+                <p className="text-xs mt-2">Tezkor javob olish uchun quyidagi savollardan birini bosing:</p>
               </div>
-              {/* Messages */}
-              <div className="flex-1 p-4 overflow-y-auto bg-gray-950 text-gray-200 space-y-3">
-                {messages.length === 0 ? (
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="text-center py-8"
-                  >
-                    <Sparkles className="w-12 h-12 text-blue-500 mx-auto mb-3" />
-                    <p className="text-gray-400 text-sm">Salom! Men sizga Uzbek tilida yordam beraman.</p>
-                    <p className="text-gray-500 text-xs mt-1">Savolingizni yozing...</p>
-                  </motion.div>
-                ) : (
-                  messages.map((msg) => (
-                    <motion.div
-                      key={msg.id}
-                      initial={{ opacity: 0, y: 20, scale: 0.9 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      transition={{ duration: 0.3 }}
-                      className={`flex ${msg.isUser ? "justify-end" : "justify-start"}`}
+
+              <div className="space-y-2">
+                {predefinedQuestionsAndAnswers.map((item) => {
+                  const IconComponent = item.icon
+                  return (
+                    <Button
+                      key={item.id}
+                      variant="outline"
+                      className="w-full text-left justify-start h-auto p-3 hover:bg-blue-50 hover:border-blue-900 bg-transparent"
+                      onClick={() => handleQuestionClick(item)}
                     >
-                      <div
-                        className={`max-w-[80%] p-3 rounded-2xl shadow-md ${
-                          msg.isUser
-                            ? "bg-blue-600 text-white rounded-br-md"
-                            : "bg-gray-700 text-gray-200 rounded-bl-md border border-gray-600"
-                        }`}
-                      >
-                        <p className="text-sm leading-relaxed">{msg.text}</p>
-                        <p className={`text-xs mt-1 ${msg.isUser ? "text-blue-200" : "text-gray-400"}`}>
-                          {msg.timestamp.toLocaleTimeString("uz-UZ", {
-                            hour: "2-digit",
-                            minute: "2-digit",
-                          })}
-                        </p>
+                      <IconComponent className="w-4 h-4 mr-3 text-blue-900 flex-shrink-0" />
+                      <div className="flex flex-col items-start">
+                        <span className="text-xs text-blue-900 font-medium">{item.category}</span>
+                        <span className="text-sm text-gray-700">{item.question}</span>
                       </div>
-                    </motion.div>
-                  ))
-                )}
-                {/* Loading indicator */}
-                {isPending && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="flex justify-start"
-                  >
-                    <div className="bg-gray-700 p-3 rounded-2xl rounded-bl-md shadow-md border border-gray-600">
-                      <div className="flex gap-1">
-                        {[0, 1, 2].map((i) => (
-                          <motion.div
-                            key={i}
-                            animate={{ scale: [1, 1.2, 1] }}
-                            transition={{
-                              duration: 0.6,
-                              repeat: Number.POSITIVE_INFINITY,
-                              delay: i * 0.2,
-                            }}
-                            className="w-2 h-2 bg-blue-500 rounded-full"
-                          />
-                        ))}
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-                <div ref={messagesEndRef} />
+                    </Button>
+                  )
+                })}
               </div>
-              {/* Input */}
-              <div className="p-3 bg-gray-900/90 backdrop-blur-md border-t border-gray-700">
-                <div className="flex gap-2">
-                  <div className="flex-1 bg-gray-700 rounded-full overflow-hidden border border-gray-600 focus-within:ring-2 focus-within:ring-blue-500 transition-all">
-                    <input
-                      type="text"
-                      value={input}
-                      onChange={(e) => setInput(e.target.value)}
-                      className="w-full p-2.5 text-sm text-white placeholder-gray-400 bg-transparent focus:outline-none"
-                      placeholder="Xabar yozing..."
-                      onKeyDown={(e) => e.key === "Enter" && !isPending && sendMessage(input)}
-                      disabled={isPending}
-                    />
-                  </div>
-                  <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    onClick={() => sendMessage(input)}
-                    disabled={isPending || !input.trim()}
-                    className="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-2.5 rounded-full shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    <Send size={18} />
-                  </motion.button>
-                </div>
-              </div>
-            </motion.div>
-          ) : (
-            <motion.button
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{
-                opacity: 1,
-                scale: 1,
-                y: alert ? [0, -10, 0, -10, 0] : 0,
-              }}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={() => {
-                toggleChat()
-                setAlert(false)
-              }}
-              className={`bg-gradient-to-r from-blue-600 to-purple-700 text-white rounded-full w-16 h-16 shadow-2xl flex flex-col justify-center items-center relative overflow-hidden ${
-                alert ? "pulse-glow" : ""
-              }`}
-            >
-              <motion.div
-                animate={
-                  alert
-                    ? {
-                        rotate: [0, -10, 10, -10, 0],
-                        scale: [1, 1.1, 1],
-                      }
-                    : {}
-                }
-                transition={{
-                  duration: 0.5,
-                  repeat: alert ? Number.POSITIVE_INFINITY : 0,
-                  repeatDelay: 1,
-                }}
-                className="flex flex-col items-center"
-              >
-                <MessageCircle size={24} />
-                <span className="text-xs font-medium mt-1">Chat</span>
-              </motion.div>
-              {alert && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 10 }}
-                  className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-xs px-3 py-2 rounded-lg shadow-lg whitespace-nowrap"
-                >
-                  <div className="flex items-center gap-1">
-                    <Sparkles size={12} />
-                    Savolingiz bormi?
-                  </div>
-                  <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-blue-600"></div>
-                </motion.div>
-              )}
-              {/* Floating particles */}
-              {alert && (
-                <div className="absolute inset-0 pointer-events-none">
-                  {[...Array(6)].map((_, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0, scale: 0 }}
-                      animate={{
-                        opacity: [0, 1, 0],
-                        scale: [0, 1, 0],
-                        x: [0, (Math.random() - 0.5) * 100],
-                        y: [0, (Math.random() - 0.5) * 100],
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Number.POSITIVE_INFINITY,
-                        delay: i * 0.3,
-                      }}
-                      className="absolute top-1/2 left-1/2 w-2 h-2 bg-yellow-400 rounded-full"
-                    />
-                  ))}
-                </div>
-              )}
-            </motion.button>
+            </div>
           )}
-        </AnimatePresence>
-      </motion.div>
-    </>
+
+          {messages.map((message) => (
+            <div key={message.id} className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}>
+              <div
+                className={`flex items-start space-x-2 max-w-[85%] ${
+                  message.role === "user" ? "flex-row-reverse space-x-reverse" : ""
+                }`}
+              >
+                <div
+                  className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
+                    message.role === "user" ? "bg-blue-900 text-white" : "bg-gray-200 text-gray-600"
+                  }`}
+                >
+                  {message.role === "user" ? <User className="w-4 h-4" /> : <Bot className="w-4 h-4" />}
+                </div>
+                <div
+                  className={`px-3 py-2 rounded-lg ${
+                    message.role === "user" ? "bg-blue-900 text-white" : "bg-gray-100 text-gray-800"
+                  }`}
+                >
+                  <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+
+          {messages.length > 0 && (
+            <div className="pt-4 border-t">
+              <p className="text-xs text-gray-500 text-center mb-3">Boshqa savol bering:</p>
+              <div className="space-y-2">
+                {predefinedQuestionsAndAnswers.slice(0, 4).map((item) => {
+                  const IconComponent = item.icon
+                  return (
+                    <Button
+                      key={item.id}
+                      variant="outline"
+                      size="sm"
+                      className="w-full text-left justify-start h-auto p-2 hover:bg-blue-50 hover:border-blue-900 bg-transparent"
+                      onClick={() => handleQuestionClick(item)}
+                    >
+                      <IconComponent className="w-3 h-3 mr-2 text-blue-900 flex-shrink-0" />
+                      <span className="text-xs text-gray-700 truncate">{item.question}</span>
+                    </Button>
+                  )
+                })}
+              </div>
+            </div>
+          )}
+
+          <div ref={messagesEndRef} />
+        </CardContent>
+      </Card>
+    </div>
   )
 }

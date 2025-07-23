@@ -1,6 +1,6 @@
 // src/app/[locale]/layout.js
 
-import AIFloatingChat from '../../components/Flowechat/FloatingChat'
+import AIFloatingChat, { MetroChat } from '../../components/Flowechat/FloatingChat'
 import RouteLoader from '@/components/route-loader'
 import SplashScreen from '@/components/splashScreen/splashScreen'
 import Layout from '@/layout/Layout'
@@ -60,7 +60,7 @@ export default async function RootLayout({ children, params }) {
 						<Navbar />
 						<SplashScreen>{children}</SplashScreen>
 						<Footer />
-						<AIFloatingChat />
+						<MetroChat />
 					</Layout>
 				</NextIntlClientProvider>
 			</body>
