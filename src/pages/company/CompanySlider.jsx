@@ -55,7 +55,7 @@ export default function CompanySlider() {
 	const x = useMotionValue(0)
 	const [isHovered, setIsHovered] = useState(false)
 	const [cardWidth, setCardWidth] = useState(280)
-	const containerRef = useRef < HTMLDivElement > (null)
+	const containerRef = useRef(null)
 	const animationRef = useRef(null)
 
 
