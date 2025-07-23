@@ -465,7 +465,7 @@ export default function ManagementPage() {
                 <div className="relative overflow-hidden">
                   <Dialog>
                     <DialogTrigger asChild>
-                      <div className="relative cursor-pointer">
+                      <div className="relative bg-white cursor-pointer">
                         <Image
                           src={member.image || "/placeholder.svg"}
                           alt={`${member.firstName} ${member.lastName}`}

@@ -111,9 +111,9 @@ function getMetroStatus(openTimeStr, closeTimeStr, now = new Date()) {
 	const [openHour, openMinute] = openTimeStr.split(':').map(Number)
 	const [closeHour, closeMinute] = closeTimeStr.split(':').map(Number)
 
-	const nowMinutes = now.getHours() * 60 + now.getMinutes()
-	const openMinutes = openHour * 60 + openMinute
-	const closeMinutes = closeHour * 60 + closeMinute
+	const nowMinutes = now.getHours() * 200 + now.getMinutes()
+	const openMinutes = openHour * 200 + openMinute
+	const closeMinutes = closeHour * 200 + closeMinute
 
 	if (openMinutes <= closeMinutes) {
 		if (nowMinutes >= openMinutes && nowMinutes < closeMinutes) return 'open'
@@ -145,7 +145,7 @@ export default function MetroSystem() {
 			marqueeControls.start({
 				x: '-50%',
 				transition: {
-					duration: 40,
+					duration: 200,
 					ease: 'linear',
 					repeat: Number.POSITIVE_INFINITY,
 				},

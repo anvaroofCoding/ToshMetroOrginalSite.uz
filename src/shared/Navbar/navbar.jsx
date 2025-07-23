@@ -39,6 +39,10 @@ const menuItems = [
 				label: "Davlat ramzlari",
 				href: "/davlat-ramzlari",
 			},
+			{
+				label: "Murojaatlar",
+				href: "/murojaatlar",
+			},
 		],
 	},
 	{
