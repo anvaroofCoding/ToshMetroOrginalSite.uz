@@ -130,54 +130,8 @@ export default function TashkentMetroChat() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
-      {/* Main page content */}
-      <div className="container mx-auto px-4 py-16">
-        <div className="text-center">
-          <div className="inline-flex items-center gap-4 mb-6">
-            <div className="p-4 bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl shadow-2xl shadow-blue-600/30">
-              <Train className="w-10 h-10 text-white" />
-            </div>
-            <div className="text-left">
-              <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-800 to-blue-600 bg-clip-text text-transparent">
-                Toshkent Metro
-              </h1>
-              <p className="text-lg text-slate-600 mt-1">Poytaxt transporti</p>
-            </div>
-          </div>
-
-          <p className="text-xl text-slate-700 mb-12 max-w-2xl mx-auto leading-relaxed">
-            Samarali, ishonchli va zamonaviy transport tizimi
-          </p>
-
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <div className="group bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 border border-blue-100 hover:border-blue-200">
-              <div className="p-4 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl w-fit mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                <Train className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-xl font-bold mb-3 text-slate-800">3 ta liniya</h3>
-              <p className="text-slate-600 leading-relaxed">Toshkentning barcha asosiy hududlarini qamrab oladi</p>
-            </div>
-
-            <div className="group bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 border border-blue-100 hover:border-blue-200">
-              <div className="p-4 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-xl w-fit mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                <Clock className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-xl font-bold mb-3 text-slate-800">5:00 - 24:00</h3>
-              <p className="text-slate-600 leading-relaxed">Har kunlik ish vaqti</p>
-            </div>
-
-            <div className="group bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 border border-blue-100 hover:border-blue-200">
-              <div className="p-4 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl w-fit mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                <MapPin className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-xl font-bold mb-3 text-slate-800">29 ta bekat</h3>
-              <p className="text-slate-600 leading-relaxed">Shaharning strategik joylarida</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
+    <div>
+     
       {/* Chat Widget */}
       <div className="fixed bottom-6 right-6 z-50">
         {/* Chat Window */}
