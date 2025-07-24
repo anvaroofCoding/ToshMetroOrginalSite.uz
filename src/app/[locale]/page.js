@@ -1,6 +1,5 @@
-import MetroMapAdCard from '@/components/MetroReklamakartasi/metro-map-kars'
+import MetroInfoSection from '@/components/main-informations/main-informations'
 import CompanySlider from '@/pages/company/CompanySlider'
-import Component from '@/pages/diagramma/diagramma'
 import MetroCarouselWithNews from '@/pages/Header/header'
 import YoutubeGrid from '@/pages/youtube/youtube'
 import MetroSystem from '@/work/metroTime/metroTime'
@@ -15,12 +14,15 @@ const Home = () => {
 			<div className='mt-5'>
 				<MetroCarouselWithNews />
 			</div>
-			<div className='my-5'>
+			{/* <div className='my-5'>
 				<Component />
+			</div> */}
+			<div className='my-10'>
+				<MetroInfoSection />
 			</div>
-			<div className='my-10 mb-15'>
+			{/* <div className='my-10 mb-15'>
 				<MetroMapAdCard />
-			</div>
+			</div> */}
 			<div>
 				<div className='container py-5'>
 					<h2 className='text-[36px] font-bold'>Qiziqarli lavhalar</h2>
