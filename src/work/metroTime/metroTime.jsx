@@ -126,7 +126,7 @@ function getMetroStatus(openTimeStr, closeTimeStr, now = new Date()) {
 
 export default function MetroSystem() {
 	const [searchQuery, setSearchQuery] = useState('')
-	const [isSearchOpen, setIsSearchOpen] = useState(false)
+	// const [isSearchOpen, setIsSearchOpen] = useState(false)
 	const [currentTime, setCurrentTime] = useState(new Date())
 	const [selectedStation, setSelectedStation] = useState(null)
 	const [activeView, setActiveView] = useState('ticker')
@@ -145,7 +145,7 @@ export default function MetroSystem() {
 			marqueeControls.start({
 				x: '-50%',
 				transition: {
-					duration: 200,
+					duration: 100,
 					ease: 'linear',
 					repeat: Number.POSITIVE_INFINITY,
 				},
@@ -153,17 +153,7 @@ export default function MetroSystem() {
 		}
 	}, [marqueeControls, activeView])
 
-	useClickAway(searchRef, () => {
-		if (isSearchOpen) {
-			setIsSearchOpen(false)
-		}
-	})
 
-	useEffect(() => {
-		if (isSearchOpen && inputRef.current) {
-			inputRef.current.focus()
-		}
-	}, [isSearchOpen])
 
 	const allStations = Object.values(metroLines).flatMap(line =>
 		line.stations.map(station => ({
@@ -178,11 +168,7 @@ export default function MetroSystem() {
 			getMetroStatus(station.open, station.close, currentTime) === 'open'
 	)
 
-	const filteredStations = allStations.filter(
-		station =>
-			station.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-			station.line.toLowerCase().includes(searchQuery.toLowerCase())
-	)
+	
 
 	const stationsToShow = searchQuery.length > 0 ? filteredStations : allStations
 
@@ -190,12 +176,12 @@ export default function MetroSystem() {
 		<div className='container bg-white rounded-md overflow-hidden shadow-lg'>
 			{/* Enhanced Command Bar */}
 			<motion.div
-				ref={searchRef}
+				// ref={searchRef}
 				className='relative bg-white border-gray-200 shadow-2xl overflow-hidden'
 				initial={{ opacity: 0, y: -20 }}
 				animate={{ opacity: 1, y: 0 }}
 			>
-				<div className='flex items-center h-16 px-6'>
+				<div className='flex items-center  justify-center h-16 px-6'>
 					{/* Status Indicator */}
 					<div className='flex items-center gap-3 flex-shrink-0'>
 						<motion.div
@@ -218,67 +204,31 @@ export default function MetroSystem() {
 					<div className='w-px h-8 bg-white/20 mx-4 flex-shrink-0' />
 
 					{/* Main Content Area */}
-					<div className='flex-grow h-full overflow-hidden'>
+					<div className='flex  h-full overflow-hidden'>
 						<AnimatePresence mode='wait'>
-							{isSearchOpen ? (
-								<motion.div
-									key='search'
-									initial={{ opacity: 0, y: 10 }}
-									animate={{ opacity: 1, y: 0 }}
-									exit={{ opacity: 0, y: -10 }}
-									className='flex items-center h-full'
-								>
-									<input
-										ref={inputRef}
-										type='text'
-										value={searchQuery}
-										onChange={e => setSearchQuery(e.target.value)}
-										placeholder='Bekatlar yoki liniyalarni qidiring...'
-										className='w-full h-full text-gray-900 bg-transparent placeholder-gray-400 focus:outline-none'
-									/>
-								</motion.div>
-							) : (
-								<motion.div
-									key='ticker'
-									initial={{ opacity: 0, y: 10 }}
-									animate={{ opacity: 1, y: 0 }}
-									exit={{ opacity: 0, y: -10 }}
-									className='flex items-center h-full cursor-pointer'
-									onHoverStart={() => marqueeControls.stop()}
-									onHoverEnd={() =>
-										marqueeControls.start({
-											x: '-50%',
-											transition: {
-												duration: 40,
-												ease: 'linear',
-												repeat: Number.POSITIVE_INFINITY,
-											},
-										})
-									}
-								>
-									<motion.div className='flex' animate={marqueeControls}>
-										{[...stationsToShow, ...stationsToShow].map(
-											(station, i) => (
-												<div
-													key={i}
-													className='flex items-center flex-shrink-0 px-6'
-												>
-													<div
-														className='w-2 h-2 rounded-full mr-3'
-														style={{ backgroundColor: station.lineColor }}
-													/>
-													<p className='text-gray-900 font-medium mr-2'>
-														{station.name}
-													</p>
-													<p className='text-gray-600 text-sm'>
-														{station.open} - {station.close}
-													</p>
-												</div>
-											)
-										)}
-									</motion.div>
-								</motion.div>
-							)}
+							<motion.div className='flex ' animate={marqueeControls}>
+								{[...stationsToShow, ...stationsToShow].map(
+									(station, i) => (
+										<div
+											key={i}
+											className='flex items-center flex-shrink-0 px-6'
+										>
+											<div
+												className='w-2 h-2 rounded-full mr-3'
+												style={{ backgroundColor: station.lineColor }}
+											/>
+											<p className='text-gray-900 font-medium mr-2'>
+												{station.name}
+											</p>
+											<p className='text-gray-600 text-sm'>
+												{station.open} - {station.close}
+											</p>
+										</div>
+									)
+								)}
+							</motion.div>
+
+
 						</AnimatePresence>
 					</div>
 
@@ -292,13 +242,13 @@ export default function MetroSystem() {
 						>
 							<MapPin size={18} />
 						</button>
-						<button
-							onClick={() => setIsSearchOpen(!isSearchOpen)}
+						{/* <button
+							// onClick={() => setIsSearchOpen(!isSearchOpen)}
 							className='p-2 rounded-xl hover:bg-gray-100 transition-colors text-gray-900'
 						>
 							<AnimatePresence mode='wait'>
 								<motion.div
-									key={isSearchOpen ? 'close' : 'search'}
+									// key={isSearchOpen ? 'close' : 'search'}
 									initial={{ opacity: 0, scale: 0.5, rotate: -90 }}
 									animate={{ opacity: 1, scale: 1, rotate: 0 }}
 									exit={{ opacity: 0, scale: 0.5, rotate: 90 }}
@@ -307,7 +257,7 @@ export default function MetroSystem() {
 									{isSearchOpen ? <X size={18} /> : <Search size={18} />}
 								</motion.div>
 							</AnimatePresence>
-						</button>
+						</button> */}
 					</div>
 				</div>
 			</motion.div>
@@ -360,15 +310,14 @@ export default function MetroSystem() {
 											</div>
 											<div className='flex items-center gap-2'>
 												<div
-													className={`w-2 h-2 rounded-full ${
-														getMetroStatus(
-															station.open,
-															station.close,
-															currentTime
-														) === 'open'
+													className={`w-2 h-2 rounded-full ${getMetroStatus(
+														station.open,
+														station.close,
+														currentTime
+													) === 'open'
 															? 'bg-green-400'
 															: 'bg-red-400'
-													}`}
+														}`}
 												/>
 												<ChevronRight size={14} className='text-gray-400' />
 											</div>
@@ -420,15 +369,14 @@ export default function MetroSystem() {
 								</div>
 								<div className='flex items-center gap-2'>
 									<div
-										className={`w-3 h-3 rounded-full ${
-											getMetroStatus(
-												selectedStation.open,
-												selectedStation.close,
-												currentTime
-											) === 'open'
+										className={`w-3 h-3 rounded-full ${getMetroStatus(
+											selectedStation.open,
+											selectedStation.close,
+											currentTime
+										) === 'open'
 												? 'bg-green-400'
 												: 'bg-red-400'
-										}`}
+											}`}
 									/>
 									<span className='text-gray-900'>
 										Holati:{' '}

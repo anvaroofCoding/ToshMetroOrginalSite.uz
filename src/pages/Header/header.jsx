@@ -161,10 +161,10 @@ export default function MetroCarouselWithNews() {
 
 	return (
 		<div className="container">
-			<div className="grid grid-cols-1 xl:grid-cols-2 gap-6 lg:gap-8">
+			<div className="grid grid-cols-1 xl:grid-cols-2  gap-6 lg:gap-8">
 				{/* Carousel Section */}
 				<div
-					className="relative aspect-[16/10] sm:aspect-[16/9] lg:aspect-[4/3] xl:aspect-[16/10] overflow-hidden rounded-2xl shadow-2xl bg-gradient-to-br from-blue-900 to-blue-800"
+					className="relative  aspect-[16/10] sm:aspect-[16/9] lg:aspect-[4/3] xl:aspect-[16/10] overflow-hidden rounded-2xl shadow-2xl bg-gradient-to-br from-blue-900 to-blue-800"
 					onMouseEnter={() => setIsAutoPlaying(false)}
 					onMouseLeave={() => setIsAutoPlaying(true)}
 				>

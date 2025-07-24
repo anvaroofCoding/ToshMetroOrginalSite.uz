@@ -92,7 +92,7 @@ export default function OptimizedFooter() {
   if (isHiddenPath) return null
 
   return (
-    <footer className="bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 text-white mt-16">
+    <footer className="bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 text-white ">
       <motion.div
         variants={containerVariants}
         initial="hidden"

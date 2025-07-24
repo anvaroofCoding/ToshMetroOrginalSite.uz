@@ -244,18 +244,13 @@ export default function MetroMapAdCard() {
 
 	return (
 		<div className="container">
-			<Card className="w-full border-none bg-white shadow-2xl rounded-2xl sm:rounded-3xl overflow-hidden">
+			<Card className="w-full border-none bg-transparent shadow-2xl rounded-2xl sm:rounded-3xl overflow-hidden">
 				<div className="flex flex-col lg:grid lg:grid-cols-2 gap-0">
 					{/* Enhanced Content Section */}
 					<div className="order-2 lg:order-1 p-4 sm:p-6 lg:p-8 xl:p-12 flex flex-col justify-center space-y-6 lg:space-y-8 bg-gradient-to-br from-slate-50 to-blue-50">
 						<div className="space-y-6 lg:space-y-8">
 							<div className="space-y-3 lg:space-y-4">
-								<div className="flex items-center gap-2 lg:gap-3 text-blue-600">
-									<MapPin className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />
-									<span className="text-xs sm:text-sm font-semibold uppercase tracking-wider">
-										Interaktiv Metro Xaritasi
-									</span>
-								</div>
+								
 
 								<CardHeader className="p-0">
 									<CardTitle className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold leading-tight">
@@ -264,6 +259,8 @@ export default function MetroMapAdCard() {
 										</span>
 										<br />
 										<span className="text-blue-900">Metropoliteni</span>
+										<br />
+										<span className="text-blue-900">Xaritasi</span>
 									</CardTitle>
 								</CardHeader>
 							</div>
@@ -274,7 +271,7 @@ export default function MetroMapAdCard() {
 									interaktiv ma'lumot.
 								</p>
 
-								{/* Metro Lines Legend */}
+								{/* Metro Lines Legend
 								<div className="space-y-3 lg:space-y-4">
 									<h3 className="text-sm sm:text-base lg:text-lg font-semibold text-gray-800">Metro Liniyalari:</h3>
 									<div className="grid grid-cols-1 gap-2 lg:gap-3">
@@ -291,7 +288,7 @@ export default function MetroMapAdCard() {
 											</div>
 										))}
 									</div>
-								</div>
+								</div> */}
 
 								{/* Stats */}
 								<div className="flex flex-wrap gap-2 lg:gap-4">
@@ -310,7 +307,7 @@ export default function MetroMapAdCard() {
 						<Link href="/metro-xaritasis" className="inline-block">
 							<Button
 								size="lg"
-								className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-6 sm:px-8 lg:px-10 py-4 sm:py-5 lg:py-6 text-base sm:text-lg lg:text-xl font-semibold rounded-xl lg:rounded-2xl shadow-xl transition-all duration-300 transform hover:scale-100 group"
+								className="w-full sm:w-auto bg-blue-900  text-white px-6 sm:px-8 lg:px-10 py-4 sm:py-5 lg:py-6 text-base sm:text-lg lg:text-xl font-semibold rounded-xl lg:rounded-2xl shadow-xl transition-all duration-300 transform hover:scale-100 group"
 							>
 								<span className="hidden sm:inline">Interaktiv Xaritani Ko'rish</span>
 								<span className="sm:hidden">Xaritani Ko'rish</span>

@@ -122,7 +122,7 @@ export default function Component() {
 	const selectedStats = selectedStation ? stationStats[selectedStation] : null
 
 	return (
-		<div className='md:h-[650px] py-5 h-auto bg-white pt-10 overflow-hidden'>
+		<div className='md:h-[650px] py-5 h-auto bg-transparent pt-10  overflow-hidden'>
 			<div className='container'>
 				<div className='mb-8 text-start'>
 					<h1 className='text-3xl md:text-4xl font-bold text-blue-900 mb-2'>
@@ -267,7 +267,7 @@ export default function Component() {
 					</div>
 
 					{/* Right Side - Metro Stations List */}
-					<div className='lg:col-span-1'>
+					<div className='lg:col-span-1 bg-white'>
 						<Card className='h-[600px] lg:h-[460px] border-0 shadow-2xl pb-2 rounded-[10px]'>
 							<CardHeader>
 								<CardTitle className='text-lg'>Metro bekatlari</CardTitle>

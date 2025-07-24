@@ -29,7 +29,7 @@ O‘z-o‘ziga xizmat ko‘rsatish terminallarida-infokiosklar.
 	]
 
 	return (
-		<div className='container'>
+		<div className='container '>
 			<h2 className='text-start text-[36px] font-bold text-blue-900 mb-6'>
 				Ko‘p beriladigan <span className='text-blue-900'>savollar</span>
 			</h2>
@@ -37,15 +37,15 @@ O‘z-o‘ziga xizmat ko‘rsatish terminallarida-infokiosklar.
 			{items.map((item, index) => (
 				<div
 					key={index}
-					className={`rounded-lg  transition-colors mt-4 duration-300 shadow ${
+					className={`rounded-lg  transition-colors mt-4 duration-300 bg-transparent shadow ${
 						openIndex === index
 							? 'border-blue-700 bg-blue-50'
-							: 'border-gray-300 bg-white'
+							: 'border-gray-300 bg-transparent'
 					}`}
 				>
 					<button
 						onClick={() => toggle(index)}
-						className='w-full flex justify-between items-center p-4 text-left font-semibold text-blue-900 hover:bg-blue-200 rounded-lg transition'
+						className='w-full flex justify-between items-center p-4 text-left font-semibold text-blue-900 hover:bg-blue-200 rounded-lg transition bg-transparent'
 					>
 						<span>{item.q}</span>
 						<motion.span
