@@ -4,12 +4,12 @@ import AIFloatingChat, { MetroChat } from '../../components/Flowechat/FloatingCh
 import RouteLoader from '@/components/route-loader'
 import SplashScreen from '@/components/splashScreen/splashScreen'
 import Layout from '@/layout/Layout'
-import Footer from '@/shared/footer/footer'
 import Navbar from '@/shared/Navbar/navbar'
 import { NextIntlClientProvider } from 'next-intl'
 import { notFound } from 'next/navigation'
 import './globals.css'
 import TashkentMetroChat from '../../components/Flowechat/FloatingChat'
+import Footer from '@/shared/footer/footer'
 
 export const metadata = {
 	title: 'Toshkent shahar metropoliteni | Rasmiy veb-sayt',

@@ -5,7 +5,7 @@ import { Clock, Facebook, Instagram, Mail, MapPin, Phone, Send, Train, Youtube }
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import logo from "../../../public/MetroLogo.png"
+import logo from "../../../public/logo.png"
 
 const contacts = [
   {

@@ -1,4 +1,4 @@
-import MetroInfoSection from '@/components/main-informations/main-informations'
+import MetroPagesShowcase from '@/components/main-informations/main-informations'
 import CompanySlider from '@/pages/company/CompanySlider'
 import MetroCarouselWithNews from '@/pages/Header/header'
 import YoutubeGrid from '@/pages/youtube/youtube'
@@ -18,7 +18,7 @@ const Home = () => {
 				<Component />
 			</div> */}
 			<div className='my-10'>
-				<MetroInfoSection />
+				<MetroPagesShowcase />
 			</div>
 			{/* <div className='my-10 mb-15'>
 				<MetroMapAdCard />

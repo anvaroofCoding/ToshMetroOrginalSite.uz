@@ -57,11 +57,11 @@ export default function MetroSystem() {
 				src='https://lottie.host/cb45b20b-6ad3-4d3f-9081-44a8599aeb16/T6qQDU3hJb.lottie'
 				loop
 				autoplay
-				className='w-40 h-20 relative -left-5 border'
+				className='w-40 h-20 relative -left-5 '
 			/>
 
 			{/* Cheksiz aylanuvchi liniyalar */}
-			<div className='relative overflow-hidden -left-7 w-full h-14 bg-gray-50'>
+			<div className='relative overflow-hidden -left-7 w-full h-14'>
 				<AnimatePresence>
 					<motion.div
 						className='absolute top-0  left-0 flex items-center h-14'

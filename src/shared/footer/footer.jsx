@@ -1,141 +1,271 @@
-// 'use client'
+"use client"
 
-import SimpleFooter from './simple-footer'
+import { Facebook, Instagram, Mail, MapPin, Phone, Send, Youtube, Users, Eye, ArrowUp } from "lucide-react"
+import Image from "next/image"
+import Link from "next/link"
+import { useEffect, useState } from "react"
+import logo from "../../../public/logos.png"
+import { usePathname } from "next/navigation"
 
-// import { motion } from 'framer-motion'
-// import {
-// 	Facebook,
-// 	Instagram,
-// 	Mail,
-// 	MapPin,
-// 	Phone,
-// 	Send,
-// 	Youtube,
-// } from 'lucide-react'
-// import Image from 'next/image'
-// import Link from 'next/link'
-// import logo from '../../../public/MetroLogo.png'
+// const logo = "/placeholder.svg?height=60&width=60&text=Metro"
 
-// const contacts = [
-// 	{
-// 		icon: <MapPin className='w-5 h-5' />,
-// 		text: "Toshkent sh, I.Karimov ko'chasi, 16a uy, 100027",
-// 		title: 'Manzil',
-// 	},
-// 	{
-// 		icon: <Phone className='w-5 h-5' />,
-// 		text: '+99871 241-65-14',
-// 		title: 'Telefon',
-// 	},
-// 	{
-// 		icon: <Mail className='w-5 h-5' />,
-// 		text: 'gup@tashmetro.uz',
-// 		title: 'Email',
-// 	},
-// ]
+const socialLinks = [
+  {
+    href: "https://t.me/tashkent_metro",
+    icon: Send,
+    title: "Telegram",
+    color: "hover:bg-blue-500",
+  },
+  {
+    href: "https://instagram.com/tashkent_metro",
+    icon: Instagram,
+    title: "Instagram",
+    color: "hover:bg-pink-500",
+  },
+  {
+    href: "https://youtube.com/tashkent_metro",
+    icon: Youtube,
+    title: "YouTube",
+    color: "hover:bg-red-500",
+  },
+  {
+    href: "https://facebook.com/tashkent_metro",
+    icon: Facebook,
+    title: "Facebook",
+    color: "hover:bg-blue-600",
+  },
+]
 
-// const socialLinks = [
-// 	{
-// 		href: 'https://t.me/tashkent_metro',
-// 		icon: <Send className='w-5 h-5' />,
-// 		title: 'Telegram',
-// 	},
-// 	{
-// 		href: 'https://instagram.com/tashkent_metro',
-// 		icon: <Instagram className='w-5 h-5' />,
-// 		title: 'Instagram',
-// 	},
-// 	{
-// 		href: 'https://youtube.com/tashkent_metro',
-// 		icon: <Youtube className='w-5 h-5' />,
-// 		title: 'YouTube',
-// 	},
-// 	{
-// 		href: 'https://facebook.com/tashkent_metro',
-// 		icon: <Facebook className='w-5 h-5' />,
-// 		title: 'Facebook',
-// 	},
-// ]
-
-// export default function Footer() {
-// 	return (
-// 		<footer className='bg-[#0E327F] text-white mt-10'>
-// 			<div className='container mx-auto px-4 py-6 flex flex-col md:flex-row justify-between items-center gap-6'>
-// 				{/* LEFT: Logo + title */}
-// 				<div className='flex flex-col items-start gap-5'>
-// 					<div className='flex items-center gap-3'>
-// 						<Link href={'/'}>
-// 							<Image src={logo} alt='Toshkent metro logo' height={50} />
-// 						</Link>
-
-// 						<div className='h-[50px] flex flex-col justify-center'>
-// 							<div className='border border-[#00B0FF] h-[30%] w-full'></div>
-// 							<div className='border border-[#FF454B] h-[5%] w-full'></div>
-// 							<div className='border border-white h-[30%] w-full'></div>
-// 							<div className='border border-[#FF454B] h-[5%] w-full'></div>
-// 							<div className='border border-[#00B100] h-[30%] w-full'></div>
-// 						</div>
-
-// 						<h1 className='text-xs md:text-sm w-[150px] md:w-[200px]'>
-// 							O‘zbekiston Respublikasi{' '}
-// 							<span className='font-extrabold'>"Toshkent Metropoliteni"</span>{' '}
-// 							DUK
-// 						</h1>
-// 					</div>
-
-// 					{/* MIDDLE: Contacts */}
-// 					<div className='flex flex-col gap-2'>
-// 						{contacts.map((item, idx) => (
-// 							<div key={idx} className='relative group flex items-center gap-2'>
-// 								{item.icon}
-// 								<span className='text-sm'>{item.text}</span>
-// 								<motion.div
-// 									initial={{ opacity: 0, y: 5 }}
-// 									whileHover={{ opacity: 1, y: 0 }}
-// 									transition={{ duration: 0.3 }}
-// 									className='absolute bottom-full mb-1 left-1/2 -translate-x-1/2 bg-blue-700 text-xs px-2 py-1 rounded shadow pointer-events-none'
-// 								>
-// 									{item.title}
-// 								</motion.div>
-// 							</div>
-// 						))}
-// 					</div>
-// 				</div>
-// 				{/* RIGHT: Social */}
-// 				<div className='flex gap-4'>
-// 					{socialLinks.map((item, idx) => (
-// 						<div key={idx} className='relative group'>
-// 							<Link href={item.href} target='_blank' aria-label={item.title}>
-// 								<span className='text-white hover:text-blue-300 transition'>
-// 									{item.icon}
-// 								</span>
-// 							</Link>
-// 							<motion.div
-// 								initial={{ opacity: 0, y: 5 }}
-// 								whileHover={{ opacity: 1, y: 0 }}
-// 								transition={{ duration: 0.3 }}
-// 								className='absolute bottom-full mb-1 left-1/2 -translate-x-1/2 bg-blue-700 text-xs px-2 py-1 rounded shadow pointer-events-none'
-// 							>
-// 								{item.title}
-// 							</motion.div>
-// 						</div>
-// 					))}
-// 				</div>
-// 			</div>
-
-// 			<div className='bg-[#0b295d] text-center text-xs py-2'>
-// 				© 2023 "Toshkent metropoliteni" DUK | Barcha Huquqlar Himoyalangan
-// 			</div>
-// 		</footer>
-// 	)
-// }
+const contacts = [
+  {
+    icon: MapPin,
+    text: "Toshkent sh., I.Karimov ko'chasi, 16a uy, 100027",
+    title: "Manzil",
+    type: "address",
+  },
+  {
+    icon: Phone,
+    text: "+99871 241-65-14",
+    title: "Telefon",
+    type: "phone",
+  },
+  {
+    icon: Mail,
+    text: "gup@tashmetro.uz",
+    title: "Korporativ email",
+    type: "email",
+  },
+  {
+    icon: Mail,
+    text: "info@tashmetro.uz",
+    title: "Xalqaro email",
+    type: "email",
+  },
+]
 
 const Footer = () => {
-	return (
-		<div>
-			<SimpleFooter />
-		</div>
-	)
+  const [totalVisitors, setTotalVisitors] = useState(125430)
+  const [onlineVisitors, setOnlineVisitors] = useState(17)
+  const [showScrollTop, setShowScrollTop] = useState(false)
+  const pathname = usePathname()
+  const parts = pathname.split('/').filter(Boolean)
+  const isHiddenPath = parts[1] === 'metro-xaritasis'
+
+  useEffect(() => {
+    // Simulate online visitors changing
+    const interval = setInterval(() => {
+      setOnlineVisitors(Math.floor(10 + Math.random() * 20))
+    }, 5000)
+
+    // Show scroll to top button
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 400)
+    }
+
+    window.addEventListener("scroll", handleScroll)
+
+    return () => {
+      clearInterval(interval)
+      window.removeEventListener("scroll", handleScroll)
+    }
+  }, [])
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  }
+
+  return (
+    <>
+      <footer className={`relative bg-gradient-to-r from-[#0E327F] to-blue-800 text-white overflow-hidden ${isHiddenPath ? 'hidden' : ''}`}>
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=60 height=60 viewBox=0 0 60 60 xmlns=http://www.w3.org/2000/svg%3E%3Cg fill=none fillRule=evenodd%3E%3Cg fill=%23ffffff fillOpacity=0.1%3E%3Ccircle cx=30 cy=30 r=2/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]"></div>
+        </div>
+
+        <div className="relative container py-8 ">
+          {/* Main Content */}
+          <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-6">
+            {/* Brand Section */}
+            <div className="lg:col-span-1 space-y-3">
+              <div className='flex items-center gap-3'>
+                <Link href={'/'}>
+                  <Image
+                    src={logo}
+                    alt='Toshkent metro logo'
+                    width={50}
+                    height={50}
+                  />
+                </Link>
+                <div className='h-[40px] flex-col justify-center hidden sm:flex'>
+                  <div className='border-l border-[#00B0FF] h-[30%] w-full'></div>
+                  <div className='border-l border-[#FF454B] h-[5%] w-full'></div>
+                  <div className='border-l border-white h-[30%] w-full'></div>
+                  <div className='border-l border-[#FF454B] h-[5%] w-full'></div>
+                  <div className='border-l border-[#00B100] h-[30%] w-full'></div>
+                </div>
+                <h1 className='hidden md:block text-[11px] lg:text-[11] w-[150px] lg:w-[200px] capitalize'>
+                  O'zbekiston Respublikasi Transport vazirligi{' '}
+                  <span>"Toshkent Metropoliteni"</span> DUK
+                </h1>
+              </div>
+
+              <blockquote className="relative">
+                <div className="absolute -left-1 -top-1 text-3xl text-blue-400/30 font-serif">"</div>
+                <p className="text-blue-100 italic leading-relaxed pl-4">
+                  Bizning maqsadimiz har bir yo'lovchi uchun xavfsiz, tez va qulay harakatlanishni yaratish.
+                </p>
+              </blockquote>
+            </div>
+
+            {/* Contact Information */}
+            <div className="lg:col-span-1 space-y-4">
+              <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+                <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center">
+                  <Phone className="w-4 h-4" />
+                </div>
+                Bog'lanish
+              </h3>
+
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+                {contacts.map((item, idx) => {
+                  const IconComponent = item.icon
+                  return (
+                    <div
+                      key={idx}
+                      className="group flex items-center gap-3 p-2 rounded-lg hover:bg-white/5 transition-all duration-300"
+                    >
+                      <div className="w-8 h-8 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <IconComponent className="w-4 h-4 text-blue-300" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-xs font-medium text-blue-200">{item.title}</p>
+                        <p className="text-white text-xs break-all">{item.text}</p>
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+
+            {/* Social & Stats */}
+            <div className="lg:col-span-1 space-y-3">
+              <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+                <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
+                  <Users className="w-4 h-4" />
+                </div>
+                Ijtimoiy tarmoqlar
+              </h3>
+
+              {/* Social Links */}
+              <div className="flex gap-3 flex-wrap">
+                {socialLinks.map((item, idx) => {
+                  const IconComponent = item.icon
+                  return (
+                    <Link
+                      key={idx}
+                      href={item.href}
+                      target="_blank"
+                      aria-label={item.title}
+                      className={`group relative w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:-translate-y-1 ${item.color}`}
+                    >
+                      <IconComponent className="w-5 h-5 text-white group-hover:text-white transition-colors duration-300" />
+                      <div className="absolute -inset-1 bg-gradient-to-r from-blue-400 to-purple-400 rounded-xl blur opacity-0 group-hover:opacity-30 transition-opacity duration-300"></div>
+                    </Link>
+                  )
+                })}
+              </div>
+
+              {/* Visitor Stats */}
+              <div className="space-y-2 pt-2">
+                <div className="bg-gradient-to-r from-blue-500/20 to-cyan-500/20 backdrop-blur-sm rounded-xl p-2 border border-white/10">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center">
+                        <Users className="w-5 h-5 text-white" />
+                      </div>
+                      <div>
+                        <p className="text-sm text-blue-200">Jami tashrif</p>
+                        <p className="text-xl font-bold text-white">{totalVisitors.toLocaleString("uz-UZ")}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-gradient-to-r from-green-500/20 to-emerald-500/20 backdrop-blur-sm rounded-xl p-2 border border-white/10">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 bg-gradient-to-r from-green-500 to-emerald-500 rounded-lg flex items-center justify-center">
+                        <Eye className="w-5 h-5 text-white" />
+                      </div>
+                      <div>
+                        <p className="text-sm text-green-200">Hozir onlayn</p>
+                        <p className="text-xl font-bold text-white">{onlineVisitors}</p>
+                      </div>
+                    </div>
+                    <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Divider */}
+          <div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mb-4"></div>
+
+          {/* Bottom Section */}
+          <div className="flex flex-col md:flex-row items-center justify-between gap-2 text-xs">
+            <div className="flex items-center gap-2 text-blue-200">
+              <span>© 2025 "Toshkent Metropoliteni" DUK</span>
+              <span className="hidden md:inline">•</span>
+              <span className="hidden md:inline">Barcha huquqlar himoyalangan</span>
+            </div>
+
+            <div className="flex items-center gap-2 text-blue-300">
+              <span>Manba:</span>
+              <Link
+                href="https://tashmetro.uz"
+                target="_blank"
+                className="hover:text-white transition-colors duration-300 underline decoration-blue-400 hover:decoration-white"
+              >
+                tashmetro.uz
+              </Link>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+      {/* Scroll to Top Button */}
+      {showScrollTop && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-8 right-8 w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 z-50 flex items-center justify-center"
+          aria-label="Scroll to top"
+        >
+          <ArrowUp className="w-5 h-5" />
+        </button>
+      )}
+    </>
+  )
 }
 
 export default Footer

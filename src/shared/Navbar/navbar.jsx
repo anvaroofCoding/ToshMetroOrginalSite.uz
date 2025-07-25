@@ -16,7 +16,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import logo from '../../../public/MetroLogo.png'
+import logo from '../../../public/logos.png'
 
 const menuItems = [
 	{

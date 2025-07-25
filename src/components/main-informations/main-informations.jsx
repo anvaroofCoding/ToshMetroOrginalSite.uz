@@ -1,877 +1,1007 @@
-'use client'
+"use client"
+import { BarChart3, Building2, CreditCard, MapPin, Wallet, ChevronLeft, ChevronRight, Camera } from "lucide-react"
+import { motion } from "framer-motion"
+import { useState, useEffect } from "react"
 
-import { Badge } from '@/components/ui/badge'
-import { Card, CardContent } from '@/components/ui/card'
-import { AnimatePresence, motion } from 'framer-motion'
-import {
-	BarChart3,
-	Building2,
-	CreditCard,
-	MapPin,
-	Smartphone,
-	TrendingUp,
-	Users,
-	Wallet,
-} from 'lucide-react'
-import { useEffect, useState } from 'react'
+export default function MetroPagesShowcase() {
 
-export default function MetroInfoSection() {
-	const [currentPaymentIndex, setCurrentPaymentIndex] = useState(0)
-	const [currentCardIndex, setCurrentCardIndex] = useState(0)
-	const [hoveredPoint, setHoveredPoint] = useState(null)
-
-	const paymentMethods = [
+	const payment = [
 		{
-			icon: <CreditCard className='w-8 h-8' />,
-			title: 'Plastik kartalar',
-			description:
-				"Visa, MasterCard va boshqa xalqaro kartalar bilan to'lov qiling",
+			name: "Humo Karta",
+			information: "Karta to'lovlari",
+			image: "https://humocard.uz/upload/medialibrary/208/8x0p9hi3h9jww0flwdm92dayhn0flulj/humo-logo-more.png",
+			color: "#FF6B35",
+			bgColor: "#FFF4F0",
 		},
 		{
-			icon: <Smartphone className='w-8 h-8' />,
-			title: "Click to'lov tizimi",
-			description: "Click ilovasi orqali tez va xavfsiz to'lov amalga oshiring",
+			name: "Uzcard Karta",
+			information: "Uzcard to'lovlari",
+			image: "https://marketing.uz/uploads/articles/1192/article-original.png",
+			color: "#0066CC",
+			bgColor: "#F0F7FF",
 		},
 		{
-			icon: <Wallet className='w-8 h-8' />,
-			title: "Payme to'lov tizimi",
-			description: "Payme ilovasi yordamida qulay to'lov imkoniyati",
+			name: "Click",
+			information: "Click ilovasi orqali to'lov",
+			image: "https://click.uz/click/images/click-white.jpg",
+			color: "#00C851",
+			bgColor: "#F0FFF4",
 		},
 	]
 
-	const attoCards = [
-		{
-			name: 'Atto Classic',
-			color: 'from-blue-600 to-blue-800',
-			description: 'Standart transport kartasi',
-			features: [
-				'Barcha transport turlari',
-				'Chegirmalar',
-				"Online to'ldirish",
-			],
-		},
-		{
-			name: 'Atto Student',
-			color: 'from-green-600 to-green-800',
-			description: 'Talabalar uchun maxsus karta',
-			features: ['50% chegirma', 'Universitet ID', 'Oylik abonement'],
-		},
-		{
-			name: "Atto O'quvchilar",
-			color: 'from-purple-600 to-purple-800',
-			description: "Maktab o'quvchilari uchun",
-			features: ['Bepul sayohat', 'Ota-ona nazorati', 'SMS xabarnoma'],
-		},
-		{
-			name: 'Atto Ijtimoiy',
-			color: 'from-amber-600 to-amber-800',
-			description: 'Ijtimoiy toifalar uchun',
-			features: ['Bepul transport', 'Tibbiy xizmatlar', 'Maxsus imtiyozlar'],
-		},
-	]
+	const apiStats = [
+		{ id: 1, station_name: "Beruniy", user_count: 23, month: "Yanvar", created_at: "2025-07-23T13:54:43.414717+05:00" },
+		{ id: 3, station_name: "Alisher Navoiy", user_count: 48, month: "Yanvar", created_at: "2025-07-23T13:54:43.414717+05:00" },
+		{ id: 4, station_name: "Alisher Navoiy", user_count: 60, month: "Dekabr", created_at: "2025-07-23T13:54:43.414717+05:00" },
+		{ id: 5, station_name: "Chilonzor", user_count: 10, month: "Aprel", created_at: "2025-07-23T13:54:43.414717+05:00" },
+	];
 
-	const stationStats = [
-		{
-			name: 'Alisher Navoiy',
-			color: '#3b82f6',
-			data: [
-				42000, 45000, 48000, 52000, 49000, 46000, 44000, 47000, 50000, 53000,
-				51000, 48000,
-			],
-		},
-		{
-			name: 'Amir Temur Hiyoboni',
-			color: '#ef4444',
-			data: [
-				35000, 38000, 41000, 44000, 42000, 39000, 37000, 40000, 43000, 46000,
-				44000, 41000,
-			],
-		},
-		{
-			name: 'Yunus Rajabiy',
-			color: '#10b981',
-			data: [
-				28000, 32000, 35000, 38000, 36000, 33000, 31000, 34000, 37000, 40000,
-				38000, 35000,
-			],
-		},
-		{
-			name: 'Ming Orik',
-			color: '#f59e0b',
-			data: [
-				25000, 28000, 31000, 34000, 32000, 29000, 27000, 30000, 33000, 36000,
-				34000, 31000,
-			],
-		},
-		{
-			name: 'Bodomzor',
-			color: '#8b5cf6',
-			data: [
-				22000, 25000, 28000, 31000, 29000, 26000, 24000, 27000, 30000, 33000,
-				31000, 28000,
-			],
-		},
-	]
+	const monthOrder = [
+		"Yanvar", "Fevral", "Mart", "Aprel", "May", "Iyun",
+		"Iyul", "Avgust", "Sentyabr", "Oktabr", "Noyabr", "Dekabr"
+	];
 
-	const months = [
-		'Yan',
-		'Fev',
-		'Mar',
-		'Apr',
-		'May',
-		'Iyn',
-		'Iyl',
-		'Avg',
-		'Sen',
-		'Okt',
-		'Noy',
-		'Dek',
-	]
+	// Get unique stations and assign colors
+	const stationNames = [...new Set(apiStats.map(s => s.station_name))];
+	const stationColors = [
+		"#3b82f6", "#ef4444", "#10b981", "#f59e0b", "#8b5cf6", "#6366f1", "#eab308"
+	];
 
-	useEffect(() => {
-		const paymentInterval = setInterval(() => {
-			setCurrentPaymentIndex(prev => (prev + 1) % paymentMethods.length)
-		}, 4000)
-
-		const cardInterval = setInterval(() => {
-			setCurrentCardIndex(prev => (prev + 1) % attoCards.length)
-		}, 3000)
-
-		return () => {
-			clearInterval(paymentInterval)
-			clearInterval(cardInterval)
-		}
-	}, [])
-
-	const maxValue = Math.max(...stationStats.flatMap(station => station.data))
-	const chartHeight = 200
-	const chartWidth = 700
-	const padding = { top: 20, right: 40, bottom: 40, left: 60 }
-
+	// Build chart data: { station, color, data: [user_count for each month] }
+	const chartData = stationNames.map((station, idx) => ({
+		name: station,
+		color: stationColors[idx % stationColors.length],
+		data: monthOrder.map(month => {
+			const found = apiStats.find(s => s.station_name === station && s.month === month);
+			return found ? found.user_count : 0;
+		})
+	}));
 	return (
-		<section className='min-h-screen py-16 px-4 bg-gradient-to-br from-slate-50 to-blue-50'>
-			<div className='container'>
+		<div className="container">
+			{/* Main Grid Layout */}
+			<div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+				{/* 1. Enhanced Metro Map with Animated Subway System */}
 				<motion.div
-					initial={{ opacity: 0, y: 20 }}
-					animate={{ opacity: 1, y: 0 }}
-					transition={{ duration: 0.8 }}
-					className='text-center mb-16'
+					initial={{ opacity: 0, scale: 0.92, rotate: -2 }}
+					animate={{ opacity: 1, scale: 1, rotate: 0 }}
+					transition={{ duration: 0.8, type: "spring" }}
+					className="lg:row-span-1 bg-gradient-to-br from-blue-900 to-blue-700 text-white rounded-2xl sm:rounded-3xl lg:rounded-[2.5rem] shadow-2xl p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden min-h-[300px] lg:min-h-[630px]"
 				>
-					<h2 className='text-4xl md:text-5xl font-bold text-blue-900 mb-4'>
-						Metro foydalanuvchilari uchun foydali ma'lumotlar
-					</h2>
+					{/* Animated Metro Map Background */}
+					<div className="absolute -bottom-50 inset-0 opacity-30">
+						<TashkentMetroMap />
+					</div>
+
+					<div className="relative z-10 flex flex-col items-center text-center">
+						<motion.div
+							animate={{ scale: [1, 1.12, 1], rotate: [0, 2, -2, 0] }}
+							transition={{ duration: 4, repeat: Number.POSITIVE_INFINITY }}
+						>
+							<MapPin className="w-12 h-12 sm:w-16 sm:h-16 mb-4" />
+						</motion.div>
+						<h3 className="text-md sm:text-2xl lg:text-2xl font-bold mb-2">Interaktiv Metro Xaritasi</h3>
+						<p className="mb-6 text-sm sm:text-base text-blue-100 max-w-xs">
+							Toshkent metrosining rasmiy interaktiv xaritasi. Stansiyalar va yo'nalishlarni ko'ring.
+						</p>
+						<motion.a
+							href="/metro-xaritasis"
+							whileTap={{ scale: 0.95 }}
+							className="inline-block px-4 sm:px-6 py-2 sm:py-3 rounded-full bg-white text-blue-900 font-semibold shadow hover:bg-blue-100 transition text-sm sm:text-base"
+						>
+							Xarita sahifasiga
+						</motion.a>
+					</div>
 				</motion.div>
 
-				<div className='grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16'>
-					{/* Metro Map Advertisement */}
-					<motion.div
-						initial={{ opacity: 0, x: -50 }}
-						animate={{ opacity: 1, x: 0 }}
-						transition={{ duration: 1, delay: 0.2 }}
-						className='relative'
-					>
-						<Card className='h-full bg-gradient-to-br from-blue-900 to-blue-700 text-white overflow-hidden'>
-							<CardContent className='p-8 h-full flex flex-col justify-center relative'>
-								{/* Animated Metro Map Background */}
-								<div className='absolute inset-0 opacity-20'>
-									<svg className='w-full h-full' viewBox='0 0 400 300'>
-										{/* Metro Lines */}
-										<motion.path
-											d='M50 150 L350 150'
-											stroke='#60a5fa'
-											strokeWidth='4'
-											fill='none'
-											initial={{ pathLength: 0 }}
-											animate={{ pathLength: 1 }}
-											transition={{
-												duration: 3,
-												repeat: Number.POSITIVE_INFINITY,
-												repeatType: 'loop',
-												ease: 'easeInOut',
-											}}
-										/>
-										<motion.path
-											d='M200 50 L200 250'
-											stroke='#f87171'
-											strokeWidth='4'
-											fill='none'
-											initial={{ pathLength: 0 }}
-											animate={{ pathLength: 1 }}
-											transition={{
-												duration: 3,
-												delay: 1,
-												repeat: Number.POSITIVE_INFINITY,
-												repeatType: 'loop',
-												ease: 'easeInOut',
-											}}
-										/>
-										<motion.path
-											d='M100 100 L300 200'
-											stroke='#4ade80'
-											strokeWidth='4'
-											fill='none'
-											initial={{ pathLength: 0 }}
-											animate={{ pathLength: 1 }}
-											transition={{
-												duration: 3,
-												delay: 2,
-												repeat: Number.POSITIVE_INFINITY,
-												repeatType: 'loop',
-												ease: 'easeInOut',
-											}}
-										/>
-
-										{/* Animated Stations */}
-										{[
-											{ x: 80, y: 150 },
-											{ x: 140, y: 150 },
-											{ x: 200, y: 150 },
-											{ x: 260, y: 150 },
-											{ x: 320, y: 150 },
-											{ x: 200, y: 80 },
-											{ x: 200, y: 110 },
-											{ x: 200, y: 180 },
-											{ x: 200, y: 220 },
-											{ x: 130, y: 130 },
-											{ x: 160, y: 160 },
-											{ x: 240, y: 170 },
-											{ x: 270, y: 185 },
-										].map((station, index) => (
-											<motion.circle
-												key={index}
-												cx={station.x}
-												cy={station.y}
-												r='6'
-												fill='white'
-												initial={{ scale: 0, opacity: 0 }}
-												animate={{
-													scale: [0, 1.2, 1],
-													opacity: [0, 1, 0.8],
-												}}
-												transition={{
-													duration: 2,
-													delay: index * 0.2,
-													repeat: Number.POSITIVE_INFINITY,
-													repeatType: 'loop',
-													ease: 'easeInOut',
-												}}
-											/>
-										))}
-									</svg>
-								</div>
-
-								{/* Content */}
-								<div className='relative z-10'>
-									<motion.div
-										animate={{
-											scale: [1, 1.05, 1],
-											rotate: [0, 1, 0],
-										}}
-										transition={{
-											duration: 6,
-											repeat: Number.POSITIVE_INFINITY,
-											ease: 'easeInOut',
-										}}
-										className='mb-6'
-									>
-										<MapPin className='w-16 h-16 mx-auto mb-4' />
-									</motion.div>
-									<h3 className='text-3xl font-bold mb-4 text-center'>
-										Metro Xaritasi
-									</h3>
-									<p className='text-lg text-center mb-6 text-blue-100'>
-										Toshkent metro tarmog'ining to'liq xaritasi bilan tanishing
-									</p>
-									<motion.div
-										animate={{ y: [0, -10, 0] }}
-										transition={{
-											duration: 2,
-											repeat: Number.POSITIVE_INFINITY,
-											ease: 'easeInOut',
-										}}
-										className='text-center'
-									>
-										<Badge variant='secondary' className='text-lg px-6 py-2'>
-											Interaktiv xarita
-										</Badge>
-									</motion.div>
-								</div>
-							</CardContent>
-						</Card>
-					</motion.div>
-
-					{/* Metro Information */}
-					<motion.div
-						initial={{ opacity: 0, x: 50 }}
-						animate={{ opacity: 1, x: 0 }}
-						transition={{ duration: 1, delay: 0.4 }}
-					>
-						<Card className='h-full bg-white shadow-xl'>
-							<CardContent className='p-8 h-full'>
-								<h3 className='text-3xl font-bold text-blue-900 mb-8 text-center'>
-									Metro haqida
-								</h3>
-								<div className='space-y-6'>
-									<motion.div
-										initial={{ opacity: 0, y: 20 }}
-										animate={{ opacity: 1, y: 0 }}
-										transition={{ duration: 0.8, delay: 0.6 }}
-										className='flex items-center justify-between p-4 bg-blue-50 rounded-lg'
-									>
-										<div className='flex items-center'>
-											<Building2 className='w-8 h-8 text-blue-900 mr-4' />
-											<span className='text-lg font-semibold text-blue-900'>
-												Bekatlar soni
-											</span>
-										</div>
-										<motion.span
-											initial={{ scale: 0 }}
-											animate={{ scale: 1 }}
-											transition={{ duration: 0.5, delay: 1 }}
-											className='text-2xl font-bold text-blue-900'
-										>
-											43
-										</motion.span>
-									</motion.div>
-
-									<motion.div
-										initial={{ opacity: 0, y: 20 }}
-										animate={{ opacity: 1, y: 0 }}
-										transition={{ duration: 0.8, delay: 0.8 }}
-										className='flex items-center justify-between p-4 bg-blue-50 rounded-lg'
-									>
-										<div className='flex items-center'>
-											<MapPin className='w-8 h-8 text-blue-900 mr-4' />
-											<span className='text-lg font-semibold text-blue-900'>
-												Umumiy masofa
-											</span>
-										</div>
-										<motion.span
-											initial={{ scale: 0 }}
-											animate={{ scale: 1 }}
-											transition={{ duration: 0.5, delay: 1.2 }}
-											className='text-2xl font-bold text-blue-900'
-										>
-											65.3 km
-										</motion.span>
-									</motion.div>
-
-									<motion.div
-										initial={{ opacity: 0, y: 20 }}
-										animate={{ opacity: 1, y: 0 }}
-										transition={{ duration: 0.8, delay: 1 }}
-										className='flex items-center justify-between p-4 bg-blue-50 rounded-lg'
-									>
-										<div className='flex items-center'>
-											<Users className='w-8 h-8 text-blue-900 mr-4' />
-											<span className='text-lg font-semibold text-blue-900'>
-												Kunlik yo'lovchilar
-											</span>
-										</div>
-										<motion.span
-											initial={{ scale: 0 }}
-											animate={{ scale: 1 }}
-											transition={{ duration: 0.5, delay: 1.4 }}
-											className='text-2xl font-bold text-blue-900'
-										>
-											1M+
-										</motion.span>
-									</motion.div>
-								</div>
-							</CardContent>
-						</Card>
-					</motion.div>
-				</div>
-
-				{/* Enhanced Station Statistics */}
+				{/* 2. Metro Info - Wide Card */}
 				<motion.div
-					initial={{ opacity: 0, y: 50 }}
-					animate={{ opacity: 1, y: 0 }}
-					transition={{ duration: 1, delay: 0.6 }}
-					className='mb-16'
-					data-stats-section
+					initial={{ opacity: 0, x: 40 }}
+					animate={{ opacity: 1, x: 0 }}
+					transition={{ duration: 0.8, delay: 0.2 }}
+					className="lg:col-span-2 bg-white rounded-2xl sm:rounded-3xl shadow-xl p-6 sm:p-8 min-h-[280px]"
 				>
-					<Card className='bg-white shadow-xl overflow-hidden'>
-						<CardContent className='p-8'>
-							<div className='flex items-center justify-center mb-8'>
-								<BarChart3 className='w-8 h-8 text-blue-900 mr-3' />
-								<h3 className='text-3xl font-bold text-blue-900'>
-									Bekatlar bo'yicha yillik statistika
-								</h3>
-							</div>
-
-							{/* Legend */}
-							<div className='flex flex-wrap justify-center gap-4 mb-8'>
-								{stationStats.map((station, index) => (
+					<div className="flex flex-col  items-center gap-6">
+						
+						<div className="flex-1 w-full">
+							<h3 className="text-xl sm:text-2xl font-bold text-blue-900 mb-4 text-center lg:text-left">
+								Metro haqida qisqacha
+							</h3>
+							<div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
+								{[
+									{ label: "Bekatlar soni", value: "50", delay: 0.3 },
+									{ label: "Kunlik yo'lovchilar", value: "1M+", delay: 0.5 },
+									{ label: "Uzunligi", value: "65 km", delay: 0.7 },
+								].map((stat, index) => (
 									<motion.div
-										key={station.name}
-										initial={{ opacity: 0, x: -20 }}
-										animate={{ opacity: 1, x: 0 }}
-										transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
-										className={`flex items-center space-x-2 px-4 py-2 rounded-lg cursor-pointer transition-all ${
-											hoveredPoint?.stationIndex === index
-												? 'bg-blue-100 shadow-md scale-105'
-												: 'bg-gray-50 hover:bg-gray-100'
-										}`}
-										onMouseEnter={() =>
-											setHoveredPoint({ stationIndex: index })
-										}
-										onMouseLeave={() => setHoveredPoint(null)}
+										key={index}
+										initial={{ y: 30, opacity: 0 }}
+										animate={{ y: 0, opacity: 1 }}
+										transition={{ delay: stat.delay }}
+										className="flex flex-col items-center bg-blue-50 rounded-xl px-3 sm:px-4 py-3"
 									>
-										<motion.div
-											className='w-4 h-4 rounded-full'
-											style={{ backgroundColor: station.color }}
-											animate={{
-												scale:
-													hoveredPoint?.stationIndex === index
-														? [1, 1.3, 1]
-														: 1,
-											}}
-											transition={{ duration: 0.5 }}
-										/>
-										<span className='text-sm font-medium text-slate-700'>
-											{station.name}
-										</span>
+										<span className="font-semibold text-blue-900 text-xs sm:text-sm text-center">{stat.label}</span>
+										<span className="text-lg sm:text-xl font-bold text-blue-900">{stat.value}</span>
 									</motion.div>
 								))}
 							</div>
-
-							{/* Enhanced Chart Container */}
-							<div className='relative bg-gradient-to-br from-slate-50 to-blue-50 rounded-xl p-6 overflow-hidden'>
-								<div className='w-full overflow-x-auto'>
-									<svg
-										className='w-full min-w-[800px]'
-										height='350'
-										viewBox={`0 0 ${
-											chartWidth + padding.left + padding.right
-										} ${chartHeight + padding.top + padding.bottom}`}
-									>
-										{/* Grid Lines */}
-										{[0, 1, 2, 3, 4, 5].map(i => (
-											<motion.line
-												key={`grid-${i}`}
-												x1={padding.left}
-												y1={padding.top + i * (chartHeight / 5)}
-												x2={chartWidth + padding.left}
-												y2={padding.top + i * (chartHeight / 5)}
-												stroke='#e2e8f0'
-												strokeWidth='1'
-												initial={{ opacity: 0 }}
-												animate={{ opacity: 0.5 }}
-												transition={{ duration: 0.5, delay: i * 0.1 }}
-											/>
-										))}
-
-										{/* Y-axis labels */}
-										{[60, 50, 40, 30, 20, 10, 0].map((value, i) => (
-											<motion.text
-												key={`y-label-${i}`}
-												x={padding.left - 10}
-												y={padding.top + i * (chartHeight / 6) + 5}
-												textAnchor='end'
-												className='text-xs fill-slate-600 font-medium'
-												initial={{ opacity: 0 }}
-												animate={{ opacity: 1 }}
-												transition={{ duration: 0.5, delay: 0.5 + i * 0.1 }}
-											>
-												{value}k
-											</motion.text>
-										))}
-
-										{/* X-axis labels */}
-										{months.map((month, i) => (
-											<motion.text
-												key={`x-label-${i}`}
-												x={
-													padding.left + (i * chartWidth) / (months.length - 1)
-												}
-												y={chartHeight + padding.top + 25}
-												textAnchor='middle'
-												className='text-xs fill-slate-600 font-medium'
-												initial={{ opacity: 0, y: 10 }}
-												animate={{ opacity: 1, y: 0 }}
-												transition={{ duration: 0.5, delay: 1 + i * 0.05 }}
-											>
-												{month}
-											</motion.text>
-										))}
-
-										{/* Station Lines and Points */}
-										{stationStats.map((station, stationIndex) => {
-											const pathData = station.data
-												.map((value, monthIndex) => {
-													const x =
-														padding.left +
-														(monthIndex * chartWidth) / (months.length - 1)
-													const y =
-														padding.top +
-														chartHeight -
-														(value / maxValue) * chartHeight
-													return `${monthIndex === 0 ? 'M' : 'L'} ${x} ${y}`
-												})
-												.join(' ')
-
-											return (
-												<g key={station.name}>
-													{/* Line Path */}
-													<motion.path
-														d={pathData}
-														stroke={station.color}
-														strokeWidth={
-															hoveredPoint?.stationIndex === stationIndex
-																? '4'
-																: '3'
-														}
-														fill='none'
-														initial={{ pathLength: 0, opacity: 0 }}
-														animate={{
-															pathLength: 1,
-															opacity:
-																hoveredPoint?.stationIndex === stationIndex
-																	? 1
-																	: hoveredPoint
-																	? 0.3
-																	: 1,
-														}}
-														transition={{
-															duration: 2,
-															delay: 1.5 + stationIndex * 0.2,
-															ease: 'easeInOut',
-														}}
-														className='drop-shadow-sm'
-													/>
-
-													{/* Data Points */}
-													{station.data.map((value, monthIndex) => {
-														const x =
-															padding.left +
-															(monthIndex * chartWidth) / (months.length - 1)
-														const y =
-															padding.top +
-															chartHeight -
-															(value / maxValue) * chartHeight
-
-														return (
-															<motion.circle
-																key={`${station.name}-${monthIndex}`}
-																cx={x}
-																cy={y}
-																r={
-																	hoveredPoint?.stationIndex === stationIndex
-																		? '6'
-																		: '4'
-																}
-																fill={station.color}
-																initial={{ scale: 0, opacity: 0 }}
-																animate={{
-																	scale: 1,
-																	opacity:
-																		hoveredPoint?.stationIndex === stationIndex
-																			? 1
-																			: hoveredPoint
-																			? 0.3
-																			: 1,
-																}}
-																transition={{
-																	duration: 0.3,
-																	delay:
-																		1.8 +
-																		stationIndex * 0.2 +
-																		monthIndex * 0.05,
-																}}
-																className='drop-shadow-sm cursor-pointer hover:scale-125 transition-transform'
-																onMouseEnter={() =>
-																	setHoveredPoint({
-																		station: station.name,
-																		value: value.toLocaleString(),
-																		month: months[monthIndex],
-																		stationIndex,
-																		x,
-																		y,
-																	})
-																}
-																onMouseLeave={() => setHoveredPoint(null)}
-															/>
-														)
-													})}
-												</g>
-											)
-										})}
-
-										{/* Enhanced Hover Tooltip */}
-										{hoveredPoint && hoveredPoint.value && (
-											<motion.g
-												initial={{ opacity: 0, scale: 0.8 }}
-												animate={{ opacity: 1, scale: 1 }}
-												transition={{ duration: 0.2 }}
-											>
-												<rect
-													x={hoveredPoint.x - 80}
-													y={hoveredPoint.y - 60}
-													width='160'
-													height='50'
-													rx='12'
-													fill='rgba(30, 58, 138, 0.95)'
-													stroke='rgba(59, 130, 246, 0.5)'
-													strokeWidth='2'
-													className='drop-shadow-lg'
-												/>
-												<text
-													x={hoveredPoint.x}
-													y={hoveredPoint.y - 38}
-													textAnchor='middle'
-													className='text-sm fill-white font-bold'
-												>
-													{hoveredPoint.station}
-												</text>
-												<text
-													x={hoveredPoint.x}
-													y={hoveredPoint.y - 22}
-													textAnchor='middle'
-													className='text-xs fill-blue-200'
-												>
-													{hoveredPoint.value} yo'lovchi
-												</text>
-												<text
-													x={hoveredPoint.x}
-													y={hoveredPoint.y - 10}
-													textAnchor='middle'
-													className='text-xs fill-blue-300'
-												>
-													{hoveredPoint.month} oyi
-												</text>
-											</motion.g>
-										)}
-									</svg>
-								</div>
-
-								{/* Summary Stats */}
-								<motion.div
-									initial={{ opacity: 0, y: 20 }}
-									animate={{ opacity: 1, y: 0 }}
-									transition={{ duration: 0.8, delay: 3 }}
-									className='mt-8 flex flex-col md:flex-row items-center justify-between gap-6 p-6 bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl'
+							
+						</div>
+						<MetroGalleryCarousel />
+						<div className="w-full  lg:text-left">
+								<motion.a
+									href="/metro-tarixi"
+									whileTap={{ scale: 0.95 }}
+									className="inline-block px-4 sm:px-5 py-2 rounded-full bg-blue-900 text-white font-semibold shadow hover:bg-blue-800 transition text-sm sm:text-base"
 								>
-									<div className='flex-1'>
-										<div className='flex items-center mb-4'>
-											<TrendingUp className='w-6 h-6 text-blue-900 mr-2' />
-											<h4 className='text-xl font-bold text-blue-900'>
-												Eng mashhur bekatlar
-											</h4>
-										</div>
-										<div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
-											{stationStats.slice(0, 3).map((station, index) => {
-												const avgPassengers = Math.round(
-													station.data.reduce((a, b) => a + b, 0) /
-														station.data.length
-												)
-												return (
-													<motion.div
-														key={station.name}
-														initial={{ opacity: 0, y: 20 }}
-														animate={{ opacity: 1, y: 0 }}
-														transition={{
-															duration: 0.5,
-															delay: 3.2 + index * 0.1,
-														}}
-														className='bg-white p-4 rounded-lg shadow-sm border-l-4'
-														style={{ borderLeftColor: station.color }}
-													>
-														<h5 className='font-semibold text-slate-800 mb-1'>
-															{station.name}
-														</h5>
-														<p className='text-sm text-slate-600'>
-															O'rtacha: {avgPassengers.toLocaleString()}{' '}
-															kishi/oy
-														</p>
-													</motion.div>
-												)
-											})}
-										</div>
-									</div>
-								</motion.div>
+									Tarix sahifasiga
+								</motion.a>
 							</div>
-						</CardContent>
-					</Card>
+					</div>
+					
 				</motion.div>
 
-				<div className='grid grid-cols-1 lg:grid-cols-2 gap-8'>
-					{/* Payment Methods */}
-					<motion.div
-						initial={{ opacity: 0, y: 50 }}
-						animate={{ opacity: 1, y: 0 }}
-						transition={{ duration: 1, delay: 0.8 }}
-					>
-						<Card className='h-full bg-white shadow-xl'>
-							<CardContent className='p-8 h-full flex flex-col justify-center'>
-								<h3 className='text-3xl font-bold text-blue-900 mb-8 text-center'>
-									To'lov usullari
-								</h3>
-								<div className='relative h-64 flex items-center justify-center'>
-									<AnimatePresence mode='wait'>
-										<motion.div
-											key={currentPaymentIndex}
-											initial={{ opacity: 0, rotateY: 90 }}
-											animate={{ opacity: 1, rotateY: 0 }}
-											exit={{ opacity: 0, rotateY: -90 }}
-											transition={{ duration: 0.8 }}
-											className='text-center'
-										>
-											<motion.div
-												animate={{ scale: [1, 1.1, 1] }}
+				{/* Metro Gallery Carousel - New Section */}
+				{/* <motion.div
+					initial={{ opacity: 0, x: -40 }}
+					animate={{ opacity: 1, x: 0 }}
+					transition={{ duration: 0.8, delay: 0.4 }}
+					className="lg:col-span-2 bg-white rounded-2xl sm:rounded-3xl shadow-xl p-6 sm:p-8 min-h-[280px] overflow-hidden"
+				>
+					
+				</motion.div> */}
+
+				{/* 3. Statistics Chart - Full Width */}
+				<motion.div
+					initial={{ opacity: 0, y: 50 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ duration: 1, delay: 0.4 }}
+					className="lg:col-span-3 bg-white rounded-2xl sm:rounded-3xl shadow-xl p-6 sm:p-8"
+				>
+					<div className="flex flex-col sm:flex-row items-start sm:items-center mb-6 sm:mb-8 gap-3">
+						<BarChart3 className="w-6 h-6 sm:w-8 sm:h-8 text-blue-900 flex-shrink-0" />
+						<h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-blue-900">
+							Bekatlar bo'yicha yillik statistikasi
+						</h3>
+					</div>
+
+					<div className="overflow-x-auto">
+						<div className="min-w-[600px] sm:min-w-[700px]">
+							<svg className="w-full" height="260" viewBox="0 0 700 260">
+								{/* Grid lines */}
+								{[0, 1, 2, 3, 4].map((i) => (
+									<motion.line
+										key={i}
+										x1={50}
+										y1={30 + i * 50}
+										x2={650}
+										y2={30 + i * 50}
+										stroke="#e0e7ef"
+										strokeWidth="1"
+										initial={{ opacity: 0 }}
+										animate={{ opacity: 0.6 }}
+										transition={{ duration: 0.5, delay: i * 0.1 }}
+									/>
+								))}
+
+								{/* X axis labels */}
+								{monthOrder.map((month, i) => (
+									<text
+										key={month}
+										x={60 + i * 55}
+										y={250}
+										textAnchor="middle"
+										className="text-xs fill-blue-900 font-semibold"
+									>
+										{month.slice(0, 3)}
+									</text>
+								))}
+
+								{/* Y axis labels */}
+								{[60, 40, 20, 0].map((val, i) => (
+									<text
+										key={val}
+										x={40}
+										y={35 + i * 50}
+										textAnchor="end"
+										className="text-xs fill-blue-900 font-semibold"
+									>
+										{val}k
+									</text>
+								))}
+
+								{/* Chart lines and points */}
+								{chartData.map((station, sIdx) => {
+									const points = station.data.map((val, i) => {
+										const x = 60 + i * 55;
+										const y = 230 - (val / 60) * 200; // user_count in thousands
+										return [x, y];
+									});
+									const path = points.map(([x, y], i) => (i === 0 ? `M${x},${y}` : `L${x},${y}`)).join(" ");
+
+									return (
+										<g key={station.name}>
+											<motion.path
+												d={path}
+												stroke={station.color}
+												strokeWidth="3"
+												fill="none"
+												initial={{ pathLength: 0 }}
+												animate={{ pathLength: 1 }}
 												transition={{
 													duration: 2,
-													repeat: Number.POSITIVE_INFINITY,
+													delay: 0.2 * sIdx,
+													ease: "easeInOut",
 												}}
-												className='mb-6 text-blue-900'
-											>
-												{paymentMethods[currentPaymentIndex].icon}
-											</motion.div>
-											<h4 className='text-2xl font-bold text-blue-900 mb-4'>
-												{paymentMethods[currentPaymentIndex].title}
-											</h4>
-											<p className='text-lg text-blue-700'>
-												{paymentMethods[currentPaymentIndex].description}
-											</p>
-										</motion.div>
-									</AnimatePresence>
-								</div>
-								<div className='flex justify-center space-x-2 mt-6'>
-									{paymentMethods.map((_, index) => (
-										<motion.div
-											key={index}
-											animate={{
-												scale: index === currentPaymentIndex ? 1.2 : 1,
-												backgroundColor:
-													index === currentPaymentIndex ? '#1e3a8a' : '#cbd5e1',
-											}}
-											className='w-3 h-3 rounded-full cursor-pointer'
-											onClick={() => setCurrentPaymentIndex(index)}
-										/>
-									))}
-								</div>
-							</CardContent>
-						</Card>
-					</motion.div>
+											/>
+											{points.map(([x, y], i) => (
+												<motion.circle
+													key={i}
+													cx={x}
+													cy={y}
+													r="4"
+													fill={station.color}
+													initial={{ scale: 0 }}
+													animate={{ scale: 1 }}
+													transition={{
+														duration: 0.3,
+														delay: 0.2 * sIdx + i * 0.05,
+													}}
+												/>
+											))}
+										</g>
+									);
+								})}
+							</svg>
+						</div>
+					</div>
 
-					{/* Enhanced Atto Cards */}
-					<motion.div
-						initial={{ opacity: 0, y: 50 }}
-						animate={{ opacity: 1, y: 0 }}
-						transition={{ duration: 1, delay: 1 }}
-					>
-						<Card className='h-full bg-white shadow-xl'>
-							<CardContent className='p-8 h-full flex flex-col justify-center'>
-								<h3 className='text-3xl font-bold text-blue-900 mb-8 text-center'>
-									Atto kartalar
-								</h3>
-								<div className='relative h-80 flex items-center justify-center'>
-									<AnimatePresence mode='wait'>
+					{/* Legend */}
+					<div className="flex flex-wrap gap-3 sm:gap-4 mt-6 justify-center sm:justify-start">
+						{chartData.map((station) => (
+							<div key={station.name} className="flex items-center gap-2">
+								<span
+									className="w-3 h-3 sm:w-4 sm:h-4 rounded-full flex-shrink-0"
+									style={{ background: station.color }}
+								/>
+								<span className="text-xs sm:text-sm text-blue-900 whitespace-nowrap">{station.name}</span>
+							</div>
+						))}
+					</div>
+				</motion.div>
+
+				{/* 4. Enhanced Payment Systems Card */}
+				<motion.div
+					initial={{ opacity: 0, y: 40, scale: 0.95 }}
+					animate={{ opacity: 1, y: 0, scale: 1 }}
+					transition={{ duration: 0.8, delay: 0.6 }}
+					className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl sm:rounded-3xl shadow-xl p-6 sm:p-8 min-h-[280px] lg:min-h-[400px]"
+				>
+					<div className="flex flex-col h-full">
+						<div className="flex items-center gap-3 mb-6 relative z-10">
+							<motion.div
+								animate={{ scale: [1, 1.1, 1], rotate: [0, 2, -2, 0] }}
+								transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY }}
+							>
+								<CreditCard className="w-8 h-8 text-blue-900" />
+							</motion.div>
+							<div>
+								<h3 className="text-xl sm:text-2xl font-bold text-blue-900">To'lov tizimlari</h3>
+							</div>
+						</div>
+
+						<div className="flex-1 space-y-4">
+							{payment.map((paymentMethod, index) => (
+								<motion.div
+									key={paymentMethod.name}
+									initial={{ opacity: 0, x: -30 }}
+									animate={{ opacity: 1, x: 0 }}
+									transition={{ duration: 0.6, delay: 0.8 + index * 0.2 }}
+									whileHover={{ scale: 1.02, y: -2 }}
+									className="group relative overflow-hidden rounded-xl p-4 transition-all duration-300 cursor-pointer"
+									style={{ backgroundColor: paymentMethod.bgColor }}
+								>
+									<div className="flex items-center gap-4">
 										<motion.div
-											key={currentCardIndex}
-											initial={{ opacity: 0, scale: 0.8, rotateX: 90 }}
-											animate={{ opacity: 1, scale: 1, rotateX: 0 }}
-											exit={{ opacity: 0, scale: 0.8, rotateX: -90 }}
-											transition={{ duration: 0.8 }}
-											className='text-center w-full'
+											className="relative w-16 h-10 rounded-lg overflow-hidden bg-white shadow-sm flex items-center justify-center"
+											whileHover={{ scale: 1.05 }}
+											transition={{ duration: 0.2 }}
 										>
-											{/* Enhanced Card Design */}
-											<motion.div
-												animate={{
-													rotateY: [0, 5, 0, -5, 0],
-													scale: [1, 1.02, 1],
+											<img
+												src={paymentMethod.image || "/placeholder.svg"}
+												alt={paymentMethod.name}
+												className="w-full h-full object-contain p-1"
+												onError={(e) => {
+													e.currentTarget.src = `/placeholder.svg?height=40&width=64&text=${paymentMethod.name}`
 												}}
-												transition={{
-													duration: 4,
-													repeat: Number.POSITIVE_INFINITY,
-												}}
-												className={`w-64 h-40 mx-auto mb-6 rounded-2xl bg-gradient-to-br ${attoCards[currentCardIndex].color} shadow-2xl relative overflow-hidden`}
-											>
-												{/* Card Background Pattern */}
-												<div className='absolute inset-0 opacity-20'>
-													<div className='absolute top-4 right-4 w-12 h-12 border-2 border-white rounded-full'></div>
-													<div className='absolute top-6 right-6 w-8 h-8 border-2 border-white rounded-full'></div>
-													<div className='absolute bottom-4 left-4 w-16 h-1 bg-white rounded'></div>
-													<div className='absolute bottom-6 left-4 w-12 h-1 bg-white rounded'></div>
-												</div>
-
-												{/* Card Content */}
-												<div className='relative z-10 p-6 h-full flex flex-col justify-between text-white'>
-													<div className='flex justify-between items-start'>
-														<div>
-															<CreditCard className='w-8 h-8 mb-2' />
-															<p className='text-sm opacity-80'>ATTO</p>
-														</div>
-														<div className='text-right'>
-															<p className='text-xs opacity-60'>
-																Transport Card
-															</p>
-														</div>
-													</div>
-
-													<div>
-														<p className='text-lg font-bold mb-1'>
-															{attoCards[currentCardIndex].name}
-														</p>
-														<p className='text-xs opacity-80'>
-															**** **** **** 1234
-														</p>
-													</div>
-												</div>
-											</motion.div>
-
-											{/* Card Information */}
-											<div className='space-y-4'>
-												<h4 className='text-xl font-bold text-blue-900'>
-													{attoCards[currentCardIndex].name}
-												</h4>
-												<p className='text-blue-700 mb-4'>
-													{attoCards[currentCardIndex].description}
-												</p>
-
-												{/* Features List */}
-												<div className='space-y-2'>
-													{attoCards[currentCardIndex].features.map(
-														(feature, index) => (
-															<motion.div
-																key={index}
-																initial={{ opacity: 0, x: -20 }}
-																animate={{ opacity: 1, x: 0 }}
-																transition={{
-																	duration: 0.3,
-																	delay: index * 0.1,
-																}}
-																className='flex items-center text-sm text-slate-600'
-															>
-																<div className='w-2 h-2 bg-blue-500 rounded-full mr-3'></div>
-																{feature}
-															</motion.div>
-														)
-													)}
-												</div>
-											</div>
+											/>
 										</motion.div>
-									</AnimatePresence>
-								</div>
-								<div className='flex justify-center space-x-2 mt-6'>
-									{attoCards.map((_, index) => (
+
+										<div className="flex-1">
+											<h4 className="font-bold text-gray-900 text-sm sm:text-base mb-1">{paymentMethod.name}</h4>
+											<p className="text-gray-600 text-xs sm:text-sm">{paymentMethod.information}</p>
+										</div>
+
 										<motion.div
-											key={index}
-											animate={{
-												scale: index === currentCardIndex ? 1.2 : 1,
-												backgroundColor:
-													index === currentCardIndex ? '#1e3a8a' : '#cbd5e1',
-											}}
-											className='w-3 h-3 rounded-full cursor-pointer'
-											onClick={() => setCurrentCardIndex(index)}
-										/>
-									))}
-								</div>
-							</CardContent>
-						</Card>
-					</motion.div>
+											className="w-8 h-8 rounded-full flex  lg:hidden xl:flex items-center justify-center"
+											style={{ backgroundColor: paymentMethod.color }}
+											whileHover={{ rotate: 90 }}
+											transition={{ duration: 0.3 }}
+										>
+											<CreditCard className="w-4 h-4 text-white" />
+										</motion.div>
+									</div>
+
+									{/* Animated background effect */}
+									<motion.div
+										className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300"
+										style={{ backgroundColor: paymentMethod.color }}
+									/>
+
+									{/* Subtle pulse animation */}
+									<motion.div
+										className="absolute -inset-1 rounded-xl opacity-0 group-hover:opacity-20 transition-opacity duration-300"
+										style={{
+											background: `linear-gradient(45deg, ${paymentMethod.color}20, transparent, ${paymentMethod.color}20)`,
+											backgroundSize: "200% 200%",
+										}}
+										animate={{
+											backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+										}}
+										transition={{
+											duration: 3,
+											repeat: Number.POSITIVE_INFINITY,
+											ease: "easeInOut",
+										}}
+									/>
+								</motion.div>
+							))}
+						</div>
+
+						<motion.div
+							initial={{ opacity: 0, y: 20 }}
+							animate={{ opacity: 1, y: 0 }}
+							transition={{ delay: 1.4 }}
+							className="mt-6 text-center"
+						>
+							<motion.a
+								href="/tolov-turi"
+								whileTap={{ scale: 0.95 }}
+								whileHover={{ scale: 1.05 }}
+								className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-blue-900 text-white font-semibold shadow-lg hover:bg-blue-800 transition-all duration-300 text-sm sm:text-base"
+							>
+								<CreditCard className="w-5 h-5" />
+								<p className="text-[12px] xl:text-md">Barcha to'lov usullari</p>
+							</motion.a>
+						</motion.div>
+					</div>
+				</motion.div>
+
+				{/* 5. Enhanced ATTO Cards Carousel */}
+				<motion.div
+					initial={{ opacity: 0, scale: 0.9, y: 40 }}
+					animate={{ opacity: 1, scale: 1, y: 0 }}
+					transition={{ duration: 0.8, delay: 0.8 }}
+					className="lg:col-span-2 bg-gradient-to-br from-slate-900 via-blue-900 to-purple-900 text-white rounded-2xl sm:rounded-3xl shadow-xl p-6 sm:p-8 min-h-[280px] lg:min-h-[400px] overflow-hidden relative"
+				>
+					<AttoCardsCarousel />
+				</motion.div>
+			</div>
+		</div>
+	)
+}
+
+function MetroGalleryCarousel() {
+	const [currentIndex, setCurrentIndex] = useState(0)
+
+	const galleryImages = [
+		{
+			name: "Loyihalashtirish va qurilish",
+			description: "Toshkent metropolitening tarixi Oʻzbekiston poytaxti jadal rivojlanib, zamonaviy transportga muhtoj boʻlgan sovet yillarida boshlangan. Shaharga jiddiy zarar yetkazgan 1966-yildagi kuchli zilziladan keyin infratuzilmani faol rekonstruksiya va modernizatsiya qilish boshlandi va metro loyihasi eng muhim vazifalardan biriga aylandi.",
+			image: "https://cdn-uz.kursiv.media/wp-content/uploads/2024/11/photo_2024-11-06-14.22.07.jpeg",
+		},
+		{
+			name: "Metro",
+			description: "Tarixiy ",
+			image: "https://cdn-uz.kursiv.media/wp-content/uploads/2024/11/scale_1200-5.jpeg",
+		},
+		{
+			name: "Birinchi metro qurilishi",
+			description: "Birinchi metro yoʻlining qurilishi 1972-yilda boshlangan va besh yil davom etgan. 1977-yil 6-noyabrda Toshkent metropolitenining tantanali ochilish marosimi boʻlib oʻtdi. Shu bilan birga, dastlabki toʻqqizta bekat ishga tushirildi.",
+			image: "https://cdn-uz.kursiv.media/wp-content/uploads/2024/11/scale_1200-8.jpeg",
+		},
+		{
+			name: "Tarixiy",
+			description: "Qurilish jarayoni",
+			image: "https://cdn-uz.kursiv.media/wp-content/uploads/2024/11/scale_1200-7.jpeg",
+		},
+		{
+			name: "Metro yoʻllarining rivojlanishi va noyob dizayni",
+			description: "Dastlab metro shahar boʻylab harakatlanishni osonlashtirishi kerak boʻlgan transport tizimi sifatida qurilgan. Lekin keyinchalik u madaniyat va milliy motivlarni oʻzida mujassam etgan sanʼat va meʼmorchilik obyektiga aylandi.",
+			image: "https://cdn-uz.kursiv.media/wp-content/uploads/2024/11/041117_alimj_rodionov_sputnik_uz.jpg",
+		},
+	]
+
+	const nextSlide = () => {
+		setCurrentIndex((prev) => (prev + 1) % galleryImages.length)
+	}
+
+	const prevSlide = () => {
+		setCurrentIndex((prev) => (prev - 1 + galleryImages.length) % galleryImages.length)
+	}
+
+	useEffect(() => {
+		const interval = setInterval(nextSlide, 4000)
+		return () => clearInterval(interval)
+	}, [])
+
+	return (
+		<div className="h-full w-full">
+			{/* <div className="flex flex-col sm:flex-row items-start sm:items-center mb-6 gap-3">
+				<Camera className="w-6 h-6 sm:w-8 sm:h-8 text-blue-900 " />
+				<h3 className="text-xl sm:text-2xl font-bold text-blue-900">Metro stansiyalari galereyasi</h3>
+			</div> */}
+
+			<div className="flex-1 relative w-full">
+				<div className="relative h-48 sm:h-76 rounded-xl overflow-hidden bg-gray-100">
+					{galleryImages.map((image, index) => (
+						<motion.div
+							key={index}
+							className="absolute inset-0"
+							initial={{ opacity: 0, x: 100 }}
+							animate={{
+								opacity: index === currentIndex ? 1 : 0,
+								x: index === currentIndex ? 0 : index > currentIndex ? 100 : -100,
+							}}
+							transition={{ duration: 0.5, ease: "easeInOut" }}
+						>
+							<img src={image.image || "/placeholder.svg"} alt={image.name} className="w-full h-full object-cover" />
+							<div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+							<motion.div
+								className="absolute bottom-4 left-4 text-white"
+								initial={{ y: 20, opacity: 0 }}
+								animate={{ y: 0, opacity: 1 }}
+								transition={{ delay: 0.3 }}
+							>
+								<h4 className="text-lg sm:text-xl font-bold mb-1">{image.name}</h4>
+								<p className="text-sm text-gray-200">{image.description}</p>
+							</motion.div>
+						</motion.div>
+					))}
+
+					{/* Navigation Arrows */}
+					<button
+						onClick={prevSlide}
+						className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-colors"
+					>
+						<ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+					</button>
+					<button
+						onClick={nextSlide}
+						className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-colors"
+					>
+						<ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+					</button>
+				</div>
+
+				{/* Dots Indicator */}
+				<div className="flex justify-center gap-2 mt-4">
+					{galleryImages.map((_, index) => (
+						<motion.button
+							key={index}
+							onClick={() => setCurrentIndex(index)}
+							className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-colors ${index === currentIndex ? "bg-blue-900" : "bg-gray-300"
+								}`}
+							whileHover={{ scale: 1.2 }}
+							whileTap={{ scale: 0.9 }}
+						/>
+					))}
+				</div>
+
+				{/* Station Counter */}
+				<motion.div
+					className="absolute top-2 right-2 bg-black/50 backdrop-blur-sm text-white px-2 py-1 rounded-lg text-xs sm:text-sm"
+					key={currentIndex}
+					initial={{ scale: 0.8, opacity: 0 }}
+					animate={{ scale: 1, opacity: 1 }}
+					transition={{ duration: 0.3 }}
+				>
+					{currentIndex + 1} / {galleryImages.length}
+				</motion.div>
+			</div>
+
+
+		</div>
+	)
+}
+
+function AttoCardsCarousel() {
+	const [currentCardIndex, setCurrentCardIndex] = useState(0)
+
+	const attoCards = [
+		{
+			name: "ATTO Classic",
+			type: "Klassik karta",
+			description: "Barcha yoshdagi fuqarolar uchun standart transport kartasi",
+			image: "https://atto.uz/image/blueCard.png",
+			color: "#2563eb",
+			bgGradient: "from-blue-500 to-blue-700",
+			features: ["Barcha transport turlari", "Chegirmalar", "Online to'ldirish"],
+		},
+		{
+			name: "ATTO Student",
+			type: "Talaba kartasi",
+			description: "Oliy o'quv yurtlari talabalari uchun maxsus imtiyozli karta",
+			image: "https://atto.uz/icons/cards/yellow_transport_card.png",
+			color: "#eab308",
+			bgGradient: "from-yellow-500 to-orange-500",
+			features: ["50% chegirma", "Talaba ID bilan", "Semestr davomida"],
+		},
+		{
+			name: "ATTO O'quvchi",
+			type: "Maktab kartasi",
+			description: "Maktab o'quvchilari uchun maxsus transport kartasi",
+			image: "https://atto.uz/icons/cards/green_transport_card.png",
+			color: "#16a34a",
+			bgGradient: "from-green-500 to-emerald-600",
+			features: ["Katta chegirmalar", "Ota-ona nazorati", "Xavfsiz to'lov"],
+		},
+		{
+			name: "ATTO Ijtimoiy",
+			type: "Ijtimoiy karta",
+			description: "Pensionerlar va imtiyozli toifalar uchun maxsus karta",
+			image: "https://atto.uz/icons/cards/red_transport_card.png",
+			color: "#dc2626",
+			bgGradient: "from-red-500 to-pink-600",
+			features: ["Maksimal chegirmalar", "Ijtimoiy himoya", "Bepul yo'nalishlar"],
+		},
+	]
+
+	const nextCard = () => {
+		setCurrentCardIndex((prev) => (prev + 1) % attoCards.length)
+	}
+
+	const prevCard = () => {
+		setCurrentCardIndex((prev) => (prev - 1 + attoCards.length) % attoCards.length)
+	}
+
+	useEffect(() => {
+		const interval = setInterval(nextCard, 4500)
+		return () => clearInterval(interval)
+	}, [])
+
+	const currentCard = attoCards[currentCardIndex]
+
+	return (
+		<div className="h-full flex flex-col relative">
+			{/* Header */}
+			<div className="flex items-center gap-3 mb-6 relative z-10">
+				<motion.div
+					animate={{ scale: [1, 1.1, 1], rotate: [0, 2, -2, 0] }}
+					transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY }}
+				>
+					<Wallet className="w-8 h-8 text-white" />
+				</motion.div>
+				<div>
+					<h3 className="text-xl sm:text-2xl font-bold">ATTO Kartalar</h3>
+					<p className="text-white/70 text-sm">Toshkent transport kartalari</p>
 				</div>
 			</div>
-		</section>
+
+			{/* Main Carousel Content */}
+			<div className="flex-1 relative">
+				{/* Background Animation */}
+				<motion.div
+					key={currentCardIndex}
+					className={`absolute inset-0 bg-gradient-to-br ${currentCard.bgGradient} opacity-20 rounded-2xl`}
+					initial={{ scale: 0.8, opacity: 0 }}
+					animate={{ scale: 1, opacity: 0.2 }}
+					transition={{ duration: 0.8 }}
+				/>
+
+				<div className="relative z-10 h-full flex flex-col lg:flex-row items-center gap-6">
+					{/* Card Image Section */}
+					<div className="flex-shrink-0 relative">
+						<motion.div
+							key={currentCardIndex}
+							initial={{ rotateY: 90, scale: 0.8 }}
+							animate={{ rotateY: 0, scale: 1 }}
+							transition={{ duration: 0.8, type: "spring" }}
+							className="relative"
+						>
+							{/* Card Container */}
+							<div className="relative w-48 h-32 sm:w-56 sm:h-36 lg:w-64 lg:h-40 rounded-2xl overflow-hidden shadow-2xl">
+								<motion.img
+									src={currentCard.image}
+									alt={currentCard.name}
+									className="w-full h-full object-cover"
+									initial={{ scale: 1.2 }}
+									animate={{ scale: 1 }}
+									transition={{ duration: 0.8 }}
+									onError={(e) => {
+										e.currentTarget.src = `/placeholder.svg?height=160&width=256&text=${currentCard.name}`
+									}}
+								/>
+
+								{/* Card Shine Effect */}
+								<motion.div
+									className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+									initial={{ x: "-100%" }}
+									animate={{ x: "100%" }}
+									transition={{
+										duration: 2,
+										repeat: Number.POSITIVE_INFINITY,
+										repeatDelay: 3,
+										ease: "easeInOut",
+									}}
+								/>
+							</div>
+
+							{/* Floating Elements */}
+							<motion.div
+								className="absolute -top-2 -right-2 w-6 h-6 rounded-full"
+								style={{ backgroundColor: currentCard.color }}
+								animate={{
+									scale: [1, 1.2, 1],
+									rotate: [0, 180, 360],
+								}}
+								transition={{
+									duration: 3,
+									repeat: Number.POSITIVE_INFINITY,
+									ease: "easeInOut",
+								}}
+							/>
+						</motion.div>
+					</div>
+
+					{/* Card Information */}
+					<div className="flex-1 text-center lg:text-left">
+						<motion.div
+							key={currentCardIndex}
+							initial={{ opacity: 0, x: 30 }}
+							animate={{ opacity: 1, x: 0 }}
+							transition={{ duration: 0.6, delay: 0.3 }}
+						>
+							<motion.h4 className="text-2xl sm:text-3xl font-bold mb-2" style={{ color: currentCard.color }}>
+								{currentCard.name}
+							</motion.h4>
+							<p className="text-white/90 font-semibold mb-3 text-lg">{currentCard.type}</p>
+							<p className="text-white/70 text-sm sm:text-base mb-4 leading-relaxed">{currentCard.description}</p>
+
+							{/* Features */}
+							<div className="space-y-2 mb-6">
+								{currentCard.features.map((feature, index) => (
+									<motion.div
+										key={feature}
+										initial={{ opacity: 0, x: -20 }}
+										animate={{ opacity: 1, x: 0 }}
+										transition={{ duration: 0.4, delay: 0.5 + index * 0.1 }}
+										className="flex items-center gap-2 justify-center lg:justify-start"
+									>
+										<motion.div
+											className="w-2 h-2 rounded-full"
+											style={{ backgroundColor: currentCard.color }}
+											animate={{ scale: [1, 1.3, 1] }}
+											transition={{
+												duration: 2,
+												repeat: Number.POSITIVE_INFINITY,
+												delay: index * 0.3,
+											}}
+										/>
+										<span className="text-white/80 text-sm">{feature}</span>
+									</motion.div>
+								))}
+							</div>
+						</motion.div>
+					</div>
+				</div>
+
+				{/* Enhanced Navigation Controls */}
+				
+			</div>
+
+			{/* Call to Action */}
+			<motion.div
+				initial={{ opacity: 0, y: 20 }}
+				animate={{ opacity: 1, y: 0 }}
+				transition={{ delay: 1 }}
+				className="mt-6 text-center relative z-10"
+			>
+				<motion.a
+					href="/atto-kartalari"
+					whileTap={{ scale: 0.95 }}
+					whileHover={{ scale: 1.05 }}
+					className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-gray-900 font-semibold shadow-lg hover:bg-gray-100 transition-all duration-300"
+					style={{
+						background: `linear-gradient(135deg, ${currentCard.color}20, white)`,
+						border: `2px solid ${currentCard.color}40`,
+					}}
+				>
+					<Wallet className="w-4 h-4" />
+					ATTO kartaga o'tish
+				</motion.a>
+			</motion.div>
+
+			{/* Enhanced Card Counter */}
+			<motion.div
+				className="absolute top-6 right-6 flex items-center gap-2 bg-black/20 backdrop-blur-md text-white px-4 py-2 rounded-full border border-white/10"
+				key={currentCardIndex}
+				initial={{ scale: 0.8, opacity: 0, y: -10 }}
+				animate={{ scale: 1, opacity: 1, y: 0 }}
+				transition={{ duration: 0.4, type: "spring" }}
+			>
+				<motion.div
+					className="w-2 h-2 rounded-full"
+					style={{ backgroundColor: currentCard.color }}
+					animate={{
+						scale: [1, 1.3, 1],
+						opacity: [0.7, 1, 0.7],
+					}}
+					transition={{
+						duration: 2,
+						repeat: Number.POSITIVE_INFINITY,
+					}}
+				/>
+				<span className="text-sm font-semibold">
+					{currentCardIndex + 1} / {attoCards.length}
+				</span>
+			</motion.div>
+		</div>
+	)
+}
+
+function TashkentMetroMap() {
+	const [activeStation, setActiveStation] = useState(0)
+
+	// Tashkent Metro Lines and Stations
+	const metroLines = {
+		chilonzor: {
+			name: "Chilonzor liniyasi",
+			color: "#3b82f6",
+			stations: [
+				{ name: "Chilonzor", x: 100, y: 300 },
+				{ name: "Mirzo Ulug'bek", x: 150, y: 250 },
+				{ name: "Novza", x: 200, y: 200 },
+				{ name: "Milliy bog'", x: 250, y: 150 },
+				{ name: "Amir Temur Hiyoboni", x: 300, y: 100 },
+				{ name: "Alisher Navoiy", x: 350, y: 100 },
+				{ name: "Pushkin", x: 400, y: 100 },
+				{ name: "Hamid Olimjon", x: 450, y: 100 },
+			],
+		},
+		uzbekistan: {
+			name: "O'zbekiston liniyasi",
+			color: "#ef4444",
+			stations: [
+				{ name: "Olmazor", x: 200, y: 50 },
+				{ name: "Choshtepa", x: 250, y: 75 },
+				{ name: "Abdulla Qodiriy", x: 300, y: 100 },
+				{ name: "Alisher Navoiy", x: 350, y: 100 },
+				{ name: "Ming Orik", x: 400, y: 125 },
+				{ name: "Pakhtakor", x: 450, y: 150 },
+				{ name: "Bunyodkor", x: 500, y: 175 },
+				{ name: "Mashinasozlar", x: 550, y: 200 },
+			],
+		},
+		yunusobod: {
+			name: "Yunusobod liniyasi",
+			color: "#10b981",
+			stations: [
+				{ name: "Yunusobod", x: 350, y: 50 },
+				{ name: "Shahriston", x: 350, y: 100 },
+				{ name: "Kosmonavtlar", x: 350, y: 150 },
+				{ name: "Oybek", x: 350, y: 200 },
+				{ name: "Toshkent", x: 350, y: 250 },
+				{ name: "Bodomzor", x: 350, y: 300 },
+				{ name: "Habib Abdullayev", x: 350, y: 350 },
+			],
+		},
+	}
+
+	useEffect(() => {
+		const interval = setInterval(() => {
+			setActiveStation((prev) => (prev + 1) % 20)
+		}, 800)
+		return () => clearInterval(interval)
+	}, [])
+
+	return (
+		<svg className="w-full h-full" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet">
+			{/* Background Grid */}
+			<defs>
+				<pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+					<path d="M 20 0 L 0 0 0 20" fill="none" stroke="#ffffff10" strokeWidth="0.5" />
+				</pattern>
+
+				{/* Glow Effects */}
+				<filter id="glow">
+					<feGaussianBlur stdDeviation="3" result="coloredBlur" />
+					<feMerge>
+						<feMergeNode in="coloredBlur" />
+						<feMergeNode in="SourceGraphic" />
+					</feMerge>
+				</filter>
+			</defs>
+
+			<rect width="100%" height="100%" fill="url(#grid)" />
+
+			{/* Metro Lines */}
+			{Object.entries(metroLines).map(([lineKey, line]) => {
+				const pathData = line.stations
+					.map((station, index) => (index === 0 ? `M${station.x},${station.y}` : `L${station.x},${station.y}`))
+					.join(" ")
+
+				return (
+					<g key={lineKey}>
+						{/* Line Path */}
+						<motion.path
+							d={pathData}
+							stroke={line.color}
+							strokeWidth="4"
+							fill="none"
+							filter="url(#glow)"
+							initial={{ pathLength: 0 }}
+							animate={{ pathLength: 1 }}
+							transition={{
+								duration: 3,
+								delay: Object.keys(metroLines).indexOf(lineKey) * 0.5,
+								ease: "easeInOut",
+							}}
+						/>
+
+						{/* Animated Train */}
+						<motion.circle
+							r="4"
+							fill={line.color}
+							filter="url(#glow)"
+							initial={{ offsetDistance: "0%" }}
+							animate={{ offsetDistance: "100%" }}
+							transition={{
+								duration: 8,
+								repeat: Number.POSITIVE_INFINITY,
+								ease: "linear",
+								delay: Object.keys(metroLines).indexOf(lineKey) * 2,
+							}}
+							style={{
+								offsetPath: `path('${pathData}')`,
+								offsetRotate: "auto",
+							}}
+						/>
+
+						{/* Stations */}
+						{line.stations.map((station, stationIndex) => {
+							const globalStationIndex = Object.keys(metroLines).indexOf(lineKey) * 8 + stationIndex
+							const isActive = globalStationIndex === activeStation
+
+							return (
+								<g key={station.name}>
+									{/* Station Circle */}
+									<motion.circle
+										cx={station.x}
+										cy={station.y}
+										r={isActive ? "6" : "4"}
+										fill={isActive ? "#ffffff" : line.color}
+										stroke="#ffffff"
+										strokeWidth="2"
+										filter={isActive ? "url(#glow)" : "none"}
+										initial={{ scale: 0 }}
+										animate={{
+											scale: isActive ? [1, 1.3, 1] : 1,
+										}}
+										transition={{
+											scale: { duration: 0.6, repeat: isActive ? Number.POSITIVE_INFINITY : 0 },
+											initial: { duration: 0.3, delay: globalStationIndex * 0.1 },
+										}}
+									/>
+
+									{/* Station Name (only for major stations) */}
+									{(stationIndex % 2 === 0 || station.name === "Alisher Navoiy") && (
+										<motion.text
+											x={station.x}
+											y={station.y - 12}
+											textAnchor="middle"
+											className="text-xs font-semibold fill-white/80"
+											initial={{ opacity: 0 }}
+											animate={{ opacity: isActive ? 1 : 0.6 }}
+											transition={{ duration: 0.3 }}
+										>
+											{station.name}
+										</motion.text>
+									)}
+
+									{/* Pulsing Ring for Active Station */}
+									{isActive && (
+										<motion.circle
+											cx={station.x}
+											cy={station.y}
+											r="8"
+											fill="none"
+											stroke="#ffffff"
+											strokeWidth="1"
+											initial={{ scale: 0, opacity: 1 }}
+											animate={{
+												scale: [1, 2, 3],
+												opacity: [1, 0.5, 0],
+											}}
+											transition={{
+												duration: 2,
+												repeat: Number.POSITIVE_INFINITY,
+												ease: "easeOut",
+											}}
+										/>
+									)}
+								</g>
+							)
+						})}
+					</g>
+				)
+			})}
+
+			{/* Transfer Stations (Interchange Points) */}
+			<g>
+				{/* Alisher Navoiy - Major Transfer Hub */}
+				<motion.circle
+					cx="350"
+					cy="100"
+					r="8"
+					fill="#ffffff"
+					stroke="#fbbf24"
+					strokeWidth="3"
+					filter="url(#glow)"
+					animate={{
+						scale: [1, 1.2, 1],
+						rotate: [0, 360],
+					}}
+					transition={{
+						scale: { duration: 2, repeat: Number.POSITIVE_INFINITY },
+						rotate: { duration: 8, repeat: Number.POSITIVE_INFINITY, ease: "linear" },
+					}}
+				/>
+
+				{/* Transfer Icon */}
+				<motion.path
+					d="M345,95 L355,95 M345,105 L355,105 M350,90 L350,110"
+					stroke="#1f2937"
+					strokeWidth="1.5"
+					strokeLinecap="round"
+					animate={{ opacity: [0.7, 1, 0.7] }}
+					transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY }}
+				/>
+			</g>
+
+			{/* Line Legend */}
+			<g transform="translate(20, 20)">
+				{Object.entries(metroLines).map(([lineKey, line], index) => (
+					<g key={lineKey} transform={`translate(0, ${index * 25})`}>
+						<circle cx="8" cy="8" r="4" fill={line.color} />
+						<text x="20" y="12" className="text-xs fill-white/90 font-medium">
+							{line.name}
+						</text>
+					</g>
+				))}
+			</g>
+
+			{/* Animated Background Elements */}
+			<g opacity="0.1">
+				{[...Array(5)].map((_, i) => (
+					<motion.circle
+						key={i}
+						cx={100 + i * 120}
+						cy={200}
+						r="2"
+						fill="#ffffff"
+						animate={{
+							scale: [0, 1, 0],
+							opacity: [0, 0.5, 0],
+						}}
+						transition={{
+							duration: 3,
+							repeat: Number.POSITIVE_INFINITY,
+							delay: i * 0.6,
+							ease: "easeInOut",
+						}}
+					/>
+				))}
+			</g>
+		</svg>
 	)
 }
