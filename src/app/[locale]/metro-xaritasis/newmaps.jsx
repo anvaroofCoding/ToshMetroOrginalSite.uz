@@ -11,14 +11,8 @@ import {
   ChevronLeft,
   ChevronRight,
   Play,
-  Clock,
   MapPin,
-  Users,
   Train,
-  Calendar,
-  Ruler,
-  User,
-  Star,
   ArrowLeft,
   ArrowUpDown,
   Navigation,
@@ -39,8 +33,12 @@ export default function TashkentMetroMap() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [showImageViewer, setShowImageViewer] = useState(false)
   const [viewerImageIndex, setViewerImageIndex] = useState(0)
+  const [showVideoPlayer, setShowVideoPlayer] = useState(false)
+  const [currentVideo, setCurrentVideo] = useState(null)
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false)
   const svgRef = useRef(null)
   const containerRef = useRef(null)
+  const videoRef = useRef(null)
 
   // Route planning states
   const [showRoutePanel, setShowRoutePanel] = useState(true)
@@ -49,6 +47,23 @@ export default function TashkentMetroMap() {
   const [currentRoute, setCurrentRoute] = useState([])
   const [isCalculatingRoute, setIsCalculatingRoute] = useState(false)
   const [routeInfo, setRouteInfo] = useState(null)
+  const [routeAnimationProgress, setRouteAnimationProgress] = useState(0)
+  const [isAnimatingRoute, setIsAnimatingRoute] = useState(false)
+
+  // Responsive breakpoint detection
+  const [isMobile, setIsMobile] = useState(false)
+  const [isTablet, setIsTablet] = useState(false)
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 768)
+      setIsTablet(window.innerWidth >= 768 && window.innerWidth < 1024)
+    }
+
+    checkScreenSize()
+    window.addEventListener("resize", checkScreenSize)
+    return () => window.removeEventListener("resize", checkScreenSize)
+  }, [])
 
   // Increased distances between stations
   const stations = {
@@ -111,110 +126,39 @@ export default function TashkentMetroMap() {
     Qipchoq: { x: 480, y: 1500, line: "yellow", nameUz: "Qipchoq" },
   }
 
-  // Detailed station information
+  // Updated station information with working video URLs
   const stationDetails = {
     "Mustaqillik maydoni": {
-      opened: "1977",
-      depth: "22m",
-      dailyPassengers: "45,000",
-      architect: "Igor Rozhin",
-      history:
-        "Dastlab 'Lenin maydoni' deb nomlangan bu stansiya 1991-yilda O'zbekiston mustaqillikka erishgach qayta nomlandi. U tizimdagi eng muhim stansiyalardan biri bo'lib, shaharning asosiy Mustaqillik maydoniga ulanadi. Stansiya sovet davri arxitekturasi va zamonaviy ta'mirlash ishlari bilan ajralib turadi.",
-      features: [
-        "Yer osti savdo markazi",
-        "Bir nechta chiqish joylari",
-        "Yaqin atrofdagi tarixiy yodgorliklar",
-        "Zamonaviy eskalatorlar",
-        "Keng platformalar",
-      ],
-      nearbyAttractions: [
-        "Mustaqillik maydoni",
-        "Senat binosi",
-        "O'zbekiston mehmonxonasi",
-        "Amir Temur muzeyi",
-        "Milliy kutubxona",
-      ],
       description:
-        "Sovet davri arxitekturasi va zamonaviy ta'mirlash ishlari bilan ajralib turadigan markaziy stansiya. Stansiya o'zining keng zallari va O'zbekiston madaniyati hamda mustaqilligini aks ettiruvchi badiiy bezaklari bilan mashhur. Bu yerda har kuni minglab yo'lovchi o'tadi va u shaharning eng muhim transport tugunlaridan biridir.",
+        "Mustaqillik Maydoni — Toshkent metrosining Chilonzor yo'nalishidagi bekat bo'lib, 1977-yilda ochilgan. Ilgari \"Lenin maydoni\" deb atalgan. Bekat oq marmar, granit va milliy naqshlar bilan bezatilgan bo'lib, arxitekturasi bilan ajralib turadi. 1991-yilda O'zbekiston mustaqillikka erishgach, bekatga hozirgi nom berilgan. U Mustaqillik maydoni markazida joylashgan bo'lib, yodgorliklar va davlat muassasalariga yaqin.",
       images: [
-        "/placeholder.svg?height=400&width=600&text=Mustaqillik+maydoni+Platform",
-        "/placeholder.svg?height=400&width=600&text=Mustaqillik+maydoni+Hall",
-        "/placeholder.svg?height=400&width=600&text=Mustaqillik+maydoni+Entrance",
-        "/placeholder.svg?height=400&width=600&text=Mustaqillik+maydoni+Architecture",
-        "/placeholder.svg?height=400&width=600&text=Mustaqillik+maydoni+Decorations",
-        "/placeholder.svg?height=400&width=600&text=Mustaqillik+maydoni+Night",
+        "https://avatars.mds.yandex.net/get-altay/6143287/2a000001845ffb2a3f145fe877d7cb1b6882/orig",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Mustaqillik_Maydoni_station_of_Chilanzar_Line_of_Tashkent_Metro_in_Tashkent_Uzbekistan.jpg/960px-Mustaqillik_Maydoni_station_of_Chilanzar_Line_of_Tashkent_Metro_in_Tashkent_Uzbekistan.jpg",
       ],
       videos: [
         {
-          title: "Virtual tur - Mustaqillik maydoni",
-          thumbnail: "/placeholder.svg?height=200&width=300&text=Virtual+Tour",
+          title: "Mustaqillik maydoni",
+          url: "https://www.youtube.com/embed/vrYXZa5es4A",
+          thumbnail: "https://avatars.mds.yandex.net/get-vh/6331688/2a0000018f628a33aac7a8b6b3fe0eb629e7/smart_crop_516x290",
         },
-        { title: "Tarixiy lavhalar", thumbnail: "/placeholder.svg?height=200&width=300&text=History+Documentary" },
+
       ],
     },
-    "Alisher Navoiy": {
-      opened: "1984",
-      depth: "18m",
-      dailyPassengers: "38,000",
-      architect: "Shavkat Abdurakhimov",
-      history:
-        "Buyuk o'zbek shoiri Alisher Navoiy nomi bilan atalgan bu stansiya qizil va ko'k liniyalar o'rtasidagi asosiy o'tish nuqtasi bo'lib xizmat qiladi. Stansiya Navoiy asarlaridan sahnalarni tasvirlaydigan chiroyli mozaikalar bilan bezatilgan. Bu yerda o'zbek adabiyoti va madaniyatining boy tarixini aks ettiruvchi san'at asarlari joylashgan.",
-      features: [
-        "O'tish stansiyasi (Transfer)",
-        "Madaniy ko'rgazmalar",
-        "Badiiy mozaikalar",
-        "Adabiy qo'lyozmalar namoyishi",
-        "Zamonaviy yo'naltirish tizimlari",
-      ],
-      nearbyAttractions: [
-        "Navoiy nomidagi opera teatri",
-        "Tasviriy san'at muzeyi",
-        "Amir Temur maydoni",
-        "Milliy kutubxona",
-        "Adabiyot muzeyi",
-      ],
-      description:
-        "Bu o'tish stansiyasi o'zining madaniy ahamiyati va an'anaviy o'zbek naqshlari hamda zamonaviy arxitektura elementlarini o'z ichiga olgan chiroyli ichki dizayni bilan mashhur. Stansiya devorlarida Alisher Navoiyning hayoti va ijodiga bag'ishlangan mozaikalar joylashgan bo'lib, ular o'zbek san'atining eng yaxshi namunalaridan hisoblanadi.",
+    "Buyuk ipak yo'li": {
+      description: "Buyuk Ipak Yoli — Toshkent metrosining Chilonzor yo‘nalishidagi so‘nggi (sharqiy) bekatidir. Bu bekat 2001-yil 24-oktabrda ochilgan. U Toshkent shahrining Yakkasaroy tumanida joylashgan. Bekat nomi qadimgi dunyo savdo yo‘llarining eng mashhuri — Buyuk Ipak Yo‘li sharafiga qo‘yilgan. Arxitekturasi milliy uslubda bezatilgan bo‘lib, devorlarida qadimiy karvonlar, ipak yo‘li xaritalari va Sharqona naqshlar tasvirlangan. Platforma yer ostida joylashgan, yo‘lovchilarga qulay sharoitlar yaratilgan.",
       images: [
-        "/placeholder.svg?height=400&width=600&text=Alisher+Navoiy+Mosaics",
-        "/placeholder.svg?height=400&width=600&text=Alisher+Navoiy+Platform",
-        "/placeholder.svg?height=400&width=600&text=Alisher+Navoiy+Transfer+Hall",
-        "/placeholder.svg?height=400&width=600&text=Alisher+Navoiy+Art+Details",
+        "https://avatars.mds.yandex.net/get-altay/6236655/2a000001845f818c76f3589fc4e161e39bf7/L_height",
+        "https://avatars.mds.yandex.net/get-altay/10636707/2a0000018a257c34a9c335e0fd19fd08c166/L_height",
       ],
       videos: [
-        { title: "Mozaikalar haqida", thumbnail: "/placeholder.svg?height=200&width=300&text=Mosaics+Documentary" },
+        {
+          title: "Buyuk ipak yo'li",
+          url: "https://youtu.be/oJeTS92hCBQ?feature=shared",
+          thumbnail: "https://avatars.mds.yandex.net/get-altay/6203703/2a0000018955bfa463d4ecb3c7ac5483cb1d/orig",
+        },
+
       ],
-    },
-    Toshkent: {
-      opened: "1980",
-      depth: "20m",
-      dailyPassengers: "52,000",
-      architect: "Vladimir Kurbatov",
-      history:
-        "Toshkent metropoliteni tizimining asosiy stansiyasi bo'lib, markaziy transport markazi vazifasini bajaradi. Dastlab Sovet metro tizimining ulug'vorligini mahalliy o'zbek madaniy elementlari bilan namoyish etish uchun mo'ljallangan. Bu stansiya shaharning eng gavjum joylaridan biri bo'lib, har kuni minglab yo'lovchi bu yerdan o'tadi.",
-      features: [
-        "Asosiy terminal",
-        "Savdo ob'ektlari",
-        "Turistik ma'lumot markazi",
-        "Keng kutish zonalari",
-        "Zamonaviy xavfsizlik tizimlari",
-      ],
-      nearbyAttractions: [
-        "Toshkent temir yo'l vokzali",
-        "Chorsu bozori",
-        "Ko'kaldosh madrasasi",
-        "Hazrati Imom majmuasi",
-        "Eski shahar",
-      ],
-      description:
-        "Toshkent metropolitenining flagman stansiyasi bo'lib, Sovet monumentalizmi va an'anaviy o'zbek dizayn elementlarini uyg'unlashtirgan ta'sirchan arxitekturaga ega. Stansiya o'zining keng zallari, baland shiftlari va noyob bezaklari bilan ajralib turadi. Bu yerda zamonaviy qulayliklar va tarixiy me'morchilik uslubi mukammal tarzda birlashtirilgan.",
-      images: [
-        "/placeholder.svg?height=400&width=600&text=Toshkent+Main+Hall",
-        "/placeholder.svg?height=400&width=600&text=Toshkent+Platform+View",
-        "/placeholder.svg?height=400&width=600&text=Toshkent+Architecture+Details",
-      ],
-      videos: [{ title: "Stansiya tarixi", thumbnail: "/placeholder.svg?height=200&width=300&text=Station+History" }],
-    },
+    }
   }
 
   const lineColors = {
@@ -342,6 +286,7 @@ export default function TashkentMetroMap() {
 
     setIsCalculatingRoute(true)
     setCurrentRoute([])
+    setRouteAnimationProgress(0)
 
     // Simulate calculation delay for better UX
     await new Promise((resolve) => setTimeout(resolve, 800))
@@ -372,8 +317,23 @@ export default function TashkentMetroMap() {
         estimatedTime: Math.ceil((route.length - 1) * 2 + transfers.length * 3),
       })
 
-      // Set the complete route immediately without animation
+      // Set the route and start animation
       setCurrentRoute(route)
+      setIsAnimatingRoute(true)
+
+      // Animate route drawing
+      const animationDuration = 2000 // 2 seconds
+      const steps = 60
+      const stepDuration = animationDuration / steps
+
+      for (let i = 0; i <= steps; i++) {
+        setTimeout(() => {
+          setRouteAnimationProgress(i / steps)
+          if (i === steps) {
+            setIsAnimatingRoute(false)
+          }
+        }, i * stepDuration)
+      }
     }
 
     setIsCalculatingRoute(false)
@@ -385,6 +345,8 @@ export default function TashkentMetroMap() {
     setRouteInfo(null)
     setFromStation("")
     setToStation("")
+    setRouteAnimationProgress(0)
+    setIsAnimatingRoute(false)
   }, [])
 
   const handleZoomIn = () => {
@@ -424,28 +386,39 @@ export default function TashkentMetroMap() {
     }
   }
 
+  // Video player functions
+  const openVideoPlayer = (video) => {
+    setCurrentVideo(video)
+    setShowVideoPlayer(true)
+    setIsVideoPlaying(false)
+  }
+
+  const closeVideoPlayer = () => {
+    setShowVideoPlayer(false)
+    setCurrentVideo(null)
+    setIsVideoPlaying(false)
+  }
+
+  const toggleVideoPlayback = () => {
+    if (videoRef.current) {
+      if (isVideoPlaying) {
+        videoRef.current.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', "*")
+      } else {
+        videoRef.current.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', "*")
+      }
+      setIsVideoPlaying(!isVideoPlaying)
+    }
+  }
+
   // Get station details with fallback
   const getStationDetails = (stationName) => {
     const station = stations[stationName]
     const details = stationDetails[stationName]
     return {
       ...station,
-      opened: details?.opened || "1980-yillar",
-      depth: details?.depth || "15-25m",
-      dailyPassengers: details?.dailyPassengers || "25,000",
-      architect: details?.architect || "Sovet metro arxitektorlari",
-      history:
-        details?.history ||
-        `${station?.nameUz} stansiyasi Toshkent metropoliteni tizimining muhim qismi bo'lib, har kuni minglab yo'lovchilarga xizmat ko'rsatadi va shaharning turli qismlarini bog'laydi.`,
-      features: details?.features || ["Zamonaviy qulayliklar", "Nogironlar uchun qulayliklar", "Xavfsizlik tizimlari"],
-      nearbyAttractions: details?.nearbyAttractions || [
-        "Mahalliy diqqatga sazovor joylar",
-        "Savdo hududlari",
-        "Madaniy ob'ektlar",
-      ],
       description:
         details?.description ||
-        `Zamonaviy qulayliklarga ega va ${lineNames[station?.line]} tarmog'ida muhim transport markazi bo'lib xizmat qiladigan yaxshi loyihalashtirilgan metro stansiyasi.`,
+        `${station?.nameUz} stansiyasi Toshkent metropoliteni tizimining muhim qismi bo'lib, har kuni minglab yo'lovchilarga xizmat ko'rsatadi va shaharning turli qismlarini bog'laydi.`,
       images: details?.images || [
         `/placeholder.svg?height=400&width=600&text=${encodeURIComponent(station?.nameUz + " 1")}`,
         `/placeholder.svg?height=400&width=600&text=${encodeURIComponent(station?.nameUz + " 2")}`,
@@ -454,6 +427,7 @@ export default function TashkentMetroMap() {
       videos: details?.videos || [
         {
           title: "Virtual tur",
+          url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
           thumbnail: `/placeholder.svg?height=200&width=300&text=${encodeURIComponent(station?.nameUz + " Video")}`,
         },
       ],
@@ -491,7 +465,9 @@ export default function TashkentMetroMap() {
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.key === "Escape") {
-        if (showImageViewer) {
+        if (showVideoPlayer) {
+          closeVideoPlayer()
+        } else if (showImageViewer) {
           setShowImageViewer(false)
         } else if (showModal) {
           setShowModal(false)
@@ -503,7 +479,7 @@ export default function TashkentMetroMap() {
     }
     document.addEventListener("keydown", handleKeyDown)
     return () => document.removeEventListener("keydown", handleKeyDown)
-  }, [isFullscreen, showModal, showImageViewer])
+  }, [isFullscreen, showModal, showImageViewer, showVideoPlayer])
 
   // Setup touch event listeners
   useEffect(() => {
@@ -599,24 +575,11 @@ export default function TashkentMetroMap() {
 
   return (
     <>
-      <style jsx>{`
-        @keyframes slideIn {
-          from {
-            opacity: 0;
-            transform: translateX(-20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-      `}</style>
-
       <div className={`${isFullscreen ? "fixed inset-0 z-[9999] bg-white" : "w-full h-screen"} relative flex`}>
         {/* Route Planning Panel - Left Side */}
         {!isFullscreen && (
           <div
-            className={`${showRoutePanel ? "w-80 sm:w-96" : "w-0"} transition-all duration-300 ease-in-out overflow-hidden bg-white border-r border-gray-200 shadow-lg z-30`}
+            className={`${showRoutePanel ? (isMobile ? "w-full" : "w-80 sm:w-96") : "w-0"} transition-all duration-300 ease-in-out overflow-hidden bg-white border-r border-gray-200 shadow-lg z-30 ${isMobile && showRoutePanel ? "absolute inset-0" : ""}`}
           >
             <div className="h-full flex flex-col">
               {/* Panel Header */}
@@ -652,7 +615,7 @@ export default function TashkentMetroMap() {
                     <select
                       value={fromStation}
                       onChange={(e) => setFromStation(e.target.value)}
-                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
+                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white text-sm"
                     >
                       <option value="">Stansiyani tanlang</option>
                       {Object.keys(stations)
@@ -691,7 +654,7 @@ export default function TashkentMetroMap() {
                     <select
                       value={toStation}
                       onChange={(e) => setToStation(e.target.value)}
-                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
+                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white text-sm"
                     >
                       <option value="">Stansiyani tanlang</option>
                       {Object.keys(stations)
@@ -744,7 +707,7 @@ export default function TashkentMetroMap() {
                   <Card className="border-0 shadow-md bg-gradient-to-br from-blue-50 to-blue-100">
                     <CardHeader className="pb-3">
                       <CardTitle className="text-lg text-blue-800 flex items-center gap-2">
-                        <Clock className="w-5 h-5" />
+                        <Train className="w-5 h-5" />
                         Yo'nalish ma'lumotlari
                       </CardTitle>
                     </CardHeader>
@@ -791,16 +754,12 @@ export default function TashkentMetroMap() {
                         {currentRoute.map((station, index) => (
                           <div
                             key={station}
-                            className={`flex items-center gap-3 p-2 rounded-lg transition-all duration-300 ${
-                              index === 0
+                            className={`flex items-center gap-3 p-2 rounded-lg transition-all duration-300 ${index === 0
                                 ? "bg-blue-100"
                                 : index === currentRoute.length - 1
                                   ? "bg-red-100"
                                   : "bg-gray-50"
-                            }`}
-                            style={{
-                              animation: `slideIn 0.3s ease-out ${index * 0.1}s both`,
-                            }}
+                              }`}
                           >
                             <div className="flex flex-col items-center">
                               <div
@@ -834,20 +793,18 @@ export default function TashkentMetroMap() {
           </div>
         )}
 
-        {/* Route Panel Toggle Button - Modern Redesign */}
-        {!isFullscreen && (
+        {/* Route Panel Toggle Button */}
+        {!isFullscreen && !isMobile && (
           <div
-            className={`fixed top-1/2 -translate-y-1/2 z-20 transition-all duration-300 ${
-              showRoutePanel ? "left-72 sm:left-80" : "left-0"
-            }`}
+            className={`fixed top-1/2 -translate-y-1/2 z-20 transition-all duration-300 ${showRoutePanel ? "left-72 sm:left-80" : "left-0"
+              }`}
           >
             <Button
               onClick={() => setShowRoutePanel(!showRoutePanel)}
-              className={`group ${
-                showRoutePanel
+              className={`group ${showRoutePanel
                   ? "bg-white text-blue-800 border border-blue-300 rounded-l-xl px-3 py-6 h-28"
                   : "bg-blue-700 text-white rounded-r-xl px-4 py-7 h-32"
-              } flex flex-col items-center justify-center transition-all duration-300`}
+                } flex flex-col items-center justify-center transition-all duration-300`}
             >
               {showRoutePanel ? (
                 <div className="flex -ml-15 flex-col items-center space-y-1">
@@ -871,13 +828,25 @@ export default function TashkentMetroMap() {
           </div>
         )}
 
+        {/* Mobile Route Panel Toggle */}
+        {!isFullscreen && isMobile && (
+          <div className="fixed bottom-4 right-4 z-20">
+            <Button
+              onClick={() => setShowRoutePanel(!showRoutePanel)}
+              className="bg-blue-700 text-white rounded-full w-14 h-14 flex items-center justify-center shadow-lg"
+            >
+              <Navigation className="w-6 h-6" />
+            </Button>
+          </div>
+        )}
+
         {/* Main Content */}
         <div className="flex-1 relative">
           {/* Back Button - Top Left */}
           <div className="absolute top-4 left-4 z-20">
             <Button
               onClick={goToHome}
-              size="lg"
+              size={isMobile ? "default" : "lg"}
               className="bg-blue-900 hover:bg-blue-800 text-white rounded-full shadow-lg px-4 sm:px-6 py-2 sm:py-3 flex items-center gap-2"
             >
               <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -887,7 +856,9 @@ export default function TashkentMetroMap() {
 
           {/* Zoom Controls - Bottom Left */}
           {!showModal && (
-            <div className="absolute bottom-4 left-4 z-10 bg-white/95 backdrop-blur-sm rounded-lg p-2 shadow-lg flex flex-col gap-2">
+            <div
+              className={`absolute ${isMobile ? "bottom-20" : "bottom-4"} left-4 z-10 bg-white/95 backdrop-blur-sm rounded-lg p-2 shadow-lg flex ${isMobile ? "flex-row gap-2" : "flex-col gap-2"}`}
+            >
               <Button
                 onClick={handleZoomIn}
                 size="sm"
@@ -921,18 +892,19 @@ export default function TashkentMetroMap() {
                 <Maximize className="w-4 h-4" />
               </Button>
               {/* Zoom indicator */}
-              <div className="bg-white/95 backdrop-blur-sm rounded-lg p-2 text-center">
-                <p className="text-xs text-gray-700 font-medium">{Math.round(transform.scale * 100)}%</p>
-              </div>
+              {!isMobile && (
+                <div className="bg-white/95 backdrop-blur-sm rounded-lg p-2 text-center">
+                  <p className="text-xs text-gray-700 font-medium">{Math.round(transform.scale * 100)}%</p>
+                </div>
+              )}
             </div>
           )}
 
           {/* Map Container */}
           <div
             ref={containerRef}
-            className={`relative overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 ${
-              showModal && !isFullscreen ? "w-full lg:w-2/3" : "w-full"
-            } h-full transition-all duration-300`}
+            className={`relative overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 ${showModal && !isFullscreen && !isMobile ? "w-full lg:w-2/3" : "w-full"
+              } h-full transition-all duration-300`}
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
@@ -973,31 +945,16 @@ export default function TashkentMetroMap() {
                 </linearGradient>
                 {/* Enhanced route gradient */}
                 <linearGradient id="routeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#06D6A0" />
-                  <stop offset="25%" stopColor="#10B981" />
-                  <stop offset="50%" stopColor="#34D399" />
-                  <stop offset="75%" stopColor="#10B981" />
-                  <stop offset="100%" stopColor="#06D6A0" />
+                  <stop offset="0%" stopColor="#10B981" />
+                  <stop offset="20%" stopColor="#34D399" />
+                  <stop offset="40%" stopColor="#6EE7B7" />
+                  <stop offset="60%" stopColor="#A7F3D0" />
+                  <stop offset="80%" stopColor="#FDE047" />
+                  <stop offset="100%" stopColor="#FACC15" />
                 </linearGradient>
                 {/* Enhanced drop shadow filter */}
                 <filter id="dropshadow" x="-50%" y="-50%" width="200%" height="200%">
                   <feDropShadow dx="3" dy="3" stdDeviation="4" floodOpacity="0.4" />
-                </filter>
-                {/* Glow effect filter */}
-                <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-                  <feGaussianBlur stdDeviation="3" result="coloredBlur" />
-                  <feMerge>
-                    <feMergeNode in="coloredBlur" />
-                    <feMergeNode in="SourceGraphic" />
-                  </feMerge>
-                </filter>
-                {/* Route glow filter */}
-                <filter id="routeGlow" x="-50%" y="-50%" width="200%" height="200%">
-                  <feGaussianBlur stdDeviation="4" result="coloredBlur" />
-                  <feMerge>
-                    <feMergeNode in="coloredBlur" />
-                    <feMergeNode in="SourceGraphic" />
-                  </feMerge>
                 </filter>
               </defs>
 
@@ -1034,13 +991,26 @@ export default function TashkentMetroMap() {
                 )
               })}
 
-              {/* Draw route lines - Static without animation */}
+              {/* Draw route lines with animation */}
               {currentRoute.length > 1 &&
                 currentRoute.map((station, index) => {
                   if (index === currentRoute.length - 1) return null
                   const fromStation = stations[station]
                   const toStation = stations[currentRoute[index + 1]]
                   if (!fromStation || !toStation) return null
+
+                  // Calculate if this segment should be visible based on animation progress
+                  const segmentProgress = (index + 1) / (currentRoute.length - 1)
+                  const shouldShow = routeAnimationProgress >= segmentProgress
+                  const segmentOpacity = shouldShow ? 1 : 0
+
+                  // For partial segments at the animation edge
+                  const isCurrentSegment =
+                    routeAnimationProgress >= index / (currentRoute.length - 1) &&
+                    routeAnimationProgress < segmentProgress
+                  const partialProgress = isCurrentSegment
+                    ? (routeAnimationProgress - index / (currentRoute.length - 1)) * (currentRoute.length - 1)
+                    : 1
 
                   return (
                     <g key={`route-${index}`}>
@@ -1050,10 +1020,14 @@ export default function TashkentMetroMap() {
                         y1={fromStation.y}
                         x2={toStation.x}
                         y2={toStation.y}
-                        stroke="#06D6A0"
+                        stroke="#10B981"
                         strokeWidth="16"
                         strokeLinecap="round"
-                        opacity="0.3"
+                        opacity={segmentOpacity * 0.4}
+                        strokeDasharray={isCurrentSegment ? `${partialProgress * 100}% 100%` : "none"}
+                        style={{
+                          transition: isAnimatingRoute ? "none" : "opacity 0.3s ease",
+                        }}
                       />
                       {/* Route middle glow */}
                       <line
@@ -1061,10 +1035,14 @@ export default function TashkentMetroMap() {
                         y1={fromStation.y}
                         x2={toStation.x}
                         y2={toStation.y}
-                        stroke="#10B981"
+                        stroke="#34D399"
                         strokeWidth="12"
                         strokeLinecap="round"
-                        opacity="0.6"
+                        opacity={segmentOpacity * 0.7}
+                        strokeDasharray={isCurrentSegment ? `${partialProgress * 100}% 100%` : "none"}
+                        style={{
+                          transition: isAnimatingRoute ? "none" : "opacity 0.3s ease",
+                        }}
                       />
                       {/* Main route line */}
                       <line
@@ -1076,6 +1054,11 @@ export default function TashkentMetroMap() {
                         strokeWidth="8"
                         strokeLinecap="round"
                         filter="url(#dropshadow)"
+                        opacity={segmentOpacity}
+                        strokeDasharray={isCurrentSegment ? `${partialProgress * 100}% 100%` : "none"}
+                        style={{
+                          transition: isAnimatingRoute ? "none" : "opacity 0.3s ease",
+                        }}
                       />
                       {/* Route highlight line */}
                       <line
@@ -1086,13 +1069,17 @@ export default function TashkentMetroMap() {
                         stroke="#FFFFFF"
                         strokeWidth="2"
                         strokeLinecap="round"
-                        opacity="0.8"
+                        opacity={segmentOpacity * 0.8}
+                        strokeDasharray={isCurrentSegment ? `${partialProgress * 100}% 100%` : "none"}
+                        style={{
+                          transition: isAnimatingRoute ? "none" : "opacity 0.3s ease",
+                        }}
                       />
                     </g>
                   )
                 })}
 
-              {/* Draw stations with enhanced mobile styling */}
+              {/* Draw stations */}
               {Object.entries(stations).map(([name, station]) => {
                 const isSelected = selectedStation === name
                 const isInRoute = currentRoute.includes(name)
@@ -1101,7 +1088,7 @@ export default function TashkentMetroMap() {
 
                 return (
                   <g key={name}>
-                    {/* Station outer glow ring - Larger touch area */}
+                    {/* Station outer glow ring */}
                     <circle
                       cx={station.x}
                       cy={station.y}
@@ -1144,10 +1131,10 @@ export default function TashkentMetroMap() {
 
                     {/* Special markers for start/end stations */}
                     {isStartStation && (
-                      <circle cx={station.x} cy={station.y} r="4" fill="#3B82F6" className="animate-pulse" />
+                      <circle cx={station.x} cy={station.y} r="4" fill="#10B981" className="animate-pulse" />
                     )}
                     {isEndStation && (
-                      <circle cx={station.x} cy={station.y} r="4" fill="#EF4444" className="animate-pulse" />
+                      <circle cx={station.x} cy={station.y} r="4" fill="#FACC15" className="animate-pulse" />
                     )}
 
                     {/* Station name with enhanced styling */}
@@ -1155,11 +1142,10 @@ export default function TashkentMetroMap() {
                       x={station.x}
                       y={station.y - (isSelected ? 32 : isInRoute ? 30 : 28)}
                       textAnchor="middle"
-                      className={`font-bold pointer-events-none ${
-                        isSelected ? "fill-blue-800" : isInRoute ? "fill-green-800" : "fill-gray-800"
-                      }`}
+                      className={`font-bold pointer-events-none ${isSelected ? "fill-blue-800" : isInRoute ? "fill-green-700" : "fill-gray-800"
+                        }`}
                       style={{
-                        fontSize: isSelected ? "16px" : isInRoute ? "15px" : "14px",
+                        fontSize: isSelected ? "16px" : isInRoute ? "15px" : isMobile ? "12px" : "14px",
                         textShadow: "2px 2px 4px rgba(255,255,255,0.9), -1px -1px 2px rgba(255,255,255,0.9)",
                         fontFamily: "system-ui, -apple-system, sans-serif",
                       }}
@@ -1172,7 +1158,7 @@ export default function TashkentMetroMap() {
             </svg>
           </div>
 
-          {/* Station Details Modal - Mobile Optimized Sidebar */}
+          {/* Station Details Modal */}
           {showModal && !isFullscreen && currentStationDetails && (
             <>
               {/* Mobile Backdrop */}
@@ -1182,13 +1168,12 @@ export default function TashkentMetroMap() {
               <div
                 className={`fixed z-50 transform transition-transform duration-300 ease-in-out overflow-y-auto
                   ${showModal ? "translate-x-0" : "translate-x-full"}
-                  ${
-                    window.innerWidth < 768
-                      ? "inset-y-0 left-0 right-0 bg-white"
-                      : "inset-y-0 right-0 w-full sm:w-2/3 lg:w-1/3 xl:w-2/5 bg-white shadow-2xl border-l border-gray-200"
+                  ${isMobile
+                    ? "inset-y-0 left-0 right-0 bg-white"
+                    : "inset-y-0 right-0 w-full sm:w-2/3 lg:w-1/3 xl:w-2/5 bg-white shadow-2xl border-l border-gray-200"
                   }`}
               >
-                {/* Modal Header - Enhanced for Mobile */}
+                {/* Modal Header */}
                 <div className="sticky top-0 bg-gradient-to-r from-blue-900 to-blue-800 p-4 sm:p-6 flex items-center justify-between z-10 shadow-lg">
                   <div className="flex items-center gap-3 sm:gap-4 min-w-0 flex-1">
                     <div
@@ -1209,7 +1194,6 @@ export default function TashkentMetroMap() {
                       </div>
                     </div>
                   </div>
-                  {/* Close button */}
                   <Button
                     variant="ghost"
                     size="icon"
@@ -1221,55 +1205,34 @@ export default function TashkentMetroMap() {
                   </Button>
                 </div>
 
-                {/* Modal Content - Mobile Optimized */}
+                {/* Modal Content */}
                 <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
-                  {/* Quick Stats - Mobile Grid */}
-                  <div className="grid grid-cols-2 gap-2 sm:gap-4">
-                    <Card className="border-0 shadow-md bg-gradient-to-br from-blue-100 to-blue-200">
-                      <CardContent className="p-2 sm:p-4 text-center">
-                        <Calendar className="w-5 h-5 sm:w-8 sm:h-8 mx-auto mb-1 sm:mb-3 text-blue-900" />
-                        <div className="text-xs text-blue-800 font-medium mb-1">Ochilgan yili</div>
-                        <div className="text-sm sm:text-xl font-bold text-blue-900">{currentStationDetails.opened}</div>
-                      </CardContent>
-                    </Card>
-                    <Card className="border-0 shadow-md bg-gradient-to-br from-blue-100 to-blue-200">
-                      <CardContent className="p-2 sm:p-4 text-center">
-                        <Ruler className="w-5 h-5 sm:w-8 sm:h-8 mx-auto mb-1 sm:mb-3 text-blue-900" />
-                        <div className="text-xs text-blue-800 font-medium mb-1">Chuqurligi</div>
-                        <div className="text-sm sm:text-xl font-bold text-blue-900">{currentStationDetails.depth}</div>
-                      </CardContent>
-                    </Card>
-                    <Card className="border-0 shadow-md bg-gradient-to-br from-blue-100 to-blue-200">
-                      <CardContent className="p-2 sm:p-4 text-center">
-                        <Users className="w-5 h-5 sm:w-8 sm:h-8 mx-auto mb-1 sm:mb-3 text-blue-900" />
-                        <div className="text-xs text-blue-800 font-medium mb-1">Kunlik yo'lovchi</div>
-                        <div className="text-sm sm:text-xl font-bold text-blue-900">
-                          {currentStationDetails.dailyPassengers}
-                        </div>
-                      </CardContent>
-                    </Card>
-                    <Card className="border-0 shadow-md bg-gradient-to-br from-blue-100 to-blue-200">
-                      <CardContent className="p-2 sm:p-4 text-center">
-                        <User className="w-5 h-5 sm:w-8 sm:h-8 mx-auto mb-1 sm:mb-3 text-blue-900" />
-                        <div className="text-xs text-blue-800 font-medium mb-1">Arxitektor</div>
-                        <div className="text-xs sm:text-lg font-bold text-blue-900 leading-tight">
-                          {currentStationDetails.architect.split(" ").slice(0, 2).join(" ")}
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </div>
+                  {/* Description */}
+                  <Card className="border-0 shadow-lg bg-gradient-to-br from-blue-50 to-blue-100">
+                    <CardHeader className="pb-2 sm:pb-4">
+                      <CardTitle className="flex items-center gap-2 sm:gap-3 text-base sm:text-xl text-blue-900">
+                        <MapPin className="w-4 h-4 sm:w-6 sm:h-6 text-blue-700" />
+                        Tavsif
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-blue-800 leading-relaxed text-sm sm:text-base">
+                        {currentStationDetails.description}
+                      </p>
+                    </CardContent>
+                  </Card>
 
-                  {/* Image Gallery - Mobile Optimized */}
+                  {/* Image Gallery */}
                   <Card className="border-0 shadow-lg">
                     <CardHeader className="pb-2 sm:pb-4">
                       <CardTitle className="flex items-center gap-2 sm:gap-3 text-base sm:text-xl text-blue-900">
-                        <Star className="w-4 h-4 sm:w-6 sm:h-6 text-blue-700" />
-                        Galereya
+                        <MapPin className="w-4 h-4 sm:w-6 sm:h-6 text-blue-700" />
+                        Rasmlar
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="p-0">
                       <div className="relative">
-                        <div className="relative h-40 sm:h-64 lg:h-80 bg-gray-100 overflow-hidden">
+                        <div className="relative h-48 sm:h-64 lg:h-80 bg-gray-100 overflow-hidden">
                           <img
                             src={currentStationDetails.images[currentImageIndex] || "/placeholder.svg"}
                             alt={`${currentStationDetails.nameUz} ${currentImageIndex + 1}`}
@@ -1282,7 +1245,7 @@ export default function TashkentMetroMap() {
                               <Button
                                 variant="ghost"
                                 size="icon"
-                                className="absolute left-1 sm:left-4 top-1/2 transform -translate-y-1/2 bg-blue-900/60 hover:bg-blue-900/80 text-white rounded-full w-8 h-8 sm:w-12 sm:h-12 backdrop-blur-sm"
+                                className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 bg-blue-900/60 hover:bg-blue-900/80 text-white rounded-full w-8 h-8 sm:w-12 sm:h-12 backdrop-blur-sm"
                                 onClick={prevImage}
                               >
                                 <ChevronLeft className="w-4 h-4 sm:w-6 sm:h-6" />
@@ -1290,7 +1253,7 @@ export default function TashkentMetroMap() {
                               <Button
                                 variant="ghost"
                                 size="icon"
-                                className="absolute right-1 sm:right-4 top-1/2 transform -translate-y-1/2 bg-blue-900/60 hover:bg-blue-900/80 text-white rounded-full w-8 h-8 sm:w-12 sm:h-12 backdrop-blur-sm"
+                                className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 bg-blue-900/60 hover:bg-blue-900/80 text-white rounded-full w-8 h-8 sm:w-12 sm:h-12 backdrop-blur-sm"
                                 onClick={nextImage}
                               >
                                 <ChevronRight className="w-4 h-4 sm:w-6 sm:h-6" />
@@ -1298,22 +1261,21 @@ export default function TashkentMetroMap() {
                             </>
                           )}
                           {/* Image Counter */}
-                          <div className="absolute bottom-1 sm:bottom-4 right-1 sm:right-4 bg-blue-900/60 text-white px-2 py-1 rounded-full text-xs font-medium backdrop-blur-sm">
+                          <div className="absolute bottom-2 sm:bottom-4 right-2 sm:right-4 bg-blue-900/60 text-white px-2 py-1 rounded-full text-xs font-medium backdrop-blur-sm">
                             {currentImageIndex + 1} / {currentStationDetails.images.length}
                           </div>
                         </div>
-                        {/* Thumbnail Strip - Hidden on very small screens */}
+                        {/* Thumbnail Strip */}
                         {currentStationDetails.images.length > 1 && (
-                          <div className="p-2 sm:p-4 bg-gray-50 hidden xs:block">
-                            <div className="flex gap-1 sm:gap-3 overflow-x-auto pb-2">
+                          <div className="p-2 sm:p-4 bg-gray-50">
+                            <div className="flex gap-2 sm:gap-3 overflow-x-auto pb-2">
                               {currentStationDetails.images.map((image, index) => (
                                 <div
                                   key={index}
-                                  className={`flex-shrink-0 w-12 h-9 sm:w-20 sm:h-16 rounded-lg cursor-pointer overflow-hidden border-2 transition-all duration-200 ${
-                                    index === currentImageIndex
+                                  className={`flex-shrink-0 w-16 h-12 sm:w-20 sm:h-16 rounded-lg cursor-pointer overflow-hidden border-2 transition-all duration-200 ${index === currentImageIndex
                                       ? "border-blue-900 scale-105 shadow-lg"
                                       : "border-blue-300 hover:border-blue-500"
-                                  }`}
+                                    }`}
                                   onClick={() => setCurrentImageIndex(index)}
                                 >
                                   <img
@@ -1330,51 +1292,7 @@ export default function TashkentMetroMap() {
                     </CardContent>
                   </Card>
 
-                  {/* History Section - Collapsible on Mobile */}
-                  <Card className="border-0 shadow-lg bg-gradient-to-br from-blue-50 to-blue-100">
-                    <CardHeader className="pb-2 sm:pb-4">
-                      <CardTitle className="flex items-center gap-2 sm:gap-3 text-base sm:text-xl text-blue-900">
-                        <Clock className="w-4 h-4 sm:w-6 sm:h-6 text-blue-700" />
-                        Tarixiy ma'lumotlar
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="space-y-2 sm:space-y-4">
-                      <p className="text-blue-800 leading-relaxed text-xs sm:text-base">
-                        {currentStationDetails.history}
-                      </p>
-                      <div className="pt-2 sm:pt-4 border-t border-blue-200">
-                        <Badge variant="outline" className="border-blue-400 text-blue-900 bg-blue-50 px-2 py-1 text-xs">
-                          <User className="w-3 h-3 mr-1" />
-                          Arxitektor: {currentStationDetails.architect}
-                        </Badge>
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  {/* Features - Compact Mobile View */}
-                  <Card className="border-0 shadow-lg">
-                    <CardHeader className="pb-2 sm:pb-4">
-                      <CardTitle className="flex items-center gap-2 sm:gap-3 text-base sm:text-xl text-blue-900">
-                        <Train className="w-4 h-4 sm:w-6 sm:h-6 text-blue-700" />
-                        Stansiya xususiyatlari
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="grid gap-1 sm:gap-3">
-                        {currentStationDetails.features.map((feature, index) => (
-                          <div
-                            key={index}
-                            className="flex items-center gap-2 sm:gap-4 p-2 sm:p-4 bg-blue-100 rounded-xl border border-blue-200 hover:bg-blue-200 transition-colors duration-200"
-                          >
-                            <div className="w-2 h-2 bg-blue-900 rounded-full flex-shrink-0"></div>
-                            <span className="text-blue-900 font-medium text-xs sm:text-base">{feature}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  {/* Videos - Compact Mobile View */}
+                  {/* Videos */}
                   <Card className="border-0 shadow-lg">
                     <CardHeader className="pb-2 sm:pb-4">
                       <CardTitle className="flex items-center gap-2 sm:gap-3 text-base sm:text-xl text-blue-900">
@@ -1383,11 +1301,12 @@ export default function TashkentMetroMap() {
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <div className="grid gap-2 sm:gap-4">
+                      <div className="grid gap-3 sm:gap-4">
                         {currentStationDetails.videos.map((video, index) => (
                           <div
                             key={index}
                             className="relative bg-blue-50 rounded-xl overflow-hidden shadow-md cursor-pointer hover:shadow-lg transition-all duration-200 group border border-blue-200"
+                            onClick={() => openVideoPlayer(video)}
                           >
                             <div className="aspect-video relative">
                               <img
@@ -1396,55 +1315,17 @@ export default function TashkentMetroMap() {
                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                               />
                               <div className="absolute inset-0 flex items-center justify-center bg-blue-900/40 group-hover:bg-blue-900/60 transition-colors">
-                                <div className="w-8 h-8 sm:w-16 sm:h-16 bg-blue-900 rounded-full flex items-center justify-center hover:bg-blue-800 transition-colors shadow-lg">
-                                  <Play className="w-4 h-4 sm:w-8 sm:h-8 text-white ml-1" />
+                                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-blue-900 rounded-full flex items-center justify-center hover:bg-blue-800 transition-colors shadow-lg">
+                                  <Play className="w-6 h-6 sm:w-8 sm:h-8 text-white ml-1" />
                                 </div>
                               </div>
                             </div>
-                            <div className="p-2 sm:p-4 bg-white">
-                              <h4 className="font-semibold text-blue-900 text-xs sm:text-base">{video.title}</h4>
+                            <div className="p-3 sm:p-4 bg-white">
+                              <h4 className="font-semibold text-blue-900 text-sm sm:text-base">{video.title}</h4>
                             </div>
                           </div>
                         ))}
                       </div>
-                    </CardContent>
-                  </Card>
-
-                  {/* Nearby Attractions - Compact Mobile View */}
-                  <Card className="border-0 shadow-lg">
-                    <CardHeader className="pb-2 sm:pb-4">
-                      <CardTitle className="flex items-center gap-2 sm:gap-3 text-base sm:text-xl text-blue-900">
-                        <MapPin className="w-4 h-4 sm:w-6 sm:h-6 text-blue-700" />
-                        Yaqin atrofdagi joylar
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="grid gap-1 sm:gap-3">
-                        {currentStationDetails.nearbyAttractions.map((attraction, index) => (
-                          <div
-                            key={index}
-                            className="flex items-center gap-2 sm:gap-4 p-2 sm:p-4 bg-blue-100 rounded-xl border border-blue-200 hover:bg-blue-200 transition-colors duration-200 cursor-pointer group"
-                          >
-                            <MapPin className="w-3 h-3 sm:w-5 sm:h-5 text-blue-900 flex-shrink-0 group-hover:scale-110 transition-transform" />
-                            <span className="text-blue-900 font-medium text-xs sm:text-base">{attraction}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  {/* Description - Compact Mobile View */}
-                  <Card className="border-0 shadow-lg bg-gradient-to-br from-blue-50 to-blue-100">
-                    <CardHeader className="pb-2 sm:pb-4">
-                      <CardTitle className="flex items-center gap-2 sm:gap-3 text-base sm:text-xl text-blue-900">
-                        <Users className="w-4 h-4 sm:w-6 sm:h-6 text-blue-700" />
-                        Batafsil tavsif
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-blue-800 leading-relaxed text-xs sm:text-base">
-                        {currentStationDetails.description}
-                      </p>
                     </CardContent>
                   </Card>
                 </div>
@@ -1455,7 +1336,7 @@ export default function TashkentMetroMap() {
             </>
           )}
 
-          {/* Fullscreen Image Viewer - Enhanced */}
+          {/* Fullscreen Image Viewer */}
           {showImageViewer && currentStationDetails && (
             <div className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4 backdrop-blur-sm">
               <div className="relative max-w-7xl max-h-full">
@@ -1500,6 +1381,43 @@ export default function TashkentMetroMap() {
                 {/* Image Counter */}
                 <div className="absolute bottom-2 sm:bottom-4 left-1/2 transform -translate-x-1/2 bg-blue-900/60 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full font-medium backdrop-blur-sm text-sm sm:text-base">
                   {viewerImageIndex + 1} / {currentStationDetails.images.length}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Video Player Modal */}
+          {showVideoPlayer && currentVideo && (
+            <div className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4 backdrop-blur-sm">
+              <div className="relative w-full max-w-6xl max-h-full">
+                <div className="relative bg-black rounded-lg overflow-hidden shadow-2xl">
+                  {/* Video Header */}
+                  <div className="absolute top-0 left-0 right-0 z-10 bg-gradient-to-b from-black/80 to-transparent p-4">
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-white font-semibold text-lg truncate">{currentVideo.title}</h3>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="text-white hover:bg-white/20 rounded-full w-10 h-10 flex-shrink-0"
+                        onClick={closeVideoPlayer}
+                        type="button"
+                      >
+                        <X className="w-5 h-5" />
+                      </Button>
+                    </div>
+                  </div>
+
+                  {/* Video Player */}
+                  <div className="aspect-video">
+                    <iframe
+                      ref={videoRef}
+                      src={`${currentVideo.url}?enablejsapi=1&autoplay=1`}
+                      title={currentVideo.title}
+                      className="w-full h-full"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  </div>
                 </div>
               </div>
             </div>

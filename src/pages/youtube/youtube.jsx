@@ -1,6 +1,6 @@
 "use client"
 
-import { Clock, Eye, Play } from "lucide-react"
+import { Clock, Eye, Play, X } from "lucide-react"
 import { useState } from "react"
 
 const videos = [
@@ -56,7 +56,7 @@ function VideoCard({ video, isLarge = false, onPlay }) {
 
   return (
     <div
-      className="relative group cursor-pointer h-full"
+      className="relative group cursor-pointer w-full h-full overflow-hidden rounded-xl bg-gray-900"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={() => onPlay(video)}
@@ -66,44 +66,48 @@ function VideoCard({ video, isLarge = false, onPlay }) {
         <img
           src={video.thumbnail || "/placeholder.svg?height=400&width=600&query=video thumbnail"}
           alt={video.title}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
+
         {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
+
         {/* Play button */}
         <div
-          className={`absolute inset-0 flex items-center justify-center transition-all duration-300 ${
-            isHovered ? "opacity-100 scale-100" : "opacity-0 scale-75"
+          className={`absolute inset-0 flex items-center justify-center transition-all duration-300 ease-out ${
+            isHovered ? "opacity-100 scale-100" : "opacity-0 scale-90"
           }`}
         >
-          <div className="bg-red-600 hover:bg-red-700 rounded-full p-3 sm:p-4 transition-colors duration-200 hover:scale-110">
-            <Play className="w-4 h-4 sm:w-6 sm:h-6 text-white fill-white ml-1" />
+          <div className="bg-red-600 hover:bg-red-700 rounded-full p-3 lg:p-4 transition-all duration-200 hover:scale-110 shadow-lg">
+            <Play className="w-5 h-5 lg:w-6 lg:h-6 text-white fill-white ml-0.5" />
           </div>
         </div>
+
         {/* Duration badge */}
-        <div className="absolute bottom-2 right-2 bg-black/80 text-white text-xs px-2 py-1 flex items-center gap-1">
+        <div className="absolute bottom-2 right-2 bg-black/80 text-white text-xs px-2 py-1 rounded flex items-center gap-1 backdrop-blur-sm">
           <Clock className="w-3 h-3" />
           {video.duration}
         </div>
       </div>
-      {/* Video info */}
+
+      {/* Video info overlay */}
       <div
-        className={`absolute bottom-0 left-0 right-0 p-3 sm:p-4 text-white transition-all duration-300 ${
+        className={`absolute bottom-0 left-0 right-0 p-3 lg:p-4 text-white transition-all duration-300 ease-out ${
           isHovered ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
         }`}
       >
         <h3
-          className={`font-semibold line-clamp-2 mb-1 ${
-            isLarge ? "text-sm sm:text-base lg:text-lg" : "text-xs sm:text-sm"
+          className={`font-semibold line-clamp-2 mb-2 leading-tight ${
+            isLarge ? "text-sm lg:text-base xl:text-lg" : "text-xs lg:text-sm"
           }`}
         >
           {video.title}
         </h3>
         <div className="flex items-center gap-3 text-xs text-gray-300">
-          <span>{video.channel}</span>
-          <div className="flex items-center gap-1">
+          <span className="truncate">{video.channel}</span>
+          <div className="flex items-center gap-1 flex-shrink-0">
             <Eye className="w-3 h-3" />
-            {video.views} views
+            {video.views}
           </div>
         </div>
       </div>
@@ -123,29 +127,46 @@ export default function YoutubeGrid() {
   }
 
   return (
-    <div className="container ">
-      {/* Video Grid - Responsive layout */}
-      <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 h-[400px] md:h-[600px] gap-3 md:gap-5">
-        {/* Main large video - Takes 2 columns and 2 rows on desktop, full width on mobile */}
-        <div className="md:col-span-2 md:row-span-2 rounded-xl overflow-hidden">
+    <div className="container">
+      {/* Mobile Layout */}
+      <div className="block lg:hidden space-y-4">
+        {/* Main video */}
+        <div className="aspect-video">
           <VideoCard video={videos[0]} isLarge={true} onPlay={handlePlay} />
         </div>
 
-        {/* Small videos - Stack vertically on mobile, grid on desktop */}
-        <div className="grid grid-cols-2 md:contents gap-3 md:gap-5">
-          <div className="md:col-span-1 md:row-span-1 rounded-xl overflow-hidden">
+        {/* Small videos in 2x2 grid */}
+        <div className="grid grid-cols-2 gap-3 aspect-[2/1]">
+          {videos.slice(1).map((video) => (
+            <div key={video.id} className="aspect-video">
+              <VideoCard video={video} onPlay={handlePlay} />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Desktop Layout */}
+      <div className="hidden lg:block">
+        <div className="grid grid-cols-4 grid-rows-2 gap-4 h-[600px]">
+          {/* Main large video - 2x2 */}
+          <div className="col-span-2 row-span-2">
+            <VideoCard video={videos[0]} isLarge={true} onPlay={handlePlay} />
+          </div>
+
+          {/* Small videos - 1x1 each */}
+          <div className="col-span-1 row-span-1">
             <VideoCard video={videos[1]} onPlay={handlePlay} />
           </div>
 
-          <div className="md:col-span-1 md:row-span-1 rounded-xl overflow-hidden">
+          <div className="col-span-1 row-span-1">
             <VideoCard video={videos[2]} onPlay={handlePlay} />
           </div>
 
-          <div className="md:col-span-1 md:row-span-1 rounded-xl overflow-hidden">
+          <div className="col-span-1 row-span-1">
             <VideoCard video={videos[3]} onPlay={handlePlay} />
           </div>
 
-          <div className="md:col-span-1 md:row-span-1 rounded-xl overflow-hidden">
+          <div className="col-span-1 row-span-1">
             <VideoCard video={videos[4]} onPlay={handlePlay} />
           </div>
         </div>
@@ -153,27 +174,38 @@ export default function YoutubeGrid() {
 
       {/* Video Modal */}
       {selectedVideo && (
-        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4 backdrop-blur-sm">
-          <div className="relative w-full max-w-4xl bg-black overflow-hidden aspect-video rounded-lg">
+        <div
+          className="fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-4 backdrop-blur-sm animate-in fade-in duration-300"
+          onClick={closeModal}
+        >
+          <div
+            className="relative w-full max-w-5xl bg-black rounded-lg overflow-hidden animate-in zoom-in-95 duration-300"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close button */}
             <button
               onClick={closeModal}
-              className="absolute top-4 right-4 z-10 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 transition-all duration-200 hover:scale-110"
+              className="absolute top-4 right-4 z-10 bg-black/60 hover:bg-black/80 text-white rounded-full p-2 transition-all duration-200 hover:scale-110 backdrop-blur-sm"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
+              <X className="w-5 h-5" />
             </button>
-            <iframe
-              src={`${selectedVideo.url}?autoplay=1&rel=0`}
-              title={selectedVideo.title}
-              className="w-full h-full"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-            />
-            <div className="absolute bottom-0 left-0 right-0 p-4 text-white bg-gradient-to-t from-black/90 to-transparent">
-              <h2 className="text-lg font-semibold mb-2">{selectedVideo.title}</h2>
+
+            {/* Video iframe */}
+            <div className="aspect-video">
+              <iframe
+                src={`${selectedVideo.url}?autoplay=1&rel=0`}
+                title={selectedVideo.title}
+                className="w-full h-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
+            </div>
+
+            {/* Video info */}
+            <div className="p-4 lg:p-6 text-white bg-gradient-to-t from-black/95 to-black/80">
+              <h2 className="text-lg lg:text-xl font-semibold mb-3 line-clamp-2">{selectedVideo.title}</h2>
               <div className="flex items-center gap-4 text-sm text-gray-300">
-                <span>{selectedVideo.channel}</span>
+                <span className="font-medium">{selectedVideo.channel}</span>
                 <div className="flex items-center gap-1">
                   <Eye className="w-4 h-4" />
                   {selectedVideo.views} views

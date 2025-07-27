@@ -71,28 +71,7 @@ const Footer = () => {
   const parts = pathname.split('/').filter(Boolean)
   const isHiddenPath = parts[1] === 'metro-xaritasis'
 
-  useEffect(() => {
-    // Simulate online visitors changing
-    const interval = setInterval(() => {
-      setOnlineVisitors(Math.floor(10 + Math.random() * 20))
-    }, 5000)
 
-    // Show scroll to top button
-    const handleScroll = () => {
-      setShowScrollTop(window.scrollY > 400)
-    }
-
-    window.addEventListener("scroll", handleScroll)
-
-    return () => {
-      clearInterval(interval)
-      window.removeEventListener("scroll", handleScroll)
-    }
-  }, [])
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" })
-  }
 
   return (
     <>
@@ -205,7 +184,9 @@ const Footer = () => {
                       </div>
                       <div>
                         <p className="text-sm text-blue-200">Jami tashrif</p>
-                        <p className="text-xl font-bold text-white">{totalVisitors.toLocaleString("uz-UZ")}</p>
+                        <p className="text-xl font-bold text-white">
+                          {totalVisitors.toLocaleString("en-US")}
+                        </p>
                       </div>
                     </div>
                   </div>

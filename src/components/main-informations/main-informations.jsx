@@ -2,69 +2,8 @@
 import { BarChart3, Building2, CreditCard, MapPin, Wallet, ChevronLeft, ChevronRight, Camera, Plus } from "lucide-react"
 import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Button } from "@/components/ui/button"
 
-const initialPaymentMethods = [
-	{
-		id: "humo-1",
-		name: "Humo Karta",
-		information: "Karta to'lovlari",
-		image: "https://humocard.uz/upload/medialibrary/208/8x0p9hi3h9jww0flwdm92dayhn0flulj/humo-logo-more.png",
-		color: "#FF6B35",
-		bgColor: "#FFF4F0",
-	},
-	{
-		id: "uzcard-1",
-		name: "Uzcard Karta",
-		information: "Uzcard to'lovlari",
-		image: "https://marketing.uz/uploads/articles/1192/article-original.png",
-		color: "#0066CC",
-		bgColor: "#F0F7FF",
-	},
-	{
-		id: "click-1",
-		name: "Click",
-		information: "Click ilovasi orqali to'lov",
-		image: "https://click.uz/click/images/click-white.jpg",
-		color: "#00C851",
-		bgColor: "#F0FFF4",
-	},
-	{
-		id: "uzcard-1",
-		name: "Uzcard Karta",
-		information: "Uzcard to'lovlari",
-		image: "https://marketing.uz/uploads/articles/1192/article-original.png",
-		color: "#0066CC",
-		bgColor: "#F0F7FF",
-	},
-	{
-		id: "click-1",
-		name: "Click",
-		information: "Click ilovasi orqali to'lov",
-		image: "https://click.uz/click/images/click-white.jpg",
-		color: "#00C851",
-		bgColor: "#F0FFF4",
-	},
-]
 
-const additionalPaymentMethods = [
-	{
-		id: "payme-1",
-		name: "Payme",
-		information: "Payme ilovasi orqali to'lov",
-		image: "/placeholder.svg?height=40&width=64&text=Payme",
-		color: "#00CCFF",
-		bgColor: "#F0FAFF",
-	},
-	{
-		id: "apelsin-1",
-		name: "Apelsin",
-		information: "Apelsin to'lov tizimi",
-		image: "/placeholder.svg?height=40&width=64&text=Apelsin",
-		color: "#FF9500",
-		bgColor: "#FFF8F0",
-	},
-]
 
 export default function MetroPagesShowcase() {
 
@@ -211,7 +150,7 @@ export default function MetroPagesShowcase() {
 								{[
 									{ label: "Bekatlar soni", value: "50", delay: 0.3 },
 									{ label: "Kunlik yo'lovchilar", value: "1M+", delay: 0.5 },
-									{ label: "Uzunligi", value: "65 km", delay: 0.7 },
+									{ label: "Uzunligi", value: "70 km", delay: 0.7 },
 								].map((stat, index) => (
 									<motion.div
 										key={index}
@@ -493,29 +432,29 @@ function MetroGalleryCarousel() {
 
 	const galleryImages = [
 		{
-			name: "Loyihalashtirish va qurilish",
-			description: "Toshkent metropolitening tarixi Oʻzbekiston poytaxti jadal rivojlanib, zamonaviy transportga muhtoj boʻlgan sovet yillarida boshlangan. Shaharga jiddiy zarar yetkazgan 1966-yildagi kuchli zilziladan keyin infratuzilmani faol rekonstruksiya va modernizatsiya qilish boshlandi va metro loyihasi eng muhim vazifalardan biriga aylandi.",
-			image: "https://cdn-uz.kursiv.media/wp-content/uploads/2024/11/photo_2024-11-06-14.22.07.jpeg",
-		},
-		{
-			name: "Metro",
-			description: "Tarixiy ",
-			image: "https://cdn-uz.kursiv.media/wp-content/uploads/2024/11/scale_1200-5.jpeg",
-		},
-		{
-			name: "Birinchi metro qurilishi",
-			description: "Birinchi metro yoʻlining qurilishi 1972-yilda boshlangan va besh yil davom etgan. 1977-yil 6-noyabrda Toshkent metropolitenining tantanali ochilish marosimi boʻlib oʻtdi. Shu bilan birga, dastlabki toʻqqizta bekat ishga tushirildi.",
-			image: "https://cdn-uz.kursiv.media/wp-content/uploads/2024/11/scale_1200-8.jpeg",
-		},
-		{
-			name: "Tarixiy",
-			description: "Qurilish jarayoni",
+			name: "Toshkent Metro qurilishi",
+			description: "1968-yil",
 			image: "https://cdn-uz.kursiv.media/wp-content/uploads/2024/11/scale_1200-7.jpeg",
 		},
 		{
-			name: "Metro yoʻllarining rivojlanishi va noyob dizayni",
-			description: "Dastlab metro shahar boʻylab harakatlanishni osonlashtirishi kerak boʻlgan transport tizimi sifatida qurilgan. Lekin keyinchalik u madaniyat va milliy motivlarni oʻzida mujassam etgan sanʼat va meʼmorchilik obyektiga aylandi.",
-			image: "https://cdn-uz.kursiv.media/wp-content/uploads/2024/11/041117_alimj_rodionov_sputnik_uz.jpg",
+			name: "O'z ish faolyatini boshladi",
+			description: "1977-yil 6-noyabrda Toshkent metropolitenining tantanali ochilish marosimi boʻlib oʻtdi.",
+			image: "https://cdn-uz.kursiv.media/wp-content/uploads/2024/11/photo_2024-11-06-14.22.07.jpeg",
+		},
+		{
+			name: "Bekatlarimiz ajoyib dizaynda bezaldi",
+			description: "Kosmonavtlar bekati",
+			image: "https://cdn-uz.kursiv.media/wp-content/uploads/2024/11/pr_kosmonavtov_enikeev-1024x683.jpg",
+		},
+		{
+			name: "Yangi poyezdlar bilan ta'minlandi",
+			description: "Zamonaviy isitish va sovutish tizimlari bilan jihozlangan yangi poyezdlar",
+			image: "https://www.afisha.uz/uploads/media/2024/11/41f443b3e2b6e97778c964b9a6c01e39_l.webp",
+		},
+		{
+			name: "Yer usti halqa yo'lllari qurildi",
+			description: "25km ca 18dan ortiq bekatlar",
+			image: "https://yuz.uz/imageproxy/1200x/https://yuz.uz/file/news/4777dd4735305eb98c3305610ff31f1f.jpg",
 		},
 	]
 
