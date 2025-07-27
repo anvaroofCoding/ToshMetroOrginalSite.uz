@@ -211,14 +211,14 @@ const Footer = () => {
                   </div>
                 </div>
 
-                <div className="bg-gradient-to-r from-green-500/20 to-emerald-500/20 backdrop-blur-sm rounded-xl p-2 border border-white/10">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-gradient-to-r from-green-500 to-emerald-500 rounded-lg flex items-center justify-center">
+                <div className="bg-gradient-to-r from-blue-500/20 to-cyan-500/20 backdrop-blur-sm  rounded-xl p-2 border border-white/10">
+                  <div className="flex items-center  justify-between">
+                    <div className="flex items-center  gap-3">
+                      <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center">
                         <Eye className="w-5 h-5 text-white" />
                       </div>
                       <div>
-                        <p className="text-sm text-green-200">Hozir onlayn</p>
+                        <p className="text-sm text-blue-200">Hozir onlayn</p>
                         <p className="text-xl font-bold text-white">{onlineVisitors}</p>
                       </div>
                     </div>

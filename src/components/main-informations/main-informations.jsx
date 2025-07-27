@@ -1,7 +1,70 @@
 "use client"
-import { BarChart3, Building2, CreditCard, MapPin, Wallet, ChevronLeft, ChevronRight, Camera } from "lucide-react"
-import { motion } from "framer-motion"
-import { useState, useEffect } from "react"
+import { BarChart3, Building2, CreditCard, MapPin, Wallet, ChevronLeft, ChevronRight, Camera, Plus } from "lucide-react"
+import { useState, useEffect, useRef } from "react"
+import { motion, AnimatePresence } from "framer-motion"
+import { Button } from "@/components/ui/button"
+
+const initialPaymentMethods = [
+	{
+		id: "humo-1",
+		name: "Humo Karta",
+		information: "Karta to'lovlari",
+		image: "https://humocard.uz/upload/medialibrary/208/8x0p9hi3h9jww0flwdm92dayhn0flulj/humo-logo-more.png",
+		color: "#FF6B35",
+		bgColor: "#FFF4F0",
+	},
+	{
+		id: "uzcard-1",
+		name: "Uzcard Karta",
+		information: "Uzcard to'lovlari",
+		image: "https://marketing.uz/uploads/articles/1192/article-original.png",
+		color: "#0066CC",
+		bgColor: "#F0F7FF",
+	},
+	{
+		id: "click-1",
+		name: "Click",
+		information: "Click ilovasi orqali to'lov",
+		image: "https://click.uz/click/images/click-white.jpg",
+		color: "#00C851",
+		bgColor: "#F0FFF4",
+	},
+	{
+		id: "uzcard-1",
+		name: "Uzcard Karta",
+		information: "Uzcard to'lovlari",
+		image: "https://marketing.uz/uploads/articles/1192/article-original.png",
+		color: "#0066CC",
+		bgColor: "#F0F7FF",
+	},
+	{
+		id: "click-1",
+		name: "Click",
+		information: "Click ilovasi orqali to'lov",
+		image: "https://click.uz/click/images/click-white.jpg",
+		color: "#00C851",
+		bgColor: "#F0FFF4",
+	},
+]
+
+const additionalPaymentMethods = [
+	{
+		id: "payme-1",
+		name: "Payme",
+		information: "Payme ilovasi orqali to'lov",
+		image: "/placeholder.svg?height=40&width=64&text=Payme",
+		color: "#00CCFF",
+		bgColor: "#F0FAFF",
+	},
+	{
+		id: "apelsin-1",
+		name: "Apelsin",
+		information: "Apelsin to'lov tizimi",
+		image: "/placeholder.svg?height=40&width=64&text=Apelsin",
+		color: "#FF9500",
+		bgColor: "#FFF8F0",
+	},
+]
 
 export default function MetroPagesShowcase() {
 
@@ -27,7 +90,45 @@ export default function MetroPagesShowcase() {
 			color: "#00C851",
 			bgColor: "#F0FFF4",
 		},
+		{
+			name: "Uzcard Karta",
+			information: "Uzcard to'lovlari",
+			image: "https://marketing.uz/uploads/articles/1192/article-original.png",
+			color: "#0066CC",
+			bgColor: "#F0F7FF",
+		},
+		{
+			name: "Click",
+			information: "Click ilovasi orqali to'lov",
+			image: "https://click.uz/click/images/click-white.jpg",
+			color: "#00C851",
+			bgColor: "#F0FFF4",
+		},
+		{
+			name: "Click",
+			information: "Click ilovasi orqali to'lov",
+			image: "https://click.uz/click/images/click-white.jpg",
+			color: "#00C851",
+			bgColor: "#F0FFF4",
+		},
+		{
+			name: "Uzcard Karta",
+			information: "Uzcard to'lovlari",
+			image: "https://marketing.uz/uploads/articles/1192/article-original.png",
+			color: "#0066CC",
+			bgColor: "#F0F7FF",
+		},
+		{
+			name: "Click",
+			information: "Click ilovasi orqali to'lov",
+			image: "https://click.uz/click/images/click-white.jpg",
+			color: "#00C851",
+			bgColor: "#F0FFF4",
+		},
 	]
+
+
+
 
 	const apiStats = [
 		{ id: 1, station_name: "Beruniy", user_count: 23, month: "Yanvar", created_at: "2025-07-23T13:54:43.414717+05:00" },
@@ -101,7 +202,7 @@ export default function MetroPagesShowcase() {
 					className="lg:col-span-2 bg-white rounded-2xl sm:rounded-3xl shadow-xl p-6 sm:p-8 min-h-[280px]"
 				>
 					<div className="flex flex-col  items-center gap-6">
-						
+
 						<div className="flex-1 w-full">
 							<h3 className="text-xl sm:text-2xl font-bold text-blue-900 mb-4 text-center lg:text-left">
 								Metro haqida qisqacha
@@ -124,33 +225,23 @@ export default function MetroPagesShowcase() {
 									</motion.div>
 								))}
 							</div>
-							
+
 						</div>
 						<MetroGalleryCarousel />
 						<div className="w-full  lg:text-left">
-								<motion.a
-									href="/metro-tarixi"
-									whileTap={{ scale: 0.95 }}
-									className="inline-block px-4 sm:px-5 py-2 rounded-full bg-blue-900 text-white font-semibold shadow hover:bg-blue-800 transition text-sm sm:text-base"
-								>
-									Tarix sahifasiga
-								</motion.a>
-							</div>
+							<motion.a
+								href="/metro-tarixi"
+								whileTap={{ scale: 0.95 }}
+								className="inline-block px-4 sm:px-5 py-2 rounded-full bg-blue-900 text-white font-semibold shadow hover:bg-blue-800 transition text-sm sm:text-base"
+							>
+								Tarix sahifasiga
+							</motion.a>
+						</div>
 					</div>
-					
+
 				</motion.div>
 
-				{/* Metro Gallery Carousel - New Section */}
-				{/* <motion.div
-					initial={{ opacity: 0, x: -40 }}
-					animate={{ opacity: 1, x: 0 }}
-					transition={{ duration: 0.8, delay: 0.4 }}
-					className="lg:col-span-2 bg-white rounded-2xl sm:rounded-3xl shadow-xl p-6 sm:p-8 min-h-[280px] overflow-hidden"
-				>
-					
-				</motion.div> */}
-
-				{/* 3. Statistics Chart - Full Width */}
+			
 				<motion.div
 					initial={{ opacity: 0, y: 50 }}
 					animate={{ opacity: 1, y: 0 }}
@@ -274,10 +365,10 @@ export default function MetroPagesShowcase() {
 					initial={{ opacity: 0, y: 40, scale: 0.95 }}
 					animate={{ opacity: 1, y: 0, scale: 1 }}
 					transition={{ duration: 0.8, delay: 0.6 }}
-					className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl sm:rounded-3xl shadow-xl p-6 sm:p-8 min-h-[280px] lg:min-h-[400px]"
+					className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl sm:rounded-3xl shadow-xl p-6 sm:p-8 h-[500px] lg:h-[600px]"
 				>
 					<div className="flex flex-col h-full">
-						<div className="flex items-center gap-3 mb-6 relative z-10">
+						<div className="flex items-center gap-3 mb-6 flex-shrink-0">
 							<motion.div
 								animate={{ scale: [1, 1.1, 1], rotate: [0, 2, -2, 0] }}
 								transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY }}
@@ -285,92 +376,99 @@ export default function MetroPagesShowcase() {
 								<CreditCard className="w-8 h-8 text-blue-900" />
 							</motion.div>
 							<div>
-								<h3 className="text-xl sm:text-2xl font-bold text-blue-900">To'lov tizimlari</h3>
+								<h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-blue-900">{"To'lov tizimlari"}</h3>
 							</div>
 						</div>
 
-						<div className="flex-1 space-y-4">
-							{payment.map((paymentMethod, index) => (
-								<motion.div
-									key={paymentMethod.name}
-									initial={{ opacity: 0, x: -30 }}
-									animate={{ opacity: 1, x: 0 }}
-									transition={{ duration: 0.6, delay: 0.8 + index * 0.2 }}
-									whileHover={{ scale: 1.02, y: -2 }}
-									className="group relative overflow-hidden rounded-xl p-4 transition-all duration-300 cursor-pointer"
-									style={{ backgroundColor: paymentMethod.bgColor }}
-								>
-									<div className="flex items-center gap-4">
+						{/* Fixed scrollable container */}
+						<div className="flex-1 overflow-hidden">
+							<div className="h-full overflow-y-auto scrollbar-thin scrollbar-thumb-blue-300 scrollbar-track-blue-100 hover:scrollbar-thumb-blue-400 pr-2">
+								<div className="space-y-4">
+									{payment.map((paymentMethod, index) => (
 										<motion.div
-											className="relative w-16 h-10 rounded-lg overflow-hidden bg-white shadow-sm flex items-center justify-center"
-											whileHover={{ scale: 1.05 }}
-											transition={{ duration: 0.2 }}
+											key={`${paymentMethod.name}-${index}`}
+											initial={{ opacity: 0, x: -30 }}
+											animate={{ opacity: 1, x: 0 }}
+											transition={{ duration: 0.6, delay: 0.8 + index * 0.2 }}
+											whileHover={{ scale: 1.02, y: -2 }}
+											className="group relative overflow-hidden rounded-xl p-4 transition-all duration-300 cursor-pointer"
+											style={{ backgroundColor: paymentMethod.bgColor }}
 										>
-											<img
-												src={paymentMethod.image || "/placeholder.svg"}
-												alt={paymentMethod.name}
-												className="w-full h-full object-contain p-1"
-												onError={(e) => {
-													e.currentTarget.src = `/placeholder.svg?height=40&width=64&text=${paymentMethod.name}`
+											<div className="flex items-center gap-4">
+												<motion.div
+													className="relative w-16 h-10 rounded-lg overflow-hidden bg-white shadow-sm flex items-center justify-center flex-shrink-0"
+													whileHover={{ scale: 1.05 }}
+													transition={{ duration: 0.2 }}
+												>
+													<img
+														src={paymentMethod.image || "/placeholder.svg"}
+														alt={paymentMethod.name}
+														className="w-full h-full object-contain p-1"
+														onError={(e) => {
+															e.currentTarget.src = `/placeholder.svg?height=40&width=64&text=${paymentMethod.name}`
+														}}
+													/>
+												</motion.div>
+												<div className="flex-1 min-w-0">
+													<h4 className="font-bold text-gray-900 text-xs sm:text-sm lg:text-base mb-1 truncate">
+														{paymentMethod.name}
+													</h4>
+													<p className="text-gray-600 text-xs sm:text-sm lg:text-base truncate">
+														{paymentMethod.information}
+													</p>
+												</div>
+												<motion.div
+													className="w-8 h-8 rounded-full flex lg:hidden xl:flex items-center justify-center flex-shrink-0"
+													style={{ backgroundColor: paymentMethod.color }}
+													whileHover={{ rotate: 90 }}
+													transition={{ duration: 0.3 }}
+												>
+													<CreditCard className="w-4 h-4 text-white" />
+												</motion.div>
+											</div>
+
+											{/* Animated background effect */}
+											<motion.div
+												className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300"
+												style={{ backgroundColor: paymentMethod.color }}
+											/>
+
+											{/* Subtle pulse animation */}
+											<motion.div
+												className="absolute -inset-1 rounded-xl opacity-0 group-hover:opacity-20 transition-opacity duration-300"
+												style={{
+													background: `linear-gradient(45deg, ${paymentMethod.color}20, transparent, ${paymentMethod.color}20)`,
+													backgroundSize: "200% 200%",
+												}}
+												animate={{
+													backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+												}}
+												transition={{
+													duration: 3,
+													repeat: Number.POSITIVE_INFINITY,
+													ease: "easeInOut",
 												}}
 											/>
 										</motion.div>
-
-										<div className="flex-1">
-											<h4 className="font-bold text-gray-900 text-sm sm:text-base mb-1">{paymentMethod.name}</h4>
-											<p className="text-gray-600 text-xs sm:text-sm">{paymentMethod.information}</p>
-										</div>
-
-										<motion.div
-											className="w-8 h-8 rounded-full flex  lg:hidden xl:flex items-center justify-center"
-											style={{ backgroundColor: paymentMethod.color }}
-											whileHover={{ rotate: 90 }}
-											transition={{ duration: 0.3 }}
-										>
-											<CreditCard className="w-4 h-4 text-white" />
-										</motion.div>
-									</div>
-
-									{/* Animated background effect */}
-									<motion.div
-										className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300"
-										style={{ backgroundColor: paymentMethod.color }}
-									/>
-
-									{/* Subtle pulse animation */}
-									<motion.div
-										className="absolute -inset-1 rounded-xl opacity-0 group-hover:opacity-20 transition-opacity duration-300"
-										style={{
-											background: `linear-gradient(45deg, ${paymentMethod.color}20, transparent, ${paymentMethod.color}20)`,
-											backgroundSize: "200% 200%",
-										}}
-										animate={{
-											backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-										}}
-										transition={{
-											duration: 3,
-											repeat: Number.POSITIVE_INFINITY,
-											ease: "easeInOut",
-										}}
-									/>
-								</motion.div>
-							))}
+									))}
+								</div>
+							</div>
 						</div>
 
 						<motion.div
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ delay: 1.4 }}
-							className="mt-6 text-center"
+							className="mt-6 text-center flex-shrink-0"
 						>
 							<motion.a
 								href="/tolov-turi"
 								whileTap={{ scale: 0.95 }}
 								whileHover={{ scale: 1.05 }}
-								className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-blue-900 text-white font-semibold shadow-lg hover:bg-blue-800 transition-all duration-300 text-sm sm:text-base"
+								className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-blue-900 text-white font-semibold shadow-lg hover:bg-blue-800 transition-all duration-300 text-xs sm:text-sm lg:text-base"
 							>
 								<CreditCard className="w-5 h-5" />
-								<p className="text-[12px] xl:text-md">Barcha to'lov usullari</p>
+								<p className="text-xs sm:text-sm lg:text-base">{"Barcha to'lov usullari"}</p>
 							</motion.a>
 						</motion.div>
 					</div>
@@ -574,12 +672,12 @@ function AttoCardsCarousel() {
 	return (
 		<div className="h-full flex flex-col relative">
 			{/* Header */}
-			<div className="flex items-center gap-3 mb-6 relative z-10">
+			<div className="flex items-center gap-3 mb-6 relative z-10 ">
 				<motion.div
 					animate={{ scale: [1, 1.1, 1], rotate: [0, 2, -2, 0] }}
 					transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY }}
 				>
-					<Wallet className="w-8 h-8 text-white" />
+					<Wallet className="w-8 h-8 text-white " />
 				</motion.div>
 				<div>
 					<h3 className="text-xl sm:text-2xl font-bold">ATTO Kartalar</h3>
@@ -638,7 +736,7 @@ function AttoCardsCarousel() {
 
 							{/* Floating Elements */}
 							<motion.div
-								className="absolute -top-2 -right-2 w-6 h-6 rounded-full"
+								className="absolute -top-2 -right-2 w-6 h-6 rounded-full "
 								style={{ backgroundColor: currentCard.color }}
 								animate={{
 									scale: [1, 1.2, 1],
@@ -687,7 +785,7 @@ function AttoCardsCarousel() {
 												delay: index * 0.3,
 											}}
 										/>
-										<span className="text-white/80 text-sm">{feature}</span>
+										<span className="text-white/80 text-sm ">{feature}</span>
 									</motion.div>
 								))}
 							</div>
@@ -696,7 +794,7 @@ function AttoCardsCarousel() {
 				</div>
 
 				{/* Enhanced Navigation Controls */}
-				
+
 			</div>
 
 			{/* Call to Action */}
@@ -723,7 +821,7 @@ function AttoCardsCarousel() {
 
 			{/* Enhanced Card Counter */}
 			<motion.div
-				className="absolute top-6 right-6 flex items-center gap-2 bg-black/20 backdrop-blur-md text-white px-4 py-2 rounded-full border border-white/10"
+				className="absolute border top-6 right-6 md:flex hidden items-center gap-2 bg-black/20 backdrop-blur-md text-white px-4 py-2 rounded-full border border-white/10"
 				key={currentCardIndex}
 				initial={{ scale: 0.8, opacity: 0, y: -10 }}
 				animate={{ scale: 1, opacity: 1, y: 0 }}
