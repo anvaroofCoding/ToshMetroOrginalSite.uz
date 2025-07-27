@@ -96,7 +96,7 @@ const bankCards = [
     {
         name: "Visa",
         color: "bg-blue-700",
-        img: "https://images.seeklogo.com/logo-png/14/2/visa-logo-png_seeklogo-149692.png",
+        img: "https://by.visa.com/dam/VCOM/regional/ve/romania/blogs/hero-image/visa-logo-800x450.jpg",
     },
     {
         name: "MasterCard",
@@ -293,7 +293,7 @@ export default function PaymentMethods() {
                                     Qo'shimcha imkoniyatlar:
                                 </h4>
                                 <p className="text-gray-700 text-xs sm:text-sm leading-relaxed">
-                                    Apple Pay, Google Pay/Wallet, Samsung Pay orqali to'lov qilish mumkin, ko'pincha cashback yoki
+                                    Uzum bank, Paynet, Click, Payme, Alif mobi orqali to'lov qilish mumkin, ko'pincha cashback yoki
                                     chegirmalar mavjud
                                 </p>
                             </div>
@@ -357,9 +357,9 @@ export default function PaymentMethods() {
                     {/* Biometric Payments Section */}
                     <div className="ml-12 md:ml-16">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <Card className="transition-all duration-300 hover:scale-105 hover:shadow-lg border-2 hover:border-blue-300">
-                                <CardContent className="p-6">
-                                    <div className="flex items-center mb-4">
+                            <Card className="transition-all duration-300 hover:scale-105 hover:shadow-lg border-2 hover:border-blue-300 relative z-10">
+                                <CardContent className="p-6 ">
+                                    <div className="flex items-center mb-4 ">
                                         <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center mr-3">
                                             <span className="text-white text-sm">
                                                 <User2 />

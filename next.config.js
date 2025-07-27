@@ -12,7 +12,8 @@ const nextConfig = {
 	  'api.logobank.uz',
 	  'encrypted-tbn0.gstatic.com',
 	  "images.seeklogo.com",
-	  'e7.pngegg.com'
+	  'e7.pngegg.com',
+	  'by.visa.com'
     ],
   },
 };
