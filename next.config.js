@@ -9,11 +9,14 @@ const nextConfig = {
       'tashmetro.uz',
       'atto.uz',
       'play-lh.googleusercontent.com', // ← bu yerga yangi domen qo‘shildi
-	  'api.logobank.uz',
-	  'encrypted-tbn0.gstatic.com',
-	  "images.seeklogo.com",
-	  'e7.pngegg.com',
-	  'by.visa.com'
+      'api.logobank.uz',
+      'encrypted-tbn0.gstatic.com',
+      "images.seeklogo.com",
+      'e7.pngegg.com',
+      'by.visa.com',
+      "1000logos.net",
+      "cdn6.aptoide.com",
+      'metro-site.onrender.com'
     ],
   },
 };

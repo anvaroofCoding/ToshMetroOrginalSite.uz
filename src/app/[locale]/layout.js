@@ -10,6 +10,7 @@ import { notFound } from 'next/navigation'
 import './globals.css'
 import TashkentMetroChat from '../../components/Flowechat/FloatingChat'
 import Footer from '@/shared/footer/footer'
+import FloatingActionButton from '@/components/ScreenFixsedButton/screenFixedButton'
 
 export const metadata = {
 	title: 'Toshkent shahar metropoliteni | Rasmiy veb-sayt',
@@ -61,7 +62,7 @@ export default async function RootLayout({ children, params }) {
 						<Navbar />
 						<SplashScreen>{children}</SplashScreen>
 						<Footer />
-						<TashkentMetroChat />
+						<FloatingActionButton />
 					</Layout>
 				</NextIntlClientProvider>
 			</body>

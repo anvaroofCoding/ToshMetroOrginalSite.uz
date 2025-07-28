@@ -166,3 +166,8 @@ body {
     @apply bg-background text-foreground;
 	}
 }
+
+.my-element {
+  offset-path: path("M0,0 L100,0");
+  offset-distance: 50%;
+}

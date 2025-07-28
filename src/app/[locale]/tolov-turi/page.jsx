@@ -1,5 +1,6 @@
 import PaymentMethods from './newtolov'
 
+
 const Page = () => {
 	return (
 		<div className='my-10'>

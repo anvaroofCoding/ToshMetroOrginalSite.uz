@@ -275,7 +275,7 @@ export default function OptimizedMetroRegulations() {
   }, [handleObserver, handleScroll])
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
+    <div className="min-h-screen ">
       {/* Progress Bar */}
       <div className="fixed top-0 left-0 w-full h-1 bg-gray-200 z-50">
         <div
@@ -285,11 +285,11 @@ export default function OptimizedMetroRegulations() {
       </div>
 
       {/* Header */}
-      <header className="relative bg-white shadow-sm">
+      <header className="relative ">
         <div className="container mx-auto px-4 py-16">
           <div className="text-center max-w-4xl mx-auto">
             <div className="inline-flex items-center gap-4 mb-8">
-              <div className="p-4 bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl shadow-lg">
+              <div className="p-4 bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl">
                 <Train className="w-10 h-10 text-white" />
               </div>
             </div>
@@ -306,7 +306,7 @@ export default function OptimizedMetroRegulations() {
       </header>
 
       {/* Timeline */}
-      <div ref={timelineRef} className="relative container mx-auto px-4 py-20">
+      <div ref={timelineRef} className="relative container mx-auto px-4 py-20 overflow-hidden ">
         {/* Timeline Line */}
         <div className="absolute left-1/2 transform -translate-x-1/2 w-0.5 bg-gradient-to-b from-blue-200 via-purple-200 to-indigo-200 h-full" />
 
@@ -451,7 +451,7 @@ export default function OptimizedMetroRegulations() {
       </div>
 
       {/* Footer */}
-      <footer className="bg-white border-t border-gray-100 py-12">
+      <footer className=" py-15">
         <div className="container mx-auto px-4 text-center">
           <div className="flex items-center justify-center gap-3 mb-4">
             <div className="p-2 bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg">

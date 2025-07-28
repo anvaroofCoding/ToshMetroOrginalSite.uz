@@ -11,25 +11,25 @@ import { usePathname } from "next/navigation"
 
 const socialLinks = [
   {
-    href: "https://t.me/tashkent_metro",
+    href: "https://t.me/Toshkent_metropoliteni_rasmiy",
     icon: Send,
     title: "Telegram",
     color: "hover:bg-blue-500",
   },
   {
-    href: "https://instagram.com/tashkent_metro",
+    href: "https://www.instagram.com/toshkentmetropoliteni?utm_source=ig_web_button_share_sheet&igsh=MWs4N3dseDY0bnBs",
     icon: Instagram,
     title: "Instagram",
     color: "hover:bg-pink-500",
   },
   {
-    href: "https://youtube.com/tashkent_metro",
+    href: "https://youtube.com/@toshkentmetropoliteniduk?feature=shared",
     icon: Youtube,
     title: "YouTube",
     color: "hover:bg-red-500",
   },
   {
-    href: "https://facebook.com/tashkent_metro",
+    href: "https://www.facebook.com/people/Toshkent-metropoliteni/100077452683509/?ti=as#",
     icon: Facebook,
     title: "Facebook",
     color: "hover:bg-blue-600",
@@ -75,7 +75,7 @@ const Footer = () => {
 
   return (
     <>
-      <footer className={`relative bg-gradient-to-r from-[#0E327F] to-blue-800 text-white overflow-hidden ${isHiddenPath ? 'hidden' : ''}`}>
+      <footer className={`relative rounded-t-[50px] bg-gradient-to-r from-[#0E327F] to-blue-800 text-white overflow-hidden ${isHiddenPath ? 'hidden' : ''}`}>
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-5">
           <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=60 height=60 viewBox=0 0 60 60 xmlns=http://www.w3.org/2000/svg%3E%3Cg fill=none fillRule=evenodd%3E%3Cg fill=%23ffffff fillOpacity=0.1%3E%3Ccircle cx=30 cy=30 r=2/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]"></div>

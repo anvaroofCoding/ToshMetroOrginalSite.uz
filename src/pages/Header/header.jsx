@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { AnimatePresence, motion } from "framer-motion"
-import { ArrowRight, ChevronLeft, ChevronRight, Clock, Info, Instagram, Send, Twitter, Youtube } from "lucide-react"
+import { ArrowRight, ChevronLeft, ChevronRight, Clock, Info, Instagram, Send, Facebook, Youtube } from "lucide-react"
 import Link from "next/link"
 import { useCallback, useEffect, useState } from "react"
 
@@ -96,21 +96,21 @@ const announcements = [
 ]
 
 const socialLinks = [
-  { href: "https://t.me/toshkent_metro", icon: Send, title: "Telegram" },
+  { href: "https://t.me/Toshkent_metropoliteni_rasmiy", icon: Send, title: "Telegram" },
   {
-    href: "https://instagram.com/toshkent_metro",
+    href: "https://www.instagram.com/toshkentmetropoliteni?utm_source=ig_web_button_share_sheet&igsh=MWs4N3dseDY0bnBs",
     icon: Instagram,
     title: "Instagram",
   },
   {
-    href: "https://twitter.com/toshkent_metro",
-    icon: Twitter,
-    title: "Twitter",
-  },
-  {
-    href: "https://youtube.com/toshkent_metro",
+    href: "https://youtube.com/@toshkentmetropoliteniduk?feature=shared",
     icon: Youtube,
     title: "YouTube",
+  },
+  {
+    href: "https://www.facebook.com/people/Toshkent-metropoliteni/100077452683509/?ti=as#",
+    icon: Facebook,
+    title: "Facebook",
   },
 ]
 

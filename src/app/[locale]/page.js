@@ -8,9 +8,9 @@ import FaqAccordion from '@/work/test/questions'
 const Home = () => {
 	return (
 		<div className='relative z-[10] bg-white'>
-			<div className='my-5'>
+			{/* <div className='my-5'>
 				<MetroSystem />
-			</div>
+			</div> */}
 			<div className='mt-5'>
 				<MetroCarouselWithNews />
 			</div>
