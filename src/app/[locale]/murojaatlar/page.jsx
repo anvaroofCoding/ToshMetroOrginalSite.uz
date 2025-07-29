@@ -1,7 +1,10 @@
 import React from 'react'
+import MetroLostItemForm from './murojaatlar-uchun'
 
 export default function page() {
   return (
-    <div>page</div>
+    <div>
+      <MetroLostItemForm />
+    </div>
   )
 }

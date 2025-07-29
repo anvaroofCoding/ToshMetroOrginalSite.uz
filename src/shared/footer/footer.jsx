@@ -64,12 +64,22 @@ const contacts = [
 ]
 
 const Footer = () => {
-  const [totalVisitors, setTotalVisitors] = useState(125430)
-  const [onlineVisitors, setOnlineVisitors] = useState(17)
+  const [totalVisitors, setTotalVisitors] = useState()
+  const [onlineVisitors, setOnlineVisitors] = useState()
   const [showScrollTop, setShowScrollTop] = useState(false)
   const pathname = usePathname()
   const parts = pathname.split('/').filter(Boolean)
   const isHiddenPath = parts[1] === 'metro-xaritasis'
+  const getprosmotrsite = async () => {
+    const res = await fetch("https://metro-site.onrender.com/api/sayt_foydalanuvchilari/")
+    const data = await res.json()
+    setTotalVisitors(data.jami_foydalanuvchilar)
+    setOnlineVisitors(data.onlayn_foydalanuvchilar)
+  }
+
+  useEffect(() => {
+    getprosmotrsite()
+  }, [])
 
 
 
@@ -185,7 +195,7 @@ const Footer = () => {
                       <div>
                         <p className="text-sm text-blue-200">Jami tashrif</p>
                         <p className="text-xl font-bold text-white">
-                          {totalVisitors.toLocaleString("en-US")}
+                          {totalVisitors}
                         </p>
                       </div>
                     </div>

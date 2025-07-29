@@ -58,7 +58,7 @@ export default function FloatingActionButton() {
       icon: FileText,
       title: "Murojaatlar",
       action: "Applications",
-      btlink: "/",
+      btlink: "/murojaatlar",
     },
   ]
 
@@ -67,7 +67,7 @@ export default function FloatingActionButton() {
       {/* Backdrop */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 transition-opacity duration-300 "
+          className="fixed inset-0 bg-black/20 backdrop-blur-sm z-30 transition-opacity duration-300 "
           onClick={() => setIsOpen(false)}
         />
       )}

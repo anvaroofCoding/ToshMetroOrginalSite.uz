@@ -320,7 +320,7 @@ export default function MetroCarouselWithNews() {
                 >
                   <CardContent className="p-2 sm:p-3 lg:p-4 flex gap-2 sm:gap-3 items-start">
                     <img
-                      src={announcement.img || "/placeholder.svg?height=60&width=60" || "/placeholder.svg"}
+                      src={announcement.img}
                       alt={announcement.title}
                       className="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 object-cover rounded-md sm:rounded-lg flex-shrink-0"
                       loading="lazy"

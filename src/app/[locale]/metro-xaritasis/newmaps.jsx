@@ -153,7 +153,7 @@ export default function TashkentMetroMap() {
       videos: [
         {
           title: "Buyuk ipak yo'li",
-          url: "https://youtu.be/oJeTS92hCBQ?feature=shared",
+          url: "https://www.youtube.com/embed/oJeTS92hCBQ?si=msyIsAe3gcaI6UVm",
           thumbnail: "https://avatars.mds.yandex.net/get-altay/6203703/2a0000018955bfa463d4ecb3c7ac5483cb1d/orig",
         },
 
@@ -2026,7 +2026,7 @@ export default function TashkentMetroMap() {
                                 alt={video.title}
                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                               />
-                              <div className="absolute inset-0 flex items-center justify-center bg-blue-900/40 group-hover:bg-blue-900/60 transition-colors">
+                              <div className="absolute inset-0 flex items-center justify-center ">
                                 <div className="w-12 h-12 sm:w-16 sm:h-16 bg-blue-900 rounded-full flex items-center justify-center hover:bg-blue-800 transition-colors shadow-lg">
                                   <Play className="w-6 h-6 sm:w-8 sm:h-8 text-white ml-1" />
                                 </div>

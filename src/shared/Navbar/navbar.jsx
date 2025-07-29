@@ -514,7 +514,7 @@ export default function MetroNavbar() {
             initial="hidden"
             animate="visible"
             exit="hidden"
-            className="fixed inset-0 bg-gradient-to-br from-[#0E327F] via-blue-800 to-[#0E327F] z-50 flex flex-col backdrop-blur-xl"
+            className="fixed inset-0 bg-gradient-to-br from-[#0E327F] via-blue-800 to-[#0E327F] z-80 flex flex-col backdrop-blur-xl"
           >
             <div className="container">
               <div className="flex items-center justify-between h-[90px]">
@@ -613,7 +613,7 @@ export default function MetroNavbar() {
                 animate={{ scaleX: 1 }}
                 transition={{ delay: 0.8, duration: 0.5 }}
               />
-              <div className="flex justify-center gap-8">
+              <div className="flex justify-center gap-8 pb-10">
                 {socialLinks.map((social, index) => (
                   <motion.a
                     key={social.name}
