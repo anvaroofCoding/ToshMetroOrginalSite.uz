@@ -5,18 +5,62 @@ const withNextIntl = createNextIntlPlugin();
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: [
-      'tashmetro.uz',
-      'atto.uz',
-      'play-lh.googleusercontent.com', // ← bu yerga yangi domen qo‘shildi
-      'api.logobank.uz',
-      'encrypted-tbn0.gstatic.com',
-      "images.seeklogo.com",
-      'e7.pngegg.com',
-      'by.visa.com',
-      "1000logos.net",
-      "cdn6.aptoide.com",
-      'metro-site.onrender.com'
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'tashmetro.uz',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'atto.uz',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'play-lh.googleusercontent.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'api.logobank.uz',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'encrypted-tbn0.gstatic.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.seeklogo.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'e7.pngegg.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'by.visa.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: '1000logos.net',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn6.aptoide.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'metro-site.onrender.com',
+        pathname: '/media/news_images/**',
+      },
     ],
   },
 };
