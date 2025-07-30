@@ -1,3 +1,11 @@
-const { RefreshCcw } = require("lucide-react");
+import MetroStatistics from "./statistika"
 
-RefreshCcw
+const Page = () => {
+    return (
+        <div>
+            <MetroStatistics />
+        </div>
+    )
+}
+
+export default Page

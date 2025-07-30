@@ -6,7 +6,18 @@ import { motion, AnimatePresence } from "framer-motion"
 
 
 export default function MetroPagesShowcase() {
+	const [apiStats, setApiStats] = useState([])
+	const [error, setError] = useState(null)
+	const apiStatss = [
+		{ id: 1, station_name: "Beruniy", user_count: 23, month: "Yanvar", created_at: "2025-07-23T13:54:43.414717+05:00" },
+		{ id: 3, station_name: "Alisher Navoiy", user_count: 48, month: "Yanvar", created_at: "2025-07-23T13:54:43.414717+05:00" },
+		{ id: 4, station_name: "Alisher Navoiy", user_count: 60, month: "Dekabr", created_at: "2025-07-23T13:54:43.414717+05:00" },
+		{ id: 5, station_name: "Chilonzor", user_count: 10, month: "Aprel", created_at: "2025-07-23T13:54:43.414717+05:00" },
+	];
 
+	console.log(apiStats);
+	console.log(apiStatss);
+	
 	const payment = [
 		{
 			name: "Humo Karta",
@@ -66,15 +77,101 @@ export default function MetroPagesShowcase() {
 		},
 	]
 
+	const getStatistika = async () => {
+		try {
+			const res = await fetch("https://metro-site.onrender.com/api/statistics/en/")
+
+			if (!res.ok) {
+				throw new Error(`Server error: ${res.status}`)
+			}
+
+			const data = await res.json()
+			setApiStats(data)
+		} catch (err) {
+			setError(err.message)
+		}
+	}
+
+	useEffect(() => {
+		getStatistika()
+	}, [])
 
 
+	if (error) return <p>Error: {error}</p>
 
-	const apiStats = [
-		{ id: 1, station_name: "Beruniy", user_count: 23, month: "Yanvar", created_at: "2025-07-23T13:54:43.414717+05:00" },
-		{ id: 3, station_name: "Alisher Navoiy", user_count: 48, month: "Yanvar", created_at: "2025-07-23T13:54:43.414717+05:00" },
-		{ id: 4, station_name: "Alisher Navoiy", user_count: 60, month: "Dekabr", created_at: "2025-07-23T13:54:43.414717+05:00" },
-		{ id: 5, station_name: "Chilonzor", user_count: 10, month: "Aprel", created_at: "2025-07-23T13:54:43.414717+05:00" },
-	];
+
+	// //  [  Information from Statistics
+    // {
+    //   "id": 2,
+    //   "station_name": "Chinor",
+    //   "user_count": 672029,
+    //   "month": "January",
+    //   "created_at": "2025-07-29T10:33:07.147228+05:00"
+    // },
+    // {
+    //   "id": 3,
+    //   "station_name": "Chinor",
+    //   "user_count": 714070,
+    //   "month": "February",
+    //   "created_at": "2025-07-29T10:34:02.755867+05:00"
+    // },
+    // {
+    //   "id": 4,
+    //   "station_name": "Chinor",
+    //   "user_count": 714070,
+    //   "month": "March",
+    //   "created_at": "2025-07-29T10:34:48.197505+05:00"
+    // },
+    // {
+    //   "id": 5,
+    //   "station_name": "Chinor",
+    //   "user_count": 787728,
+    //   "month": "April",
+    //   "created_at": "2025-07-29T10:35:21.467764+05:00"
+    // },
+    // {
+    //   "id": 6,
+    //   "station_name": "Chinor",
+    //   "user_count": 798093,
+    //   "month": "May",
+    //   "created_at": "2025-07-29T10:39:05.935394+05:00"
+    // },
+    // {
+    //   "id": 7,
+    //   "station_name": "Chinor",
+    //   "user_count": 642633,
+    //   "month": "June",
+    //   "created_at": "2025-07-29T10:39:22.514945+05:00"
+    // },
+    // {
+    //   "id": 8,
+    //   "station_name": "Yangihayot",
+    //   "user_count": 218022,
+    //   "month": "January",
+    //   "created_at": "2025-07-29T10:40:01.652553+05:00"
+    // },
+    // {
+    //   "id": 9,
+    //   "station_name": "Yangihayot",
+    //   "user_count": 714070,
+    //   "month": "February",
+    //   "created_at": "2025-07-29T10:40:45.610395+05:00"
+    // },
+    // {
+    //   "id": 10,
+    //   "station_name": "Yangihayot",
+    //   "user_count": 714070,
+    //   "month": "March",
+    //   "created_at": "2025-07-29T10:41:44.479152+05:00"
+    // },
+    // {
+    //   "id": 11,
+    //   "station_name": "Yangihayot",
+    //   "user_count": 244719,
+    //   "month": "April",
+    //   "created_at": "2025-07-29T10:42:06.782404+05:00"
+    // }
+	
 
 	const monthOrder = [
 		"Yanvar", "Fevral", "Mart", "Aprel", "May", "Iyun",
@@ -180,7 +277,7 @@ export default function MetroPagesShowcase() {
 
 				</motion.div>
 
-			
+
 				<motion.div
 					initial={{ opacity: 0, y: 50 }}
 					animate={{ opacity: 1, y: 0 }}
@@ -227,7 +324,7 @@ export default function MetroPagesShowcase() {
 								))}
 
 								{/* Y axis labels */}
-								{[60, 40, 20, 0].map((val, i) => (
+								{[2000, 550, 350, 250, 150, 100, 50, 0].map((val, i) => (
 									<text
 										key={val}
 										x={40}
@@ -890,8 +987,8 @@ function TashkentMetroMap() {
 							r="4"
 							fill={line.color}
 							filter="url(#glow)"
-							initial={{ offsetDistance: "0%" }}
-							animate={{ offsetDistance: "100%" }}
+							// initial={{ offsetDistance: "0%" }}
+							// animate={{ offsetDistance: "100%" }}
 							transition={{
 								duration: 8,
 								repeat: Number.POSITIVE_INFINITY,

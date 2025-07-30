@@ -1,9 +1,9 @@
-import ContactInfo from './contact'
+import Component from './free-works'
 
 const Page = () => {
 	return (
 		<div>
-			<ContactInfo />
+			<Component />
 		</div>
 	)
 }

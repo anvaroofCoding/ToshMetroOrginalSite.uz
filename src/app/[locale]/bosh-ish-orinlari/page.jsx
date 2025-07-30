@@ -1,4 +1,4 @@
-import Component from './free-works'
+import Component from './vakan'
 
 const Page = () => {
 	return (

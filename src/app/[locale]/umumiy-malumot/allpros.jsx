@@ -32,11 +32,11 @@ export default function TashkentMetroDashboard() {
 	const [currentSection, setCurrentSection] = useState(0)
 
 	const finalStats = {
-		totalEmployees: 6184,
-		womenEmployees: 2616,
-		menEmployees: 3543,
-		womenPercentage: 42,
-		menPercentage: 58,
+		totalEmployees: 6481,
+		womenEmployees: 2536,
+		menEmployees: 3945,
+		womenPercentage: 39.13,
+		menPercentage: 60.87,
 	}
 
 	useEffect(() => {
@@ -115,13 +115,13 @@ export default function TashkentMetroDashboard() {
 						</p>
 						<div className='flex flex-wrap justify-center gap-4 pt-4'>
 							<div className='bg-gradient-to-r from-[#0E327F] to-blue-600 text-white px-6 py-3 rounded-full text-sm font-medium shadow-lg'>
-								6,184 Jami Xodim
+								6.481 Jami Xodim
 							</div>
 							<div className='bg-gradient-to-r from-pink-500 to-pink-600 text-white px-6 py-3 rounded-full text-sm font-medium shadow-lg'>
-								42% Ayollar
+								39.13% Ayollar
 							</div>
 							<div className='bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 py-3 rounded-full text-sm font-medium shadow-lg'>
-								58% Erkaklar
+								60.87% Erkaklar
 							</div>
 						</div>
 					</div>
@@ -247,85 +247,7 @@ export default function TashkentMetroDashboard() {
 					</CardContent>
 				</Card>
 
-				{/* Management Statistics */}
-				<div className='grid grid-cols-1 lg:grid-cols-2 gap-6'>
-					<Card className='border-0 shadow-2xl bg-gradient-to-br from-white via-gray-50/50 to-white backdrop-blur-sm'>
-						<CardHeader>
-							<CardTitle className='text-xl text-[#0E327F] flex items-center gap-2'>
-								<Building2 className='w-5 h-5' />
-								Apparat Tarkibi
-							</CardTitle>
-							<CardDescription>
-								DUK apparatidagi xodimlar tarkibi
-							</CardDescription>
-						</CardHeader>
-						<CardContent>
-							<div className='space-y-4'>
-								<div className='flex items-center justify-between p-4 bg-pink-50 rounded-lg'>
-									<div className='flex items-center gap-3'>
-										<div className='w-3 h-3 bg-pink-500 rounded-full'></div>
-										<span className='font-medium'>Ayollar</span>
-									</div>
-									<div className='text-right'>
-										<div className='text-2xl font-bold text-pink-600'>1</div>
-										<div className='text-sm text-gray-600'>6.25%</div>
-									</div>
-								</div>
-								<div className='flex items-center justify-between p-4 bg-blue-50 rounded-lg'>
-									<div className='flex items-center gap-3'>
-										<div className='w-3 h-3 bg-blue-500 rounded-full'></div>
-										<span className='font-medium'>Erkaklar</span>
-									</div>
-									<div className='text-right'>
-										<div className='text-2xl font-bold text-blue-600'>15</div>
-										<div className='text-sm text-gray-600'>93.75%</div>
-									</div>
-								</div>
-								<div className='pt-2 border-t'>
-									<div className='flex items-center justify-between'>
-										<span className='font-semibold text-gray-700'>Jami</span>
-										<span className='text-xl font-bold text-[#0E327F]'>16</span>
-									</div>
-								</div>
-							</div>
-						</CardContent>
-					</Card>
-
-					<Card className='border-0 shadow-2xl bg-gradient-to-br from-white via-gray-50/50 to-white backdrop-blur-sm'>
-						<CardHeader>
-							<CardTitle className='text-xl text-[#0E327F] flex items-center gap-2'>
-								<Award className='w-5 h-5' />
-								Asosiy Yutuqlar
-							</CardTitle>
-							<CardDescription>
-								Gender tenglik sohasidagi muhim natijalar
-							</CardDescription>
-						</CardHeader>
-						<CardContent>
-							<div className='space-y-4'>
-								{achievements.map((achievement, index) => (
-									<div
-										key={index}
-										className='flex items-center justify-between p-4 bg-white rounded-lg shadow-sm border border-gray-100'
-									>
-										<div className='flex items-center gap-3'>
-											<achievement.icon className='w-5 h-5 text-[#0E327F]' />
-											<span className='font-medium text-gray-700'>
-												{achievement.label}
-											</span>
-										</div>
-										<Badge
-											variant='secondary'
-											className='bg-green-100 text-green-700 hover:bg-green-200'
-										>
-											{achievement.value}
-										</Badge>
-									</div>
-								))}
-							</div>
-						</CardContent>
-					</Card>
-				</div>
+				
 
 				{/* Legal Framework */}
 				<Card className='border-0 shadow-2xl bg-white relative overflow-hidden'>

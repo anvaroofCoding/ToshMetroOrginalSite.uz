@@ -18,7 +18,7 @@ const Home = () => {
 				<Component />
 			</div> */}
 			<div className='my-10'>
-				<MetroPagesShowcase />
+				<MetroPagesShowcase  />
 			</div>
 			{/* <div className='my-10 mb-15'>
 				<MetroMapAdCard />
