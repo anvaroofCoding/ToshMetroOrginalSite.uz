@@ -19,7 +19,7 @@ const attoCards = [
     },
     {
         id: 2,
-        name: "Student ATTO Karta",
+        name: "Talaba ATTO Karta",
         type: "Sariq",
         price: "Chegirmali tarif",
         description: "Talabalar uchun imtiyozli tarif",
