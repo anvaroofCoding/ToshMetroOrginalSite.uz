@@ -479,26 +479,23 @@ export default function UzbekistanSymbols() {
                     <div className="grid md:grid-cols-2 gap-4">
                       <div className="space-y-3">
                         <div className="bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-500">
-                          <h4 className="font-bold mb-2">🦅 Humo Qushi</h4>
+                          <h4 className="font-bold mb-2">Humo Qushi</h4>
                           <p className="text-sm text-gray-700">Baxt va erkinlik ramzi. Hech qachon yerga qo'nmaydi.</p>
                         </div>
                         <div className="bg-orange-50 p-4 rounded-lg border-l-4 border-orange-500">
                           <h4 className="font-bold mb-2 flex items-center">
-                            <Sun className="w-4 h-4 mr-1" />
                             Quyosh
                           </h4>
                           <p className="text-sm text-gray-700">Yorug'lik va hayot manbai. Energiya va kuch.</p>
                         </div>
                         <div className="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
                           <h4 className="font-bold mb-2 flex items-center">
-                            <Mountain className="w-4 h-4 mr-1" />
                             Tog'lar
                           </h4>
                           <p className="text-sm text-gray-700">Tyan-Shan va Pamir-Oloy. Mustahkamlik ramzi.</p>
                         </div>
                         <div className="bg-cyan-50 p-4 rounded-lg border-l-4 border-cyan-500">
                           <h4 className="font-bold mb-2 flex items-center">
-                            <Waves className="w-4 h-4 mr-1" />
                             Daryolar
                           </h4>
                           <p className="text-sm text-gray-700">Amudaryo va Sirdaryo. Suv resurslari.</p>
@@ -507,25 +504,22 @@ export default function UzbekistanSymbols() {
                       <div className="space-y-3">
                         <div className="bg-amber-50 p-4 rounded-lg border-l-4 border-amber-500">
                           <h4 className="font-bold mb-2 flex items-center">
-                            <Wheat className="w-4 h-4 mr-1" />
                             Bug'doy
                           </h4>
                           <p className="text-sm text-gray-700">Dehqonchilik va farovonlik ramzi.</p>
                         </div>
                         <div className="bg-gray-50 p-4 rounded-lg border-l-4 border-gray-500">
-                          <h4 className="font-bold mb-2">🤍 Paxta</h4>
+                          <h4 className="font-bold mb-2">Paxta</h4>
                           <p className="text-sm text-gray-700">Oq oltin. Asosiy ekin turi.</p>
                         </div>
                         <div className="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
                           <h4 className="font-bold mb-2 flex items-center">
-                            <Ribbon className="w-4 h-4 mr-1" />
                             Lenta
                           </h4>
                           <p className="text-sm text-gray-700">Bayroq ranglari. Davlat ramzlari birligi.</p>
                         </div>
                         <div className="bg-indigo-50 p-4 rounded-lg border-l-4 border-indigo-500">
                           <h4 className="font-bold mb-2 flex items-center">
-                            <FileText className="w-4 h-4 mr-1" />
                             Yozuv
                           </h4>
                           <p className="text-sm text-gray-700">"O'ZBEKISTON RESPUBLIKASI" - rasmiy nomi.</p>

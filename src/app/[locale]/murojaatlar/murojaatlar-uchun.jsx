@@ -79,7 +79,6 @@ export default function MetroLostItemForm() {
       <div className="max-w-2xl mx-auto">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-blue-900 mb-2">Murojaatlar bo'limi</h1>
-          <p className="text-gray-600">Yo'qolgan buyumingiz haqida murojaat qoldiring</p>
         </div>
 
         <Card className="shadow-lg border-0 bg-white">

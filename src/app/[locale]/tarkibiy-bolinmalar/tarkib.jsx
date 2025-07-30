@@ -116,7 +116,7 @@ export default function TransportDirectory() {
     },
     {
       title:
-        "Axborot xavfsizligini ta'minlash va texnik xizmat ko'rsatish xizmati",
+        "Axborot xavfsizligini ta'minlash va axborot-kommunikatsiya texnologiyalarini rivojlantirish xizmati",
       titleEn: 'Information Security and Technical Support Service',
       head: "Toshpo'lotov Feruz G'olib o'g'li",
       schedule: 'Dushanba-juma kunlari 08:00 dan 17:00 ga qadar',

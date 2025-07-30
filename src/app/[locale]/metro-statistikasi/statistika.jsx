@@ -117,13 +117,13 @@ const MetroStatistics = () => {
   }
 
   return (
-    <div className="w-full max-w-7xl mx-auto p-4 sm:p-6 bg-white min-h-screen">
-      <div className="text-center space-y-2">
+    <div className="container min-h-screen overflow-hidden">
+      <div className="text-center space-y-2 my-10">
         <h1 className="text-2xl sm:text-3xl font-bold text-blue-900">Metro Bekatlari Statistikasi</h1>
-        <p className="text-muted-foreground">Bekatni tanlang va uning oylik foydalanuvchilar statistikasini ko'ring</p>
+        <p className="text-muted-foreground">Bekatni tanlang va uning oylik Yo'lovchilar statistikasini ko'ring</p>
       </div>
 
-      <Card className="border-blue-200">
+      <Card className=" mb-4">
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-blue-900">
             <TrendingUp className="h-5 w-5" />
@@ -149,23 +149,23 @@ const MetroStatistics = () => {
 
       {selectedStation && (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
-          <Card>
+          <Card className="mb-10 lg:mb-20">
             <CardHeader>
               <CardTitle>{selectedStation} bekati statistikasi</CardTitle>
-              <CardDescription>Oylik foydalanuvchilar soni va umumiy ko'rsatkichlar</CardDescription>
+              <CardDescription>Oylik Yo'lovchilar soni va umumiy ko'rsatkichlar</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
                 <Card className="border-blue-200">
                   <CardContent className="pt-6">
                     <div className="text-xl sm:text-2xl font-bold text-blue-900">{totalUsers.toLocaleString()}</div>
-                    <p className="text-xs sm:text-sm text-blue-600">Jami foydalanuvchilar</p>
+                    <p className="text-xs sm:text-sm text-blue-600">Jami Yo'lovchilar</p>
                   </CardContent>
                 </Card>
                 <Card className="border-blue-200">
                   <CardContent className="pt-6">
                     <div className="text-xl sm:text-2xl font-bold text-blue-900">{averageUsers.toLocaleString()}</div>
-                    <p className="text-xs sm:text-sm text-blue-600">O'rtacha oylik foydalanuvchilar</p>
+                    <p className="text-xs sm:text-sm text-blue-600">O'rtacha oylik Yo'lovchilar</p>
                   </CardContent>
                 </Card>
               </div>
@@ -175,20 +175,20 @@ const MetroStatistics = () => {
                   <BarChart data={selectedStationData} margin={{ top: 20, right: 10, left: 10, bottom: 60 }}>
                     <XAxis
                       dataKey="month"
-                      tick={{ fontSize: 10, fill: "#1e3a8a" }}
+                      tick={{ fontSize: 15, fill: "#1e3a8a", fontWeight: 'bold' }}
                       angle={-45}
                       textAnchor="end"
                       height={80}
                       interval={0}
                     />
-                    <YAxis tick={{ fontSize: 10, fill: "#1e3a8a" }} />
+                    <YAxis tick={{ fontSize: 15, fill: "#1e3a8a", fontWeight: 'bold' }} />
                     <Tooltip
-                      formatter={(value) => [value.toLocaleString(), "Foydalanuvchilar soni"]}
+                      formatter={(value) => [value.toLocaleString(), "Yo'lovchilar soni"]}
                       labelStyle={{ color: "#1e3a8a" }}
                       contentStyle={{ backgroundColor: "#f8fafc", border: "1px solid #1e3a8a" }}
                     />
                     <Legend />
-                    <Bar dataKey="user_count" fill="#1e3a8a" name="Foydalanuvchilar soni" radius={[4, 4, 0, 0]} />
+                    <Bar dataKey="user_count" fill="#1e3a8a" name="Yo'lovchilar soni" radius={[4, 4, 0, 0]} />
                   </BarChart>
                 </ResponsiveContainer>
               </div>

@@ -48,7 +48,7 @@ export default function FloatingActionButton() {
       icon: Bot ,
       title: "Tezkor savol javob",
       action: "Quick Q&A",
-      btlink: "/",
+      btlink: "/mister-ai",
     },
     {
       id: "manager",

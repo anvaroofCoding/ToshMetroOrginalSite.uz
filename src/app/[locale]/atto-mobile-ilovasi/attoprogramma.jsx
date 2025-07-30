@@ -221,14 +221,7 @@ export default function AttoLandingPage() {
                         ))}
                     </ul>
 
-                    <motion.div variants={itemVariants}>
-                        <Button
-                            variant='outline'
-                            className='rounded-lg bg-gray-100 border-gray-300'
-                        >
-                            UZB
-                        </Button>
-                    </motion.div>
+
                 </motion.div>
             </div>
         </div>

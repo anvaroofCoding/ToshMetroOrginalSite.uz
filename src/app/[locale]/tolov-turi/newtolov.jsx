@@ -10,7 +10,7 @@ const attoCards = [
     {
         id: 1,
         name: "Oddiy ATTO Karta",
-        type: "Kochuk (Moviy)",
+        type: "Moviy",
         price: "1,700 UZS",
         description: "Markazlashtirilgan NFC transport kartasi",
         color: "bg-blue-50 border-blue-200",
@@ -431,7 +431,7 @@ export default function PaymentMethods() {
                                             <h3 className="font-bold text-blue-900 text-base sm:text-lg md:text-xl lg:text-2xl">PalmPay</h3>
                                         </div>
                                         <p className="text-gray-700 mb-4 sm:mb-5 md:mb-6 text-sm sm:text-base md:text-lg leading-relaxed">
-                                            Palma tomirlarini skanerlash orqali to'lov
+                                            Kaftni skanerlash orqali to'lov
                                         </p>
                                         <Badge variant="outline" className="text-xs sm:text-sm px-3 py-1">
                                             12 stansiyada
@@ -446,7 +446,7 @@ export default function PaymentMethods() {
                                 </h4>
                                 <p className="text-gray-700 text-sm sm:text-base md:text-lg leading-relaxed">
                                     Foydalanuvchi mobil ilovada biometrik profilni yaratib, ATTO kartasiga bog'laydi. Metro burilish
-                                    turniketida palma yoki yuzni skaner qilib o'tadi.
+                                    turniketida kaft yoki yuzni skaner qilib o'tadi.
                                 </p>
                             </div>
                         </div>

@@ -42,40 +42,27 @@ export default function MetroPagesShowcase() {
 			bgColor: "#F0FFF4",
 		},
 		{
-			name: "Uzcard Karta",
-			information: "Uzcard to'lovlari",
-			image: "https://marketing.uz/uploads/articles/1192/article-original.png",
-			color: "#0066CC",
+			name: "Alif mobi",
+			information: "Alif mobi ilovasi orqali to'lov",
+			image: "https://play-lh.googleusercontent.com/kJJQYR2u11_8fCgrJl5lKScnlba5_5KXx6RUD6KQHm4tmxaZqiiOjVscwvFvtfce2vE=w600-h300-pc0xffffff-pd",
+			color: "#0b9e48ff",
 			bgColor: "#F0F7FF",
 		},
 		{
-			name: "Click",
-			information: "Click ilovasi orqali to'lov",
-			image: "https://click.uz/click/images/click-white.jpg",
-			color: "#00C851",
+			name: "Payme",
+			information: "Payme ilovasi orqali to'lov",
+			image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Paymeuz_logo.png/1600px-Paymeuz_logo.png",
+			color: "#2ba6eeff",
 			bgColor: "#F0FFF4",
 		},
 		{
-			name: "Click",
-			information: "Click ilovasi orqali to'lov",
-			image: "https://click.uz/click/images/click-white.jpg",
+			name: "Paynet",
+			information: "Paynet ilovasi orqali to'lov",
+			image: "https://play-lh.googleusercontent.com/SKrx5xcp2Vu8Jj9Q4XTw2Cifdaix96xkb5U1T1NKyE-zKwbwuCvhV2RFLwHsVZS8r5k=w480-h960",
 			color: "#00C851",
 			bgColor: "#F0FFF4",
 		},
-		{
-			name: "Uzcard Karta",
-			information: "Uzcard to'lovlari",
-			image: "https://marketing.uz/uploads/articles/1192/article-original.png",
-			color: "#0066CC",
-			bgColor: "#F0F7FF",
-		},
-		{
-			name: "Click",
-			information: "Click ilovasi orqali to'lov",
-			image: "https://click.uz/click/images/click-white.jpg",
-			color: "#00C851",
-			bgColor: "#F0FFF4",
-		},
+		
 	]
 
 	const getStatistika = async () => {

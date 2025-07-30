@@ -23,16 +23,9 @@ const companies = [
 		desc: 'www.president.uz',
 		link: 'www.president.uz',
 	},
-
 	{
-		name: `O'zbekiston Respublikasi Oliy Majlisining Inson huquqlari bo'yicha vakili`,
-		logo: 'https://parliament.gov.uz/media/interactive_services/usefull3.png',
-		desc: 'www.data.gov.uz',
-		link: 'www.data.gov.uz',
-	},
-	{
-		name: `O'zbekiston Respublikasi Oliy Majlisining Inson huquqlari bo'yicha vakili`,
-		logo: 'https://parliament.gov.uz/media/interactive_services/usefulll.png',
+		name: `O'zbekiston Respublikasi Transport Vazirligi`,
+		logo: 'https://sirdaryo.mintrans.uz/logo.png',
 		desc: 'mintrans.uz',
 		link: 'https://www.mintrans.uz/',
 	},

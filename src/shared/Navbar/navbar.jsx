@@ -87,7 +87,7 @@ const menuItems = [
     dropdown: true,
     icon: Building,
     dropdownItems: [
-      { label: "Tashkilod haqida", href: "/metro-tarixi", icon: Building },
+      { label: "Tashkilot haqida", href: "/metro-tarixi", icon: Building },
       { label: "Rahbariyat", href: "/Raxbariyat", icon: Users },
       { label: "Tarkibiy bo'linmalar", href: "/tarkibiy-bolinmalar", icon: Building },
       { label: "Bo'sh ish o'rinlari", href: "/bosh-ish-orinlari", icon: Users },

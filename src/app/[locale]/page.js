@@ -18,6 +18,9 @@ const Home = () => {
 				<Component />
 			</div> */}
 			<div className='my-10'>
+				<div className='container py-5'>
+					<h2 className='md:text-[36px] text-[24px] font-bold'>Metropoliteni yo'lovchilari uchun foydali ma'lumotlar</h2>
+				</div>
 				<MetroPagesShowcase  />
 			</div>
 			{/* <div className='my-10 mb-15'>
@@ -25,7 +28,7 @@ const Home = () => {
 			</div> */}
 			<div>
 				<div className='container py-5'>
-					<h2 className='text-[36px] font-bold'>Qiziqarli lavhalar</h2>
+					<h2 className='lg:text-[36px] font-bold text-[24px]'>Qiziqarli lavhalar</h2>
 				</div>
 				<YoutubeGrid />
 			</div>

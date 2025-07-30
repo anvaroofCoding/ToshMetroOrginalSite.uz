@@ -59,21 +59,21 @@ export default function AttoDetailedPage() {
 			title: 'Talabalar uchun',
 			description:
 				'Jamoat transportida imtiyozli sayohat qilish huquqiga ega talabalar uchun.',
-			color: 'from-green-500 to-green-700',
+			color: 'from-yellow-300 to-yellow-300',
 			icon: <GraduationCap className='w-8 h-8 text-white' />,
 			price: 'Imtiyozli tarif',
 			features: ['Talaba ID kerak', 'Imtiyozli tarif', 'Universitet tasdiqi'],
-			cardColor: 'yashil',
+			cardColor: 'sariq',
 		},
 		{
 			title: "O'quvchilar uchun",
 			description:
 				"Jamoat transportida imtiyozli sayohat qilish huquqiga ega o'quvchilar uchun.",
-			color: 'from-yellow-500 to-orange-500',
+			color: 'from-green-500 to-green-500',
 			icon: <School className='w-8 h-8 text-white' />,
 			price: 'Imtiyozli tarif',
 			features: ['Maktab guvohnomasi', 'Katta chegirma', 'Ota-ona nazorati'],
-			cardColor: 'sariq',
+			cardColor: 'yashil',
 		},
 		{
 			title: 'Ijtimoiy karta',
@@ -521,93 +521,6 @@ export default function AttoDetailedPage() {
 				</div>
 			</section>
 
-			{/* How to Use Section - Enhanced */}
-			<section className='py-20 bg-white'>
-				<div className=' mx-auto'>
-					<motion.div
-						initial={{ opacity: 0, y: 30 }}
-						whileInView={{ opacity: 1, y: 0 }}
-						viewport={{ once: true }}
-						className='text-center mb-16'
-					>
-						<h2
-							className='text-4xl lg:text-5xl font-bold mb-4'
-							style={{ color: mainColor }}
-						>
-							Kartadan Foydalanish
-						</h2>
-						<p className='text-xl text-gray-600'>
-							3 ta oddiy qadam bilan transport kartasidan foydalaning
-						</p>
-					</motion.div>
-
-					<div className='relative'>
-						{/* Enhanced Connection Line */}
-						<div className='hidden lg:block absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-blue-300 to-transparent transform -translate-y-1/2 rounded-full'></div>
-
-						<div className='grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12'>
-							{steps.map((step, index) => (
-								<motion.div
-									key={index}
-									initial={{ opacity: 0, y: 50 }}
-									whileInView={{ opacity: 1, y: 0 }}
-									transition={{ delay: index * 0.2 }}
-									viewport={{ once: true }}
-									className='relative'
-								>
-									<motion.div
-										whileHover={{ scale: 1.05 }}
-										className='text-center bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100'
-									>
-										{/* Enhanced Step Number */}
-										<div className='relative mx-auto w-20 h-20 mb-6'>
-											<motion.div
-												className='w-full h-full rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-lg'
-												style={{ backgroundColor: mainColor }}
-												whileHover={{ rotate: 360 }}
-												transition={{ duration: 0.5 }}
-											>
-												{step.number}
-											</motion.div>
-											<div className='absolute -inset-2 rounded-full bg-blue-100 -z-10'></div>
-										</div>
-
-										{/* Enhanced Icon */}
-										<motion.div
-											className='inline-flex items-center justify-center w-16 h-16 bg-blue-50 rounded-full mb-4'
-											whileHover={{ scale: 1.1 }}
-										>
-											<div style={{ color: mainColor }}>{step.icon}</div>
-										</motion.div>
-
-										{/* Content */}
-										<h3
-											className='text-2xl font-bold mb-3'
-											style={{ color: mainColor }}
-										>
-											{step.title}
-										</h3>
-										<p className='text-gray-600 leading-relaxed mb-6'>
-											{step.description}
-										</p>
-
-										<Button
-											variant='outline'
-											className='border-2 hover:bg-blue-50 bg-transparent transition-all duration-300'
-											style={{ borderColor: mainColor, color: mainColor }}
-											onClick={step.action}
-										>
-											<Info className='w-4 h-4 mr-2' />
-											Batafsil
-										</Button>
-									</motion.div>
-								</motion.div>
-							))}
-						</div>
-					</div>
-				</div>
-			</section>
-
 			{/* Detailed Services Section - Enhanced */}
 			<section className='py-20 '>
 				<div className=' mx-auto'>
@@ -793,38 +706,6 @@ export default function AttoDetailedPage() {
 							}}
 						/>
 					))}
-				</div>
-
-				<div className='max-w-4xl mx-auto text-center text-white relative z-10'>
-					<motion.div
-						initial={{ opacity: 0, y: 30 }}
-						whileInView={{ opacity: 1, y: 0 }}
-						viewport={{ once: true }}
-					>
-						<h2 className='text-4xl lg:text-5xl font-bold mb-6 text-[#0E327F]'>
-							Bugun ATTO kartasini oling
-						</h2>
-						<p className='text-xl mb-8 max-w-2xl mx-auto leading-relaxed text-gray-600'>
-							Toshkent jamoat transportida qulay va tezkor sayohat qiling.
-							Kontaktsiz to'lov - kelajak bugun!
-						</p>
-						<div className='flex flex-col sm:flex-row gap-4 justify-center'>
-							<Button
-								size='lg'
-								className='bg-white text-blue-900 hover:bg-blue-50 font-semibold px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300'
-								onClick={() => openModal('where-to-buy')}
-							>
-								Eng yaqin nuqtani topish <MapPin className='w-5 h-5 ml-2' />
-							</Button>
-							<Button
-								// variant='outline'
-								size='lg'
-								className='bg-[#0E327F] text-white hover:bg-[#0E327F]/60 font-semibold px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300'
-							>
-								Mobil ilova yuklab olish
-							</Button>
-						</div>
-					</motion.div>
 				</div>
 			</section>
 

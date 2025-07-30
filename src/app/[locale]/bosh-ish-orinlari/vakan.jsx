@@ -271,47 +271,14 @@ export default function Component() {
 						</motion.div>
 
 						{/* Floating Stats */}
-						<motion.div
-							initial={{ y: 50, opacity: 0 }}
-							animate={{ y: 0, opacity: 1 }}
-							transition={{ delay: 1.3, duration: 0.8 }}
-							className='grid grid-cols-1 md:grid-cols-3 gap-6 mt-16 max-w-3xl mx-auto'
-						>
-							<motion.div
-								whileHover={{ y: -5 }}
-								className='bg-white/80 backdrop-blur-sm border border-gray-200 rounded-2xl p-6 shadow-xl'
-							>
-								<div className='text-3xl font-bold text-[#0E327F] mb-2'>
-									14 mln
-								</div>
-								<div className='text-gray-600'>Maksimal maosh</div>
-							</motion.div>
-							<motion.div
-								whileHover={{ y: -5 }}
-								className='bg-white/80 backdrop-blur-sm border border-gray-200 rounded-2xl p-6 shadow-xl'
-							>
-								<div className='text-3xl font-bold text-[#0E327F] mb-2'>
-									1.5 mln
-								</div>
-								<div className='text-gray-600'>Ijara kompensatsiyasi</div>
-							</motion.div>
-							<motion.div
-								whileHover={{ y: -5 }}
-								className='bg-white/80 backdrop-blur-sm border border-gray-200 rounded-2xl p-6 shadow-xl'
-							>
-								<div className='text-3xl font-bold text-[#0E327F] mb-2'>
-									100%
-								</div>
-								<div className='text-gray-600'>Tibbiy ta'minot</div>
-							</motion.div>
-						</motion.div>
+					
 					</motion.div>
 				</div>
 			</motion.section>
 
 			{/* Jobs Section */}
 			<section className='container py-16'>
-				<motion.div
+				{/* <motion.div
 					initial={{ y: 50, opacity: 0 }}
 					whileInView={{ y: 0, opacity: 1 }}
 					transition={{ duration: 0.8 }}
@@ -325,7 +292,7 @@ export default function Component() {
 						Toshkent Metro jamoasiga qo'shiling va shahar transporti tizimining
 						rivojlanishida ishtirok eting
 					</p>
-				</motion.div>
+				</motion.div> */}
 
 				<div className=' grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
 					{jobPositions.map((job, index) => (
