@@ -6,71 +6,109 @@ import { useEffect, useState, useCallback, useMemo } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Heart, Loader2 } from "lucide-react"
+import { Heart, Loader2, RefreshCw } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
 
-// ⏱ Vaqtni "1 soat oldin", "10 daqiqa oldin" kabi ko‘rsatish funksiyasi
+// Enhanced time ago function with better localization
 const getTimeAgo = (dateString) => {
-  const now = new Date();
-  const publishedDate = new Date(dateString);
-  const diffInSeconds = Math.floor((now.getTime() - publishedDate.getTime()) / 1000);
+  const now = new Date()
+  const publishedDate = new Date(dateString)
+  const diffInSeconds = Math.floor((now.getTime() - publishedDate.getTime()) / 1000)
 
   if (diffInSeconds < 60) {
-    return `${diffInSeconds} soniya oldin`;
+    return `${diffInSeconds} soniya oldin`
   } else if (diffInSeconds < 3600) {
-    const minutes = Math.floor(diffInSeconds / 60);
-    return `${minutes} daqiqa oldin`;
+    const minutes = Math.floor(diffInSeconds / 60)
+    return `${minutes} daqiqa oldin`
   } else if (diffInSeconds < 86400) {
-    const hours = Math.floor(diffInSeconds / 3600);
-    return `${hours} soat oldin`;
+    const hours = Math.floor(diffInSeconds / 3600)
+    return `${hours} soat oldin`
+  } else if (diffInSeconds < 2592000) {
+    // 30 days
+    const days = Math.floor(diffInSeconds / 86400)
+    return `${days} kun oldin`
   } else {
-    const days = Math.floor(diffInSeconds / 86400);
-    return `${days} kun oldin`;
+    return publishedDate.toLocaleDateString()
   }
-};
+}
+
 
 export default function OptimizedNews() {
-  const [newsdata, setNewsData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [likingItems, setLikingItems] = useState(new Set());
+  const [newsdata, setNewsData] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+  const [likingItems, setLikingItems] = useState(new Set())
 
-  const pathname = usePathname();
-  const lang = pathname.split("/")[1];
-  const { toast } = useToast();
+  const pathname = usePathname()
+  const lang = pathname.split("/")[1] || "uz"
+  const { toast } = useToast()
 
+  // Optimized news fetching with better error handling
   const getNews = useCallback(async () => {
     try {
-      setLoading(true);
-      setError(null);
+      setLoading(true)
+      setError(null)
 
-      const res = await fetch(`https://metro-site.onrender.com/api/news/${lang}/`);
-      if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+      const controller = new AbortController()
+      const timeoutId = setTimeout(() => controller.abort(), 10000) // 10 second timeout
 
-      const data = await res.json();
-      setNewsData(data);
+      const res = await fetch(`https://metro-site.onrender.com/api/news/${lang}/`, {
+        signal: controller.signal,
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
+
+      clearTimeout(timeoutId)
+
+      if (!res.ok) {
+        throw new Error(`Failed to fetch news: ${res.status} ${res.statusText}`)
+      }
+
+      const data = await res.json()
+
+      if (!Array.isArray(data)) {
+        throw new Error("Invalid data format received")
+      }
+
+      setNewsData(data)
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : "Unknown error occurred";
-      setError(errorMessage);
-      console.error("Error fetching news:", err);
+      let errorMessage = "Unknown error occurred"
+
+      if (err instanceof Error) {
+        if (err.name === "AbortError") {
+          errorMessage = "Request timed out. Please check your connection."
+        } else {
+          errorMessage = err.message
+        }
+      }
+
+      setError(errorMessage)
+      console.error("Error fetching news:", err)
 
       toast({
         title: "Error",
         description: "Failed to load news. Please try again.",
         variant: "destructive",
-      });
+      })
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  }, [lang, toast]);
+  }, [lang, toast])
 
+  // Optimized like handler with better state management
   const handleLike = useCallback(
     async (itemId) => {
-      if (likingItems.has(itemId)) return;
+      if (likingItems.has(itemId)) return
+
+      const currentItem = newsdata.find((item) => item.id === itemId)
+      if (!currentItem) return
 
       try {
-        setLikingItems((prev) => new Set(prev).add(itemId));
+        setLikingItems((prev) => new Set(prev).add(itemId))
 
+        // Optimistic update
         setNewsData((prevData) =>
           prevData.map((item) =>
             item.id === itemId
@@ -81,167 +119,225 @@ export default function OptimizedNews() {
                 }
               : item,
           ),
-        );
+        )
 
         const response = await fetch(`https://metro-site.onrender.com/api/news/${itemId}/like/`, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-        });
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        })
 
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`)
+        }
 
-        const data = await response.json();
+        const data = await response.json()
+
+        // Update with server response
         setNewsData((prevData) =>
           prevData.map((item) =>
-            item.id === itemId ? { ...item, like_count: data.like_count, is_liked: true } : item,
+            item.id === itemId ? { ...item, like_count: data.like_count, is_liked: data.is_liked ?? true } : item,
           ),
-        );
+        )
 
-        toast({ title: "Success", description: data.message });
+        toast({
+          title: "Success",
+          description: data.message || "Action completed successfully",
+        })
       } catch (err) {
+        // Revert optimistic update on error
         setNewsData((prevData) =>
           prevData.map((item) =>
             item.id === itemId
               ? {
                   ...item,
-                  like_count: item.is_liked ? item.like_count - 1 : item.like_count + 1,
-                  is_liked: !item.is_liked,
+                  like_count: currentItem.like_count,
+                  is_liked: currentItem.is_liked,
                 }
               : item,
           ),
-        );
+        )
 
-        console.error("Error liking news:", err);
+        console.error("Error liking news:", err)
         toast({
           title: "Error",
-          description: "Failed to like the news. Please try again.",
+          description: "Failed to update like. Please try again.",
           variant: "destructive",
-        });
+        })
       } finally {
         setLikingItems((prev) => {
-          const newSet = new Set(prev);
-          newSet.delete(itemId);
-          return newSet;
-        });
+          const newSet = new Set(prev)
+          newSet.delete(itemId)
+          return newSet
+        })
       }
     },
-    [likingItems, toast],
-  );
+    [likingItems, newsdata, toast],
+  )
 
   useEffect(() => {
-    getNews();
-  }, [getNews]);
+    getNews()
+  }, [getNews])
 
+  // Memoized news items with improved layout and stylish like button
   const memoizedNewsItems = useMemo(() => {
     return newsdata.map((item) => {
-      const imageUrl = item.images?.[0]?.image;
-      const description = item[`description_${lang}`];
-      const title = item[`title_${lang}`];
-      const isLiking = likingItems.has(item.id);
+      const imageUrl = item.images?.[0]?.image
+      const description = item[`description_${lang}`]
+      const title = item[`title_${lang}` ]
+      const isLiking = likingItems.has(item.id)
 
       return (
-        <Card key={item.id} className="h-[500px] flex flex-col overflow-hidden hover:shadow-lg transition-shadow">
-          <div className="relative h-1/2">
+        <Card
+          key={item.id}
+          className="h-[450px] flex flex-col overflow-hidden hover:shadow-xl transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 bg-white border border-gray-200 hover:border-gray-300"
+        >
+          <div className="relative h-48 bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden">
             {imageUrl ? (
               <Image
-                src={imageUrl}
+                src={imageUrl || "/placeholder.svg"}
                 alt={title || "News image"}
                 fill
-                className="object-cover"
+                className="object-cover transition-all duration-500 hover:scale-110"
                 sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                priority={false}
               />
             ) : (
-              <div className="w-full h-full bg-gray-200 flex items-center justify-center text-sm text-gray-500">
-                No Image Available
+              <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                <span className="text-sm text-gray-500">No Image Available</span>
               </div>
             )}
+            {/* Overlay gradient for better visual appeal */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300" />
           </div>
 
-          <CardContent className="flex-1 p-4 flex flex-col justify-between">
-            <div className="flex-1 border relative">
-              <Link href={`/${lang}/yangiliklar/${item.id}`} className="block hover:text-blue-600 transition-colors">
-                <h3 className="font-semibold text-lg line-clamp-2 mb-2">{title}</h3>
-                <p className="text-sm text-gray-600 line-clamp-3">{description}</p>
-                <p className="text-sm text-muted-foreground absolute bottom-1 ">{getTimeAgo(item.publishedAt)}</p>
+          <CardContent className="flex-1 p-4 flex flex-col">
+            <div className="flex-1 mb-4 relative">
+              <Link href={`/${lang}/yangiliklar/${item.id}`} className="block group">
+                <h3 className="font-semibold text-lg line-clamp-2 mb-2 group-hover:text-blue-600 transition-colors duration-200">
+                  {title || "Untitled"}
+                </h3>
+                <p className="text-sm text-gray-600 line-clamp-3 mb-3">{description || "No description available"}</p>
               </Link>
+              <p className="text-xs text-muted-foreground absolute bottom-0">{getTimeAgo(item.publishedAt)}</p>
             </div>
 
-            <div className="flex items-center justify-between mt-4 pt-3 border-t">
-              <Button
-                variant={item.is_liked ? "default" : "outline"}
-                size="sm"
-                onClick={() => handleLike(item.id)}
+            <div className="flex items-center justify-between pt-3 border-t border-gray-100">
+              {/* Stylish Like Button */}
+              <button
+                onClick={(e) => {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  handleLike(item.id)
+                }}
                 disabled={isLiking}
-                className="flex items-center gap-2"
+                className={`group relative flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300 transform hover:scale-105 active:scale-95 ${
+                  item.is_liked
+                    ? "bg-gradient-to-r from-pink-500 to-red-500 text-white shadow-lg hover:shadow-xl hover:from-pink-600 hover:to-red-600"
+                    : "bg-gray-50 hover:bg-gray-100 text-gray-600 hover:text-red-500 border border-gray-200 hover:border-red-200 hover:shadow-md"
+                } ${isLiking ? "cursor-not-allowed opacity-70" : "cursor-pointer"}`}
               >
                 {isLiking ? (
                   <Loader2 className="h-4 w-4 animate-spin" />
                 ) : (
-                  <Heart className={`h-4 w-4 ${item.is_liked ? "fill-current" : ""}`} />
+                  <Heart
+                    className={`h-4 w-4 transition-all duration-300 ${
+                      item.is_liked
+                        ? "fill-current scale-110 drop-shadow-sm"
+                        : "group-hover:scale-110 group-hover:fill-red-100"
+                    }`}
+                  />
                 )}
-                <span>{item.like_count}</span>
-              </Button>
+                <span
+                  className={`font-semibold text-sm transition-all duration-300 ${
+                    item.is_liked ? "text-white" : "group-hover:text-red-500"
+                  }`}
+                >
+                  {item.like_count}
+                </span>
+                {/* Ripple effect */}
+                <div
+                  className={`absolute inset-0 rounded-full transition-all duration-300 pointer-events-none ${
+                    item.is_liked
+                      ? "bg-white/20 scale-0 group-active:scale-100 group-active:opacity-50"
+                      : "bg-red-500/10 scale-0 group-hover:scale-100 group-hover:opacity-30"
+                  }`}
+                />
+              </button>
 
               <Link
                 href={`/${lang}/yangiliklar/${item.id}`}
-                className="text-sm text-blue-600 hover:text-blue-800 transition-colors"
+                className="text-sm text-blue-600 hover:text-blue-800 transition-all duration-200 font-medium hover:underline decoration-2 underline-offset-2"
+                onClick={(e) => e.stopPropagation()}
               >
-                Read More
+                Ko'proq
               </Link>
             </div>
           </CardContent>
         </Card>
-      );
-    });
-  }, [newsdata, lang, likingItems, handleLike]);
+      )
+    })
+  }, [newsdata, lang, likingItems, handleLike])
 
   if (loading) {
     return (
-      <div className="w-full">
-        <div className="container py-5">
-          <div className="flex items-center justify-center min-h-[400px]">
-            <div className="flex items-center gap-2">
-              <Loader2 className="h-6 w-6 animate-spin" />
-              <span>Loading news...</span>
-            </div>
+      <div className="w-full min-h-[400px]">
+        <div className="container py-8">
+          <div className="flex flex-col items-center justify-center min-h-[400px] gap-4">
+            <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
+            <span className="text-lg font-medium">Loading news...</span>
+            <p className="text-sm text-gray-500">Please wait while we fetch the latest news</p>
           </div>
         </div>
       </div>
-    );
+    )
   }
 
   if (error) {
     return (
-      <div className="w-full">
-        <div className="container py-5">
-          <div className="flex flex-col items-center justify-center min-h-[400px] gap-4">
-            <p className="text-red-600">Error: {error}</p>
-            <Button onClick={getNews} variant="outline">
+      <div className="w-full min-h-[400px]">
+        <div className="container py-8">
+          <div className="flex flex-col items-center justify-center min-h-[400px] gap-4 text-center">
+            <div className="p-4 bg-red-50 rounded-lg border border-red-200">
+              <p className="text-red-600 font-medium mb-2">Failed to load news</p>
+              <p className="text-sm text-red-500">{error}</p>
+            </div>
+            <Button onClick={getNews} variant="outline" className="flex items-center gap-2 bg-transparent">
+              <RefreshCw className="h-4 w-4" />
               Try Again
             </Button>
           </div>
         </div>
       </div>
-    );
+    )
   }
 
   if (newsdata.length === 0) {
     return (
-      <div className="w-full">
-        <div className="container py-5">
-          <div className="flex items-center justify-center min-h-[400px]">
-            <p className="text-gray-500">No news available.</p>
+      <div className="w-full min-h-[400px]">
+        <div className="container py-8">
+          <div className="flex flex-col items-center justify-center min-h-[400px] gap-4">
+            <div className="p-6 bg-gray-50 rounded-lg border border-gray-200 text-center">
+              <p className="text-gray-600 font-medium mb-2">No news available</p>
+              <p className="text-sm text-gray-500">Check back later for updates</p>
+            </div>
+            <Button onClick={getNews} variant="outline" className="flex items-center gap-2 bg-transparent">
+              <RefreshCw className="h-4 w-4" />
+              Refresh
+            </Button>
           </div>
         </div>
       </div>
-    );
+    )
   }
 
   return (
     <div className="w-full">
-      <div className="container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 py-5">
-        {memoizedNewsItems}
+      <div className="container py-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">{memoizedNewsItems}</div>
       </div>
     </div>
-  );
+  )
 }

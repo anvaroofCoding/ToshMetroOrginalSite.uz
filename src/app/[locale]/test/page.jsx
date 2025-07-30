@@ -1,195 +1,115 @@
+// components/TopStationsChart.jsx
+"use client"
 
-
-// "use client";
-
-// import { useEffect, useState } from "react";
-// import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from "recharts";
-// import { motion } from "framer-motion";
-
-// const StatistikaSection = () => {
-//   const [apiStats, setApiStats] = useState([]);
-//   const [loading, setLoading] = useState(true);
-//   const [error, setError] = useState(null);
-
-//   useEffect(() => {
-//     const getStatistika = async () => {
-//       try {
-//         const response = await fetch("https://metro-site.onrender.com/api/statistics/uz/");
-//         if (!response.ok) {
-//           throw new Error(`HTTP error! Status: ${response.status}`);
-//         }
-//         const data = await response.json();
-
-//         // Eng yuqori 5ta statistikani olish
-//         const top5 = [...data.results]
-//           .sort((a, b) => b.user_count - a.user_count)
-//           .slice(0, 5);
-
-//         setApiStats(top5);
-//       } catch (err) {
-//         console.error("Xatolik yuz berdi:", err);
-//         setError("Ma'lumotlarni yuklashda xatolik yuz berdi.");
-//       } finally {
-//         setLoading(false);
-//       }
-//     };
-
-//     getStatistika();
-//   }, []);
-
-//   if (loading) return <p>Yuklanmoqda...</p>;
-//   if (error) return <p style={{ color: "red" }}>{error}</p>;
-
-//   const colors = ["#8884d8", "#82ca9d", "#ffc658", "#ff7300", "#0088FE"];
-
-//   return (
-//     <div className="w-full p-4">
-//       <motion.div
-//         initial={{ opacity: 0, y: 20 }}
-//         animate={{ opacity: 1, y: 0 }}
-//         transition={{ delay: 0.1 }}
-//         className="mb-12"
-//       >
-//         <h2 className="text-2xl font-bold mb-4">Eng yuqori 5ta ko‘rsatkich</h2>
-//         <ResponsiveContainer width="100%" height={300}>
-//           <BarChart
-//             data={apiStats}
-//             margin={{ top: 20, right: 30, left: 0, bottom: 5 }}
-//           >
-//             <XAxis dataKey="station_name" />
-//             <YAxis />
-//             <Tooltip />
-//             <Legend />
-//             <Bar dataKey="user_count" fill="#8884d8" name="Foydalanuvchilar soni" />
-//           </BarChart>
-//         </ResponsiveContainer>
-//       </motion.div>
-//     </div>
-//   );
-// };
-
-// export default StatistikaSection;
-"use client";
-
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"
 import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
+  Chart as ChartJS,
+  LineElement,
+  PointElement,
+  CategoryScale,
+  LinearScale,
+  Title,
   Tooltip,
   Legend,
-  ResponsiveContainer,
-} from "recharts";
-import { motion } from "framer-motion";
+} from "chart.js"
+import { Line } from "react-chartjs-2"
 
-const StatistikaSection = () => {
-  const [apiStats, setApiStats] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+ChartJS.register(
+  LineElement,
+  PointElement,
+  CategoryScale,
+  LinearScale,
+  Title,
+  Tooltip,
+  Legend
+)
+
+const monthOrder = [
+  "January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+]
+
+export default function TopStationsChart() {
+  const [chartData, setChartData] = useState(null)
+  const [error, setError] = useState(null)
 
   useEffect(() => {
-    const getStatistika = async () => {
+    const fetchData = async () => {
       try {
-        const response = await fetch("https://metro-site.onrender.com/api/statistics/uz/");
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
+        const res = await fetch("https://metro-site.onrender.com/api/statistics/en")
+        const data = await res.json()
+        const results = data
+
+        const grouped = {}
+        for (const item of results) {
+          if (!grouped[item.station_name]) grouped[item.station_name] = []
+          grouped[item.station_name].push(item)
         }
-        const data = await response.json();
 
-        // Stansiyalar bo‘yicha guruhlash
-        const grouped = data.results.reduce((acc, curr) => {
-          if (!acc[curr.station_name]) {
-            acc[curr.station_name] = [];
-          }
-          acc[curr.station_name].push(curr);
-          return acc;
-        }, {});
-
-        // Har bir stansiyaning umumiy foydalanuvchi sonini hisoblash
-        const totalPerStation = Object.entries(grouped).map(([station, records]) => ({
+        const stationSums = Object.entries(grouped).map(([station, entries]) => ({
           station,
-          total: records.reduce((sum, r) => sum + r.user_count, 0),
-          records,
-        }));
+          total: entries.reduce((sum, e) => sum + e.user_count, 0)
+        }))
 
-        // Eng yuqori 5ta stansiyani tanlash
-        const top5Stations = totalPerStation
-          .sort((a, b) => b.total - a.total)
-          .slice(0, 5);
+        const topStations = stationSums.sort((a, b) => b.total - a.total).slice(0, 5)
 
-        // Oylar bo‘yicha formatlash
-        const allMonths = [
-          "Yanvar",
-          "Fevral",
-          "Mart",
-          "Aprel",
-          "May",
-          "Iyun",
-          "Iyul",
-          "Avgust",
-          "Sentabr",
-          "Oktabr",
-          "Noyabr",
-          "Dekabr",
-        ];
+        const allMonths = [...new Set(results.map(r => r.month))]
+        allMonths.sort((a, b) => monthOrder.indexOf(a) - monthOrder.indexOf(b))
 
-        const chartData = allMonths.map((month) => {
-          const row = { name: month };
-          top5Stations.forEach(({ station, records }) => {
-            const found = records.find((r) => r.month === month);
-            row[station] = found ? found.user_count : 0;
-          });
-          return row;
-        });
+        const datasets = topStations.map(({ station }) => {
+          const entries = grouped[station]
+          const monthData = allMonths.map(month => {
+            const entry = entries.find(e => e.month === month)
+            return entry ? entry.user_count : 0
+          })
 
-        setApiStats(chartData);
+          return {
+            label: station,
+            data: monthData,
+            borderColor: `hsl(${Math.random() * 360}, 70%, 50%)`,
+            backgroundColor: "transparent",
+            tension: 0.4
+          }
+        })
+
+        setChartData({ labels: allMonths, datasets })
       } catch (err) {
-        console.error("Xatolik yuz berdi:", err);
-        setError("Ma'lumotlarni yuklashda xatolik yuz berdi.");
-      } finally {
-        setLoading(false);
+        setError("Ma'lumotlarni olishda xatolik yuz berdi.")
       }
-    };
+    }
 
-    getStatistika();
-  }, []);
+    fetchData()
+  }, [])
 
-  if (loading) return <p>Yuklanmoqda...</p>;
-  if (error) return <p style={{ color: "red" }}>{error}</p>;
-
-  const colors = ["#8884d8", "#82ca9d", "#ffc658", "#ff7300", "#0088FE"];
+  if (error) return <div className="text-red-500">{error}</div>
+  if (!chartData) return <div>Yuklanmoqda...</div>
 
   return (
-    <div className="w-full p-4">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.1 }}
-        className="mb-12"
-      >
-        <h2 className="text-2xl font-bold mb-4">Eng yuqori 5ta bekatning oylar bo‘yicha statistikasi</h2>
-        <ResponsiveContainer width="100%" height={400}>
-          <BarChart data={apiStats} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            {Object.keys(apiStats[0] || {})
-              .filter((key) => key !== "name")
-              .map((station, index) => (
-                <Bar
-                  key={station}
-                  dataKey={station}
-                  fill={colors[index % colors.length]}
-                  name={station}
-                />
-              ))}
-          </BarChart>
-        </ResponsiveContainer>
-      </motion.div>
+    <div className="w-full max-w-4xl mx-auto">
+      <h2 className="text-xl font-bold mb-4">Top 5 Metro Bekatlar - Oylik Statistikasi</h2>
+      <Line
+        data={chartData}
+        options={{
+          responsive: true,
+          plugins: {
+            legend: {
+              position: "bottom"
+            },
+            title: {
+              display: true,
+              text: "Eng Ko‘p Foydalanuvchiga Ega Metro Bekatlar"
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                callback: value => value.toLocaleString()
+              }
+            }
+          }
+        }}
+      />
     </div>
-  );
-};
-
-export default StatistikaSection;
+  )
+}

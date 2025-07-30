@@ -2,6 +2,7 @@
 import { BarChart3, Building2, CreditCard, MapPin, Wallet, ChevronLeft, ChevronRight, Camera, Plus } from "lucide-react"
 import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import TopStationsChart from "@/app/[locale]/metro-statistikasi/boshSahifastatistika"
 
 
 
@@ -17,7 +18,7 @@ export default function MetroPagesShowcase() {
 
 	console.log(apiStats);
 	console.log(apiStatss);
-	
+
 	const payment = [
 		{
 			name: "Humo Karta",
@@ -101,77 +102,77 @@ export default function MetroPagesShowcase() {
 
 
 	// //  [  Information from Statistics
-    // {
-    //   "id": 2,
-    //   "station_name": "Chinor",
-    //   "user_count": 672029,
-    //   "month": "January",
-    //   "created_at": "2025-07-29T10:33:07.147228+05:00"
-    // },
-    // {
-    //   "id": 3,
-    //   "station_name": "Chinor",
-    //   "user_count": 714070,
-    //   "month": "February",
-    //   "created_at": "2025-07-29T10:34:02.755867+05:00"
-    // },
-    // {
-    //   "id": 4,
-    //   "station_name": "Chinor",
-    //   "user_count": 714070,
-    //   "month": "March",
-    //   "created_at": "2025-07-29T10:34:48.197505+05:00"
-    // },
-    // {
-    //   "id": 5,
-    //   "station_name": "Chinor",
-    //   "user_count": 787728,
-    //   "month": "April",
-    //   "created_at": "2025-07-29T10:35:21.467764+05:00"
-    // },
-    // {
-    //   "id": 6,
-    //   "station_name": "Chinor",
-    //   "user_count": 798093,
-    //   "month": "May",
-    //   "created_at": "2025-07-29T10:39:05.935394+05:00"
-    // },
-    // {
-    //   "id": 7,
-    //   "station_name": "Chinor",
-    //   "user_count": 642633,
-    //   "month": "June",
-    //   "created_at": "2025-07-29T10:39:22.514945+05:00"
-    // },
-    // {
-    //   "id": 8,
-    //   "station_name": "Yangihayot",
-    //   "user_count": 218022,
-    //   "month": "January",
-    //   "created_at": "2025-07-29T10:40:01.652553+05:00"
-    // },
-    // {
-    //   "id": 9,
-    //   "station_name": "Yangihayot",
-    //   "user_count": 714070,
-    //   "month": "February",
-    //   "created_at": "2025-07-29T10:40:45.610395+05:00"
-    // },
-    // {
-    //   "id": 10,
-    //   "station_name": "Yangihayot",
-    //   "user_count": 714070,
-    //   "month": "March",
-    //   "created_at": "2025-07-29T10:41:44.479152+05:00"
-    // },
-    // {
-    //   "id": 11,
-    //   "station_name": "Yangihayot",
-    //   "user_count": 244719,
-    //   "month": "April",
-    //   "created_at": "2025-07-29T10:42:06.782404+05:00"
-    // }
-	
+	// {
+	//   "id": 2,
+	//   "station_name": "Chinor",
+	//   "user_count": 672029,
+	//   "month": "January",
+	//   "created_at": "2025-07-29T10:33:07.147228+05:00"
+	// },
+	// {
+	//   "id": 3,
+	//   "station_name": "Chinor",
+	//   "user_count": 714070,
+	//   "month": "February",
+	//   "created_at": "2025-07-29T10:34:02.755867+05:00"
+	// },
+	// {
+	//   "id": 4,
+	//   "station_name": "Chinor",
+	//   "user_count": 714070,
+	//   "month": "March",
+	//   "created_at": "2025-07-29T10:34:48.197505+05:00"
+	// },
+	// {
+	//   "id": 5,
+	//   "station_name": "Chinor",
+	//   "user_count": 787728,
+	//   "month": "April",
+	//   "created_at": "2025-07-29T10:35:21.467764+05:00"
+	// },
+	// {
+	//   "id": 6,
+	//   "station_name": "Chinor",
+	//   "user_count": 798093,
+	//   "month": "May",
+	//   "created_at": "2025-07-29T10:39:05.935394+05:00"
+	// },
+	// {
+	//   "id": 7,
+	//   "station_name": "Chinor",
+	//   "user_count": 642633,
+	//   "month": "June",
+	//   "created_at": "2025-07-29T10:39:22.514945+05:00"
+	// },
+	// {
+	//   "id": 8,
+	//   "station_name": "Yangihayot",
+	//   "user_count": 218022,
+	//   "month": "January",
+	//   "created_at": "2025-07-29T10:40:01.652553+05:00"
+	// },
+	// {
+	//   "id": 9,
+	//   "station_name": "Yangihayot",
+	//   "user_count": 714070,
+	//   "month": "February",
+	//   "created_at": "2025-07-29T10:40:45.610395+05:00"
+	// },
+	// {
+	//   "id": 10,
+	//   "station_name": "Yangihayot",
+	//   "user_count": 714070,
+	//   "month": "March",
+	//   "created_at": "2025-07-29T10:41:44.479152+05:00"
+	// },
+	// {
+	//   "id": 11,
+	//   "station_name": "Yangihayot",
+	//   "user_count": 244719,
+	//   "month": "April",
+	//   "created_at": "2025-07-29T10:42:06.782404+05:00"
+	// }
+
 
 	const monthOrder = [
 		"Yanvar", "Fevral", "Mart", "Aprel", "May", "Iyun",
@@ -279,121 +280,12 @@ export default function MetroPagesShowcase() {
 
 
 				<motion.div
-					initial={{ opacity: 0, y: 50 }}
-					animate={{ opacity: 1, y: 0 }}
-					transition={{ duration: 1, delay: 0.4 }}
-					className="lg:col-span-3 bg-white rounded-2xl sm:rounded-3xl shadow-xl p-6 sm:p-8"
+					initial={{ opacity: 0, x: 40 }}
+					animate={{ opacity: 1, x: 0 }}
+					transition={{ duration: 0.8, delay: 0.2 }}
+					className="lg:col-span-3 bg-white rounded-2xl sm:rounded-3xl shadow-xl p-6 sm:p-8 min-h-[280px]"
 				>
-					<div className="flex flex-col sm:flex-row items-start sm:items-center mb-6 sm:mb-8 gap-3">
-						<BarChart3 className="w-6 h-6 sm:w-8 sm:h-8 text-blue-900 flex-shrink-0" />
-						<h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-blue-900">
-							Bekatlar bo'yicha yillik statistikasi
-						</h3>
-					</div>
-
-					<div className="overflow-x-auto">
-						<div className="min-w-[600px] sm:min-w-[700px]">
-							<svg className="w-full" height="260" viewBox="0 0 700 260">
-								{/* Grid lines */}
-								{[0, 1, 2, 3, 4].map((i) => (
-									<motion.line
-										key={i}
-										x1={50}
-										y1={30 + i * 50}
-										x2={650}
-										y2={30 + i * 50}
-										stroke="#e0e7ef"
-										strokeWidth="1"
-										initial={{ opacity: 0 }}
-										animate={{ opacity: 0.6 }}
-										transition={{ duration: 0.5, delay: i * 0.1 }}
-									/>
-								))}
-
-								{/* X axis labels */}
-								{monthOrder.map((month, i) => (
-									<text
-										key={month}
-										x={60 + i * 55}
-										y={250}
-										textAnchor="middle"
-										className="text-xs fill-blue-900 font-semibold"
-									>
-										{month.slice(0, 3)}
-									</text>
-								))}
-
-								{/* Y axis labels */}
-								{[2000, 550, 350, 250, 150, 100, 50, 0].map((val, i) => (
-									<text
-										key={val}
-										x={40}
-										y={35 + i * 50}
-										textAnchor="end"
-										className="text-xs fill-blue-900 font-semibold"
-									>
-										{val}k
-									</text>
-								))}
-
-								{/* Chart lines and points */}
-								{chartData.map((station, sIdx) => {
-									const points = station.data.map((val, i) => {
-										const x = 60 + i * 55;
-										const y = 230 - (val / 60) * 200; // user_count in thousands
-										return [x, y];
-									});
-									const path = points.map(([x, y], i) => (i === 0 ? `M${x},${y}` : `L${x},${y}`)).join(" ");
-
-									return (
-										<g key={station.name}>
-											<motion.path
-												d={path}
-												stroke={station.color}
-												strokeWidth="3"
-												fill="none"
-												initial={{ pathLength: 0 }}
-												animate={{ pathLength: 1 }}
-												transition={{
-													duration: 2,
-													delay: 0.2 * sIdx,
-													ease: "easeInOut",
-												}}
-											/>
-											{points.map(([x, y], i) => (
-												<motion.circle
-													key={i}
-													cx={x}
-													cy={y}
-													r="4"
-													fill={station.color}
-													initial={{ scale: 0 }}
-													animate={{ scale: 1 }}
-													transition={{
-														duration: 0.3,
-														delay: 0.2 * sIdx + i * 0.05,
-													}}
-												/>
-											))}
-										</g>
-									);
-								})}
-							</svg>
-						</div>
-					</div>
-
-					{/* Legend */}
-					<div className="flex flex-wrap gap-3 sm:gap-4 mt-6 justify-center sm:justify-start">
-						{chartData.map((station) => (
-							<div key={station.name} className="flex items-center gap-2">
-								<span
-									className="w-3 h-3 sm:w-4 sm:h-4 rounded-full flex-shrink-0"
-									style={{ background: station.color }}
-								/>
-								<span className="text-xs sm:text-sm text-blue-900 whitespace-nowrap">{station.name}</span>
-							</div>
-						))}
-					</div>
+					<TopStationsChart />
 				</motion.div>
 
 				{/* 4. Enhanced Payment Systems Card */}
