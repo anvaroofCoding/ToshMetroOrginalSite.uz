@@ -33,8 +33,8 @@ const companies = [
 	{
 		name: `O'zbekiston Respublikasi Oliy Majlisining Inson huquqlari bo'yicha vakili`,
 		logo: 'https://parliament.gov.uz/media/interactive_services/usefulll.png',
-		desc: 'www.ombudsman.uz',
-		link: 'www.ombudsman.uz',
+		desc: 'mintrans.uz',
+		link: 'https://www.mintrans.uz/',
 	},
 ]
 

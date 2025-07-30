@@ -6,7 +6,9 @@ import { motion } from "framer-motion"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Loader2, TrendingUp } from "lucide-react"
-import { Alert, AlertDescription } from "@/components/ui/alert"
+// import { Alert, AlertDescription } from "@/components/ui/alert"
+
+// bu yerda ishlash kerak
 
 const MetroStatistics = () => {
   const [apiStats, setApiStats] = useState([])

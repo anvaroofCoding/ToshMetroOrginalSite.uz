@@ -17,6 +17,7 @@ import {
   UserCheck,
   Phone,
   Sparkles,
+  ChartNoAxesCombined 
 } from "lucide-react"
 import { useLocale } from "next-intl"
 import Image from "next/image"
@@ -72,7 +73,11 @@ const menuItems = [
     href: "",
     dropdown: true,
     icon: Info,
-    dropdownItems: [{ label: "Yangiliklar", href: "/yangiliklar", icon: Info }],
+    dropdownItems: [
+      { label: "Yangiliklar", href: "/yangiliklar", icon: Info },
+      {label: "Yo'lovchilar statistikasi", href: "/metro-statistikasi", icon: ChartNoAxesCombined }
+    
+    ],
   },
   {
     label: "Metro haqida",
