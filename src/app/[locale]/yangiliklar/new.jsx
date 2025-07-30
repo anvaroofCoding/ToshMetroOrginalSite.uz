@@ -283,13 +283,10 @@ export default function OptimizedNews() {
 
   if (loading) {
     return (
-      <div className="w-full min-h-[400px]">
-        <div className="container py-8">
-          <div className="flex flex-col items-center justify-center min-h-[400px] gap-4">
-            <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
-            <span className="text-lg font-medium">Loading news...</span>
-            <p className="text-sm text-gray-500">Please wait while we fetch the latest news</p>
-          </div>
+     <div className="flex items-center justify-center h-[100vh]">
+        <div className="flex items-center space-x-2">
+          <Loader2 className="h-6 w-6 animate-spin" />
+          <span>Yuklanmoqda...</span>
         </div>
       </div>
     )

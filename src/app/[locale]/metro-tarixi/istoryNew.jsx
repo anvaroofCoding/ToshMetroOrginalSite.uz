@@ -26,12 +26,7 @@ const lineStats = [
     stations: 8,
     color: "bg-red-700",
   },
-  {
-    name: "Sergeli yo'nalishi",
-    length: "7.0 km",
-    stations: 5,
-    color: "bg-orange-700",
-  },
+  
   {
     name: "Halqa yer usti yo'nalishi",
     length: "11.5+ km",
@@ -214,13 +209,13 @@ export default function Component() {
           {/* Line Statistics */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {lineStats.map((line, index) => (
-              <Card key={index} className="hover:shadow-lg transition-shadow duration-300">
+              <Card key={index} className="hover:shadow-lg transition-shadow duration-300 bg-blue-900 text-white">
                 <CardContent className="pt-6">
                   <div className="flex items-center gap-3 mb-3">
                     <div className={`w-4 h-4 rounded-full ${line.color}`}></div>
-                    <h3 className="font-semibold text-blue-900">{line.name}</h3>
+                    <h3 className="font-semibold ">{line.name}</h3>
                   </div>
-                  <div className="flex justify-between text-sm text-gray-600">
+                  <div className="flex justify-between text-sm ">
                     <div className="flex items-center gap-1">
                       <Ruler className="h-4 w-4" />
                       {line.length}

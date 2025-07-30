@@ -17,7 +17,8 @@ import {
   UserCheck,
   Phone,
   Sparkles,
-  ChartNoAxesCombined 
+  ChartNoAxesCombined ,
+  Film 
 } from "lucide-react"
 import { useLocale } from "next-intl"
 import Image from "next/image"
@@ -75,7 +76,8 @@ const menuItems = [
     icon: Info,
     dropdownItems: [
       { label: "Yangiliklar", href: "/yangiliklar", icon: Info },
-      {label: "Yo'lovchilar statistikasi", href: "/metro-statistikasi", icon: ChartNoAxesCombined }
+      {label: "Yo'lovchilar statistikasi", href: "/metro-statistikasi", icon: ChartNoAxesCombined },
+      {label: "Qiziqarli lavhalar", href: "/videos", icon: Film  }
     
     ],
   },

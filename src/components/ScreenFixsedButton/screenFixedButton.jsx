@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Plus, MessageCircle, UserCheck, FileText, X } from "lucide-react"
+import { Plus, MessageCircle, UserCheck, FileText, X , Bot } from "lucide-react"
 import Link from "next/link"
 
 export default function FloatingActionButton() {
@@ -32,6 +32,10 @@ export default function FloatingActionButton() {
     setIsOpen(!isOpen)
   }
 
+  const handleclosebutton = () => {
+    setIsOpen(false)
+  }
+
   const handleSubButtonClick = (action) => {
     playClickSound()
     console.log(`${action} clicked`)
@@ -41,7 +45,7 @@ export default function FloatingActionButton() {
   const buttons = [
     {
       id: "qa",
-      icon: MessageCircle,
+      icon: Bot ,
       title: "Tezkor savol javob",
       action: "Quick Q&A",
       btlink: "/",
@@ -49,7 +53,7 @@ export default function FloatingActionButton() {
     {
       id: "manager",
       icon: UserCheck,
-      title: "Raxbar qabulxonasi",
+      title: "Qabulxona",
       action: "Manager Reception",
       btlink: "/",
     },
@@ -79,7 +83,7 @@ export default function FloatingActionButton() {
           {buttons.map((button, index) => {
             const Icon = button.icon
             return (
-             <Link key={button.id} href={button.btlink} className="relative">
+             <Link key={button.id} href={button.btlink} className="relative" >
               <div
                 className={`flex items-center transition-all duration-300 ease-out ${
                   isOpen ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0 pointer-events-none"
@@ -89,9 +93,11 @@ export default function FloatingActionButton() {
                 }}
                 onMouseEnter={() => setHoveredButton(button.id)}
                 onMouseLeave={() => setHoveredButton(null)}
+                onClick={(()=>{handleclosebutton()})}
               >
                 {/* Title Tooltip */}
                 <div
+                
                   className={`mr-4 px-3 py-2 bg-gray-900 text-white text-sm rounded-lg shadow-lg whitespace-nowrap transition-all duration-200 ${
                     hoveredButton === button.id
                       ? "opacity-100 translate-x-0"

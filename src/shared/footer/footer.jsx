@@ -186,7 +186,7 @@ const Footer = () => {
 
               {/* Visitor Stats */}
               <div className="space-y-2 pt-2">
-                <div className="bg-gradient-to-r from-blue-500/20 to-cyan-500/20 backdrop-blur-sm rounded-xl p-2 border border-white/10">
+                <div className="">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center">
@@ -202,7 +202,7 @@ const Footer = () => {
                   </div>
                 </div>
 
-                <div className="bg-gradient-to-r from-blue-500/20 to-cyan-500/20 backdrop-blur-sm  rounded-xl p-2 border border-white/10">
+                <div className="">
                   <div className="flex items-center  justify-between">
                     <div className="flex items-center  gap-3">
                       <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center">
@@ -213,7 +213,7 @@ const Footer = () => {
                         <p className="text-xl font-bold text-white">{onlineVisitors}</p>
                       </div>
                     </div>
-                    <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                    {/* <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div> */}
                   </div>
                 </div>
               </div>
