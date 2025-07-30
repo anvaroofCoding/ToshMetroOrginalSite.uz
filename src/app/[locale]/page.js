@@ -6,6 +6,7 @@ import MetroSystem from '@/work/metroTime/metroTime'
 import FaqAccordion from '@/work/test/questions'
 
 const Home = () => {
+	const malumot = "Metropoliteni yo'lovchilari uchun foydali ma'lumotlar"
 	return (
 		<div className='relative z-[10] bg-white'>
 			{/* <div className='my-5'>
@@ -19,7 +20,7 @@ const Home = () => {
 			</div> */}
 			<div className='my-10'>
 				<div className='container py-5'>
-					<h2 className='md:text-[36px] text-[24px] font-bold'>Metropoliteni yo'lovchilari uchun foydali ma'lumotlar</h2>
+					<h2 className='md:text-[36px] text-[24px] font-bold'>{malumot}</h2>
 				</div>
 				<MetroPagesShowcase  />
 			</div>
