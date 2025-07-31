@@ -294,12 +294,12 @@ export default function OptimizedMetroRegulations() {
               </div>
             </div>
             <h1 className="text-5xl md:text-6xl font-bold text-blue-900 mb-6">
-              Metropoliten Qoidalari
+              Metropolitendan foydalanish qoidalari
             </h1>
             <p className="text-xl text-gray-600 mb-8 font-medium">O'zbekiston Respublikasi Vazirlar Mahkamasi</p>
             <div className="flex items-center justify-center gap-3 text-gray-500">
               <Scale className="w-5 h-5 text-blue-500" />
-              <span className="font-medium">2023-yil 10-oktabr, 535-son qaror</span>
+              <span className="font-medium">2023-yil 10-oktabr, 535-son qarori</span>
             </div>
           </div>
         </div>

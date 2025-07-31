@@ -9,40 +9,40 @@ import Image from "next/image"
 const attoCards = [
     {
         id: 1,
-        name: "Oddiy ATTO Karta",
-        type: "Moviy",
-        price: "1,700 UZS",
-        description: "Markazlashtirilgan NFC transport kartasi",
+        name: "Yagona/Umumiy",
+        type: "Ko'k",
+        price: "20.000 UZS",
+        description: "Markazlashtirilgan Kontaksiz to'lov transport kartasi",
         color: "bg-blue-50 border-blue-200",
         iconColor: "bg-blue-500",
         img: "https://atto.uz/image/blueCard.png",
     },
     {
         id: 2,
-        name: "Talaba ATTO Karta",
+        name: "Talabalar uchun",
         type: "Sariq",
-        price: "Chegirmali tarif",
-        description: "Talabalar uchun imtiyozli tarif",
+        price: "15.000 So'm",
+        description: "Talabalar uchun imtiyozli tarif kartasi",
         color: "bg-yellow-50 border-yellow-200",
         iconColor: "bg-yellow-500",
         img: "https://atto.uz/icons/cards/yellow_transport_card.png",
     },
     {
         id: 3,
-        name: "Maktab O'quvchilari",
+        name: "O'quvchilar uchun",
         type: "Yashil",
-        price: "Chegirmali tarif",
-        description: "Maktab o'quvchilari uchun",
+        price: "0 So'm",
+        description: "Maktab o'quvchilari uchun imtiyozli tarif kartasi",
         color: "bg-green-50 border-green-200",
         iconColor: "bg-green-500",
         img: "https://atto.uz/icons/cards/green_transport_card.png",
     },
     {
         id: 4,
-        name: "Ijtimoiy ATTO Karta",
+        name: "Ijtimoiy",
         type: "Qizil",
-        price: "Imtiyozli tarif",
-        description: "Ijtimoiy himoya ostidagi fuqarolar uchun",
+        price: "15.000 So'm",
+        description: "Ijtimoiy himoya ostidagi fuqarolar uchun imtiyozli tarif kartasi",
         color: "bg-red-50 border-red-200",
         iconColor: "bg-red-500",
         img: "https://atto.uz/icons/cards/red_transport_card.png",
@@ -128,11 +128,10 @@ export default function PaymentMethods() {
 
                 {/* Timeline Container - Fully Responsive */}
                 <div className="relative">
-                    {/* Timeline Line - Adaptive Positioning */}
-                    <div className="absolute left-4 sm:left-6 md:left-8 lg:left-1/2 transform lg:-translate-x-0.5 h-full w-0.5 bg-gradient-to-b from-blue-200 via-blue-400 to-blue-200 rounded-full shadow-sm"></div>
+
 
                     {/* ATTO Transport Cards Section */}
-                    <div className="relative mb-12 sm:mb-16 lg:mb-20 xl:mb-24">
+                    <div className="relative mb-12 sm:mb-16 lg:mb-20 xl:mb-24 ">
                         <div className="flex items-center mb-6 sm:mb-8 lg:mb-12">
                             <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 rounded-full flex items-center justify-center z-10 relative shadow-lg ring-4 ring-white">
                                 <CreditCard className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 text-white" />
@@ -142,7 +141,7 @@ export default function PaymentMethods() {
                                     ATTO Transport Kartasi
                                 </h2>
                                 <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 mt-2 sm:mt-3 lg:mt-4 leading-relaxed">
-                                    Markazlashtirilgan NFC transport kartasi
+                                    Markazlashtirilgan Kontaksiz to'lov transport kartasi
                                 </p>
                             </div>
                         </div>
@@ -173,9 +172,6 @@ export default function PaymentMethods() {
                                             <h3 className="font-bold text-blue-900 mb-2 sm:mb-3 text-sm sm:text-base md:text-lg lg:text-xl leading-tight">
                                                 {card.name}
                                             </h3>
-                                            <Badge variant="secondary" className="mb-2 sm:mb-3 text-xs sm:text-sm px-3 py-1">
-                                                {card.type}
-                                            </Badge>
                                             <p className="text-xs sm:text-sm md:text-base text-gray-600 mb-2 sm:mb-3 leading-relaxed">
                                                 {card.description}
                                             </p>
@@ -223,15 +219,15 @@ export default function PaymentMethods() {
                             </div>
                         </div>
 
-                        <div className="ml-12 sm:ml-16 md:ml-20 lg:ml-26">
+                        <div className="ml-12 sm:ml-16 md:ml-20 lg:ml-26 ">
                             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4 md:gap-5 lg:gap-6 mb-6 sm:mb-8 lg:mb-10">
                                 {mobileApps.map((app, index) => (
                                     <Card
                                         key={index}
-                                        className="transition-all duration-500 hover:scale-110 hover:shadow-xl hover:shadow-blue-200/30 cursor-pointer border-2 hover:border-blue-400 group overflow-hidden"
+                                        className="transition-all duration-500 hover:scale-110  cursor-pointer overflow-hidden bg-transparent shadow-none border-none"
                                     >
-                                        <CardContent className="p-3 sm:p-4 md:p-5 lg:p-6 text-center">
-                                            <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-18 lg:h-18 xl:w-20 xl:h-20 rounded-2xl mx-auto mb-2 sm:mb-3 md:mb-4 overflow-hidden bg-white shadow-md transition-all duration-500 group-hover:rotate-12 group-hover:scale-110 flex items-center justify-center border border-gray-100">
+                                        <CardContent className="p-3 sm:p-4 md:p-5 lg:p-1 text-center">
+                                            <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-18 lg:h-18 xl:w-20 xl:h-20 rounded-2xl mx-auto mb-2 sm:mb-3 md:mb-4 overflow-hidden bg-white  shadow-md transition-all duration-500 group-hover:rotate-12 group-hover:scale-110 flex items-center justify-center ">
                                                 <div className="relative w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14">
                                                     <Image
                                                         src={app.img || "/placeholder.svg"}
@@ -262,7 +258,7 @@ export default function PaymentMethods() {
                         </div>
                     </div>
 
-                    {/* Bank Cards & NFC Section */}
+                    {/* Bank Cards & Kontaksiz to'lov Section */}
                     <div className="relative mb-12 sm:mb-16 lg:mb-20 xl:mb-24">
                         <div className="flex items-center mb-6 sm:mb-8 lg:mb-12">
                             <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 rounded-full flex items-center justify-center z-10 relative shadow-lg ring-4 ring-white">
@@ -270,10 +266,10 @@ export default function PaymentMethods() {
                             </div>
                             <div className="ml-4 sm:ml-6 md:ml-8 lg:ml-12">
                                 <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-blue-900 leading-tight tracking-tight">
-                                    Bank Kartalari & NFC To'lovlar
+                                    Bank Kartalari & Kontaksiz to'lov To'lovlar
                                 </h2>
                                 <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 mt-2 sm:mt-3 lg:mt-4 leading-relaxed">
-                                    NFC orqali metro va avtobusda to'lov - 1,700 UZS
+                                    Kontaksiz to'lov orqali metro va avtobusda to'lov - 1,700 UZS
                                 </p>
                             </div>
                         </div>
@@ -283,10 +279,10 @@ export default function PaymentMethods() {
                                 {bankCards.map((card, index) => (
                                     <Card
                                         key={index}
-                                        className="transition-all duration-500 hover:scale-110 hover:shadow-xl hover:shadow-blue-200/30 cursor-pointer border-2 hover:border-blue-400 group overflow-hidden"
+                                        className="transition-all duration-500 hover:scale-110 overflow-hidden bg-transparent shadow-none border-none"
                                     >
-                                        <CardContent className="p-3 sm:p-4 md:p-5 lg:p-6 text-center">
-                                            <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-18 lg:h-18 xl:w-20 xl:h-20 rounded-2xl mx-auto mb-2 sm:mb-3 md:mb-4 overflow-hidden bg-white shadow-md transition-all duration-500 group-hover:scale-125 group-hover:-rotate-6 flex items-center justify-center p-2 border border-gray-100">
+                                        <CardContent className="p-3 sm:p-4 md:p-5 lg:p-0 text-center">
+                                            <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-18 lg:h-18 xl:w-20 xl:h-20 rounded-2xl mx-auto mb-2 sm:mb-3 md:mb-4 overflow-hidden bg-white shadow-md transition-all duration-500 group-hover:scale-125 group-hover:-rotate-6 flex items-center justify-center border border-gray-100">
                                                 <div className="relative w-full h-full">
                                                     <Image
                                                         src={card.img || "/placeholder.svg"}
@@ -310,8 +306,7 @@ export default function PaymentMethods() {
                                     Qo'shimcha imkoniyatlar:
                                 </h4>
                                 <p className="text-gray-700 text-sm sm:text-base md:text-lg leading-relaxed">
-                                    Uzum bank, Paynet, Click, Payme, Alif mobi orqali to'lov qilish mumkin, ko'pincha cashback yoki
-                                    chegirmalar mavjud
+                                    Uzum bank, Paynet, Click, Payme, Alif mobi ilovalari orqali chegirmalar bilan to'lov qilishingiz mumkin
                                 </p>
                             </div>
                         </div>
@@ -350,9 +345,7 @@ export default function PaymentMethods() {
                                             <span className="font-bold text-blue-900 text-base sm:text-lg md:text-xl lg:text-2xl">
                                                 3,000 UZS
                                             </span>
-                                            <Badge variant="outline" className="text-xs sm:text-sm px-3 py-1">
-                                                30 daqiqa
-                                            </Badge>
+                                           
                                         </div>
                                     </CardContent>
                                 </Card>
@@ -487,7 +480,7 @@ export default function PaymentMethods() {
                                     </div>
                                     <div className="bg-white/15 backdrop-blur-md rounded-2xl p-4 sm:p-5 md:p-6 lg:p-8 border border-white/20 transition-all duration-500 hover:bg-white/20 hover:scale-105">
                                         <h4 className="font-bold mb-2 sm:mb-3 md:mb-4 text-base sm:text-lg md:text-xl lg:text-2xl">
-                                            NFC bank kartalar
+                                            Kontaksiz to'lov bank kartalar
                                         </h4>
                                         <p className="text-blue-100 text-sm sm:text-base md:text-lg leading-relaxed">
                                             1,700 UZS - tez va qulay

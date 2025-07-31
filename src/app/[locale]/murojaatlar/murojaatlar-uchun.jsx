@@ -75,7 +75,7 @@ export default function MetroLostItemForm() {
   }
 
   return (
-    <div className="min-h-screen bg-white py-12 px-4">
+    <div className="min-h-screen py-12 px-4">
       <div className="max-w-2xl mx-auto">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-blue-900 mb-2">Murojaatlar bo'limi</h1>

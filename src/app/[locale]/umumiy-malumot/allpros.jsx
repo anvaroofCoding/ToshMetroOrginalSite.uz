@@ -103,8 +103,8 @@ export default function TashkentMetroDashboard() {
 	return (
 		<div className='min-h-screen container '>
 			{/* Header */}
-			<div className='bg-white  py-12 px-4'>
-				<div className='max-w-7xl mx-auto'>
+			<div className='py-12 px-4'>
+				<div className=''>
 					<div className='text-center space-y-6'>
 						<h1 className='text-5xl md:text-7xl font-bold bg-gradient-to-r from-[#0E327F] via-blue-600 to-[#0E327F] bg-clip-text text-transparent leading-tight'>
 							Gender Tenglik

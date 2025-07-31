@@ -138,7 +138,7 @@ export default function TransportDirectory() {
   return (
     <div className="min-h-screen">
       {/* Header Section */}
-      <div className="bg-white ">
+      <div >
         <div className="container mx-auto px-4 py-8 sm:py-12 lg:py-16">
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold mb-3 sm:mb-4 text-[#0E327F] leading-tight">
@@ -307,7 +307,7 @@ export default function TransportDirectory() {
       </div>
 
       {/* Footer */}
-      <div className="bg-white ">
+      <div>
         <div className="container mx-auto px-4 py-8 sm:py-12 text-center">
           <div className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-[#0E327F] to-[#1e4a9f] rounded-full mb-3 sm:mb-4 shadow-lg">
             <Train className="w-5 h-5 sm:w-6 sm:h-6 text-white" />

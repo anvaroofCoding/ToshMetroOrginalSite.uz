@@ -70,8 +70,8 @@ const contactInfo = [
 
 export default function ContactInfo() {
 	return (
-		<div className="bg-white min-h-screen py-16 px-4">
-			<div className="max-w-6xl mx-auto">
+		<div className="min-h-screen py-16 px-4">
+			<div className="container">
 				<motion.div
 					initial={{ opacity: 0, y: -20 }}
 					animate={{ opacity: 1, y: 0 }}

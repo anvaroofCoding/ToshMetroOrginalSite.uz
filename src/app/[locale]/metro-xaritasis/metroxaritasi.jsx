@@ -219,7 +219,7 @@ export default function TashkentMetroMap() {
 
       ],
     },
-    "Gʻafur Gʻulom": {
+    "G'afur G'ulom": {
       description: "Gʻafur Gʻulom — Toshkent metrosining Oʻzbekiston yo‘nalishidagi bekatlaridan biridir. Bu bekat 1989-yil 6-noyabrda ochilgan. U Shayxontohur tumanida joylashgan. Bekat nomi o‘zbek adabiyoti namoyandasi Gʻafur Gʻulom sharafiga qo‘yilgan. Arxitekturasi o‘zbek milliy uslubida bo‘lib, devorlari marmar va keramika bilan bezatilgan. Platforma yer ostida joylashgan va keng yoritishga ega.",
       images: [
         "/station/O'zbekiston/gafur.jpg",
@@ -279,7 +279,7 @@ export default function TashkentMetroMap() {
 
       ],
     },
-    "Milliy bogʻ": {
+    "Milliy bog'": {
       description: "Milliy bogʻ — Toshkent metrosining Chilonzor yo‘nalishidagi bekatlaridan biridir. Bu bekat 1984-yil 6-noyabrda ochilgan. U Toshkent shahrining Mirzo Ulug‘bek tumanida joylashgan. Bekat nomi yonida joylashgan Milliy bog‘ (Hozirgi Istiqlol bog‘i) sharafiga qo‘yilgan. Arxitekturasi milliy uslubda bo‘lib, oq marmar ustunlar va yengil geometrik naqshlar bilan bezatilgan. Platforma yer ostida joylashgan va yo‘lovchilar uchun qulay.",
       images: [
         "/station/Chilonzor/Milliy.png",
@@ -294,7 +294,7 @@ export default function TashkentMetroMap() {
 
       ],
     },
-    "Xalqlar doʻstligi": {
+    "Xalqlar do'stligi": {
       description: "Xalqlar doʻstligi — Toshkent metrosining Chilonzor yo‘nalishidagi markaziy bekatlaridan biridir. Bu bekat 1977-yil 6-noyabrda ochilgan. U Toshkent shahrining Shayxontohur tumanida joylashgan. Bekat nomi xalqlar o‘rtasidagi do‘stlik g‘oyasidan ilhomlangan. Arxitekturasi Sharqona va sovet davri uslublarini uyg‘unlashtirgan bo‘lib, rangli mozaikalar va marmar ustunlar bilan bezatilgan. Platforma yer ostida joylashgan va keng.",
       images: [
         "/station/Chilonzor/Xalqlar.png",
@@ -325,7 +325,7 @@ export default function TashkentMetroMap() {
 
       ],
     },
-    "Mirzo Ulugʻbek": {
+    "Mirzo Ulugbek": {
       description: "Mirzo Ulugʻbek — Toshkent metrosining Chilonzor yo‘nalishidagi bekatlaridan biridir. Bu bekat 1980-yil 2-noyabrda ochilgan. U Toshkent shahrining Mirzo Ulug‘bek tumanida joylashgan. Bekat nomi buyuk olim va astronom Mirzo Ulug‘bek sharafiga qo‘yilgan. Arxitekturasi ilmiy mavzuga mos bo‘lib, osmon xaritalari va yulduz naqshlari bilan bezatilgan. Platforma yer ostida joylashgan va keng.",
       images: [
         "/station/Chilonzor/Mirzo.jpg",
@@ -333,7 +333,7 @@ export default function TashkentMetroMap() {
       ],
       videos: [
         {
-          title: "Mirzo Ulugʻbek",
+          title: "Mirzo Ulug'bek",
           url: "https://www.youtube.com/embed/OVtByLeY3YU?si=hHZGGq2T5mPX4vOH",
           thumbnail: "https://avatars.mds.yandex.net/get-altay/5538812/2a0000018462383b690db77df02343375ac2/XXXL",
         },
@@ -355,7 +355,7 @@ export default function TashkentMetroMap() {
 
       ],
     },
-    "Doʻstlik": {
+    "Do'stlik": {
       description: "Doʻstlik — Toshkent metrosining Chilonzor yo‘nalishidagi bekatlaridan biridir. Bu bekat 1977-yil 6-noyabrda ochilgan. U Toshkent shahrining Yakkasaroy tumanida joylashgan. Bekat nomi xalqlar do‘stligi va birligi g‘oyasidan ilhomlangan. Arxitekturasi sodda va amaliy bo‘lib, oq marmar ustunlar va minimal bezaklarga ega. Platforma yer ostida joylashgan va yo‘lovchilar uchun qulay.",
       images: [
         "/station/O'zbekiston/dostlik.jpg",
@@ -430,7 +430,7 @@ export default function TashkentMetroMap() {
 
       ],
     },
-    "Oʻzbekiston": {
+    "O'zbekiston": {
       description: "Oʻzbekiston — Toshkent metrosining Oʻzbekiston yo‘nalishidagi markaziy bekatlaridan biridir. Bu bekat 1984-yil 6-noyabrda ochilgan. U Toshkent shahrining Shayxontohur tumanida joylashgan. Bekat nomi mamlakat nomidan olingan. Arxitekturasi milliy va zamonaviy uslub uyg‘unligida bezatilgan bo‘lib, oq marmar va dekorativ panellar bilan ajralib turadi. Platforma yer ostida joylashgan va yo‘lovchilar uchun qulay sharoitlarga ega.",
       images: [
         "/station/O'zbekiston/ozbekiston.jpg",
@@ -460,7 +460,7 @@ export default function TashkentMetroMap() {
 
       ],
     },
-    "Ming Oʻrik": {
+    "Mingo'rik": {
       description: "Ming Oʻrik — Toshkent metrosining Yunusobod yo‘nalishidagi bekatlaridan biridir. Bu bekat 2001-yil 24-oktabrda ochilgan. U Toshkent shahrining Mirobod tumanida joylashgan. Bekat nomi yaqin hududdagi Ming O‘rik bozori nomidan olingan. Arxitekturasi zamonaviy bo‘lib, yorqin rangli bezaklar va minimal dizayn bilan ajralib turadi. Platforma yer ostida joylashgan va yo‘lovchilar uchun qulay.",
       images: [
         "/station/Yunusobod/Mingorik.png",
@@ -701,7 +701,7 @@ export default function TashkentMetroMap() {
 
       ],
     },
-    "Oʻzgarish": {
+    "O'zgarish": {
       description: "Oʻzgarish — Toshkent metrosining Yangihayot yo‘nalishidagi bekatlaridan biridir. Bu bekat 2024-yil ochilgan. U Toshkent shahrining Yangihayot tumanida joylashgan. Bekat nomi yangilanish va rivojlanish ma’nosini anglatadi. Arxitekturasi zamonaviy, yorqin ranglar va minimalistik panellar bilan bezatilgan. Platforma yer ostida joylashgan va keng.",
       images: [
         "/station/Chilonzor/ozgarish.jpg",
@@ -731,7 +731,7 @@ export default function TashkentMetroMap() {
 
       ],
     },
-    "Qoʻyliq": {
+    "Qo'yliq": {
       description: "Qoʻyliq — Toshkent metrosining Yangihayot yo‘nalishidagi bekatlaridan biridir. Bu bekat 2024-yil ochilgan. U Toshkent shahrining Sergeli va Yangihayot tumanlari chegarasida joylashgan. Bekat nomi Qo‘ylik bozori va hududi nomidan olingan. Arxitekturasi sodda va zamonaviy bo‘lib, yengil ranglar bilan bezatilgan. Platforma yer ostida joylashgan va yo‘lovchilar uchun qulay.",
       images: [
         "/station/Yer_usti/Qoyliq1.jpg",
@@ -791,7 +791,7 @@ export default function TashkentMetroMap() {
 
       ],
     },
-    "Xonabod": {
+    "Xonobod": {
       description: "Xonabod — Toshkent metrosining Yangihayot yo‘nalishidagi bekatlaridan biridir. Bu bekat 2024-yil ochilgan. U Toshkent shahrining Yangihayot tumanida joylashgan. Bekat nomi Xonobod mahallasi va tarixiy nomdan olingan. Arxitekturasi zamonaviy va milliy uslub uyg‘unligida bo‘lib, oq marmar bilan bezatilgan. Platforma yer ostida joylashgan va yo‘lovchilar uchun qulay.",
       images: [
         "/station/Yer_usti/Xonobod1.jpg",
@@ -1976,19 +1976,7 @@ export default function TashkentMetroMap() {
                 {/* Modal Content */}
                 <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
                   {/* Description */}
-                  <Card className="border-0 shadow-lg bg-gradient-to-br from-blue-50 to-blue-100">
-                    <CardHeader className="pb-2 sm:pb-4">
-                      <CardTitle className="flex items-center gap-2 sm:gap-3 text-base sm:text-xl text-blue-900">
-                        <MapPin className="w-4 h-4 sm:w-6 sm:h-6 text-blue-700" />
-                        Tavsif
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-blue-800 leading-relaxed text-sm sm:text-base">
-                        {currentStationDetails.description}
-                      </p>
-                    </CardContent>
-                  </Card>
+              
 
                   {/* Image Gallery - Optimized */}
                   <Card className="border-0 shadow-lg">

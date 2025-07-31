@@ -17,8 +17,10 @@ import {
   UserCheck,
   Phone,
   Sparkles,
-  ChartNoAxesCombined ,
-  Film 
+  ChartNoAxesCombined,
+  Film,
+  Nfc, 
+  ScanFace
 } from "lucide-react"
 import { useLocale } from "next-intl"
 import Image from "next/image"
@@ -44,6 +46,8 @@ const menuItems = [
       { label: `To'lov turlari`, href: "/tolov-turi", icon: CreditCard },
       { label: "ATTO kartalari", href: "/atto-kartalari", icon: CreditCard },
       { label: "ATTO mobile ilovasi", href: "/atto-mobile-ilovasi", icon: Phone },
+      { label: "PalmPay", href: "/pay", icon: Nfc },
+      { label: "FacePay", href: "/FacePay", icon: ScanFace },
     ],
   },
   {
@@ -53,7 +57,7 @@ const menuItems = [
     icon: Users,
     dropdownItems: [
       {
-        label: "Metrodan foydalanish qoidalari",
+        label: "Metropolitenidan foydalanish qoidalari",
         href: "/Metrodab-foydalanish-qoidalari",
         icon: Info,
       },
@@ -76,9 +80,9 @@ const menuItems = [
     icon: Info,
     dropdownItems: [
       { label: "Yangiliklar", href: "/yangiliklar", icon: Info },
-      {label: "Yo'lovchilar statistikasi", href: "/metro-statistikasi", icon: ChartNoAxesCombined },
-      {label: "Qiziqarli lavhalar", href: "/videos", icon: Film  }
-    
+      { label: "Yo'lovchilar statistikasi", href: "/metro-statistikasi", icon: ChartNoAxesCombined },
+      { label: "Qiziqarli lavhalar", href: "/videos", icon: Film }
+
     ],
   },
   {
@@ -270,23 +274,20 @@ export default function MetroNavbar() {
   return (
     <>
       <header
-        className={`sticky top-0 left-0 w-full z-50 transition-all rounded-b-[50px]  duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] ${
-          isScrolled
+        className={`sticky top-0 left-0 w-full z-50 transition-all rounded-b-[50px]  duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] ${isScrolled
             ? "bg-gradient-to-r from-[#0E327F]/95 via-blue-800/95 to-[#0E327F]/95 backdrop-blur-xl pt-0 "
             : "bg-transparent pt-5"
-        } ${isHiddenPath ? "hidden" : "block"}`}
+          } ${isHiddenPath ? "hidden" : "block"}`}
       >
         <div
-          className={`transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] ${
-            isScrolled ? "container-none px-0" : "container"
-          }`}
+          className={`transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] ${isScrolled ? "container-none px-0" : "container"
+            }`}
         >
           <div
-            className={`flex items-center justify-between h-[70px] text-white transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] transform ${
-              isScrolled
+            className={`flex items-center justify-between h-[70px] text-white transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] transform ${isScrolled
                 ? "bg-transparent px-8 mx-0 rounded-none "
                 : "bg-gradient-to-r from-[#0E327F] via-blue-800 to-[#0E327F]  px-6  rounded-2xl backdrop-blur-lg"
-            }`}
+              }`}
           >
             <motion.div className="flex items-center gap-2" whileHover={{ scale: 1.02 }} transition={{ duration: 0.2 }}>
               <Link href={"/"}>

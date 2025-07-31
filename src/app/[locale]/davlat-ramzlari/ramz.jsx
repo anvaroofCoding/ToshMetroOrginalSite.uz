@@ -251,12 +251,12 @@ export default function UzbekistanSymbols() {
   }, [recordedAudio])
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       {/* Hidden Audio Element */}
       <audio ref={audioRef} src="/mathiya-auido/mathiya.mp3" preload="metadata" />
 
       {/* Header */}
-      <header className="bg-white shadow-sm">
+      <header >
         <div className="container mx-auto px-4 py-8">
           <div className="text-center mb-8">
             <h1 className="text-3xl md:text-4xl font-bold text-[#0E327F] mb-2">O'ZBEKISTON RESPUBLIKASI</h1>

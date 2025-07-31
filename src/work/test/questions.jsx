@@ -37,15 +37,15 @@ O‘z-o‘ziga xizmat ko‘rsatish terminallarida-infokiosklar.
 			{items.map((item, index) => (
 				<div
 					key={index}
-					className={`rounded-lg  transition-colors mt-4 duration-300 bg-transparent shadow ${
+					className={`rounded-lg  transition-colors mt-4 duration-300 bg-transparent ${
 						openIndex === index
-							? 'border-blue-700 bg-blue-50'
+							? 'border-blue-200 bg-blue-400/10'
 							: 'border-gray-300 bg-transparent'
 					}`}
 				>
 					<button
 						onClick={() => toggle(index)}
-						className='w-full flex justify-between items-center p-4 text-left font-semibold text-blue-900 hover:bg-blue-200 rounded-lg transition bg-transparent'
+						className='w-full flex justify-between bg-blue-400/10 border border-blue-900/10 items-center p-4 text-left font-semibold text-blue-900 rounded-lg transition '
 					>
 						<span>{item.q}</span>
 						<motion.span
@@ -66,7 +66,7 @@ O‘z-o‘ziga xizmat ko‘rsatish terminallarida-infokiosklar.
 								exit={{ height: 0, opacity: 0 }}
 								transition={{ duration: 0.4, ease: 'easeOut' }}
 							>
-								<div className='px-4 pb-4 text-gray-700'>{item.a}</div>
+								<div className='px-4 pb-4 text-gray-700 bg-blue-400/10'>{item.a}</div>
 							</motion.div>
 						)}
 					</AnimatePresence>

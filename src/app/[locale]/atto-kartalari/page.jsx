@@ -1,4 +1,4 @@
-import AttoDetailedPage from '../../../components/atto-detailed-page'
+import AttoDetailedPage from "@/components/atto-detailed-page";
 
 export default function Home() {
 	return (

@@ -45,7 +45,7 @@ export default function AttoDetailedPage() {
 			title: 'Umumiy transport kartasi',
 			description:
 				"Aholiga, ya'ni barcha turdagi yo'lovchilarga mo'ljallangan.",
-			color: 'from-blue-500 to-blue-700',
+			color: "bg-[#3939c6]",
 			icon: <Users className='w-8 h-8 text-white' />,
 			price: 'Oddiy narx',
 			features: [
@@ -59,7 +59,7 @@ export default function AttoDetailedPage() {
 			title: 'Talabalar uchun',
 			description:
 				'Jamoat transportida imtiyozli sayohat qilish huquqiga ega talabalar uchun.',
-			color: 'from-yellow-300 to-yellow-300',
+			color: "bg-[#e2d317]",
 			icon: <GraduationCap className='w-8 h-8 text-white' />,
 			price: 'Imtiyozli tarif',
 			features: ['Talaba ID kerak', 'Imtiyozli tarif', 'Universitet tasdiqi'],
@@ -69,16 +69,16 @@ export default function AttoDetailedPage() {
 			title: "O'quvchilar uchun",
 			description:
 				"Jamoat transportida imtiyozli sayohat qilish huquqiga ega o'quvchilar uchun.",
-			color: 'from-green-500 to-green-500',
+			color: "bg-[#39b84d]",
 			icon: <School className='w-8 h-8 text-white' />,
-			price: 'Imtiyozli tarif',
+			price: "0 So'm",
 			features: ['Maktab guvohnomasi', 'Katta chegirma', 'Ota-ona nazorati'],
 			cardColor: 'yashil',
 		},
 		{
 			title: 'Ijtimoiy karta',
 			description: "Imtiyozli nafaqaxo'rlar va nogironlar uchun mo'ljallangan.",
-			color: 'from-red-500 to-red-700',
+			color: "bg-[#ec3641]",
 			icon: <CreditCard className='w-8 h-8 text-white' />,
 			price: 'Imtiyozli/Bepul',
 			features: ['Ijtimoiy himoya', "To'liq imtiyoz", 'Maxsus yordam'],
@@ -86,32 +86,6 @@ export default function AttoDetailedPage() {
 		},
 	]
 
-	const steps = [
-		{
-			number: '01',
-			title: 'Kartani oling',
-			description:
-				'Metro kassalari yoki maxsus nuqtalardan ATTO kartasini sotib oling',
-			icon: <CreditCard className='w-6 h-6' />,
-			action: () => openModal('where-to-buy'),
-		},
-		{
-			number: '02',
-			title: "Balansni to'ldiring",
-			description:
-				"Mobil ilovalar yoki kassalar orqali kartangiz balansini to'ldiring",
-			icon: <Wallet className='w-6 h-6' />,
-			action: () => openModal('how-to-topup'),
-		},
-		{
-			number: '03',
-			title: 'Tekkizing va boring',
-			description:
-				'Validatorga kartani tekkizing va yashil signal kutib transport kiriting',
-			icon: <Zap className='w-6 h-6' />,
-			action: () => openModal('how-to-pay'),
-		},
-	]
 
 	const benefits = [
 		{
@@ -185,486 +159,454 @@ export default function AttoDetailedPage() {
 	return (
 		<div>
 			<div className='container '>
-			{/* Hero Section - White Background */}
-			<section className='relative min-h-screen flex items-center justify-center'>
-				{/* Unique Background Pattern */}
-				
+				{/* Hero Section - White Background */}
+				<section className='relative flex items-center justify-center py-10'>
+					{/* Unique Background Pattern */}
 
-				<div className='relative z-10 mx-auto  py-20'>
-					<div className='grid lg:grid-cols-2 gap-12 items-center'>
-						{/* Left Content */}
-						<motion.div
-							initial={{ opacity: 0, x: -50 }}
-							animate={{ opacity: 1, x: 0 }}
-							transition={{ duration: 0.8 }}
-							className='text-gray-900'
-						>
+
+					<div className='relative z-10 mx-auto'>
+						<div className='grid lg:grid-cols-2 gap-12 items-center'>
+							{/* Left Content */}
 							<motion.div
-								initial={{ scale: 0 }}
-								animate={{ scale: 1 }}
-								transition={{ delay: 0.3, type: 'spring' }}
-								className='inline-flex items-center gap-2 bg-blue-100 rounded-full px-4 py-2 mb-6'
+								initial={{ opacity: 0, x: -50 }}
+								animate={{ opacity: 1, x: 0 }}
+								transition={{ duration: 0.8 }}
+								className='text-gray-900'
 							>
-								<Zap className='w-4 h-4 text-blue-600' />
-								<span className='text-sm font-medium text-blue-800'>
-									Kontaktsiz (NFC) texnologiyasi
-								</span>
-							</motion.div>
-
-							<h1 className='text-5xl lg:text-7xl font-black leading-tight mb-6'>
-								<span className='block' style={{ color: mainColor }}>
-									ATTO
-								</span>
-								<span className='block bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent'>
-									Transport
-								</span>
-								<span className='block' style={{ color: mainColor }}>
-									Kartasi
-								</span>
-							</h1>
-
-							<p className='text-xl text-gray-600 mb-8 leading-relaxed'>
-								Toshkent jamoat transportida kontaktsiz to'lov tizimi. Tez va
-								qulay tarzda yo'l haqini to'lang.
-							</p>
-
-							<div className='flex flex-wrap gap-4 mb-8'>
-								{benefits.map((benefit, index) => (
-									<motion.div
-										key={index}
-										initial={{ opacity: 0, y: 20 }}
-										animate={{ opacity: 1, y: 0 }}
-										transition={{ delay: 0.5 + index * 0.1 }}
-										className='flex items-center gap-2 bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg border border-gray-100'
-									>
-										<div className='text-blue-600'>{benefit.icon}</div>
-										<span className='text-sm font-medium text-gray-700'>
-											{benefit.title}
-										</span>
-									</motion.div>
-								))}
-							</div>
-
-							<motion.div
-								initial={{ opacity: 0, y: 20 }}
-								animate={{ opacity: 1, y: 0 }}
-								transition={{ delay: 0.8 }}
-								className='flex flex-col sm:flex-row gap-4'
-							>
-								<Button
-									size='lg'
-									className='font-semibold px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 text-white'
-									style={{ backgroundColor: mainColor }}
-									onClick={() => openModal('where-to-buy')}
-								>
-									Kartani olish <ArrowRight className='w-5 h-5 ml-2' />
-								</Button>
-								<Button
-									variant='outline'
-									size='lg'
-									className='border-2 font-semibold px-8 py-4 rounded-full hover:bg-gray-50 transition-all duration-300 bg-transparent'
-									style={{ borderColor: mainColor, color: mainColor }}
-								>
-									Batafsil ma'lumot
-								</Button>
-							</motion.div>
-						</motion.div>
-
-						{/* Right Content - Enhanced 3D Card Display */}
-						<motion.div
-							initial={{ opacity: 0, x: 50 }}
-							animate={{ opacity: 1, x: 0 }}
-							transition={{ duration: 0.8, delay: 0.2 }}
-							className='relative'
-						>
-							<div className='relative w-full max-w-md mx-auto'>
-								{/* Main Card with Enhanced Design */}
 								<motion.div
-									animate={{
-										rotateY: [0, 5, 0, -5, 0],
-										rotateX: [0, 2, 0, -2, 0],
-									}}
-									transition={{
-										duration: 6,
-										repeat: Number.POSITIVE_INFINITY,
-										ease: 'easeInOut',
-									}}
-									className='relative z-30'
+									initial={{ scale: 0 }}
+									animate={{ scale: 1 }}
+									transition={{ delay: 0.3, type: 'spring' }}
+									className='inline-flex items-center gap-2 bg-blue-100 rounded-full px-4 py-2 mb-6'
 								>
-									<div className='w-80 h-48 bg-gradient-to-br from-white via-blue-50 to-white rounded-2xl shadow-2xl p-6 border border-gray-100'>
-										<div className='flex justify-between items-start mb-4'>
-											<div>
-												<h3
-													className='text-2xl font-bold'
-													style={{ color: mainColor }}
-												>
-													ATTO
-												</h3>
-												<p className='text-sm text-gray-500'>Transport Card</p>
-											</div>
-											<div className='w-12 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-md flex items-center justify-center'>
-												<Zap className='w-6 h-6 text-white' />
-											</div>
-										</div>
-
-										<div className='space-y-2 mb-4'>
-											<div className='w-full h-2 bg-gray-200 rounded-full'>
-												<motion.div
-													className='h-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full'
-													initial={{ width: 0 }}
-													animate={{ width: '75%' }}
-													transition={{ duration: 2, delay: 1 }}
-												/>
-											</div>
-											<p className='text-xs text-gray-500'>
-												Balans: 45,000 so'm
-											</p>
-										</div>
-
-										<div className='flex justify-between items-end'>
-											<div>
-												<p className='text-xs text-gray-500'>Karta raqami</p>
-												<p
-													className='font-mono text-sm font-semibold'
-													style={{ color: mainColor }}
-												>
-													**** **** **** 1234
-												</p>
-											</div>
-											<div className='text-right'>
-												<p className='text-xs text-gray-500'>Amal qiladi</p>
-												<p
-													className='font-mono text-sm font-semibold'
-													style={{ color: mainColor }}
-												>
-													12/28
-												</p>
-											</div>
-										</div>
-									</div>
+									<Zap className='w-4 h-4 text-blue-600' />
+									<span className='text-sm font-medium text-blue-800'>
+										Kontaktsiz (NFC) texnologiyasi
+									</span>
 								</motion.div>
 
-								{/* Enhanced Floating Elements */}
-								{[...Array(4)].map((_, i) => (
+								<h1 className='text-5xl lg:text-7xl font-black leading-tight mb-6'>
+									<span className='block' style={{ color: mainColor }}>
+										ATTO
+									</span>
+									<span className='block bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent'>
+										Transport
+									</span>
+									<span className='block' style={{ color: mainColor }}>
+										Kartasi
+									</span>
+								</h1>
+
+								<p className='text-xl text-gray-600 mb-8 leading-relaxed'>
+									Toshkent jamoat transportida kontaktsiz to'lov tizimi. Tez va
+									qulay tarzda yo'l haqini to'lang.
+								</p>
+
+								<div className='flex flex-wrap gap-4 mb-8'>
+									{benefits.map((benefit, index) => (
+										<motion.div
+											key={index}
+											initial={{ opacity: 0, y: 20 }}
+											animate={{ opacity: 1, y: 0 }}
+											transition={{ delay: 0.5 + index * 0.1 }}
+											className='flex items-center gap-2 bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg border border-gray-100'
+										>
+											<div className='text-blue-600'>{benefit.icon}</div>
+											<span className='text-sm font-medium text-gray-700'>
+												{benefit.title}
+											</span>
+										</motion.div>
+									))}
+								</div>
+
+								<motion.div
+									initial={{ opacity: 0, y: 20 }}
+									animate={{ opacity: 1, y: 0 }}
+									transition={{ delay: 0.8 }}
+									className='flex flex-col sm:flex-row gap-4'
+								>
+									<Button
+										size='lg'
+										className='font-semibold px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 text-white'
+										style={{ backgroundColor: mainColor }}
+										onClick={() => openModal('where-to-buy')}
+									>
+										Kartani olish <ArrowRight className='w-5 h-5 ml-2' />
+									</Button>
+
+								</motion.div>
+							</motion.div>
+
+							{/* Right Content - Enhanced 3D Card Display */}
+							<motion.div
+								initial={{ opacity: 0, x: 50 }}
+								animate={{ opacity: 1, x: 0 }}
+								transition={{ duration: 0.8, delay: 0.2 }}
+								className='relative'
+							>
+								<div className='relative w-full max-w-md mx-auto'>
+									{/* Main Card with Enhanced Design */}
 									<motion.div
-										key={i}
-										className='absolute bg-white/60 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200'
 										animate={{
-											y: [0, -20, 0],
-											rotate: [0, 5, 0],
-											scale: [1, 1.05, 1],
+											rotateY: [0, 5, 0, -5, 0],
+											rotateX: [0, 2, 0, -2, 0],
 										}}
 										transition={{
-											duration: 3 + i,
+											duration: 6,
 											repeat: Number.POSITIVE_INFINITY,
-											delay: i * 0.5,
+											ease: 'easeInOut',
 										}}
-										style={{
-											width: `${40 + i * 8}px`,
-											height: `${25 + i * 5}px`,
-											right: `${-30 + i * 20}px`,
-											top: `${40 + i * 35}px`,
-										}}
+										className='relative z-30'
 									>
-										<div className='w-full h-full flex items-center justify-center'>
-											<div
-												className='w-3 h-3 rounded-full'
-												style={{
-													backgroundColor: `hsl(${220 + i * 30}, 70%, 60%)`,
-												}}
-											/>
-										</div>
-									</motion.div>
-								))}
-							</div>
-						</motion.div>
-					</div>
-				</div>
+										<div className='w-80 h-48 bg-gradient-to-br from-white via-blue-50 to-white rounded-2xl shadow-2xl p-6 border border-gray-100'>
+											<div className='flex justify-between items-start mb-4'>
+												<div>
+													<h3
+														className='text-2xl font-bold'
+														style={{ color: mainColor }}
+													>
+														ATTO
+													</h3>
+													<p className='text-sm text-gray-500'>Transport Card</p>
+												</div>
+												<div className='w-12 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-md flex items-center justify-center'>
+													<Zap className='w-6 h-6 text-white' />
+												</div>
+											</div>
 
-				
-			</section>
+											<div className='space-y-2 mb-4'>
+												<div className='w-full h-2 bg-gray-200 rounded-full'>
+													<motion.div
+														className='h-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full'
+														initial={{ width: 0 }}
+														animate={{ width: '75%' }}
+														transition={{ duration: 2, delay: 1 }}
+													/>
+												</div>
+												<p className='text-xs text-gray-500'>
+													Balans: 45,000 so'm
+												</p>
+											</div>
 
-			{/* Card Types Section - Enhanced */}
-			<section className='py-20 '>
-				<div className=' mx-auto'>
-					<motion.div
-						initial={{ opacity: 0, y: 30 }}
-						whileInView={{ opacity: 1, y: 0 }}
-						viewport={{ once: true }}
-						className='text-center mb-16'
-					>
-						<h2
-							className='text-4xl lg:text-5xl font-bold mb-4'
-							style={{ color: mainColor }}
-						>
-							ATTO Transport Kartalari Turlari
-						</h2>
-						<p className='text-xl text-gray-600 max-w-3xl mx-auto'>
-							Hozirgi vaqtda yo'lovchilarning turli toifalari uchun
-							mo'ljallangan to'rt turdagi ATTO transport kartalari joriy
-							qilingan
-						</p>
-					</motion.div>
-
-					<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8'>
-						{cardTypes.map((card, index) => (
-							<motion.div
-								key={index}
-								initial={{ opacity: 0, y: 50 }}
-								whileInView={{ opacity: 1, y: 0 }}
-								transition={{ delay: index * 0.1 }}
-								viewport={{ once: true }}
-								whileHover={{ y: -10, scale: 1.02 }}
-								className='group'
-							>
-								<Card className='h-full overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-300'>
-									<div
-										className={`h-32 bg-gradient-to-br ${card.color} relative overflow-hidden`}
-									>
-										<div className='absolute inset-0 bg-black/10'></div>
-										<div className='absolute top-4 right-4 bg-white/20 p-2 rounded-full'>
-											{card.icon}
-										</div>
-										<div className='absolute bottom-4 left-4 text-white'>
-											<div className='text-lg font-bold'>{card.price}</div>
-											<div className='text-xs opacity-80'>
-												({card.cardColor})
+											<div className='flex justify-between items-end'>
+												<div>
+													<p className='text-xs text-gray-500'>Karta raqami</p>
+													<p
+														className='font-mono text-sm font-semibold'
+														style={{ color: mainColor }}
+													>
+														**** **** **** 1234
+													</p>
+												</div>
+												<div className='text-right'>
+													<p className='text-xs text-gray-500'>Amal qiladi</p>
+													<p
+														className='font-mono text-sm font-semibold'
+														style={{ color: mainColor }}
+													>
+														12/28
+													</p>
+												</div>
 											</div>
 										</div>
-									</div>
+									</motion.div>
 
-									<CardContent className='p-6'>
-										<h3
-											className='text-xl font-bold mb-3'
-											style={{ color: mainColor }}
-										>
-											{card.title}
-										</h3>
-										<p className='text-gray-600 mb-4 text-sm leading-relaxed'>
-											{card.description}
-										</p>
-
-										<div className='space-y-2'>
-											{card.features.map((feature, idx) => (
-												<div
-													key={idx}
-													className='flex items-center gap-2 text-sm'
-												>
-													<CheckCircle className='w-4 h-4 text-green-500' />
-													<span className='text-gray-600'>{feature}</span>
-												</div>
-											))}
-										</div>
-
-										<Button
-											className='w-full mt-4 group-hover:bg-blue-600 text-white transition-colors'
-											style={{ backgroundColor: mainColor }}
-											onClick={() => openModal('where-to-buy')}
-										>
-											Tanlash
-										</Button>
-									</CardContent>
-								</Card>
-							</motion.div>
-						))}
-					</div>
-				</div>
-			</section>
-
-			{/* Detailed Services Section - Enhanced */}
-			<section className='py-20 '>
-				<div className=' mx-auto'>
-					<motion.div
-						initial={{ opacity: 0, y: 30 }}
-						whileInView={{ opacity: 1, y: 0 }}
-						viewport={{ once: true }}
-						className='text-center mb-16'
-					>
-						<h2
-							className='text-4xl lg:text-5xl font-bold mb-4'
-							style={{ color: mainColor }}
-						>
-							Qo'shimcha Xizmatlar
-						</h2>
-						<p className='text-xl text-gray-600'>
-							ATTO kartasidan samarali foydalanish uchun muhim ma'lumotlar
-						</p>
-					</motion.div>
-
-					<div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
-						{detailedServices.map((service, index) => (
-							<motion.div
-								key={index}
-								initial={{ opacity: 0, y: 30 }}
-								whileInView={{ opacity: 1, y: 0 }}
-								transition={{ delay: index * 0.1 }}
-								viewport={{ once: true }}
-								whileHover={{ y: -5, scale: 1.02 }}
-							>
-								<Card
-									className='h-full border-0 shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer bg-white'
-									onClick={service.action}
-								>
-									<CardContent className='p-8 text-center'>
+									{/* Enhanced Floating Elements */}
+									{[...Array(4)].map((_, i) => (
 										<motion.div
-											className='inline-flex items-center justify-center w-16 h-16 bg-blue-50 rounded-full mb-6'
-											whileHover={{ scale: 1.1, rotate: 5 }}
+											key={i}
+											className='absolute bg-white/60 backdrop-blur-sm rounded-lg shadow-lg border border-gray-200'
+											animate={{
+												y: [0, -20, 0],
+												rotate: [0, 5, 0],
+												scale: [1, 1.05, 1],
+											}}
+											transition={{
+												duration: 3 + i,
+												repeat: Number.POSITIVE_INFINITY,
+												delay: i * 0.5,
+											}}
+											style={{
+												width: `${40 + i * 8}px`,
+												height: `${25 + i * 5}px`,
+												right: `${-30 + i * 20}px`,
+												top: `${40 + i * 35}px`,
+											}}
 										>
-											<div style={{ color: mainColor }}>{service.icon}</div>
+											<div className='w-full h-full flex items-center justify-center'>
+												<div
+													className='w-3 h-3 rounded-full'
+													style={{
+														backgroundColor: `hsl(${220 + i * 30}, 70%, 60%)`,
+													}}
+												/>
+											</div>
 										</motion.div>
-										<h3
-											className='text-xl font-bold mb-3'
-											style={{ color: mainColor }}
-										>
-											{service.title}
-										</h3>
-										<p className='text-gray-600 mb-6 leading-relaxed'>
-											{service.description}
-										</p>
-										<Button
-											variant='outline'
-											className='border-2 hover:bg-blue-50 bg-transparent transition-all duration-300'
-											style={{ borderColor: mainColor, color: mainColor }}
-										>
-											<Info className='w-4 h-4 mr-2' />
-											Ko'rish
-										</Button>
-									</CardContent>
-								</Card>
+									))}
+								</div>
 							</motion.div>
-						))}
+						</div>
 					</div>
-				</div>
-			</section>
 
-			{/* Enhanced FAQ Section with Custom Animations */}
-			<section className='py-20 '>
-				<div className=' mx-auto'>
-					<motion.div
-						initial={{ opacity: 0, y: 30 }}
-						whileInView={{ opacity: 1, y: 0 }}
-						viewport={{ once: true }}
-						className='text-center mb-16'
-					>
-						<h2
-							className='text-4xl lg:text-5xl font-bold mb-4'
-							style={{ color: mainColor }}
+
+				</section>
+
+				{/* Card Types Section - Enhanced */}
+				<section className='py-10'>
+					<div className=' mx-auto'>
+						<motion.div
+							initial={{ opacity: 0, y: 30 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							viewport={{ once: true }}
+							className='text-center mb-16'
 						>
-							Savol-Javoblar
-						</h2>
-						<p className='text-xl text-gray-600'>
-							Eng ko'p beriladigan savollar va ularning javoblari
-						</p>
-					</motion.div>
+							<h2
+								className='text-4xl lg:text-5xl font-bold mb-4'
+								style={{ color: mainColor }}
+							>
+								ATTO Transport Kartalari Turlari
+							</h2>
+							<p className='text-xl text-gray-600 max-w-3xl mx-auto'>
+								Hozirgi vaqtda yo'lovchilarning turli toifalari uchun
+								mo'ljallangan to'rt turdagi ATTO transport kartalari joriy
+								qilingan
+							</p>
+						</motion.div>
 
-					<motion.div
-						initial={{ opacity: 0, y: 30 }}
-						whileInView={{ opacity: 1, y: 0 }}
-						viewport={{ once: true }}
-					>
-						<div className='space-y-4'>
-							{faqs.map((faq, index) => (
+						<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8'>
+							{cardTypes.map((card, index) => (
 								<motion.div
 									key={index}
-									initial={{ opacity: 0, y: 20 }}
+									initial={{ opacity: 0, y: 50 }}
 									whileInView={{ opacity: 1, y: 0 }}
 									transition={{ delay: index * 0.1 }}
 									viewport={{ once: true }}
-									className='border border-gray-200 rounded-2xl bg-white shadow-sm hover:shadow-md transition-all duration-300'
+									whileHover={{ y: -10, scale: 1.02 }}
+									className='group'
 								>
-									<motion.button
-										className='w-full px-6 py-6 text-left flex items-center justify-between focus:outline-none'
-										onClick={() => toggleFaq(index)}
-										whileHover={{ backgroundColor: 'rgba(59, 130, 246, 0.05)' }}
-									>
-										<span
-											className='text-lg font-semibold pr-4'
-											style={{ color: mainColor }}
+									<Card className='h-full overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-300'>
+										<div
+											className={`h-32 bg-gradient-to-br ${card.color} relative overflow-hidden`}
 										>
-											{faq.question}
-										</span>
-										<motion.div
-											animate={{ rotate: openFaq === index ? 45 : 0 }}
-											transition={{ duration: 0.3 }}
-											className='flex-shrink-0'
-										>
-											{openFaq === index ? (
-												<Minus
-													className='w-5 h-5'
-													style={{ color: mainColor }}
-												/>
-											) : (
-												<Plus
-													className='w-5 h-5'
-													style={{ color: mainColor }}
-												/>
-											)}
-										</motion.div>
-									</motion.button>
-									<AnimatePresence>
-										{openFaq === index && (
-											<motion.div
-												initial={{ height: 0, opacity: 0 }}
-												animate={{ height: 'auto', opacity: 1 }}
-												exit={{ height: 0, opacity: 0 }}
-												transition={{ duration: 0.3, ease: 'easeInOut' }}
-												className='overflow-hidden'
+											<div className='absolute inset-0 bg-black/10'></div>
+											<div className='absolute top-4 right-4 bg-white/20 p-2 rounded-full'>
+												{card.icon}
+											</div>
+											<div className='absolute bottom-4 left-4 text-white'>
+												<div className='text-lg font-bold'>{card.price}</div>
+												<div className='text-xs opacity-80'>
+													({card.cardColor})
+												</div>
+											</div>
+										</div>
+
+										<CardContent className='p-6'>
+											<h3
+												className='text-xl font-bold mb-3'
+												style={{ color: mainColor }}
 											>
-												<motion.div
-													initial={{ y: -10 }}
-													animate={{ y: 0 }}
-													exit={{ y: -10 }}
-													transition={{ duration: 0.2 }}
-													className='px-6 pb-6'
-												>
-													<div className='h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent mb-4'></div>
-													<p className='text-gray-600 leading-relaxed'>
-														{faq.answer}
-													</p>
-												</motion.div>
-											</motion.div>
-										)}
-									</AnimatePresence>
+												{card.title}
+											</h3>
+											<p className='text-gray-600 mb-4 text-sm leading-relaxed'>
+												{card.description}
+											</p>
+
+											<div className='space-y-2'>
+												{card.features.map((feature, idx) => (
+													<div
+														key={idx}
+														className='flex items-center gap-2 text-sm'
+													>
+														<CheckCircle className='w-4 h-4 text-green-500' />
+														<span className='text-gray-600'>{feature}</span>
+													</div>
+												))}
+											</div>
+
+											<Button
+												className='w-full mt-4 group-hover:bg-blue-600 text-white transition-colors'
+												style={{ backgroundColor: mainColor }}
+												onClick={() => openModal('where-to-buy')}
+											>
+												Tanlash
+											</Button>
+										</CardContent>
+									</Card>
 								</motion.div>
 							))}
 						</div>
-					</motion.div>
-				</div>
-			</section>
+					</div>
+				</section>
 
-			{/* Enhanced CTA Section */}
-			<section className='py-20  relative overflow-hidden'>
-				{/* Background Animation */}
-				<div className='absolute inset-0'>
-					{[...Array(6)].map((_, i) => (
+				{/* Detailed Services Section - Enhanced */}
+				<section className='py-10 '>
+					<div className=' mx-auto'>
 						<motion.div
-							key={i}
-							className='absolute w-32 h-32 bg-white/10 rounded-full blur-xl'
-							animate={{
-								x: [0, 100, 0],
-								y: [0, -100, 0],
-								scale: [1, 1.2, 1],
-							}}
-							transition={{
-								duration: 15 + i * 2,
-								repeat: Number.POSITIVE_INFINITY,
-								ease: 'easeInOut',
-							}}
-							style={{
-								left: `${Math.random() * 100}%`,
-								top: `${Math.random() * 100}%`,
-							}}
-						/>
-					))}
-				</div>
-			</section>
+							initial={{ opacity: 0, y: 30 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							viewport={{ once: true }}
+							className='text-center mb-16'
+						>
+							<h2
+								className='text-4xl lg:text-5xl font-bold mb-4'
+								style={{ color: mainColor }}
+							>
+								Qo'shimcha Xizmatlar
+							</h2>
+							<p className='text-xl text-gray-600'>
+								ATTO kartasidan samarali foydalanish uchun muhim ma'lumotlar
+							</p>
+						</motion.div>
 
-			<DetailedInfoModal
-				isOpen={isModalOpen}
-				onClose={() => setIsModalOpen(false)}
-				type={modalType}
-			/>
-		</div>
+						<div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
+							{detailedServices.map((service, index) => (
+								<motion.div
+									key={index}
+									initial={{ opacity: 0, y: 30 }}
+									whileInView={{ opacity: 1, y: 0 }}
+									transition={{ delay: index * 0.1 }}
+									viewport={{ once: true }}
+									whileHover={{ y: -5, scale: 1.02 }}
+								>
+									<Card
+										className='h-full border-0 shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer bg-white'
+										onClick={service.action}
+									>
+										<CardContent className='p-8 text-center'>
+											<motion.div
+												className='inline-flex items-center justify-center w-16 h-16 bg-blue-50 rounded-full mb-6'
+												whileHover={{ scale: 1.1, rotate: 5 }}
+											>
+												<div style={{ color: mainColor }}>{service.icon}</div>
+											</motion.div>
+											<h3
+												className='text-xl font-bold mb-3'
+												style={{ color: mainColor }}
+											>
+												{service.title}
+											</h3>
+											<p className='text-gray-600 mb-6 leading-relaxed'>
+												{service.description}
+											</p>
+											<Button
+												variant='outline'
+												className='border-2 hover:bg-blue-50 bg-transparent transition-all duration-300'
+												style={{ borderColor: mainColor, color: mainColor }}
+											>
+												<Info className='w-4 h-4 mr-2' />
+												Ko'rish
+											</Button>
+										</CardContent>
+									</Card>
+								</motion.div>
+							))}
+						</div>
+					</div>
+				</section>
+
+				{/* Enhanced FAQ Section with Custom Animations */}
+				<section className='py-10'>
+					<div className=' mx-auto'>
+						<motion.div
+							initial={{ opacity: 0, y: 30 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							viewport={{ once: true }}
+							className='text-center mb-16'
+						>
+							<h2
+								className='text-4xl lg:text-5xl font-bold mb-4'
+								style={{ color: mainColor }}
+							>
+								Savol-Javoblar
+							</h2>
+							<p className='text-xl text-gray-600'>
+								Eng ko'p beriladigan savollar va ularning javoblari
+							</p>
+						</motion.div>
+
+						<motion.div
+							initial={{ opacity: 0, y: 30 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							viewport={{ once: true }}
+						>
+							<div className='space-y-4'>
+								{faqs.map((faq, index) => (
+									<motion.div
+										key={index}
+										initial={{ opacity: 0, y: 20 }}
+										whileInView={{ opacity: 1, y: 0 }}
+										transition={{ delay: index * 0.1 }}
+										viewport={{ once: true }}
+										className='border border-blue-900/20 rounded-2xl bg-blue-400/10  transition-all duration-300'
+									>
+										<motion.button
+											className='w-full px-6 py-6 text-left flex items-center justify-between focus:outline-none'
+											onClick={() => toggleFaq(index)}
+											whileHover={{ backgroundColor: 'rgba(59, 130, 246, 0.05)' }}
+										>
+											<span
+												className='text-lg font-semibold pr-4'
+												style={{ color: mainColor }}
+											>
+												{faq.question}
+											</span>
+											<motion.div
+												animate={{ rotate: openFaq === index ? 45 : 0 }}
+												transition={{ duration: 0.3 }}
+												className='flex-shrink-0'
+											>
+												{openFaq === index ? (
+													<Minus
+														className='w-5 h-5'
+														style={{ color: mainColor }}
+													/>
+												) : (
+													<Plus
+														className='w-5 h-5'
+														style={{ color: mainColor }}
+													/>
+												)}
+											</motion.div>
+										</motion.button>
+										<AnimatePresence>
+											{openFaq === index && (
+												<motion.div
+													initial={{ height: 0, opacity: 0 }}
+													animate={{ height: 'auto', opacity: 1 }}
+													exit={{ height: 0, opacity: 0 }}
+													transition={{ duration: 0.3, ease: 'easeInOut' }}
+													className='overflow-hidden'
+												>
+													<motion.div
+														initial={{ y: -10 }}
+														animate={{ y: 0 }}
+														exit={{ y: -10 }}
+														transition={{ duration: 0.2 }}
+														className='px-6 pb-6'
+													>
+														<div className='h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent mb-4'></div>
+														<p className='text-gray-600 leading-relaxed'>
+															{faq.answer}
+														</p>
+													</motion.div>
+												</motion.div>
+											)}
+										</AnimatePresence>
+									</motion.div>
+								))}
+							</div>
+						</motion.div>
+					</div>
+				</section>
+
+
+
+				<DetailedInfoModal
+					isOpen={isModalOpen}
+					onClose={() => setIsModalOpen(false)}
+					type={modalType}
+				/>
+			</div>
 		</div>
 	)
 }

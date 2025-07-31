@@ -1,4 +1,5 @@
-import PaymentMethods from './newtolov'
+import PaymentMethods from "./newtolov"
+
 
 
 const Page = () => {

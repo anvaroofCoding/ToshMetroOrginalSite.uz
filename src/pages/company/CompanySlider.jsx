@@ -115,7 +115,7 @@ export default function CompanySlider() {
 	}
 
 	return (
-		<div className='relative overflow-hidden  bg-transparent py-8'>
+		<div className='relative overflow-hidden'>
 			<div className=''>
 				<div className='flex justify-between items-center mb-8 container  pb-10'>
 					<h2 className='text-2xl sm:text-3xl lg:text-4xl font-bold text-blue-900'>
@@ -140,7 +140,7 @@ export default function CompanySlider() {
 				</div>
 
 				<div
-					className='relative overflow-hidden  '
+					className='relative overflow-hidden py-1 '
 					onMouseEnter={() => setIsHovered(true)}
 					onMouseLeave={() => setIsHovered(false)}
 				>
@@ -148,12 +148,12 @@ export default function CompanySlider() {
 						{duplicatedCompanies.map((company, index) => (
 							<motion.div
 								key={`${company.name}-${index}`}
-								className='flex-shrink-0 bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200 rounded-xl p-4 sm:p-6 shadow-md hover:shadow-xl transition-all duration-300 hover:scale-100 hover:border-blue-300'
+								className='flex-shrink-0 bg-blue-400/10 border border-blue-900/20 rounded-xl p-4 sm:p-6 hover:scale-102 duration-100 transition-all duration-300 hover:scale-100 hover:border-blue-300'
 								style={{ width: cardWidth }}
 								// whileHover={{ y: -5 }}
 							>
 								<div className='flex flex-col items-center text-center h-full '>
-									<div className='w-12 h-12 sm:w-16 sm:h-16 mb-4 flex items-center justify-center bg-white rounded-lg shadow-sm'>
+									<div className='w-12 h-12 bg-white sm:w-16 sm:h-16 mb-4 flex items-center justify-center rounded-lg shadow-sm'>
 										<img
 											src={company.logo || '/placeholder.svg'}
 											alt={`${company.name} logo`}
