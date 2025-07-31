@@ -11,6 +11,7 @@ import './globals.css'
 import TashkentMetroChat from '../../components/Flowechat/FloatingChat'
 import Footer from '@/shared/footer/footer'
 import FloatingActionButton from '@/components/ScreenFixsedButton/screenFixedButton'
+import BgImage from '@/components/bg-main-images/bg-images'
 
 export const metadata = {
 	title: 'Toshkent shahar metropoliteni | Rasmiy veb-sayt',
@@ -57,14 +58,17 @@ export default async function RootLayout({ children, params }) {
 		<html lang={locale}>
 			<body className='roboto'>
 				<NextIntlClientProvider locale={locale} messages={messages}>
-					<RouteLoader />
-					<Layout>
-						<Navbar />
-						<SplashScreen>{children}</SplashScreen>
-						<Footer />
-						<FloatingActionButton />
-					</Layout>
+					<BgImage>
+						<RouteLoader />
+						<Layout>
+							<Navbar />
+							<SplashScreen>{children}</SplashScreen>
+							<Footer />
+							<FloatingActionButton />
+						</Layout>
+					</BgImage>
 				</NextIntlClientProvider>
+
 			</body>
 		</html>
 	);

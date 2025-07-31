@@ -8,7 +8,7 @@ import FaqAccordion from '@/work/test/questions'
 const Home = () => {
 	const malumot = "Metropoliteni yo'lovchilari uchun foydali ma'lumotlar"
 	return (
-		<div className='relative z-[10] bg-white'>
+		<div className='relative z-[10] '>
 			{/* <div className='my-5'>
 				<MetroSystem />
 			</div> */}

@@ -183,51 +183,12 @@ export default function AttoDetailedPage() {
 	]
 
 	return (
-		<div className='bg-white'>
-			<div className='bg-white container'>
+		<div>
+			<div className='container '>
 			{/* Hero Section - White Background */}
-			<section className='relative min-h-screen flex items-center justify-center  bg-white'>
+			<section className='relative min-h-screen flex items-center justify-center'>
 				{/* Unique Background Pattern */}
-				<div className='absolute inset-0'>
-					{/* <div className='absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-blue-50'></div>
-					<div className='absolute inset-0 opacity-30'>
-						<div className='absolute top-20 left-10 w-72 h-72 bg-blue-100 rounded-full blur-3xl'></div>
-						<div className='absolute bottom-20 right-10 w-96 h-96 bg-purple-100 rounded-full blur-3xl'></div>
-						<div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-yellow-100 rounded-full blur-3xl'></div>
-					</div> */}
-					{/* Geometric Shapes */}
-					<div className='absolute inset-0 overflow-hidden'>
-						{[...Array(8)].map((_, i) => (
-							<motion.div
-								key={i}
-								className='absolute'
-								animate={{
-									rotate: [0, 360],
-									scale: [1, 1.1, 1],
-								}}
-								transition={{
-									duration: 20 + i * 3,
-									repeat: Number.POSITIVE_INFINITY,
-									ease: 'linear',
-								}}
-								style={{
-									left: `${Math.random() * 100}%`,
-									top: `${Math.random() * 100}%`,
-									width: `${20 + Math.random() * 40}px`,
-									height: `${20 + Math.random() * 40}px`,
-								}}
-							>
-								<div
-									className='w-full h-full border-2 opacity-20'
-									style={{
-										borderColor: mainColor,
-										borderRadius: i % 2 === 0 ? '50%' : '0%',
-									}}
-								/>
-							</motion.div>
-						))}
-					</div>
-				</div>
+				
 
 				<div className='relative z-10 mx-auto  py-20'>
 					<div className='grid lg:grid-cols-2 gap-12 items-center'>
@@ -420,18 +381,7 @@ export default function AttoDetailedPage() {
 					</div>
 				</div>
 
-				{/* Enhanced Scroll Indicator */}
-				<motion.div
-					animate={{ y: [0, 10, 0] }}
-					transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
-					className='absolute md:bottom-8 bottom-5 left-1/2 transform -translate-x-1/2'
-					style={{ color: mainColor }}
-				>
-					<div className='flex flex-col items-center gap-2 '>
-						<span className='text-sm font-medium'>Pastga aylantiring</span>
-						<ArrowDown className='w-6 h-6' />
-					</div>
-				</motion.div>
+				
 			</section>
 
 			{/* Card Types Section - Enhanced */}
@@ -588,7 +538,7 @@ export default function AttoDetailedPage() {
 			</section>
 
 			{/* Enhanced FAQ Section with Custom Animations */}
-			<section className='py-20 bg-white'>
+			<section className='py-20 '>
 				<div className=' mx-auto'>
 					<motion.div
 						initial={{ opacity: 0, y: 30 }}
