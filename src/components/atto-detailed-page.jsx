@@ -131,7 +131,7 @@ export default function AttoDetailedPage() {
 		{
 			question: 'Transport kartasidagi qoldiqni qanday aniqlash mumkin?',
 			answer:
-				'"ATTO" transport kartasi balansini ATTO, MyUzcard, Payme, Upay, Apelsin mobil ilovalari, bank infokiosklari, yoki "Toshshahartransxizmat" AJ va metro kassalarida tekshirish mumkin.',
+				`"ATTO" transport kartasi balansini ATTO, MyUzcard, Payme, Upay, Apelsin, Click, Oson, Ipak yo'li bank, Alif mobi, Mavrid, Plum, Uzum bank mobil ilovalari, bank infokiosklari, yoki "Toshshahartransxizmat" AJ va metro kassalarida tekshirish mumkin.`,
 		},
 		{
 			question:
@@ -152,7 +152,7 @@ export default function AttoDetailedPage() {
 		{
 			question: "ATTO transport kartasi balansini qanday to'ldirish mumkin?",
 			answer:
-				'"ATTO" transport kartasi balansini ATTO, MyUzcard, Payme, Upay, Apelsin toʻlov xizmatlari va boshqa elektron toʻlov tizimlarining mobil ilovalari orqali toʻldirish mumkin. Shuningdek, bank infokiosklari va kassalarda ham to\'ldirish mumkin.',
+				`"ATTO" transport kartasi balansini ATTO, MyUzcard, Payme, Upay, Apelsin, Click, Oson, Ipak yo'li bank, Alif mobi, Mavrid, Plum, Uzum bank  toʻlov xizmatlari va boshqa elektron toʻlov tizimlarining mobil ilovalari orqali toʻldirish mumkin. Shuningdek, bank infokiosklari va kassalarda ham to\'ldirish mumkin`,
 		},
 	]
 

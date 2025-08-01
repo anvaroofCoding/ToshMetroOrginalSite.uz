@@ -302,9 +302,6 @@ export default function ManagementPage() {
         <div className="container  py-8 lg:py-12">
           <div className="text-center lg:text-left">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-blue-900 mb-4">Metropoliteni rahbariyati</h1>
-            <p className="text-lg text-gray-600 max-w-2xl">
-              Toshkent metropoliteni boshqaruv tizimi va rahbariyat a'zolari bilan tanishing
-            </p>
           </div>
         </div>
       </div>

@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { CreditCard, Smartphone, QrCode, Scan, Wallet, User2, Check } from "lucide-react"
+import { CreditCard, Smartphone, QrCode, Scan, Wallet, User2, Check, ScanFace } from "lucide-react"
 import Image from "next/image"
 
 const attoCards = [
@@ -320,7 +320,7 @@ export default function PaymentMethods() {
                             </div>
                             <div className="ml-4 sm:ml-6 md:ml-8 lg:ml-12">
                                 <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-blue-900 leading-tight tracking-tight">
-                                    QR-Bilet & Paynet ATM
+                                    QR-Bilet & Alif ATM
                                 </h2>
                                 <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 mt-2 sm:mt-3 lg:mt-4 leading-relaxed">
                                     Bir martalik QR to'lov va ATM orqali QR kod
@@ -335,6 +335,7 @@ export default function PaymentMethods() {
                                         <div className="flex items-center mb-4 sm:mb-5 md:mb-6">
                                             <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl flex items-center justify-center mr-3 sm:mr-4 shadow-lg group-hover:scale-110 transition-transform duration-500">
                                                 <QrCode className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-white" />
+                                                {/* <Image src={"https://api.logobank.uz/media/logos_png/alif-01.png"} alt="alif atm" width={28} height={28} /> */}
                                             </div>
                                             <h3 className="font-bold text-blue-900 text-base sm:text-lg md:text-xl lg:text-2xl">QR-Bilet</h3>
                                         </div>
@@ -345,7 +346,7 @@ export default function PaymentMethods() {
                                             <span className="font-bold text-blue-900 text-base sm:text-lg md:text-xl lg:text-2xl">
                                                 3,000 UZS
                                             </span>
-                                           
+
                                         </div>
                                     </CardContent>
                                 </Card>
@@ -353,15 +354,15 @@ export default function PaymentMethods() {
                                 <Card className="transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-blue-200/50 border-2 hover:border-blue-400 group overflow-hidden">
                                     <CardContent className="p-5 sm:p-6 md:p-7 lg:p-8 xl:p-10">
                                         <div className="flex items-center mb-4 sm:mb-5 md:mb-6">
-                                            <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-gradient-to-br from-green-500 to-green-700 rounded-2xl flex items-center justify-center mr-3 sm:mr-4 shadow-lg group-hover:scale-110 transition-transform duration-500">
-                                                <Scan className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-white" />
+                                            <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14  rounded-2xl flex items-center justify-center mr-3 sm:mr-4 shadow-lg group-hover:scale-110 transition-transform duration-500">
+                                                <Image src={"https://api.logobank.uz/media/logos_png/alif-01.png"} alt="alif atm" width={28} height={28} className=" w-full " />
                                             </div>
                                             <h3 className="font-bold text-blue-900 text-base sm:text-lg md:text-xl lg:text-2xl">
-                                                Paynet ATM QR
+                                                Alif ATM QR
                                             </h3>
                                         </div>
                                         <p className="text-gray-700 mb-4 sm:mb-5 md:mb-6 text-sm sm:text-base md:text-lg leading-relaxed">
-                                            Paynet ATM'laridan QR kod olish imkoniyati
+                                            Alif ATM'laridan QR kod olish imkoniyati
                                         </p>
                                         <Badge variant="secondary" className="text-xs sm:text-sm px-3 py-1">
                                             Tez va qulay
@@ -390,11 +391,12 @@ export default function PaymentMethods() {
 
                         <div className="ml-12 sm:ml-16 md:ml-20 lg:ml-26">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 md:gap-6 lg:gap-8 mb-6 sm:mb-8 lg:mb-10">
-                                <Card className="transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-purple-200/50 border-2 hover:border-purple-400 group overflow-hidden">
+                                <Card className="transition-all duration-500 hover:scale-105 hover:shadow-2xl 
+                                 group overflow-hidden">
                                     <CardContent className="p-5 sm:p-6 md:p-7 lg:p-8 xl:p-10">
                                         <div className="flex items-center mb-4 sm:mb-5 md:mb-6">
-                                            <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mr-3 sm:mr-4 shadow-lg group-hover:scale-110 transition-transform duration-500">
-                                                <User2 className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-white" />
+                                            <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 rounded-full rounded-2xl flex items-center justify-center mr-3 sm:mr-4 shadow-lg group-hover:scale-110 transition-transform duration-500">
+                                                <ScanFace  className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-white" />
                                             </div>
                                             <h3 className="font-bold text-blue-900 text-base sm:text-lg md:text-xl lg:text-2xl">FacePay</h3>
                                         </div>
@@ -407,13 +409,13 @@ export default function PaymentMethods() {
                                     </CardContent>
                                 </Card>
 
-                                <Card className="transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-green-200/50 border-2 hover:border-green-400 group overflow-hidden">
+                                <Card className="transition-all duration-500 hover:scale-105 hover:shadow-2xl  border-2  group overflow-hidden">
                                     <CardContent className="p-5 sm:p-6 md:p-7 lg:p-8 xl:p-10">
                                         <div className="flex items-center mb-4 sm:mb-5 md:mb-6">
-                                            <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-gradient-to-br from-green-500 to-blue-600 rounded-2xl flex items-center justify-center mr-3 sm:mr-4 shadow-lg group-hover:scale-110 transition-transform duration-500 overflow-hidden">
+                                            <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-2xl flex items-center justify-center mr-3 sm:mr-4 shadow-lg group-hover:scale-110 transition-transform duration-500 overflow-hidden">
                                                 <div className="relative w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8">
                                                     <Image
-                                                        src="https://cdn6.aptoide.com/imgs/6/3/8/638e5192d3a8e2b1d56cf1b04f91bd36_icon.png"
+                                                        src="https://yt3.googleusercontent.com/TERu3mSd_cpqD9U3L00_-NcJlPNakiHn8AJQOUTfQNGaq_t0zUKjs2DX3DJ7N6-cxa-aR6rybQ=s900-c-k-c0x00ffffff-no-rj"
                                                         alt="Palmpay"
                                                         fill
                                                         className="object-contain"

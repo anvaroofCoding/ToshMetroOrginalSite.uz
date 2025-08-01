@@ -273,7 +273,90 @@ export default function MetroCarouselWithNews() {
         </div>
 
         {/* Metro Announcements Section */}
-        <div className="bg-gradient-to-br from-slate-50 to-white rounded-2xl shadow-2xl border border-slate-200 aspect-[16/10] sm:aspect-[16/9] lg:aspect-[4/3] xl:aspect-[16/10] flex flex-col overflow-hidden">
+        <div className="bg-gradient-to-br from-slate-50 to-white rounded-2xl shadow-2xl border border-slate-200 aspect-[16/10] sm:aspect-[16/9] lg:aspect-[4/3] xl:aspect-[16/10] hidden md:flex flex-col overflow-hidden">
+          {/* Header */}
+          <div className="flex items-center gap-5 justify-between p-3 sm:p-4 lg:p-6 border-b border-slate-200 bg-white/80 backdrop-blur-sm flex-shrink-0">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <div className="w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg sm:rounded-xl hidden md:flex items-center justify-center shadow-lg">
+                <Info className="w-3 h-3 sm:w-4 sm:h-4 lg:w-5 lg:h-5 text-white" />
+              </div>
+              <div>
+                <h3 className="text-sm sm:text-base lg:text-lg font-bold text-slate-800">
+                  Saytga joylashtirilgan so'ngi yangiliklar
+                </h3>
+                <p className="text-xs text-slate-500 hidden sm:block">Joriy holat va e'lonlar</p>
+              </div>
+            </div>
+            <Link href="/yangiliklar" className="flex items-center">
+              <Button
+                variant="outline"
+                size="sm"
+                className="text-blue-600 border-blue-200 hover:bg-blue-50 hover:border-blue-300 bg-transparent font-medium text-xs touch-manipulation px-2 sm:px-3"
+              >
+                <span className="hidden sm:inline">Barchasi</span>
+                <span className="sm:hidden">Ko'rish</span>
+                <ArrowRight className="w-3 h-3 ml-1" />
+              </Button>
+            </Link>
+          </div>
+
+          {/* Scrolling Container */}
+          <div className="flex-1 relative overflow-hidden">
+            <motion.div
+              className="space-y-2 sm:space-y-3 p-3 sm:p-4 lg:p-6"
+              animate={{
+                y: [0, -announcements.length * 120],
+              }}
+              transition={{
+                duration: announcements.length * 5,
+                ease: "linear",
+                repeat: Number.POSITIVE_INFINITY,
+              }}
+            >
+              {[...announcements, ...announcements].map((announcement, index) => (
+                <Card
+                  key={`${announcement.id}-${Math.floor(index / announcements.length)}`}
+                  className="w-full overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 border-none bg-white/80 backdrop-blur-sm hover:bg-white"
+                >
+                  <CardContent className="p-2 sm:p-3 lg:p-4 flex gap-2 sm:gap-3 items-start">
+                    <img
+                      src={announcement.img}
+                      alt={announcement.title}
+                      className="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 object-cover rounded-md sm:rounded-lg flex-shrink-0"
+                      loading="lazy"
+                    />
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-1 sm:gap-2 mb-1 sm:mb-2 flex-wrap">
+                        <span className="px-1.5 py-0.5 sm:px-2 sm:py-1 text-xs font-semibold rounded-full border bg-blue-50 text-blue-700 border-blue-200 whitespace-nowrap">
+                          {announcement.status}
+                        </span>
+                        {announcement.line !== "Barcha" && (
+                          <div className="flex items-center gap-1">
+                            <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-blue-500" />
+                            <span className="text-xs text-slate-600 font-medium">{announcement.line}</span>
+                          </div>
+                        )}
+                        <div className="flex items-center gap-1 text-xs text-slate-500 ml-auto">
+                          <Clock className="w-3 h-3" />
+                          {announcement.time}
+                        </div>
+                      </div>
+                      <h4 className="text-xs sm:text-sm font-semibold text-slate-800 hover:text-blue-600 transition-colors mb-1 line-clamp-2">
+                        {announcement.title}
+                      </h4>
+                      <p className="text-xs text-slate-600 leading-relaxed line-clamp-2">{announcement.description}</p>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </motion.div>
+          </div>
+
+          {/* Bottom Gradient Overlay */}
+          <div className="absolute bottom-0 left-0 right-0 h-8 sm:h-12 lg:h-16 bg-gradient-to-t from-white via-white/90 to-transparent pointer-events-none" />
+        </div>
+
+        <div className="bg-gradient-to-br from-slate-50 to-white rounded-2xl shadow-2xl border border-slate-200 aspect-[16/10] sm:aspect-[16/9] lg:aspect-[4/3] xl:aspect-[16/10] flex md:hidden flex-col w-full overflow-hidden h-[500px]">
           {/* Header */}
           <div className="flex items-center gap-5 justify-between p-3 sm:p-4 lg:p-6 border-b border-slate-200 bg-white/80 backdrop-blur-sm flex-shrink-0">
             <div className="flex items-center gap-2 sm:gap-3">

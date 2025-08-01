@@ -1,4 +1,3 @@
-// next.config.js
 const createNextIntlPlugin = require('next-intl/plugin')
 const withNextIntl = createNextIntlPlugin()
 
@@ -69,6 +68,16 @@ const nextConfig = {
 			{
 				protocol: 'https',
 				hostname: 'urdu.uz',
+				pathname: '/**',
+			},
+			{
+				protocol: 'https',
+				hostname: 'yt3.googleusercontent.com',
+				pathname: '/**',
+			},
+			{
+				protocol: 'https',
+				hostname: 'i.pinimg.com',
 				pathname: '/**',
 			},
 		],
