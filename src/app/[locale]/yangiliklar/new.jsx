@@ -272,7 +272,7 @@ export default function OptimizedNews() {
                 className="text-sm text-blue-600 hover:text-blue-800 transition-all duration-200 font-medium hover:underline decoration-2 underline-offset-2"
                 onClick={(e) => e.stopPropagation()}
               >
-                Ko'proq
+                Batafsil
               </Link>
             </div>
           </CardContent>

@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { CreditCard, Smartphone, QrCode, Scan, Wallet, User2, Check, ScanFace } from "lucide-react"
+import { CreditCard, Smartphone, QrCode, Scan, Wallet, User2, Check, ScanFace, LocationEdit, MapPin } from "lucide-react"
 import Image from "next/image"
 
 const attoCards = [
@@ -12,7 +12,7 @@ const attoCards = [
         name: "Yagona/Umumiy",
         type: "Ko'k",
         price: "20.000 UZS",
-        description: "Markazlashtirilgan Kontaksiz to'lov transport kartasi",
+        description: "Markazlashtirilgan kontaktsiz to'lov transport kartasi",
         color: "bg-blue-50 border-blue-200",
         iconColor: "bg-blue-500",
         img: "https://atto.uz/image/blueCard.png",
@@ -122,7 +122,7 @@ export default function PaymentMethods() {
                         To'lov Turlari
                     </h1>
                     <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 max-w-4xl mx-auto px-4 leading-relaxed">
-                        Toshkent Metropolitenida mavjud bo'lgan barcha to'lov usullari haqida batafsil ma'lumot
+                        Toshkent Metropolitenida mavjud bo'lgan barcha to'lov turlari haqida batafsil ma'lumot
                     </p>
                 </div>
 
@@ -141,7 +141,7 @@ export default function PaymentMethods() {
                                     ATTO Transport Kartasi
                                 </h2>
                                 <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 mt-2 sm:mt-3 lg:mt-4 leading-relaxed">
-                                    Markazlashtirilgan Kontaksiz to'lov transport kartasi
+                                    Markazlashtirilgan kontaktsiz to'lov transport kartasi
                                 </p>
                             </div>
                         </div>
@@ -182,7 +182,8 @@ export default function PaymentMethods() {
                             </div>
 
                             <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-5 sm:p-6 md:p-7 lg:p-8 xl:p-10 mb-6 sm:mb-8 border border-blue-200 shadow-lg">
-                                <h4 className="font-bold text-blue-900 mb-3 sm:mb-4 md:mb-5 text-base sm:text-lg md:text-xl lg:text-2xl">
+                                <h4 className="font-bold text-blue-900 mb-3 sm:mb-4 md:mb-5 text-base sm:text-lg md:text-xl lg:text-2xl flex items-center gap-1">
+                                    <MapPin />
                                     Qayerdan sotib olish mumkin:
                                 </h4>
                                 <ul className="text-gray-700 space-y-2 sm:space-y-3 text-sm sm:text-base md:text-lg leading-relaxed">
@@ -258,7 +259,7 @@ export default function PaymentMethods() {
                         </div>
                     </div>
 
-                    {/* Bank Cards & Kontaksiz to'lov Section */}
+                    {/* Bank Cards & kontaktsiz to'lov Section */}
                     <div className="relative mb-12 sm:mb-16 lg:mb-20 xl:mb-24">
                         <div className="flex items-center mb-6 sm:mb-8 lg:mb-12">
                             <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 rounded-full flex items-center justify-center z-10 relative shadow-lg ring-4 ring-white">
@@ -266,10 +267,10 @@ export default function PaymentMethods() {
                             </div>
                             <div className="ml-4 sm:ml-6 md:ml-8 lg:ml-12">
                                 <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-blue-900 leading-tight tracking-tight">
-                                    Bank Kartalari & Kontaksiz to'lov To'lovlar
+                                    Bank Kartalari & kontaktsiz to'lov To'lovlar
                                 </h2>
                                 <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 mt-2 sm:mt-3 lg:mt-4 leading-relaxed">
-                                    Kontaksiz to'lov orqali metro va avtobusda to'lov - 1,700 UZS
+                                    kontaktsiz to'lov orqali metro va avtobusda to'lov - 1,700 UZS
                                 </p>
                             </div>
                         </div>
@@ -396,7 +397,7 @@ export default function PaymentMethods() {
                                     <CardContent className="p-5 sm:p-6 md:p-7 lg:p-8 xl:p-10">
                                         <div className="flex items-center mb-4 sm:mb-5 md:mb-6">
                                             <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 rounded-full rounded-2xl flex items-center justify-center mr-3 sm:mr-4 shadow-lg group-hover:scale-110 transition-transform duration-500">
-                                                <ScanFace  className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-white" />
+                                                <ScanFace className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-white" />
                                             </div>
                                             <h3 className="font-bold text-blue-900 text-base sm:text-lg md:text-xl lg:text-2xl">FacePay</h3>
                                         </div>
@@ -482,7 +483,7 @@ export default function PaymentMethods() {
                                     </div>
                                     <div className="bg-white/15 backdrop-blur-md rounded-2xl p-4 sm:p-5 md:p-6 lg:p-8 border border-white/20 transition-all duration-500 hover:bg-white/20 hover:scale-105">
                                         <h4 className="font-bold mb-2 sm:mb-3 md:mb-4 text-base sm:text-lg md:text-xl lg:text-2xl">
-                                            Kontaksiz to'lov bank kartalar
+                                            kontaktsiz to'lov bank kartalar
                                         </h4>
                                         <p className="text-blue-100 text-sm sm:text-base md:text-lg leading-relaxed">
                                             1,700 UZS - tez va qulay

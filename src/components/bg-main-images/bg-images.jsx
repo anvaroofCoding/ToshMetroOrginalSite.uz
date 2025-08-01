@@ -2,7 +2,7 @@
 
 export default function BgImage({ children }) {
 	return (
-		<div className='relative min-h-screen'>
+		<div className='relative min-h-screen bg-white '>
 			{/* Background Image */}
 			<div className='absolute inset-0 z-0 opacity-20'>
 				<div

@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
+import { Slider } from "@radix-ui/react-slider"
 import { AnimatePresence, motion } from "framer-motion"
 import { ArrowRight, ChevronLeft, ChevronRight, Clock, Info, Instagram, Send, Facebook, Youtube } from "lucide-react"
 import Link from "next/link"
@@ -118,6 +119,19 @@ export default function MetroCarouselWithNews() {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [direction, setDirection] = useState(0)
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
+  // const [silder, setSlider] = useState()
+  // console.log(slides);
+
+  // const getNewsPaper = async () => {
+  //   const res = await fetch("https://metro-site.onrender.com/api/news/latest/en")
+  //   const data = await res.json()
+  //   console.log(data)
+  // }
+
+  // useEffect(()=>{
+  //   getNewsPaper()
+  // }, [])
+  
 
   const nextSlide = useCallback(() => {
     setDirection(1)

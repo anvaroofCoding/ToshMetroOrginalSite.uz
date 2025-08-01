@@ -17,13 +17,13 @@ import tarkib12 from "./tarkib/matbuot.jpg"
 
 
 
-import { Phone, Train, Eye, Clock, User, Calendar } from "lucide-react"
+import { Phone, Train, Eye, Clock, User, Calendar, Mail } from "lucide-react"
 import Image from "next/image"
 import { Card, CardContent } from "@/components/ui/card"
 import { Dialog, DialogContent, DialogTrigger, DialogTitle } from "@/components/ui/dialog"
 
 export default function TransportDirectory() {
-   const departments = [
+  const departments = [
     {
       title: 'Kadrlar bilan ishlash xizmati',
       titleEn: 'Human Resources Service',
@@ -32,6 +32,7 @@ export default function TransportDirectory() {
       reception: 'Haftaning har chorshanbasida 14:00 dan 17:00 gacha',
       phone: '+99871-239-89-27',
       image: tarkib1,
+      email: 'kadr@tashmetro.uz',
     },
     {
       title: 'Harakat xizmati',
@@ -41,6 +42,7 @@ export default function TransportDirectory() {
       reception: 'Haftaning chorshanba kuni 14:00 dan 17:00 gacha',
       phone: '+99871-293-89-31',
       image: tarkib2,
+      email: 'd@tashmetro.uz',
     },
     {
       title: 'Chilonzor elektrodeposi',
@@ -50,6 +52,7 @@ export default function TransportDirectory() {
       reception: 'Haftaning seshanba kuni 10:00 da',
       phone: '+998-93-500-25-20',
       image: tarkib3,
+      email: 'tch1@tashmetro.uz',
     },
     {
       title: "O'zbekiston elektrodeposi",
@@ -59,6 +62,7 @@ export default function TransportDirectory() {
       reception: 'Haftaning seshanba kuni 10:00 da',
       phone: '+998-93-500-55-89',
       image: tarkib4,
+      email: 'tch2@tashmetro.uz',
     },
     {
       title: 'Elektromexanika xizmati',
@@ -68,6 +72,7 @@ export default function TransportDirectory() {
       reception: 'Haftaning seshanba kuni 09:00 da',
       phone: '+99893-501-79-70',
       image: tarkib5,
+      email: 'm@tashmetro.uz',
     },
     {
       title: "Elektr ta'minot xizmati",
@@ -77,6 +82,7 @@ export default function TransportDirectory() {
       reception: 'Haftaning dushanba kuni 13:30 da',
       phone: '+99893-501-79-72',
       image: tarkib6,
+      email: 'e@tashmetro.uz',
     },
     {
       title: 'Signallashtirish va aloqa xizmati',
@@ -86,6 +92,7 @@ export default function TransportDirectory() {
       reception: 'Haftaning chorshanba kuni 14:00 dan 17:00 gacha',
       phone: '+998998026218',
       image: tarkib7,
+      email: 'sh@tashmetro.uz',
     },
     {
       title: "Yo'l xizmati",
@@ -95,6 +102,7 @@ export default function TransportDirectory() {
       reception: 'Haftaning seshanba kuni 09:00 da',
       phone: '+99894-100-26-26',
       image: tarkib8,
+      email: 'p@tashmetro.uz',
     },
     {
       title: 'Tonnel inshootlari xizmati',
@@ -104,6 +112,7 @@ export default function TransportDirectory() {
       reception: 'Haftaning seshanba kuni 14:00 da',
       phone: '+998-93-501-79-71',
       image: tarkib9,
+      email: 'ts@tashmetro.uz',
     },
     {
       title: 'Korrupsiyani oldini olish xizmati',
@@ -113,6 +122,7 @@ export default function TransportDirectory() {
       reception: '',
       phone: '+998-93-700-03-25',
       image: tarkib10,
+      email: 'nk@tashmetro.uz',
     },
     {
       title:
@@ -123,6 +133,7 @@ export default function TransportDirectory() {
       reception: 'Payshanba kuni 15:00 dan 16:00 gacha',
       phone: '+998 71-241-31-40',
       image: tarkib11,
+      email: 'cybersecurity@tashmetro.uz',
     },
     {
       title: 'Matbuot xizmati',
@@ -132,6 +143,7 @@ export default function TransportDirectory() {
       reception: 'Haftaning chorshanba kuni 14:00 dan 17:00 gacha',
       phone: '+998-90-370-19-98',
       image: tarkib12,
+      email: 'pressa@tashmetro.uz',
     },
   ]
 
@@ -282,6 +294,15 @@ export default function TransportDirectory() {
                               </div>
                             </div>
                           )}
+                          {/* email */}
+                          <div className="flex items-center gap-3 pt-2">
+                            <div className="w-8 h-8 bg-[#0E327F] rounded-lg flex items-center justify-center flex-shrink-0">
+                              <Mail className="w-4 h-4 text-white" />
+                            </div>
+
+                            <p className="text-[#0E327F] font-semibold hover:text-[#1e4a9f] transition-colors duration-200 text-base sm:text-lg break-all">{dept.email}</p>
+
+                          </div>
 
                           {/* Phone */}
                           <div className="flex items-center gap-3 pt-2">

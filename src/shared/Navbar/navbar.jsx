@@ -299,26 +299,55 @@ export default function MetroNavbar() {
 	return (
 		<>
 			<header
-				className={`sticky top-0 left-0 w-full z-50 transition-all rounded-b-[50px]  duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] ${
-					isScrolled
-						? 'bg-gradient-to-r from-[#0E327F]/95 via-blue-800/95 to-[#0E327F]/95 backdrop-blur-xl pt-0 '
-						: 'bg-transparent pt-5'
-				} ${isHiddenPath ? 'hidden' : 'block'}`}
+				className={`sticky top-0 left-0 w-full z-50 transition-all rounded-b-[50px]  duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] ${isScrolled
+					? 'bg-gradient-to-r from-[#0E327F]/95 via-blue-800/95 to-[#0E327F]/95 backdrop-blur-xl pt-0 '
+					: 'bg-transparent pt-5'
+					} ${isHiddenPath ? 'hidden' : 'block'}`}
 			>
-				<div
-					className={`transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] ${
-						isScrolled ? 'container-none px-0' : 'container'
-					}`}
-				>
+				{/* img */}
+				<div className='absolute inset-0 z-0 opacity-20'>
 					<div
-						className={`flex items-center justify-between h-[70px] text-white transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] transform ${
-							isScrolled
-								? 'bg-transparent px-8 mx-0 rounded-none '
-								: 'bg-gradient-to-r from-[#0E327F] via-blue-800 to-[#0E327F]  px-6  rounded-2xl backdrop-blur-lg'
+						className='w-full h-full bg-repeat'
+						style={{
+							backgroundImage: 'url("/naqsh.png")',
+							backgroundRepeat: 'repeat',
+							backgroundSize: '130px', // <<< kichikroq qilib, ko‘p takrorlanadi
+						}}
+					/>
+				</div>
+				{/* img */}
+				<div
+					className={`transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] ${isScrolled ? 'container-none px-0' : 'container'
 						}`}
+				>
+					{/* <div className='absolute inset-0 z-0 opacity-20'>
+						<div
+							className='w-full h-full bg-repeat'
+							style={{
+								backgroundImage: 'url("/naqsh.png")',
+								backgroundRepeat: 'repeat',
+								backgroundSize: '300px', // <<< kichikroq qilib, ko‘p takrorlanadi
+							}}
+						/>
+					</div> */}
+					<div
+						className={`flex items-center justify-between h-[70px] text-white transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] transform ${isScrolled
+							? 'bg-transparent px-8 mx-0 rounded-none '
+							: 'bg-gradient-to-r from-[#0E327F] via-blue-800 to-[#0E327F]  px-6  rounded-2xl backdrop-blur-lg'
+							}`}
 					>
+						<div className='absolute inset-0 z-0 opacity-20'>
+							<div
+								className='w-full h-full bg-repeat'
+								style={{
+									backgroundImage: 'url("/naqsh.png")',
+									backgroundRepeat: 'repeat',
+									backgroundSize: '130px', // <<< kichikroq qilib, ko‘p takrorlanadi
+								}}
+							/>
+						</div>
 						<motion.div
-							className='flex items-center gap-2'
+							className='flex items-center gap-2 relative z-5'
 							whileHover={{ scale: 1.02 }}
 							transition={{ duration: 0.2 }}
 						>
@@ -391,7 +420,7 @@ export default function MetroNavbar() {
 									{item.dropdown ? (
 										<motion.button
 											onClick={() => handleDropdownClick(index)}
-											className='px-3 py-2 text-[12px] text-gray-300 hover:text-white transition-all duration-300 relative flex items-center gap-2 rounded-lg hover:bg-white/10 '
+											className='px-3 py-2 text-[12px] text-gray-300  hover:text-white transition-all duration-300 relative flex items-center gap-2 rounded-lg hover:bg-white/10 '
 											whileHover={{ scale: 1.05 }}
 											whileTap={{ scale: 0.95 }}
 										>

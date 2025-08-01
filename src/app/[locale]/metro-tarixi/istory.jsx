@@ -16,7 +16,7 @@ import {
 } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 
-export default function TashkentMetroPage() {
+function TashkentMetroPage() {
 	const [currentImageIndex, setCurrentImageIndex] = useState(0)
 	const [isVisible, setIsVisible] = useState(false)
 	const [scrollY, setScrollY] = useState(0)
@@ -825,3 +825,5 @@ export default function TashkentMetroPage() {
 		</div>
 	)
 }
+
+export default TashkentMetroPage

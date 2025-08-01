@@ -126,7 +126,7 @@ export default function TopStationsChart() {
         </h2>
         <Link href="/metro-statistikasi" className="self-start sm:self-auto">
           <button className="px-3 py-1.5 sm:px-4 sm:py-1 text-sm sm:text-base rounded-2xl bg-blue-900 text-white transition-all duration-300 hover:bg-blue-800 hover:scale-105 whitespace-nowrap">
-            Ko'proq
+            Batafsil
           </button>
         </Link>
       </div>

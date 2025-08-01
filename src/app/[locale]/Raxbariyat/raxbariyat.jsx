@@ -301,7 +301,7 @@ export default function ManagementPage() {
       <div className=" ">
         <div className="container  py-8 lg:py-12">
           <div className="text-center lg:text-left">
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-blue-900 mb-4">Metropoliteni rahbariyati</h1>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-blue-900 mb-4">Rahbariyati</h1>
           </div>
         </div>
       </div>

@@ -87,6 +87,16 @@ const Footer = () => {
     <>
       <footer className={`relative rounded-t-[50px] bg-gradient-to-r from-[#0E327F] to-blue-800 text-white overflow-hidden ${isHiddenPath ? 'hidden' : ''}`}>
         {/* Background Pattern */}
+        <div className='absolute inset-0 z-0 opacity-20'>
+				<div
+					className='w-full h-full bg-repeat'
+					style={{
+						backgroundImage: 'url("/naqsh.png")',
+						backgroundRepeat: 'repeat',
+						backgroundSize: '200px', // <<< kichikroq qilib, ko‘p takrorlanadi
+					}}
+				/>
+			</div>
         <div className="absolute inset-0 opacity-5">
           <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=60 height=60 viewBox=0 0 60 60 xmlns=http://www.w3.org/2000/svg%3E%3Cg fill=none fillRule=evenodd%3E%3Cg fill=%23ffffff fillOpacity=0.1%3E%3Ccircle cx=30 cy=30 r=2/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]"></div>
         </div>
@@ -118,10 +128,10 @@ const Footer = () => {
                 </h1>
               </div>
 
-              <blockquote className="relative">
-                <div className="absolute -left-1 -top-1 text-3xl text-blue-400/30 font-serif">"</div>
-                <p className="text-blue-100 italic leading-relaxed pl-4">
-                  Bizning maqsadimiz har bir yo'lovchi uchun xavfsiz, tez va qulay harakatlanishni yaratish.
+              <blockquote className="relative text-white">
+                <div className="absolute -left-1 -top-1 text-3xl text-white font-serif">"</div>
+                <p className=" italic leading-relaxed pl-4">
+                  Xavfsiz, tez va qulay yo’lovchilar tashishni ta’minlash.
                 </p>
               </blockquote>
             </div>
