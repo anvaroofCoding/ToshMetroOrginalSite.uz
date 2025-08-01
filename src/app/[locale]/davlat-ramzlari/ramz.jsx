@@ -279,7 +279,7 @@ export default function UzbekistanSymbols() {
                       : "text-blue-100 hover:text-white hover:bg-blue-800/50"
                   }`}
                 >
-                  <Icon className="w-4 h-4" />
+                  {/* <Icon className="w-4 h-4" /> */}
                   <span className="hidden sm:inline">{tab.label}</span>
                 </button>
               )
