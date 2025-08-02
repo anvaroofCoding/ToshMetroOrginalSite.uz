@@ -32,9 +32,6 @@ export default function MetroPagesShowcase() {
     },
   ]
 
-  console.log(apiStats)
-  console.log(apiStatss)
-
   const payment = [
     {
       name: "Humo Karta",

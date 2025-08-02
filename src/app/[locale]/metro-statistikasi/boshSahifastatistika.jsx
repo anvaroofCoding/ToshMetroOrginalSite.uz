@@ -1,11 +1,27 @@
-"use client"
+"use client";
 
-import { useEffect, useState, useRef } from "react"
-import { Chart as ChartJS, LineElement, PointElement, CategoryScale, LinearScale, Tooltip, Legend } from "chart.js"
-import { Line } from "react-chartjs-2"
-import Link from "next/link"
+import { useEffect, useState, useRef } from "react";
+import {
+  Chart as ChartJS,
+  LineElement,
+  PointElement,
+  CategoryScale,
+  LinearScale,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { Line } from "react-chartjs-2";
+import Link from "next/link";
+import { BarChart3 } from "lucide-react";
 
-ChartJS.register(LineElement, PointElement, CategoryScale, LinearScale, Tooltip, Legend)
+ChartJS.register(
+  LineElement,
+  PointElement,
+  CategoryScale,
+  LinearScale,
+  Tooltip,
+  Legend
+);
 
 const monthOrder = [
   "January",
@@ -20,7 +36,7 @@ const monthOrder = [
   "October",
   "November",
   "December",
-]
+];
 
 // Enhanced vibrant color palette
 const colors = [
@@ -29,93 +45,114 @@ const colors = [
   "#FFD166", // Yellow
   "#6A0572", // Purple
   "#1A936F", // Green
-]
+];
 
 export default function TopStationsChart() {
-  const [chartData, setChartData] = useState(null)
-  const [error, setError] = useState(null)
-  const [selectedPoint, setSelectedPoint] = useState(null)
-  const chartRef = useRef(null)
+  const [chartData, setChartData] = useState(null);
+  const [error, setError] = useState(null);
+  const [selectedPoint, setSelectedPoint] = useState(null);
+  const chartRef = useRef(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch("https://metro-site.onrender.com/api/statistics/en")
-        const data = await res.json()
-        const results = data
+        const res = await fetch(
+          "https://metro-site.onrender.com/api/statistics/en"
+        );
+        const data = await res.json();
+        const results = data;
 
-        const grouped = {}
+        const grouped = {};
         for (const item of results) {
-          if (!grouped[item.station_name]) grouped[item.station_name] = []
-          grouped[item.station_name].push(item)
+          if (!grouped[item.station_name]) grouped[item.station_name] = [];
+          grouped[item.station_name].push(item);
         }
 
-        const stationSums = Object.entries(grouped).map(([station, entries]) => ({
-          station,
-          total: entries.reduce((sum, e) => sum + e.user_count, 0),
-        }))
+        const stationSums = Object.entries(grouped).map(
+          ([station, entries]) => ({
+            station,
+            total: entries.reduce((sum, e) => sum + e.user_count, 0),
+          })
+        );
 
-        const topStations = stationSums.sort((a, b) => b.total - a.total).slice(0, 5)
+        const topStations = stationSums
+          .sort((a, b) => b.total - a.total)
+          .slice(0, 5);
 
-        const allMonths = [...new Set(results.map((r) => r.month))]
-        allMonths.sort((a, b) => monthOrder.indexOf(a) - monthOrder.indexOf(b))
+        const allMonths = [...new Set(results.map((r) => r.month))];
+        allMonths.sort((a, b) => monthOrder.indexOf(a) - monthOrder.indexOf(b));
 
         const datasets = topStations.map(({ station }, index) => {
-          const entries = grouped[station]
+          const entries = grouped[station];
           const monthData = allMonths.map((month) => {
-            const entry = entries.find((e) => e.month === month)
-            return entry ? entry.user_count : 0
-          })
+            const entry = entries.find((e) => e.month === month);
+            return entry ? entry.user_count : 0;
+          });
 
           return {
             label: station,
             data: monthData,
             borderColor: colors[index % colors.length],
             backgroundColor: "transparent",
-            tension: 0.4,
+            tension: 0, // Changed from 0.4 to 0 to remove rounded edges
             borderWidth: 3,
             pointRadius: 6,
             pointHoverRadius: 8,
             pointBackgroundColor: colors[index % colors.length],
             pointBorderColor: "#ffffff",
             pointBorderWidth: 2,
-          }
-        })
+          };
+        });
 
-        setChartData({ labels: allMonths, datasets })
+        setChartData({ labels: allMonths, datasets });
       } catch (err) {
-        setError("Ma'lumotlarni olishda xatolik yuz berdi.")
+        setError("Ma'lumotlarni olishda xatolik yuz berdi.");
       }
-    }
+    };
 
-    fetchData()
-  }, [])
+    fetchData();
+  }, []);
 
   const handleClick = (event) => {
-    if (!chartRef.current) return
+    if (!chartRef.current) return;
 
-    const chart = chartRef.current
-    const points = chart.getElementsAtEventForMode(event, "nearest", { intersect: true }, true)
+    const chart = chartRef.current;
+    const points = chart.getElementsAtEventForMode(
+      event,
+      "nearest",
+      { intersect: true },
+      true
+    );
 
     if (points.length) {
-      const firstPoint = points[0]
-      const { datasetIndex, index } = firstPoint
-      const station = chartData.datasets[datasetIndex].label
-      const month = chartData.labels[index]
-      const value = chartData.datasets[datasetIndex].data[index]
+      const firstPoint = points[0];
+      const { datasetIndex, index } = firstPoint;
+      const station = chartData.datasets[datasetIndex].label;
+      const month = chartData.labels[index];
+      const value = chartData.datasets[datasetIndex].data[index];
 
       setSelectedPoint({
         station,
         month,
         value,
-      })
+      });
     } else {
-      setSelectedPoint(null)
+      setSelectedPoint(null);
     }
-  }
+  };
 
-  if (error) return <div className="text-red-500 text-sm md:text-base text-center mt-4 px-4">{error}</div>
-  if (!chartData) return <div className="text-center text-sm md:text-base mt-4 px-4">Yuklanmoqda...</div>
+  if (error)
+    return (
+      <div className="text-red-500 text-sm md:text-base text-center mt-4 px-4">
+        {error}
+      </div>
+    );
+  if (!chartData)
+    return (
+      <div className="text-center text-sm md:text-base mt-4 px-4">
+        Yuklanmoqda...
+      </div>
+    );
 
   return (
     <div className="w-full min-h-[400px] sm:min-h-[500px] lg:min-h-[450px] p-3 sm:p-4 lg:p-6 bg-white rounded-lg relative">
@@ -125,7 +162,8 @@ export default function TopStationsChart() {
           5ta eng ko'p yo'lovchilarga ega bekatlar
         </h2>
         <Link href="/metro-statistikasi" className="self-start sm:self-auto">
-          <button className="px-3 py-1.5 sm:px-4 sm:py-1 text-sm sm:text-base rounded-2xl bg-blue-900 text-white transition-all duration-300 hover:bg-blue-800 hover:scale-105 whitespace-nowrap">
+          <button className="flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-1 text-sm sm:text-base rounded-2xl bg-blue-900 text-white transition-all duration-300 hover:bg-blue-800 hover:scale-105 whitespace-nowrap">
+            <BarChart3 size={16} />
             Batafsil
           </button>
         </Link>
@@ -148,7 +186,12 @@ export default function TopStationsChart() {
                 position: "bottom",
                 labels: {
                   font: {
-                    size: window.innerWidth < 640 ? 10 : window.innerWidth < 1024 ? 11 : 12,
+                    size:
+                      window.innerWidth < 640
+                        ? 10
+                        : window.innerWidth < 1024
+                        ? 11
+                        : 12,
                   },
                   usePointStyle: true,
                   padding: window.innerWidth < 640 ? 12 : 16,
@@ -180,12 +223,17 @@ export default function TopStationsChart() {
                 ticks: {
                   callback: (value) => {
                     if (window.innerWidth < 640) {
-                      return (value / 1000000).toFixed(1) + "M"
+                      return (value / 1000000).toFixed(1) + "M";
                     }
-                    return value.toLocaleString()
+                    return value.toLocaleString();
                   },
                   font: {
-                    size: window.innerWidth < 640 ? 9 : window.innerWidth < 1024 ? 10 : 11,
+                    size:
+                      window.innerWidth < 640
+                        ? 9
+                        : window.innerWidth < 1024
+                        ? 10
+                        : 11,
                   },
                   maxTicksLimit: window.innerWidth < 640 ? 5 : 7,
                 },
@@ -196,7 +244,12 @@ export default function TopStationsChart() {
               x: {
                 ticks: {
                   font: {
-                    size: window.innerWidth < 640 ? 9 : window.innerWidth < 1024 ? 10 : 11,
+                    size:
+                      window.innerWidth < 640
+                        ? 9
+                        : window.innerWidth < 1024
+                        ? 10
+                        : 11,
                   },
                   maxRotation: window.innerWidth < 640 ? 45 : 0,
                   minRotation: window.innerWidth < 640 ? 45 : 0,
@@ -235,11 +288,13 @@ export default function TopStationsChart() {
                 ? `${(selectedPoint.value / 1000000).toFixed(1)}M`
                 : selectedPoint.value.toLocaleString()}
             </div>
-            <div className="text-xs sm:text-sm opacity-80 truncate">{selectedPoint.station}</div>
+            <div className="text-xs sm:text-sm opacity-80 truncate">
+              {selectedPoint.station}
+            </div>
             <div className="text-xs opacity-70 mt-1">{selectedPoint.month}</div>
           </div>
         </div>
       )}
     </div>
-  )
+  );
 }
