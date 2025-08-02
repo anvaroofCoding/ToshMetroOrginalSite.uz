@@ -1,62 +1,75 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import { usePathname } from "next/navigation"
-import { motion, AnimatePresence } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Calendar, Heart, ChevronLeft, ChevronRight, ArrowLeft, Loader2, AlertCircle } from "lucide-react"
-import CommentsSection from "./comments-section"
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import {
+  Calendar,
+  Heart,
+  ChevronLeft,
+  ChevronRight,
+  ArrowLeft,
+  Loader2,
+  AlertCircle,
+} from "lucide-react";
+import CommentsSection from "./comments-section";
 
 export default function NewsArticlePage() {
-  const path = usePathname()
-  const id = path.split("/")[3]
-  const lang = path.split("/")[1]
+  const path = usePathname();
+  const id = path.split("/")[3];
+  const lang = path.split("/")[1];
 
-  const [data, setData] = useState(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
-  const [currentImageIndex, setCurrentImageIndex] = useState(0)
-  const [imageLoading, setImageLoading] = useState(true)
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [imageLoading, setImageLoading] = useState(true);
 
   useEffect(() => {
     const getNewsProductions = async () => {
       try {
-        const res = await fetch(`https://metro-site.onrender.com/api/news/${lang}/${id}/`, {
-          cache: "no-store",
-        })
+        const res = await fetch(
+          `https://metro-site.onrender.com/api/news/${lang}/${id}/`,
+          {
+            cache: "no-store",
+          }
+        );
         if (!res.ok) {
-          throw new Error(`Xatolik: ${res.status}`)
+          throw new Error(`Xatolik: ${res.status}`);
         }
-        const json = await res.json()
-        setData(json)
+        const json = await res.json();
+        setData(json);
       } catch (err) {
-        console.error(err)
-        setError("Ma'lumotni yuklab bo'lmadi.")
+        console.error(err);
+        setError("Ma'lumotni yuklab bo'lmadi.");
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };
 
-    getNewsProductions()
-  }, [id, lang])
+    getNewsProductions();
+  }, [id, lang]);
 
   const nextImage = () => {
     if (data?.images) {
-      setCurrentImageIndex((prev) => (prev + 1) % data.images.length)
+      setCurrentImageIndex((prev) => (prev + 1) % data.images.length);
     }
-  }
+  };
 
   const prevImage = () => {
     if (data?.images) {
-      setCurrentImageIndex((prev) => (prev - 1 + data.images.length) % data.images.length)
+      setCurrentImageIndex(
+        (prev) => (prev - 1 + data.images.length) % data.images.length
+      );
     }
-  }
+  };
 
   const goToImage = (index) => {
-    setCurrentImageIndex(index)
-  }
+    setCurrentImageIndex(index);
+  };
 
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString("ru-RU", {
@@ -65,12 +78,12 @@ export default function NewsArticlePage() {
       day: "numeric",
       hour: "2-digit",
       minute: "2-digit",
-    })
-  }
+    });
+  };
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+      <div className="flex items-center justify-center min-h-screen bg-transparent">
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -80,7 +93,7 @@ export default function NewsArticlePage() {
           Yuklanmoqda...
         </motion.div>
       </div>
-    )
+    );
   }
 
   if (error) {
@@ -88,23 +101,26 @@ export default function NewsArticlePage() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="flex items-center justify-center min-h-screen bg-gradient-to-br from-slate-50 to-slate-100"
+        className="flex items-center justify-center min-h-screen bg-transparent "
       >
-        <Card className="p-8 max-w-md mx-4 shadow-xl border-0 bg-white/80 backdrop-blur-sm">
+        <Card className="p-8 max-w-md mx-4 shadow-xl border-0 ">
           <CardContent className="text-center space-y-4">
             <AlertCircle className="w-12 h-12 text-red-500 mx-auto" />
             <p className="text-red-600 font-medium">{error}</p>
-            <Button onClick={() => window.location.reload()} className="bg-blue-600 hover:bg-blue-700 shadow-lg">
+            <Button
+              onClick={() => window.location.reload()}
+              className="bg-blue-600 hover:bg-blue-700 shadow-lg"
+            >
               Qayta urinish
             </Button>
           </CardContent>
         </Card>
       </motion.div>
-    )
+    );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100">
+    <div className="min-h-screen ">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -125,14 +141,21 @@ export default function NewsArticlePage() {
           <div className="flex flex-wrap items-center gap-6 text-sm text-slate-600 mb-8">
             <div className="flex items-center gap-2 bg-white/60 backdrop-blur-sm px-3 py-2 rounded-full shadow-sm">
               <Calendar className="w-4 h-4 text-blue-600" />
-              <span className="font-medium">{data?.publishedAt && formatDate(data.publishedAt)}</span>
+              <span className="font-medium">
+                {data?.publishedAt && formatDate(data.publishedAt)}
+              </span>
             </div>
             <div className="flex items-center gap-2 bg-white/60 backdrop-blur-sm px-3 py-2 rounded-full shadow-sm">
               <Heart className="w-4 h-4 text-red-500" />
-              <span className="font-medium">{data?.like_count || 0} ta yoqtirish</span>
+              <span className="font-medium">
+                {data?.like_count || 0} ta yoqtirish
+              </span>
             </div>
             {data?.category_ru && (
-              <Badge variant="secondary" className="bg-blue-100 text-blue-800 hover:bg-blue-200 shadow-sm">
+              <Badge
+                variant="secondary"
+                className="bg-blue-100 text-blue-800 hover:bg-blue-200 shadow-sm"
+              >
                 {data.category_ru}
               </Badge>
             )}
@@ -154,7 +177,9 @@ export default function NewsArticlePage() {
                     <motion.img
                       key={currentImageIndex}
                       src={data.images[currentImageIndex]?.image}
-                      alt={`${data?.[`title_${lang}`]} - изображение ${currentImageIndex + 1}`}
+                      alt={`${data?.[`title_${lang}`]} - изображение ${
+                        currentImageIndex + 1
+                      }`}
                       className="w-full h-full object-cover"
                       initial={{ opacity: 0, scale: 1.05 }}
                       animate={{ opacity: 1, scale: 1 }}
@@ -242,7 +267,8 @@ export default function NewsArticlePage() {
             <CardContent className="p-8 sm:p-12">
               <div className="prose prose-lg prose-slate max-w-none">
                 <p className="text-lg leading-relaxed whitespace-pre-line text-slate-700 font-medium">
-                  {data?.[`fullContent_${lang}`] || data?.[`description_${lang}`]}
+                  {data?.[`fullContent_${lang}`] ||
+                    data?.[`description_${lang}`]}
                 </p>
               </div>
             </CardContent>
@@ -270,5 +296,5 @@ export default function NewsArticlePage() {
         </motion.div>
       </motion.div>
     </div>
-  )
+  );
 }

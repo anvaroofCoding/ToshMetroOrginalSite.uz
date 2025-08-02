@@ -91,7 +91,7 @@ const menuItems = [
 				href: '/metro-statistikasi',
 				icon: ChartNoAxesCombined,
 			},
-			{ label: 'Qiziqarli lavhalar', href: '/videos', icon: Film },
+			{ label: 'Mediateka', href: '/mediateka', icon: Film },
 		],
 	},
 	{

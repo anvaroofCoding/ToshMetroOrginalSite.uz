@@ -141,6 +141,75 @@ export default function TopStationsChart() {
     }
   };
 
+  const LoadingSpinner = ({ size = "default", text = "" }) => {
+    const sizeClasses = {
+      small: "w-6 h-6",
+      default: "w-8 h-8",
+      large: "w-12 h-12",
+      xl: "w-16 h-16",
+    };
+
+    return (
+      <div className="flex flex-col items-center justify-center gap-4">
+        <motion.div
+          className="relative"
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          {/* Outer rotating ring */}
+          <motion.div
+            className={`${sizeClasses[size]} border-4 border-blue-200 rounded-full`}
+            animate={{ rotate: 360 }}
+            transition={{
+              duration: 2,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "linear",
+            }}
+          />
+
+          {/* Inner rotating spinner */}
+          <motion.div
+            className={`absolute inset-2 border-4 border-transparent border-t-blue-600 rounded-full`}
+            animate={{ rotate: -360 }}
+            transition={{
+              duration: 1,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "linear",
+            }}
+          />
+
+          {/* Center icon */}
+          <motion.div
+            className="absolute inset-0 flex items-center justify-center"
+            animate={{
+              scale: [1, 1.1, 1],
+              opacity: [0.7, 1, 0.7],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "easeInOut",
+            }}
+          >
+            <Train className="w-4 h-4 text-blue-600" />
+          </motion.div>
+        </motion.div>
+
+        {text && (
+          <motion.p
+            className="text-white text-lg font-medium"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+          >
+            {text}
+          </motion.p>
+        )}
+      </div>
+    );
+  };
+
   if (error)
     return (
       <div className="text-red-500 text-sm md:text-base text-center mt-4 px-4">

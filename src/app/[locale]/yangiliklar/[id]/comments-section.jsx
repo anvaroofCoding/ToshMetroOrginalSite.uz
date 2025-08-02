@@ -1,107 +1,122 @@
-"use client"
+"use client";
 
-
-import { useState, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import  Textarea  from "@/components/ui/textarea"
-import { Input } from "@/components/ui/input"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { MessageCircle, MoreVertical, Edit, Trash2, Send, User } from "lucide-react"
-import { useToast } from "@/hooks/use-toast"
-
-
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import Textarea from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
+  MessageCircle,
+  MoreVertical,
+  Edit,
+  Trash2,
+  Send,
+  User,
+} from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 export default function CommentsSection({ newsId }) {
-  const [comments, setComments] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [submitting, setSubmitting] = useState(false)
-  const [editingId, setEditingId] = useState(null)
+  const [comments, setComments] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
+  const [editingId, setEditingId] = useState(null);
   const [newComment, setNewComment] = useState({
     author_uz: "",
     content_uz: "",
-  })
-  const [editContent, setEditContent] = useState("")
+  });
+  const [editContent, setEditContent] = useState("");
 
-  const { toast } = useToast()
+  const { toast } = useToast();
 
   const fetchComments = async () => {
     try {
-      setLoading(true)
-      const response = await fetch(`https://metro-site.onrender.com/api/comments/uz/`, {
-        cache: "no-store",
-      })
+      setLoading(true);
+      const response = await fetch(
+        `https://metro-site.onrender.com/api/comments/uz/`,
+        {
+          cache: "no-store",
+        }
+      );
 
       if (!response.ok) {
-        throw new Error("Izohlarni yuklab bo'lmadi")
+        throw new Error("Izohlarni yuklab bo'lmadi");
       }
 
-      const data = await response.json()
-      setComments(data)
+      const data = await response.json();
+      setComments(data);
     } catch (error) {
-      console.error("Error fetching comments:", error)
+      console.error("Error fetching comments:", error);
       toast({
         title: "Xatolik",
         description: "Izohlarni yuklab bo'lmadi",
         variant: "destructive",
-      })
+      });
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   const handleSubmitComment = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (!newComment.content_uz.trim() || !newComment.author_uz.trim()) {
       toast({
         title: "Xatolik",
         description: "Ism va izoh matnini to'ldiring",
         variant: "destructive",
-      })
-      return
+      });
+      return;
     }
 
     try {
-      setSubmitting(true)
-      const response = await fetch(`https://metro-site.onrender.com/api/comments/uz/`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          news: Number.parseInt(newsId),
-          author_uz: newComment.author_uz,
-          content_uz: newComment.content_uz,
-          timestamp: new Date().toISOString(),
-        }),
-      })
+      setSubmitting(true);
+      const response = await fetch(
+        `https://metro-site.onrender.com/api/comments/uz/`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            news: Number.parseInt(newsId),
+            author_uz: newComment.author_uz,
+            content_uz: newComment.content_uz,
+            timestamp: new Date().toISOString(),
+          }),
+        }
+      );
 
       if (!response.ok) {
-        throw new Error("Izoh qo'shib bo'lmadi")
+        throw new Error("Izoh qo'shib bo'lmadi");
       }
 
-      const newCommentData = await response.json()
-      setComments((prev) => [newCommentData, ...prev])
-      setNewComment({ author_uz: "", content_uz: "" })
+      const newCommentData = await response.json();
+      setComments((prev) => [newCommentData, ...prev]);
+      setNewComment({ author_uz: "", content_uz: "" });
 
       toast({
         title: "Muvaffaqiyat",
         description: "Izoh muvaffaqiyatli qo'shildi",
-      })
+      });
     } catch (error) {
-      console.error("Error posting comment:", error)
+      console.error("Error posting comment:", error);
       toast({
         title: "Xatolik",
         description: "Izoh qo'shishda xatolik yuz berdi",
         variant: "destructive",
-      })
+      });
     } finally {
-      setSubmitting(false)
+      setSubmitting(false);
     }
-  }
+  };
 
   const handleEditComment = async (commentId) => {
     if (!editContent.trim()) {
@@ -109,86 +124,96 @@ export default function CommentsSection({ newsId }) {
         title: "Xatolik",
         description: "Izoh matnini kiriting",
         variant: "destructive",
-      })
-      return
+      });
+      return;
     }
 
     try {
-      const response = await fetch(`https://metro-site.onrender.com/api/comments/uz/${commentId}/`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          content_uz: editContent,
-        }),
-      })
+      const response = await fetch(
+        `https://metro-site.onrender.com/api/comments/uz/${commentId}/`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            content_uz: editContent,
+          }),
+        }
+      );
 
       if (!response.ok) {
-        throw new Error("Izohni tahrirlash bo'lmadi")
+        throw new Error("Izohni tahrirlash bo'lmadi");
       }
 
-      const updatedComment = await response.json()
+      const updatedComment = await response.json();
       setComments((prev) =>
-        prev.map((comment) => (comment.id === commentId ? { ...comment, ...updatedComment } : comment)),
-      )
+        prev.map((comment) =>
+          comment.id === commentId ? { ...comment, ...updatedComment } : comment
+        )
+      );
 
-      setEditingId(null)
-      setEditContent("")
+      setEditingId(null);
+      setEditContent("");
 
       toast({
         title: "Muvaffaqiyat",
         description: "Izoh muvaffaqiyatli tahrirlandi",
-      })
+      });
     } catch (error) {
-      console.error("Error editing comment:", error)
+      console.error("Error editing comment:", error);
       toast({
         title: "Xatolik",
         description: "Izohni tahrirlashda xatolik yuz berdi",
         variant: "destructive",
-      })
+      });
     }
-  }
+  };
 
   const handleDeleteComment = async (commentId) => {
-    const confirmed = window.confirm("Haqiqatan ham bu izohni o'chirmoqchimisiz? Bu amalni qaytarib bo'lmaydi.")
+    const confirmed = window.confirm(
+      "Haqiqatan ham bu izohni o'chirmoqchimisiz? Bu amalni qaytarib bo'lmaydi."
+    );
 
-    if (!confirmed) return
+    if (!confirmed) return;
 
     try {
-      const response = await fetch(`https://metro-site.onrender.com/api/comments/uz/${commentId}/`, {
-        method: "DELETE",
-      })
+      const response = await fetch(
+        `https://metro-site.onrender.com/api/comments/uz/${commentId}/`,
+        {
+          method: "DELETE",
+        }
+      );
 
       if (!response.ok) {
-        throw new Error("Izohni o'chirib bo'lmadi")
+        throw new Error("Izohni o'chirib bo'lmadi");
       }
 
-      setComments((prev) => prev.filter((comment) => comment.id !== commentId))
+      setComments((prev) => prev.filter((comment) => comment.id !== commentId));
 
       toast({
         title: "Muvaffaqiyat",
         description: "Izoh muvaffaqiyatli o'chirildi",
-      })
+      });
     } catch (error) {
-      console.error("Error deleting comment:", error)
+      console.error("Error deleting comment:", error);
       toast({
         title: "Xatolik",
         description: "Izohni o'chirishda xatolik yuz berdi",
         variant: "destructive",
-      })
+      });
     }
-  }
+  };
 
   const startEdit = (comment) => {
-    setEditingId(comment.id)
-    setEditContent(comment.content_uz)
-  }
+    setEditingId(comment.id);
+    setEditContent(comment.content_uz);
+  };
 
   const cancelEdit = () => {
-    setEditingId(null)
-    setEditContent("")
-  }
+    setEditingId(null);
+    setEditContent("");
+  };
 
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString("uz-UZ", {
@@ -197,19 +222,19 @@ export default function CommentsSection({ newsId }) {
       day: "numeric",
       hour: "2-digit",
       minute: "2-digit",
-    })
-  }
+    });
+  };
 
   useEffect(() => {
-    fetchComments()
-  }, [newsId])
+    fetchComments();
+  }, [newsId]);
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.5 }}
-      className="mt-8"
+      className="mt-8 "
     >
       <Card>
         <CardHeader>
@@ -225,18 +250,32 @@ export default function CommentsSection({ newsId }) {
               <Input
                 placeholder="Ismingiz *"
                 value={newComment.author_uz}
-                onChange={(e) => setNewComment((prev) => ({ ...prev, author_uz: e.target.value }))}
+                onChange={(e) =>
+                  setNewComment((prev) => ({
+                    ...prev,
+                    author_uz: e.target.value,
+                  }))
+                }
                 required
               />
             </div>
             <Textarea
               placeholder="Izohingizni yozing... *"
               value={newComment.content_uz}
-              onChange={(e) => setNewComment((prev) => ({ ...prev, content_uz: e.target.value }))}
+              onChange={(e) =>
+                setNewComment((prev) => ({
+                  ...prev,
+                  content_uz: e.target.value,
+                }))
+              }
               rows={4}
               required
             />
-            <Button type="submit" disabled={submitting} className="w-full md:w-auto">
+            <Button
+              type="submit"
+              disabled={submitting}
+              className="w-full md:w-auto"
+            >
               {submitting ? (
                 <div className="flex items-center gap-2">
                   <div className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full"></div>
@@ -276,39 +315,59 @@ export default function CommentsSection({ newsId }) {
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex items-center gap-3">
                         <Avatar className="w-8 h-8">
-                          <AvatarImage src={`https://api.dicebear.com/7.x/initials/svg?seed=${comment.author_uz}`} />
+                          <AvatarImage
+                            src={`https://api.dicebear.com/7.x/initials/svg?seed=${comment.author_uz}`}
+                          />
                           <AvatarFallback>
                             <User className="w-4 h-4" />
                           </AvatarFallback>
                         </Avatar>
                         <div>
-                          <p className="font-medium text-sm">{comment.author_uz}</p>
-                          <p className="text-xs text-gray-500">{formatDate(comment.timestamp)}</p>
+                          <p className="font-medium text-sm">
+                            {comment.author_uz}
+                          </p>
+                          <p className="text-xs text-gray-500">
+                            {formatDate(comment.timestamp)}
+                          </p>
                         </div>
                       </div>
-
-                      
                     </div>
 
                     {editingId === comment.id ? (
                       <div className="space-y-3">
-                        <Textarea value={editContent} onChange={(e) => setEditContent(e.target.value)} rows={3} />
+                        <Textarea
+                          value={editContent}
+                          onChange={(e) => setEditContent(e.target.value)}
+                          rows={3}
+                        />
                         <div className="flex gap-2">
-                          <Button size="sm" onClick={() => handleEditComment(comment.id)}>
+                          <Button
+                            size="sm"
+                            onClick={() => handleEditComment(comment.id)}
+                          >
                             Saqlash
                           </Button>
-                          <Button size="sm" variant="outline" onClick={cancelEdit}>
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={cancelEdit}
+                          >
                             Bekor qilish
                           </Button>
                         </div>
                       </div>
                     ) : (
-                      <p className="text-gray-700 whitespace-pre-line">{comment.content_uz}</p>
+                      <p className="text-gray-700 whitespace-pre-line">
+                        {comment.content_uz}
+                      </p>
                     )}
 
-                    {comment.timestamp && comment.updated_at !== comment.timestamp && (
-                      <p className="text-xs text-gray-400 mt-2">Tahrirlangan: {formatDate(comment.timestamp)}</p>
-                    )}
+                    {comment.timestamp &&
+                      comment.updated_at !== comment.timestamp && (
+                        <p className="text-xs text-gray-400 mt-2">
+                          Tahrirlangan: {formatDate(comment.timestamp)}
+                        </p>
+                      )}
                   </motion.div>
                 ))}
               </AnimatePresence>
@@ -317,5 +376,5 @@ export default function CommentsSection({ newsId }) {
         </CardContent>
       </Card>
     </motion.div>
-  )
+  );
 }

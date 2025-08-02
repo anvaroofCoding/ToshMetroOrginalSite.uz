@@ -1,49 +1,32 @@
-"use client"
-import { CreditCard, MapPin, Wallet, ChevronLeft, ChevronRight } from "lucide-react"
-import { useState, useEffect } from "react"
-import { motion } from "framer-motion"
-import TopStationsChart from "@/app/[locale]/metro-statistikasi/boshSahifastatistika"
+"use client";
+import {
+  CreditCard,
+  MapPin,
+  Wallet,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import TopStationsChart from "@/app/[locale]/metro-statistikasi/boshSahifastatistika";
 
 export default function MetroPagesShowcase() {
-  const [apiStats, setApiStats] = useState([])
-  const [error, setError] = useState(null)
-  const apiStatss = [
-    { id: 1, station_name: "Beruniy", user_count: 23, month: "Yanvar", created_at: "2025-07-23T13:54:43.414717+05:00" },
-    {
-      id: 3,
-      station_name: "Alisher Navoiy",
-      user_count: 48,
-      month: "Yanvar",
-      created_at: "2025-07-23T13:54:43.414717+05:00",
-    },
-    {
-      id: 4,
-      station_name: "Alisher Navoiy",
-      user_count: 60,
-      month: "Dekabr",
-      created_at: "2025-07-23T13:54:43.414717+05:00",
-    },
-    {
-      id: 5,
-      station_name: "Chilonzor",
-      user_count: 10,
-      month: "Aprel",
-      created_at: "2025-07-23T13:54:43.414717+05:00",
-    },
-  ]
-
+  const [apiStats, setApiStats] = useState([]);
+  const [error, setError] = useState(null);
   const payment = [
     {
       name: "Humo Karta",
       information: "Karta to'lovlari",
-      image: "https://humocard.uz/upload/medialibrary/208/8x0p9hi3h9jww0flwdm92dayhn0flulj/humo-logo-more.png",
+      image:
+        "https://humocard.uz/upload/medialibrary/208/8x0p9hi3h9jww0flwdm92dayhn0flulj/humo-logo-more.png",
       color: "#FF6B35",
       bgColor: "#FFF4F0",
     },
     {
       name: "Uzcard Karta",
       information: "Uzcard to'lovlari",
-      image: "https://marketing.uz/uploads/articles/1192/article-original.png",
+      image:
+        "https://avatars.mds.yandex.net/i?id=6c2035675ebdc7cc61ca8ab797d59752_sr-10878212-images-thumbs&n=13",
       color: "#0066CC",
       bgColor: "#F0F7FF",
     },
@@ -65,7 +48,8 @@ export default function MetroPagesShowcase() {
     {
       name: "Payme",
       information: "Payme ilovasi orqali to'lov",
-      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Paymeuz_logo.png/1600px-Paymeuz_logo.png",
+      image:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Paymeuz_logo.png/1600px-Paymeuz_logo.png",
       color: "#2ba6eeff",
       bgColor: "#F0FFF4",
     },
@@ -77,32 +61,42 @@ export default function MetroPagesShowcase() {
       color: "#00C851",
       bgColor: "#F0FFF4",
     },
-  ]
+  ];
 
   const getStatistika = async () => {
     try {
-      const res = await fetch("https://metro-site.onrender.com/api/statistics/en/")
+      const res = await fetch(
+        "https://metro-site.onrender.com/api/statistics/en/"
+      );
 
       if (!res.ok) {
-        throw new Error(`Server error: ${res.status}`)
+        throw new Error(`Server error: ${res.status}`);
       }
 
-      const data = await res.json()
-      setApiStats(data)
+      const data = await res.json();
+      setApiStats(data);
     } catch (err) {
-      setError(err.message)
+      setError(err.message);
     }
-  }
+  };
 
   useEffect(() => {
-    getStatistika()
-  }, [])
+    getStatistika();
+  }, []);
 
-  if (error) return <p>Error: {error}</p>
+  if (error) return <p>Error: {error}</p>;
 
   // Get unique stations and assign colors
-  const stationNames = [...new Set(apiStats.map((s) => s.station_name))]
-  const stationColors = ["#3b82f6", "#ef4444", "#10b981", "#f59e0b", "#8b5cf6", "#6366f1", "#eab308"]
+  const stationNames = [...new Set(apiStats.map((s) => s.station_name))];
+  const stationColors = [
+    "#3b82f6",
+    "#ef4444",
+    "#10b981",
+    "#f59e0b",
+    "#8b5cf6",
+    "#6366f1",
+    "#eab308",
+  ];
 
   // Build chart data: { station, color, data: [user_count for each month] }
 
@@ -129,9 +123,12 @@ export default function MetroPagesShowcase() {
             >
               <MapPin className="w-12 h-12 sm:w-16 sm:h-16 mb-4" />
             </motion.div>
-            <h3 className="text-md sm:text-2xl lg:text-2xl font-bold mb-2">Interaktiv Metro Xaritasi</h3>
+            <h3 className="text-md sm:text-2xl lg:text-2xl font-bold mb-2">
+              Interaktiv Metro Xaritasi
+            </h3>
             <p className="mb-6 text-sm sm:text-base text-blue-100 max-w-xs">
-              Toshkent metrosining rasmiy interaktiv xaritasi. Stansiyalar va yo'nalishlarni ko'ring.
+              Toshkent metrosining rasmiy interaktiv xaritasi. Stansiyalar va
+              yo'nalishlarni ko'ring.
             </p>
             <motion.a
               href="/metro-xaritasis"
@@ -168,8 +165,12 @@ export default function MetroPagesShowcase() {
                     transition={{ delay: stat.delay }}
                     className="flex flex-col items-center bg-blue-50 rounded-xl px-3 sm:px-4 py-3"
                   >
-                    <span className="font-semibold text-blue-900 text-xs sm:text-sm text-center">{stat.label}</span>
-                    <span className="text-lg sm:text-xl font-bold text-blue-900">{stat.value}</span>
+                    <span className="font-semibold text-blue-900 text-xs sm:text-sm text-center">
+                      {stat.label}
+                    </span>
+                    <span className="text-lg sm:text-xl font-bold text-blue-900">
+                      {stat.value}
+                    </span>
                   </motion.div>
                 ))}
               </div>
@@ -212,7 +213,9 @@ export default function MetroPagesShowcase() {
                 <CreditCard className="w-8 h-8 text-blue-900" />
               </motion.div>
               <div>
-                <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-blue-900">{"To'lov tizimlari"}</h3>
+                <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-blue-900">
+                  {"To'lov tizimlari"}
+                </h3>
               </div>
             </div>
 
@@ -248,7 +251,7 @@ export default function MetroPagesShowcase() {
                           alt={paymentMethod.name}
                           className="w-full h-full object-contain p-1"
                           onError={(e) => {
-                            e.currentTarget.src = `/placeholder.svg?height=40&width=64&text=${paymentMethod.name}`
+                            e.currentTarget.src = `/placeholder.svg?height=40&width=64&text=${paymentMethod.name}`;
                           }}
                         />
                       </motion.div>
@@ -310,7 +313,9 @@ export default function MetroPagesShowcase() {
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-blue-900 text-white font-semibold shadow-lg hover:bg-blue-800 transition-all duration-300 text-xs sm:text-sm lg:text-base"
               >
                 <CreditCard className="w-5 h-5" />
-                <p className="text-xs sm:text-sm lg:text-base">{"Barcha to'lov usullari"}</p>
+                <p className="text-xs sm:text-sm lg:text-base">
+                  {"Barcha to'lov usullari"}
+                </p>
               </motion.a>
             </motion.div>
           </div>
@@ -327,52 +332,61 @@ export default function MetroPagesShowcase() {
         </motion.div>
       </div>
     </div>
-  )
+  );
 }
 
 function MetroGalleryCarousel() {
-  const [currentIndex, setCurrentIndex] = useState(0)
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const galleryImages = [
     {
       name: "Toshkent Metro qurilishi",
       description: "1968-yil",
-      image: "https://cdn-uz.kursiv.media/wp-content/uploads/2024/11/scale_1200-7.jpeg",
+      image:
+        "https://cdn-uz.kursiv.media/wp-content/uploads/2024/11/scale_1200-7.jpeg",
     },
     {
       name: "O'z ish faolyatini boshladi",
-      description: "1977-yil 6-noyabrda Toshkent metropolitenining tantanali ochilish marosimi boʻlib oʻtdi.",
-      image: "https://cdn-uz.kursiv.media/wp-content/uploads/2024/11/photo_2024-11-06-14.22.07.jpeg",
+      description:
+        "1977-yil 6-noyabrda Toshkent metropolitenining tantanali ochilish marosimi boʻlib oʻtdi.",
+      image:
+        "https://cdn-uz.kursiv.media/wp-content/uploads/2024/11/photo_2024-11-06-14.22.07.jpeg",
     },
     {
       name: "Bekatlarimiz ajoyib dizaynda bezaldi",
       description: "Kosmonavtlar bekati",
-      image: "https://cdn-uz.kursiv.media/wp-content/uploads/2024/11/pr_kosmonavtov_enikeev-1024x683.jpg",
+      image:
+        "https://cdn-uz.kursiv.media/wp-content/uploads/2024/11/pr_kosmonavtov_enikeev-1024x683.jpg",
     },
     {
       name: "Yangi poyezdlar bilan ta'minlandi",
-      description: "Zamonaviy isitish va sovutish tizimlari bilan jihozlangan yangi poyezdlar",
-      image: "https://www.afisha.uz/uploads/media/2024/11/41f443b3e2b6e97778c964b9a6c01e39_l.webp",
+      description:
+        "Zamonaviy isitish va sovutish tizimlari bilan jihozlangan yangi poyezdlar",
+      image:
+        "https://www.afisha.uz/uploads/media/2024/11/41f443b3e2b6e97778c964b9a6c01e39_l.webp",
     },
     {
       name: "Yer usti halqa yo'lllari qurildi",
       description: "25km ca 18dan ortiq bekatlar",
-      image: "https://yuz.uz/imageproxy/1200x/https://yuz.uz/file/news/4777dd4735305eb98c3305610ff31f1f.jpg",
+      image:
+        "https://yuz.uz/imageproxy/1200x/https://yuz.uz/file/news/4777dd4735305eb98c3305610ff31f1f.jpg",
     },
-  ]
+  ];
 
   const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % galleryImages.length)
-  }
+    setCurrentIndex((prev) => (prev + 1) % galleryImages.length);
+  };
 
   const prevSlide = () => {
-    setCurrentIndex((prev) => (prev - 1 + galleryImages.length) % galleryImages.length)
-  }
+    setCurrentIndex(
+      (prev) => (prev - 1 + galleryImages.length) % galleryImages.length
+    );
+  };
 
   useEffect(() => {
-    const interval = setInterval(nextSlide, 4000)
-    return () => clearInterval(interval)
-  }, [])
+    const interval = setInterval(nextSlide, 4000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="h-full w-full">
@@ -385,11 +399,20 @@ function MetroGalleryCarousel() {
               initial={{ opacity: 0, x: 100 }}
               animate={{
                 opacity: index === currentIndex ? 1 : 0,
-                x: index === currentIndex ? 0 : index > currentIndex ? 100 : -100,
+                x:
+                  index === currentIndex
+                    ? 0
+                    : index > currentIndex
+                    ? 100
+                    : -100,
               }}
               transition={{ duration: 0.5, ease: "easeInOut" }}
             >
-              <img src={image.image || "/placeholder.svg"} alt={image.name} className="w-full h-full object-cover" />
+              <img
+                src={image.image || "/placeholder.svg"}
+                alt={image.name}
+                className="w-full h-full object-cover"
+              />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               <motion.div
                 className="absolute bottom-4 left-4 text-white"
@@ -397,7 +420,9 @@ function MetroGalleryCarousel() {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.3 }}
               >
-                <h4 className="text-lg sm:text-xl font-bold mb-1">{image.name}</h4>
+                <h4 className="text-lg sm:text-xl font-bold mb-1">
+                  {image.name}
+                </h4>
                 <p className="text-sm text-gray-200">{image.description}</p>
               </motion.div>
             </motion.div>
@@ -445,11 +470,11 @@ function MetroGalleryCarousel() {
         </motion.div>
       </div>
     </div>
-  )
+  );
 }
 
 function AttoCardsCarousel() {
-  const [currentCardIndex, setCurrentCardIndex] = useState(0)
+  const [currentCardIndex, setCurrentCardIndex] = useState(0);
 
   const attoCards = [
     {
@@ -459,12 +484,17 @@ function AttoCardsCarousel() {
       image: "https://atto.uz/image/blueCard.png",
       color: "#2563eb",
       bgGradient: "from-blue-500 to-blue-700",
-      features: ["Barcha transport turlari", "Chegirmalar", "Online to'ldirish"],
+      features: [
+        "Barcha transport turlari",
+        "Chegirmalar",
+        "Online to'ldirish",
+      ],
     },
     {
       name: "ATTO Student",
       type: "Talaba kartasi",
-      description: "Oliy o'quv yurtlari talabalari uchun maxsus imtiyozli karta",
+      description:
+        "Oliy o'quv yurtlari talabalari uchun maxsus imtiyozli karta",
       image: "https://atto.uz/icons/cards/yellow_transport_card.png",
       color: "#eab308",
       bgGradient: "from-yellow-500 to-orange-500",
@@ -486,24 +516,30 @@ function AttoCardsCarousel() {
       image: "https://atto.uz/icons/cards/red_transport_card.png",
       color: "#dc2626",
       bgGradient: "from-red-500 to-pink-600",
-      features: ["Maksimal chegirmalar", "Ijtimoiy himoya", "Bepul yo'nalishlar"],
+      features: [
+        "Maksimal chegirmalar",
+        "Ijtimoiy himoya",
+        "Bepul yo'nalishlar",
+      ],
     },
-  ]
+  ];
 
   const nextCard = () => {
-    setCurrentCardIndex((prev) => (prev + 1) % attoCards.length)
-  }
+    setCurrentCardIndex((prev) => (prev + 1) % attoCards.length);
+  };
 
   const prevCard = () => {
-    setCurrentCardIndex((prev) => (prev - 1 + attoCards.length) % attoCards.length)
-  }
+    setCurrentCardIndex(
+      (prev) => (prev - 1 + attoCards.length) % attoCards.length
+    );
+  };
 
   useEffect(() => {
-    const interval = setInterval(nextCard, 4500)
-    return () => clearInterval(interval)
-  }, [])
+    const interval = setInterval(nextCard, 4500);
+    return () => clearInterval(interval);
+  }, []);
 
-  const currentCard = attoCards[currentCardIndex]
+  const currentCard = attoCards[currentCardIndex];
 
   return (
     <div className="h-full flex flex-col relative">
@@ -552,7 +588,7 @@ function AttoCardsCarousel() {
                   animate={{ scale: 1 }}
                   transition={{ duration: 0.8 }}
                   onError={(e) => {
-                    e.currentTarget.src = `/placeholder.svg?height=160&width=256&text=${currentCard.name}`
+                    e.currentTarget.src = `/placeholder.svg?height=160&width=256&text=${currentCard.name}`;
                   }}
                 />
 
@@ -595,11 +631,18 @@ function AttoCardsCarousel() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
             >
-              <motion.h4 className="text-2xl sm:text-3xl font-bold mb-2" style={{ color: currentCard.color }}>
+              <motion.h4
+                className="text-2xl sm:text-3xl font-bold mb-2"
+                style={{ color: currentCard.color }}
+              >
                 {currentCard.name}
               </motion.h4>
-              <p className="text-white/90 font-semibold mb-3 text-lg">{currentCard.type}</p>
-              <p className="text-white/70 text-sm sm:text-base mb-4 leading-relaxed">{currentCard.description}</p>
+              <p className="text-white/90 font-semibold mb-3 text-lg">
+                {currentCard.type}
+              </p>
+              <p className="text-white/70 text-sm sm:text-base mb-4 leading-relaxed">
+                {currentCard.description}
+              </p>
 
               {/* Features */}
               <div className="space-y-2 mb-6">
@@ -677,11 +720,11 @@ function AttoCardsCarousel() {
         </span>
       </motion.div>
     </div>
-  )
+  );
 }
 
 function TashkentMetroMap() {
-  const [activeStation, setActiveStation] = useState(0)
+  const [activeStation, setActiveStation] = useState(0);
 
   // Tashkent Metro Lines and Stations
   const metroLines = {
@@ -726,21 +769,30 @@ function TashkentMetroMap() {
         { name: "Habib Abdullayev", x: 350, y: 350 },
       ],
     },
-  }
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setActiveStation((prev) => (prev + 1) % 20)
-    }, 800)
-    return () => clearInterval(interval)
-  }, [])
+      setActiveStation((prev) => (prev + 1) % 20);
+    }, 800);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <svg className="w-full h-full" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet">
+    <svg
+      className="w-full h-full"
+      viewBox="0 0 600 400"
+      preserveAspectRatio="xMidYMid meet"
+    >
       {/* Background Grid */}
       <defs>
         <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
-          <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#ffffff10" strokeWidth="0.5" />
+          <path
+            d="M 20 0 L 0 0 0 20"
+            fill="none"
+            stroke="#ffffff10"
+            strokeWidth="0.5"
+          />
         </pattern>
 
         {/* Glow Effects */}
@@ -758,8 +810,12 @@ function TashkentMetroMap() {
       {/* Metro Lines */}
       {Object.entries(metroLines).map(([lineKey, line]) => {
         const pathData = line.stations
-          .map((station, index) => (index === 0 ? `M${station.x},${station.y}` : `L${station.x},${station.y}`))
-          .join(" ")
+          .map((station, index) =>
+            index === 0
+              ? `M${station.x},${station.y}`
+              : `L${station.x},${station.y}`
+          )
+          .join(" ");
 
         return (
           <g key={lineKey}>
@@ -798,8 +854,9 @@ function TashkentMetroMap() {
 
             {/* Stations */}
             {line.stations.map((station, stationIndex) => {
-              const globalStationIndex = Object.keys(metroLines).indexOf(lineKey) * 8 + stationIndex
-              const isActive = globalStationIndex === activeStation
+              const globalStationIndex =
+                Object.keys(metroLines).indexOf(lineKey) * 8 + stationIndex;
+              const isActive = globalStationIndex === activeStation;
 
               return (
                 <g key={station.name}>
@@ -817,13 +874,20 @@ function TashkentMetroMap() {
                       scale: isActive ? [1, 1.3, 1] : 1,
                     }}
                     transition={{
-                      scale: { duration: 0.6, repeat: isActive ? Number.POSITIVE_INFINITY : 0 },
-                      initial: { duration: 0.3, delay: globalStationIndex * 0.1 },
+                      scale: {
+                        duration: 0.6,
+                        repeat: isActive ? Number.POSITIVE_INFINITY : 0,
+                      },
+                      initial: {
+                        duration: 0.3,
+                        delay: globalStationIndex * 0.1,
+                      },
                     }}
                   />
 
                   {/* Station Name (only for major stations) */}
-                  {(stationIndex % 2 === 0 || station.name === "Alisher Navoiy") && (
+                  {(stationIndex % 2 === 0 ||
+                    station.name === "Alisher Navoiy") && (
                     <motion.text
                       x={station.x}
                       y={station.y - 12}
@@ -859,10 +923,10 @@ function TashkentMetroMap() {
                     />
                   )}
                 </g>
-              )
+              );
             })}
           </g>
-        )
+        );
       })}
 
       {/* Transfer Stations (Interchange Points) */}
@@ -882,7 +946,11 @@ function TashkentMetroMap() {
           }}
           transition={{
             scale: { duration: 2, repeat: Number.POSITIVE_INFINITY },
-            rotate: { duration: 8, repeat: Number.POSITIVE_INFINITY, ease: "linear" },
+            rotate: {
+              duration: 8,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "linear",
+            },
           }}
         />
 
@@ -932,5 +1000,5 @@ function TashkentMetroMap() {
         ))}
       </g>
     </svg>
-  )
+  );
 }
