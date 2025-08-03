@@ -193,7 +193,6 @@ export default function MetroCarouselWithNews() {
   const [slides, setSlides] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [announcements, Setannouncements] = useState([]);
-  console.log(announcements);
 
   const getNewstVerticalSlider = async () => {
     const res = await fetch(
