@@ -512,7 +512,7 @@ export default function UzbekistanSymbols() {
                         <div className="bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-500">
                           <h4 className="font-bold mb-2">Humo Qushi</h4>
                           <p className="text-sm text-gray-700">
-                            Baxt va erkinlik ramzi. Hech qachon yerga qo'nmaydi.
+                            Baxt va erkinlik ramzi.
                           </p>
                         </div>
                         <div className="bg-orange-50 p-4 rounded-lg border-l-4 border-orange-500">
@@ -552,7 +552,7 @@ export default function UzbekistanSymbols() {
                         <div className="bg-gray-50 p-4 rounded-lg border-l-4 border-gray-500">
                           <h4 className="font-bold mb-2">Paxta</h4>
                           <p className="text-sm text-gray-700">
-                            Oq oltin. Asosiy ekin turi.
+                            Oq oltin. Paxta - poklik va boylik.
                           </p>
                         </div>
                         <div className="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">

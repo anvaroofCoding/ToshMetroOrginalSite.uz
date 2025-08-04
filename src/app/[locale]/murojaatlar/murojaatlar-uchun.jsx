@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -37,6 +37,56 @@ export default function MetroLostItemForm() {
   const [showError, setShowError] = useState(false);
   const [countdown, setCountdown] = useState(10);
   const [isCountingDown, setIsCountingDown] = useState(false);
+  const [isBlocked, setIsBlocked] = useState(false);
+  const [blockTimeRemaining, setBlockTimeRemaining] = useState(0);
+  const [failedAttempts, setFailedAttempts] = useState(0);
+
+  // Check if user is blocked on component mount and set up timer
+  useEffect(() => {
+    const checkBlockStatus = () => {
+      const blockData = localStorage.getItem("formBlockData");
+      if (blockData) {
+        const { attempts, blockStartTime } = JSON.parse(blockData);
+        const currentTime = Date.now();
+        const blockDuration = 10 * 60 * 1000; // 10 minutes in milliseconds
+        const timeElapsed = currentTime - blockStartTime;
+
+        if (attempts >= 3 && timeElapsed < blockDuration) {
+          // Still blocked
+          setIsBlocked(true);
+          setFailedAttempts(attempts);
+          const remainingTime = Math.ceil((blockDuration - timeElapsed) / 1000);
+          setBlockTimeRemaining(remainingTime);
+
+          // Start countdown timer
+          const timer = setInterval(() => {
+            setBlockTimeRemaining((prev) => {
+              if (prev <= 1) {
+                clearInterval(timer);
+                setIsBlocked(false);
+                setFailedAttempts(0);
+                localStorage.removeItem("formBlockData");
+                return 0;
+              }
+              return prev - 1;
+            });
+          }, 1000);
+
+          return () => clearInterval(timer);
+        } else if (attempts >= 3 && timeElapsed >= blockDuration) {
+          // Block period has expired
+          localStorage.removeItem("formBlockData");
+          setIsBlocked(false);
+          setFailedAttempts(0);
+        } else {
+          // Not blocked but has some failed attempts
+          setFailedAttempts(attempts);
+        }
+      }
+    };
+
+    checkBlockStatus();
+  }, []);
 
   const handleInputChange = (field, value) => {
     setFormData((prev) => ({
@@ -55,6 +105,12 @@ export default function MetroLostItemForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Check if user is blocked
+    if (isBlocked) {
+      return;
+    }
+
     setIsSubmitting(true);
     setShowError(false);
     setShowSuccess(false);
@@ -72,7 +128,9 @@ export default function MetroLostItemForm() {
       );
 
       if (response.ok) {
-        // Show success message
+        // Success - clear any failed attempts
+        localStorage.removeItem("formBlockData");
+        setFailedAttempts(0);
         setShowSuccess(true);
         // Reset form
         setFormData({
@@ -87,27 +145,64 @@ export default function MetroLostItemForm() {
         throw new Error("Xatolik yuz berdi");
       }
     } catch (error) {
-      // Show error and start countdown
-      setShowError(true);
-      setIsCountingDown(true);
-      setCountdown(10);
+      // Handle failed attempt
+      const newFailedAttempts = failedAttempts + 1;
+      setFailedAttempts(newFailedAttempts);
 
-      // Start countdown timer
-      const timer = setInterval(() => {
-        setCountdown((prev) => {
-          if (prev <= 1) {
-            clearInterval(timer);
-            setShowError(false);
-            setIsCountingDown(false);
-            setCountdown(10);
-            return 10;
-          }
-          return prev - 1;
-        });
-      }, 1000);
+      const blockData = {
+        attempts: newFailedAttempts,
+        blockStartTime: Date.now(),
+      };
+
+      localStorage.setItem("formBlockData", JSON.stringify(blockData));
+
+      if (newFailedAttempts >= 3) {
+        // Block the user for 10 minutes
+        setIsBlocked(true);
+        setBlockTimeRemaining(10 * 60); // 10 minutes in seconds
+
+        // Start 10-minute countdown
+        const blockTimer = setInterval(() => {
+          setBlockTimeRemaining((prev) => {
+            if (prev <= 1) {
+              clearInterval(blockTimer);
+              setIsBlocked(false);
+              setFailedAttempts(0);
+              localStorage.removeItem("formBlockData");
+              return 0;
+            }
+            return prev - 1;
+          });
+        }, 1000);
+      } else {
+        // Show error and start countdown
+        setShowError(true);
+        setIsCountingDown(true);
+        setCountdown(10);
+
+        // Start countdown timer
+        const timer = setInterval(() => {
+          setCountdown((prev) => {
+            if (prev <= 1) {
+              clearInterval(timer);
+              setShowError(false);
+              setIsCountingDown(false);
+              setCountdown(10);
+              return 10;
+            }
+            return prev - 1;
+          });
+        }, 1000);
+      }
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const formatTime = (seconds) => {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
   };
 
   const resetSuccess = () => {
@@ -115,7 +210,7 @@ export default function MetroLostItemForm() {
   };
 
   return (
-    <div className="min-h-screen py-12 px-4">
+    <div className=" py-12 px-4">
       <div className="max-w-2xl mx-auto">
         {showSuccess ? (
           <Card className="shadow-lg border-0 bg-white">
@@ -148,6 +243,47 @@ export default function MetroLostItemForm() {
                 >
                   Yangi murojaat yuborish
                 </Button>
+              </div>
+            </CardContent>
+          </Card>
+        ) : isBlocked ? (
+          <Card className="shadow-lg border-0 bg-white">
+            <CardContent className="p-8 text-center">
+              <div className="mb-6">
+                <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg
+                    className="w-8 h-8 text-orange-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 15v2m0 0v2m0-2h2m-2 0H10m2-5V9m0 0V7m0 2h2m-2 0H10M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                </div>
+                <h2 className="text-2xl font-bold text-orange-600 mb-2">
+                  Forma vaqtincha bloklangan
+                </h2>
+                <p className="text-gray-600 mb-4">
+                  3 marta muvaffaqiyatsiz urinish tufayli forma 10 daqiqaga
+                  bloklangan.
+                </p>
+                <div className="mb-4">
+                  <div className="text-4xl font-bold text-blue-900 mb-2">
+                    {formatTime(blockTimeRemaining)}
+                  </div>
+                  <p className="text-sm text-gray-500">qolgan vaqt</p>
+                </div>
+                <div className="bg-gray-100 rounded-lg p-4">
+                  <p className="text-sm text-gray-600">
+                    Xavfsizlik choralari sababli forma vaqtincha ishlamaydi.
+                    Iltimos, belgilangan vaqtdan keyin qayta urinib ko'ring.
+                  </p>
+                </div>
               </div>
             </CardContent>
           </Card>
@@ -331,16 +467,27 @@ export default function MetroLostItemForm() {
                 </div>
 
                 <div className="pt-4">
+                  {failedAttempts > 0 && failedAttempts < 3 && (
+                    <div className="mb-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+                      <p className="text-sm text-yellow-800">
+                        Ogohlantirish: {failedAttempts}/3 muvaffaqiyatsiz
+                        urinish.
+                        {3 - failedAttempts} ta urinish qoldi.
+                      </p>
+                    </div>
+                  )}
                   <Button
                     type="submit"
-                    disabled={isSubmitting}
-                    className="w-full bg-blue-900 hover:bg-blue-800 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2"
+                    disabled={isSubmitting || isBlocked}
+                    className="w-full bg-blue-900 hover:bg-blue-800 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {isSubmitting ? (
                       <>
                         <Loader2 className="w-4 h-4 animate-spin" />
                         Yuborilmoqda...
                       </>
+                    ) : isBlocked ? (
+                      <>Forma bloklangan</>
                     ) : (
                       <>
                         <Send className="w-4 h-4" />
