@@ -1,193 +1,356 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { CardTitle } from "@/components/ui/card";
+import {
+  CardTitle,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { motion } from "framer-motion";
 import {
   Briefcase,
-  ChevronRight,
   GraduationCap,
   Loader2,
   Users,
   AlertCircle,
   CheckCircle,
   Star,
+  Send,
+  Upload,
+  X,
 } from "lucide-react";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState, useCallback, useEffect, useMemo } from "react";
 
 export default function Page() {
-  // const [loading, setLoading] = useState(true);
-  // const [error, setError] = useState(null);
-  const [data, setData] = useState({
-    id: 3,
-    title_uz: "Metro haydovchisi",
-    requirements_uz: "o'qigan va 2 ta tilni bilishi kerak",
-    mutaxasislik_uz: "mashinist",
-    education_status_uz: "o'rta",
-    created_by: 4,
-    total_requests: 0,
-    answered_requests: 0,
-    rejected_requests: 0,
-    pending_requests: 0,
+  const pathname = usePathname();
+  const jobId = useMemo(() => {
+    const segments = pathname.split("/");
+    return Number.parseInt(segments[segments.length - 1]);
+  }, [pathname]);
+
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState({});
+  const [error, setError] = useState(null);
+
+  // Form state
+  const [formData, setFormData] = useState({
+    jobVacancy: jobId,
+    name_en: "",
+    phone: "",
+    email: "",
+    status: "pending",
   });
 
-  const path = usePathname();
-  const segments = path.split("/");
-  const id = segments[segments.length - 1];
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState("idle");
 
-  // async function getJob() {
-  //   try {
-  //     setLoading(true);
-  //     setError(null);
-  //     const res = await fetch(
-  //       `https://metro-site.onrender.com/api/job-vacancies/uz/${id}`
-  //     );
-  //     if (!res.ok) {
-  //       throw new Error("Ish o'rinlarini yuklashda xatolik yuz berdi");
-  //     }
-  //     const jobData = await res.json();
-  //     setData(jobData);
-  //     console.log(jobData);
-  //   } catch (err) {
-  //     setError(err instanceof Error ? err.message : "Xatolik yuz berdi");
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // }
+  // Fetch job data
+  const fetchJobData = useCallback(async () => {
+    setLoading(true);
+    setError(null);
 
-  // useEffect(() => {
-  //   getJob();
-  // }, [id]);
+    try {
+      const res = await fetch(
+        `https://metro-site.onrender.com/api/job-vacancies/en/${jobId}`
+      );
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        duration: 0.6,
-        staggerChildren: 0.1,
+      if (!res.ok) {
+        throw new Error(`Failed to fetch job data: ${res.status}`);
+      }
+
+      const items = await res.json();
+      setData(items);
+    } catch (err) {
+      console.error("Error fetching job data:", err);
+      setError(err.message || "Failed to load job data");
+    } finally {
+      setLoading(false);
+    }
+  }, [jobId]);
+
+  useEffect(() => {
+    fetchJobData();
+  }, [fetchJobData]);
+
+  // Animation variants
+  const containerVariants = useMemo(
+    () => ({
+      hidden: { opacity: 0 },
+      visible: {
+        opacity: 1,
+        transition: {
+          duration: 0.6,
+          staggerChildren: 0.1,
+        },
       },
-    },
-  };
+    }),
+    []
+  );
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: "easeOut",
+  const itemVariants = useMemo(
+    () => ({
+      hidden: { opacity: 0, y: 20 },
+      visible: {
+        opacity: 1,
+        y: 0,
+        transition: {
+          duration: 0.5,
+          ease: "easeOut",
+        },
       },
+    }),
+    []
+  );
+
+  // Form validation
+  const validateForm = useCallback(() => {
+    const newErrors = {};
+
+    if (!formData.name_en.trim()) {
+      newErrors.name_en = "Ism talab qilinadi";
+    } else if (formData.name_en.trim().length < 2) {
+      newErrors.name_en = "Ism kamida 2 ta belgidan iborat bo'lishi kerak";
+    }
+
+    if (!formData.phone.trim()) {
+      newErrors.phone = "Telefon raqam talab qilinadi";
+    } else if (!/^\+?[\d\s\-()]{10,}$/.test(formData.phone.trim())) {
+      newErrors.phone = "Iltimos, to'g'ri telefon raqam kiriting";
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = "Elektron pochta talab qilinadi";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
+      newErrors.email = "Iltimos, to'g'ri elektron pochta manzilini kiriting";
+    }
+
+    if (!selectedFile) {
+      newErrors.file = "Rezyume/CV fayli talab qilinadi";
+    } else if (selectedFile.size > 5 * 1024 * 1024) {
+      newErrors.file = "Fayl hajmi 5MB dan oshmasligi kerak";
+    }
+
+    setFormErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  }, [formData, selectedFile]);
+
+  // File handling
+  const handleFileChange = useCallback((e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const allowedTypes = [
+      "application/pdf",
+      "application/msword",
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "text/plain",
+    ];
+
+    if (!allowedTypes.includes(file.type)) {
+      setFormErrors((prev) => ({
+        ...prev,
+        file: "Faqat PDF, DOC, DOCX, TXT formatdagi fayllar qabul qilinadi",
+      }));
+      return;
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      setFormErrors((prev) => ({
+        ...prev,
+        file: "Fayl hajmi 5MB dan oshmasligi kerak",
+      }));
+      return;
+    }
+
+    setSelectedFile(file);
+    setFormErrors((prev) => ({ ...prev, file: undefined }));
+  }, []);
+
+  const removeFile = useCallback(() => {
+    setSelectedFile(null);
+    const fileInput = document.getElementById("file");
+    if (fileInput) {
+      fileInput.value = "";
+    }
+  }, []);
+
+  // Form submission
+  const handleSubmit = useCallback(
+    async (e) => {
+      e.preventDefault();
+
+      if (!validateForm()) return;
+
+      setIsSubmitting(true);
+      setSubmitStatus("idle");
+      setFormErrors({});
+
+      try {
+        const submitFormData = new FormData();
+        submitFormData.append("jobVacancy", jobId.toString());
+        submitFormData.append("name_en", formData.name_en.trim());
+        submitFormData.append("phone", formData.phone.trim());
+        submitFormData.append("email", formData.email.trim());
+        submitFormData.append("status", formData.status);
+
+        if (selectedFile) {
+          submitFormData.append("file", selectedFile);
+        }
+
+        const response = await fetch(
+          `https://metro-site.onrender.com/api/job-vacancy-requests/en/`,
+          {
+            method: "POST",
+            body: submitFormData,
+          }
+        );
+
+        if (!response.ok) {
+          let errorMessage = `HTTP error! status: ${response.status}`;
+          try {
+            const errorData = await response.json();
+            errorMessage = errorData.message || errorData.error || errorMessage;
+          } catch {
+            errorMessage = response.statusText || errorMessage;
+          }
+          throw new Error(errorMessage);
+        }
+
+        const result = await response.json();
+        console.log("Application submitted successfully:", result);
+
+        setSubmitStatus("success");
+
+        // Reset form
+        setFormData({
+          jobVacancy: jobId,
+          name_en: "",
+          phone: "",
+          email: "",
+          status: "pending",
+        });
+        setSelectedFile(null);
+
+        const fileInput = document.getElementById("file");
+        if (fileInput) {
+          fileInput.value = "";
+        }
+      } catch (err) {
+        console.error("Error submitting application:", err);
+        setSubmitStatus("error");
+
+        let errorMessage =
+          "Arizani yuborishda xatolik yuz berdi. Iltimos, qayta urinib ko'ring.";
+
+        if (err instanceof Error) {
+          if (err.message.includes("Failed to fetch")) {
+            errorMessage =
+              "Internet aloqasi bilan bog'liq muammo. Iltimos, internetni tekshiring va qayta urinib ko'ring.";
+          } else if (err.message.includes("413")) {
+            errorMessage =
+              "Yuklangan fayl juda katta. Iltimos, kichikroq fayl tanlang.";
+          } else if (err.message.includes("400")) {
+            errorMessage =
+              "Ma'lumotlar noto'g'ri formatda. Iltimos, barcha maydonlarni to'g'ri to'ldiring.";
+          } else {
+            errorMessage = err.message;
+          }
+        }
+
+        setFormErrors({ general: errorMessage });
+      } finally {
+        setIsSubmitting(false);
+      }
     },
-  };
+    [formData, selectedFile, jobId, validateForm]
+  );
 
-  const pulseVariants = {
-    pulse: {
-      scale: [1, 1.05, 1],
-      transition: {
-        duration: 2,
-        repeat: Number.POSITIVE_INFINITY,
-        ease: "easeInOut",
-      },
+  const handleInputChange = useCallback(
+    (field, value) => {
+      setFormData((prev) => ({ ...prev, [field]: value }));
+      if (formErrors[field]) {
+        setFormErrors((prev) => ({ ...prev, [field]: undefined }));
+      }
     },
-  };
+    [formErrors]
+  );
 
-  // if (loading) {
-  //   return (
-  //     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
-  //       <motion.div
-  //         className="flex flex-col items-center space-y-4"
-  //         initial={{ opacity: 0, scale: 0.8 }}
-  //         animate={{ opacity: 1, scale: 1 }}
-  //         transition={{ duration: 0.5 }}
-  //       >
-  //         <motion.div
-  //           animate={{ rotate: 360 }}
-  //           transition={{
-  //             duration: 1,
-  //             repeat: Number.POSITIVE_INFINITY,
-  //             ease: "linear",
-  //           }}
-  //         >
-  //           <Loader2 className="h-12 w-12 text-blue-600" />
-  //         </motion.div>
-  //         <motion.p
-  //           className="text-lg font-medium text-gray-700"
-  //           animate={{ opacity: [0.5, 1, 0.5] }}
-  //           transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY }}
-  //         >
-  //           Ish o'rni ma'lumotlari yuklanmoqda...
-  //         </motion.p>
-  //       </motion.div>
-  //     </div>
-  //   );
-  // }
+  const formatFileSize = useCallback((bytes) => {
+    if (bytes === 0) return "0 Bytes";
+    const k = 1024;
+    const sizes = ["Bytes", "KB", "MB", "GB"];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return (
+      Number.parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i]
+    );
+  }, []);
 
-  // if (error) {
-  //   return (
-  //     <div className="min-h-screen bg-gradient-to-br from-red-50 to-pink-100 flex items-center justify-center p-4">
-  //       <motion.div
-  //         className="text-center p-8 bg-white rounded-2xl shadow-2xl max-w-md w-full"
-  //         initial={{ opacity: 0, y: 50, scale: 0.9 }}
-  //         animate={{ opacity: 1, y: 0, scale: 1 }}
-  //         transition={{ duration: 0.6, ease: "easeOut" }}
-  //       >
-  //         <motion.div
-  //           className="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6"
-  //           variants={pulseVariants}
-  //           animate="pulse"
-  //         >
-  //           <AlertCircle className="w-10 h-10 text-red-600" />
-  //         </motion.div>
-  //         <motion.h2
-  //           className="text-2xl font-bold text-gray-900 mb-3"
-  //           variants={itemVariants}
-  //           initial="hidden"
-  //           animate="visible"
-  //         >
-  //           Xatolik yuz berdi
-  //         </motion.h2>
-  //         <motion.p
-  //           className="text-gray-600 mb-6"
-  //           variants={itemVariants}
-  //           initial="hidden"
-  //           animate="visible"
-  //         >
-  //           {error}
-  //         </motion.p>
-  //         <motion.div
-  //           variants={itemVariants}
-  //           initial="hidden"
-  //           animate="visible"
-  //           whileHover={{ scale: 1.05 }}
-  //           whileTap={{ scale: 0.95 }}
-  //         >
-  //           <Button
-  //             onClick={getJob}
-  //             className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-all duration-200"
-  //           >
-  //             Qayta urinish
-  //           </Button>
-  //         </motion.div>
-  //       </motion.div>
-  //     </div>
-  //   );
-  // }
+  // Loading state
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="flex items-center space-x-2">
+          <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
+          <span className="text-lg font-medium">Yuklanmoqda...</span>
+        </div>
+      </div>
+    );
+  }
 
-  if (!data) return null;
+  // Error state
+  if (error) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-center space-y-4">
+          <AlertCircle className="h-12 w-12 text-red-500 mx-auto" />
+          <h2 className="text-xl font-semibold text-gray-900">
+            Xatolik yuz berdi
+          </h2>
+          <p className="text-gray-600">{error}</p>
+          <Button onClick={fetchJobData} variant="outline">
+            Qayta urinish
+          </Button>
+        </div>
+      </div>
+    );
+  }
 
+  // No data state
+  if (!data) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-center space-y-4">
+          <AlertCircle className="h-12 w-12 text-gray-400 mx-auto" />
+          <h2 className="text-xl font-semibold text-gray-900">
+            Ma'lumot topilmadi
+          </h2>
+          <p className="text-gray-600">
+            Ushbu ish o'rni haqida ma'lumot mavjud emas
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  // Main content - only renders after data is loaded
   return (
-    <div className="min-h-screen mt-10  ">
+    <div className="min-h-screen mt-10">
       <motion.div
-        className="container mx-auto px-4 py-8"
+        className="container py-8"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
-        <div className="max-w-4xl mx-auto">
+        <div className="container space-y-8">
+          {/* Job Details Section */}
           <motion.div
             className="bg-white rounded-3xl shadow-2xl overflow-hidden"
             variants={itemVariants}
@@ -221,7 +384,7 @@ export default function Page() {
                       <div className="flex items-center space-x-1">
                         <Users className="w-4 h-4" />
                         <span className="text-sm">
-                          {data.total_requests} ariza
+                          {data.total_requests || 0} ariza
                         </span>
                       </div>
                       <div className="flex items-center space-x-1">
@@ -266,7 +429,7 @@ export default function Page() {
                           Ta'lim darajasi
                         </h3>
                         <p className="text-gray-700 text-base leading-relaxed">
-                          {data.education_status_uz}
+                          {data.education_status_uz || "Ma'lumot yo'q"}
                         </p>
                       </div>
                     </div>
@@ -290,7 +453,7 @@ export default function Page() {
                           Mutaxassislik darajasi
                         </h3>
                         <p className="text-gray-700 text-base leading-relaxed">
-                          {data.mutaxasislik_uz}
+                          {data.mutaxasislik_uz || "Ma'lumot yo'q"}
                         </p>
                       </div>
                     </div>
@@ -315,13 +478,213 @@ export default function Page() {
                       Asosiy talablar
                     </h3>
                     <p className="text-gray-700 text-base leading-relaxed">
-                      {data.requirements_uz}
+                      {data.requirements_uz || "Ma'lumot yo'q"}
                     </p>
                   </motion.div>
                 </motion.div>
               </div>
-              <h1>Hello world</h1>
             </div>
+          </motion.div>
+
+          {/* Application Form Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.8 }}
+          >
+            <Card className="shadow-lg">
+              <CardHeader className="text-center">
+                <CardTitle className="text-2xl font-bold text-gray-900">
+                  Lavozimga ariza berish
+                </CardTitle>
+                <CardDescription>
+                  Ish o'rni ID: {jobId} uchun arizangizni yuboring
+                </CardDescription>
+              </CardHeader>
+
+              <CardContent>
+                {submitStatus === "success" && (
+                  <Alert className="mb-6 border-green-200 bg-green-50">
+                    <CheckCircle className="h-4 w-4 text-green-600" />
+                    <AlertDescription className="text-green-800">
+                      Arizangiz muvaffaqiyatli yuborildi! Biz uni ko'rib
+                      chiqamiz va tez orada javob beramiz.
+                    </AlertDescription>
+                  </Alert>
+                )}
+
+                {formErrors.general && (
+                  <Alert className="mb-6 border-red-200 bg-red-50">
+                    <AlertCircle className="h-4 w-4 text-red-600" />
+                    <AlertDescription className="text-red-800">
+                      {formErrors.general}
+                    </AlertDescription>
+                  </Alert>
+                )}
+
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <Label htmlFor="name_en" className="text-sm font-medium">
+                        To'liq ism *
+                      </Label>
+                      <Input
+                        id="name_en"
+                        type="text"
+                        value={formData.name_en}
+                        onChange={(e) =>
+                          handleInputChange("name_en", e.target.value)
+                        }
+                        placeholder="To'liq ismingizni kiriting"
+                        className={
+                          formErrors.name_en
+                            ? "border-red-500 focus:border-red-500"
+                            : ""
+                        }
+                        disabled={isSubmitting}
+                      />
+                      {formErrors.name_en && (
+                        <p className="text-sm text-red-600">
+                          {formErrors.name_en}
+                        </p>
+                      )}
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="phone" className="text-sm font-medium">
+                        Telefon raqam *
+                      </Label>
+                      <Input
+                        id="phone"
+                        type="tel"
+                        value={formData.phone}
+                        onChange={(e) =>
+                          handleInputChange("phone", e.target.value)
+                        }
+                        placeholder="+998 90 123 45 67"
+                        className={
+                          formErrors.phone
+                            ? "border-red-500 focus:border-red-500"
+                            : ""
+                        }
+                        disabled={isSubmitting}
+                      />
+                      {formErrors.phone && (
+                        <p className="text-sm text-red-600">
+                          {formErrors.phone}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="email" className="text-sm font-medium">
+                      Elektron pochta manzili *
+                    </Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      value={formData.email}
+                      onChange={(e) =>
+                        handleInputChange("email", e.target.value)
+                      }
+                      placeholder="your.email@example.com"
+                      className={
+                        formErrors.email
+                          ? "border-red-500 focus:border-red-500"
+                          : ""
+                      }
+                      disabled={isSubmitting}
+                    />
+                    {formErrors.email && (
+                      <p className="text-sm text-red-600">{formErrors.email}</p>
+                    )}
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="file" className="text-sm font-medium">
+                      Rezyume/CV *
+                    </Label>
+                    <div className="space-y-3">
+                      <div className="flex items-center space-x-2">
+                        <Input
+                          id="file"
+                          type="file"
+                          onChange={handleFileChange}
+                          accept=".pdf,.doc,.docx,.txt"
+                          className={
+                            formErrors.file
+                              ? "border-red-500 focus:border-red-500"
+                              : ""
+                          }
+                          disabled={isSubmitting}
+                        />
+                        <Upload className="h-4 w-4 text-gray-400" />
+                      </div>
+
+                      {selectedFile && (
+                        <div className="flex items-center justify-between p-3 bg-green-50 border border-green-200 rounded-lg">
+                          <div className="flex items-center space-x-2">
+                            <CheckCircle className="h-4 w-4 text-green-600" />
+                            <div>
+                              <p className="text-sm font-medium text-green-800">
+                                {selectedFile.name}
+                              </p>
+                              <p className="text-xs text-green-600">
+                                {formatFileSize(selectedFile.size)}
+                              </p>
+                            </div>
+                          </div>
+                          <Button
+                            type="button"
+                            variant="ghost"
+                            size="sm"
+                            onClick={removeFile}
+                            disabled={isSubmitting}
+                            className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                          >
+                            <X className="h-4 w-4" />
+                          </Button>
+                        </div>
+                      )}
+
+                      {formErrors.file && (
+                        <p className="text-sm text-red-600">
+                          {formErrors.file}
+                        </p>
+                      )}
+                      <p className="text-xs text-gray-500">
+                        Qabul qilinadigan formatlar: PDF, DOC, DOCX, TXT (Max
+                        5MB)
+                      </p>
+                    </div>
+                  </div>
+
+                  <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <Button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 text-lg font-medium"
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                          Ariza yuborilmoqda...
+                        </>
+                      ) : (
+                        <>
+                          <Send className="mr-2 h-5 w-5" />
+                          Ariza yuborish
+                        </>
+                      )}
+                    </Button>
+                  </motion.div>
+                </form>
+              </CardContent>
+            </Card>
           </motion.div>
         </div>
       </motion.div>
