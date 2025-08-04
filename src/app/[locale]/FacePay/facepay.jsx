@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef } from "react";
 import {
   Smartphone,
   Hand,
@@ -18,29 +18,29 @@ import {
   Wallet,
   ArrowRight,
   Star,
-  Nfc
-} from "lucide-react"
+  Nfc,
+} from "lucide-react";
 
 function facepay() {
-  const observerRef = useRef(null)
+  const observerRef = useRef(null);
 
   useEffect(() => {
     observerRef.current = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add("animate-in")
+            entry.target.classList.add("animate-in");
           }
-        })
+        });
       },
-      { threshold: 0.1 },
-    )
+      { threshold: 0.1 }
+    );
 
-    const elements = document.querySelectorAll(".fade-in")
-    elements.forEach((el) => observerRef.current?.observe(el))
+    const elements = document.querySelectorAll(".fade-in");
+    elements.forEach((el) => observerRef.current?.observe(el));
 
-    return () => observerRef.current?.disconnect()
-  }, [])
+    return () => observerRef.current?.disconnect();
+  }, []);
 
   const steps = [
     {
@@ -61,12 +61,13 @@ function facepay() {
       description: "Yoki bepul virtual karta oching",
       image: "https://www.atto.uz/image/step3.png",
     },
-  ]
+  ];
 
   const activationSteps = [
     {
       icon: MapPin,
-      title: "Xalqlar doʻstligi metro bekatidagi roʻyxatdan oʻtish stoliga boring.",
+      title:
+        "Xalqlar doʻstligi metro bekatidagi roʻyxatdan oʻtish stoliga boring.",
     },
     {
       icon: Camera,
@@ -75,14 +76,15 @@ function facepay() {
     },
     {
       icon: Hand,
-      title: "Avval oʻng qoʻlingizni, soʻng chap qoʻlingizni qoʻying. Shundan soʻng ekranda QR kod paydo boʻladi.",
+      title:
+        "Avval oʻng qoʻlingizni, soʻng chap qoʻlingizni qoʻying. Shundan soʻng ekranda QR kod paydo boʻladi.",
     },
     {
       icon: QrCode,
       title:
         'ATTO mobil ilovasi yordamida QR kodni skanerlang. Ilovaning bosh ekranida "PalmPay ni faollashtirish" tugmasini bosing, soʻng "QR kodni skanerlash" tugmasini bosing.',
     },
-  ]
+  ];
 
   const usageSteps = [
     {
@@ -105,17 +107,19 @@ function facepay() {
     },
     {
       icon: Zap,
-      title: "Skaner ustiga kaftingizni tuting, yashil signal va eshiklarning ochilishini kuting",
+      title:
+        "Skaner ustiga kaftingizni tuting, yashil signal va eshiklarning ochilishini kuting",
     },
     {
       icon: CreditCard,
-      title: "Toʻlov miqdori biroz vaqt oʻtib bogʻlangan transport kartasidan yechiladi.",
+      title:
+        "Toʻlov miqdori biroz vaqt oʻtib bogʻlangan transport kartasidan yechiladi.",
     },
     {
       icon: Star,
       title: "Metroga oʻting va xayrli sayohat!",
     },
-  ]
+  ];
 
   return (
     <div className="min-h-screen  ">
@@ -126,9 +130,13 @@ function facepay() {
           <div className="text-center fade-in opacity-0 translate-y-8 transition-all duration-1000">
             <div className="inline-flex items-center gap-3 mb-6 px-6 py-3 bg-blue-900/10 rounded-full border border-blue-900/20">
               <Nfc className="w-5 h-5 text-blue-900" />
-              <span className="text-blue-900 font-medium">Biometrik to'lov</span>
+              <span className="text-blue-900 font-medium">
+                Biometrik to'lov
+              </span>
             </div>
-            <h1 className="text-5xl md:text-7xl font-bold text-blue-900 mb-8 leading-tight">PalmPay</h1>
+            <h1 className="text-5xl md:text-7xl font-bold text-blue-900 mb-8 leading-tight">
+              PalmPay
+            </h1>
             <div className="relative inline-block mb-12">
               <img
                 src="https://www.atto.uz/image/hand.png"
@@ -138,8 +146,12 @@ function facepay() {
               <div className="absolute -inset-4 bg-gradient-to-r from-blue-900/20 to-transparent rounded-full blur-xl"></div>
             </div>
             <div className="max-w-2xl mx-auto">
-              <h2 className="text-2xl md:text-3xl font-semibold text-blue-900 mb-4">PalmPay ni ulang</h2>
-              <p className="text-lg text-blue-800/80 leading-relaxed">Kaft bilan metroda yo'l haqini to'lang</p>
+              <h2 className="text-2xl md:text-3xl font-semibold text-blue-900 mb-4">
+                PalmPay ni ulang
+              </h2>
+              <p className="text-lg text-blue-800/80 leading-relaxed">
+                Kaft bilan metroda yo'l haqini to'lang
+              </p>
             </div>
           </div>
         </div>
@@ -150,43 +162,54 @@ function facepay() {
         <div className="container mx-auto max-w-6xl">
           <div className="fade-in opacity-0 translate-y-8 transition-all duration-1000">
             <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-blue-900 mb-6">PalmPay nima?</h2>
+              <h2 className="text-4xl font-bold text-blue-900 mb-6">
+                PalmPay nima?
+              </h2>
               <div className="w-24 h-1 bg-gradient-to-r from-blue-900 to-blue-600 mx-auto rounded-full"></div>
             </div>
 
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="space-y-6">
                 <p className="text-lg text-blue-800/90 leading-relaxed">
-                  Bu yo'l haqi uchun toʻlovlar butunlay kontaktsiz, innovasion usuli. Endi siz bank kartasini olib
-                  yurish yoki hamyondan chiqarish haqida oʻylashingiz shart emas, chunki qoʻlingiz doim siz bilan.
+                  Bu yo'l haqi uchun toʻlovlar butunlay kontaktsiz, innovasion
+                  usuli. Endi siz bank kartasini olib yurish yoki hamyondan
+                  chiqarish haqida oʻylashingiz shart emas, chunki qoʻlingiz
+                  doim siz bilan.
                 </p>
                 <p className="text-lg text-blue-800/90 leading-relaxed">
-                  Biometrik toʻlov xizmati barcha yoʻlovchilar uchun majburiy boʻlmaydi – boshqa barcha toʻlov usullari
-                  ham ishlab turishi davom etadi.
+                  Biometrik toʻlov xizmati barcha yoʻlovchilar uchun majburiy
+                  boʻlmaydi – boshqa barcha toʻlov usullari ham ishlab turishi
+                  davom etadi.
                 </p>
                 <p className="text-lg text-blue-800/90 leading-relaxed">
-                  Kaft bilan toʻlov qilish juda oson: turniketga oʻrnatilgan qurilma ustiga istalgan kaftingizni tutib
-                  turing. Eshiklar ochiladi va toʻlov miqdori bogʻlangan transport kartasidan chegiriladi.
+                  Kaft bilan toʻlov qilish juda oson: turniketga oʻrnatilgan
+                  qurilma ustiga istalgan kaftingizni tutib turing. Eshiklar
+                  ochiladi va toʻlov miqdori bogʻlangan transport kartasidan
+                  chegiriladi.
                 </p>
 
                 <div className="grid sm:grid-cols-2 gap-4 mt-8">
                   <div className="flex items-center gap-3 p-4 bg-blue-900/5 rounded-xl border border-blue-900/10">
                     <CheckCircle className="w-6 h-6 text-blue-900 flex-shrink-0" />
-                    <span className="text-blue-900 font-medium">Barcha metro bekatlarida mavjud</span>
+                    <span className="text-blue-900 font-medium">
+                      Barcha metro bekatlarida mavjud
+                    </span>
                   </div>
                   <div className="flex items-center gap-3 p-4 bg-blue-900/5 rounded-xl border border-blue-900/10">
                     <Smartphone className="w-6 h-6 text-blue-900 flex-shrink-0" />
-                    <span className="text-blue-900 font-medium">Smartfon va kartasiz to'lov</span>
+                    <span className="text-blue-900 font-medium">
+                      Smartfon va kartasiz to'lov
+                    </span>
                   </div>
                 </div>
               </div>
 
               <div className="relative">
-                <img
-                  src="https://www.atto.uz/image/handPay.png"
+                {/* <img
+                  src="https://habrastorage.org/r/w780/getpro/habr/upload_files/d70/685/d6f/d70685d6fc1580d42a9a88930850e209.jpg"
                   alt="Hand payment"
                   className="w-full h-auto rounded-2xl shadow-2xl"
-                />
+                /> */}
                 <div className="absolute -inset-4 bg-gradient-to-r from-blue-900/10 to-transparent rounded-2xl blur-xl"></div>
               </div>
             </div>
@@ -199,7 +222,9 @@ function facepay() {
         <div className="container mx-auto max-w-6xl">
           <div className="fade-in opacity-0 translate-y-8 transition-all duration-1000">
             <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-blue-900 mb-6">PalmPayni qanday ulash kerak</h2>
+              <h2 className="text-4xl font-bold text-blue-900 mb-6">
+                PalmPayni qanday ulash kerak
+              </h2>
               <div className="w-24 h-1 bg-gradient-to-r from-blue-900 to-blue-600 mx-auto rounded-full"></div>
             </div>
 
@@ -213,8 +238,12 @@ function facepay() {
                     <div className="absolute -top-4 -left-4 w-12 h-12 bg-blue-900 rounded-full flex items-center justify-center text-white font-bold text-xl">
                       {index + 1}
                     </div>
-                    <h3 className="text-xl font-semibold text-blue-900 mb-4 text-center">{step.title}</h3>
-                    <p className="text-blue-800/80 text-center mb-6">{step.description}</p>
+                    <h3 className="text-xl font-semibold text-blue-900 mb-4 text-center">
+                      {step.title}
+                    </h3>
+                    <p className="text-blue-800/80 text-center mb-6">
+                      {step.description}
+                    </p>
                     <div className="relative rounded-xl">
                       <img
                         src={step.image || "/placeholder.svg"}
@@ -235,7 +264,9 @@ function facepay() {
         <div className="container mx-auto max-w-6xl">
           <div className="fade-in opacity-0 translate-y-8 transition-all duration-1000">
             <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-blue-900 mb-6">Palm to'lovini faollashtirish</h2>
+              <h2 className="text-4xl font-bold text-blue-900 mb-6">
+                Palm to'lovini faollashtirish
+              </h2>
               <div className="w-24 h-1 bg-gradient-to-r from-blue-900 to-blue-600 mx-auto rounded-full"></div>
             </div>
 
@@ -252,7 +283,9 @@ function facepay() {
                   </div>
                   <div className="flex items-center gap-4 flex-1">
                     <step.icon className="w-8 h-8 text-blue-900 flex-shrink-0" />
-                    <p className="text-blue-800/90 leading-relaxed">{step.title}</p>
+                    <p className="text-blue-800/90 leading-relaxed">
+                      {step.title}
+                    </p>
                   </div>
                   <ArrowRight className="w-6 h-6 text-blue-900/50 flex-shrink-0" />
                 </div>
@@ -267,7 +300,9 @@ function facepay() {
         <div className="container mx-auto max-w-6xl">
           <div className="fade-in opacity-0 translate-y-8 transition-all duration-1000">
             <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-blue-900 mb-6">PalmPay dan qanday foydalanish mumkin</h2>
+              <h2 className="text-4xl font-bold text-blue-900 mb-6">
+                PalmPay dan qanday foydalanish mumkin
+              </h2>
               <div className="w-24 h-1 bg-gradient-to-r from-blue-900 to-blue-600 mx-auto rounded-full"></div>
             </div>
 
@@ -281,7 +316,9 @@ function facepay() {
                     <div className="flex items-center justify-center w-12 h-12 bg-blue-900/10 rounded-xl mb-4 mx-auto group-hover:bg-blue-900 group-hover:text-white transition-all duration-300">
                       <step.icon className="w-6 h-6 text-blue-900 group-hover:text-white transition-colors duration-300" />
                     </div>
-                    <p className="text-blue-800/90 text-center leading-relaxed">{step.title}</p>
+                    <p className="text-blue-800/90 text-center leading-relaxed">
+                      {step.title}
+                    </p>
                   </div>
                 </div>
               ))}
@@ -296,14 +333,14 @@ function facepay() {
           transform: translateY(2rem);
           transition: all 1s ease-out;
         }
-        
+
         .fade-in.animate-in {
           opacity: 1;
           transform: translateY(0);
         }
       `}</style>
     </div>
-  )
+  );
 }
 
-export default facepay
+export default facepay;

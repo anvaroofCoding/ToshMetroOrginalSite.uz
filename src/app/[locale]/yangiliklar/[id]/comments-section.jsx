@@ -40,7 +40,7 @@ export default function CommentsSection({ newsId }) {
     try {
       setLoading(true);
       const response = await fetch(
-        `https://metro-site.onrender.com/api/comments/uz/`,
+        `https://metro-site.onrender.com/api/comments/uz/?news_id=${newsId}`,
         {
           cache: "no-store",
         }
@@ -79,7 +79,7 @@ export default function CommentsSection({ newsId }) {
     try {
       setSubmitting(true);
       const response = await fetch(
-        `https://metro-site.onrender.com/api/comments/uz/`,
+        `https://metro-site.onrender.com/api/comments/uz/?news_id=${newsId}`,
         {
           method: "POST",
           headers: {
@@ -179,7 +179,7 @@ export default function CommentsSection({ newsId }) {
 
     try {
       const response = await fetch(
-        `https://metro-site.onrender.com/api/comments/uz/${commentId}/`,
+        `https://metro-site.onrender.com/api/comments/uz/?news_id=${newsId}`,
         {
           method: "DELETE",
         }

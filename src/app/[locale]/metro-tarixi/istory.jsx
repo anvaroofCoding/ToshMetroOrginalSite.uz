@@ -84,12 +84,12 @@ function TashkentMetroPage() {
   const metroLines = [
     {
       name: "Chilonzor yo'nalishi",
-      length: "16.3 km",
-      stations: 12,
+      length: "22.6 km",
+      stations: 17,
       opened: "1977",
       color: "#fb7e7e",
       description:
-        "Shahar markazini turar-joy massivlari bilan bog'laydigan birinchi metro yo'nalishi",
+        "Chinor-Choshtepa bekatlari 2020-yilda foydalanishga topshirilgan",
       highlights: [
         "Tarixiy birinchi yo'nalish",
         "Shahar markazi aloqasi",
@@ -98,7 +98,7 @@ function TashkentMetroPage() {
     },
     {
       name: "O'zbekiston yo'nalishi",
-      length: "14.2 km",
+      length: "14.8 km",
       stations: 11,
       opened: "1984",
       color: "#2563eb",
@@ -111,12 +111,12 @@ function TashkentMetroPage() {
     },
     {
       name: "Yunusobod yo'nalishi",
-      length: "9.5 km",
+      length: "10.05 km",
       stations: 8,
       opened: "2001",
       color: "#57be82",
       description:
-        "Yirik turar-joy majmualariga xizmat ko'rsatadigan zamonaviy yo'nalish",
+        "Yunisobod-Turkiston bekatlar 2021-yilda foydalanishga topshirilgan",
       highlights: [
         "Turar-joy hududlari",
         "Zamonaviy dizayn",
@@ -125,12 +125,12 @@ function TashkentMetroPage() {
     },
     {
       name: "Yerusti xalqa yo'li",
-      length: "7.0 km",
-      stations: 5,
+      length: "22.34 km",
+      stations: 14,
       opened: "2020",
       color: "#eecf53",
       description:
-        "Eng so'nggi texnologiyalar bilan jihozlangan yangi yo'nalish",
+        "Turon-Qipchoq bekatlari 2024-yilda foydalanishga topshirilgan",
       highlights: [
         "So'nggi texnologiya",
         "Ekologik toza",
@@ -150,82 +150,102 @@ function TashkentMetroPage() {
     {
       year: "1977",
       event: "Birinchi yo'nalish ochildi",
-      phase: "1-bosqich",
+      phase: "1-bosqich Chilonzor",
       description:
-        "Chilonzor yo'nalishi 6 ta bekat bilan ochildi, shahar transportida yangi davr boshlandi",
+        "1977-yil 6-noyabrda “Olmazor” bekatidan “Amir Temur xiyoboni” bekatiga qadar, “Chilonzor” elektrodepo kompleksi va aloqa uyi foydalanishga topshirildi.",
     },
     {
-      year: "1980-1991",
+      year: "1980",
       event: "Tez rivojlanish davri",
-      phase: "O'sish",
+      phase: "2-bosqich Chilonzor",
       description:
-        "Qurilishning bir necha bosqichlari yangi yo'nalishlar qo'shdi va shaharning asosiy hududlarini bog'ladi",
+        "Uzunligi 4,2 km, “Amir Temur xiyoboni” bekatidan “Buyuk ipak yo‘li” bekatigacha bo‘lgan 3 ta bekat 1980-yil avgust oyida foydalanishga topshirildi. Ushbu bekatlar ishga tushirilgach, Chilonzor metro yonalishining qurilishi janubi-g‘arbdan shimoli-sharqqa shahar markazi orqali 12 bekat va uzunligi 16,3 km bo‘lgan.",
+    },
+    {
+      year: "1984",
+      event: "O‘zbekiston yo‘nalishi",
+      phase: "1-bosqich O'zbekiston",
+      description:
+        "Uzunligi 5,6 km dan ortiq boʻlgan, 5 ta bekati boʻlgan “Alisher Navoiy” bekatidan “Toshkent” bekatiga qadar 1984-yil 26-noyabrda foydalanishga topshirilib, shahar markazini temir yoʻl vokzaliga tutashtirdi.",
+    },
+    {
+      year: "1987",
+      event: "O'zbekiston yo'nalishining kengayishi",
+      phase: "2-bosqich O'zbekiston",
+      description:
+        "Uzunligi 3,2 km dan ortiq bo‘lgan, “Toshkent” bekatidan “Do‘stlik” bekatigacha bekat 1987-yil foydalanishga topshirildi.",
+    },
+    {
+      year: "1989",
+      event: "O'zbekiston yo'nalishining kengayishi",
+      phase: "3-bosqich O'zbekiston",
+      description:
+        "Uzunligi 2,2 km dan ortiq bo ‘lgan, “Alisher Navoiy” bekatidan “Chorsu” bekatiga qadar 2 ta bekat 1989 yil foydalanishga topshirildi.",
+    },
+    {
+      year: "1991",
+      event: "O'zbekiston yo'nalishining kengayishi",
+      phase: "4-bosqich O'zbekiston",
+      description:
+        "3,2 km uzunlikdagi Chorsu bekatidan Beruniy bekatigacha boʻlgan 2 ta bekat 1991-yil aprel oyida foydalanishga topshirilgan.Umumiy uzunligi 14,2 km boʻlgan Oʻzbekiston yo‘nalishi 11 ta bekat va Oʻzbekiston elektr deposini oʻz ichiga oladi.",
     },
     {
       year: "2001",
-      event: "Yangi ming yillik yo'nalishi",
-      phase: "Zamonaviy davr",
+      event: "Yunusobod yo’nalishi",
+      phase: "1-bosqich Yunusobod",
       description:
-        "Yunusobod yo'nalishi zamonaviy texnologiya va yaxshilangan qulayliklar bilan ochildi",
+        "Shahar aholisiga transport xizmati koʻrsatishni yanada yaxshilash maqsadida, 2001-yil 26-oktabr sanasida Ming oʻrik bekatidan Shahriston bekatigacha boʻlgan Yunusobod metro yo’nalishining 1-bosqichi, umumiy uzunligi 7,15 km boʻlgan 6 ta bekat foydalanishga topshirildi.",
     },
     {
       year: "2016-2020",
-      event: "Katta modernizatsiya",
-      phase: "Innovatsiya",
+      event: "Yunusobod yo’nalishi",
+      phase: "2-bosqich Yunusobod",
       description:
-        "Prezident tashabbusi bilan katta kengayish va modernizatsiya loyihalari boshlandi",
+        "2016-yilda O‘zbekiston Respublikasi Prezidenti Sh.M. Mirziyoyev tomonidan metro qurilishini davom ettirishga qaratilgan qator qarorlar imzolandi. O‘zbekiston Respublikasi Prezidentining 2016-yil 7-noyabrdagi “Toshkent metropolitenining Yunusobod liniyasining ikkinchi bosqichini qurish” loyihasini amalga oshirish chora-tadbirlari to‘g‘risida”gi PQ-2653-sonli qaroriga muvofiq Yunusobod metro yo ‘nalishining 2,9 km uzunlikdagi ikki “Turkiston” va “Yunusobod” bekatlari qurilishi boshlandi. 2020-yilda avgust oyida ikkita “Turkiston” va “Yunusobod” bekatlari foydalanishga topshirildi. Hozirgi vaqtda Yunusobod yo ‘nalishining umumiy uzunligi 9,5 km bo‘lib, 8 bekat bilan yirik turar-joy massivini shahar markazi bilan bog‘laydi.",
     },
     {
-      year: "2020-2023",
-      event: "Rekord kengayish",
-      phase: "Hozirgi vaqt",
+      year: "2017",
+      event: "PQ-2979-son qarori",
+      phase: "Yer usti halqa yo'li",
       description:
-        "21.4 km yangi yo'nalishlar qo'shildi, shu jumladan halqa yo'li va Sergeli yo'nalishi",
+        "O ‘zbekiston Respublikasi Prezidentining 2017-yil 19-maydagi PQ-2979-son qaroriga muvofiq “Toshkent shahrida halqa yer usti metro liniyasini qurish” loyihasi amalga oshirilmoqda.",
+    },
+    {
+      year: "2017",
+      event: "PQ-2979-son qarori",
+      phase: "Yer usti halqa yo'li",
+      description:
+        "O ‘zbekiston Respublikasi Prezidentining 2017-yil 19-maydagi PQ-2979-son qaroriga muvofiq “Toshkent shahrida halqa yer usti metro liniyasini qurish” loyihasi amalga oshirilmoqda.",
+    },
+    {
+      year: "2020",
+      event: "Yer usti halqa yo'li",
+      phase: "Yer usti halqa yo'li topshirildi",
+      description:
+        "2020 yil avgust oyida metro halqa yer usti yo ‘nalishining 1–bosqichi – 11,5 km uzunlikdagi 7 ta bekat foydalanishga topshirildi.Ushbu qarorlar ijrosini ta ‘minlash maqsadida 2020-yilda umumiy uzunligi 21,4 km bo ‘lgan 14 ta yangi metro yo‘nalish va bekatlari qurilib, foydalanishga topshirildi.",
+    },
+    {
+      year: "2020",
+      event: "Chilonzor yo'nalishining kengayishi",
+      phase: "Sergili bekatlari",
+      description:
+        "O‘zbekiston Respublikasi Prezidentining 2016-yil 29-noyabrdagi “Toshkent metropolitenining Sergeli liniyasini qurish” loyihasini amalga oshirish chora-tadbirlari to‘g‘risida”gi PQ-2664-sonli qaroriga muvofiq 2020-yil dekabr oyida 7,0 km uzunlikdagi yangi Sergeli metro yo‘lining 5 ta bekati qurildi va foydalanishga topshirildi",
+    },
+    {
+      year: "2021",
+      event: "Yunusobod yo'nalishining kengayishi",
+      phase: "Yangi bekatlar",
+      description:
+        "Yunisobod-Turkiston bekatlar 2021-yilda foydalanishga topshirilgan",
+    },
+    {
+      year: "2024",
+      event: "Yerusti xalqa yo'li kengayishi",
+      phase: "Yangi bekatlar",
+      description:
+        "Turon-Qipchoq bekatlari 2024-yilda foydalanishga topshirilgan",
     },
   ];
-
-  const futurePlans = [
-    {
-      title: "Yo'nalishlarni kengaytirish",
-      description:
-        "Rivojlanayotgan shahar atrofi hududlariga xizmat ko'rsatish uchun mavjud yo'nalishlarni kengaytirish",
-      timeline: "2024-2026",
-      status: "Rejalashtirilmoqda",
-    },
-    {
-      title: "Aqlli texnologiyalar",
-      description:
-        "AI asosidagi transport boshqaruvi va mobil chiptalar tizimini joriy etish",
-      timeline: "2024-2025",
-      status: "Amalga oshirilmoqda",
-    },
-    {
-      title: "Qulaylik yangilanishlari",
-      description: "Nogironlar uchun liftlar va qulayliklar qo'shish",
-      timeline: "2024-2027",
-      status: "Davom etmoqda",
-    },
-    {
-      title: "Yashil energiya",
-      description:
-        "Barcha operatsiyalar uchun qayta tiklanadigan energiya manbalariga o'tish",
-      timeline: "2025-2030",
-      status: "Tadqiqot bosqichi",
-    },
-  ];
-
-  const getStatusColor = (status) => {
-    switch (status) {
-      case "Amalga oshirilmoqda":
-        return "bg-green-500";
-      case "Rejalashtirilmoqda":
-        return "bg-blue-500";
-      case "Davom etmoqda":
-        return "bg-orange-500";
-      default:
-        return "bg-gray-500";
-    }
-  };
 
   return (
     <div className="min-h-screen mt-10  overflow-hidden">
@@ -258,17 +278,12 @@ function TashkentMetroPage() {
               <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-[#0E327F] to-blue-600 bg-clip-text text-transparent">
                 Toshkent Metropoliteni
               </h1>
-              <p className="text-lg text-[#0E327F]/70 mt-2">
-                Markaziy Osiyoning Yetakchi Metro Tizimi
-              </p>
             </div>
           </div>
           <div className="max-w-4xl mx-auto">
             <p className="text-xl md:text-2xl text-gray-600 leading-relaxed mb-8">
-              Markaziy Osiyoda birinchi va yagona metro tizimi, 1972 yildan beri
-              shahar transportining asosiy qismi hisoblanadi. Bu taraqqiyot
-              ramzi bo&apos;lib, jamoalarni bog&apos;laydi va barqaror
-              transportning kelajagini ta&apos;minlaydi.
+              Markaziy Osiyoda birinchi va yagona metro tizimi, 1977 yildan beri
+              shahar transportining asosiy qismi hisoblanadi.
             </p>
           </div>
         </div>
@@ -420,23 +435,6 @@ function TashkentMetroPage() {
                       <div className="text-xs text-gray-600">Ochildi</div>
                     </div>
                   </div>
-
-                  <div className="space-y-2">
-                    <h4 className="font-semibold text-[#0E327F] text-sm">
-                      Asosiy xususiyatlar:
-                    </h4>
-                    <div className="flex flex-wrap gap-2">
-                      {line.highlights.map((highlight, idx) => (
-                        <Badge
-                          key={idx}
-                          variant="outline"
-                          className="border-gray-300 text-gray-600 hover:border-[#0E327F] hover:text-[#0E327F] transition-colors duration-300"
-                        >
-                          {highlight}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
                 </CardContent>
               </Card>
             ))}
@@ -502,52 +500,6 @@ function TashkentMetroPage() {
           </div>
         </div>
 
-        {/* Future Plans */}
-        <div ref={(el) => (sectionRefs.current[6] = el)} className="mb-20">
-          <h2 className="text-4xl font-bold text-[#0E327F] mb-4 text-center">
-            Kelajak Rejalar
-          </h2>
-          <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-            Shaharimizning o&apos;sib borayotgan ehtiyojlariga xizmat
-            ko&apos;rsatish uchun doimiy innovatsiya va kengayish
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {futurePlans.map((plan, index) => (
-              <Card
-                key={index}
-                className="border-0 shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-2 bg-gradient-to-br from-white to-blue-50 group"
-                style={{
-                  animationDelay: `${index * 150}ms`,
-                  animation: `fadeInUp 0.8s ease-out ${index * 150}ms both`,
-                }}
-              >
-                <CardContent className="p-8">
-                  <div className="flex items-start justify-between mb-4">
-                    <h3 className="text-xl font-bold text-[#0E327F] group-hover:text-blue-600 transition-colors duration-300">
-                      {plan.title}
-                    </h3>
-                    <Badge
-                      className={`${getStatusColor(
-                        plan.status
-                      )} text-white group-hover:scale-110 transition-transform duration-300`}
-                    >
-                      {plan.status}
-                    </Badge>
-                  </div>
-                  <p className="text-gray-600 mb-4 leading-relaxed">
-                    {plan.description}
-                  </p>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm font-medium text-[#0E327F]">
-                      {plan.timeline}
-                    </span>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-
         {/* Enhanced Current Status */}
         <Card className="border-0 shadow-2xl bg-gradient-to-r from-[#0E327F] via-blue-600 to-blue-700 text-white overflow-hidden relative">
           <div className="absolute inset-0 bg-gradient-to-r from-[#0E327F]/90 to-blue-600/90" />
@@ -564,7 +516,7 @@ function TashkentMetroPage() {
             <p className="text-xl mb-8 opacity-90 leading-relaxed max-w-4xl mx-auto">
               Bugun Toshkent metropoliteni Markaziy Osiyoning yetakchi shahar
               transport tizimi sifatida 70 kilometrdan ortiq uzunlikda 50 ta
-              zamonaviy bekat bilan faoliyat yuritmoqda. Bizning jamoa xavfsiz,
+              bekatlar bilan faoliyat yuritmoqda. Bizning jamoa xavfsiz,
               samarali va barqaror transport bilan xizmat ko&apos;rsatishdan
               faxrlanamiz, hayotlarni bog&apos;laymiz va shahar
               harakatchanligining kelajagini ta&apos;minlaymiz.
@@ -583,7 +535,7 @@ function TashkentMetroPage() {
                 <div className="text-sm opacity-80">Kunlik Yo&apos;lovchi</div>
               </div>
               <div className="text-center group hover:scale-110 transition-transform duration-300">
-                <div className="text-4xl font-bold mb-2">51</div>
+                <div className="text-4xl font-bold mb-2">53</div>
                 <div className="text-sm opacity-80">Xizmat Yili</div>
               </div>
             </div>

@@ -1,112 +1,118 @@
-"use client"
+"use client";
 
-import Image from "next/image"
-import { usePathname } from "next/navigation"
-import { useEffect, useState, useCallback, useMemo } from "react"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Heart, Loader2, RefreshCw } from "lucide-react"
-import { useToast } from "@/hooks/use-toast"
+import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { useEffect, useState, useCallback, useMemo } from "react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Heart, Loader2, RefreshCw } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 // Enhanced time ago function with better localization
 const getTimeAgo = (dateString) => {
-  const now = new Date()
-  const publishedDate = new Date(dateString)
-  const diffInSeconds = Math.floor((now.getTime() - publishedDate.getTime()) / 1000)
+  const now = new Date();
+  const publishedDate = new Date(dateString);
+  const diffInSeconds = Math.floor(
+    (now.getTime() - publishedDate.getTime()) / 1000
+  );
 
   if (diffInSeconds < 60) {
-    return `${diffInSeconds} soniya oldin`
+    return `${diffInSeconds} soniya oldin`;
   } else if (diffInSeconds < 3600) {
-    const minutes = Math.floor(diffInSeconds / 60)
-    return `${minutes} daqiqa oldin`
+    const minutes = Math.floor(diffInSeconds / 60);
+    return `${minutes} daqiqa oldin`;
   } else if (diffInSeconds < 86400) {
-    const hours = Math.floor(diffInSeconds / 3600)
-    return `${hours} soat oldin`
+    const hours = Math.floor(diffInSeconds / 3600);
+    return `${hours} soat oldin`;
   } else if (diffInSeconds < 2592000) {
     // 30 days
-    const days = Math.floor(diffInSeconds / 86400)
-    return `${days} kun oldin`
+    const days = Math.floor(diffInSeconds / 86400);
+    return `${days} kun oldin`;
   } else {
-    return publishedDate.toLocaleDateString()
+    return publishedDate.toLocaleDateString();
   }
-}
-
+};
 
 export default function OptimizedNews() {
-  const [newsdata, setNewsData] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
-  const [likingItems, setLikingItems] = useState(new Set())
+  const [newsdata, setNewsData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [likingItems, setLikingItems] = useState(new Set());
 
-  const pathname = usePathname()
-  const lang = pathname.split("/")[1] || "uz"
-  const { toast } = useToast()
+  const pathname = usePathname();
+  const lang = pathname.split("/")[1] || "uz";
+  const { toast } = useToast();
 
   // Optimized news fetching with better error handling
   const getNews = useCallback(async () => {
     try {
-      setLoading(true)
-      setError(null)
+      setLoading(true);
+      setError(null);
 
-      const controller = new AbortController()
-      const timeoutId = setTimeout(() => controller.abort(), 10000) // 10 second timeout
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
 
-      const res = await fetch(`https://metro-site.onrender.com/api/news/${lang}/`, {
-        signal: controller.signal,
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      })
+      const res = await fetch(
+        `https://metro-site.onrender.com/api/news/${lang}/`,
+        {
+          signal: controller.signal,
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
-      clearTimeout(timeoutId)
+      clearTimeout(timeoutId);
 
       if (!res.ok) {
-        throw new Error(`Failed to fetch news: ${res.status} ${res.statusText}`)
+        throw new Error(
+          `Failed to fetch news: ${res.status} ${res.statusText}`
+        );
       }
 
-      const data = await res.json()
+      const data = await res.json();
 
       if (!Array.isArray(data)) {
-        throw new Error("Invalid data format received")
+        throw new Error("Invalid data format received");
       }
 
-      setNewsData(data)
+      setNewsData(data);
     } catch (err) {
-      let errorMessage = "Unknown error occurred"
+      let errorMessage = "Unknown error occurred";
 
       if (err instanceof Error) {
         if (err.name === "AbortError") {
-          errorMessage = "Request timed out. Please check your connection."
+          errorMessage = "Request timed out. Please check your connection.";
         } else {
-          errorMessage = err.message
+          errorMessage = err.message;
         }
       }
 
-      setError(errorMessage)
-      console.error("Error fetching news:", err)
+      setError(errorMessage);
+      console.error("Error fetching news:", err);
 
       toast({
         title: "Error",
         description: "Failed to load news. Please try again.",
         variant: "destructive",
-      })
+      });
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }, [lang, toast])
+  }, [lang, toast]);
 
   // Optimized like handler with better state management
   const handleLike = useCallback(
     async (itemId) => {
-      if (likingItems.has(itemId)) return
+      if (likingItems.has(itemId)) return;
 
-      const currentItem = newsdata.find((item) => item.id === itemId)
-      if (!currentItem) return
+      const currentItem = newsdata.find((item) => item.id === itemId);
+      if (!currentItem) return;
 
       try {
-        setLikingItems((prev) => new Set(prev).add(itemId))
+        setLikingItems((prev) => new Set(prev).add(itemId));
 
         // Optimistic update
         setNewsData((prevData) =>
@@ -114,38 +120,49 @@ export default function OptimizedNews() {
             item.id === itemId
               ? {
                   ...item,
-                  like_count: item.is_liked ? item.like_count - 1 : item.like_count + 1,
+                  like_count: item.is_liked
+                    ? item.like_count - 1
+                    : item.like_count + 1,
                   is_liked: !item.is_liked,
                 }
-              : item,
-          ),
-        )
+              : item
+          )
+        );
 
-        const response = await fetch(`https://metro-site.onrender.com/api/news/${itemId}/like/`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-        })
+        const response = await fetch(
+          `https://metro-site.onrender.com/api/news/${itemId}/like/`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+          }
+        );
 
         if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`)
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        const data = await response.json()
+        const data = await response.json();
 
         // Update with server response
         setNewsData((prevData) =>
           prevData.map((item) =>
-            item.id === itemId ? { ...item, like_count: data.like_count, is_liked: data.is_liked ?? true } : item,
-          ),
-        )
+            item.id === itemId
+              ? {
+                  ...item,
+                  like_count: data.like_count,
+                  is_liked: data.is_liked ?? true,
+                }
+              : item
+          )
+        );
 
         toast({
           title: "Success",
           description: data.message || "Action completed successfully",
-        })
+        });
       } catch (err) {
         // Revert optimistic update on error
         setNewsData((prevData) =>
@@ -156,38 +173,38 @@ export default function OptimizedNews() {
                   like_count: currentItem.like_count,
                   is_liked: currentItem.is_liked,
                 }
-              : item,
-          ),
-        )
+              : item
+          )
+        );
 
-        console.error("Error liking news:", err)
+        console.error("Error liking news:", err);
         toast({
           title: "Error",
           description: "Failed to update like. Please try again.",
           variant: "destructive",
-        })
+        });
       } finally {
         setLikingItems((prev) => {
-          const newSet = new Set(prev)
-          newSet.delete(itemId)
-          return newSet
-        })
+          const newSet = new Set(prev);
+          newSet.delete(itemId);
+          return newSet;
+        });
       }
     },
-    [likingItems, newsdata, toast],
-  )
+    [likingItems, newsdata, toast]
+  );
 
   useEffect(() => {
-    getNews()
-  }, [getNews])
+    getNews();
+  }, [getNews]);
 
   // Memoized news items with improved layout and stylish like button
   const memoizedNewsItems = useMemo(() => {
     return newsdata.map((item) => {
-      const imageUrl = item.images?.[0]?.image
-      const description = item[`description_${lang}`]
-      const title = item[`title_${lang}` ]
-      const isLiking = likingItems.has(item.id)
+      const imageUrl = item.images?.[0]?.image;
+      const description = item[`description_${lang}`];
+      const title = item[`title_${lang}`];
+      const isLiking = likingItems.has(item.id);
 
       return (
         <Card
@@ -206,7 +223,9 @@ export default function OptimizedNews() {
               />
             ) : (
               <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
-                <span className="text-sm text-gray-500">No Image Available</span>
+                <span className="text-sm text-gray-500">
+                  No Image Available
+                </span>
               </div>
             )}
             {/* Overlay gradient for better visual appeal */}
@@ -215,29 +234,38 @@ export default function OptimizedNews() {
 
           <CardContent className="flex-1 p-4 flex flex-col">
             <div className="flex-1 mb-4 relative">
-              <Link href={`/${lang}/yangiliklar/${item.id}`} className="block group">
+              <Link
+                href={`/${lang}/yangiliklar/${item.id}`}
+                className="block group"
+              >
                 <h3 className="font-semibold text-lg line-clamp-2 mb-2 group-hover:text-blue-600 transition-colors duration-200">
                   {title || "Untitled"}
                 </h3>
-                <p className="text-sm text-gray-600 line-clamp-3 mb-3">{description || "No description available"}</p>
+                <p className="text-sm text-gray-600 line-clamp-3 mb-3">
+                  {description || "No description available"}
+                </p>
               </Link>
-              <p className="text-xs text-muted-foreground absolute bottom-0">{getTimeAgo(item.publishedAt)}</p>
+              <p className="text-xs text-muted-foreground absolute bottom-0">
+                {getTimeAgo(item.publishedAt)}
+              </p>
             </div>
 
             <div className="flex items-center justify-between pt-3 border-t border-gray-100">
               {/* Stylish Like Button */}
               <button
                 onClick={(e) => {
-                  e.preventDefault()
-                  e.stopPropagation()
-                  handleLike(item.id)
+                  e.preventDefault();
+                  e.stopPropagation();
+                  handleLike(item.id);
                 }}
                 disabled={isLiking}
                 className={`group relative flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300 transform hover:scale-105 active:scale-95 ${
                   item.is_liked
                     ? "bg-gradient-to-r from-pink-500 to-red-500 text-white shadow-lg hover:shadow-xl hover:from-pink-600 hover:to-red-600"
                     : "bg-gray-50 hover:bg-gray-100 text-gray-600 hover:text-red-500 border border-gray-200 hover:border-red-200 hover:shadow-md"
-                } ${isLiking ? "cursor-not-allowed opacity-70" : "cursor-pointer"}`}
+                } ${
+                  isLiking ? "cursor-not-allowed opacity-70" : "cursor-pointer"
+                }`}
               >
                 {isLiking ? (
                   <Loader2 className="h-4 w-4 animate-spin" />
@@ -277,19 +305,19 @@ export default function OptimizedNews() {
             </div>
           </CardContent>
         </Card>
-      )
-    })
-  }, [newsdata, lang, likingItems, handleLike])
+      );
+    });
+  }, [newsdata, lang, likingItems, handleLike]);
 
   if (loading) {
     return (
-     <div className="flex items-center justify-center h-[100vh]">
+      <div className="flex items-center justify-center h-[100vh]">
         <div className="flex items-center space-x-2">
           <Loader2 className="h-6 w-6 animate-spin" />
           <span>Yuklanmoqda...</span>
         </div>
       </div>
-    )
+    );
   }
 
   if (error) {
@@ -298,17 +326,23 @@ export default function OptimizedNews() {
         <div className="container py-8">
           <div className="flex flex-col items-center justify-center min-h-[400px] gap-4 text-center">
             <div className="p-4 bg-red-50 rounded-lg border border-red-200">
-              <p className="text-red-600 font-medium mb-2">Failed to load news</p>
+              <p className="text-red-600 font-medium mb-2">
+                Failed to load news
+              </p>
               <p className="text-sm text-red-500">{error}</p>
             </div>
-            <Button onClick={getNews} variant="outline" className="flex items-center gap-2 bg-transparent">
+            <Button
+              onClick={getNews}
+              variant="outline"
+              className="flex items-center gap-2 bg-transparent"
+            >
               <RefreshCw className="h-4 w-4" />
               Try Again
             </Button>
           </div>
         </div>
       </div>
-    )
+    );
   }
 
   if (newsdata.length === 0) {
@@ -317,24 +351,34 @@ export default function OptimizedNews() {
         <div className="container py-8">
           <div className="flex flex-col items-center justify-center min-h-[400px] gap-4">
             <div className="p-6 bg-gray-50 rounded-lg border border-gray-200 text-center">
-              <p className="text-gray-600 font-medium mb-2">No news available</p>
-              <p className="text-sm text-gray-500">Check back later for updates</p>
+              <p className="text-gray-600 font-medium mb-2">
+                No news available
+              </p>
+              <p className="text-sm text-gray-500">
+                Check back later for updates
+              </p>
             </div>
-            <Button onClick={getNews} variant="outline" className="flex items-center gap-2 bg-transparent">
+            <Button
+              onClick={getNews}
+              variant="outline"
+              className="flex items-center gap-2 bg-transparent"
+            >
               <RefreshCw className="h-4 w-4" />
               Refresh
             </Button>
           </div>
         </div>
       </div>
-    )
+    );
   }
 
   return (
     <div className="w-full">
       <div className="container py-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">{memoizedNewsItems}</div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {memoizedNewsItems}
+        </div>
       </div>
     </div>
-  )
+  );
 }

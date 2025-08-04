@@ -12,6 +12,7 @@ import {
   Clock,
   Train,
   Phone,
+  Loader2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -95,25 +96,11 @@ function ApiVakan() {
 
   if (loading) {
     return (
-      <div className="h-screen flex items-center justify-center">
-        <motion.div
-          className="text-center"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          <motion.div
-            variants={loadingVariants}
-            animate="animate"
-            className="w-16 h-16 border-4 border-blue-900 border-t-transparent rounded-full mx-auto mb-4"
-          />
-          <h2 className="text-2xl font-bold text-blue-900 mb-2">
-            Bo'sh ish o'rinlari yuklanmoqda
-          </h2>
-          <p className="text-blue-700">
-            Siz uchun eng yaxshi imkoniyatlarni topmoqdamiz...
-          </p>
-        </motion.div>
+      <div className="flex items-center justify-center h-[100vh]">
+        <div className="flex items-center space-x-2">
+          <Loader2 className="h-6 w-6 animate-spin" />
+          <span>Yuklanmoqda...</span>
+        </div>
       </div>
     );
   }
@@ -265,7 +252,10 @@ function ApiVakan() {
                         </div>
                       </div>
 
-                      <Link href={`/vacancies/${item.id}`} className="block">
+                      <Link
+                        href={`/bosh-ish-orinlari/${item.id}`}
+                        className="block"
+                      >
                         <Button
                           className="w-full bg-blue-900 hover:bg-blue-800 text-white group-hover:bg-blue-800 transition-all duration-300"
                           size="lg"

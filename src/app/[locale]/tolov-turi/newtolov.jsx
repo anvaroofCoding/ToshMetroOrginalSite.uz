@@ -14,8 +14,12 @@ import {
   ScanFace,
   LocationEdit,
   MapPin,
+  MoveRight,
+  ArrowRight,
 } from "lucide-react";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const attoCards = [
   {
@@ -64,7 +68,7 @@ const attoCards = [
 const mobileApps = [
   {
     name: "ATTO",
-    img: "https://play-lh.googleusercontent.com/n-p8ur5cwuXe1C49apbby-TWCLpA0Wp1P-DLz2VZv30BOfTlgJ5O27PwuX8L0bUvg9Q",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcmy22XjFSD_2_0EMVrZtvEIMPzDNWKm1rAQ&s",
     color: "bg-blue-500",
   },
   {
@@ -84,7 +88,7 @@ const mobileApps = [
   },
   {
     name: "Alif",
-    img: "https://play-lh.googleusercontent.com/Pa7lbcLOR8ax9XQEJEW7d5NdXrZrKQ9viUUt_2FCq1PgojFMB8Q-a04EjCKJ3Mw_yg",
+    img: "https://media.zenfs.com/en/accesswire.ca/972c408ebf2955d752992970cc69417f",
     color: "bg-blue-600",
   },
   {
@@ -417,7 +421,7 @@ export default function PaymentMethods() {
               </div>
             </div>
 
-            <div className="ml-12 sm:ml-16 md:ml-20 lg:ml-26">
+            <div className="ml-12 sm:ml-16 md:ml-20 lg:ml-26 ">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 md:gap-6 lg:gap-8 mb-6 sm:mb-8 lg:mb-10">
                 <Card
                   className="transition-all duration-500 hover:scale-105 hover:shadow-2xl 
@@ -435,12 +439,19 @@ export default function PaymentMethods() {
                     <p className="text-gray-700 mb-4 sm:mb-5 md:mb-6 text-sm sm:text-base md:text-lg leading-relaxed">
                       Yuz tanish texnologiyasi asosida to'lov
                     </p>
-                    <Badge
-                      variant="outline"
-                      className="text-xs sm:text-sm px-3 py-1"
-                    >
-                      Sinov rejimida
-                    </Badge>
+                    <div className="flex w-full justify-between items-center">
+                      <Badge
+                        variant="outline"
+                        className="text-xs sm:text-sm px-3 py-1"
+                      >
+                        Sinov rejimida
+                      </Badge>
+                      <Link href={"/FacePay"}>
+                        <Button className="bg-blue-900 hover:bg-vlue-800">
+                          Batafsil
+                        </Button>
+                      </Link>
+                    </div>
                   </CardContent>
                 </Card>
 
@@ -465,12 +476,20 @@ export default function PaymentMethods() {
                     <p className="text-gray-700 mb-4 sm:mb-5 md:mb-6 text-sm sm:text-base md:text-lg leading-relaxed">
                       Kaftni skanerlash orqali to'lov
                     </p>
-                    <Badge
-                      variant="outline"
-                      className="text-xs sm:text-sm px-3 py-1"
-                    >
-                      12 stansiyada
-                    </Badge>
+
+                    <div className="flex w-full justify-between items-center">
+                      <Badge
+                        variant="outline"
+                        className="text-xs sm:text-sm px-3 py-1"
+                      >
+                        12 stansiyada
+                      </Badge>
+                      <Link href={"/pay"}>
+                        <Button className="bg-blue-900 hover:bg-vlue-800">
+                          Batafsil
+                        </Button>
+                      </Link>
+                    </div>
                   </CardContent>
                 </Card>
               </div>
