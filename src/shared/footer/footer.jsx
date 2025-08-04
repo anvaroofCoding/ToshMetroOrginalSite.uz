@@ -1,11 +1,22 @@
-"use client"
+"use client";
 
-import { Facebook, Instagram, Mail, MapPin, Phone, Send, Youtube, Users, Eye, ArrowUp } from "lucide-react"
-import Image from "next/image"
-import Link from "next/link"
-import { useEffect, useState } from "react"
-import logo from "../../../public/logos.png"
-import { usePathname } from "next/navigation"
+import {
+  Facebook,
+  Instagram,
+  Mail,
+  MapPin,
+  Phone,
+  Send,
+  Youtube,
+  Users,
+  Eye,
+  ArrowUp,
+} from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import logo from "../../../public/logos.png";
+import { usePathname } from "next/navigation";
 
 // const logo = "/placeholder.svg?height=60&width=60&text=Metro"
 
@@ -34,7 +45,7 @@ const socialLinks = [
     title: "Facebook",
     color: "hover:bg-blue-600",
   },
-]
+];
 
 const contacts = [
   {
@@ -46,57 +57,61 @@ const contacts = [
   {
     icon: Phone,
     text: "+99871 241-65-14",
-    title: "Telefon",
+    title: "Qabulxona raqami",
     type: "phone",
   },
   {
     icon: Mail,
     text: "gup@tashmetro.uz",
-    title: "Korporativ email",
+    title: "Korporativ pochta manzili",
     type: "email",
   },
   {
     icon: Mail,
-    text: "info@tashmetro.uz",
-    title: "Xalqaro email",
+    text: "tash.metropoliten@mail.ru",
+    title: "Xalqaro pochta manzili",
     type: "email",
   },
-]
+];
 
 const Footer = () => {
-  const [totalVisitors, setTotalVisitors] = useState()
-  const [onlineVisitors, setOnlineVisitors] = useState()
-  const [showScrollTop, setShowScrollTop] = useState(false)
-  const pathname = usePathname()
-  const parts = pathname.split('/').filter(Boolean)
-  const isHiddenPath = parts[1] === 'metro-xaritasis'
+  const [totalVisitors, setTotalVisitors] = useState();
+  const [onlineVisitors, setOnlineVisitors] = useState();
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  const pathname = usePathname();
+  const parts = pathname.split("/").filter(Boolean);
+  const isHiddenPath = parts[1] === "metro-xaritasis";
   const getprosmotrsite = async () => {
-    const res = await fetch("https://metro-site.onrender.com/api/sayt_foydalanuvchilari/")
-    const data = await res.json()
-    setTotalVisitors(data.jami_foydalanuvchilar)
-    setOnlineVisitors(data.onlayn_foydalanuvchilar)
-  }
+    const res = await fetch(
+      "https://metro-site.onrender.com/api/sayt_foydalanuvchilari/"
+    );
+    const data = await res.json();
+    setTotalVisitors(data.jami_foydalanuvchilar);
+    setOnlineVisitors(data.onlayn_foydalanuvchilar);
+  };
 
   useEffect(() => {
-    getprosmotrsite()
-  }, [])
-
-
+    getprosmotrsite();
+  }, []);
 
   return (
     <>
-      <footer className={`relative rounded-t-[50px] bg-gradient-to-r from-[#0E327F] to-blue-800 text-white overflow-hidden ${isHiddenPath ? 'hidden' : ''}`}>
+      <footer
+        className={`relative rounded-t-[50px] bg-gradient-to-r from-[#0E327F] to-blue-800 text-white overflow-hidden ${
+          isHiddenPath ? "hidden" : ""
+        }`}
+      >
         {/* Background Pattern */}
-        <div className='absolute inset-0 z-0 opacity-20'>
-				<div
-					className='w-full h-full bg-repeat'
-					style={{
-						backgroundImage: 'url("/naqsh.png")',
-						backgroundRepeat: 'repeat',
-						backgroundSize: '200px', // <<< kichikroq qilib, ko‘p takrorlanadi
-					}}
-				/>
-			</div>
+        <div className="absolute inset-0 z-0 opacity-20">
+          <div
+            className="w-full h-full bg-repeat"
+            style={{
+              backgroundImage: 'url("/naqsh.png")',
+              backgroundRepeat: "repeat",
+              backgroundSize: "200px", // <<< kichikroq qilib, ko‘p takrorlanadi
+            }}
+          />
+        </div>
         <div className="absolute inset-0 opacity-5">
           <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=60 height=60 viewBox=0 0 60 60 xmlns=http://www.w3.org/2000/svg%3E%3Cg fill=none fillRule=evenodd%3E%3Cg fill=%23ffffff fillOpacity=0.1%3E%3Ccircle cx=30 cy=30 r=2/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]"></div>
         </div>
@@ -106,30 +121,32 @@ const Footer = () => {
           <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-6">
             {/* Brand Section */}
             <div className="lg:col-span-1 space-y-3">
-              <div className='flex items-center gap-3'>
-                <Link href={'/'}>
+              <div className="flex items-center gap-3">
+                <Link href={"/"}>
                   <Image
                     src={logo}
-                    alt='Toshkent metro logo'
+                    alt="Toshkent metro logo"
                     width={50}
                     height={50}
                   />
                 </Link>
-                <div className='h-[40px] flex-col justify-center hidden sm:flex'>
-                  <div className='border-l border-[#00B0FF] h-[30%] w-full'></div>
-                  <div className='border-l border-[#FF454B] h-[5%] w-full'></div>
-                  <div className='border-l border-white h-[30%] w-full'></div>
-                  <div className='border-l border-[#FF454B] h-[5%] w-full'></div>
-                  <div className='border-l border-[#00B100] h-[30%] w-full'></div>
+                <div className="h-[40px] flex-col justify-center hidden sm:flex">
+                  <div className="border-l border-[#00B0FF] h-[30%] w-full"></div>
+                  <div className="border-l border-[#FF454B] h-[5%] w-full"></div>
+                  <div className="border-l border-white h-[30%] w-full"></div>
+                  <div className="border-l border-[#FF454B] h-[5%] w-full"></div>
+                  <div className="border-l border-[#00B100] h-[30%] w-full"></div>
                 </div>
-                <h1 className='hidden md:block text-[11px] lg:text-[11] w-[150px] lg:w-[200px] capitalize'>
-                  O'zbekiston Respublikasi Transport vazirligi{' '}
+                <h1 className="hidden md:block text-[11px] lg:text-[11] w-[150px] lg:w-[200px] capitalize">
+                  O'zbekiston Respublikasi Transport vazirligi{" "}
                   <span>"Toshkent Metropoliteni"</span> DUK
                 </h1>
               </div>
 
               <blockquote className="relative text-white">
-                <div className="absolute -left-1 -top-1 text-3xl text-white font-serif">"</div>
+                <div className="absolute -left-1 -top-1 text-3xl text-white font-serif">
+                  "
+                </div>
                 <p className=" italic leading-relaxed pl-4">
                   Xavfsiz, tez va qulay yo’lovchilar tashishni ta’minlash.
                 </p>
@@ -147,7 +164,7 @@ const Footer = () => {
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
                 {contacts.map((item, idx) => {
-                  const IconComponent = item.icon
+                  const IconComponent = item.icon;
                   return (
                     <div
                       key={idx}
@@ -157,11 +174,15 @@ const Footer = () => {
                         <IconComponent className="w-4 h-4 text-blue-300" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-xs font-medium text-blue-200">{item.title}</p>
-                        <p className="text-white text-xs break-all">{item.text}</p>
+                        <p className="text-xs font-medium text-blue-200">
+                          {item.title}
+                        </p>
+                        <p className="text-white text-xs break-all">
+                          {item.text}
+                        </p>
                       </div>
                     </div>
-                  )
+                  );
                 })}
               </div>
             </div>
@@ -178,7 +199,7 @@ const Footer = () => {
               {/* Social Links */}
               <div className="flex gap-3 flex-wrap">
                 {socialLinks.map((item, idx) => {
-                  const IconComponent = item.icon
+                  const IconComponent = item.icon;
                   return (
                     <Link
                       key={idx}
@@ -190,7 +211,7 @@ const Footer = () => {
                       <IconComponent className="w-5 h-5 text-white group-hover:text-white transition-colors duration-300" />
                       <div className="absolute -inset-1 bg-gradient-to-r from-blue-400 to-purple-400 rounded-xl blur opacity-0 group-hover:opacity-30 transition-opacity duration-300"></div>
                     </Link>
-                  )
+                  );
                 })}
               </div>
 
@@ -220,7 +241,9 @@ const Footer = () => {
                       </div>
                       <div>
                         <p className="text-sm text-blue-200">Hozir onlayn</p>
-                        <p className="text-xl font-bold text-white">{onlineVisitors}</p>
+                        <p className="text-xl font-bold text-white">
+                          {onlineVisitors}
+                        </p>
                       </div>
                     </div>
                     {/* <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div> */}
@@ -238,7 +261,9 @@ const Footer = () => {
             <div className="flex items-center gap-2 text-blue-200">
               <span>© 2025 "Toshkent Metropoliteni" DUK</span>
               <span className="hidden md:inline">•</span>
-              <span className="hidden md:inline">Barcha huquqlar himoyalangan</span>
+              <span className="hidden md:inline">
+                Barcha huquqlar himoyalangan
+              </span>
             </div>
 
             <div className="flex items-center gap-2 text-blue-300">
@@ -266,7 +291,7 @@ const Footer = () => {
         </button>
       )}
     </>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;
