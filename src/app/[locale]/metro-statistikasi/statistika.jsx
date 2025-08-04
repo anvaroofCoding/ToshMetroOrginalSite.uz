@@ -1,12 +1,24 @@
-"use client"
+"use client";
 
-import { Alert } from "@/components/ui/alert"
+import { Alert } from "@/components/ui/alert";
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { motion } from "framer-motion"
-import { Loader2, TrendingUp } from "lucide-react"
-import { useEffect, useState } from "react"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { motion } from "framer-motion";
+import { Loader2, TrendingUp } from "lucide-react";
+import { useEffect, useState } from "react";
 import {
   Area,
   AreaChart,
@@ -27,17 +39,17 @@ import {
   Tooltip,
   XAxis,
   YAxis,
-} from "recharts"
+} from "recharts";
 
 const MetroStatistics = () => {
-  const [apiStats, setApiStats] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
-  const [selectedStation, setSelectedStation] = useState("")
-  const [stations, setStations] = useState([])
-  const [chartType, setChartType] = useState("bar")
-  const [animatedTotalUsers, setAnimatedTotalUsers] = useState(0)
-  const [animatedAverageUsers, setAnimatedAverageUsers] = useState(0)
+  const [apiStats, setApiStats] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [selectedStation, setSelectedStation] = useState("");
+  const [stations, setStations] = useState([]);
+  const [chartType, setChartType] = useState("bar");
+  const [animatedTotalUsers, setAnimatedTotalUsers] = useState(0);
+  const [animatedAverageUsers, setAnimatedAverageUsers] = useState(0);
 
   // Function to get month order for sorting
   const getMonthOrder = (monthName) => {
@@ -66,88 +78,98 @@ const MetroStatistics = () => {
       October: 10,
       November: 11,
       December: 12,
-    }
-    return months[monthName] || 0
-  }
+    };
+    return months[monthName] || 0;
+  };
 
   useEffect(() => {
     const getStatistika = async () => {
       try {
-        const response = await fetch("https://metro-site.onrender.com/api/statistics/uz/")
+        const response = await fetch(
+          "https://metro-site.onrender.com/api/statistics/uz/"
+        );
         if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`)
+          throw new Error(`HTTP error! Status: ${response.status}`);
         }
-        const data = await response.json()
-        setApiStats(data)
+        const data = await response.json();
+        setApiStats(data);
 
         // Extract unique station names
-        const uniqueStations = Array.from(new Set(data.map((stat) => stat.station_name)))
-        setStations(uniqueStations)
+        const uniqueStations = Array.from(
+          new Set(data.map((stat) => stat.station_name))
+        );
+        setStations(uniqueStations);
 
         // Set first station as default selection
         if (uniqueStations.length > 0) {
-          setSelectedStation(uniqueStations[0])
+          setSelectedStation(uniqueStations[0]);
         }
       } catch (err) {
-        console.error("Xatolik yuz berdi:", err)
-        setError("Ma'lumotlarni yuklashda xatolik yuz berdi.")
+        console.error("Xatolik yuz berdi:", err);
+        setError("Ma'lumotlarni yuklashda xatolik yuz berdi.");
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };
 
-    getStatistika()
-  }, [])
+    getStatistika();
+  }, []);
 
   // Get data for selected station - sorted by month order and remove duplicates
   const selectedStationData = apiStats
     .filter((item) => item.station_name === selectedStation)
     .reduce((acc, monthData) => {
       // Check if month already exists to avoid duplicates
-      const existingMonth = acc.find((item) => item.month === monthData.month)
+      const existingMonth = acc.find((item) => item.month === monthData.month);
       if (!existingMonth) {
         acc.push({
           month: monthData.month,
           user_count: monthData.user_count,
-        })
+        });
       }
-      return acc
+      return acc;
     }, [])
-    .sort((a, b) => getMonthOrder(a.month) - getMonthOrder(b.month))
+    .sort((a, b) => getMonthOrder(a.month) - getMonthOrder(b.month));
 
   // Calculate total users for selected station
-  const totalUsers = selectedStationData.reduce((sum, item) => sum + item.user_count, 0)
-  const averageUsers = selectedStationData.length > 0 ? Math.round(totalUsers / selectedStationData.length) : 0
+  const totalUsers = selectedStationData.reduce(
+    (sum, item) => sum + item.user_count,
+    0
+  );
+  const averageUsers =
+    selectedStationData.length > 0
+      ? Math.round(totalUsers / selectedStationData.length)
+      : 0;
 
   useEffect(() => {
     if (totalUsers > 0) {
-      const duration = 2000 // 2 seconds
-      const steps = 60 // 60 steps for smooth animation
-      const totalIncrement = totalUsers / steps
-      const averageIncrement = averageUsers / steps
-      const stepDuration = duration / steps
+      const duration = 2000; // 2 seconds
+      const steps = 60; // 60 steps for smooth animation
+      const totalIncrement = totalUsers / steps;
+      const averageIncrement = averageUsers / steps;
+      const stepDuration = duration / steps;
 
-      let currentStep = 0
+      let currentStep = 0;
       const timer = setInterval(() => {
-        currentStep++
-        const progress = currentStep / steps
+        currentStep++;
+        const progress = currentStep / steps;
 
-        setAnimatedTotalUsers(Math.round(totalUsers * progress))
-        setAnimatedAverageUsers(Math.round(averageUsers * progress))
+        setAnimatedTotalUsers(Math.round(totalUsers * progress));
+        setAnimatedAverageUsers(Math.round(averageUsers * progress));
 
         if (currentStep >= steps) {
-          setAnimatedTotalUsers(totalUsers)
-          setAnimatedAverageUsers(averageUsers)
-          clearInterval(timer)
+          setAnimatedTotalUsers(totalUsers);
+          setAnimatedAverageUsers(averageUsers);
+          clearInterval(timer);
         }
-      }, stepDuration)
+      }, stepDuration);
 
-      return () => clearInterval(timer)
+      return () => clearInterval(timer);
     } else {
-      setAnimatedTotalUsers(0)
-      setAnimatedAverageUsers(0)
+      setAnimatedTotalUsers(0);
+      setAnimatedAverageUsers(0);
     }
-  }, [totalUsers, averageUsers])
+  }, [totalUsers, averageUsers]);
 
   if (loading) {
     return (
@@ -157,7 +179,7 @@ const MetroStatistics = () => {
           <span>Yuklanmoqda...</span>
         </div>
       </div>
-    )
+    );
   }
 
   if (error) {
@@ -168,14 +190,15 @@ const MetroStatistics = () => {
           <p className="text-muted-foreground">{error}</p>
         </div>
       </Alert>
-    )
+    );
   }
 
   return (
     <div className="container min-h-screen overflow-hidden">
       <div className="text-center space-y-2 my-10">
         <h1 className="text-2xl sm:text-3xl font-bold text-blue-900">
-          Metropolitendan foydalanadigan yo'lovchilar oqimi tog'risida 6 oylik ma'lumot
+          Metropolitendan foydalanadigan yo'lovchilar oqimi tog'risida 6 oylik
+          ma'lumot
         </h1>
       </div>
 
@@ -185,7 +208,9 @@ const MetroStatistics = () => {
             <TrendingUp className="h-5 w-5" />
             Bekat Tanlash
           </CardTitle>
-          <CardDescription>Statistikasini ko'rish uchun metro bekatini tanlang</CardDescription>
+          <CardDescription>
+            Statistikasini ko'rish uchun metro bekatini tanlang
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <Select value={selectedStation} onValueChange={setSelectedStation}>
@@ -194,7 +219,11 @@ const MetroStatistics = () => {
             </SelectTrigger>
             <SelectContent>
               {stations.map((station) => (
-                <SelectItem key={station} value={station} className="focus:bg-blue-50">
+                <SelectItem
+                  key={station}
+                  value={station}
+                  className="focus:bg-blue-50"
+                >
                   {station}
                 </SelectItem>
               ))}
@@ -205,8 +234,12 @@ const MetroStatistics = () => {
 
       <Card className="mb-4">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-blue-900">Grafik Turi</CardTitle>
-          <CardDescription>Ma'lumotlarni ko'rsatish uchun grafik turini tanlang</CardDescription>
+          <CardTitle className="flex items-center gap-2 text-blue-900">
+            Grafik Turi
+          </CardTitle>
+          <CardDescription>
+            Ma'lumotlarni ko'rsatish uchun grafik turini tanlang
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <Select value={chartType} onValueChange={setChartType}>
@@ -225,11 +258,17 @@ const MetroStatistics = () => {
       </Card>
 
       {selectedStation && (
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+        >
           <Card className="mb-10 lg:mb-20">
             <CardHeader>
               <CardTitle>{selectedStation} bekati statistikasi</CardTitle>
-              <CardDescription>Oylik Yo'lovchilar soni va umumiy ko'rsatkichlar</CardDescription>
+              <CardDescription>
+                Oylik Yo'lovchilar soni va umumiy ko'rsatkichlar
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
@@ -238,7 +277,9 @@ const MetroStatistics = () => {
                     <div className="text-xl sm:text-2xl font-bold text-blue-900">
                       {animatedTotalUsers.toLocaleString()}
                     </div>
-                    <p className="text-xs sm:text-sm text-blue-600">Jami Yo'lovchilar</p>
+                    <p className="text-xs sm:text-sm text-blue-600">
+                      Jami Yo'lovchilar
+                    </p>
                   </CardContent>
                 </Card>
                 <Card className="border-blue-200">
@@ -246,7 +287,9 @@ const MetroStatistics = () => {
                     <div className="text-xl sm:text-2xl font-bold text-blue-900">
                       {animatedAverageUsers.toLocaleString()}
                     </div>
-                    <p className="text-xs sm:text-sm text-blue-600">O'rtacha oylik Yo'lovchilar</p>
+                    <p className="text-xs sm:text-sm text-blue-600">
+                      O'rtacha oylik Yo'lovchilar
+                    </p>
                   </CardContent>
                 </Card>
               </div>
@@ -257,7 +300,7 @@ const MetroStatistics = () => {
                     const commonProps = {
                       data: selectedStationData,
                       margin: { top: 20, right: 10, left: 10, bottom: 60 },
-                    }
+                    };
 
                     const commonXAxis = (
                       <XAxis
@@ -272,7 +315,7 @@ const MetroStatistics = () => {
                         height={80}
                         interval={0}
                       />
-                    )
+                    );
 
                     const commonYAxis = (
                       <YAxis
@@ -282,20 +325,23 @@ const MetroStatistics = () => {
                           fontWeight: "bold",
                         }}
                       />
-                    )
+                    );
 
                     const commonTooltip = (
                       <Tooltip
-                        formatter={(value) => [value.toLocaleString(), "Yo'lovchilar soni"]}
+                        formatter={(value) => [
+                          value.toLocaleString(),
+                          "Yo'lovchilar soni",
+                        ]}
                         labelStyle={{ color: "#1e3a8a" }}
                         contentStyle={{
                           backgroundColor: "#f8fafc",
                           border: "1px solid #1e3a8a",
                         }}
                       />
-                    )
+                    );
 
-                    const commonLegend = <Legend />
+                    const commonLegend = <Legend />;
 
                     switch (chartType) {
                       case "line":
@@ -314,7 +360,7 @@ const MetroStatistics = () => {
                               name="Yo'lovchilar soni"
                             />
                           </LineChart>
-                        )
+                        );
 
                       case "area":
                         return (
@@ -333,7 +379,7 @@ const MetroStatistics = () => {
                               name="Yo'lovchilar soni"
                             />
                           </AreaChart>
-                        )
+                        );
 
                       case "pie":
                         return (
@@ -343,7 +389,9 @@ const MetroStatistics = () => {
                               cx="50%"
                               cy="50%"
                               labelLine={false}
-                              label={({ month, percent }) => `${month} ${(percent * 100).toFixed(0)}%`}
+                              label={({ month, percent }) =>
+                                `${month} ${(percent * 100).toFixed(0)}%`
+                              }
                               outerRadius={120}
                               fill="#8884d8"
                               dataKey="user_count"
@@ -351,20 +399,32 @@ const MetroStatistics = () => {
                               {selectedStationData.map((entry, index) => (
                                 <Cell
                                   key={`cell-${index}`}
-                                  fill={`hsl(${220 + index * 30}, 70%, ${50 + index * 5}%)`}
+                                  fill={`hsl(${220 + index * 30}, 70%, ${
+                                    50 + index * 5
+                                  }%)`}
                                 />
                               ))}
                             </Pie>
-                            <Tooltip formatter={(value) => [value.toLocaleString(), "Yo'lovchilar soni"]} />
+                            <Tooltip
+                              formatter={(value) => [
+                                value.toLocaleString(),
+                                "Yo'lovchilar soni",
+                              ]}
+                            />
                           </PieChart>
-                        )
+                        );
 
                       case "radar":
                         return (
                           <RadarChart data={selectedStationData}>
                             <PolarGrid />
-                            <PolarAngleAxis dataKey="month" tick={{ fontSize: 12, fill: "#1e3a8a" }} />
-                            <PolarRadiusAxis tick={{ fontSize: 10, fill: "#1e3a8a" }} />
+                            <PolarAngleAxis
+                              dataKey="month"
+                              tick={{ fontSize: 12, fill: "#1e3a8a" }}
+                            />
+                            <PolarRadiusAxis
+                              tick={{ fontSize: 10, fill: "#1e3a8a" }}
+                            />
                             <Radar
                               name="Yo'lovchilar soni"
                               dataKey="user_count"
@@ -373,9 +433,14 @@ const MetroStatistics = () => {
                               fillOpacity={0.3}
                               strokeWidth={2}
                             />
-                            <Tooltip formatter={(value) => [value.toLocaleString(), "Yo'lovchilar soni"]} />
+                            <Tooltip
+                              formatter={(value) => [
+                                value.toLocaleString(),
+                                "Yo'lovchilar soni",
+                              ]}
+                            />
                           </RadarChart>
-                        )
+                        );
 
                       default: // bar chart
                         return (
@@ -384,9 +449,14 @@ const MetroStatistics = () => {
                             {commonYAxis}
                             {commonTooltip}
                             {commonLegend}
-                            <Bar dataKey="user_count" fill="#1e3a8a" name="Yo'lovchilar soni" radius={[4, 4, 0, 0]} />
+                            <Bar
+                              dataKey="user_count"
+                              fill="#1e3a8a"
+                              name="Yo'lovchilar soni"
+                              radius={[4, 4, 0, 0]}
+                            />
                           </BarChart>
-                        )
+                        );
                     }
                   })()}
                 </ResponsiveContainer>
@@ -399,13 +469,17 @@ const MetroStatistics = () => {
       {selectedStationData.length === 0 && selectedStation && (
         <Alert>
           <div className="text-center">
-            <h2 className="text-xl font-bold text-blue-900">Ma'lumotlar yo'q</h2>
-            <p className="text-muted-foreground">{selectedStation} bekati uchun statistika ma'lumotlari topilmadi.</p>
+            <h2 className="text-xl font-bold text-blue-900">
+              Ma'lumotlar yo'q
+            </h2>
+            <p className="text-muted-foreground">
+              {selectedStation} bekati uchun statistika ma'lumotlari topilmadi.
+            </p>
           </div>
         </Alert>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default MetroStatistics
+export default MetroStatistics;

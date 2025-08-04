@@ -201,21 +201,17 @@ function ApiVakan() {
               >
                 <Card className="h-full bg-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group flex flex-col">
                   <CardHeader className="bg-gradient-to-r from-blue-900 to-blue-800 text-white p-6">
-                    <div className="flex items-start justify-between">
+                    <div className="flex items-start justify-between ">
                       <div className="flex-1 min-w-0">
-                        <CardTitle className="text-lg font-bold leading-tight mb-2 group-hover:text-blue-100 transition-colors">
+                        <CardTitle className="text-xl font-bold leading-tight mb-2 group-hover:text-blue-100 transition-colors">
                           {truncateText(item.title_uz, 50)}
                         </CardTitle>
-                        <div className="flex items-center text-blue-100">
-                          <MapPin className="w-4 h-4 mr-1 flex-shrink-0" />
-                          <span className="text-sm">Masofaviy/Ofisda</span>
-                        </div>
                       </div>
                       <Briefcase className="w-8 h-8 text-blue-200 group-hover:scale-110 transition-transform flex-shrink-0 ml-2" />
                     </div>
                   </CardHeader>
 
-                  <CardContent className="p-6 flex-1 flex flex-col">
+                  <CardContent className="p-6 flex-1 flex flex-col ">
                     <div className="space-y-4 flex-1">
                       <div className="flex items-start space-x-3">
                         <GraduationCap className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
