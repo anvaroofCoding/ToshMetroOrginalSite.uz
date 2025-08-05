@@ -1,8 +1,6 @@
 import MetroPagesShowcase from "@/components/main-informations/main-informations";
 import CompanySlider from "@/pages/company/CompanySlider";
 import MetroCarouselWithNews from "@/pages/Header/header";
-import YoutubeGrid from "@/pages/youtube/youtube";
-import MetroSystem from "@/work/metroTime/metroTime";
 import FaqAccordion from "@/work/test/questions";
 import Mediateka from "./mediateka/headermediateka";
 

@@ -166,7 +166,7 @@ function TashkentMetroPage() {
       event: "O‘zbekiston yo‘nalishi",
       phase: "1-bosqich O'zbekiston",
       description:
-        "Uzunligi 5,6 km dan ortiq boʻlgan, 5 ta bekati boʻlgan “Alisher Navoiy” bekatidan “Toshkent” bekatiga qadar 1984-yil 26-noyabrda foydalanishga topshirilib, shahar markazini temir yoʻl vokzaliga tutashtirdi.",
+        "Alisher Navoiy bekatidan Toshkent bekatiga qadar uzunligi 5.6 kmdan ortiq bo'lgan shahar markazini temir yo'l vakzaliga tutashtiruvchi jami 5 ta bekat 1984-yil 26-noyabrda foydalanishga topshirildi",
     },
     {
       year: "1987",
@@ -247,6 +247,12 @@ function TashkentMetroPage() {
     },
   ];
 
+  const imeges = [
+    "https://cdn1.img.sputniknews.uz/img/07e7/08/1e/38378409_0:67:1280:787_1920x0_80_0_0_5a0d93c22a77a08b2f68d80cbfba6ff5.jpg",
+    "https://cdn1.img.sputniknews.uz/img/07e7/08/1e/38378409_0:67:1280:787_1920x0_80_0_0_5a0d93c22a77a08b2f68d80cbfba6ff5.jpg",
+    "https://cdn1.img.sputniknews.uz/img/07e7/08/1e/38378409_0:67:1280:787_1920x0_80_0_0_5a0d93c22a77a08b2f68d80cbfba6ff5.jpg",
+  ];
+
   return (
     <div className="min-h-screen mt-10  overflow-hidden">
       {/* Floating Background Elements */}
@@ -309,9 +315,7 @@ function TashkentMetroPage() {
               >
                 <div className="aspect-[4/3] bg-gradient-to-br from-[#0E327F] via-blue-600 to-blue-800 flex items-center justify-center relative">
                   <img
-                    src={`https://cdn1.img.sputniknews.uz/img/07e7/08/1e/38378409_0:67:1280:787_1920x0_80_0_0_5a0d93c22a77a08b2f68d80cbfba6ff5.jpg?height=400&width=500&text=Metro+Bekati+${
-                      index + 1
-                    }`}
+                    src={`https://cdn1.img.sputniknews.uz/img/07e7/08/1e/38378409_0:67:1280:787_1920x0_80_0_0_5a0d93c22a77a08b2f68d80cbfba6ff5.jpg?height=400&width=500&text=Metro+Bekati+`}
                     alt={`Toshkent Metro Bekati ${index + 1}`}
                     className="w-full h-full object-cover"
                   />
@@ -379,9 +383,8 @@ function TashkentMetroPage() {
             Metro Tarmog&apos;i
           </h2>
           <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-            Butun metropoliten hududiga zamonaviy, samarali va xavfsiz transport
-            bilan xizmat ko&apos;rsatadigan to&apos;rtta o&apos;zaro
-            bog&apos;langan yo&apos;nalishlar
+            Toshkent shahar bo'ylab xizmat ko'rsatadigan hamda o'zaro bog'langan
+            metropoliten yo'nalishlari
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {metroLines.map((line, index) => (
@@ -492,16 +495,16 @@ function TashkentMetroPage() {
                     </CardContent>
                   </Card>
                 </div>
-                <div className="absolute xl:block hidden left-8 md:left-1/2 transform md:-translate-x-1/2 w-6 h-6 bg-gradient-to-r from-[#0E327F] to-blue-600 rounded-full border-4 border-white shadow-xl z-10 group-hover:scale-125 transition-transform duration-300">
+                {/* <div className="absolute xl:block hidden left-8 md:left-1/2 transform md:-translate-x-1/2 w-6 h-6 bg-gradient-to-r from-[#0E327F] to-blue-600 rounded-full border-4 border-white shadow-xl z-10 group-hover:scale-125 transition-transform duration-300">
                   <div className="absolute inset-0 bg-gradient-to-r from-[#0E327F] to-blue-600 rounded-full animate-ping opacity-20"></div>
-                </div>
+                </div> */}
               </div>
             ))}
           </div>
         </div>
 
         {/* Enhanced Current Status */}
-        <Card className="border-0 shadow-2xl bg-gradient-to-r from-[#0E327F] via-blue-600 to-blue-700 text-white overflow-hidden relative">
+        <Card className="border-0 shadow-2xl bg-gradient-to-r from-[#0E327F] via-blue-600 to-blue-700 text-white overflow-hidden relative ">
           <div className="absolute inset-0 bg-gradient-to-r from-[#0E327F]/90 to-blue-600/90" />
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-32 translate-x-32" />
           <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full translate-y-24 -translate-x-24" />
@@ -516,10 +519,7 @@ function TashkentMetroPage() {
             <p className="text-xl mb-8 opacity-90 leading-relaxed max-w-4xl mx-auto">
               Bugun Toshkent metropoliteni Markaziy Osiyoning yetakchi shahar
               transport tizimi sifatida 70 kilometrdan ortiq uzunlikda 50 ta
-              bekatlar bilan faoliyat yuritmoqda. Bizning jamoa xavfsiz,
-              samarali va barqaror transport bilan xizmat ko&apos;rsatishdan
-              faxrlanamiz, hayotlarni bog&apos;laymiz va shahar
-              harakatchanligining kelajagini ta&apos;minlaymiz.
+              bekatlar bilan faoliyat yuritmoqda.
             </p>
             <div className="flex flex-wrap justify-center gap-6 mb-8">
               <div className="text-center group hover:scale-110 transition-transform duration-300">

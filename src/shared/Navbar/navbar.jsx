@@ -124,7 +124,7 @@ const menuItems = [
         icon: UsersRound,
       },
       {
-        label: "Meyoriy hujjatlar",
+        label: "Me'yoriy hujjatlar",
         href: "/meyoriy-xujjatlar",
         icon: FileCheck2,
       },

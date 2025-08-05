@@ -366,8 +366,8 @@ function MetroGalleryCarousel() {
         "https://www.afisha.uz/uploads/media/2024/11/41f443b3e2b6e97778c964b9a6c01e39_l.webp",
     },
     {
-      name: "Yer usti halqa yo'lllari qurildi",
-      description: "25km ca 18dan ortiq bekatlar",
+      name: "Yer usti halqa yo'llari qurildi",
+      description: "25km uzunlikdagi 14ta bekat",
       image:
         "https://yuz.uz/imageproxy/1200x/https://yuz.uz/file/news/4777dd4735305eb98c3305610ff31f1f.jpg",
     },
