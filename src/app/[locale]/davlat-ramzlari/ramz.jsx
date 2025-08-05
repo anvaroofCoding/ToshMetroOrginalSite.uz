@@ -336,7 +336,7 @@ export default function UzbekistanSymbols() {
                             Muallif:
                           </span>
                           <span className="font-semibold">
-                            Mirabror Usmanov
+                            Bekzod Xidoyatov
                           </span>
                         </div>
                         <div className="flex justify-between p-3 bg-gray-50 rounded-lg">
@@ -462,15 +462,7 @@ export default function UzbekistanSymbols() {
                           <span className="font-medium text-gray-600">
                             Bosh muallif:
                           </span>
-                          <span className="font-semibold">Elbek Rizayev</span>
-                        </div>
-                        <div className="flex justify-between p-3 bg-gray-50 rounded-lg">
-                          <span className="font-medium text-gray-600">
-                            Hammuallif:
-                          </span>
-                          <span className="font-semibold">
-                            Akmal Turdikulov
-                          </span>
+                          <span className="font-semibold">Anvar Mamajonov</span>
                         </div>
                       </div>
                       <div className="space-y-3">
@@ -478,13 +470,7 @@ export default function UzbekistanSymbols() {
                           <span className="font-medium text-gray-600">
                             Elementlar:
                           </span>
-                          <span className="font-semibold">8 ta asosiy</span>
-                        </div>
-                        <div className="flex justify-between p-3 bg-gray-50 rounded-lg">
-                          <span className="font-medium text-gray-600">
-                            Shakl:
-                          </span>
-                          <span className="font-semibold">Dumaloq</span>
+                          <span className="font-semibold">10 ta asosiy</span>
                         </div>
                         <div className="flex justify-between p-3 bg-gray-50 rounded-lg">
                           <span className="font-medium text-gray-600">
@@ -512,7 +498,7 @@ export default function UzbekistanSymbols() {
                         <div className="bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-500">
                           <h4 className="font-bold mb-2">Humo Qushi</h4>
                           <p className="text-sm text-gray-700">
-                            Baxt va erkinlik ramzi.
+                            Baxt va erkinlik timsoli
                           </p>
                         </div>
                         <div className="bg-orange-50 p-4 rounded-lg border-l-4 border-orange-500">
@@ -520,15 +506,15 @@ export default function UzbekistanSymbols() {
                             Quyosh
                           </h4>
                           <p className="text-sm text-gray-700">
-                            Yorug'lik va hayot manbai. Energiya va kuch.
+                            Yorqin kelajak va farovonlik ramzi.
                           </p>
                         </div>
                         <div className="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
                           <h4 className="font-bold mb-2 flex items-center">
-                            Tog'lar
+                            O'rtadagi tog'lar
                           </h4>
                           <p className="text-sm text-gray-700">
-                            Tyan-Shan va Pamir-Oloy. Mustahkamlik ramzi.
+                            O'zbekistonning geografiyasi.
                           </p>
                         </div>
                         <div className="bg-cyan-50 p-4 rounded-lg border-l-4 border-cyan-500">
@@ -543,32 +529,32 @@ export default function UzbekistanSymbols() {
                       <div className="space-y-3">
                         <div className="bg-amber-50 p-4 rounded-lg border-l-4 border-amber-500">
                           <h4 className="font-bold mb-2 flex items-center">
-                            Bug'doy
+                            Bug'doy boshoqlar
                           </h4>
                           <p className="text-sm text-gray-700">
-                            Dehqonchilik va farovonlik ramzi.
+                            To'kin-sochinlik va mo'l-ko'llik belgisi
                           </p>
                         </div>
                         <div className="bg-gray-50 p-4 rounded-lg border-l-4 border-gray-500">
-                          <h4 className="font-bold mb-2">Paxta</h4>
+                          <h4 className="font-bold mb-2">Paxta guli</h4>
                           <p className="text-sm text-gray-700">
-                            Oq oltin. Paxta - poklik va boylik.
+                            Tinchlik, mehnatsevarlik va boylik ramzi
                           </p>
                         </div>
                         <div className="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
                           <h4 className="font-bold mb-2 flex items-center">
-                            Lenta
+                            O'zbekiston Respublikasi bayrog'i ranglari
                           </h4>
                           <p className="text-sm text-gray-700">
-                            Bayroq ranglari. Davlat ramzlari birligi.
+                            Lenta holatida, birlik va davlat ramzi sifatida
                           </p>
                         </div>
                         <div className="bg-indigo-50 p-4 rounded-lg border-l-4 border-indigo-500">
                           <h4 className="font-bold mb-2 flex items-center">
-                            Yozuv
+                            Yulduz va yarim oy
                           </h4>
                           <p className="text-sm text-gray-700">
-                            "O'ZBEKISTON RESPUBLIKASI" - rasmiy nomi.
+                            Musulmonona qadriyatlar va tarixiy meros
                           </p>
                         </div>
                       </div>

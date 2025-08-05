@@ -285,7 +285,7 @@ export default function PaymentMethods() {
               </div>
               <div className="ml-4 sm:ml-6 md:ml-8 lg:ml-12">
                 <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-blue-900 leading-tight tracking-tight">
-                  Bank Kartalari & kontaktsiz to'lov To'lovlar
+                  Bank Kartalari va kontaktsiz to'lov To'lovlar
                 </h2>
                 <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 mt-2 sm:mt-3 lg:mt-4 leading-relaxed">
                   kontaktsiz to'lov orqali metro va avtobusda to'lov - 1,700 UZS
@@ -340,7 +340,7 @@ export default function PaymentMethods() {
               </div>
               <div className="ml-4 sm:ml-6 md:ml-8 lg:ml-12">
                 <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-blue-900 leading-tight tracking-tight">
-                  QR-Bilet & Alif ATM
+                  QR-Bilet va Alif ATM
                 </h2>
                 <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 mt-2 sm:mt-3 lg:mt-4 leading-relaxed">
                   Bir martalik QR to'lov va ATM orqali QR kod
@@ -391,7 +391,7 @@ export default function PaymentMethods() {
                       </h3>
                     </div>
                     <p className="text-gray-700 mb-4 sm:mb-5 md:mb-6 text-sm sm:text-base md:text-lg leading-relaxed">
-                      Alif ATM'laridan QR kod olish imkoniyati
+                      Alif ATMlaridan QR kod olish imkoniyati
                     </p>
                     <Badge
                       variant="secondary"

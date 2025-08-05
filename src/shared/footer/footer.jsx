@@ -144,10 +144,7 @@ const Footer = () => {
               </div>
 
               <blockquote className="relative text-white">
-                <div className="absolute -left-1 -top-1 text-3xl text-white font-serif">
-                  "
-                </div>
-                <p className=" italic leading-relaxed pl-4">
+                <p className=" italic leading-relaxed">
                   Xavfsiz, tez va qulay yo’lovchilar tashishni ta’minlash.
                 </p>
               </blockquote>

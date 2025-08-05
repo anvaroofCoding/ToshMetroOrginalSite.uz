@@ -30,15 +30,37 @@ function ApiVakan() {
   const [error, setError] = useState(null);
 
   async function getJob() {
+    const cacheKey = "jobData";
+    const cacheExpiryKey = "jobDataExpiry";
+    const now = Date.now();
+    const expiryTime = 10 * 60 * 1000; // 10 minut
+
+    // 1. Keshlangan ma'lumotni tekshirish
+    const cachedData = localStorage.getItem(cacheKey);
+    const cachedExpiry = localStorage.getItem(cacheExpiryKey);
+
+    if (cachedData && cachedExpiry && now < parseInt(cachedExpiry)) {
+      setData(JSON.parse(cachedData));
+      return;
+    }
+
+    // 2. Serverdan yangi ma'lumot olish
     try {
       setLoading(true);
       const res = await fetch(
         "https://metro-site.onrender.com/api/job-vacancies/uz/"
       );
+
       if (!res.ok) {
         throw new Error("Ish o'rinlarini yuklashda xatolik yuz berdi");
       }
+
       const data = await res.json();
+
+      // 3. Ma'lumotni va muddati tugash vaqtini keshga saqlash
+      localStorage.setItem(cacheKey, JSON.stringify(data));
+      localStorage.setItem(cacheExpiryKey, (now + expiryTime).toString());
+
       setData(data);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Xatolik yuz berdi");

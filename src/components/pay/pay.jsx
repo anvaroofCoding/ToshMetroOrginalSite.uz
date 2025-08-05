@@ -65,8 +65,7 @@ function PalmpayPayments() {
   const activationSteps = [
     {
       icon: MapPin,
-      title:
-        "Xalqlar doʻstligi metro bekatidagi roʻyxatdan oʻtish stoliga boring.",
+      title: "Barcha metro bekatidagi roʻyxatdan oʻtish stoliga boring.",
     },
     {
       icon: Camera,
