@@ -37,6 +37,7 @@ export default function Page() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState({});
   const [error, setError] = useState(null);
+  console.log(data);
 
   // Form state
   const [formData, setFormData] = useState({
@@ -59,7 +60,7 @@ export default function Page() {
 
     try {
       const res = await fetch(
-        `https://metro-site.onrender.com/api/job-vacancies/en/${jobId}`
+        `https://metro-site.onrender.com/api/job-vacancies/uz/${jobId}`
       );
 
       if (!res.ok) {
@@ -67,6 +68,8 @@ export default function Page() {
       }
 
       const items = await res.json();
+      // console.log(items);
+
       setData(items);
     } catch (err) {
       console.error("Error fetching job data:", err);
