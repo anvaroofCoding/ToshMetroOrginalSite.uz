@@ -146,7 +146,6 @@ function PalmpayPayments() {
             </div>
             {/* Optimized PalmPay Video */}
             <div className="w-full container flex justify-center items-center">
-              //{" "}
               <video
                 controls
                 muted
@@ -154,7 +153,6 @@ function PalmpayPayments() {
                 src="/videos/IMG_4247.MOV"
                 width={300}
               ></video>
-              //{" "}
             </div>
           </div>
         </div>
