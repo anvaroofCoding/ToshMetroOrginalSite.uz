@@ -49,7 +49,6 @@ export default async function RootLayout({ children, params }) {
   if (!["uz", "ru", "en"].includes(locale)) notFound();
 
   const messages = (await import(`../../../messages/${locale}.json`)).default;
-  const hideLayout = ["/metro-xaritasis"];
 
   return (
     <html lang={locale}>
@@ -59,7 +58,9 @@ export default async function RootLayout({ children, params }) {
             <RouteLoader />
             <Layout>
               <Navbar />
-              <SplashScreen>{children}</SplashScreen>
+              {/* <SplashScreen> */}
+              {children}
+              {/* </SplashScreen> */}
               <Footer />
               <FloatingActionButton />
             </Layout>

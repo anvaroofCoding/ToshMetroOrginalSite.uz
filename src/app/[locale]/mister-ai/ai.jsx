@@ -1,81 +1,98 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-
-
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 
 const predefinedQAs = [
   {
     id: 1,
-    question: "Sun'iy intellekt nima?",
+    question: `Toshkent metropoliteni" DUK ga ishga kirmoqchiman.  Qayerga murojaat qilsam bo'ladi?`,
     answer:
-      "Sun'iy intellekt (AI) - bu kompyuter fanlari sohasi bo'lib, inson aqlining vazifalarini bajaradigan aqlli mashinalar yaratishga qaratilgan. Bu o'rganish, mulohaza yuritish, muammolarni hal qilish va tabiiy tilni tushunish kabi vazifalarni o'z ichiga oladi.",
-    category: "Texnologiya",
+      "Toshkent metropoliten rasmiy saytidan bo'sh ish o'rinlari qismidan, ishga kirish haqida ma'lumotlar olsangiz bo'ladi",
+    category: "Asosiy",
   },
   {
     id: 2,
-    question: "Mashinani o'rgatish qanday ishlaydi?",
+    question: "ATTO kartasini qayerdan xarid qilishim mumkin?",
     answer:
-      "Mashinani o'rgatish - bu AI ning bir qismi bo'lib, kompyuterlarga aniq dasturlashtirilmasdan tajribadan o'rganish va yaxshilanish imkonini beradi. U ma'lumotlarni tahlil qilish, naqshlarni aniqlash va bashorat qilish uchun algoritmlardan foydalanadi.",
-    category: "Texnologiya",
+      "ATTO kartasini metro kassalaridan yoki ayrim terminal nuqtalaridan xarid qilishingiz mumkin.",
+    category: "To‘lov tizimi",
   },
   {
     id: 3,
-    question: "Bulutli hisoblashning afzalliklari qanday?",
+    question: "Metro tokenlari hali ham ishlatiladimi?",
     answer:
-      "Bulutli hisoblash kengayuvchanlik, tejamkorlik, istalgan joydan kirish imkoniyati, avtomatik yangilanishlar, kuchaytirilgan xavfsizlik va IT infratuzilma xarajatlarini kamaytirish kabi afzalliklarni taqdim etadi.",
-    category: "Bulut",
+      "Yo‘q, hozirda metroda faqat ATTO kartalari orqali to‘lov amalga oshiriladi.",
+    category: "To‘lov tizimi",
   },
   {
     id: 4,
-    question: "Kiberxavfsizlik nima?",
+    question: "Bekatlar ish vaqti qanday?",
     answer:
-      "Kiberxavfsizlik - bu tizimlar, tarmoqlar va dasturlarni raqamli hujumlardan himoya qilish amaliyotidir. Bu ruxsatsiz kirishni, ma'lumotlar buzilishini va boshqa kiber tahdidlarni oldini olish choralarini o'z ichiga oladi.",
-    category: "Xavfsizlik",
+      "Toshkent metropoliteni har kuni 05:00 dan 00:00 gacha faoliyat yuritadi.",
+    category: "Asosiy",
   },
   {
     id: 5,
-    question: "Ma'lumotlar bazasi qanday ishlaydi?",
+    question:
+      "Yo‘nalishlar va bekatlar haqida qayerdan ma'lumot olsam bo‘ladi?",
     answer:
-      "Ma'lumotlar bazasi - bu elektron tarzda saqlangan tuzilgan ma'lumotlarning tartibli to'plami. Ular boshqaruv tizimlari (DBMS) orqali ma'lumotlarni samarali saqlash, olish va boshqarish uchun ishlatiladi.",
-    category: "Ma'lumotlar",
+      "Metro xaritasi va bekatlar haqida rasmiy sayt yoki mobil ilova orqali ma'lumot olishingiz mumkin.",
+    category: "Xarita va yo‘nalishlar",
   },
   {
     id: 6,
-    question: "Moslashuvchan veb-dizayn nima?",
+    question: "Yo‘lovchi ko‘p bo‘lgan vaqtlar qaysilar?",
     answer:
-      "Moslashuvchan veb-dizayn - bu veb-sahifalarni turli qurilmalar va ekran o'lchamlarida yaxshi ko'rsatish yondashuvi. U moslashuvchan tartib, rasmlar va CSS media so'rovlaridan foydalanadi.",
-    category: "Dizayn",
+      "Asosan ertalab soat 7:00-9:00 va kechqurun 17:00-19:00 oralig‘ida metroda yo‘lovchilar soni ko‘p bo‘ladi.",
+    category: "Asosiy",
   },
   {
     id: 7,
-    question: "Blockchain texnologiyasi qanday ishlaydi?",
+    question: "Nega metroda internet ishlamaydi?",
     answer:
-      "Blockchain - bu ma'lumotlarni markazlashtirilmagan tarzda saqlash texnologiyasi. Har bir blok oldingi blok bilan bog'langan bo'lib, bu ma'lumotlarning o'zgarmasligini va xavfsizligini ta'minlaydi.",
-    category: "Blockchain",
+      "Metroda aloqa uzilishi tunellar va yer osti infratuzilmasi bilan bog‘liq. Aloqa yaxshilash ustida ish olib borilmoqda.",
+    category: "Asosiy",
   },
   {
     id: 8,
-    question: "IoT (Narsalar interneti) nima?",
+    question: "ATTO kartasini qanday to‘ldirish mumkin?",
     answer:
-      "IoT - bu kundalik buyumlarni internetga ulash va ular orasida ma'lumot almashish imkoniyatidir. Bu uy jihozlari, avtomobillar, sensorlar va boshqa qurilmalarni o'z ichiga oladi.",
-    category: "IoT",
+      "ATTO kartasini terminallar, mobil ilovalar yoki bank ilovalari orqali to‘ldirish mumkin.",
+    category: "To‘lov tizimi",
   },
-]
-
-
+  {
+    id: 9,
+    question:
+      "Yo‘l haqini to‘lamasdan metroga kirganlarga qanday choralar ko‘riladi?",
+    answer:
+      "Nazoratchilar tomonidan aniqlansa, jarima yoki boshqa ma’muriy choralar qo‘llaniladi.",
+    category: "Asosiy",
+  },
+  {
+    id: 10,
+    question: "Metrodagi videokuzatuv tizimi ishlaydimi?",
+    answer:
+      "Ha, barcha bekatlarda va vagonlarda videokuzatuv tizimi mavjud va faoliyat yuritadi.",
+    category: "Xavfsizlik",
+  },
+];
 
 export default function AIChat() {
-  const [chatMessages, setChatMessages] = useState([])
-  const [animatingMessageId, setAnimatingMessageId] = useState(null)
-  const [selectedCategory, setSelectedCategory] = useState("Barchasi")
+  const [chatMessages, setChatMessages] = useState([]);
+  const [animatingMessageId, setAnimatingMessageId] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState("Barchasi");
 
-  const categories = ["Barchasi", ...Array.from(new Set(predefinedQAs.map((qa) => qa.category)))]
+  const categories = [
+    "Barchasi",
+    ...Array.from(new Set(predefinedQAs.map((qa) => qa.category))),
+  ];
 
   const filteredQAs =
-    selectedCategory === "Barchasi" ? predefinedQAs : predefinedQAs.filter((qa) => qa.category === selectedCategory)
+    selectedCategory === "Barchasi"
+      ? predefinedQAs
+      : predefinedQAs.filter((qa) => qa.category === selectedCategory);
 
   const handleQuestionClick = (qa) => {
     const questionMessage = {
@@ -84,7 +101,7 @@ export default function AIChat() {
       content: qa.question,
       timestamp: new Date(),
       category: qa.category,
-    }
+    };
 
     const answerMessage = {
       id: Date.now() + 1,
@@ -92,23 +109,23 @@ export default function AIChat() {
       content: qa.answer,
       timestamp: new Date(),
       category: qa.category,
-    }
+    };
 
-    setChatMessages((prev) => [...prev, questionMessage])
+    setChatMessages((prev) => [...prev, questionMessage]);
 
     setTimeout(() => {
-      setAnimatingMessageId(answerMessage.id)
-      setChatMessages((prev) => [...prev, answerMessage])
+      setAnimatingMessageId(answerMessage.id);
+      setChatMessages((prev) => [...prev, answerMessage]);
 
       setTimeout(() => {
-        setAnimatingMessageId(null)
-      }, 800)
-    }, 600)
-  }
+        setAnimatingMessageId(null);
+      }, 800);
+    }, 600);
+  };
 
   const clearChat = () => {
-    setChatMessages([])
-  }
+    setChatMessages([]);
+  };
 
   return (
     <div className="min-h-screen ">
@@ -140,7 +157,9 @@ export default function AIChat() {
         <Card className="border-0 shadow-2xl bg-white/90 backdrop-blur-sm">
           <CardContent className="p-4 sm:p-6 md:p-8">
             <div className="mb-6 sm:mb-8">
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-blue-900 mb-2">Tezkor Savollar</h2>
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-blue-900 mb-2">
+                Tezkor Savollar
+              </h2>
               <div className="h-1 w-16 sm:w-20 bg-gradient-to-r from-blue-900 to-blue-600 rounded-full"></div>
             </div>
 
@@ -149,7 +168,9 @@ export default function AIChat() {
               {categories.map((category) => (
                 <Button
                   key={category}
-                  variant={selectedCategory === category ? "default" : "outline"}
+                  variant={
+                    selectedCategory === category ? "default" : "outline"
+                  }
                   size="sm"
                   onClick={() => setSelectedCategory(category)}
                   className={`rounded-full transition-all duration-300 text-xs sm:text-sm px-3 sm:px-4 py-2 sm:py-2.5 min-h-[36px] sm:min-h-[40px] ${
@@ -190,7 +211,9 @@ export default function AIChat() {
           <CardContent className="p-4 sm:p-6 md:p-8">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 sm:mb-8">
               <div>
-                <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-blue-900 mb-2">AI Suhbat</h2>
+                <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-blue-900 mb-2">
+                  AI Suhbat
+                </h2>
                 <div className="h-1 w-12 sm:w-16 bg-gradient-to-r from-green-600 to-green-400 rounded-full"></div>
               </div>
               {chatMessages.length > 0 && (
@@ -210,7 +233,9 @@ export default function AIChat() {
                 <div className="text-center py-12 sm:py-16 md:py-20">
                   <div className="w-16 sm:w-20 md:w-24 h-16 sm:h-20 md:h-24 bg-gradient-to-br from-blue-100 to-indigo-200 rounded-full mx-auto flex items-center justify-center mb-4 sm:mb-6">
                     <div className="w-8 sm:w-10 md:w-12 h-8 sm:h-10 md:h-12 bg-blue-900 rounded-full flex items-center justify-center">
-                      <span className="text-white font-bold text-sm sm:text-base md:text-lg">AI</span>
+                      <span className="text-white font-bold text-sm sm:text-base md:text-lg">
+                        AI
+                      </span>
                     </div>
                   </div>
                   <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-700 mb-2 sm:mb-3">
@@ -224,13 +249,21 @@ export default function AIChat() {
                 chatMessages.map((message) => (
                   <div
                     key={message.id}
-                    className={`flex gap-3 sm:gap-4 ${message.type === "question" ? "justify-end" : "justify-start"} ${
-                      animatingMessageId === message.id ? "animate-slide-in-bounce" : ""
+                    className={`flex gap-3 sm:gap-4 ${
+                      message.type === "question"
+                        ? "justify-end"
+                        : "justify-start"
+                    } ${
+                      animatingMessageId === message.id
+                        ? "animate-slide-in-bounce"
+                        : ""
                     }`}
                   >
                     {message.type === "answer" && (
                       <div className="w-8 sm:w-10 h-8 sm:h-10 bg-gradient-to-br from-blue-900 to-indigo-800 rounded-full flex items-center justify-center flex-shrink-0 shadow-lg">
-                        <span className="text-white font-bold text-xs sm:text-sm">AI</span>
+                        <span className="text-white font-bold text-xs sm:text-sm">
+                          AI
+                        </span>
                       </div>
                     )}
 
@@ -248,9 +281,15 @@ export default function AIChat() {
                           </span>
                         </div>
                       )}
-                      <p className="text-sm sm:text-base md:text-lg leading-relaxed">{message.content}</p>
+                      <p className="text-sm sm:text-base md:text-lg leading-relaxed">
+                        {message.content}
+                      </p>
                       <p
-                        className={`text-xs sm:text-sm mt-3 ${message.type === "question" ? "text-blue-100" : "text-gray-500"}`}
+                        className={`text-xs sm:text-sm mt-3 ${
+                          message.type === "question"
+                            ? "text-blue-100"
+                            : "text-gray-500"
+                        }`}
                       >
                         {message.timestamp.toLocaleTimeString("uz-UZ")}
                       </p>
@@ -258,7 +297,9 @@ export default function AIChat() {
 
                     {message.type === "question" && (
                       <div className="w-8 sm:w-10 h-8 sm:h-10 bg-gradient-to-br from-blue-100 to-indigo-200 rounded-full flex items-center justify-center flex-shrink-0 shadow-lg">
-                        <span className="text-blue-900 font-bold text-xs sm:text-sm">Siz</span>
+                        <span className="text-blue-900 font-bold text-xs sm:text-sm">
+                          Siz
+                        </span>
                       </div>
                     )}
                   </div>
@@ -269,5 +310,5 @@ export default function AIChat() {
         </Card>
       </div>
     </div>
-  )
+  );
 }
