@@ -196,7 +196,7 @@ export default function MetroCarouselWithNews() {
 
   const getNewstVerticalSlider = async () => {
     const res = await fetch(
-      "https://metro-site.onrender.com/api/news/latest/en"
+      "https://metro-site.onrender.com/api/news/latest/uz"
     );
     const data = await res.json();
     Setannouncements(data);
@@ -523,7 +523,7 @@ export default function MetroCarouselWithNews() {
                             `https://metro-site.onrender.com${announcement.image}` ||
                             "/placeholder.svg"
                           }
-                          alt={announcement.title_en}
+                          alt={announcement.title_uz}
                           className="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 object-cover rounded-md sm:rounded-lg flex-shrink-0"
                           loading="lazy"
                         />
@@ -535,10 +535,10 @@ export default function MetroCarouselWithNews() {
                             </div>
                           </div>
                           <h4 className="text-xs sm:text-sm font-semibold text-slate-800 hover:text-blue-600 transition-colors mb-1 line-clamp-2">
-                            {announcement.title_en}
+                            {announcement.title_uz}
                           </h4>
                           <p className="text-xs text-slate-600 leading-relaxed line-clamp-2">
-                            {announcement.description_en}
+                            {announcement.description_uz}
                           </p>
                         </div>
                       </CardContent>
@@ -610,7 +610,7 @@ export default function MetroCarouselWithNews() {
                             `https://metro-site.onrender.com${announcement.image}` ||
                             "/placeholder.svg"
                           }
-                          alt={announcement.title_en}
+                          alt={announcement.title_uz}
                           className="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 object-cover rounded-md sm:rounded-lg flex-shrink-0"
                           loading="lazy"
                         />
@@ -622,10 +622,10 @@ export default function MetroCarouselWithNews() {
                             </div>
                           </div>
                           <h4 className="text-xs sm:text-sm font-semibold text-slate-800 hover:text-blue-600 transition-colors mb-1 line-clamp-2">
-                            {announcement.title_en}
+                            {announcement.title_uz}
                           </h4>
                           <p className="text-xs text-slate-600 leading-relaxed line-clamp-2">
-                            {announcement.description_en}
+                            {announcement.description_uz}
                           </p>
                         </div>
                       </CardContent>

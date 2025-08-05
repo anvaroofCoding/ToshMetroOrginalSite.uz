@@ -133,6 +133,17 @@ function Facepay() {
                 Metroga yo‘l haqini smartfonsiz, yuzni skanerlash orqali to‘lang
               </p>
             </div>
+            <div className="w-full pt-10 container flex justify-center items-center">
+              //{" "}
+              <video
+                controls
+                muted
+                className="rounded-2xl"
+                src="/videos/IMG_6836.MP4"
+                width={300}
+              ></video>
+              //{" "}
+            </div>
           </div>
         </div>
       </section>

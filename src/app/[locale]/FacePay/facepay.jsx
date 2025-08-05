@@ -145,14 +145,6 @@ function facepay() {
               />
               <div className="absolute -inset-4 bg-gradient-to-r from-blue-900/20 to-transparent rounded-full blur-xl"></div>
             </div>
-            <div className="max-w-2xl mx-auto">
-              <h2 className="text-2xl md:text-3xl font-semibold text-blue-900 mb-4">
-                PalmPay ni ulang
-              </h2>
-              <p className="text-lg text-blue-800/80 leading-relaxed">
-                Kaft bilan metroda yo'l haqini to'lang
-              </p>
-            </div>
           </div>
         </div>
       </section>

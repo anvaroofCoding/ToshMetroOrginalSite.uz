@@ -5,7 +5,6 @@ import {
   Smartphone,
   Hand,
   CreditCard,
-  Shield,
   Zap,
   CheckCircle,
   Download,
@@ -122,9 +121,9 @@ function PalmpayPayments() {
   ];
 
   return (
-    <div className="min-h-screen  ">
+    <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative overflow-hidden py-20 px-4">
+      <section className="relative overflow-hidden py-10">
         <div className="absolute"></div>
         <div className="container mx-auto max-w-6xl relative z-10">
           <div className="text-center fade-in opacity-0 translate-y-8 transition-all duration-1000">
@@ -145,13 +144,17 @@ function PalmpayPayments() {
               />
               <div className="absolute -inset-4 bg-gradient-to-r from-blue-900/20 to-transparent rounded-full blur-xl"></div>
             </div>
-            <div className="max-w-2xl mx-auto">
-              <h2 className="text-2xl md:text-3xl font-semibold text-blue-900 mb-4">
-                PalmPay ni ulang
-              </h2>
-              <p className="text-lg text-blue-800/80 leading-relaxed">
-                Kaft bilan metroda yo'l haqini to'lang
-              </p>
+            {/* Optimized PalmPay Video */}
+            <div className="w-full container flex justify-center items-center">
+              //{" "}
+              <video
+                controls
+                muted
+                className="rounded-2xl"
+                src="/videos/IMG_4247.MOV"
+                width={300}
+              ></video>
+              //{" "}
             </div>
           </div>
         </div>
@@ -218,7 +221,7 @@ function PalmpayPayments() {
       </section>
 
       {/* How to Connect Section */}
-      <section className="py-20 px-4 ">
+      <section className="py-20 px-4">
         <div className="container mx-auto max-w-6xl">
           <div className="fade-in opacity-0 translate-y-8 transition-all duration-1000">
             <div className="text-center mb-16">
@@ -296,7 +299,7 @@ function PalmpayPayments() {
       </section>
 
       {/* Usage Steps */}
-      <section className="py-20 px-4 ">
+      <section className="py-20 px-4">
         <div className="container mx-auto max-w-6xl">
           <div className="fade-in opacity-0 translate-y-8 transition-all duration-1000">
             <div className="text-center mb-16">
