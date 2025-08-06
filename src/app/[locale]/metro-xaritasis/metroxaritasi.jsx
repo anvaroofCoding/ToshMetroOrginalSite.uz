@@ -936,7 +936,7 @@ export default function TashkentMetroMap() {
 
   const lineColors = {
     red: "#E53E3E",
-    blue: "#3182CE",
+    blue: "#0000fe",
     green: "#38A169",
     yellow: "#D69E2E",
   };
@@ -1797,62 +1797,52 @@ export default function TashkentMetroMap() {
                 {/* Enhanced gradients for lines */}
                 <linearGradient
                   id="redGradient"
-                  x1="0%"
-                  y1="0%"
+                  x1="100%"
+                  y1="100%"
                   x2="100%"
                   y2="100%"
                 >
-                  <stop offset="0%" stopColor="#E53E3E" />
-                  <stop offset="50%" stopColor="#FC8181" />
                   <stop offset="100%" stopColor="#E53E3E" />
                 </linearGradient>
-                <linearGradient
-                  id="blueGradient"
-                  x1="0%"
-                  y1="0%"
-                  x2="100%"
-                  y2="100%"
-                >
-                  <stop offset="0%" stopColor="#3182CE" />
-                  <stop offset="50%" stopColor="#63B3ED" />
-                  <stop offset="100%" stopColor="#3182CE" />
+                <linearGradient id="blueGradient">
+                  <stop offset="100%" stopColor="#0000fe" />
                 </linearGradient>
                 <linearGradient
                   id="greenGradient"
-                  x1="0%"
-                  y1="0%"
+                  x1="100%"
+                  y1="100%"
                   x2="100%"
                   y2="100%"
                 >
-                  <stop offset="0%" stopColor="#38A169" />
-                  <stop offset="50%" stopColor="#68D391" />
+                  <stop offset="100%" stopColor="#38A169" />
+                  <stop offset="100%" stopColor="#38A169" />
                   <stop offset="100%" stopColor="#38A169" />
                 </linearGradient>
                 <linearGradient
                   id="yellowGradient"
-                  x1="0%"
-                  y1="0%"
+                  x1="100%"
+                  y1="100%"
                   x2="100%"
                   y2="100%"
                 >
                   <stop offset="0%" stopColor="#D69E2E" />
-                  <stop offset="50%" stopColor="#F6E05E" />
+                  <stop offset="50%" stopColor="#D69E2E" />
                   <stop offset="100%" stopColor="#D69E2E" />
                 </linearGradient>
                 {/* Enhanced route gradient */}
                 <linearGradient
                   id="routeGradient"
-                  x1="0%"
-                  y1="0%"
+                  x1="100%"
+                  y1="100%"
                   x2="100%"
                   y2="100%"
                 >
-                  <stop offset="0%" stopColor="#10B981" />
-                  <stop offset="20%" stopColor="#34D399" />
-                  <stop offset="40%" stopColor="#6EE7B7" />
-                  <stop offset="60%" stopColor="#A7F3D0" />
-                  <stop offset="80%" stopColor="#FDE047" />
-                  <stop offset="100%" stopColor="#FACC15" />
+                  <stop offset="100%" stopColor="#38A169" />
+                  <stop offset="100%" stopColor="#38A169" />
+                  <stop offset="100%" stopColor="#38A169" />
+                  <stop offset="100%" stopColor="#38A169" />
+                  <stop offset="100%" stopColor="#D69E2E" />
+                  <stop offset="100%" stopColor="#D69E2E" />
                 </linearGradient>
                 {/* Enhanced drop shadow filter */}
                 <filter
@@ -1891,7 +1881,7 @@ export default function TashkentMetroMap() {
                       stroke={lineColors[fromStation.line]}
                       strokeWidth="12"
                       strokeLinecap="round"
-                      opacity={opacity * 0.3}
+                      opacity={opacity * 0.5}
                     />
                     {/* Main line with gradient */}
                     <line
@@ -1903,7 +1893,7 @@ export default function TashkentMetroMap() {
                       strokeWidth="8"
                       strokeLinecap="round"
                       filter="url(#dropshadow)"
-                      opacity={opacity}
+                      opacity={opacity * 0.5}
                     />
                   </g>
                 );
@@ -1942,7 +1932,7 @@ export default function TashkentMetroMap() {
                         y1={fromStation.y}
                         x2={toStation.x}
                         y2={toStation.y}
-                        stroke="#10B981"
+                        stroke="#38A169"
                         strokeWidth="16"
                         strokeLinecap="round"
                         opacity={segmentOpacity * 0.4}
@@ -1963,7 +1953,7 @@ export default function TashkentMetroMap() {
                         y1={fromStation.y}
                         x2={toStation.x}
                         y2={toStation.y}
-                        stroke="#34D399"
+                        stroke="#38A169"
                         strokeWidth="12"
                         strokeLinecap="round"
                         opacity={segmentOpacity * 0.7}
@@ -2044,7 +2034,7 @@ export default function TashkentMetroMap() {
                       cx={station.x}
                       cy={station.y}
                       r={isSelected ? "25" : isInRoute ? "22" : "20"}
-                      fill={isInRoute ? "#10B981" : lineColors[station.line]}
+                      fill={isInRoute ? "#38A169" : lineColors[station.line]}
                       opacity={
                         isSelected
                           ? "0.4"
@@ -2058,7 +2048,7 @@ export default function TashkentMetroMap() {
                       cx={station.x}
                       cy={station.y}
                       r={isSelected ? "18" : isInRoute ? "16" : "15"}
-                      fill={isInRoute ? "#10B981" : lineColors[station.line]}
+                      fill={isInRoute ? "#38A169" : lineColors[station.line]}
                       opacity={
                         isSelected
                           ? "0.6"
@@ -2073,7 +2063,7 @@ export default function TashkentMetroMap() {
                       cy={station.y}
                       r={isSelected ? "15" : isInRoute ? "13" : "12"}
                       fill="white"
-                      stroke={isInRoute ? "#10B981" : lineColors[station.line]}
+                      stroke={isInRoute ? "#38A169" : lineColors[station.line]}
                       strokeWidth={isSelected ? "5" : isInRoute ? "4" : "4"}
                       filter="url(#dropshadow)"
                       className="cursor-pointer hover:r-13 transition-all duration-200"
@@ -2086,7 +2076,7 @@ export default function TashkentMetroMap() {
                       cx={station.x}
                       cy={station.y}
                       r={isSelected ? "9" : isInRoute ? "8" : "7"}
-                      fill={isInRoute ? "#10B981" : lineColors[station.line]}
+                      fill={isInRoute ? "#38A169" : lineColors[station.line]}
                       opacity={stationOpacity * 0.9}
                       className="cursor-pointer"
                       onClick={(e) => handleStationClick(name, e)}
@@ -2099,7 +2089,7 @@ export default function TashkentMetroMap() {
                         cx={station.x}
                         cy={station.y}
                         r="4"
-                        fill="#10B981"
+                        fill="#38A169"
                         className="animate-pulse"
                       />
                     )}
@@ -2108,7 +2098,7 @@ export default function TashkentMetroMap() {
                         cx={station.x}
                         cy={station.y}
                         r="4"
-                        fill="#FACC15"
+                        fill="#D69E2E"
                         className="animate-pulse"
                       />
                     )}
