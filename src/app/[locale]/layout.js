@@ -29,7 +29,7 @@ export const metadata = {
     siteName: "Toshkent shahar metropoliteni",
     images: [
       {
-        url: "/logo.png",
+        url: "/logos.png",
         width: 800,
         height: 600,
         alt: "Toshkent metropoliteni logotipi",
