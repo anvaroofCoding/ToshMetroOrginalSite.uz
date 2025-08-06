@@ -39,7 +39,7 @@ export const metadata = {
     type: "website",
   },
   icons: {
-    icon: "/MetroLogo.png",
+    icon: "/logos.png",
   },
 };
 
