@@ -1,10 +1,10 @@
-import Facepay from '@/components/facepay/facepay'
-import React from 'react'
+import Facepay from "@/components/facepay/facepay";
+import React from "react";
 
 export default function page() {
-    return (
-        <div>
-            <Facepay />
-        </div>
-    )
+  return (
+    <div>
+      <Facepay />
+    </div>
+  );
 }

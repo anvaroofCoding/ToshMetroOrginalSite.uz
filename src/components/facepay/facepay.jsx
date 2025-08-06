@@ -22,6 +22,7 @@ import {
   MoveRight,
   ScanFace,
 } from "lucide-react";
+import Component from "@/app/[locale]/FacePay/forFacepayanimation";
 
 function Facepay() {
   const observerRef = useRef(null);
@@ -117,13 +118,8 @@ function Facepay() {
             <h1 className="text-5xl md:text-7xl font-bold text-blue-900 mb-8 leading-tight">
               FacePay
             </h1>
-            <div className="relative inline-block mb-12">
-              <img
-                src="https://www.atto.uz/image/person.png"
-                alt="Hand scanner"
-                className="w-64 h-64 object-contain mx-auto animate-pulse"
-              />
-              <div className="absolute -inset-4 bg-gradient-to-r from-blue-900/20 to-transparent rounded-full blur-xl"></div>
+            <div className="relative flex justify-center items-center">
+              <Component />
             </div>
             <div className="max-w-2xl mx-auto">
               <h2 className="text-2xl md:text-3xl font-semibold text-blue-900 mb-4">
@@ -132,15 +128,6 @@ function Facepay() {
               <p className="text-lg text-blue-800/80 leading-relaxed">
                 Metroga yo‘l haqini smartfonsiz, yuzni skanerlash orqali to‘lang
               </p>
-            </div>
-            <div className="w-full pt-10 container flex justify-center items-center">
-              <video
-                controls
-                muted
-                className="rounded-2xl"
-                src="/videos/IMG_6836.MP4"
-                width={300}
-              ></video>
             </div>
           </div>
         </div>

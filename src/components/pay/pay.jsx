@@ -19,6 +19,7 @@ import {
   Star,
   Nfc,
 } from "lucide-react";
+import Component from "@/app/[locale]/pay/components";
 
 function PalmpayPayments() {
   const observerRef = useRef(null);
@@ -135,24 +136,10 @@ function PalmpayPayments() {
             <h1 className="text-5xl md:text-7xl font-bold text-blue-900 mb-8 leading-tight">
               PalmPay
             </h1>
-            <div className="relative inline-block mb-12">
-              <img
-                src="https://www.atto.uz/image/hand.png"
-                alt="Hand scanner"
-                className="w-64 h-64 object-contain mx-auto animate-pulse"
-              />
-              <div className="absolute -inset-4 bg-gradient-to-r from-blue-900/20 to-transparent rounded-full blur-xl"></div>
+            <div className="relative flex justify-center items-center">
+              <Component />
             </div>
             {/* Optimized PalmPay Video */}
-            <div className="w-full container flex justify-center items-center">
-              <video
-                controls
-                muted
-                className="rounded-2xl"
-                src="/videos/IMG_4247.MOV"
-                width={300}
-              ></video>
-            </div>
           </div>
         </div>
       </section>
