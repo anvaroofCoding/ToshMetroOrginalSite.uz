@@ -80,7 +80,8 @@ const Footer = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const pathname = usePathname();
   const parts = pathname.split("/").filter(Boolean);
-  const isHiddenPath = parts[1] === "metro-xaritasis";
+  const isHiddenPath =
+    parts[1] === "metro-xaritasis" || parts[1] === "normalMap";
   const getprosmotrsite = async () => {
     const res = await fetch(
       "https://metro-site.onrender.com/api/sayt_foydalanuvchilari/"

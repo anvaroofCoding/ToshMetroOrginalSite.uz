@@ -265,82 +265,11 @@ export default function TashkentMetroMap() {
   }, [isDragging, dragStart]);
 
   return (
-    <div className="w-full min-h-screen bg-white">
+    <div className="w-full min-h-screen bg-white overflow-hidden">
       <div className="w-full bg-white">
-        <div className="p-4 bg-white border-b border-gray-200">
-          <h1 className="text-2xl md:text-3xl font-bold text-center text-gray-800">
-            Tashkent Metro Map
-          </h1>
-
-          {selectedStation && (
-            <div className="mt-4 p-3 bg-blue-50 rounded-lg border border-blue-200 max-w-md mx-auto">
-              <p className="text-lg font-semibold text-blue-800">
-                Selected:{" "}
-                {stations[selectedStation]?.name ||
-                  (selectedStation === "xalqlar_dostligi"
-                    ? "Xalqlar Do'stligi"
-                    : selectedStation === "paxtakor"
-                    ? "Paxtakor"
-                    : selectedStation === "mustaqillik_maydoni"
-                    ? "Mustaqillik Maydoni"
-                    : selectedStation === "amir_temur_xiyoboni"
-                    ? "Amir Temur Xiyoboni"
-                    : selectedStation === "kosmonavtlar"
-                    ? "Kosmonavtlar"
-                    : selectedStation === "oybek"
-                    ? "Oybek"
-                    : selectedStation === "toshkent"
-                    ? "Toshkent"
-                    : "")}
-              </p>
-              <p className="text-sm text-blue-600">
-                Line:{" "}
-                {stations[selectedStation]?.line ||
-                  (selectedStation === "xalqlar_dostligi"
-                    ? "red"
-                    : selectedStation === "paxtakor"
-                    ? "red"
-                    : selectedStation === "mustaqillik_maydoni"
-                    ? "red"
-                    : selectedStation === "amir_temur_xiyoboni"
-                    ? "red"
-                    : selectedStation === "kosmonavtlar"
-                    ? "blue"
-                    : selectedStation === "oybek"
-                    ? "blue"
-                    : selectedStation === "toshkent"
-                    ? "blue"
-                    : "")}
-              </p>
-            </div>
-          )}
-
-          {/* Map Controls */}
-          <div className="flex justify-center gap-2 mt-4">
-            <button
-              onClick={zoomIn}
-              className="px-3 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-sm"
-            >
-              Zoom In
-            </button>
-            <button
-              onClick={zoomOut}
-              className="px-3 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-sm"
-            >
-              Zoom Out
-            </button>
-            <button
-              onClick={resetView}
-              className="px-3 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors text-sm"
-            >
-              Reset View
-            </button>
-          </div>
-        </div>
-
         <div
           ref={containerRef}
-          className="w-full h-[calc(100vh-200px)] overflow-hidden bg-white relative cursor-grab active:cursor-grabbing touch-none"
+          className="w-full h-[calc(100vh-200px)]bg-white relative cursor-grab active:cursor-grabbing touch-none"
           onMouseDown={handleMouseDown}
           onWheel={handleWheel}
           onTouchStart={handleTouchStart}
@@ -882,17 +811,6 @@ export default function TashkentMetroMap() {
               </g>
             </svg>
           </div>
-        </div>
-
-        <div className="p-4 text-center text-sm text-gray-600 bg-white border-t border-gray-200">
-          <p className="mb-2">
-            Click on any station to select it. Transfer stations are marked with
-            larger circles.
-          </p>
-          <p className="text-xs">
-            Use mouse wheel to zoom, drag to pan, or use the control buttons
-            above.
-          </p>
         </div>
       </div>
     </div>

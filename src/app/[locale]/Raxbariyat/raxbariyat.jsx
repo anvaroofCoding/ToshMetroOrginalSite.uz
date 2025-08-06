@@ -269,13 +269,13 @@ export default function ManagementPage() {
     });
 
     return paragraphs;
-  };  
+  };
 
   return (
     <div className="min-h-screen">
       {/* Header Section */}
-      <div className=" ">
-        <div className="container py-8">
+      <div className="py-8">
+        <div className="container">
           <div className="text-center lg:text-left">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-blue-900">
               Rahbariyat
@@ -285,7 +285,7 @@ export default function ManagementPage() {
       </div>
 
       {/* Management Grid */}
-      <div className="container py-8">
+      <div className="container py-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
           {managementData.map((member) => (
             <Card
