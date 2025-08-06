@@ -171,11 +171,33 @@ export default function TashkentMetroMap() {
     setIsDragging(false);
   };
 
+  // Enhanced wheel handler with cursor-based zooming
   const handleWheel = (e) => {
     e.preventDefault();
+
+    if (!containerRef.current) return;
+
+    const container = containerRef.current;
+    const rect = container.getBoundingClientRect();
+
+    // Get cursor position relative to container
+    const cursorX = e.clientX - rect.left;
+    const cursorY = e.clientY - rect.top;
+
+    // Calculate zoom factor
     const delta = e.deltaY > 0 ? 0.9 : 1.1;
     const newScale = Math.min(Math.max(0.5, scale * delta), 3);
+
+    // Calculate the point in the coordinate system that the cursor is over
+    const pointX = (cursorX - position.x) / scale;
+    const pointY = (cursorY - position.y) / scale;
+
+    // Calculate new position to keep the point under the cursor
+    const newX = cursorX - pointX * newScale;
+    const newY = cursorY - pointY * newScale;
+
     setScale(newScale);
+    setPosition({ x: newX, y: newY });
   };
 
   const resetView = () => {
@@ -184,11 +206,51 @@ export default function TashkentMetroMap() {
   };
 
   const zoomIn = () => {
-    setScale((prev) => Math.min(prev * 1.2, 3));
+    if (!containerRef.current) return;
+
+    const container = containerRef.current;
+    const rect = container.getBoundingClientRect();
+
+    // Zoom towards center of container
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const newScale = Math.min(scale * 1.2, 3);
+
+    // Calculate the point in the coordinate system at the center
+    const pointX = (centerX - position.x) / scale;
+    const pointY = (centerY - position.y) / scale;
+
+    // Calculate new position to keep the center point stable
+    const newX = centerX - pointX * newScale;
+    const newY = centerY - pointY * newScale;
+
+    setScale(newScale);
+    setPosition({ x: newX, y: newY });
   };
 
   const zoomOut = () => {
-    setScale((prev) => Math.max(prev * 0.8, 0.5));
+    if (!containerRef.current) return;
+
+    const container = containerRef.current;
+    const rect = container.getBoundingClientRect();
+
+    // Zoom from center of container
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const newScale = Math.max(scale * 0.8, 0.5);
+
+    // Calculate the point in the coordinate system at the center
+    const pointX = (centerX - position.x) / scale;
+    const pointY = (centerY - position.y) / scale;
+
+    // Calculate new position to keep the center point stable
+    const newX = centerX - pointX * newScale;
+    const newY = centerY - pointY * newScale;
+
+    setScale(newScale);
+    setPosition({ x: newX, y: newY });
   };
 
   // Touch event handlers for mobile support
@@ -225,7 +287,7 @@ export default function TashkentMetroMap() {
         y: touch.clientY - dragStart.y,
       });
     } else if (e.touches.length === 2) {
-      // Two touches - pinch zoom
+      // Two touches - pinch zoom with cursor-based zooming
       const touch1 = e.touches[0];
       const touch2 = e.touches[1];
       const distance = Math.sqrt(
@@ -233,10 +295,27 @@ export default function TashkentMetroMap() {
           Math.pow(touch2.clientY - touch1.clientY, 2)
       );
 
-      if (lastTouchDistance > 0) {
+      if (lastTouchDistance > 0 && containerRef.current) {
+        const container = containerRef.current;
+        const rect = container.getBoundingClientRect();
+
+        // Get center point between the two touches
+        const centerX = (touch1.clientX + touch2.clientX) / 2 - rect.left;
+        const centerY = (touch1.clientY + touch2.clientY) / 2 - rect.top;
+
         const scaleChange = distance / lastTouchDistance;
         const newScale = Math.min(Math.max(0.5, initialScale * scaleChange), 3);
+
+        // Calculate the point in the coordinate system at the touch center
+        const pointX = (centerX - position.x) / scale;
+        const pointY = (centerY - position.y) / scale;
+
+        // Calculate new position to keep the touch center stable
+        const newX = centerX - pointX * newScale;
+        const newY = centerY - pointY * newScale;
+
         setScale(newScale);
+        setPosition({ x: newX, y: newY });
       }
     }
     e.preventDefault();
@@ -374,7 +453,7 @@ export default function TashkentMetroMap() {
             className="transition-transform duration-200 ease-out"
             style={{
               transform: `translate(${position.x}px, ${position.y}px) scale(${scale})`,
-              transformOrigin: "center center",
+              transformOrigin: "0 0",
             }}
           >
             <svg
