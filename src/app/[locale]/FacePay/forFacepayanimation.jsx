@@ -62,7 +62,7 @@ export default function Component() {
 
       {/* Image */}
       <img
-        src="https://www.atto.uz/image/hand.png"
+        src="https://www.atto.uz/image/person.png"
         alt="Hand gesture"
         style={{
           width: "100%",
