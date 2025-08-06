@@ -189,6 +189,66 @@ export default function TashkentMetroMap() {
     setScale((prev) => Math.max(prev * 0.8, 0.5));
   };
 
+  // Touch event handlers for mobile devices
+  const [touchStart, setTouchStart] = useState({ x: 0, y: 0 });
+  const [lastTouchDistance, setLastTouchDistance] = useState(0);
+  const [isTouching, setIsTouching] = useState(false);
+
+  const getTouchDistance = (touches) => {
+    if (touches.length < 2) return 0;
+    const touch1 = touches[0];
+    const touch2 = touches[1];
+    return Math.sqrt(
+      Math.pow(touch2.clientX - touch1.clientX, 2) +
+        Math.pow(touch2.clientY - touch1.clientY, 2)
+    );
+  };
+
+  const handleTouchStart = (e) => {
+    if (e.target.tagName === "circle" || e.target.tagName === "text") return;
+
+    setIsTouching(true);
+
+    if (e.touches.length === 1) {
+      // Single touch - pan
+      setTouchStart({
+        x: e.touches[0].clientX - position.x,
+        y: e.touches[0].clientY - position.y,
+      });
+    } else if (e.touches.length === 2) {
+      // Two finger touch - zoom
+      setLastTouchDistance(getTouchDistance(e.touches));
+    }
+  };
+
+  const handleTouchMove = (e) => {
+    e.preventDefault();
+
+    if (!isTouching) return;
+
+    if (e.touches.length === 1) {
+      // Single touch - pan
+      setPosition({
+        x: e.touches[0].clientX - touchStart.x,
+        y: e.touches[0].clientY - touchStart.y,
+      });
+    } else if (e.touches.length === 2) {
+      // Two finger touch - zoom
+      const currentDistance = getTouchDistance(e.touches);
+      if (lastTouchDistance > 0) {
+        const scaleChange = currentDistance / lastTouchDistance;
+        const newScale = Math.min(Math.max(0.5, scale * scaleChange), 3);
+        setScale(newScale);
+      }
+      setLastTouchDistance(currentDistance);
+    }
+  };
+
+  const handleTouchEnd = (e) => {
+    setIsTouching(false);
+    setLastTouchDistance(0);
+  };
+
   useEffect(() => {
     const handleGlobalMouseMove = (e) => handleMouseMove(e);
     const handleGlobalMouseUp = () => handleMouseUp();
@@ -280,16 +340,23 @@ export default function TashkentMetroMap() {
 
         <div
           ref={containerRef}
-          className="w-full h-[calc(100vh-200px)] overflow-hidden bg-white relative cursor-grab active:cursor-grabbing"
+          className="w-full h-[calc(100vh-200px)] overflow-hidden bg-white relative cursor-grab active:cursor-grabbing touch-none"
           onMouseDown={handleMouseDown}
           onWheel={handleWheel}
-          style={{ cursor: isDragging ? "grabbing" : "grab" }}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+          style={{
+            cursor: isDragging || isTouching ? "grabbing" : "grab",
+            touchAction: "none",
+          }}
         >
           <div
-            className="transition-transform duration-200 ease-out"
+            className="transition-transform duration-100 ease-out"
             style={{
               transform: `translate(${position.x}px, ${position.y}px) scale(${scale})`,
               transformOrigin: "center center",
+              willChange: "transform",
             }}
           >
             <svg
@@ -815,6 +882,17 @@ export default function TashkentMetroMap() {
               </g>
             </svg>
           </div>
+        </div>
+
+        <div className="p-4 text-center text-sm text-gray-600 bg-white border-t border-gray-200">
+          <p className="mb-2">
+            Click on any station to select it. Transfer stations are marked with
+            larger circles.
+          </p>
+          <p className="text-xs">
+            Use mouse wheel to zoom, drag to pan, or use the control buttons
+            above.
+          </p>
         </div>
       </div>
     </div>
