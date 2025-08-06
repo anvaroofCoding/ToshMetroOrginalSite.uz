@@ -1841,8 +1841,8 @@ export default function TashkentMetroMap() {
                   <stop offset="100%" stopColor="#38A169" />
                   <stop offset="100%" stopColor="#38A169" />
                   <stop offset="100%" stopColor="#38A169" />
-                  <stop offset="100%" stopColor="#D69E2E" />
-                  <stop offset="100%" stopColor="#D69E2E" />
+                  <stop offset="100%" stopColor="#38A169" />
+                  <stop offset="100%" stopColor="#38A169" />
                 </linearGradient>
                 {/* Enhanced drop shadow filter */}
                 <filter
