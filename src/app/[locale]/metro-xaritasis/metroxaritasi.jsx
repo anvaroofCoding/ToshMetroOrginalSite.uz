@@ -1403,7 +1403,7 @@ export default function TashkentMetroMap() {
     <>
       <div
         className={`${
-          isFullscreen ? "fixed inset-0 z-[9999] bg-white" : "w-full h-screen"
+          isFullscreen ? "fixed inset-0 z-[9999] bg-red-900" : "w-full h-screen"
         } relative flex`}
       >
         {/* Route Planning Panel - Left Side */}
@@ -1540,7 +1540,7 @@ export default function TashkentMetroMap() {
 
                 {/* Route Information */}
                 {routeInfo && (
-                  <Card className="border-0 shadow-md bg-gradient-to-br from-blue-50 to-blue-100">
+                  <Card className="border-0 shadow-md bg-transparent">
                     <CardHeader className="pb-3">
                       <CardTitle className="text-lg text-blue-800 flex items-center gap-2">
                         <Train className="w-5 h-5" />
@@ -1770,7 +1770,7 @@ export default function TashkentMetroMap() {
           {/* Map Container */}
           <div
             ref={containerRef}
-            className={`relative overflow-hidden bg-gradient-to-br  from-gray-50 to-gray-100 ${
+            className={`relative overflow-hidden  ${
               showModal && !isFullscreen && !isMobile
                 ? "w-full lg:w-2/3"
                 : "w-full"
