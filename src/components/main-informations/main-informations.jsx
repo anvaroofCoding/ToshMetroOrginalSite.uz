@@ -552,7 +552,7 @@ function AttoCardsCarousel() {
           <Wallet className="w-8 h-8 text-white " />
         </motion.div>
         <div>
-          <h3 className="text-xl sm:text-2xl font-bold">ATTO Kartalar</h3>
+          <h3 className="text-xl sm:text-2xl font-bold">ATTO kartalar</h3>
           <p className="text-white/70 text-sm">Toshkent transport kartalari</p>
         </div>
       </div>

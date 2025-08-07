@@ -102,7 +102,8 @@ function TashkentMetroPage() {
       stations: 11,
       opened: "1984",
       color: "#2563eb",
-      description: "O'zbekiston yo'nalishi ikkinchi ishga tushgan yo'nalish bo'lib, Beruniy bekatidan Do'stlik bekatigacha davom etadi.",
+      description:
+        "O'zbekiston yo'nalishi ikkinchi ishga tushgan yo'nalish bo'lib, Beruniy bekatidan Do'stlik bekatigacha davom etadi.",
       highlights: [
         "Temir yo'l aloqasi",
         "Biznes hududi",
@@ -247,10 +248,28 @@ function TashkentMetroPage() {
     },
   ];
 
-  const imeges = [
-    "https://cdn1.img.sputniknews.uz/img/07e7/08/1e/38378409_0:67:1280:787_1920x0_80_0_0_5a0d93c22a77a08b2f68d80cbfba6ff5.jpg",
-    "https://cdn1.img.sputniknews.uz/img/07e7/08/1e/38378409_0:67:1280:787_1920x0_80_0_0_5a0d93c22a77a08b2f68d80cbfba6ff5.jpg",
-    "https://cdn1.img.sputniknews.uz/img/07e7/08/1e/38378409_0:67:1280:787_1920x0_80_0_0_5a0d93c22a77a08b2f68d80cbfba6ff5.jpg",
+  const sliderHistory = [
+    {
+      image:
+        "https://cdn1.img.sputniknews.uz/img/07e7/08/1e/38378409_0:67:1280:787_1920x0_80_0_0_5a0d93c22a77a08b2f68d80cbfba6ff5.jpg",
+      title: "Tarixiy metro poezdlari",
+      description: "Metro qurilishining ilk bosqichlari",
+      badges: ["Tarixiy", "Madaniy"],
+    },
+    {
+      image:
+        "https://cdn1.img.sputniknews.uz/img/07e7/08/1e/38378409_0:67:1280:787_1920x0_80_0_0_5a0d93c22a77a08b2f68d80cbfba6ff5.jpg",
+      title: "Yaqin o'tmishdagi metro poezdlari",
+      description: "Rivojlanish bosqichidagi poezdlar",
+      badges: ["Xavfsiz", "Samarali"],
+    },
+    {
+      image:
+        "https://cdn1.img.sputniknews.uz/img/07e7/08/1e/38378409_0:67:1280:787_1920x0_80_0_0_5a0d93c22a77a08b2f68d80cbfba6ff5.jpg",
+      title: "Hozirgi zamonaviy poyezdlar",
+      description: "Yangi texnologiyalar va kengaygan imkoniyatlar",
+      badges: ["Zamonaviy", "Qulay transport"],
+    },
   ];
 
   return (
@@ -282,23 +301,22 @@ function TashkentMetroPage() {
           <div className="inline-flex items-center gap-4 mb-8 group">
             <div>
               <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-[#0E327F] to-blue-600 bg-clip-text text-transparent">
-                Toshkent Metropoliteni
+                Toshkent metropoliteni
               </h1>
             </div>
           </div>
           <div className="max-w-4xl mx-auto">
             <p className="text-xl md:text-2xl text-gray-600 leading-relaxed mb-8">
-              Markaziy Osiyodagi birinchi, xavfsiz, qulay va tez jamoat transportlaridan bo'lib 1977-yildan beri
-              faoliyat yuritib kelmoqda.
+              Markaziy Osiyodagi birinchi, xavfsiz, qulay va tez jamoat
+              transportlaridan bo'lib 1977-yildan beri faoliyat yuritib
+              kelmoqda.
             </p>
           </div>
         </div>
-
         {/* Animated Image Gallery */}
         <div ref={(el) => (sectionRefs.current[1] = el)} className="mb-20">
-          
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-            {[0, 1, 2].map((index) => (
+            {sliderHistory.map((slide, index) => (
               <div
                 key={index}
                 className={`relative overflow-hidden rounded-3xl shadow-2xl transition-all duration-1000 transform hover:rotate-1 ${
@@ -313,8 +331,8 @@ function TashkentMetroPage() {
               >
                 <div className="aspect-[4/3] bg-gradient-to-br from-[#0E327F] via-blue-600 to-blue-800 flex items-center justify-center relative">
                   <img
-                    src={`https://cdn1.img.sputniknews.uz/img/07e7/08/1e/38378409_0:67:1280:787_1920x0_80_0_0_5a0d93c22a77a08b2f68d80cbfba6ff5.jpg?height=400&width=500&text=Metro+Bekati+`}
-                    alt={`Toshkent Metro Bekati ${index + 1}`}
+                    src={slide.image}
+                    alt={slide.title}
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
@@ -325,18 +343,14 @@ function TashkentMetroPage() {
                   }`}
                 >
                   <div className="absolute bottom-6 left-6 text-white">
-                    <h3 className="text-xl font-bold mb-2">
-                      Zamonaviy Metro Bekati
-                    </h3>
-                    <p className="text-sm opacity-90">
-                      Eng so&apos;nggi infratuzilma va dizayn
-                    </p>
+                    <h3 className="text-xl font-bold mb-2">{slide.title}</h3>
+                    <p className="text-sm opacity-90">{slide.description}</p>
                     <div className="flex gap-2 mt-3">
-                      <Badge className="bg-white/20 text-white">Xavfsiz</Badge>
-                      <Badge className="bg-white/20 text-white">
-                        Zamonaviy
-                      </Badge>
-                      <Badge className="bg-white/20 text-white">Samarali</Badge>
+                      {slide.badges.map((badge, i) => (
+                        <Badge key={i} className="bg-white/20 text-white">
+                          {badge}
+                        </Badge>
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -357,7 +371,7 @@ function TashkentMetroPage() {
 
           {/* Enhanced Image Navigation */}
           <div className="flex justify-center gap-3 mb-8">
-            {[0, 1, 2].map((index) => (
+            {sliderHistory.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentImageIndex(index)}
@@ -374,11 +388,10 @@ function TashkentMetroPage() {
             ))}
           </div>
         </div>
-
         {/* Enhanced Metro Lines */}
         <div ref={(el) => (sectionRefs.current[3] = el)} className="mb-20">
           <h2 className="text-4xl font-bold text-[#0E327F] mb-4 text-center">
-            Metro Tarmog&apos;i
+            Metro tarmog'i
           </h2>
           <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
             Toshkent shahar bo'ylab xizmat ko'rsatadigan hamda o'zaro bog'langan
@@ -441,15 +454,14 @@ function TashkentMetroPage() {
             ))}
           </div>
         </div>
-
         {/* Enhanced Timeline */}
         <div ref={(el) => (sectionRefs.current[5] = el)} className="mb-20">
           <h2 className="text-4xl font-bold text-[#0E327F] mb-4 text-center">
-            Vaqt Bo&apos;ylab Sayohat
+            Vaqt bo'ylab sayohat
           </h2>
           <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-            Poydevor qo&apos;yishdan zamonaviy kengayishgacha - doimiy
-            o&apos;sish va innovatsiyaning ellik yili
+            Poydevor qo'yishdan zamonaviy kengayishgacha - doimiy o'sish va
+            innovatsiyaning ellik yili
           </p>
           <div className="relative">
             <div className="absolute left-8 md:left-1/2 transform md:-translate-x-1/2 h-full w-1 bg-gradient-to-b from-[#0E327F] via-blue-400 to-blue-600 opacity-30"></div>
@@ -500,7 +512,6 @@ function TashkentMetroPage() {
             ))}
           </div>
         </div>
-
         {/* Enhanced Current Status */}
         <Card className="border-0 shadow-2xl bg-gradient-to-r from-[#0E327F] via-blue-600 to-blue-700 text-white overflow-hidden relative ">
           <div className="absolute inset-0 bg-gradient-to-r from-[#0E327F]/90 to-blue-600/90" />
@@ -515,9 +526,10 @@ function TashkentMetroPage() {
               <h2 className="text-4xl font-bold">Hozirgi Yutuqlar</h2>
             </div>
             <p className="text-xl mb-8 opacity-90 leading-relaxed max-w-4xl mx-auto">
-              Bugungi kunda Toshkent metropoliteni Markaziy Osiyoning yetakchi shahar
-              transport tizimi sifatida 70 kilometrdan ortiq uzunlikda 50 ta
-              bekatlar bilan faoliyat yuritmoqda. 2024-yilning 1-choragida kunlik yo'lovchi tashish soni 1 milliondan oshgan.
+              Bugungi kunda Toshkent metropoliteni Markaziy Osiyoning yetakchi
+              shahar transport tizimi sifatida 70 kilometrdan ortiq uzunlikda 50
+              ta bekatlar bilan faoliyat yuritmoqda. 2024-yilning 1-choragida
+              kunlik yo'lovchi tashish soni 1 milliondan oshgan.
             </p>
             <div className="flex flex-wrap justify-center gap-6 mb-8">
               <div className="text-center group hover:scale-110 transition-transform duration-300">
@@ -528,14 +540,15 @@ function TashkentMetroPage() {
                 <div className="text-4xl font-bold mb-2">50</div>
                 <div className="text-sm opacity-80">Bekat</div>
               </div>
-              
+
               <div className="text-center group hover:scale-110 transition-transform duration-300">
                 <div className="text-4xl font-bold mb-2">53</div>
-                <div className="text-sm opacity-80">Xizmat Yili</div>
+                <div className="text-sm opacity-80">Xizmat yili</div>
               </div>
             </div>
           </CardContent>
         </Card>
+        Metro Tarmog'i
       </div>
 
       <style jsx>{`

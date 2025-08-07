@@ -92,7 +92,7 @@ export default function TashkentMetroMap() {
     rohat: { x: 700, y: 820, name: "Rohat", line: "yellow" },
     yangiobod: { x: 700, y: 860, name: "Yangiobod", line: "yellow" },
     qoyliq: { x: 650, y: 910, name: "Qo'yliq", line: "yellow" },
-    malohat: { x: 590, y: 910, name: "Malohat", line: "yellow" },
+    malohat: { x: 590, y: 910, name: "Matonat", line: "yellow" },
     qiyot: { x: 530, y: 910, name: "Qiyot", line: "yellow" },
     tolariq: { x: 440, y: 910, name: "Tolariq", line: "yellow" },
     xonobod: { x: 360, y: 910, name: "Xonobod", line: "yellow" },

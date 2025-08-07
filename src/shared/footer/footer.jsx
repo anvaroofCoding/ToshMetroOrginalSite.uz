@@ -50,7 +50,7 @@ const socialLinks = [
 const contacts = [
   {
     icon: MapPin,
-    text: "Toshkent sh., I.Karimov ko'chasi, 16a uy, 100027",
+    text: "Toshkent sh. Shayxontohur t. I.Karimov ko'chasi, 16a uy, 100027",
     title: "Manzil",
     type: "address",
   },
@@ -138,9 +138,9 @@ const Footer = () => {
                   <div className="border-l border-[#FF454B] h-[5%] w-full"></div>
                   <div className="border-l border-[#00B100] h-[30%] w-full"></div>
                 </div>
-                <h1 className="hidden md:block text-[11px] lg:text-[11] w-[150px] lg:w-[200px] capitalize">
+                <h1 className="hidden md:block text-[11px] lg:text-[11] w-[150px] lg:w-[200px]">
                   O'zbekiston Respublikasi Transport vazirligi{" "}
-                  <span>"Toshkent Metropoliteni"</span> DUK
+                  <span>"Toshkent metropoliteni"</span> DUK
                 </h1>
               </div>
 
@@ -257,7 +257,7 @@ const Footer = () => {
           {/* Bottom Section */}
           <div className="flex flex-col md:flex-row items-center justify-between gap-2 text-xs">
             <div className="flex items-center gap-2 text-blue-200">
-              <span>© 2025 "Toshkent Metropoliteni" DUK</span>
+              <span>© 2025 "Toshkent metropoliteni" DUK</span>
               <span className="hidden md:inline">•</span>
               <span className="hidden md:inline">
                 Barcha huquqlar himoyalangan

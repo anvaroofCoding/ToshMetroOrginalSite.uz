@@ -306,13 +306,13 @@ const Logo = () => (
     </div>
 
     <motion.h1
-      className="hidden md:block text-[11px] lg:text-[10px] w-[150px] lg:w-[150px] capitalize font-medium leading-tight"
+      className="hidden md:block text-[11px] lg:text-[10px] w-[150px] lg:w-[150px] font-medium leading-tight"
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: 0.6, duration: 0.5 }}
     >
       O'zbekiston Respublikasi Transport vazirligi{" "}
-      <span>"Toshkent Metropoliteni"</span> DUK
+      <span>"Toshkent metropoliteni"</span> DUK
     </motion.h1>
   </motion.div>
 );
@@ -794,7 +794,7 @@ export default function MetroNavbar() {
                   <h2 className="text-white text-[10px] capitalize font-medium">
                     O'zbekiston Respublikasi Transport vazirligi{" "}
                     <span className="text-blue-200 font-semibold">
-                      "Toshkent Metropoliteni"
+                      "Toshkent metropoliteni"
                     </span>{" "}
                     DUK
                   </h2>
