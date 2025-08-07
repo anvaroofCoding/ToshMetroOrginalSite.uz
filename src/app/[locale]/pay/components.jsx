@@ -4,22 +4,61 @@ import { useState, useEffect, useRef } from "react";
 
 export default function Component() {
   const [showVideo, setShowVideo] = useState(true);
+  const [isFullscreen, setIsFullscreen] = useState(false);
   const videoRef = useRef(null);
+  const timerRef = useRef(null);
 
-  // Switch between video and image every 3 seconds
+  // Fullscreen holatini tekshirish
   useEffect(() => {
-    const timer = setInterval(() => {
-      setShowVideo((prev) => !prev);
-    }, 3000);
+    function handleFullscreenChange() {
+      const fullscreenElement =
+        document.fullscreenElement ||
+        document.webkitFullscreenElement ||
+        document.mozFullScreenElement ||
+        document.msFullscreenElement;
+      setIsFullscreen(!!fullscreenElement);
+    }
 
-    return () => clearInterval(timer);
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
+    document.addEventListener("webkitfullscreenchange", handleFullscreenChange);
+    document.addEventListener("mozfullscreenchange", handleFullscreenChange);
+    document.addEventListener("MSFullscreenChange", handleFullscreenChange);
+
+    return () => {
+      document.removeEventListener("fullscreenchange", handleFullscreenChange);
+      document.removeEventListener(
+        "webkitfullscreenchange",
+        handleFullscreenChange
+      );
+      document.removeEventListener(
+        "mozfullscreenchange",
+        handleFullscreenChange
+      );
+      document.removeEventListener(
+        "MSFullscreenChange",
+        handleFullscreenChange
+      );
+    };
   }, []);
+
+  // Switch between video and image every 3 seconds (faqat fullscreen bo'lmaganda)
+  useEffect(() => {
+    if (!isFullscreen) {
+      timerRef.current = setInterval(() => {
+        setShowVideo((prev) => !prev);
+      }, 3000);
+    } else {
+      clearInterval(timerRef.current);
+      setShowVideo(true); // Fullscreen bo'lsa faqat video ko'rsin
+    }
+    return () => clearInterval(timerRef.current);
+  }, [isFullscreen]);
 
   // Handle video play/pause
   useEffect(() => {
     if (videoRef.current) {
       if (showVideo) {
-        videoRef.current.play().catch(console.log);
+        videoRef.current.play().catch(() => {});
       } else {
         videoRef.current.pause();
         videoRef.current.currentTime = 0;
@@ -50,7 +89,6 @@ export default function Component() {
           opacity: showVideo ? 1 : 0,
           transition: "opacity 0.5s ease-in-out",
           position: "absolute",
-          borderRadius: "rounded-[30px]",
         }}
         muted
         loop

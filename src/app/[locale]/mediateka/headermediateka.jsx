@@ -283,10 +283,10 @@ export default function Mediateka() {
           </div>
 
           {/* Optimized More Button */}
-          <Link href="/more">
+          <Link href="/mediateka">
             <button className="group relative bg-blue-900 hover:bg-blue-800 text-white px-5 py-2.5 lg:px-6 lg:py-3 rounded-xl font-medium text-sm lg:text-base transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-xl border-2 border-blue-900 hover:border-blue-700">
               <div className="flex items-center gap-2">
-                <span>Ko'proq</span>
+                <span>Batafsil</span>
                 <div className="transform group-hover:translate-x-0.5 transition-transform duration-200">
                   <ChevronRight className="w-4 h-4" />
                 </div>

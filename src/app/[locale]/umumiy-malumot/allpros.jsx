@@ -111,7 +111,7 @@ export default function TashkentMetroDashboard() {
 						</h1>
 						<p className='text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed'>
 							Ayollar va erkaklar uchun teng huquq va imkoniyatlarni ta'minlash
-							bo'yicha statistika va yutuqlar
+							bo'yicha statistika
 						</p>
 						<div className='flex flex-wrap justify-center gap-4 pt-4'>
 							<div className='bg-gradient-to-r from-[#0E327F] to-blue-600 text-white px-6 py-3 rounded-full text-sm font-medium shadow-lg'>

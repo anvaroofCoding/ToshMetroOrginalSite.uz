@@ -1,163 +1,165 @@
-"use client"
+"use client";
 
+import tarkib1 from "./tarkib/kadr.jpg";
+import tarkib2 from "./tarkib/harakatxiz.jpg";
+import tarkib3 from "./tarkib/tch-1.jpg";
+import tarkib4 from "./tarkib/tch-2.jpg";
+import tarkib5 from "./tarkib/Elektromexanika.jpg";
+import tarkib6 from "./tarkib/elektrtaminot.jpg";
+import tarkib7 from "./tarkib/signallashtirish.jpg";
+import tarkib8 from "./tarkib/yolxiz.jpg";
+import tarkib9 from "./tarkib/Tonnel.jpg";
+import tarkib10 from "./tarkib/korrupsiya.jpg";
+import tarkib11 from "./tarkib/AKT.png";
+import tarkib12 from "./tarkib/matbuot.jpg";
 
-import tarkib1 from "./tarkib/kadr.jpg"
-import tarkib2 from "./tarkib/harakatxiz.jpg"
-import tarkib3 from "./tarkib/tch-1.jpg"
-import tarkib4 from "./tarkib/tch-2.jpg"
-import tarkib5 from "./tarkib/Elektromexanika.jpg"
-import tarkib6 from "./tarkib/elektrtaminot.jpg"
-import tarkib7 from "./tarkib/signallashtirish.jpg"
-import tarkib8 from "./tarkib/yolxiz.jpg"
-import tarkib9 from "./tarkib/Tonnel.jpg"
-import tarkib10 from "./tarkib/korrupsiya.jpg"
-import tarkib11 from "./tarkib/AKT.png"
-import tarkib12 from "./tarkib/matbuot.jpg"
-
-
-
-
-import { Phone, Train, Eye, Clock, User, Calendar, Mail } from "lucide-react"
-import Image from "next/image"
-import { Card, CardContent } from "@/components/ui/card"
-import { Dialog, DialogContent, DialogTrigger, DialogTitle } from "@/components/ui/dialog"
+import { Phone, Train, Eye, Clock, User, Calendar, Mail } from "lucide-react";
+import Image from "next/image";
+import { Card, CardContent } from "@/components/ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 export default function TransportDirectory() {
   const departments = [
     {
-      title: 'Kadrlar bilan ishlash xizmati',
-      titleEn: 'Human Resources Service',
+      title: "Kadrlar bilan ishlash xizmati",
+      titleEn: "Human Resources Service",
       head: "Xusanov Qudratilla Komiljon o'g'li",
-      schedule: 'Dushanba-juma kunlari 08:00 dan 17:00 ga qadar',
-      reception: 'Haftaning har chorshanbasida 14:00 dan 17:00 gacha',
-      phone: '+99871-239-89-27',
+      schedule: "Dushanba-juma kunlari 08:00 dan 17:00 ga qadar",
+      reception: "Haftaning har chorshanbasida 14:00 dan 17:00 gacha",
+      phone: "+99871-239-89-27",
       image: tarkib1,
-      email: 'kadr@tashmetro.uz',
+      email: "kadr@tashmetro.uz",
     },
     {
-      title: 'Harakat xizmati',
-      titleEn: 'Movement Service',
+      title: "Harakat xizmati",
+      titleEn: "Movement Service",
       head: "Saidxodjayev Jasur Sa'dullayevich",
-      schedule: 'Dushanba-juma kunlari 08:00 dan 17:00 ga qadar',
-      reception: 'Haftaning chorshanba kuni 14:00 dan 17:00 gacha',
-      phone: '+99871-293-89-31',
+      schedule: "Dushanba-juma kunlari 08:00 dan 17:00 ga qadar",
+      reception: "Haftaning chorshanba kuni 14:00 dan 17:00 gacha",
+      phone: "+99871-293-89-31",
       image: tarkib2,
-      email: 'd@tashmetro.uz',
+      email: "d@tashmetro.uz",
     },
     {
-      title: 'Chilonzor elektrodeposi',
-      titleEn: 'Chilonzor Electrodepot',
-      head: 'Shafikov Rustam Rafikovich',
-      schedule: 'Dushanba-juma kunlari 08:00 dan 17:00 ga qadar',
-      reception: 'Haftaning seshanba kuni 10:00 da',
-      phone: '+998-93-500-25-20',
+      title: "Chilonzor elektrodeposi",
+      titleEn: "Chilonzor Electrodepot",
+      head: "Shafikov Rustam Rafikovich",
+      schedule: "Dushanba-juma kunlari 08:00 dan 17:00 ga qadar",
+      reception: "Haftaning seshanba kuni 10:00 da",
+      phone: "+998-93-500-25-20",
       image: tarkib3,
-      email: 'tch1@tashmetro.uz',
+      email: "tch1@tashmetro.uz",
     },
     {
       title: "O'zbekiston elektrodeposi",
-      titleEn: 'Uzbekistan Electrodepot',
+      titleEn: "Uzbekistan Electrodepot",
       head: "Iskandarov Gulamjan Rustamovich",
-      schedule: 'Dushanba-juma kunlari 08:00 dan 17:00 ga qadar',
-      reception: 'Haftaning seshanba kuni 10:00 da',
-      phone: '+998-93-500-55-89',
+      schedule: "Dushanba-juma kunlari 08:00 dan 17:00 ga qadar",
+      reception: "Haftaning seshanba kuni 10:00 da",
+      phone: "+998-93-500-55-89",
       image: tarkib4,
-      email: 'tch2@tashmetro.uz',
+      email: "tch2@tashmetro.uz",
     },
     {
-      title: 'Elektromexanika xizmati',
-      titleEn: 'Electromechanical Service',
+      title: "Elektromexanika xizmati",
+      titleEn: "Electromechanical Service",
       head: "Karimjonov Omonjon Alimjonovich",
-      schedule: 'Dushanba-juma kunlari 08:00 dan 17:00 ga qadar',
-      reception: 'Haftaning seshanba kuni 09:00 da',
-      phone: '+99893-501-79-70',
+      schedule: "Dushanba-juma kunlari 08:00 dan 17:00 ga qadar",
+      reception: "Haftaning seshanba kuni 09:00 da",
+      phone: "+99893-501-79-70",
       image: tarkib5,
-      email: 'm@tashmetro.uz',
+      email: "m@tashmetro.uz",
     },
     {
       title: "Elektr ta'minot xizmati",
-      titleEn: 'Power Supply Service',
+      titleEn: "Power Supply Service",
       head: "Baxromov Behzod To'xtamurodovich",
-      schedule: 'Dushanba-juma kunlari 08:00 dan 17:00 ga qadar',
-      reception: 'Haftaning dushanba kuni 13:30 da',
-      phone: '+99893-501-79-72',
+      schedule: "Dushanba-juma kunlari 08:00 dan 17:00 ga qadar",
+      reception: "Haftaning dushanba kuni 13:30 da",
+      phone: "+99893-501-79-72",
       image: tarkib6,
-      email: 'e@tashmetro.uz',
+      email: "e@tashmetro.uz",
     },
     {
-      title: 'Signallashtirish va aloqa xizmati',
-      titleEn: 'Signaling and Communication Service',
+      title: "Signallashtirish va aloqa xizmati",
+      titleEn: "Signaling and Communication Service",
       head: "Agzamov Shaxzod Sherzod o'g'li",
-      schedule: 'Dushanba-juma kunlari 08:00 dan 17:00 ga qadar',
-      reception: 'Haftaning chorshanba kuni 14:00 dan 17:00 gacha',
-      phone: '+998998026218',
+      schedule: "Dushanba-juma kunlari 08:00 dan 17:00 ga qadar",
+      reception: "Haftaning chorshanba kuni 14:00 dan 17:00 gacha",
+      phone: "+998998026218",
       image: tarkib7,
-      email: 'sh@tashmetro.uz',
+      email: "sh@tashmetro.uz",
     },
     {
       title: "Yo'l xizmati",
-      titleEn: 'Road Service',
+      titleEn: "Road Service",
       head: "Xolmurodov Ruslan Beknazar o'g'li",
-      schedule: 'Dushanba-juma kunlari 08:00 dan 17:00 ga qadar',
-      reception: 'Haftaning seshanba kuni 09:00 da',
-      phone: '+99894-100-26-26',
+      schedule: "Dushanba-juma kunlari 08:00 dan 17:00 ga qadar",
+      reception: "Haftaning seshanba kuni 09:00 da",
+      phone: "+99894-100-26-26",
       image: tarkib8,
-      email: 'p@tashmetro.uz',
+      email: "p@tashmetro.uz",
     },
     {
-      title: 'Tonnel inshootlari xizmati',
-      titleEn: 'Tunnel Structures Service',
-      head: 'Musayev Bobomurod Faxriddinovich',
-      schedule: 'Dushanba-juma kunlari 08:00 dan 17:00 ga qadar',
-      reception: 'Haftaning seshanba kuni 14:00 da',
-      phone: '+998-93-501-79-71',
+      title: "Tonnel inshootlari xizmati",
+      titleEn: "Tunnel Structures Service",
+      head: "Musayev Bobomurod Faxriddinovich",
+      schedule: "Dushanba-juma kunlari 08:00 dan 17:00 ga qadar",
+      reception: "Haftaning seshanba kuni 14:00 da",
+      phone: "+998-93-501-79-71",
       image: tarkib9,
-      email: 'ts@tashmetro.uz',
+      email: "ts@tashmetro.uz",
     },
     {
-      title: 'Korrupsiyani oldini olish xizmati',
-      titleEn: 'Anti-Corruption Service',
-      head: 'Kabirov Qobiljon Qosimovich',
-      schedule: 'Dushanba-juma kunlari 08:00 dan 17:00 ga qadar',
-      reception: '',
-      phone: '+998-93-700-03-25',
+      title: "Korrupsiyani oldini olish xizmati",
+      titleEn: "Anti-Corruption Service",
+      head: "Kabirov Qobiljon Qosimovich",
+      schedule: "Dushanba-juma kunlari 08:00 dan 17:00 ga qadar",
+      reception: "",
+      phone: "+998-93-700-03-25",
       image: tarkib10,
-      email: 'nk@tashmetro.uz',
+      email: "nk@tashmetro.uz",
     },
     {
       title:
         "Axborot xavfsizligini ta'minlash va axborot-kommunikatsiya texnologiyalarini rivojlantirish xizmati",
-      titleEn: 'Information Security and Technical Support Service',
+      titleEn: "Information Security and Technical Support Service",
       head: "Toshpo'lotov Feruz G'olib o'g'li",
-      schedule: 'Dushanba-juma kunlari 08:00 dan 17:00 ga qadar',
-      reception: 'Payshanba kuni 15:00 dan 16:00 gacha',
-      phone: '+998 71-241-31-40',
+      schedule: "Dushanba-juma kunlari 08:00 dan 17:00 ga qadar",
+      reception: "Payshanba kuni 15:00 dan 16:00 gacha",
+      phone: "+998 71-241-31-40",
       image: tarkib11,
-      email: 'cybersecurity@tashmetro.uz',
+      email: "cybersecurity@tashmetro.uz",
     },
     {
-      title: 'Matbuot xizmati',
-      titleEn: 'Press Service',
+      title: "Matbuot xizmati",
+      titleEn: "Press Service",
       head: "Mirzayev To'ychi Farxod o'g'li",
-      schedule: 'Dushanba-juma kunlari 08:00 dan 17:00 ga qadar',
-      reception: 'Haftaning chorshanba kuni 14:00 dan 17:00 gacha',
-      phone: '+998-90-370-19-98',
+      schedule: "Dushanba-juma kunlari 08:00 dan 17:00 ga qadar",
+      reception: "Haftaning chorshanba kuni 14:00 dan 17:00 gacha",
+      phone: "+998-90-370-19-98",
       image: tarkib12,
-      email: 'pressa@tashmetro.uz',
+      email: "pressa@tashmetro.uz",
     },
-  ]
+  ];
 
   return (
     <div className="min-h-screen">
       {/* Header Section */}
-      <div >
+      <div>
         <div className="container mx-auto px-4 py-8 sm:py-12 lg:py-16">
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold mb-3 sm:mb-4 text-[#0E327F] leading-tight">
               Transport Ma'lumotnomasi
             </h1>
             <p className="text-base sm:text-lg lg:text-xl text-gray-600 leading-relaxed">
-              Barcha transport xizmatlari va bo'limlarining to'liq aloqa ma'lumotlari
+              Barcha transport xizmatlari va bo'limlarining to'liq aloqa
+              ma'lumotlari
             </p>
           </div>
         </div>
@@ -195,25 +197,30 @@ export default function TransportDirectory() {
 
                             {/* Department Head */}
                             <div className="space-y-1">
-                              <p className="text-xs sm:text-sm font-semibold text-gray-700">Xizmat boshlig'i</p>
-                              <p className="text-xs sm:text-sm text-gray-600 line-clamp-2">{dept.head}</p>
+                              <p className="text-xs sm:text-sm font-semibold text-gray-700">
+                                Xizmat boshlig'i
+                              </p>
+                              <p className="text-xs sm:text-sm text-gray-600 line-clamp-2">
+                                {dept.head}
+                              </p>
                             </div>
                           </div>
 
                           {/* Contact Info */}
                           <div className="flex items-center justify-center sm:justify-between gap-3 pt-3 mt-auto">
-                            {/* Phone */}
-                            <div className="flex items-center gap-2 min-w-0">
-                              <div className="w-6 h-6 bg-[#0E327F] rounded-md flex items-center justify-center flex-shrink-0">
-                                <Phone className="w-3 h-3 text-white" />
+                            {/* Reseption */}
+                            <div className="flex items-start gap-3">
+                              <div className="w-6 h-6 bg-[#0E327F] rounded-md flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <Calendar className="w-3 h-3 text-white" />
                               </div>
-                              <a
-                                href={`tel:${dept.phone}`}
-                                className="text-[#0E327F] font-semibold hover:text-[#1e4a9f] transition-colors duration-200 text-xs sm:text-sm truncate"
-                                onClick={(e) => e.stopPropagation()}
-                              >
-                                {dept.phone}
-                              </a>
+                              <div className="min-w-0">
+                                <h3 className="font-semibold text-gray-700 mb-1 text-sm sm:text-base">
+                                  Qabul soatlari
+                                </h3>
+                                <p className="text-gray-900 text-sm sm:text-base">
+                                  {dept.reception}
+                                </p>
+                              </div>
                             </div>
 
                             {/* View Icon */}
@@ -265,7 +272,9 @@ export default function TransportDirectory() {
                               <h3 className="font-semibold text-gray-700 mb-1 text-sm sm:text-base">
                                 Xizmat boshlig'i
                               </h3>
-                              <p className="text-gray-900 font-medium text-sm sm:text-base">{dept.head}</p>
+                              <p className="text-gray-900 font-medium text-sm sm:text-base">
+                                {dept.head}
+                              </p>
                             </div>
                           </div>
 
@@ -275,8 +284,12 @@ export default function TransportDirectory() {
                               <Clock className="w-3 h-3 text-white" />
                             </div>
                             <div className="min-w-0">
-                              <h3 className="font-semibold text-gray-700 mb-1 text-sm sm:text-base">Ish jadvali</h3>
-                              <p className="text-gray-900 text-sm sm:text-base">{dept.schedule}</p>
+                              <h3 className="font-semibold text-gray-700 mb-1 text-sm sm:text-base">
+                                Ish jadvali
+                              </h3>
+                              <p className="text-gray-900 text-sm sm:text-base">
+                                {dept.schedule}
+                              </p>
                             </div>
                           </div>
 
@@ -290,7 +303,9 @@ export default function TransportDirectory() {
                                 <h3 className="font-semibold text-gray-700 mb-1 text-sm sm:text-base">
                                   Qabul soatlari
                                 </h3>
-                                <p className="text-gray-900 text-sm sm:text-base">{dept.reception}</p>
+                                <p className="text-gray-900 text-sm sm:text-base">
+                                  {dept.reception}
+                                </p>
                               </div>
                             </div>
                           )}
@@ -300,8 +315,9 @@ export default function TransportDirectory() {
                               <Mail className="w-4 h-4 text-white" />
                             </div>
 
-                            <p className="text-[#0E327F] font-semibold hover:text-[#1e4a9f] transition-colors duration-200 text-base sm:text-lg break-all">{dept.email}</p>
-
+                            <p className="text-[#0E327F] font-semibold hover:text-[#1e4a9f] transition-colors duration-200 text-base sm:text-lg break-all">
+                              {dept.email}
+                            </p>
                           </div>
 
                           {/* Phone */}
@@ -342,5 +358,5 @@ export default function TransportDirectory() {
         </div>
       </div>
     </div>
-  )
+  );
 }

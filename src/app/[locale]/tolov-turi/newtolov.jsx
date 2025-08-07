@@ -285,7 +285,7 @@ export default function PaymentMethods() {
               </div>
               <div className="ml-4 sm:ml-6 md:ml-8 lg:ml-12">
                 <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-blue-900 leading-tight tracking-tight">
-                  Bank Kartalari va kontaktsiz to'lov To'lovlar
+                  Bank Kartalari va Kontaktsiz To'lovlar
                 </h2>
                 <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 mt-2 sm:mt-3 lg:mt-4 leading-relaxed">
                   kontaktsiz to'lov orqali metro va avtobusda to'lov - 1,700 UZS

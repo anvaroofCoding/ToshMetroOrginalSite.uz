@@ -13,7 +13,7 @@ const FaqAccordion = () => {
 
 	const items = [
 		{
-			q: 'ATTO kartasini qaerdan sotib olish mumkin va karta balansini qanday to‘ldirish mumkin?',
+			q: 'ATTO kartasini qayerdan sotib olish mumkin va karta balansini qanday to‘ldirish mumkin?',
 			a: `"ATTO" transport kartasining balansini ATTO, MyUzcard , Payme, Upay, Apelsin va boshqa elektron to‘lov tizimlarining mobil ilovalari orqali to‘ldirish mumkin.
 O‘z-o‘ziga xizmat ko‘rsatish terminallarida-infokiosklar.
 "Toshyulovchitrans" DUK va "Toshkent metropoliteni" DUK kompaniyasining barcha savdo nuqtalarida.`,

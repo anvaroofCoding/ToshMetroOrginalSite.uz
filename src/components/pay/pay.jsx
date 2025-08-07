@@ -128,7 +128,7 @@ function PalmpayPayments() {
         <div className="container mx-auto max-w-6xl relative z-10">
           <div className="text-center fade-in opacity-0 translate-y-8 transition-all duration-1000">
             <div className="inline-flex items-center gap-3 mb-6 px-6 py-3 bg-blue-900/10 rounded-full border border-blue-900/20">
-              <Nfc className="w-5 h-5 text-blue-900" />
+              <Hand className="w-5 h-5 text-blue-900" />
               <span className="text-blue-900 font-medium">
                 Biometrik to'lov
               </span>
