@@ -334,7 +334,7 @@ export default function MetroLostItemForm() {
                 Murojaat Shakli
               </CardTitle>
               <CardDescription className="text-blue-100">
-                Barcha maydonlarni to'ldiring va biz siz bilan bog'lanamiz
+                Barcha maydonlarni to'ldiring va 5 ish kuni davomida murojaatlaringiz ko'rib chiqiladi
               </CardDescription>
             </CardHeader>
 

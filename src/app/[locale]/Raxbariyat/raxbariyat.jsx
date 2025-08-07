@@ -54,7 +54,7 @@ const managementData = [
     image: rasm6,
 
     biography:
-      "1960 yilda Toshkent shahrida tugʻilgan. Maʼlumoti – oliy. 1982 yilda Toshkent avtomobil-yoʻllar institutining avtomobil transporti ekspluatatsiyasi muhandisi mutaxassisligi boʻyicha tamomlagan. 1982 yilda Toshkent shahar 1-Avtokorxonasi uchastka ustasi, avtosaf boʻlimi, katta muhandis, direktor oʻrinbosari sifatida ishlagan. 1990 yilda “Oʻzagroqurilish” birlashmasiga qarashli “Agromexservis” chiqarish axborot boshqarmasi boshligʻi boʻlib ishlab chiqarishni bajargan. 1990–1992 yillarda “Oʻzagroqurilish” birlashmasiga qarashli “Qurilishmexservis” korxonasi direktori. 1992–1993 yillarda “Oʻzagroqurilish” birlashmasiga qarashli “Agroqurilishmexservis” korxonasi bosh direktorining oʻrinbosari. 1993–1996 yillarda Toshkent shahar 1-Avtokorxonasi direktori. 1996 yilda “Toshshaharyoʻlovchiavtotrans” ishlab chiqarish birlashmasi boshligi. 1996–2001 yillarda “Toshshaharyoʻlovchitrans” Davlat uyushmasi boshqaruvi oʻrinbosari. 2001–2003 yillarda Mirzo Ulugʻbek tumani hokimining birinchi oʻrinbosari. 2003–2005 yillarda Yakkasaroy tumani hokimi. 2005–2011 yillarda Toshkent shahar hokimining kapital qurilish, kommunal xoʻjalik, obodonlashtirish, sanoat va tadbirkorlik masalalari boʻyicha birinchi oʻrinbosari. 2011–2012 yillarda Toshkent shahar hokimi vazifasini bajaruvchi. 2012–2018 yillarda Toshkent shahar hokimi. 2018 yilda Oʻzbekiston avtomobil transporti agentligi rahbarining birinchi oʻrinbosari. 2018–2020 yillarda Toshkent shahar Yunusobod tumani hokimi. 2021 yilda Oʻzbekiston Respublikasi Transport vaziri oʻrinbosari. 2021 yilda “Oʻzbekiston temir yoʻllari” AJ boshqaruvi raisining oʻrinbosari – “Toshkent metropoliteni” UK boshligʻi. 2021 yildan “Toshkent metropoliteni” DUK boshligʻi. 2008 yilda “Mehnat shuhrati” ordeni bilan taqdirlangan. 2024 yilda “Fidokorona xizmatlari uchun” ordeni bilan taqdirlangan.",
+      "1960 yilda Toshkent shahrida tug‘ilgan. Ma’lumoti – oliy. 1982 yilda Toshkent avtomobil-yo‘llar institutini avtomobil transporti ekspluatatsiyasi muhandisi mutaxassisligi bo‘yicha tamomlagan. Mehnat faoliyatini Toshkent shahar 1-Avtokorxonasida boshlagan, keyinchalik turli rahbarlik lavozimlarida ishlagan. 2003–2005 yillarda Yakkasaroy tumani hokimi, 2005–2012 yillarda Toshkent shahar hokimi o‘rinbosari, 2012–2018 yillarda Toshkent shahar hokimi lavozimlarida faoliyat yuritgan. 2021 yildan “Toshkent metropoliteni” DUK boshlig‘i lavozimida ishlamoqda. 2008 yilda “Mehnat shuhrati”, 2024 yilda “Fidokorona xizmatlari uchun” ordenlari bilan taqdirlangan.",
   },
 
   {
@@ -154,7 +154,7 @@ const managementData = [
     image: rasm8,
 
     biography:
-      "1985 yilda Sirdaryo viloyatida tugʻilgan. Maʼlumoti – oliy. 2008 yilda Toshkent irrigatsiya va melioratsiya institutining menejment mutaxassisligi boʻyicha tamomlagan. 2002 yilda “Maroqand” masʼuliyati cheklangan jamiyati koʻp tarmoqli axborot markazi mutaxassisi sifatida faoliyat boshlagan. 2004–2008 yillarda Toshkent irrigatsiya va melioratsiya instituti talabasi. 2011–2014 yillarda Oʻzbekiston fermer xoʻjaliklari uyushmasi qoshidagi “Agro-nektar” shoʻba korxonasi direktori. 2014–2015 yillarda Toshkent shahar Shayxontohur tumani budjetdan tashqari Pensiya jamgʻarmasi boʻyicha mablagʻlar boʻyicha hisobi, buxgalteriya hisobi va hisoboti sektori 1-sonli inspektori, sektor bosh hisobchisi. 2015–2016 yillarda Toshkent shahar hokimining kapital qurilish, kommunal xoʻjalik, obodonlashtirish, sanoat va tadbirkorlik masalalari boʻyicha birinchi oʻrinbosari kotibiyati mutaxassisi. 2016–2017 yillarda Toshkent shahar hokimligi sanoatni rivojlantirish, kapital qurilish, aloqalar va kommunal xoʻjalik masalalari boʻyicha oʻrinbosari kotibiyati malaka mutaxassisi. 2017–2018 yillarda Toshkent shahar Iqtisodiyot va kompleks rivojlantirish bosh boshqarmasi Sanoatni rivojlantirish va ishlab chiqarishni rivojlantirish boʻlimi bosh mutaxassisi. 2018 yilda Oʻzbekiston Avtomobil transporti agentligi Toshkent shahar boshqarmasi AKT boʻlimi bosh mutaxassisi. 2018–2019 yillarda Yunusobod tuman hokimi qarori bilan lavozimlarda ishlagan. 2019–2021 yillarda Yunusobod tuman hokimligi apparati rahbari. 2021 yilda Oʻzbekiston Respublikasi Transport vazirligi Ruxsatnomalar boʻlimini boshqarish xizmatlarida faoliyat yuritgan. 2021 yildan “Toshkent metropoliteni” DUK boshligʻining marketing boʻyicha oʻrinbosari lavozimida faoliyat olib bormoqda.",
+      "1985 yilda Sirdaryo viloyatida tug‘ilgan. Ma’lumoti – oliy. 2008 yilda Toshkent irrigatsiya va melioratsiya institutining menejment mutaxassisligi bo‘yicha tamomlagan. Mehnat faoliyatini 2002 yilda “Maroqand” MChJda boshlagan. Keyinchalik qator davlat va xo‘jalik tashkilotlarida rahbar va mutaxassis lavozimlarida ishlagan, jumladan, “Agro-nektar” sho‘ba korxonasi direktori, Yunusobod tuman hokimligi apparati rahbari bo‘lib faoliyat yuritgan. 2021 yildan “Toshkent metropoliteni” DUK boshlig‘ining marketing bo‘yicha o‘rinbosari lavozimida ishlab kelmoqda.",
   },
 
   {
@@ -167,7 +167,7 @@ const managementData = [
     lastName: "Kuchkarov",
 
     position:
-      "«Toshkent metropoliteni» DUK boshlig’ining qurilish bo‘yicha o‘rinbosari",
+      "«Toshkent metropoliteni» DUK boshlig’ining qurilish bo‘yicha o‘rinbosari v.v.b.",
 
     department: "Operations",
 
@@ -180,7 +180,7 @@ const managementData = [
     image: rasm2,
 
     biography:
-      "1995–2000 yillar – Respublika Bosh prokuraturasi devonxona ish yurituvchisi, noziri; 1996–2000 yillar – G.V. Plexanov nomidagi Rossiya iqtisodiyot akademiyasi – talaba; 2000–2001 yillar – Toshkent viloyati Yangiyo‘l tumani “Aziz” XK – iqtisodchi; 2001–2002 yillar – “O‘zbekinvest” marketing qo‘mitasi – menejer assistenti; 2002–2003 yillar – Harbiy xizmat – askar; 2003–2005 yillar – Harbiy prokuratura markaziy mahkamasi – ish yurituvchi; 2005–2008 yillar – Toshkent harbiy okrugi harbiy prokurori yordamchisi, katta tergovchi; 2008–2009 yillar – Toshkent viloyati Chirchiq harbiy prokuraturasi – katta tergovchi; 2009–2009 yillar – Qashqadaryo viloyati Qarshi harbiy prokuraturasi – katta tergovchi; 2009–2010 yillar – Mirzo Ulug‘bek tumani “VET KORM AGRO” MChJ – huquqshunos, direktor; 2010–2016 yillar – Xususiy tadbirkor; 2016–2017 yillar – Olmazor tumani garajlar boshqarmasi – boshliq; 2017–2019 yillar – Olmazor tumani MTT maxsus ta’mirlash va ekspluatatsiya xizmati – boshliq; 2019–2019 yillar – “DONG SEUNG KOREA” MChJ – texnik bo‘lim muhandisi; 2019–2019 yillar – Shayxontohur tumani “Avto Agro” davlat korxonasi – rahbar; 2019–2023 yillar – Shayxontohur tumani hokimligi uy-joy va kommunal xizmat bo‘limi – boshliq; 2023–2024 yillar – Shayxontohur tumani hokimining qurilish, kommunikatsiyalarni rivojlantirish, ekologiya va ko‘kalamzorlashtirish masalalari bo‘yicha o‘rinbosari; 2024–2025 yillar – Yakkasaroy tuman hokimining ko‘kalamzorlashtirish masalalari bo‘yicha o‘rinbosari.",
+      "1995 yilda mehnat faoliyatini Respublika Bosh prokuraturasida ish yurituvchi sifatida boshlagan. 1996–2000 yillarda G.V. Plexanov nomidagi Rossiya iqtisodiyot akademiyasida tahsil olgan. Keyingi yillarda turli davlat va xususiy tashkilotlarda iqtisodchi, tergovchi, direktor va huquqshunos lavozimlarida ishlagan. 2019–2023 yillarda Shayxontohur tumani hokimligi uy-joy va kommunal xizmat bo‘limi boshlig‘i, 2023–2024 yillarda Shayxontohur tumani hokimining qurilish va ekologiya masalalari bo‘yicha o‘rinbosari lavozimida faoliyat yuritgan. 2024 yildan Yakkasaroy tuman hokimining ko‘kalamzorlashtirish masalalari bo‘yicha o‘rinbosari sifatida ishlamoqda.",
   },
 
   {
@@ -205,7 +205,8 @@ const managementData = [
 
     image: rasm1,
 
-    biography: "aniq emas",
+    biography:
+      "Suxrob Norkulov 1990 yilda Surxondaryo viloyati Uzun tumanida tug‘ilgan. Ma’lumoti – oliy. 2008 yilda Toshkent temir yo‘l transporti kasb-hunar kollejini, 2015 yilda Toshkent temir yo‘l muhandislari institutini, 2018 yilda Toshkent davlat iqtisodiyot universitetini, 2022 yilda esa O‘zbekiston Respublikasi Vazirlar Mahkamasi huzuridagi Biznes va tadbirkorlik oliy maktabining “Loyiha boshqaruvi” yo‘nalishida magistraturasini tamomlagan. Mehnat faoliyatini temir yo‘l sohasida boshlagan va keyingi yillarda turli rahbarlik lavozimlarida ishlagan. Tayinlovga qadar Transport vazirligi huzuridagi temir yo‘l xodimlarini malaka oshirish va qayta tayyorlash markazi direktori lavozimida faoliyat yuritgan. Hozirda “Toshkent metropoliteni” DUK boshlig‘ining ilmiy-innovatsion rivojlanish bo‘yicha o‘rinbosari lavozimida faoliyat yuritmoqda.",
   },
 
   {
@@ -230,7 +231,8 @@ const managementData = [
 
     image: rasm3,
 
-    biography: "aniq emas",
+    biography:
+      "Ma’lumoti – oliy. 2014 yilda Toshkent temir yo‘l muhandislik instituti bakalavr bosqichini tamomlagan. 2016 yilda Toshkent temir yo‘l muhandislik instituti magistr bosqichini tamomlagan. 2019 yilda O‘zbekiston Respublikasi Prezidenti huzuridagi Davlat boshqaruv akademiyasini tamomlagan. Tayinlovga qadar D. Ergashev “Toshkent metropoliteni” DUK bosh muhandisining yer usti metro liniyalarini tasarruf etish bo‘yicha o‘rinbosari lavozimida faoliyat yuritgan.",
   },
 ];
 
@@ -309,8 +311,7 @@ export default function ManagementPage() {
                         <div className="absolute inset-0 bg-gradient-to-t from-[#0E327F]/90 via-[#0E327F]/50 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end justify-center">
                           <div className="text-white w-full text-center opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-6 group-hover:translate-y-0 p-4">
                             <h3 className="text-lg font-bold mb-2 line-clamp-2">
-                              {member.firstName} {member.middleName}{" "}
-                              {member.lastName}
+                              {member.lastName} {member.firstName} {member.middleName}{" "}
                             </h3>
                             <p className="text-sm text-gray-200 flex justify-center items-center">
                               <Eye className="w-4 h-4 mr-2" /> Rasmni
@@ -331,8 +332,7 @@ export default function ManagementPage() {
                         />
                         <div className="text-center">
                           <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                            {member.firstName} {member.middleName}{" "}
-                            {member.lastName}
+                            {member.lastName} {member.firstName} {member.middleName}{" "}
                           </h3>
                           <p className="text-gray-600">{member.position}</p>
                         </div>
@@ -346,7 +346,7 @@ export default function ManagementPage() {
                   {/* Name and Position */}
                   <div className="mb-4">
                     <h3 className="text-lg lg:text-xl font-bold text-gray-900 mb-2 line-clamp-2 leading-tight">
-                      {member.firstName} {member.middleName} {member.lastName}
+                      {member.lastName} {member.firstName} {member.middleName}
                     </h3>
                     {/* <Badge className="bg-[#0E327F] hover:bg-[#0E327F]/90 text-white text-xs px-2 py-1">
                       <User className="w-3 h-3 mr-1" />

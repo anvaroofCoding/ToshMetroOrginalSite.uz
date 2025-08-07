@@ -89,7 +89,7 @@ function TashkentMetroPage() {
       opened: "1977",
       color: "#fb7e7e",
       description:
-        "Chinor-Choshtepa bekatlari 2020-yilda foydalanishga topshirilgan",
+        "Cilonzor yo'nalishi birinchi ishga tushgan yo'nalish bo'lib, Buyuk Ipak yo'li bekatidan Chinor bekatigacha davom etadi. ",
       highlights: [
         "Tarixiy birinchi yo'nalish",
         "Shahar markazi aloqasi",
@@ -102,7 +102,7 @@ function TashkentMetroPage() {
       stations: 11,
       opened: "1984",
       color: "#2563eb",
-      description: "Shahar markazini asosiy temir yo'l vokzali bilan bog'laydi",
+      description: "O'zbekiston yo'nalishi ikkinchi ishga tushgan yo'nalish bo'lib, Beruniy bekatidan Do'stlik bekatigacha davom etadi.",
       highlights: [
         "Temir yo'l aloqasi",
         "Biznes hududi",
@@ -116,7 +116,7 @@ function TashkentMetroPage() {
       opened: "2001",
       color: "#57be82",
       description:
-        "Yunisobod-Turkiston bekatlar 2021-yilda foydalanishga topshirilgan",
+        "Yunisobod yo'li uchinchi ishga tushgan yo'nalish bo'lib, Turkiston bekatidan Ming o'rik bekatigacha davom etadi. ",
       highlights: [
         "Turar-joy hududlari",
         "Zamonaviy dizayn",
@@ -124,13 +124,13 @@ function TashkentMetroPage() {
       ],
     },
     {
-      name: "Yerusti xalqa yo'li",
+      name: "Yerusti halqa yo'li",
       length: "22.34 km",
       stations: 14,
       opened: "2020",
       color: "#eecf53",
       description:
-        "Turon-Qipchoq bekatlari 2024-yilda foydalanishga topshirilgan",
+        "Yerusti halqa yo'li to'rtinchi ishga tushgan yo'nalish bo'lib, Texnopark bekatidan Qipchoq bekatigacha davom etadi. ",
       highlights: [
         "So'nggi texnologiya",
         "Ekologik toza",
@@ -288,17 +288,15 @@ function TashkentMetroPage() {
           </div>
           <div className="max-w-4xl mx-auto">
             <p className="text-xl md:text-2xl text-gray-600 leading-relaxed mb-8">
-              Markaziy Osiyoda birinchi va yagona metro tizimi, 1977 yildan beri
-              shahar transportining asosiy qismi hisoblanadi.
+              Markaziy Osiyodagi birinchi, xavfsiz, qulay va tez jamoat transportlaridan bo'lib 1977-yildan beri
+              faoliyat yuritib kelmoqda.
             </p>
           </div>
         </div>
 
         {/* Animated Image Gallery */}
         <div ref={(el) => (sectionRefs.current[1] = el)} className="mb-20">
-          <h2 className="text-4xl font-bold text-center text-[#0E327F] mb-12">
-            Sayohatni His Eting
-          </h2>
+          
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
             {[0, 1, 2].map((index) => (
               <div
@@ -517,9 +515,9 @@ function TashkentMetroPage() {
               <h2 className="text-4xl font-bold">Hozirgi Yutuqlar</h2>
             </div>
             <p className="text-xl mb-8 opacity-90 leading-relaxed max-w-4xl mx-auto">
-              Bugun Toshkent metropoliteni Markaziy Osiyoning yetakchi shahar
+              Bugungi kunda Toshkent metropoliteni Markaziy Osiyoning yetakchi shahar
               transport tizimi sifatida 70 kilometrdan ortiq uzunlikda 50 ta
-              bekatlar bilan faoliyat yuritmoqda.
+              bekatlar bilan faoliyat yuritmoqda. 2024-yilning 1-choragida kunlik yo'lovchi tashish soni 1 milliondan oshgan.
             </p>
             <div className="flex flex-wrap justify-center gap-6 mb-8">
               <div className="text-center group hover:scale-110 transition-transform duration-300">
@@ -530,10 +528,7 @@ function TashkentMetroPage() {
                 <div className="text-4xl font-bold mb-2">50</div>
                 <div className="text-sm opacity-80">Bekat</div>
               </div>
-              <div className="text-center group hover:scale-110 transition-transform duration-300">
-                <div className="text-4xl font-bold mb-2">1M+</div>
-                <div className="text-sm opacity-80">Kunlik Yo&apos;lovchi</div>
-              </div>
+              
               <div className="text-center group hover:scale-110 transition-transform duration-300">
                 <div className="text-4xl font-bold mb-2">53</div>
                 <div className="text-sm opacity-80">Xizmat Yili</div>
