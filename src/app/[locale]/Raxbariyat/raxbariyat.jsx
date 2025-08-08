@@ -237,16 +237,10 @@ const managementData = [
 ];
 
 export default function ManagementPage() {
-  const [expandedBios, setExpandedBios] = useState(new Set());
+  const [openedBioId, setOpenedBioId] = useState(null);
 
   const toggleBio = (id) => {
-    const newExpanded = new Set(expandedBios);
-    if (newExpanded.has(id)) {
-      newExpanded.delete(id);
-    } else {
-      newExpanded.add(id);
-    }
-    setExpandedBios(newExpanded);
+    setOpenedBioId(openedBioId === id ? null : id);
   };
 
   const formatBiography = (biography) => {
@@ -311,7 +305,8 @@ export default function ManagementPage() {
                         <div className="absolute inset-0 bg-gradient-to-t from-[#0E327F]/90 via-[#0E327F]/50 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end justify-center">
                           <div className="text-white w-full text-center opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-6 group-hover:translate-y-0 p-4">
                             <h3 className="text-lg font-bold mb-2 line-clamp-2">
-                              {member.lastName} {member.firstName} {member.middleName}{" "}
+                              {member.lastName} {member.firstName}{" "}
+                              {member.middleName}{" "}
                             </h3>
                             <p className="text-sm text-gray-200 flex justify-center items-center">
                               <Eye className="w-4 h-4 mr-2" /> Rasmni
@@ -332,7 +327,8 @@ export default function ManagementPage() {
                         />
                         <div className="text-center">
                           <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                            {member.lastName} {member.firstName} {member.middleName}{" "}
+                            {member.lastName} {member.firstName}{" "}
+                            {member.middleName}{" "}
                           </h3>
                           <p className="text-gray-600">{member.position}</p>
                         </div>
@@ -383,7 +379,7 @@ export default function ManagementPage() {
                     variant="outline"
                     className="w-full border-[#0E327F] text-[#0E327F] hover:bg-[#0E327F] hover:text-white transition-all duration-300 font-medium"
                   >
-                    {expandedBios.has(member.id) ? (
+                    {openedBioId === member.id ? (
                       <>
                         Biografiyani yashirish{" "}
                         <ChevronUp className="w-4 h-4 ml-2" />
@@ -399,7 +395,7 @@ export default function ManagementPage() {
                   {/* Enhanced Biography Content */}
                   <div
                     className={`overflow-hidden transition-all duration-700 ease-in-out ${
-                      expandedBios.has(member.id)
+                      openedBioId === member.id
                         ? "max-h-[800px] opacity-100 mt-4"
                         : "max-h-0 opacity-0"
                     }`}

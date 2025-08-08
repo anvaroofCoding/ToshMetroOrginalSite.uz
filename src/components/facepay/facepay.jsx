@@ -147,7 +147,7 @@ function Facepay() {
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="space-y-6">
                 <p className="text-lg text-blue-800/90 leading-relaxed">
-                  Bu toʻlovning toʻlasicha kontaktsiz usuli. Endi siz na
+                  Bu toʻlovning toʻliq kontaktsiz usuli. Endi siz na
                   smartfonga, na boshqa yuzalarga tegishingiz shart emas.
                   Biometrik toʻlov xizmati barcha yoʻlovchilar uchun majburiy
                   boʻlmaydi – boshqa barcha toʻlov usullari ham ishlab turishi

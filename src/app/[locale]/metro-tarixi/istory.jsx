@@ -443,7 +443,9 @@ function TashkentMetroPage() {
                       <div className="text-2xl font-bold text-[#0E327F]">
                         {line.opened}
                       </div>
-                      <div className="text-xs text-gray-600">Ochildi</div>
+                      <div className="text-xs text-gray-600">
+                        Ishga tushirilgan
+                      </div>
                     </div>
                   </div>
                 </CardContent>
@@ -458,7 +460,7 @@ function TashkentMetroPage() {
           </h2>
           <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
             Poydevor qo'yishdan zamonaviy kengayishgacha - doimiy o'sish va
-            innovatsiyaning ellik yili
+            innovatsiyalar.
           </p>
           <div className="relative">
             <div className="absolute left-8 md:left-1/2 transform md:-translate-x-1/2 h-full w-1 bg-gradient-to-b from-[#0E327F] via-blue-400 to-blue-600 opacity-30"></div>
@@ -525,8 +527,8 @@ function TashkentMetroPage() {
             <p className="text-xl mb-8 opacity-90 leading-relaxed max-w-4xl mx-auto">
               Bugungi kunda Toshkent metropoliteni Markaziy Osiyoning yetakchi
               shahar transport tizimi sifatida 70 kilometrdan ortiq uzunlikda 50
-              ta bekatlar bilan faoliyat yuritmoqda. 2024-yilning 1-choragida
-              kunlik yo'lovchi tashish soni 1 milliondan oshgan.
+              ta bekatlar bilan faoliyat yuritmoqda. 2024-yilning so'ngi
+              choragida kunlik yo'lovchi tashish soni 1 milliondan oshgan.
             </p>
             <div className="flex flex-wrap justify-center gap-6 mb-8">
               <div className="text-center group hover:scale-110 transition-transform duration-300">
@@ -545,7 +547,6 @@ function TashkentMetroPage() {
             </div>
           </CardContent>
         </Card>
-        Metro Tarmog'i
       </div>
 
       <style jsx>{`

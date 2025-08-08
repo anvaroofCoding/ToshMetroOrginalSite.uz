@@ -12,7 +12,7 @@ import {
   Globe,
   Info,
   MapPin,
-  MapPinned,
+  // MapPinned,
   Menu,
   Hand,
   Phone,
@@ -35,12 +35,12 @@ import { useCallback, useEffect, useRef, useState } from "react";
 const MENU_ITEMS = [
   {
     label: "Xarita",
-    href: "",
-    dropdown: true,
-    dropdownItems: [
-      { label: "Oddiy xarita", href: "normalMap", icon: MapPinned },
-      { label: "Batafsil xarita", href: "/metro-xaritasis", icon: MapPinned },
-    ],
+    href: "/metro-xaritasis",
+    // dropdown: true,
+    // dropdownItems: [
+    //   { label: "Oddiy xarita", href: "normalMap", icon: MapPinned },
+    //   { label: "Batafsil xarita", href: "/metro-xaritasis", icon: MapPinned },
+    // ],
     icon: MapPin,
   },
   {

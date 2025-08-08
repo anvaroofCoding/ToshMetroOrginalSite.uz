@@ -255,7 +255,7 @@ export default function UzbekistanSymbols() {
             <h1 className="text-3xl md:text-4xl font-bold text-[#0E327F] mb-2">
               O'ZBEKISTON RESPUBLIKASI
             </h1>
-            <p className="text-lg text-gray-600">Davlat Ramzlari</p>
+            <p className="text-lg text-gray-600">Davlat ramzlari</p>
           </div>
 
           {/* Navigation Tabs */}
@@ -443,118 +443,138 @@ export default function UzbekistanSymbols() {
               {/* Coat of Arms Details */}
               <div className="lg:col-span-2 space-y-6">
                 <Card>
-                  <CardContent className="p-6">
-                    <div className="flex items-center space-x-3 mb-4">
+                  <CardContent className="p-4 sm:p-6">
+                    <div className="flex items-center space-x-2 sm:space-x-3 mb-3 sm:mb-4">
                       <Users className="w-5 h-5 text-[#0E327F]" />
-                      <h2 className="text-xl font-bold text-[#0E327F]">
+                      <h2 className="text-lg sm:text-xl font-bold text-[#0E327F]">
                         Asosiy ma'lumotlar
                       </h2>
                     </div>
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div className="space-y-3">
-                        <div className="flex justify-between p-3 bg-gray-50 rounded-lg">
+                    <div className="flex flex-col gap-2">
+                      {/* Qabul sanasi va Ma'lumot yonma-yon */}
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                        <div className="flex items-center gap-2">
                           <span className="font-medium text-gray-600">
                             Qabul sanasi:
                           </span>
                           <span className="font-semibold">02.07.1992</span>
                         </div>
-                        <div className="flex justify-between p-3 bg-gray-50 rounded-lg">
+                        <div className="flex items-center gap-2">
                           <span className="font-medium text-gray-600">
-                            Bosh muallif:
-                          </span>
-                          <span className="font-semibold">Anvar Mamajonov</span>
-                        </div>
-                      </div>
-                      <div className="space-y-3">
-                        <div className="flex justify-between p-3 bg-gray-50 rounded-lg">
-                          <span className="font-medium text-gray-600">
-                            Elementlar:
-                          </span>
-                          <span className="font-semibold">10 ta asosiy</span>
-                        </div>
-                        <div className="flex justify-between p-3 bg-gray-50 rounded-lg">
-                          <span className="font-medium text-gray-600">
-                            Status:
+                            Ma'lumot:
                           </span>
                           <span className="font-semibold text-green-600">
                             Rasmiy
                           </span>
                         </div>
                       </div>
+                      {/* Qonun */}
+                      <div className="flex flex-col gap-1">
+                        <span className="font-medium text-gray-600">
+                          Qonun:
+                        </span>
+                        <span className="font-semibold break-words">
+                          “O‘zbekiston Respublikasi Davlat gerbi to‘g‘risida”gi
+                          Qonun, Oliy Kengash X sessiyasi
+                        </span>
+                      </div>
+                      {/* Qisqacha tavsif */}
+                      <div className="flex flex-col gap-1">
+                        <span className="font-medium text-gray-600">
+                          Qisqacha tavsif:
+                        </span>
+                        <span className="font-semibold break-words leading-relaxed">
+                          Gerb – gullagan vodiy uzra charaqlab turgan quyosh,
+                          so‘l tomonida bug‘doy boshoqlari, o‘ng tomonida
+                          ochilgan paxta chanoqlari surati tushirilgan chambarak,
+                          markazida Humo qushi, yuqorisida sakkiz qirrali yulduz
+                          va yarim oy tasviridan iborat.
+                        </span>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
 
                 <Card>
-                  <CardContent className="p-6">
-                    <div className="flex items-center space-x-3 mb-4">
+                  <CardContent className="p-4 sm:p-6">
+                    <div className="flex items-center space-x-2 sm:space-x-3 mb-3 sm:mb-4">
                       <MapPin className="w-5 h-5 text-[#0E327F]" />
-                      <h3 className="text-xl font-bold text-[#0E327F]">
-                        Gerb elementlari
+                      <h3 className="text-lg sm:text-xl font-bold text-[#0E327F]">
+                        Gerb ramzlari va ularning ma'nosi
                       </h3>
                     </div>
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div className="space-y-3">
-                        <div className="bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-500">
-                          <h4 className="font-bold mb-2">Humo qushi</h4>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                      <div className="space-y-2 sm:space-y-3">
+                        <div className="bg-yellow-50 p-3 sm:p-4 rounded-lg border-l-4 border-yellow-500">
+                          <h4 className="font-bold mb-1 sm:mb-2">Humo qushi</h4>
                           <p className="text-sm text-gray-700">
-                            Baxt va erkinlik timsoli
+                            Himmat, oliyjanoblik va fidoyilik timsoli. Tinchlik,
+                            yaxshilik, baxt-saodat, farovonlik orzularini
+                            ifodalaydi.
                           </p>
                         </div>
-                        <div className="bg-orange-50 p-4 rounded-lg border-l-4 border-orange-500">
-                          <h4 className="font-bold mb-2 flex items-center">
+                        <div className="bg-orange-50 p-3 sm:p-4 rounded-lg border-l-4 border-orange-500">
+                          <h4 className="font-bold mb-1 sm:mb-2 flex items-center">
                             Quyosh
                           </h4>
                           <p className="text-sm text-gray-700">
-                            Yorqin kelajak va farovonlik ramzi.
+                            Gullagan vodiy uzra charaqlab turgan quyosh – yorqin
+                            kelajak va farovonlik ramzi.
                           </p>
                         </div>
-                        <div className="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
-                          <h4 className="font-bold mb-2 flex items-center">
+                        <div className="bg-blue-50 p-3 sm:p-4 rounded-lg border-l-4 border-blue-500">
+                          <h4 className="font-bold mb-1 sm:mb-2 flex items-center">
                             O'rtadagi tog'lar
                           </h4>
                           <p className="text-sm text-gray-700">
-                            O'zbekistonning geografiyasi.
+                            O‘zbekistonning geografiyasi.
                           </p>
                         </div>
-                        <div className="bg-cyan-50 p-4 rounded-lg border-l-4 border-cyan-500">
-                          <h4 className="font-bold mb-2 flex items-center">
+                        <div className="bg-cyan-50 p-3 sm:p-4 rounded-lg border-l-4 border-cyan-500">
+                          <h4 className="font-bold mb-1 sm:mb-2 flex items-center">
                             Daryolar
                           </h4>
                           <p className="text-sm text-gray-700">
-                            Amudaryo va Sirdaryo. Suv resurslari.
+                            Amudaryo va Sirdaryo – suv resurslari va hayot
+                            manbai.
                           </p>
                         </div>
                       </div>
-                      <div className="space-y-3">
-                        <div className="bg-amber-50 p-4 rounded-lg border-l-4 border-amber-500">
-                          <h4 className="font-bold mb-2 flex items-center">
-                            Bug'doy boshoqlar
+                      <div className="space-y-2 sm:space-y-3">
+                        <div className="bg-amber-50 p-3 sm:p-4 rounded-lg border-l-4 border-amber-500">
+                          <h4 className="font-bold mb-1 sm:mb-2 flex items-center">
+                            Bug'doy boshoqlari
                           </h4>
                           <p className="text-sm text-gray-700">
-                            To'kin-sochinlik va mo'l-ko'llik belgisi
+                            To‘kin-sochinlik va mo‘l-ko‘llik belgisi,
+                            chambarning so‘l tomonida.
                           </p>
                         </div>
-                        <div className="bg-gray-50 p-4 rounded-lg border-l-4 border-gray-500">
-                          <h4 className="font-bold mb-2">Paxta guli</h4>
-                          <p className="text-sm text-gray-700">
-                            Tinchlik, mehnatsevarlik va boylik ramzi
-                          </p>
-                        </div>
-                        <div className="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
-                          <h4 className="font-bold mb-2 flex items-center">
-                            O'zbekiston Respublikasi bayrog'i ranglari
+                        <div className="bg-gray-50 p-3 sm:p-4 rounded-lg border-l-4 border-gray-500">
+                          <h4 className="font-bold mb-1 sm:mb-2">
+                            Paxta chanoqlari
                           </h4>
                           <p className="text-sm text-gray-700">
-                            Lenta holatida, birlik va davlat ramzi sifatida
+                            Tinchlik, mehnatsevarlik va boylik ramzi,
+                            chambarning o‘ng tomonida.
                           </p>
                         </div>
-                        <div className="bg-indigo-50 p-4 rounded-lg border-l-4 border-indigo-500">
-                          <h4 className="font-bold mb-2 flex items-center">
-                            Yulduz va yarim oy
+                        <div className="bg-green-50 p-3 sm:p-4 rounded-lg border-l-4 border-green-500">
+                          <h4 className="font-bold mb-1 sm:mb-2 flex items-center">
+                            Davlat bayrog‘i ranglari
                           </h4>
                           <p className="text-sm text-gray-700">
-                            Musulmonona qadriyatlar va tarixiy meros
+                            Pastki qismida chambarak tasmasi – birlik va davlat
+                            ramzi sifatida.
+                          </p>
+                        </div>
+                        <div className="bg-indigo-50 p-3 sm:p-4 rounded-lg border-l-4 border-indigo-500">
+                          <h4 className="font-bold mb-1 sm:mb-2 flex items-center">
+                            Sakkiz qirrali yulduz va yarim oy
+                          </h4>
+                          <p className="text-sm text-gray-700">
+                            Respublika jipsligi, musulmonlarning qadriyatlari va
+                            tarixiy meros ramzi.
                           </p>
                         </div>
                       </div>

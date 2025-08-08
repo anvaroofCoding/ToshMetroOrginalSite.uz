@@ -120,7 +120,7 @@ export default function TransportDirectory() {
       titleEn: "Anti-Corruption Service",
       head: "Kabirov Qobiljon Qosimovich",
       schedule: "Dushanba-juma kunlari 08:00 dan 17:00 ga qadar",
-      reception: "",
+      reception: "Hafta ish kunlari davomida",
       phone: "+998-93-700-03-25",
       image: tarkib10,
       email: "nk@tashmetro.uz",
@@ -215,7 +215,7 @@ export default function TransportDirectory() {
                               </div>
                               <div className="min-w-0">
                                 <h3 className="font-semibold text-gray-700 mb-1 text-sm sm:text-base">
-                                  Qabul soatlari
+                                  Qabul kuni
                                 </h3>
                                 <p className="text-gray-900 text-sm sm:text-base">
                                   {dept.reception}
@@ -301,7 +301,7 @@ export default function TransportDirectory() {
                               </div>
                               <div className="min-w-0">
                                 <h3 className="font-semibold text-gray-700 mb-1 text-sm sm:text-base">
-                                  Qabul soatlari
+                                  Qabul kuni
                                 </h3>
                                 <p className="text-gray-900 text-sm sm:text-base">
                                   {dept.reception}
@@ -344,19 +344,7 @@ export default function TransportDirectory() {
       </div>
 
       {/* Footer */}
-      <div>
-        <div className="container mx-auto px-4 py-8 sm:py-12 text-center">
-          <div className="inline-flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-[#0E327F] to-[#1e4a9f] rounded-full mb-3 sm:mb-4 shadow-lg">
-            <Train className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
-          </div>
-          <p className="text-base sm:text-lg text-gray-900 font-semibold mb-1 sm:mb-2">
-            Transport xizmatlari ma'lumotnomasi
-          </p>
-          <p className="text-xs sm:text-sm text-gray-600">
-            Barcha bo'limlar dushanba-juma kunlari 08:00-17:00 gacha ishlaydi
-          </p>
-        </div>
-      </div>
+ 
     </div>
   );
 }

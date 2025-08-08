@@ -5,31 +5,31 @@ import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { useEffect, useMemo, useRef, useState } from 'react'
 
 const companies = [
-	{
-		name: `O'zbekiston Respublikasi hukumat portali`,
-		logo: 'https://parliament.gov.uz/media/interactive_services/favicon_31jjx8x.png',
-		desc: 'gov.uz',
-		link: 'https://gov.uz/uz',
-	},
-	{
-		name: 'Oʼzbekiston Respublikasi Oliy Majlisi Senati',
-		logo: 'https://parliament.gov.uz/media/interactive_services/senat-build_tFdRS5u.png',
-		desc: 'www.senat.uz',
-		link: 'https://senat.uz/',
-	},
-	{
-		name: `O'zbekiston Respublikasi Prezidentining rasmiy veb-sayti`,
-		logo: 'https://parliament.gov.uz/media/interactive_services/usefull5_T39hHvI.png',
-		desc: 'www.president.uz',
-		link: 'www.president.uz',
-	},
-	{
-		name: `O'zbekiston Respublikasi Transport vazirligi`,
-		logo: 'https://sirdaryo.mintrans.uz/logo.png',
-		desc: 'mintrans.uz',
-		link: 'https://www.mintrans.uz/',
-	},
-]
+  {
+    name: `O'zbekiston Respublikasi hukumat portali`,
+    logo: "https://parliament.gov.uz/media/interactive_services/favicon_31jjx8x.png",
+    desc: "gov.uz",
+    link: "https://gov.uz/uz",
+  },
+  {
+    name: "Oʼzbekiston Respublikasi Oliy Majlisi Senati",
+    logo: "https://parliament.gov.uz/media/interactive_services/senat-build_tFdRS5u.png",
+    desc: "www.senat.uz",
+    link: "https://senat.uz/",
+  },
+  {
+    name: `O'zbekiston Respublikasi Prezidentining rasmiy veb-sayti`,
+    logo: "https://parliament.gov.uz/media/interactive_services/usefull5_T39hHvI.png",
+    desc: "www.president.uz",
+    link: "https://president.uz/uz",
+  },
+  {
+    name: `O'zbekiston Respublikasi Transport vazirligi`,
+    logo: "https://sirdaryo.mintrans.uz/logo.png",
+    desc: "mintrans.uz",
+    link: "https://www.mintrans.uz/",
+  },
+];
 
 export default function CompanySlider() {
 	const x = useMotionValue(0)

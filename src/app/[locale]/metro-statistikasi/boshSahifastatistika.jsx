@@ -227,7 +227,7 @@ export default function TopStationsChart() {
     <div className="w-full min-h-[400px] sm:min-h-[500px] lg:min-h-[450px] p-3 sm:p-4 lg:p-6 bg-white rounded-lg relative">
       {/* Header - Responsive layout */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 border-b pb-3 sm:pb-4 mb-4">
-        <h2 className="text-base sm:text-lg lg:text-xl font-semibold text-gray-800 leading-tight">
+        <h2 className="text-base sm:text-lg lg:text-xl font-semibold   leading-tight">
           5ta eng ko'p yo'lovchilarga ega bekatlar
         </h2>
         <Link href="/metro-statistikasi" className="self-start sm:self-auto">
@@ -261,7 +261,9 @@ export default function TopStationsChart() {
                         : window.innerWidth < 1024
                         ? 11
                         : 12,
+                    color: "rgba(0,0,128, 0.8)",
                   },
+                  color: "rgba(0,0,128, 0.8)",
                   usePointStyle: true,
                   padding: window.innerWidth < 640 ? 12 : 16,
                   boxWidth: window.innerWidth < 640 ? 8 : 10,
@@ -303,7 +305,9 @@ export default function TopStationsChart() {
                         : window.innerWidth < 1024
                         ? 10
                         : 11,
+                    color: "rgba(0,0,128, 0.8)",
                   },
+                  color: "rgba(0,0,128, 0.8)",
                   maxTicksLimit: window.innerWidth < 640 ? 5 : 7,
                 },
                 grid: {
@@ -319,7 +323,9 @@ export default function TopStationsChart() {
                         : window.innerWidth < 1024
                         ? 10
                         : 11,
+                    color: "rgba(0,0,128, 0.8)",
                   },
+                  color: "rgba(0,0,128, 0.8)",
                   maxRotation: window.innerWidth < 640 ? 45 : 0,
                   minRotation: window.innerWidth < 640 ? 45 : 0,
                 },
