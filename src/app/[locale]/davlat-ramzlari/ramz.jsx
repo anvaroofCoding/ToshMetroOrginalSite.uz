@@ -320,7 +320,7 @@ export default function UzbekistanSymbols() {
                     <div className="flex items-center space-x-3 mb-4">
                       <Info className="w-5 h-5 text-[#0E327F]" />
                       <h2 className="text-xl font-bold text-[#0E327F]">
-                        Asosiy Ma'lumotlar
+                        Asosiy ma'lumotlar
                       </h2>
                     </div>
                     <div className="grid md:grid-cols-2 gap-4">
@@ -377,7 +377,7 @@ export default function UzbekistanSymbols() {
                     <div className="flex items-center space-x-3 mb-4">
                       <Palette className="w-5 h-5 text-[#0E327F]" />
                       <h3 className="text-xl font-bold text-[#0E327F]">
-                        Ranglar Ramziyati
+                        Ranglar ramziyati
                       </h3>
                     </div>
                     <div className="grid md:grid-cols-3 gap-4">
@@ -447,7 +447,7 @@ export default function UzbekistanSymbols() {
                     <div className="flex items-center space-x-3 mb-4">
                       <Users className="w-5 h-5 text-[#0E327F]" />
                       <h2 className="text-xl font-bold text-[#0E327F]">
-                        Asosiy Ma'lumotlar
+                        Asosiy ma'lumotlar
                       </h2>
                     </div>
                     <div className="grid md:grid-cols-2 gap-4">
@@ -490,7 +490,7 @@ export default function UzbekistanSymbols() {
                     <div className="flex items-center space-x-3 mb-4">
                       <MapPin className="w-5 h-5 text-[#0E327F]" />
                       <h3 className="text-xl font-bold text-[#0E327F]">
-                        Gerb Elementlari
+                        Gerb elementlari
                       </h3>
                     </div>
                     <div className="grid md:grid-cols-2 gap-4">
@@ -576,7 +576,7 @@ export default function UzbekistanSymbols() {
                   <div className="flex items-center space-x-3 mb-6">
                     <Volume2 className="w-5 h-5 text-[#0E327F]" />
                     <h2 className="text-xl font-bold text-[#0E327F]">
-                      Audio Player
+                      Audio player
                     </h2>
                   </div>
 
@@ -722,7 +722,7 @@ export default function UzbekistanSymbols() {
                 <CardContent className="p-6">
                   <h2 className="text-xl font-bold text-[#0E327F] mb-4 text-center flex items-center justify-center">
                     <Music className="w-5 h-5 mr-2" />
-                    Madhiya Matni
+                    Madhiya matni
                   </h2>
                   <div className="space-y-4">
                     <div className="bg-blue-50 p-4 rounded-lg">

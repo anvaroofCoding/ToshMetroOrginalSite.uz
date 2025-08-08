@@ -69,7 +69,7 @@ export default function TashkentMetroDashboard() {
   const initiatives = [
     {
       icon: Scale,
-      title: "Teng Huquqlar",
+      title: "Teng huquqlar",
       description: "Erkaklar va ayollar uchun teng imkoniyatlar yaratilgan",
       color: "bg-blue-500",
     },
@@ -81,13 +81,13 @@ export default function TashkentMetroDashboard() {
     },
     {
       icon: Heart,
-      title: "Oilaviy Qo'llab-quvvatlash",
+      title: "Oilaviy qo'llab-quvvatlash",
       description: "Homilador ayollar va bolali onalar uchun imtiyozlar",
       color: "bg-pink-500",
     },
     {
       icon: Shield,
-      title: "Huquqiy Himoya",
+      title: "Huquqiy himoya",
       description:
         "Xodimlarning ijtimoiy himoyasi va huquqiy bilimini oshirish",
       color: "bg-purple-500",
@@ -95,9 +95,9 @@ export default function TashkentMetroDashboard() {
   ];
 
   const achievements = [
-    { label: "Maslahat Kengashi", value: "Faol", icon: Building2 },
-    { label: "Huquqiy Targ'ibot", value: "Doimiy", icon: Award },
-    { label: "Anonim So'rov", value: "Tizimli", icon: TrendingUp },
+    { label: "Maslahat kengashi", value: "Faol", icon: Building2 },
+    { label: "Huquqiy targ'ibot", value: "Doimiy", icon: Award },
+    { label: "Anonim so'rov", value: "Tizimli", icon: TrendingUp },
   ];
 
   return (

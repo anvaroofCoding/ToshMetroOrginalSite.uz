@@ -359,7 +359,7 @@ export default function AttoDetailedPage() {
                 className="text-4xl lg:text-5xl font-bold mb-4"
                 style={{ color: mainColor }}
               >
-                ATTO Transport Kartalari Turlari
+                ATTO transport kartalari turlari
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                 Hozirgi vaqtda yo'lovchilarning turli toifalari uchun
@@ -446,7 +446,7 @@ export default function AttoDetailedPage() {
                 className="text-4xl lg:text-5xl font-bold mb-4"
                 style={{ color: mainColor }}
               >
-                Qo'shimcha Xizmatlar
+                Qo'shimcha xizmatlar
               </h2>
               <p className="text-xl text-gray-600">
                 ATTO kartasidan samarali foydalanish uchun muhim ma'lumotlar
@@ -489,7 +489,7 @@ export default function AttoDetailedPage() {
                         style={{ borderColor: mainColor, color: mainColor }}
                       >
                         <Info className="w-4 h-4 mr-2" />
-                        Ko'rish
+                        Batafsil
                       </Button>
                     </CardContent>
                   </Card>

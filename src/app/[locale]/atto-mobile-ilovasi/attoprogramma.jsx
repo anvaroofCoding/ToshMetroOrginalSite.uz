@@ -163,7 +163,7 @@ export default function AttoLandingPage() {
                 >
                     <motion.div variants={itemVariants} className='space-y-2'>
                         <h1 className='text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800'>
-                            ATTO Mobil Ilovasi
+                            ATTO mobil ilovasi
                         </h1>
                         <p className='text-md sm:text-lg text-gray-600'>
                             Barcha transport to'lovlari bir joyda.

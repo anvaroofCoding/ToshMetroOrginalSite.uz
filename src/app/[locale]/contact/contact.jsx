@@ -82,7 +82,7 @@ export default function ContactInfo() {
           className="text-center mb-12"
         >
           <h2 className="text-4xl font-bold text-blue-900 mb-4">
-            Bog'lanish Ma'lumotlari
+            Bog'lanish ma'lumotlari
           </h2>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">
             Biz bilan bog'lanish uchun quyidagi ma'lumotlardan foydalaning

@@ -174,7 +174,7 @@ function ApiVakan() {
             transition={{ delay: 0.7, duration: 0.8 }}
             className="text-4xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-[#0E327F] to-blue-600 bg-clip-text text-transparent"
           >
-            Toshkent Metro
+            Toshkent metro
           </motion.h1>
           <p className="text-xl text-gray-700 max-w-2xl mx-auto">
             Karyerangizni bizning jamoamizda boshlang

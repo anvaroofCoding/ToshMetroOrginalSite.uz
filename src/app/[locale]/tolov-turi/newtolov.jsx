@@ -135,7 +135,7 @@ export default function PaymentMethods() {
         {/* Header - Fluid Typography */}
         <div className="text-center mb-12 sm:mb-16 lg:mb-20 xl:mb-24">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-blue-900 mb-4 sm:mb-6 lg:mb-8 leading-tight tracking-tight">
-            To'lov Turlari
+            To'lov turlari
           </h1>
           <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 max-w-4xl mx-auto px-4 leading-relaxed">
             Toshkent Metropolitenida mavjud bo'lgan barcha to'lov turlari haqida
@@ -153,10 +153,10 @@ export default function PaymentMethods() {
               </div>
               <div className="ml-4 sm:ml-6 md:ml-8 lg:ml-12">
                 <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-blue-900 leading-tight tracking-tight">
-                  ATTO Transport Kartasi
+                  ATTO transport kartasi
                 </h2>
                 <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 mt-2 sm:mt-3 lg:mt-4 leading-relaxed">
-                  Avtomatlashtirilgan Transport To'lov Tizimi
+                  Avtomatlashtirilgan transport to'lov tizimi
                 </p>
               </div>
             </div>
@@ -229,7 +229,7 @@ export default function PaymentMethods() {
               </div>
               <div className="ml-4 sm:ml-6 md:ml-8 lg:ml-12">
                 <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-blue-900 leading-tight tracking-tight">
-                  Mobil Ilovalar Orqali To'lov
+                  Mobil ilovalar orqali to'lov
                 </h2>
                 <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 mt-2 sm:mt-3 lg:mt-4 leading-relaxed">
                   Turli mobil ilovalar orqali to'lov qilish imkoniyati
@@ -285,7 +285,7 @@ export default function PaymentMethods() {
               </div>
               <div className="ml-4 sm:ml-6 md:ml-8 lg:ml-12">
                 <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-blue-900 leading-tight tracking-tight">
-                  Bank Kartalari va Kontaktsiz To'lovlar
+                  Bank kartalari va kontaktsiz to'lovlar
                 </h2>
                 <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 mt-2 sm:mt-3 lg:mt-4 leading-relaxed">
                   kontaktsiz to'lov orqali metro va avtobusda to'lov - 1,700 UZS
@@ -340,7 +340,7 @@ export default function PaymentMethods() {
               </div>
               <div className="ml-4 sm:ml-6 md:ml-8 lg:ml-12">
                 <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-blue-900 leading-tight tracking-tight">
-                  QR-Bilet va Alif ATM
+                  QR-bilet va Alif ATM
                 </h2>
                 <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 mt-2 sm:mt-3 lg:mt-4 leading-relaxed">
                   Bir martalik QR to'lov va ATM orqali QR kod
@@ -413,7 +413,7 @@ export default function PaymentMethods() {
               </div>
               <div className="ml-4 sm:ml-6 md:ml-8 lg:ml-12">
                 <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-blue-900 leading-tight tracking-tight">
-                  Biometrik To'lovlar
+                  Biometrik to'lovlar
                 </h2>
                 <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 mt-2 sm:mt-3 lg:mt-4 leading-relaxed">
                   Kelajak texnologiyalari asosida to'lov

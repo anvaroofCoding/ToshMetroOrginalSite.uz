@@ -331,7 +331,7 @@ export default function MetroLostItemForm() {
             <CardHeader className="bg-blue-900 text-white rounded-t-lg">
               <CardTitle className="text-xl font-semibold flex items-center gap-2">
                 <MessageSquare className="w-5 h-5" />
-                Murojaat Shakli
+                Murojaat shakli
               </CardTitle>
               <CardDescription className="text-blue-100">
                 Barcha maydonlarni to'ldiring va 5 ish kuni davomida murojaatlaringiz ko'rib chiqiladi
@@ -491,7 +491,7 @@ export default function MetroLostItemForm() {
                     ) : (
                       <>
                         <Send className="w-4 h-4" />
-                        Murojaatni Yuborish
+                        Murojaatni yuborish
                       </>
                     )}
                   </Button>

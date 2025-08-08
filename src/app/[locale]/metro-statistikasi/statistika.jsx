@@ -205,7 +205,7 @@ const MetroStatistics = () => {
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-blue-900">
             <TrendingUp className="h-5 w-5" />
-            Bekat Tanlash
+            Bekat tanlash
           </CardTitle>
           <CardDescription>
             Statistikasini ko'rish uchun metro bekatini tanlang
@@ -234,7 +234,7 @@ const MetroStatistics = () => {
       <Card className="mb-4">
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-blue-900">
-            Grafik Turi
+            Grafik turi
           </CardTitle>
           <CardDescription>
             Ma'lumotlarni ko'rsatish uchun grafik turini tanlang
@@ -246,11 +246,11 @@ const MetroStatistics = () => {
               <SelectValue placeholder="Grafik turini tanlang..." />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="bar">Ustunli Grafik</SelectItem>
-              <SelectItem value="line">Chiziqli Grafik</SelectItem>
-              <SelectItem value="area">Maydonli Grafik</SelectItem>
-              <SelectItem value="pie">Doira Grafik</SelectItem>
-              <SelectItem value="radar">Radar Grafik</SelectItem>
+              <SelectItem value="bar">Ustunli grafik</SelectItem>
+              <SelectItem value="line">Chiziqli grafik</SelectItem>
+              <SelectItem value="area">Maydonli grafik</SelectItem>
+              <SelectItem value="pie">Doira grafik</SelectItem>
+              <SelectItem value="radar">Radar grafik</SelectItem>
             </SelectContent>
           </Select>
         </CardContent>
@@ -277,7 +277,7 @@ const MetroStatistics = () => {
                       {animatedTotalUsers.toLocaleString()}
                     </div>
                     <p className="text-xs sm:text-sm text-blue-600">
-                      Jami Yo'lovchilar
+                      Jami yo'lovchilar
                     </p>
                   </CardContent>
                 </Card>
@@ -287,7 +287,7 @@ const MetroStatistics = () => {
                       {animatedAverageUsers.toLocaleString()}
                     </div>
                     <p className="text-xs sm:text-sm text-blue-600">
-                      O'rtacha oylik Yo'lovchilar
+                      O'rtacha oylik yo'lovchilar
                     </p>
                   </CardContent>
                 </Card>

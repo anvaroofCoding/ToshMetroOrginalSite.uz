@@ -124,7 +124,7 @@ export default function MetroPagesShowcase() {
               <MapPin className="w-12 h-12 sm:w-16 sm:h-16 mb-4" />
             </motion.div>
             <h3 className="text-md sm:text-2xl lg:text-2xl font-bold mb-2">
-              Interaktiv Metro Xaritasi
+              Interaktiv metro xaritasi
             </h3>
             <p className="mb-6 text-sm sm:text-base text-blue-100 max-w-xs">
               Toshkent metrosining rasmiy interaktiv xaritasi. Stansiyalar va

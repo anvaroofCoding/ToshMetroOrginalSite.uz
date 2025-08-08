@@ -89,7 +89,7 @@ function TashkentMetroPage() {
       opened: "1977",
       color: "#fb7e7e",
       description:
-        "Cilonzor yo'nalishi birinchi ishga tushgan yo'nalish bo'lib, Buyuk Ipak yo'li bekatidan Chinor bekatigacha davom etadi. ",
+        "Chilonzor yo'nalishi birinchi ishga tushgan yo'nalish bo'lib, Buyuk Ipak yo'li bekatidan Chinor bekatigacha davom etadi. ",
       highlights: [
         "Tarixiy birinchi yo'nalish",
         "Shahar markazi aloqasi",
@@ -117,7 +117,7 @@ function TashkentMetroPage() {
       opened: "2001",
       color: "#57be82",
       description:
-        "Yunisobod yo'li uchinchi ishga tushgan yo'nalish bo'lib, Turkiston bekatidan Ming o'rik bekatigacha davom etadi. ",
+        "Yunusobod yo'li uchinchi ishga tushgan yo'nalish bo'lib, Turkiston bekatidan Ming o'rik bekatigacha davom etadi. ",
       highlights: [
         "Turar-joy hududlari",
         "Zamonaviy dizayn",
@@ -125,13 +125,13 @@ function TashkentMetroPage() {
       ],
     },
     {
-      name: "Yerusti halqa yo'li",
+      name: "Yer usti halqa yo'li",
       length: "22.34 km",
       stations: 14,
       opened: "2020",
       color: "#eecf53",
       description:
-        "Yerusti halqa yo'li to'rtinchi ishga tushgan yo'nalish bo'lib, Texnopark bekatidan Qipchoq bekatigacha davom etadi. ",
+        "Yer usti halqa yo'li to'rtinchi ishga tushgan yo'nalish bo'lib, Texnopark bekatidan Qipchoq bekatigacha davom etadi. ",
       highlights: [
         "So'nggi texnologiya",
         "Ekologik toza",
@@ -250,22 +250,19 @@ function TashkentMetroPage() {
 
   const sliderHistory = [
     {
-      image:
-        "https://cdn1.img.sputniknews.uz/img/07e7/08/1e/38378409_0:67:1280:787_1920x0_80_0_0_5a0d93c22a77a08b2f68d80cbfba6ff5.jpg",
+      image: "/galery/birinchisostav.png",
       title: "Tarixiy metro poezdlari",
       description: "Metro qurilishining ilk bosqichlari",
       badges: ["Tarixiy", "Madaniy"],
     },
     {
-      image:
-        "https://cdn1.img.sputniknews.uz/img/07e7/08/1e/38378409_0:67:1280:787_1920x0_80_0_0_5a0d93c22a77a08b2f68d80cbfba6ff5.jpg",
+      image: "/galery/ortasastav.png",
       title: "Yaqin o'tmishdagi metro poezdlari",
       description: "Rivojlanish bosqichidagi poezdlar",
       badges: ["Xavfsiz", "Samarali"],
     },
     {
-      image:
-        "https://cdn1.img.sputniknews.uz/img/07e7/08/1e/38378409_0:67:1280:787_1920x0_80_0_0_5a0d93c22a77a08b2f68d80cbfba6ff5.jpg",
+      image: "/galery/yangisastav.png",
       title: "Hozirgi zamonaviy poyezdlar",
       description: "Yangi texnologiyalar va kengaygan imkoniyatlar",
       badges: ["Zamonaviy", "Qulay transport"],
@@ -523,7 +520,7 @@ function TashkentMetroPage() {
               <div className="p-4 rounded-full bg-white/20 group-hover:bg-white/30 transition-colors duration-300 group-hover:rotate-12">
                 <TrendingUp size={40} className="animate-pulse" />
               </div>
-              <h2 className="text-4xl font-bold">Hozirgi Yutuqlar</h2>
+              <h2 className="text-4xl font-bold">Hozirgi yutuqlar</h2>
             </div>
             <p className="text-xl mb-8 opacity-90 leading-relaxed max-w-4xl mx-auto">
               Bugungi kunda Toshkent metropoliteni Markaziy Osiyoning yetakchi

@@ -155,7 +155,7 @@ export default function TransportDirectory() {
         <div className="container mx-auto px-4 py-8 sm:py-12 lg:py-16">
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold mb-3 sm:mb-4 text-[#0E327F] leading-tight">
-              Transport Ma'lumotnomasi
+              Transport ma'lumotnomasi
             </h1>
             <p className="text-base sm:text-lg lg:text-xl text-gray-600 leading-relaxed">
               Barcha transport xizmatlari va bo'limlarining to'liq aloqa
@@ -350,7 +350,7 @@ export default function TransportDirectory() {
             <Train className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
           </div>
           <p className="text-base sm:text-lg text-gray-900 font-semibold mb-1 sm:mb-2">
-            Transport Xizmatlari Ma'lumotnomasi
+            Transport xizmatlari ma'lumotnomasi
           </p>
           <p className="text-xs sm:text-sm text-gray-600">
             Barcha bo'limlar dushanba-juma kunlari 08:00-17:00 gacha ishlaydi

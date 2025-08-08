@@ -203,7 +203,7 @@ export default function Component() {
               <div className="flex justify-between items-center mb-2">
                 <span className="text-sm sm:text-base font-medium text-green-800 flex items-center gap-2">
                   <CheckCircle className="h-4 w-4" />
-                  Javob Berilgan So'rovlar
+                  Javob berilgan so'rovlar
                 </span>
                 <span className="text-sm sm:text-base font-bold text-green-900">
                   {stats.answer_requests}/{stats.total_requests}
@@ -228,7 +228,7 @@ export default function Component() {
               <div className="flex justify-between items-center mb-2">
                 <span className="text-sm sm:text-base font-medium text-orange-800 flex items-center gap-2">
                   <Clock className="h-4 w-4" />
-                  Javob Berilmagan So'rovlar
+                  Javob berilmagan so'rovlar
                 </span>
                 <span className="text-sm sm:text-base font-bold text-orange-900">
                   {stats.unanswered_requests}/{stats.total_requests}
