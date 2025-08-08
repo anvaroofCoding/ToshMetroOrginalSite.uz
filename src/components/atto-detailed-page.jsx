@@ -77,7 +77,7 @@ export default function AttoDetailedPage() {
     },
     {
       title: "Ijtimoiy karta",
-      description: "Imtiyozli nafaqaxo'rlar va nogironlar uchun mo'ljallangan.",
+      description: "Nafaqaxo'rlar va nogironlar uchun mo'ljallangan.",
       color: "bg-[#ec3641]",
       icon: <CreditCard className="w-8 h-8 text-white" />,
       price: "Imtiyozli/Bepul",
@@ -512,7 +512,7 @@ export default function AttoDetailedPage() {
                 className="text-4xl lg:text-5xl font-bold mb-4"
                 style={{ color: mainColor }}
               >
-                Savol-Javoblar
+                Savol-javoblar
               </h2>
               <p className="text-xl text-gray-600">
                 Eng ko'p beriladigan savollar va ularning javoblari

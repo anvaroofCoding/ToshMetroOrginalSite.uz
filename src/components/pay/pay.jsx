@@ -66,7 +66,7 @@ function PalmpayPayments() {
   const activationSteps = [
     {
       icon: MapPin,
-      title: "Barcha metro bekatidagi roʻyxatdan oʻtish stoliga boring.",
+      title: "Metro bekatidagi roʻyxatdan oʻtish stoliga boring.",
     },
     {
       icon: Camera,

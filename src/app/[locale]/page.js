@@ -5,7 +5,7 @@ import FaqAccordion from "@/work/test/questions";
 import Mediateka from "./mediateka/headermediateka";
 
 const Home = () => {
-  const malumot = "Metropoliteni yo'lovchilari uchun foydali ma'lumotlar";
+  const malumot = "Metropoliten yo'lovchilari uchun foydali ma'lumotlar";
   return (
     <div className="relative z-[10] ">
       <div className="mt-5">

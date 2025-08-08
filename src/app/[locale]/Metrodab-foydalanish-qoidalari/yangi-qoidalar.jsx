@@ -1,15 +1,26 @@
-"use client"
+"use client";
 
-import { Badge } from "@/components/ui/badge"
-import { Card, CardContent } from "@/components/ui/card"
-import { AlertTriangle, CheckCircle, Clock, FileText, Home, Scale, Shield, Train, UserCheck, Users } from "lucide-react"
-import { useEffect, useRef, useState, useMemo, useCallback } from "react"
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
+import {
+  AlertTriangle,
+  CheckCircle,
+  Clock,
+  FileText,
+  Home,
+  Scale,
+  Shield,
+  Train,
+  UserCheck,
+  Users,
+} from "lucide-react";
+import { useEffect, useRef, useState, useMemo, useCallback } from "react";
 
 export default function OptimizedMetroRegulations() {
-  const [visibleSections, setVisibleSections] = useState(new Set())
-  const [scrollProgress, setScrollProgress] = useState(0)
-  const sectionRefs = useRef([])
-  const timelineRef = useRef(null)
+  const [visibleSections, setVisibleSections] = useState(new Set());
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const sectionRefs = useRef([]);
+  const timelineRef = useRef(null);
 
   const allSections = useMemo(
     () => [
@@ -22,7 +33,7 @@ export default function OptimizedMetroRegulations() {
         bgColor: "bg-blue-50",
         borderColor: "border-blue-200",
         content:
-          "Ushbu Qoidalar metropolitenda yo'lovchilar hamda boshqa shaxslarning (metropoliten xodimlari, metropolitenda o'z xizmat vazifasini bajaruvchi ichki ishlar organlari va O'zbekiston Respublikasi Favqulodda vaziyatlar vazirligi xodimlari hamda metropoliten rahbariyatining ruxsati bilan tashrif buyuruvchi shaxslar) bo'lishi, ularning huquq va majburiyatlarini, shuningdek, metropolitendan foydalanish tartibini belgilaydi.",
+          "Ushbu qoidalar metropolitenda yo'lovchilar hamda boshqa shaxslarning (metropoliten xodimlari, metropolitenda o'z xizmat vazifasini bajaruvchi ichki ishlar organlari va O'zbekiston Respublikasi Favqulodda vaziyatlar vazirligi xodimlari hamda metropoliten rahbariyatining ruxsati bilan tashrif buyuruvchi shaxslar) bo'lishi, ularning huquq va majburiyatlarini, shuningdek, metropolitendan foydalanish tartibini belgilaydi.",
       },
       {
         id: 2,
@@ -32,7 +43,8 @@ export default function OptimizedMetroRegulations() {
         color: "from-indigo-500 to-indigo-600",
         bgColor: "bg-indigo-50",
         borderColor: "border-indigo-200",
-        content: "Ushbu Qoidalarda quyidagi asosiy tushunchalardan foydalaniladi:",
+        content:
+          "Ushbu qoidalarda quyidagi asosiy tushunchalardan foydalaniladi:",
         definitions: [
           "bekat platformasi — bekatdagi poyezdlarni kutish joyi;",
           "yo'l chiptasi — metropolitendan foydalanish uchun QR-kodli bir martalik yo'l haqi to'lovi amalga oshirilganligini tasdiqlovchi hujjat;",
@@ -60,7 +72,8 @@ export default function OptimizedMetroRegulations() {
         color: "from-emerald-500 to-emerald-600",
         bgColor: "bg-emerald-50",
         borderColor: "border-emerald-200",
-        content: "Metropolitenda yo'lovchilarning xavfsiz va qulay harakatlanishi ta'minlanadi.",
+        content:
+          "Metropolitenda yo'lovchilarning xavfsiz va qulay harakatlanishi ta'minlanadi.",
       },
       {
         id: 5,
@@ -147,7 +160,8 @@ export default function OptimizedMetroRegulations() {
         color: "from-green-500 to-teal-500",
         bgColor: "bg-green-50",
         borderColor: "border-green-200",
-        content: "Yo'lovchilar metropolitendan foydalanishda quyidagi huquqlarga ega:",
+        content:
+          "Yo'lovchilar metropolitendan foydalanishda quyidagi huquqlarga ega:",
         rights: [
           "o'zlari bilan birgalikda yetti yoshgacha bo'lgan bolalarini, bolalar va nogironligi bo'lgan shaxslar aravachalarini bepul olib yurish;",
           "nogironligi bo'lgan va imkoniyati cheklangan shaxslar tomonidan metropolitenning texnik vositalaridan foydalanish;",
@@ -164,7 +178,8 @@ export default function OptimizedMetroRegulations() {
         color: "from-blue-500 to-cyan-500",
         bgColor: "bg-blue-50",
         borderColor: "border-blue-200",
-        content: "Yo'lovchilar metropolitendan foydalanishda quyidagi majburiyatlarga ega:",
+        content:
+          "Yo'lovchilar metropolitendan foydalanishda quyidagi majburiyatlarga ega:",
         obligations: [
           "jamoat tartibi, sanitariya-gigiyena normalari va qoidalariga rioya qilishi;",
           "qonunchilik hujjatlariga muvofiq yo'lkira haqini to'lashi;",
@@ -215,7 +230,7 @@ export default function OptimizedMetroRegulations() {
         bgColor: "bg-slate-50",
         borderColor: "border-slate-200",
         content:
-          "Mazkur Qoidalar talablarini qo'llashda yuzaga keladigan nizolar qonunchilik hujjatlarida belgilangan tartibda hal etiladi.",
+          "Mazkur qoidalar talablarini qo'llashda yuzaga keladigan nizolar qonunchilik hujjatlarida belgilangan tartibda hal etiladi.",
       },
       {
         id: 17,
@@ -226,53 +241,56 @@ export default function OptimizedMetroRegulations() {
         bgColor: "bg-gray-50",
         borderColor: "border-gray-200",
         content:
-          "Ushbu Qoidalar talablarining buzilishida aybdor bo'lgan shaxslar qonunchilik hujjatlarida belgilangan tartibda javobgar bo'ladi.",
+          "Ushbu qoidalar talablarining buzilishida aybdor bo'lgan shaxslar qonunchilik hujjatlarida belgilangan tartibda javobgar bo'ladi.",
       },
     ],
-    [],
-  )
+    []
+  );
 
   const handleObserver = useCallback(
     (entries) => {
-      const newVisibleSections = new Set(visibleSections)
+      const newVisibleSections = new Set(visibleSections);
 
       entries.forEach((entry) => {
-        const sectionId = Number.parseInt(entry.target.getAttribute("data-section-id") || "0")
+        const sectionId = Number.parseInt(
+          entry.target.getAttribute("data-section-id") || "0"
+        );
         if (entry.isIntersecting) {
-          newVisibleSections.add(sectionId)
+          newVisibleSections.add(sectionId);
         }
-      })
+      });
 
-      setVisibleSections(newVisibleSections)
+      setVisibleSections(newVisibleSections);
     },
-    [visibleSections],
-  )
+    [visibleSections]
+  );
 
   const handleScroll = useCallback(() => {
     if (timelineRef.current) {
-      const { scrollTop, scrollHeight, clientHeight } = document.documentElement
-      const progress = (scrollTop / (scrollHeight - clientHeight)) * 100
-      setScrollProgress(Math.min(progress, 100))
+      const { scrollTop, scrollHeight, clientHeight } =
+        document.documentElement;
+      const progress = (scrollTop / (scrollHeight - clientHeight)) * 100;
+      setScrollProgress(Math.min(progress, 100));
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(handleObserver, {
       threshold: 0.3,
       rootMargin: "-20% 0px -20% 0px",
-    })
+    });
 
     sectionRefs.current.forEach((ref) => {
-      if (ref) observer.observe(ref)
-    })
+      if (ref) observer.observe(ref);
+    });
 
-    window.addEventListener("scroll", handleScroll, { passive: true })
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
-      observer.disconnect()
-      window.removeEventListener("scroll", handleScroll)
-    }
-  }, [handleObserver, handleScroll])
+      observer.disconnect();
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [handleObserver, handleScroll]);
 
   return (
     <div className="min-h-screen ">
@@ -296,17 +314,24 @@ export default function OptimizedMetroRegulations() {
             <h1 className="text-5xl md:text-6xl font-bold text-blue-900 mb-6">
               Metropolitendan foydalanish qoidalari
             </h1>
-            <p className="text-xl text-gray-600 mb-8 font-medium">O'zbekiston Respublikasi Vazirlar Mahkamasi</p>
+            <p className="text-xl text-gray-600 mb-8 font-medium">
+              O'zbekiston Respublikasi Vazirlar Mahkamasi
+            </p>
             <div className="flex items-center justify-center gap-3 text-gray-500">
               <Scale className="w-5 h-5 text-blue-500" />
-              <span className="font-medium">2023-yil 10-oktabr, 535-son qarori</span>
+              <span className="font-medium">
+                2023-yil 10-oktabr, 535-son qarori
+              </span>
             </div>
           </div>
         </div>
       </header>
 
       {/* Timeline */}
-      <div ref={timelineRef} className="relative container mx-auto px-4 py-20 overflow-hidden ">
+      <div
+        ref={timelineRef}
+        className="relative container mx-auto px-4 py-20 overflow-hidden "
+      >
         {/* Timeline Line */}
         <div className="absolute left-1/2 transform -translate-x-1/2 w-0.5 bg-gradient-to-b from-blue-200 via-purple-200 to-indigo-200 h-full" />
 
@@ -318,7 +343,9 @@ export default function OptimizedMetroRegulations() {
               ref={(el) => (sectionRefs.current[index] = el)}
               data-section-id={section.id}
               className={`relative transition-all duration-700 ease-out ${
-                visibleSections.has(section.id) ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+                visibleSections.has(section.id)
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-8"
               }`}
             >
               {/* Timeline Dot */}
@@ -330,33 +357,52 @@ export default function OptimizedMetroRegulations() {
                       : "bg-gray-300 scale-100"
                   }`}
                 >
-                  <span className="text-white font-bold text-sm">{section.number}</span>
+                  <span className="text-white font-bold text-sm">
+                    {section.number}
+                  </span>
                 </div>
               </div>
 
               {/* Content */}
-              <div className={`flex ${index % 2 === 0 ? "justify-start" : "justify-end"}`}>
-                <div className={`w-full max-w-xl ${index % 2 === 0 ? "pr-12" : "pl-12"}`}>
+              <div
+                className={`flex ${
+                  index % 2 === 0 ? "justify-start" : "justify-end"
+                }`}
+              >
+                <div
+                  className={`w-full max-w-xl ${
+                    index % 2 === 0 ? "pr-12" : "pl-12"
+                  }`}
+                >
                   <Card
                     className={`shadow-lg border-0 overflow-hidden transition-all duration-500 hover:shadow-xl ${section.bgColor} ${section.borderColor} border-l-4`}
                   >
                     <CardContent className="p-6">
                       {/* Header */}
                       <div className="flex items-center gap-3 mb-4">
-                        <div className={`p-2.5 rounded-lg bg-gradient-to-r ${section.color} text-white shadow-md`}>
+                        <div
+                          className={`p-2.5 rounded-lg bg-gradient-to-r ${section.color} text-white shadow-md`}
+                        >
                           {section.icon}
                         </div>
                         <div>
-                          <Badge variant="outline" className="mb-1 text-xs font-semibold border-current">
+                          <Badge
+                            variant="outline"
+                            className="mb-1 text-xs font-semibold border-current"
+                          >
                             {section.number}-modda
                           </Badge>
-                          <h2 className="text-lg font-bold text-gray-900 leading-tight">{section.title}</h2>
+                          <h2 className="text-lg font-bold text-gray-900 leading-tight">
+                            {section.title}
+                          </h2>
                         </div>
                       </div>
 
                       {/* Content */}
                       <div className="space-y-4">
-                        <p className="text-gray-700 leading-relaxed">{section.content}</p>
+                        <p className="text-gray-700 leading-relaxed">
+                          {section.content}
+                        </p>
 
                         {/* Definitions */}
                         {section.definitions && (
@@ -407,15 +453,17 @@ export default function OptimizedMetroRegulations() {
                               Majburiyatlar:
                             </h4>
                             <div className="space-y-2">
-                              {section.obligations.map((obligation, obligationIndex) => (
-                                <div
-                                  key={obligationIndex}
-                                  className="flex items-start gap-2 p-3 bg-white/70 rounded-lg border border-orange-100 text-sm"
-                                >
-                                  <div className="w-2 h-2 bg-orange-500 rounded-full mt-2 flex-shrink-0" />
-                                  <span>{obligation}</span>
-                                </div>
-                              ))}
+                              {section.obligations.map(
+                                (obligation, obligationIndex) => (
+                                  <div
+                                    key={obligationIndex}
+                                    className="flex items-start gap-2 p-3 bg-white/70 rounded-lg border border-orange-100 text-sm"
+                                  >
+                                    <div className="w-2 h-2 bg-orange-500 rounded-full mt-2 flex-shrink-0" />
+                                    <span>{obligation}</span>
+                                  </div>
+                                )
+                              )}
                             </div>
                           </div>
                         )}
@@ -433,12 +481,16 @@ export default function OptimizedMetroRegulations() {
                               <div
                                 className={`h-1 rounded-full bg-gradient-to-r ${section.color} transition-all duration-700`}
                                 style={{
-                                  width: visibleSections.has(section.id) ? "100%" : "0%",
+                                  width: visibleSections.has(section.id)
+                                    ? "100%"
+                                    : "0%",
                                 }}
                               />
                             </div>
                           </div>
-                          {visibleSections.has(section.id) && <CheckCircle className="w-3 h-3 text-green-500" />}
+                          {visibleSections.has(section.id) && (
+                            <CheckCircle className="w-3 h-3 text-green-500" />
+                          )}
                         </div>
                       </div>
                     </CardContent>
@@ -457,11 +509,16 @@ export default function OptimizedMetroRegulations() {
             <div className="p-2 bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg">
               <Train className="w-5 h-5 text-white" />
             </div>
-            <p className="text-lg font-bold text-gray-900">© 2023 O'zbekiston Respublikasi Vazirlar Mahkamasi</p>
+            <p className="text-lg font-bold text-gray-900">
+              © 2023 O'zbekiston Respublikasi Vazirlar Mahkamasi
+            </p>
           </div>
-          <p className="text-gray-600">Qonunchilik ma'lumotlari milliy bazasi, 11.10.2023-y., 09/23/535/0766-son</p>
+          <p className="text-gray-600">
+            Qonunchilik ma'lumotlari milliy bazasi, 11.10.2023-y.,
+            09/23/535/0766-son
+          </p>
         </div>
       </footer>
     </div>
-  )
+  );
 }

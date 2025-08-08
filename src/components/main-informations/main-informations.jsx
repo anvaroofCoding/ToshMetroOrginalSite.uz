@@ -512,7 +512,7 @@ function AttoCardsCarousel() {
     {
       name: "ATTO Ijtimoiy",
       type: "Ijtimoiy karta",
-      description: "Pensionerlar va imtiyozli toifalar uchun maxsus karta",
+      description: "Nafaqaxo'rlar va imtiyozli toifalar uchun maxsus karta",
       image: "https://atto.uz/icons/cards/red_transport_card.png",
       color: "#dc2626",
       bgGradient: "from-red-500 to-pink-600",

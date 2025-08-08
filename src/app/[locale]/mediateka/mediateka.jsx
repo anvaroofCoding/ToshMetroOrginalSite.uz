@@ -165,7 +165,7 @@ function VideoCard({ video, index, onPlay }) {
         <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
           <Link href="/detail">
             <button className="bg-blue-900/90 hover:bg-blue-800/90 backdrop-blur-sm text-white px-3 py-2 lg:px-4 lg:py-2 rounded-full text-xs lg:text-sm font-medium transition-all duration-200 hover:scale-105 shadow-lg">
-              Detail
+              Ko'rish
             </button>
           </Link>
         </div>

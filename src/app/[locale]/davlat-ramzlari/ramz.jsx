@@ -496,7 +496,7 @@ export default function UzbekistanSymbols() {
                     <div className="grid md:grid-cols-2 gap-4">
                       <div className="space-y-3">
                         <div className="bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-500">
-                          <h4 className="font-bold mb-2">Humo Qushi</h4>
+                          <h4 className="font-bold mb-2">Humo qushi</h4>
                           <p className="text-sm text-gray-700">
                             Baxt va erkinlik timsoli
                           </p>

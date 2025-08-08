@@ -197,7 +197,8 @@ const MetroStatistics = () => {
     <div className="container min-h-screen overflow-hidden">
       <div className="text-center space-y-2 my-10">
         <h1 className="text-2xl sm:text-3xl font-bold text-blue-900">
-          Toshkent Metropoliteni orqali 2025-yil 1-yarim yillikdagi (yanvardan-iyungacha) yo'lovchi tashish statistikasi
+          Toshkent metropoliteni orqali 2025-yil 1-yarim yillikdagi
+          (yanvardan-iyungacha) yo'lovchi tashish statistikasi
         </h1>
       </div>
 

@@ -27,7 +27,7 @@ const attoCards = [
     name: "Yagona/Umumiy",
     type: "Ko'k",
     price: "20.000 UZS",
-    description: "Avtomatlashtirilgan Transport To'lov Tizimi",
+    description: "Avtomatlashtirilgan transport To'lov Tizimi",
     color: "bg-blue-50 border-blue-200",
     iconColor: "bg-blue-500",
     img: "https://atto.uz/image/blueCard.png",
@@ -138,7 +138,7 @@ export default function PaymentMethods() {
             To'lov turlari
           </h1>
           <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 max-w-4xl mx-auto px-4 leading-relaxed">
-            Toshkent Metropolitenida mavjud bo'lgan barcha to'lov turlari haqida
+            Toshkent metropolitenida mavjud bo'lgan barcha to'lov turlari haqida
             batafsil ma'lumot
           </p>
         </div>

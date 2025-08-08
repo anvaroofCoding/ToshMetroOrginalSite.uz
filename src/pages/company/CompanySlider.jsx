@@ -24,7 +24,7 @@ const companies = [
 		link: 'www.president.uz',
 	},
 	{
-		name: `O'zbekiston Respublikasi Transport Vazirligi`,
+		name: `O'zbekiston Respublikasi Transport vazirligi`,
 		logo: 'https://sirdaryo.mintrans.uz/logo.png',
 		desc: 'mintrans.uz',
 		link: 'https://www.mintrans.uz/',

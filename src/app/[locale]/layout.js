@@ -44,7 +44,8 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children, params }) {
-  const locale = params?.locale;
+  const resolvedParams = await params;
+  const locale = resolvedParams?.locale;
 
   if (!["uz", "ru", "en"].includes(locale)) notFound();
 
