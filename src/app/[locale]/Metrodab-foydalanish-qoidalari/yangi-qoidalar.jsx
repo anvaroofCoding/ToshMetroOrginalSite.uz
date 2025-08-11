@@ -514,8 +514,15 @@ export default function OptimizedMetroRegulations() {
             </p>
           </div>
           <p className="text-gray-600">
-            Qonunchilik ma'lumotlari milliy bazasi, 11.10.2023-y.,
-            09/23/535/0766-son
+            Qonunchilik ma'lumotlari milliy bazasi, 11.10.2023-y.
+            <a
+              href="https://lex.uz/uz/docs/-6631523"
+              className="text-blue-900"
+              target="_blank"
+            >
+              {" "}
+              09/23/535/0766-son
+            </a>
           </p>
         </div>
       </footer>

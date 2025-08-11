@@ -9,10 +9,18 @@ import {
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import TopStationsChart from "@/app/[locale]/metro-statistikasi/boshSahifastatistika";
+import Link from "next/link";
 
 export default function MetroPagesShowcase() {
   const [apiStats, setApiStats] = useState([]);
   const [error, setError] = useState(null);
+  const [videoError, setVideoError] = useState(false);
+
+  const stats = [
+    { value: "70+", label: "Kilometr" },
+    { value: "50", label: "Bekat" },
+    { value: "53", label: "Xizmat yili" },
+  ];
   const payment = [
     {
       name: "Humo Karta",
@@ -103,13 +111,13 @@ export default function MetroPagesShowcase() {
   return (
     <div className="container">
       {/* Main Grid Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 ">
         {/* 1. Enhanced Metro Map with Animated Subway System */}
         <motion.div
           initial={{ opacity: 0, scale: 0.92, rotate: -2 }}
           animate={{ opacity: 1, scale: 1, rotate: 0 }}
           transition={{ duration: 0.8, type: "spring" }}
-          className="lg:row-span-1 bg-gradient-to-br from-blue-900 to-blue-700 text-white rounded-2xl sm:rounded-3xl lg:rounded-[2.5rem] shadow-2xl p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden min-h-[300px] lg:min-h-[630px]"
+          className="lg:row-span-1 bg-gradient-to-br from-blue-900 to-blue-700 text-white rounded-2xl sm:rounded-3xl lg:rounded-[2.5rem] shadow-2xl p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden min-h-[300px] lg:min-h-[530px]"
         >
           {/* Animated Metro Map Background */}
           <div className="absolute -bottom-50 inset-0 opacity-30">
@@ -145,46 +153,89 @@ export default function MetroPagesShowcase() {
           initial={{ opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="lg:col-span-2 bg-white rounded-2xl sm:rounded-3xl shadow-xl p-6 sm:p-8 min-h-[280px]"
+          className="lg:col-span-2 relative  rounded-2xl sm:rounded-3xl shadow-2xl min-h-[280px] sm:min-h-[320px] lg:min-h-[400px] overflow-hidden group "
         >
-          <div className="flex flex-col  items-center gap-6">
-            <div className="flex-1 w-full">
-              <h3 className="text-xl sm:text-2xl font-bold text-blue-900 mb-4 text-center lg:text-left">
-                Metro haqida qisqacha
-              </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
-                {[
-                  { label: "Bekatlar soni", value: "50", delay: 0.3 },
-                  { label: "Kunlik yo'lovchilar", value: "1M+", delay: 0.5 },
-                  { label: "Uzunligi", value: "70 km", delay: 0.7 },
-                ].map((stat, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ y: 30, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: stat.delay }}
-                    className="flex flex-col items-center bg-blue-50 rounded-xl px-3 sm:px-4 py-3"
-                  >
-                    <span className="font-semibold text-blue-900 text-xs sm:text-sm text-center">
-                      {stat.label}
-                    </span>
-                    <span className="text-lg sm:text-xl font-bold text-blue-900">
-                      {stat.value}
-                    </span>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-            <MetroGalleryCarousel />
-            <div className="w-full  lg:text-left">
-              <motion.a
-                href="/metro-tarixi"
-                whileTap={{ scale: 0.95 }}
-                className="inline-block px-4 sm:px-5 py-2 rounded-full bg-blue-900 text-white font-semibold shadow hover:bg-blue-800 transition text-sm sm:text-base"
-              >
-                Tarix sahifasiga
-              </motion.a>
-            </div>
+          {/* Video Background */}
+          {!videoError && (
+            <video
+              className="absolute inset-0 w-full h-full object-cover "
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="metadata"
+              onError={() => setVideoError(true)}
+              aria-hidden="true"
+            >
+              <source src="/videos/05.mp4" type="video/mp4" />
+            </video>
+          )}
+
+          {/* Overlay */}
+          <div className="absolute bg-black/50 w-full h-full  rounded-2xl sm:rounded-3xl shadow-2xl " />
+
+          {/* Content */}
+          <div className="relative z-10 w-full  h-full flex flex-col justify-center items-center text-white p-4 sm:p-6 lg:p-1">
+            {/* Title */}
+            <h2
+              // initial={{ opacity: 0, y: 20 }}
+              // animate={{ opacity: 1, y: 0 }}
+              // transition={{ duration: 0.6, delay: 0.4 }}
+              className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-center mb-3 sm:mb-4"
+            >
+              Hozirgi yutuqlar
+            </h2>
+
+            {/* Description */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              className="text-sm sm:text-base lg:text-lg xl:text-xl text-center opacity-90  max-w-xs sm:max-w-2xl lg:max-w-4xl mx-auto mb-6 sm:mb-8 px-2"
+            >
+              Bugungi kunda Toshkent metropoliteni Markaziy Osiyoning yetakchi
+              shahar transport tizimi sifatida 70 kilometrdan ortiq uzunlikda 50
+              ta bekatlar bilan faoliyat yuritmoqda. 2024-yilning so'ngi
+              choragida kunlik yo'lovchi tashish soni 1 milliondan oshgan.
+            </motion.p>
+
+            {/* Statistics */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+              className="grid grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-6 sm:mb-8 w-full max-w-md sm:max-w-lg"
+            >
+              {stats.map((stat, index) => (
+                <motion.div
+                  key={stat.label}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: 1 + index * 0.1 }}
+                  className="text-center group/stat cursor-default"
+                >
+                  <div className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold mb-1 sm:mb-2 group-hover/stat:scale-110 transition-transform duration-300 bg-gradient-to-b from-white to-gray-300 bg-clip-text text-transparent">
+                    {stat.value}
+                  </div>
+                  <div className="text-xs sm:text-sm lg:text-base opacity-80 font-medium">
+                    {stat.label}
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            {/* CTA Button */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 1.2 }}
+            >
+              <Link href="/metro-tarixi">
+                <button className="px-4 sm:px-6 lg:px-8 py-2 sm:py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 rounded-xl sm:rounded-2xl text-white font-semibold text-sm sm:text-base lg:text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-transparent">
+                  Batafsil
+                </button>
+              </Link>
+            </motion.div>
           </div>
         </motion.div>
 
