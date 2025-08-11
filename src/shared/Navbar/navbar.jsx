@@ -247,7 +247,7 @@ const useScrollDetection = () => {
 
 // Background pattern component
 const BackgroundPattern = ({ className = "" }) => (
-  <div className={`absolute inset-0 z-0 opacity-20 ${className}`}>
+  <div className={`absolute inset-0 z-0  opacity-20 ${className}`}>
     <div
       className="w-full h-full bg-repeat"
       style={{
@@ -447,7 +447,7 @@ const LanguageSelector = ({
   <div className="hidden 2xl:flex items-center relative dropdown-container">
     <motion.button
       onClick={onLangClick}
-      className="flex items-center gap-2 text-sm text-gray-300 hover:text-white transition-all duration-300 px-3 py-2 rounded-lg hover:bg-white/10 backdrop-blur-sm"
+      className="flex items-center gap-2 text-sm text-gray-300 hover:text-white transition-all duration-300 px-3 py-2 rounded-lg hover:bg-white/10"
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
     >
@@ -705,7 +705,7 @@ export default function MetroNavbar() {
             <Logo />
 
             {/* Desktop Navigation */}
-            <nav className="hidden 2xl:flex items-center space-x-1">
+            <nav className="hidden  2xl:flex items-center space-x-1">
               {MENU_ITEMS.map((item, index) => (
                 <DesktopNavItem
                   key={item.label}

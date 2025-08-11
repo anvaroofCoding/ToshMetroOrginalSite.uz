@@ -381,28 +381,45 @@ export default function UzbekistanSymbols() {
                       </h3>
                     </div>
                     <div className="grid md:grid-cols-3 gap-4">
+                      {/* Ko‘k rang */}
                       <div className="bg-blue-500 text-white p-4 rounded-lg">
                         <div className="font-bold text-lg mb-2">KO'K</div>
                         <ul className="text-sm space-y-1">
-                          <li>• Osmon va suv</li>
-                          <li>• Abadiylik</li>
-                          <li>• Ma'naviyat</li>
+                          <li>• Moviy osmon va toza suv</li>
+                          <li>• Tinchlik va orzu-umidlar</li>
+                          <li>• Turk xalqlarining tarixiy ramzi</li>
                         </ul>
                       </div>
+
+                      {/* Oq rang */}
                       <div className="bg-white border-2 border-gray-200 text-gray-800 p-4 rounded-lg">
                         <div className="font-bold text-lg mb-2">OQ</div>
                         <ul className="text-sm space-y-1">
-                          <li>• Tinchlik</li>
-                          <li>• Poklik</li>
-                          <li>• Paxta (oq oltin)</li>
+                          <li>• Poklik va ma’naviy tozalik</li>
+                          <li>• Tinchlik va ezgulik</li>
+                          <li>• Yorug‘ kelajak ramzi</li>
                         </ul>
                       </div>
+
+                      {/* Yashil rang */}
                       <div className="bg-green-500 text-white p-4 rounded-lg">
                         <div className="font-bold text-lg mb-2">YASHIL</div>
                         <ul className="text-sm space-y-1">
-                          <li>• Tabiat</li>
-                          <li>• Yangilanish</li>
-                          <li>• Umid</li>
+                          <li>• Tabiat va hayot</li>
+                          <li>• Yangi hayot va yangilanish</li>
+                          <li>• Yurtimizdagi hosildorlik</li>
+                        </ul>
+                      </div>
+
+                      {/* Qizil chiziqlar */}
+                      <div className="bg-red-500 text-white p-4 rounded-lg">
+                        <div className="font-bold text-lg mb-2">
+                          QIZIL CHIZIQLAR
+                        </div>
+                        <ul className="text-sm space-y-1">
+                          <li>• Hayotiy kuch va energiya</li>
+                          <li>• O‘zbekiston xalqlari o‘rtasidagi do‘stlik</li>
+                          <li>• Ranglar orasidagi birlashuv ramzi</li>
                         </ul>
                       </div>
                     </div>
@@ -486,9 +503,9 @@ export default function UzbekistanSymbols() {
                         <span className="font-semibold break-words leading-relaxed">
                           Gerb – gullagan vodiy uzra charaqlab turgan quyosh,
                           so‘l tomonida bug‘doy boshoqlari, o‘ng tomonida
-                          ochilgan paxta chanoqlari surati tushirilgan chambarak,
-                          markazida Humo qushi, yuqorisida sakkiz qirrali yulduz
-                          va yarim oy tasviridan iborat.
+                          ochilgan paxta chanoqlari surati tushirilgan
+                          chambarak, markazida Humo qushi, yuqorisida sakkiz
+                          qirrali yulduz va yarim oy tasviridan iborat.
                         </span>
                       </div>
                     </div>
