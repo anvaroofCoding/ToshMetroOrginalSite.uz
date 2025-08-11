@@ -167,7 +167,7 @@ export default function MetroPagesShowcase() {
               onError={() => setVideoError(true)}
               aria-hidden="true"
             >
-              <source src="/videos/05.mp4" type="video/mp4" />
+              <source src="/videos/01.mp4" type="video/mp4" />
             </video>
           )}
 
