@@ -347,7 +347,7 @@ export default function Page() {
   return (
     <div className="min-h-screen mt-10">
       <motion.div
-        className="container py-8"
+        className=" py-8"
         variants={containerVariants}
         initial="hidden"
         animate="visible"

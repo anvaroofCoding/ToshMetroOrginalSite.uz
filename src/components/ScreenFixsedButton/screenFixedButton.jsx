@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Plus, MessageCircle, UserCheck, FileText, X, Bot } from "lucide-react";
+import { Plus, FileText, X, Bot } from "lucide-react";
 import Link from "next/link";
 
 export default function FloatingActionButton() {
@@ -57,13 +57,7 @@ export default function FloatingActionButton() {
       action: "Quick Q&A",
       btlink: "/mister-ai",
     },
-    {
-      id: "manager",
-      icon: UserCheck,
-      title: "Qabulxona",
-      action: "Manager Reception",
-      btlink: "/",
-    },
+
     {
       id: "applications",
       icon: FileText,

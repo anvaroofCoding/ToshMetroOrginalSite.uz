@@ -235,7 +235,7 @@ export default function MetroLostItemForm() {
                   Murojaatingiz muvaffaqiyatli qabul qilindi!
                 </h2>
                 <p className="text-gray-600 mb-6">
-                  Tez orada siz bilan bog'lanamiz.
+                  5 ish kuni davomida murojaatlaringiz ko'rib chiqiladi
                 </p>
                 <Button
                   onClick={resetSuccess}
@@ -334,7 +334,7 @@ export default function MetroLostItemForm() {
                 Murojaat shakli
               </CardTitle>
               <CardDescription className="text-blue-100">
-                Barcha maydonlarni to'ldiring va 5 ish kuni davomida murojaatlaringiz ko'rib chiqiladi
+                Barcha maydonlarni to'ldiring va murojaatingizni yuboring.
               </CardDescription>
             </CardHeader>
 

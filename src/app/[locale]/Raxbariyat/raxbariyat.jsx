@@ -1,20 +1,16 @@
 "use client";
-
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import {
-  ChevronDown,
-  ChevronUp,
-  Clock,
-  Eye,
-  Mail,
-  Phone,
-  User,
-} from "lucide-react";
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Clock, Eye, Mail, Phone, User } from "lucide-react";
 import Image from "next/image";
-import { useState } from "react";
+
 import rasm1 from "../../../../public/raxbatiyat-metro/raxbar3.jpg";
 
 import rasm2 from "../../../../public/raxbatiyat-metro/raxbar6.jpg";
@@ -78,7 +74,8 @@ const managementData = [
 
     image: rasm4,
 
-    biography: "aniq emas",
+    biography:
+      "Toshkent temir yo‘llari Chuqursoy stansiyasi poezdlar qabul qiluvchisi. 2018-2018 yy. – Toshkent temir yo‘llari Keles stansiyasi 3346 km strelka o‘tkazgich navbatchisi. 2018-2019 yy. – Yunusobod tuman hokimligi Investitsiya majmuasi kotibiyati bosh mutaxassisi. 2019-2019 yy. – Yunusobod tuman hokimligi Investitsiya va tashqi savdo bo‘limi boshlig‘i o‘rinbosari. 2019-2021 yy. – Yunusobod tuman hokimligi Investitsiya majmuasi kotibiyati bosh mutaxassisi. 2021-2021 yy. – “Toshkent metropoliteni” unitar korxonasi Harakat xizmati boshlig‘ining tashishni tashkil etish bo‘yicha o‘rinbosari. 2022-2024 yy. – “Toshkent metropoliteni” davlat unitar korxonasi ishlar boshqaruvchisi. 2024 y. – h.v. – “Toshkent metropoliteni” davlat unitar korxonasi bosh muhandisi. ",
   },
 
   {
@@ -103,7 +100,8 @@ const managementData = [
 
     image: rasm7,
 
-    biography: "aniq emas",
+    biography:
+      " 2001-2005 yy. – O‘zbekiston Respublikasi Davlat xavfsizlik xizmati instituti talabasi. 2005-2019 yy. – O‘zbekiston Respublikasi Qurolli Kuchlari 18836-h/q harbiy xizmatchi. 2019-2019 yy. – O‘zbekiston Respublikasi Qurolli Kuchlari 51411-h/q harbiy xizmatchi. 2019-2022 yy. – “Toshkent metropoliteni” unitar korxonasi Metropoliten boshlig‘ining xavfsizlik bo‘yicha o‘rinbosari. 2022 y. – h.v. – “Toshkent metropoliteni” davlat unitar korxonasi Metropoliten boshlig‘ining xavfsizlik bo‘yicha o‘rinbosari.",
   },
 
   {
@@ -237,14 +235,8 @@ const managementData = [
 ];
 
 export default function ManagementPage() {
-  const [openedBioId, setOpenedBioId] = useState(null);
-
-  const toggleBio = (id) => {
-    setOpenedBioId(openedBioId === id ? null : id);
-  };
-
   const formatBiography = (biography) => {
-    if (biography === "aniq emas" || biography === "Aniq emas") {
+    if (biography === "Aniq emas") {
       return "Biografiya ma'lumotlari hozircha mavjud emas.";
     }
 
@@ -286,7 +278,7 @@ export default function ManagementPage() {
           {managementData.map((member) => (
             <Card
               key={member.id}
-              className="group overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 rounded-xl  border-0"
+              className="group overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 rounded-xl border-0"
             >
               <CardContent className="p-0">
                 {/* Image Section with Enhanced Hover Effect */}
@@ -344,10 +336,6 @@ export default function ManagementPage() {
                     <h3 className="text-lg lg:text-xl font-bold text-gray-900 mb-2 line-clamp-2 leading-tight">
                       {member.lastName} {member.firstName} {member.middleName}
                     </h3>
-                    {/* <Badge className="bg-[#0E327F] hover:bg-[#0E327F]/90 text-white text-xs px-2 py-1">
-                      <User className="w-3 h-3 mr-1" />
-                      {member.department}
-                    </Badge> */}
                   </div>
 
                   {/* Position */}
@@ -373,58 +361,57 @@ export default function ManagementPage() {
                     </div>
                   </div>
 
-                  {/* Biography Toggle */}
-                  <Button
-                    onClick={() => toggleBio(member.id)}
-                    variant="outline"
-                    className="w-full border-[#0E327F] text-[#0E327F] hover:bg-[#0E327F] hover:text-white transition-all duration-300 font-medium"
-                  >
-                    {openedBioId === member.id ? (
-                      <>
-                        Biografiyani yashirish{" "}
-                        <ChevronUp className="w-4 h-4 ml-2" />
-                      </>
-                    ) : (
-                      <>
-                        Biografiyani ko'rish{" "}
-                        <ChevronDown className="w-4 h-4 ml-2" />
-                      </>
-                    )}
-                  </Button>
-
-                  {/* Enhanced Biography Content */}
-                  <div
-                    className={`overflow-hidden transition-all duration-700 ease-in-out ${
-                      openedBioId === member.id
-                        ? "max-h-[800px] opacity-100 mt-4"
-                        : "max-h-0 opacity-0"
-                    }`}
-                  >
-                    <div className="bg-gradient-to-r from-gray-50 to-blue-50 p-4 lg:p-6 rounded-xl border-l-4 border-[#0E327F] shadow-inner">
-                      <h4 className="font-semibold text-gray-900 mb-3 flex items-center">
-                        <User className="w-4 h-4 mr-2 text-[#0E327F]" />
-                        Biografiya
-                      </h4>
-                      <div className="space-y-3">
-                        {Array.isArray(formatBiography(member.biography)) ? (
-                          formatBiography(member.biography).map(
-                            (paragraph, index) => (
-                              <p
-                                key={index}
-                                className="text-sm text-gray-700 leading-relaxed"
-                              >
-                                {paragraph}
+                  {/* Biography Modal */}
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button
+                        variant="outline"
+                        className="w-full border-[#0E327F] text-[#0E327F] hover:bg-[#0E327F] hover:text-white transition-all duration-300 font-medium bg-transparent"
+                      >
+                        <User className="w-4 h-4 mr-2" />
+                        Biografiyani ko'rish
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+                      <DialogHeader>
+                        <DialogTitle className="text-xl font-bold text-gray-900 mb-2">
+                          {member.lastName} {member.firstName}{" "}
+                          {member.middleName}
+                        </DialogTitle>
+                        <p className="text-gray-600 text-sm">
+                          {member.position}
+                        </p>
+                      </DialogHeader>
+                      <div className="mt-6">
+                        <div className="bg-gradient-to-r from-gray-50 to-blue-50 p-6 rounded-xl border-l-4 border-[#0E327F] shadow-inner">
+                          <h4 className="font-semibold text-gray-900 mb-4 flex items-center">
+                            <User className="w-4 h-4 mr-2 text-[#0E327F]" />
+                            Biografiya
+                          </h4>
+                          <div className="space-y-4">
+                            {Array.isArray(
+                              formatBiography(member.biography)
+                            ) ? (
+                              formatBiography(member.biography).map(
+                                (paragraph, index) => (
+                                  <p
+                                    key={index}
+                                    className="text-sm text-gray-700 leading-relaxed"
+                                  >
+                                    {paragraph}
+                                  </p>
+                                )
+                              )
+                            ) : (
+                              <p className="text-sm text-gray-700 leading-relaxed italic">
+                                {formatBiography(member.biography)}
                               </p>
-                            )
-                          )
-                        ) : (
-                          <p className="text-sm text-gray-700 leading-relaxed italic">
-                            {formatBiography(member.biography)}
-                          </p>
-                        )}
+                            )}
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
+                    </DialogContent>
+                  </Dialog>
                 </div>
               </CardContent>
             </Card>
