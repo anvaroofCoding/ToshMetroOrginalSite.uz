@@ -512,41 +512,52 @@ function TashkentMetroPage() {
           </div>
         </div>
         {/* Enhanced Current Status */}
-        <Card className="border-0 shadow-2xl bg-gradient-to-r from-[#0E327F] via-blue-600 to-blue-700 text-white overflow-hidden relative ">
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0E327F]/90 to-blue-600/90" />
-          <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-32 translate-x-32" />
-          <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full translate-y-24 -translate-x-24" />
+        <div className="w-full space-y-8">
+          <Card className="border-0 shadow-2xl bg-transparent  text-white overflow-hidden relative">
+            <div className="absolute " />
+            <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-32 translate-x-32" />
+            <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full translate-y-24 -translate-x-24" />
+            <CardContent className="p-12 bg-black/50 text-center relative z-10">
+              <div className="inline-flex items-center gap-4 mb-8 group">
+                <div className="p-4 rounded-full bg-white/20 group-hover:bg-white/30 transition-colors duration-300 group-hover:rotate-12">
+                  <TrendingUp size={40} className="animate-pulse" />
+                </div>
+                <h2 className="text-4xl font-bold">Hozirgi yutuqlar</h2>
+              </div>
+              <p className="text-xl mb-8 opacity-90 leading-relaxed max-w-4xl mx-auto">
+                Bugungi kunda Toshkent metropoliteni Markaziy Osiyoning yetakchi
+                shahar transport tizimi sifatida 70 kilometrdan ortiq uzunlikda
+                50 ta bekatlar bilan faoliyat yuritmoqda. 2024-yilning so'ngi
+                choragida kunlik yo'lovchi tashish soni 1 milliondan oshgan.
+              </p>
+              <div className="flex flex-wrap justify-center gap-6 mb-8">
+                <div className="text-center group hover:scale-110 transition-transform duration-300">
+                  <div className="text-4xl font-bold mb-2">70+</div>
+                  <div className="text-sm opacity-80">Kilometr</div>
+                </div>
+                <div className="text-center group hover:scale-110 transition-transform duration-300">
+                  <div className="text-4xl font-bold mb-2">50</div>
+                  <div className="text-sm opacity-80">Bekat</div>
+                </div>
+                <div className="text-center group hover:scale-110 transition-transform duration-300">
+                  <div className="text-4xl font-bold mb-2">53</div>
+                  <div className="text-sm opacity-80">Xizmat yili</div>
+                </div>
+              </div>
+            </CardContent>
+            <video
+              className="w-full h-auto top-0 absolute"
+              autoPlay
+              loop
+              muted
+              playsInline
+              controls={false}
+              src="/videos/05.mp4"
+            />
+          </Card>
 
-          <CardContent className="p-12 text-center relative z-10">
-            <div className="inline-flex items-center gap-4 mb-8 group">
-              <div className="p-4 rounded-full bg-white/20 group-hover:bg-white/30 transition-colors duration-300 group-hover:rotate-12">
-                <TrendingUp size={40} className="animate-pulse" />
-              </div>
-              <h2 className="text-4xl font-bold">Hozirgi yutuqlar</h2>
-            </div>
-            <p className="text-xl mb-8 opacity-90 leading-relaxed max-w-4xl mx-auto">
-              Bugungi kunda Toshkent metropoliteni Markaziy Osiyoning yetakchi
-              shahar transport tizimi sifatida 70 kilometrdan ortiq uzunlikda 50
-              ta bekatlar bilan faoliyat yuritmoqda. 2024-yilning so'ngi
-              choragida kunlik yo'lovchi tashish soni 1 milliondan oshgan.
-            </p>
-            <div className="flex flex-wrap justify-center gap-6 mb-8">
-              <div className="text-center group hover:scale-110 transition-transform duration-300">
-                <div className="text-4xl font-bold mb-2">70+</div>
-                <div className="text-sm opacity-80">Kilometr</div>
-              </div>
-              <div className="text-center group hover:scale-110 transition-transform duration-300">
-                <div className="text-4xl font-bold mb-2">50</div>
-                <div className="text-sm opacity-80">Bekat</div>
-              </div>
-
-              <div className="text-center group hover:scale-110 transition-transform duration-300">
-                <div className="text-4xl font-bold mb-2">53</div>
-                <div className="text-sm opacity-80">Xizmat yili</div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+          {/* <source src="/videos/05.mp4" type="video/mp4" /> */}
+        </div>
       </div>
 
       <style jsx>{`
