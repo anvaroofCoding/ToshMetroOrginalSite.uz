@@ -5,19 +5,46 @@ import {
   Wallet,
   ChevronLeft,
   ChevronRight,
+  TrendingUp,
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import TopStationsChart from "@/app/[locale]/metro-statistikasi/boshSahifastatistika";
 import Link from "next/link";
+import { Card, CardContent } from "@/components/ui/card";
+import { AnimatedCounter } from "../animated-counter";
 
 export default function MetroPagesShowcase() {
   const [apiStats, setApiStats] = useState([]);
   const [error, setError] = useState(null);
   const [videoError, setVideoError] = useState(false);
+  const [kilometers, setKilometers] = useState(0);
+  const [stations, setStations] = useState(0);
+  const [years, setYears] = useState(0);
+
+  const animateValue = (setter, target, duration) => {
+    let startTimestamp = null;
+
+    const step = (timestamp) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      setter(Math.floor(progress * target));
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      }
+    };
+
+    requestAnimationFrame(step);
+  };
+
+  useEffect(() => {
+    animateValue(setKilometers, 70, 1500); // 1.5s animation
+    animateValue(setStations, 50, 1500);
+    animateValue(setYears, 53, 1500);
+  }, []);
 
   const stats = [
-    { value: "70+", label: "Kilometr" },
+    { value: "70", label: "Kilometr" },
     { value: "50", label: "Bekat" },
     { value: "53", label: "Xizmat yili" },
   ];
@@ -183,7 +210,7 @@ export default function MetroPagesShowcase() {
               // transition={{ duration: 0.6, delay: 0.4 }}
               className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-center mb-3 sm:mb-4"
             >
-              Hozirgi yutuqlar
+              Metropoliten haqida
             </h2>
 
             {/* Description */}
@@ -201,21 +228,21 @@ export default function MetroPagesShowcase() {
 
             {/* Statistics */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.8 }}
+              // initial={{ opacity: 0, y: 20 }}
+              // animate={{ opacity: 1, y: 0 }}
+              // transition={{ duration: 0.6, delay: 0.8 }}
               className="grid grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-6 sm:mb-8 w-full max-w-md sm:max-w-lg"
             >
               {stats.map((stat, index) => (
                 <motion.div
                   key={stat.label}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5, delay: 1 + index * 0.1 }}
+                  // initial={{ opacity: 0, scale: 0.8 }}
+                  // animate={{ opacity: 1, scale: 1 }}
+                  // transition={{ duration: 0.5, delay: 1 + index * 0.1 }}
                   className="text-center group/stat cursor-default"
                 >
                   <div className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold mb-1 sm:mb-2 group-hover/stat:scale-110 transition-transform duration-300 bg-gradient-to-b from-white to-gray-300 bg-clip-text text-transparent">
-                    {stat.value}
+                    <AnimatedCounter end={stat.value} />
                   </div>
                   <div className="text-xs sm:text-sm lg:text-base opacity-80 font-medium">
                     {stat.label}
@@ -231,7 +258,7 @@ export default function MetroPagesShowcase() {
               transition={{ duration: 0.6, delay: 1.2 }}
             >
               <Link href="/metro-tarixi">
-                <button className="px-4 sm:px-6 lg:px-8 py-2 sm:py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 rounded-xl sm:rounded-2xl text-white font-semibold text-sm sm:text-base lg:text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-transparent">
+                <button className="px-4 sm:px-6 lg:px-6 py-2 sm:py-1 bg-white text-blue-900 rounded-xl sm:rounded-2xl  font-semibold text-sm sm:text-base lg:text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-transparent">
                   Batafsil
                 </button>
               </Link>
