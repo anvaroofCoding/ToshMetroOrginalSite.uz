@@ -686,10 +686,8 @@ export default function MetroNavbar() {
             : "bg-transparent pt-5"
         }`}
       >
-        <BackgroundPattern />
-
         <div
-          className={`transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] ${
+          className={`transition-all  duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] ${
             isScrolled ? "container-none px-0" : "container"
           }`}
         >
@@ -738,10 +736,10 @@ export default function MetroNavbar() {
                 whileTap={{ scale: 0.9 }}
               >
                 <motion.div
-                  animate={{ rotate: isMenuOpen ? 90 : 0 }}
+                  // animate={{ rotate: isMenuOpen ? 90 : 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <Menu size={28} />
+                  {isMenuOpen ? <X size={32} /> : <Menu size={28} />}
                 </motion.div>
               </motion.button>
             </div>
@@ -757,11 +755,12 @@ export default function MetroNavbar() {
             initial="hidden"
             animate="visible"
             exit="hidden"
-            className="fixed inset-0 bg-gradient-to-br from-[#0E327F] via-blue-800 to-[#0E327F] z-40 flex flex-col backdrop-blur-xl"
+            className="fixed inset-0 bg-blue-900 z-40 flex flex-col backdrop-blur-xl"
           >
+            <BackgroundPattern />
             {/* Mobile header */}
-            <div className="container">
-              <div className="flex items-center justify-between h-[90px]">
+            {/* <div className="container ">
+              <div className="flex items-center justify-between">
                 <motion.div
                   className="flex items-center gap-3 justify-center"
                   initial={{ opacity: 0, x: -50 }}
@@ -810,17 +809,17 @@ export default function MetroNavbar() {
                   <X size={32} />
                 </motion.button>
               </div>
-            </div>
+            </div> */}
 
             {/* Mobile navigation */}
-            <nav className="flex-grow overflow-y-auto container mx-auto">
+            <nav className="container pt-28">
               <motion.ul
                 initial="hidden"
                 animate="visible"
                 variants={{
                   visible: { transition: { staggerChildren: 0.1 } },
                 }}
-                className="flex flex-col text-xl text-white space-y-2"
+                className="flex flex-col text-xl text-white space-y-2 "
               >
                 {MENU_ITEMS.map((item, index) => (
                   <MobileNavItem
@@ -840,7 +839,7 @@ export default function MetroNavbar() {
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.5 }}
-              className="container py-6"
+              className="container py-6 pb-10 "
             >
               {/* Language buttons */}
               <div className="flex justify-center gap-4 mb-8">
