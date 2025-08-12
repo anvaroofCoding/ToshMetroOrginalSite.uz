@@ -558,51 +558,62 @@ function TashkentMetroPage() {
           </Card>
         </div> */}
         <div className="w-full space-y-8">
-          <Card className="border-0 shadow-2xl bg-transparent  text-white overflow-hidden relative">
-            <div className="absolute " />
-            <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-32 translate-x-32" />
-            <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full translate-y-24 -translate-x-24" />
-            <CardContent className="p-12 bg-black/50 text-center relative z-10">
-              <div className="inline-flex items-center gap-4 mb-8 group">
-                <div className="p-4 rounded-full bg-white/20 group-hover:bg-white/30 transition-colors duration-300 group-hover:rotate-12">
-                  <TrendingUp size={40} className="animate-pulse" />
+          <Card className="border-0 shadow-2xl bg-transparent text-white overflow-hidden relative">
+            {/* Background decorative elements */}
+            <div className="absolute" />
+            <div className="absolute top-0 right-0 w-40 h-40 sm:w-48 sm:h-48 lg:w-64 lg:h-64 bg-white/5 rounded-full -translate-y-20 sm:-translate-y-28 lg:-translate-y-32 translate-x-20 sm:translate-x-28 lg:translate-x-32" />
+            <div className="absolute bottom-0 left-0 w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 bg-white/5 rounded-full translate-y-16 sm:translate-y-20 lg:translate-y-24 -translate-x-16 sm:-translate-x-20 lg:-translate-x-24" />
+
+            <CardContent className="p-6 sm:p-10 lg:p-12 bg-black/50 text-center relative z-10">
+              {/* Header */}
+              <div className="inline-flex items-center gap-3 sm:gap-4 mb-6 sm:mb-8 group flex-wrap justify-center">
+                <div className="p-3 sm:p-4 rounded-full bg-white/20 group-hover:bg-white/30 transition-colors duration-300 group-hover:rotate-12">
+                  <TrendingUp
+                    size={30}
+                    className="sm:size-8 lg:size-10 animate-pulse"
+                  />
                 </div>
-                <h2 className="text-4xl font-bold">Hozirgi yutuqlar</h2>
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold">
+                  Hozirgi yutuqlar
+                </h2>
               </div>
-              <p className="text-xl mb-8 opacity-90 leading-relaxed max-w-4xl mx-auto">
+
+              {/* Description */}
+              <p className="text-base sm:text-lg lg:text-xl mb-6 sm:mb-8 opacity-90 leading-relaxed max-w-4xl mx-auto px-2">
                 Bugungi kunda Toshkent metropoliteni Markaziy Osiyoning yetakchi
                 shahar transport tizimi sifatida 70 kilometrdan ortiq uzunlikda
                 50 ta bekatlar bilan faoliyat yuritmoqda. 2024-yilning so'ngi
                 choragida kunlik yo'lovchi tashish soni 1 milliondan oshgan.
               </p>
-              <div className="flex flex-wrap justify-center gap-6 mb-8">
+
+              {/* Stats */}
+              <div className="flex flex-wrap justify-center gap-4 sm:gap-6 mb-6 sm:mb-8">
                 <div className="text-center group hover:scale-110 transition-transform duration-300">
-                  {/*  replaced static number with animated counter */}
-                  <div className="text-4xl font-bold mb-2">
+                  <div className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-1 sm:mb-2">
                     <AnimatedCounter end={70} suffix="+" />
                   </div>
-                  <div className="text-sm opacity-80">Kilometr</div>
+                  <div className="text-xs sm:text-sm opacity-80">Kilometr</div>
                 </div>
                 <div className="text-center group hover:scale-110 transition-transform duration-300">
-                  {/*  replaced static number with animated counter */}
-                  <div className="text-4xl font-bold mb-2">
+                  <div className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-1 sm:mb-2">
                     <AnimatedCounter end={50} />
                   </div>
-                  <div className="text-sm opacity-80">Bekat</div>
+                  <div className="text-xs sm:text-sm opacity-80">Bekat</div>
                 </div>
                 <div className="text-center group hover:scale-110 transition-transform duration-300">
-                  {/*  replaced static number with animated counter */}
-                  <div className="text-4xl font-bold mb-2">
+                  <div className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-1 sm:mb-2">
                     <AnimatedCounter end={1000000} />
                   </div>
-                  <div className="text-sm opacity-80">
+                  <div className="text-xs sm:text-sm opacity-80">
                     Yo'lovchilar kunlik soni
                   </div>
                 </div>
               </div>
             </CardContent>
+
+            {/* Background Video */}
             <video
-              className="w-full h-auto top-0 absolute"
+              className="w-full h-full object-cover top-0 left-0 absolute z-0"
               autoPlay
               loop
               muted
