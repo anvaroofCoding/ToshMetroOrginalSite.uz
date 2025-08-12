@@ -20,7 +20,6 @@ import {
   SkipBack,
   SkipForward,
   VolumeX,
-  Sparkles,
 } from "lucide-react";
 import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
@@ -218,20 +217,16 @@ export default function UzbekistanSymbols() {
                   <button
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
-                    className={`
-                      relative px-6 py-3 mx-1 rounded-full transition-all duration-500 transform 
-                      ${
-                        activeTab === tab.id
-                          ? `bg-gradient-to-r bg-white  text-white scale-110 shadow-lg`
-                          : "text-blue-100 hover:text-white hover:bg-white/20 hover:scale-105"
-                      }
-                    `}
+                    className={`relative px-6 py-3 mx-1 rounded-full transition-all duration-500 transform ${
+                      activeTab === tab.id
+                        ? `bg-gradient-to-r bg-white text-white scale-110 shadow-lg`
+                        : "text-blue-100 hover:text-white hover:bg-white/20 hover:scale-105"
+                    }`}
                     style={{ animationDelay: `${index * 0.1}s` }}
                   >
                     <span className="flex items-center space-x-2 animate-fade-in">
                       <span
-                        className={`font-semibold 
-                        ${
+                        className={`font-semibold ${
                           activeTab === tab.id ? "text-blue-900" : "text-white"
                         }`}
                       >
@@ -249,131 +244,136 @@ export default function UzbekistanSymbols() {
         </div>
       </header>
 
-      <main className="container mx-auto px-4 py-8">
+      <main className="container py-8">
         {activeTab === "flag" && (
           <div className="space-y-8 animate-fade-in">
-            <div className="grid lg:grid-cols-3 gap-8">
-              {/* Flag Image */}
-              <div className="lg:col-span-1">
-                <Card className="overflow-hidden shadow-xl hover:shadow-2xl">
-                  <CardContent className="p-6">
-                    <div className="relative mb-4 group">
-                      <div className="absolute "></div>
-                      <Image
-                        src={
-                          flag ||
-                          "/placeholder.svg?height=267&width=400&query=Uzbekistan flag with blue white green stripes and crescent moon with stars"
-                        }
-                        alt="O'zbekiston bayrog'i"
-                        width={400}
-                        height={267}
-                        className="w-full h-auto rounded-lg relative z-10 "
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    </div>
-                    <div className="text-center">
-                      <Badge className="bg-[#0E327F] text-white ">
-                        <Calendar className="w-3 h-3 mr-1" />
-                        1991-yil 18-noyabr
-                      </Badge>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
+            <div className="flex justify-center">
+              <div>
+                {/* Flag Image - centered */}
+                <div className="mb-10 flex justify-center">
+                  <Card className="overflow-hidden shadow-xl hover:shadow-2xl w-full max-w-md">
+                    <CardContent className="p-6">
+                      <div className="relative mb-4 group">
+                        <div className="absolute"></div>
+                        <Image
+                          src={
+                            flag ||
+                            "/placeholder.svg?height=267&width=400&query=Uzbekistan flag with blue white green stripes and crescent moon with stars" ||
+                            "/placeholder.svg" ||
+                            "/placeholder.svg"
+                          }
+                          alt="O'zbekiston bayrog'i"
+                          width={400}
+                          height={267}
+                          className="w-full h-auto rounded-lg relative z-10"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      </div>
+                      <div className="text-center">
+                        <Badge className="bg-[#0E327F] text-white">
+                          <Calendar className="w-3 h-3 mr-1" />
+                          1991-yil 18-noyabr
+                        </Badge>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
 
-              <div className="lg:col-span-2 space-y-6">
-                <Card className=" transition-all duration-300 shadow-lg hover:shadow-xl">
-                  <CardContent className="p-8">
-                    <div className="prose prose-lg max-w-none">
-                      <p className="text-gray-700 leading-relaxed text-justify animate-fade-in-up">
-                        <strong className="text-[#0E327F]">
-                          "O'zbekiston Respublikasi Davlat bayrog'i
-                          to'g'risida"gi qonun
-                        </strong>
-                        <br />
-                        <span>
-                          1991-yil 18-noyabrda O'zbekiston Respublikasi Oliy
-                          Kengashining navbatdan tashqari o'tkazilgan VII
-                          sessiyasida qabul qilingan.
-                        </span>
-                      </p>
+                <div className="space-y-6">
+                  <Card className="transition-all duration-300 shadow-lg hover:shadow-xl">
+                    <CardContent className="p-8">
+                      <div className="prose prose-lg max-w-none">
+                        <p className="text-gray-700 leading-relaxed text-justify animate-fade-in-up">
+                          <strong className="text-[#0E327F]">
+                            "O'zbekiston Respublikasi Davlat bayrog'i
+                            to'g'risida"gi qonun
+                          </strong>
+                          <br />
+                          <span>
+                            1991-yil 18-noyabrda O'zbekiston Respublikasi Oliy
+                            Kengashining navbatdan tashqari o'tkazilgan VII
+                            sessiyasida qabul qilingan.
+                          </span>
+                        </p>
 
-                      <p className="text-gray-700 leading-relaxed text-justify animate-fade-in-up delay-200">
-                        Davlat bayrog'i va uning ramzi bugungi O'zbekiston
-                        sarhadida qadimda mavjud bo'lgan davlatlar bilan tarixan
-                        bog'liqligini anglatadi hamda respublikaning
-                        milliy-madaniy an'analarini o'zida mujassamlashtiradi.
-                      </p>
+                        <p className="text-gray-700 leading-relaxed text-justify animate-fade-in-up delay-200">
+                          Davlat bayrog'i va uning ramzi bugungi O'zbekiston
+                          sarhadida qadimda mavjud bo'lgan davlatlar bilan
+                          tarixan bog'liqligini anglatadi hamda respublikaning
+                          milliy-madaniy an'analarini o'zida mujassamlashtiradi.
+                        </p>
 
-                      <div className="grid md:grid-cols-2 gap-6 mt-8">
-                        <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-6 rounded-xl animate-fade-in-up delay-300">
-                          <h3 className="font-bold text-blue-800 mb-3 flex items-center">
-                            <div className="w-4 h-4 bg-blue-500 rounded-full mr-2"></div>
-                            Moviy rang
-                          </h3>
-                          <p className="text-gray-700 text-sm leading-relaxed">
-                            Tiriklik mazmuni aks etgan mangu osmon va obihayot
-                            ramzi. Yaxshilikni, donishmandlikni, halollikni,
-                            shon-shuhrat va sadoqatni bildiradi.
-                          </p>
+                        <div className="grid md:grid-cols-2 gap-6 mt-8">
+                          <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-6 rounded-xl animate-fade-in-up delay-300">
+                            <h3 className="font-bold text-blue-800 mb-3 flex items-center">
+                              <div className="w-4 h-4 bg-blue-500 rounded-full mr-2"></div>
+                              Moviy rang
+                            </h3>
+                            <p className="text-gray-700 text-sm leading-relaxed">
+                              Tiriklik mazmuni aks etgan mangu osmon va obihayot
+                              ramzi. Yaxshilikni, donishmandlikni, halollikni,
+                              shon-shuhrat va sadoqatni bildiradi.
+                            </p>
+                          </div>
+
+                          <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-6 rounded-xl animate-fade-in-up delay-400">
+                            <h3 className="font-bold text-gray-800 mb-3 flex items-center">
+                              <div className="w-4 h-4 bg-white border-2 border-gray-400 rounded-full mr-2"></div>
+                              Oq rang
+                            </h3>
+                            <p className="text-gray-700 text-sm leading-relaxed">
+                              Muqaddas tinchlik ramzi. Poklik, beg'uborlik,
+                              soflikni, orzu va hayollar tozaligi, ichki
+                              go'zallikka intilishning timsoli.
+                            </p>
+                          </div>
+
+                          <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-6 rounded-xl animate-fade-in-up delay-500">
+                            <h3 className="font-bold text-green-800 mb-3 flex items-center">
+                              <div className="w-4 h-4 bg-green-500 rounded-full mr-2"></div>
+                              Yashil rang
+                            </h3>
+                            <p className="text-gray-700 text-sm leading-relaxed">
+                              Tabiatning yangilanish ramzi. Ko'pgina xalqlarda
+                              navqironlik, umid va shodumonlik timsoli
+                              hisoblanadi.
+                            </p>
+                          </div>
+
+                          <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-6 rounded-xl animate-fade-in-up delay-600">
+                            <h3 className="font-bold text-red-800 mb-3 flex items-center">
+                              <div className="w-4 h-4 bg-red-500 rounded-full mr-2"></div>
+                              Qizil chiziqlar
+                            </h3>
+                            <p className="text-gray-700 text-sm leading-relaxed">
+                              Vujudimizda jo'shib oqayotgan hayotiy qudrat
+                              irmoqlarini anglatadi.
+                            </p>
+                          </div>
                         </div>
 
-                        <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-6 rounded-xl animate-fade-in-up delay-400">
-                          <h3 className="font-bold text-gray-800 mb-3 flex items-center">
-                            <div className="w-4 h-4 bg-white border-2 border-gray-400 rounded-full mr-2"></div>
-                            Oq rang
+                        <div className="mt-8 p-6 bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl animate-fade-in-up delay-700">
+                          <h3 className="font-bold text-blue-900 mb-4 flex items-center">
+                            <Moon className="w-5 h-5 mr-2" />
+                            Yarim oy va yulduzlar
                           </h3>
-                          <p className="text-gray-700 text-sm leading-relaxed">
-                            Muqaddas tinchlik ramzi. Poklik, beg'uborlik,
-                            soflikni, orzu va hayollar tozaligi, ichki
-                            go'zallikka intilishning timsoli.
+                          <p className="text-gray-700 leading-relaxed">
+                            <strong>Navqiron yarim oy</strong> tasviri bizning
+                            tarixiy an'analarimiz bilan bog'liq. Ayni paytda u
+                            qo'lga kiritilgan mustaqilligimiz ramzi ham.
                           </p>
-                        </div>
-
-                        <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-6 rounded-xl animate-fade-in-up delay-500">
-                          <h3 className="font-bold text-green-800 mb-3 flex items-center">
-                            <div className="w-4 h-4 bg-green-500 rounded-full mr-2"></div>
-                            Yashil rang
-                          </h3>
-                          <p className="text-gray-700 text-sm leading-relaxed">
-                            Tabiatning yangilanish ramzi. Ko'pgina xalqlarda
-                            navqironlik, umid va shodumonlik timsoli
-                            hisoblanadi.
-                          </p>
-                        </div>
-
-                        <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-6 rounded-xl animate-fade-in-up delay-600">
-                          <h3 className="font-bold text-red-800 mb-3 flex items-center">
-                            <div className="w-4 h-4 bg-red-500 rounded-full mr-2"></div>
-                            Qizil chiziqlar
-                          </h3>
-                          <p className="text-gray-700 text-sm leading-relaxed">
-                            Vujudimizda jo'shib oqayotgan hayotiy qudrat
-                            irmoqlarini anglatadi.
+                          <p className="text-gray-700 leading-relaxed mt-3">
+                            <strong>12 yulduz</strong> tasviri tarixiy
+                            an'analarimiz, qadimgi yilnomamizga bevosita
+                            aloqador. O'zbek xalqi madaniyatining qadimiyligi,
+                            uning komillikka, o'z tuprog'ida saodatga intilishi
+                            ramzi.
                           </p>
                         </div>
                       </div>
-
-                      <div className="mt-8 p-6 bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl animate-fade-in-up delay-700">
-                        <h3 className="font-bold text-blue-900 mb-4 flex items-center">
-                          <Moon className="w-5 h-5 mr-2" />
-                          Yarim oy va yulduzlar
-                        </h3>
-                        <p className="text-gray-700 leading-relaxed">
-                          <strong>Navqiron yarim oy</strong> tasviri bizning
-                          tarixiy an'analarimiz bilan bog'liq. Ayni paytda u
-                          qo'lga kiritilgan mustaqilligimiz ramzi ham.
-                        </p>
-                        <p className="text-gray-700 leading-relaxed mt-3">
-                          <strong>12 yulduz</strong> tasviri tarixiy
-                          an'analarimiz, qadimgi yilnomamizga bevosita aloqador.
-                          O'zbek xalqi madaniyatining qadimiyligi, uning
-                          komillikka, o'z tuprog'ida saodatga intilishi ramzi.
-                        </p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
+                    </CardContent>
+                  </Card>
+                </div>
               </div>
             </div>
           </div>
@@ -381,113 +381,117 @@ export default function UzbekistanSymbols() {
 
         {activeTab === "coat" && (
           <div className="space-y-8 animate-fade-in">
-            <div className="grid lg:grid-cols-3 gap-8">
-              {/* Coat of Arms Image */}
-              <div className="lg:col-span-1">
-                <Card className="overflow-hidden duration-500 shadow-xl hover:shadow-2xl">
-                  <CardContent className="p-6">
-                    <div className="relative mb-4 group">
-                      <div className="absolute "></div>
-                      <Image
-                        src={
-                          gerb ||
-                          "/placeholder.svg?height=400&width=300&query=Uzbekistan coat of arms with Humo bird cotton wheat sun"
-                        }
-                        alt="O'zbekiston gerbi"
-                        width={300}
-                        height={400}
-                        className="w-full h-auto rounded-lg relative z-10 "
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    </div>
-                    <div className="text-center">
-                      <Badge className="bg-[#0E327F] text-white ">
-                        <Calendar className="w-3 h-3 mr-1" />
-                        1992-yil 2-iyul
-                      </Badge>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
+            <div className="flex justify-center">
+              <div>
+                {/* Coat of Arms Image - centered */}
+                <div className=" flex justify-center">
+                  <Card className="overflow-hidden duration-500 shadow-xl hover:shadow-2xl w-full max-w-md">
+                    <CardContent className="p-6">
+                      <div className="relative mb-4 group">
+                        <div className="absolute"></div>
+                        <Image
+                          src={
+                            gerb ||
+                            "/placeholder.svg?height=400&width=300&query=Uzbekistan coat of arms with Humo bird cotton wheat sun" ||
+                            "/placeholder.svg" ||
+                            "/placeholder.svg"
+                          }
+                          alt="O'zbekiston gerbi"
+                          width={300}
+                          height={400}
+                          className="w-full h-auto rounded-lg relative z-10"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      </div>
+                      <div className="text-center">
+                        <Badge className="bg-[#0E327F] text-white">
+                          <Calendar className="w-3 h-3 mr-1" />
+                          1992-yil 2-iyul
+                        </Badge>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
 
-              <div className="lg:col-span-2 space-y-6">
-                <Card className="  duration-300 shadow-lg hover:shadow-xl">
-                  <CardContent className="p-8">
-                    <div className="prose prose-lg max-w-none">
-                      <p className="text-gray-700 leading-relaxed text-justify animate-fade-in-up">
-                        <strong className="text-[#0E327F]">
-                          "O'zbekiston Respublikasi Davlat gerbi to'g'risida"gi
-                          Qonun
-                        </strong>
-                        <br />
-                        <span>
-                          1992-yil 2-iyulda O'zbekiston Respublikasi Oliy
-                          Kengashining X sessiyasida qabul qilingan.
-                        </span>
-                      </p>
+                <div className="mt-10">
+                  <Card className="transition-all duration-300 shadow-lg hover:shadow-xl">
+                    <CardContent className="p-8">
+                      <div className="prose prose-lg max-w-none">
+                        <p className="text-gray-700 leading-relaxed text-justify animate-fade-in-up">
+                          <strong className="text-[#0E327F]">
+                            "O'zbekiston Respublikasi Davlat gerbi
+                            to'g'risida"gi Qonun
+                          </strong>
+                          <br />
+                          <span>
+                            1992-yil 2-iyulda O'zbekiston Respublikasi Oliy
+                            Kengashining X sessiyasida qabul qilingan.
+                          </span>
+                        </p>
 
-                      <div className="mt-8 space-y-6">
-                        <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-6 rounded-xl animate-fade-in-up delay-200">
-                          <h3 className="font-bold text-blue-900 mb-3 flex items-center">
-                            Quyosh va vodiy
-                          </h3>
-                          <p className="text-gray-700 leading-relaxed">
-                            O'zbekiston Respublikasining Davlat gerbi gullagan
-                            vodiy uzra charaqlab turgan quyosh tasviridan
-                            iborat.
-                          </p>
-                        </div>
+                        <div className="mt-8 space-y-6">
+                          <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-6 rounded-xl animate-fade-in-up delay-200">
+                            <h3 className="font-bold text-blue-900 mb-3 flex items-center">
+                              Quyosh va vodiy
+                            </h3>
+                            <p className="text-gray-700 leading-relaxed">
+                              O'zbekiston Respublikasining Davlat gerbi gullagan
+                              vodiy uzra charaqlab turgan quyosh tasviridan
+                              iborat.
+                            </p>
+                          </div>
 
-                        <div className="bg-gradient-to-br from-gray-50 to-gray-50 p-6 rounded-xl animate-fade-in-up delay-300">
-                          <h3 className="font-bold text-blue-900 mb-3 flex items-center">
-                            Bug'doy va paxta
-                          </h3>
-                          <p className="text-gray-700 leading-relaxed">
-                            So'l tomonida bug'doy boshoqlari, o'ng tomonida
-                            ochilgan paxta chanoqlari suvrati tushirilgan
-                            chambardan iborat.
-                          </p>
-                        </div>
+                          <div className="bg-gradient-to-br from-gray-50 to-gray-50 p-6 rounded-xl animate-fade-in-up delay-300">
+                            <h3 className="font-bold text-blue-900 mb-3 flex items-center">
+                              Bug'doy va paxta
+                            </h3>
+                            <p className="text-gray-700 leading-relaxed">
+                              So'l tomonida bug'doy boshoqlari, o'ng tomonida
+                              ochilgan paxta chanoqlari suvrati tushirilgan
+                              chambardan iborat.
+                            </p>
+                          </div>
 
-                        <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-6 rounded-xl animate-fade-in-up delay-400">
-                          <h3 className="font-bold text-blue-900 mb-3 flex items-center">
-                            Sakkiz qirrali yulduz
-                          </h3>
-                          <p className="text-gray-700 leading-relaxed">
-                            Gerbning yuqori qismida Respublika jipsligining
-                            ramzi sifatida sakkiz qirrali yulduz tasvirlangan:
-                            sakkiz qirra ichida joylashgan yarim oy va yulduz
-                            musulmonlarning qutlug' ramzidir.
-                          </p>
-                        </div>
+                          <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-6 rounded-xl animate-fade-in-up delay-400">
+                            <h3 className="font-bold text-blue-900 mb-3 flex items-center">
+                              Sakkiz qirrali yulduz
+                            </h3>
+                            <p className="text-gray-700 leading-relaxed">
+                              Gerbning yuqori qismida Respublika jipsligining
+                              ramzi sifatida sakkiz qirrali yulduz tasvirlangan:
+                              sakkiz qirra ichida joylashgan yarim oy va yulduz
+                              musulmonlarning qutlug' ramzidir.
+                            </p>
+                          </div>
 
-                        <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-6 rounded-xl animate-fade-in-up delay-500">
-                          <h3 className="font-bold text-blue-900 mb-3 flex items-center">
-                            Humo qushi
-                          </h3>
-                          <p className="text-gray-700 leading-relaxed">
-                            Gerbning markazida himmat, oliyjanoblik va fidoyilik
-                            timsoli bo'lgan afsonaviy Humo qushi qanotlarini
-                            yozib turibdi. Ushbu ramz va timsollar xalqimizning
-                            tinchlik, yaxshilik, baxt-saodat, farovonlik
-                            yo'lidagi orzu-umidlarini ifodalaydi.
-                          </p>
-                        </div>
+                          <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-6 rounded-xl animate-fade-in-up delay-500">
+                            <h3 className="font-bold text-blue-900 mb-3 flex items-center">
+                              Humo qushi
+                            </h3>
+                            <p className="text-gray-700 leading-relaxed">
+                              Gerbning markazida himmat, oliyjanoblik va
+                              fidoyilik timsoli bo'lgan afsonaviy Humo qushi
+                              qanotlarini yozib turibdi. Ushbu ramz va timsollar
+                              xalqimizning tinchlik, yaxshilik, baxt-saodat,
+                              farovonlik yo'lidagi orzu-umidlarini ifodalaydi.
+                            </p>
+                          </div>
 
-                        <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-6 rounded-xl animate-fade-in-up delay-600">
-                          <h3 className="font-bold text-blue-900 mb-3 flex items-center">
-                            "O'zbekiston" yozuvi
-                          </h3>
-                          <p className="text-gray-700 leading-relaxed">
-                            Gerbning pastki qismida Respublika Davlat bayrog'ini
-                            ifoda etuvchi chambar lentasining bandiga
-                            «O'zbekiston» deb yozib qo'yilgan.
-                          </p>
+                          <div className="bg-gradient-to-br from-gray-50 to-gray-100 p-6 rounded-xl animate-fade-in-up delay-600">
+                            <h3 className="font-bold text-blue-900 mb-3 flex items-center">
+                              "O'zbekiston" yozuvi
+                            </h3>
+                            <p className="text-gray-700 leading-relaxed">
+                              Gerbning pastki qismida Respublika Davlat
+                              bayrog'ini ifoda etuvchi chambar lentasining
+                              bandiga «O'zbekiston» deb yozib qo'yilgan.
+                            </p>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </CardContent>
-                </Card>
+                    </CardContent>
+                  </Card>
+                </div>
               </div>
             </div>
           </div>
@@ -524,7 +528,7 @@ export default function UzbekistanSymbols() {
 
                     <div className="relative z-10">
                       <div className="text-center mb-4">
-                        <h3 className="text-lg font-bold ">
+                        <h3 className="text-lg font-bold">
                           <span className="text-white">
                             O'zbekiston Respublikasi Madhiyasi
                           </span>
@@ -653,10 +657,10 @@ export default function UzbekistanSymbols() {
                 </CardContent>
               </Card>
 
-              <Card className=" transition-all duration-300 shadow-xl hover:shadow-2xl">
+              <Card className="transition-all duration-300 shadow-xl hover:shadow-2xl">
                 <CardContent className="p-6">
                   <h2 className="text-xl font-bold text-[#0E327F] mb-4 text-center flex items-center justify-center animate-fade-in">
-                    <Music className="w-5 h-5 mr-2 " />
+                    <Music className="w-5 h-5 mr-2" />
                     <span className="text-blue-900">Madhiya matni</span>
                   </h2>
 
@@ -781,7 +785,7 @@ export default function UzbekistanSymbols() {
       {/* Hidden audio element */}
       <audio
         ref={audioRef}
-        src="/audio/uzbekistan-anthem.mp3"
+        src="mathiya-auido/mathiya.mp3"
         preload="metadata"
       />
 

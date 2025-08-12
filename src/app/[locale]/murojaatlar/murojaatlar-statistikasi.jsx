@@ -228,7 +228,7 @@ export default function Component() {
               <div className="flex justify-between items-center mb-2">
                 <span className="text-sm sm:text-base font-medium text-orange-800 flex items-center gap-2">
                   <Clock className="h-4 w-4" />
-                  Javob berilmagan so'rovlar
+                  Jarayondagi so'rovlar
                 </span>
                 <span className="text-sm sm:text-base font-bold text-orange-900">
                   {stats.unanswered_requests}/{stats.total_requests}

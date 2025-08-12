@@ -73,7 +73,7 @@ const contactInfo = [
 
 export default function ContactInfo() {
   return (
-    <div className="min-h-screen py-16 px-4">
+    <div className=" py-20 px-4">
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -166,31 +166,6 @@ export default function ContactInfo() {
             );
           })}
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="mt-16 text-center"
-        >
-          <div className="bg-blue-50 rounded-2xl p-8 border border-blue-200">
-            <h3 className="text-2xl font-bold text-blue-900 mb-4">
-              Savollaringiz bormi?
-            </h3>
-            <p className="text-gray-700 mb-6">
-              Bizning mutaxassislarimiz sizga yordam berishga tayyor
-            </p>
-            <Link href={"/murojaatlar"}>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-blue-900 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-800 transition-colors duration-300"
-              >
-                Bog'lanish
-              </motion.button>
-            </Link>
-          </div>
-        </motion.div>
       </div>
     </div>
   );

@@ -155,12 +155,8 @@ export default function TransportDirectory() {
         <div className="container mx-auto px-4 py-8 sm:py-12 lg:py-16">
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold mb-3 sm:mb-4 text-[#0E327F] leading-tight">
-              Transport ma'lumotnomasi
+              Toshkent metropoliteni DUK tarkibiy tuzulmalarining rahbarlari
             </h1>
-            <p className="text-base sm:text-lg lg:text-xl text-gray-600 leading-relaxed">
-              Barcha transport xizmatlari va bo'limlarining to'liq aloqa
-              ma'lumotlari
-            </p>
           </div>
         </div>
       </div>
@@ -344,7 +340,6 @@ export default function TransportDirectory() {
       </div>
 
       {/* Footer */}
- 
     </div>
   );
 }

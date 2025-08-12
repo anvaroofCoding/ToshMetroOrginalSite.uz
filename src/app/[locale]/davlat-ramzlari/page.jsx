@@ -1,4 +1,4 @@
-import UzbekistanSymbols from "@/components/uzbekistan-symbols-original";
+import UzbekistanSymbols from "./ramz";
 
 const Page = () => {
   return (

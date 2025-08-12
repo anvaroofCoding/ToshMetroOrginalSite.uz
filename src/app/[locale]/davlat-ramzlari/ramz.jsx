@@ -9,18 +9,11 @@ import { Slider } from "@/components/ui/slider";
 import {
   Calendar,
   Flag,
-  MapPin,
   Music,
-  Palette,
   Pause,
   Play,
   Shield,
-  Users,
   Volume2,
-  Star,
-  Moon,
-  FileText,
-  Info,
   SkipBack,
   SkipForward,
   VolumeX,
@@ -288,10 +281,9 @@ export default function UzbekistanSymbols() {
       <main className="container mx-auto px-4 py-8">
         {/* Flag Section */}
         {activeTab === "flag" && (
-          <div className="space-y-8">
-            <div className="grid lg:grid-cols-3 gap-8">
-              {/* Flag Image */}
-              <div className="lg:col-span-1">
+          <div>
+            <div className="flex justify-center mb-8">
+              <div className="w-[400px]">
                 <Card className="overflow-hidden">
                   <CardContent className="p-6">
                     <div className="relative mb-4">
@@ -312,48 +304,103 @@ export default function UzbekistanSymbols() {
                   </CardContent>
                 </Card>
               </div>
+            </div>
 
-              {/* Flag Details */}
-              <div className="lg:col-span-2 space-y-6">
-                "O‘zbekiston Respublikasi Davlat bayrog‘i to‘g‘risida"gi qonun
-                1991-yil 18-noyabrda O‘zbekiston Respublikasi Oliy Kengashining
-                navbatdan tashqari o‘tkazilgan VII sessiyasida qabul qilingan.
-                Davlat bayrog‘i va uning ramzi bugungi O‘zbekiston sarhadida
-                qadimda mavjud bo‘lgan davlatlar bilan tarixan bog‘liqligini
-                anglatadi hamda respublikaning milliy-madaniy an’analarini
-                o‘zida mujassamlashtiradi. Bayroqdagi moviy rang tiriklik
-                mazmuni aks etgan mangu osmon va obihayot ramzi. Timsollar
-                tilida bu — yaxshilikni, donishmandlikni, halollikni,
-                shon-shuhrat va sadoqatni bildiradi. Binobarin, Amir Temur
-                davlati bayrog‘ining rangi ham moviy rangda edi. Bayroqdagi oq
-                rang — muqaddas tinchlik ramzi bo‘lib, u kun charog‘onligi va
-                koinot yoritqichlari bilan uyg‘unlashib ketadi. Oq rang —
-                poklik, beg‘uborlik, soflikni, orzu va hayollar tozaligi, ichki
-                go‘zallikka intilishning timsoli. Yashil rang — tabiatning
-                yangilanish ramzi. U ko‘pgina xalqlarda navqironlik, umid va
-                shodumonlik timsoli hisoblanadi. Qizil chiziqlar — vujudimizda
-                jo‘shib oqayotgan hayotiy qudrat irmoqlarini anglatadi. Navqiron
-                yarim oy tasviri bizning tarixiy an’analarimiz bilan bog‘liq.
-                Ayni paytda u qo‘lga kiritilgan mustaqilligimiz ramzi ham.
-                O‘zbekiston Respublikasi Davlat bayrog‘idagi 12 yulduz tasviri
-                tarixiy an’analarimiz, qadimgi yilnomamizga bevosita aloqador.
-                Bizning o‘n ikki yulduzga bo‘lgan e’tiborimiz O‘zbekiston
-                sarhadidagi qadimgi davlatlar ilmiy tafakkurida nujum ilmi
-                taraqqiy etganligi bilan ham izohlanadi. Davlat bayrog‘imizdagi
-                12 yulduz tasvirini o‘zbek xalqi madaniyatining qadimiyligi,
-                uning komillikka, o‘z tuprog‘ida saodatga intilishi ramzi
-                sifatida tushunish lozim.
-              </div>
+            <div className="max-w-4xl mx-auto">
+              <Card className="w-full transition-all duration-300 shadow-lg hover:shadow-xl border-l-4 border-l-[#0E327F]">
+                <CardContent className="p-8">
+                  <div className="text-center mb-8">
+                    <h2 className="text-2xl font-bold text-[#0E327F] mb-4">
+                      O'zbekiston Respublikasi Davlat Bayrog'i
+                    </h2>
+                    <div className="w-24 h-1 bg-gradient-to-r from-[#0E327F] to-blue-400 mx-auto rounded-full"></div>
+                  </div>
+
+                  <div className="prose prose-lg max-w-none">
+                    <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl mb-8 border-l-4 border-[#0E327F]">
+                      <p className="text-gray-700 leading-relaxed text-justify animate-fade-in-up">
+                        <strong className="text-[#0E327F] text-lg">
+                          "O'zbekiston Respublikasi Davlat bayrog'i
+                          to'g'risida"gi Qonun
+                        </strong>
+                        <br />
+                        <span className="text-gray-600 italic">
+                          1991-yil 18-noyabrda O'zbekiston Respublikasi Oliy
+                          Kengashining navbatdan tashqari sessiyasida qabul
+                          qilingan.
+                        </span>
+                      </p>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div className="bg-gradient-to-br from-sky-50 to-blue-50 p-6 rounded-xl animate-fade-in-up delay-200 hover:shadow-md transition-shadow">
+                        <h3 className="font-bold text-[#0E327F] mb-3 flex items-center text-lg">
+                          <div className="w-3 h-3 bg-sky-400 rounded-full mr-3"></div>
+                          Moviy rang
+                        </h3>
+                        <p className="text-gray-700 leading-relaxed">
+                          Osmon va suv ramzi, tabiat go'zalligi, hayot manbai va
+                          tinchlik timsoli.
+                        </p>
+                      </div>
+
+                      <div className="bg-gradient-to-br from-emerald-50 to-green-50 p-6 rounded-xl animate-fade-in-up delay-300 hover:shadow-md transition-shadow">
+                        <h3 className="font-bold text-[#0E327F] mb-3 flex items-center text-lg">
+                          <div className="w-3 h-3 bg-green-400 rounded-full mr-3"></div>
+                          Yashil rang
+                        </h3>
+                        <p className="text-gray-700 leading-relaxed">
+                          Tabiat yangilanishi, bahor va umid ramzi, xalqimizning
+                          farovonlik yo'lidagi intilishi.
+                        </p>
+                      </div>
+
+                      <div className="bg-gradient-to-br from-gray-50 to-slate-50 p-6 rounded-xl animate-fade-in-up delay-400 hover:shadow-md transition-shadow">
+                        <h3 className="font-bold text-[#0E327F] mb-3 flex items-center text-lg">
+                          <div className="w-3 h-3 bg-gray-300 rounded-full mr-3"></div>
+                          Oq rang
+                        </h3>
+                        <p className="text-gray-700 leading-relaxed">
+                          Poklik va halollik ramzi, tinchlik va xotirjamlik
+                          timsoli.
+                        </p>
+                      </div>
+
+                      <div className="bg-gradient-to-br from-red-50 to-rose-50 p-6 rounded-xl animate-fade-in-up delay-500 hover:shadow-md transition-shadow">
+                        <h3 className="font-bold text-[#0E327F] mb-3 flex items-center text-lg">
+                          <div className="w-3 h-3 bg-red-400 rounded-full mr-3"></div>
+                          Qizil chiziqlar
+                        </h3>
+                        <p className="text-gray-700 leading-relaxed">
+                          Hayot kuchi va barcha tirik mavjudotlardagi qon
+                          aylanishi ramzi.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="mt-8 bg-gradient-to-br from-yellow-50 to-amber-50 p-6 rounded-xl animate-fade-in-up delay-600 border-l-4 border-yellow-400">
+                      <h3 className="font-bold text-[#0E327F] mb-3 flex items-center text-lg">
+                        <div className="w-3 h-3 bg-yellow-400 rounded-full mr-3"></div>
+                        Yarim oy va yulduzlar
+                      </h3>
+                      <p className="text-gray-700 leading-relaxed">
+                        O'zbekiston xalqining an'anaviy ramzi. Yarim oy -
+                        yangilanish ramzi, 12 yulduz - yil oylarini va qadimiy
+                        burjlar tizimini ifodalaydi.
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
           </div>
         )}
 
         {/* Coat of Arms Section */}
         {activeTab === "coat" && (
-          <div className="space-y-8">
-            <div className="grid lg:grid-cols-3 gap-8">
-              {/* Coat of Arms Image */}
-              <div className="lg:col-span-1">
+          <div>
+            <div className="flex justify-center mb-8">
+              <div className="w-[300px]">
                 <Card className="overflow-hidden">
                   <CardContent className="p-6">
                     <div className="relative mb-4">
@@ -374,25 +421,96 @@ export default function UzbekistanSymbols() {
                   </CardContent>
                 </Card>
               </div>
+            </div>
 
-              {/* Coat of Arms Details */}
-              <div className="lg:col-span-2 space-y-6">
-                "O‘zbekiston Respublikasi Davlat gerbi to‘g‘risida"gi Qonun
-                1992-yil 2-iyulda O‘zbekiston Respublikasi Oliy Kengashining X
-                sessiyasida qabul qilingan. O‘zbekiston Respublikasining Davlat
-                gerbi gullagan vodiy uzra charaqlab turgan quyosh tasviridan
-                hamda so‘l tomonida bug‘doy boshoqlari, o‘ng tomonida ochilgan
-                paxta chanoqlari suvrati tushirilgan chambardan iborat. Gerbning
-                yuqori qismida Respublika jipsligining ramzi sifatida sakkiz
-                qirrali yulduz tasvirlangan: sakkiz qirra ichida joylashgan
-                yarim oy va yulduz musulmonlarning qutlug‘ ramzidir. Gerbning
-                markazida himmat, oliyjanoblik va fidoyilik timsoli bo‘lgan
-                afsonaviy Humo qushi qanotlarini yozib turibdi. Ushbu ramz va
-                timsollar xalqimizning tinchlik, yaxshilik, baxt-saodat,
-                farovonlik yo‘lidagi orzu-umidlarini ifodalaydi. Gerbning pastki
-                qismida Respublika Davlat bayrog‘ini ifoda etuvchi chambar
-                lentasining bandiga «O‘zbekiston» deb yozib qo‘yilgan.
-              </div>
+            <div className="max-w-4xl mx-auto">
+              <Card className="w-full transition-all duration-300 shadow-lg hover:shadow-xl border-l-4 border-l-[#0E327F]">
+                <CardContent className="p-8">
+                  <div className="text-center mb-8">
+                    <h2 className="text-2xl font-bold text-[#0E327F] mb-4">
+                      O'zbekiston Respublikasi Davlat Gerbi
+                    </h2>
+                    <div className="w-24 h-1 bg-gradient-to-r from-[#0E327F] to-blue-400 mx-auto rounded-full"></div>
+                  </div>
+
+                  <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl mb-8 border-l-4 border-[#0E327F]">
+                    <p className="text-gray-700 leading-relaxed text-justify">
+                      <strong className="text-[#0E327F] text-lg">
+                        "O'zbekiston Respublikasi Davlat gerbi to'g'risida"gi
+                        Qonun
+                      </strong>
+                      <br />
+                      <span className="text-gray-600 italic">
+                        1992-yil 2-iyulda O'zbekiston Respublikasi Oliy
+                        Kengashining X sessiyasida qabul qilingan.
+                      </span>
+                    </p>
+                  </div>
+
+                  <div className="space-y-6">
+                    <div className="bg-gradient-to-br from-yellow-50 to-amber-50 p-6 rounded-xl animate-fade-in-up delay-200 hover:shadow-md transition-shadow border-l-4 border-yellow-400">
+                      <h3 className="font-bold text-[#0E327F] mb-3 flex items-center text-lg">
+                        <div className="w-3 h-3 bg-yellow-400 rounded-full mr-3"></div>
+                        Quyosh va vodiy
+                      </h3>
+                      <p className="text-gray-700 leading-relaxed">
+                        O'zbekiston Respublikasining Davlat gerbi gullagan vodiy
+                        uzra charaqlab turgan quyosh tasviridan iborat.
+                      </p>
+                    </div>
+
+                    <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-xl animate-fade-in-up delay-300 hover:shadow-md transition-shadow border-l-4 border-green-400">
+                      <h3 className="font-bold text-[#0E327F] mb-3 flex items-center text-lg">
+                        <div className="w-3 h-3 bg-green-400 rounded-full mr-3"></div>
+                        Bug'doy va paxta
+                      </h3>
+                      <p className="text-gray-700 leading-relaxed">
+                        So'l tomonida bug'doy boshoqlari, o'ng tomonida ochilgan
+                        paxta chanoqlari suvrati tushirilgan chambardan iborat.
+                      </p>
+                    </div>
+
+                    <div className="bg-gradient-to-br from-blue-50 to-sky-50 p-6 rounded-xl animate-fade-in-up delay-400 hover:shadow-md transition-shadow border-l-4 border-blue-400">
+                      <h3 className="font-bold text-[#0E327F] mb-3 flex items-center text-lg">
+                        <div className="w-3 h-3 bg-blue-400 rounded-full mr-3"></div>
+                        Sakkiz qirrali yulduz
+                      </h3>
+                      <p className="text-gray-700 leading-relaxed">
+                        Gerbning yuqori qismida Respublika jipsligining ramzi
+                        sifatida sakkiz qirrali yulduz tasvirlangan: sakkiz
+                        qirra ichida joylashgan yarim oy va yulduz
+                        musulmonlarning qutlug' ramzidir.
+                      </p>
+                    </div>
+
+                    <div className="bg-gradient-to-br from-purple-50 to-violet-50 p-6 rounded-xl animate-fade-in-up delay-500 hover:shadow-md transition-shadow border-l-4 border-purple-400">
+                      <h3 className="font-bold text-[#0E327F] mb-3 flex items-center text-lg">
+                        <div className="w-3 h-3 bg-purple-400 rounded-full mr-3"></div>
+                        Humo qushi
+                      </h3>
+                      <p className="text-gray-700 leading-relaxed">
+                        Gerbning markazida himmat, oliyjanoblik va fidoyilik
+                        timsoli bo'lgan afsonaviy Humo qushi qanotlarini yozib
+                        turibdi. Ushbu ramz va timsollar xalqimizning tinchlik,
+                        yaxshilik, baxt-saodat, farovonlik yo'lidagi
+                        orzu-umidlarini ifodalaydi.
+                      </p>
+                    </div>
+
+                    <div className="bg-gradient-to-br from-red-50 to-rose-50 p-6 rounded-xl animate-fade-in-up delay-600 hover:shadow-md transition-shadow border-l-4 border-red-400">
+                      <h3 className="font-bold text-[#0E327F] mb-3 flex items-center text-lg">
+                        <div className="w-3 h-3 bg-red-400 rounded-full mr-3"></div>
+                        "O'zbekiston" yozuvi
+                      </h3>
+                      <p className="text-gray-700 leading-relaxed">
+                        Gerbning pastki qismida Respublika Davlat bayrog'ini
+                        ifoda etuvchi chambar lentasining bandiga «O'zbekiston»
+                        deb yozib qo'yilgan.
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
           </div>
         )}
@@ -500,18 +618,23 @@ export default function UzbekistanSymbols() {
                     </div>
                   </div>
 
-                  {/* Technical Info */}
-                  <div className="space-y-4">
-                    O`zbekiston Respublikasi Davlat madhiyasining matni va
-                    musiqasi O`zbekiston Respublikasining 1992 yil 10 dekabrdagi
-                    768-XII-sonli «O`zbekiston Respublikasining Davlat madhiyasi
-                    to`g`risida»gi Qonuni bilan tasdiqlangan. O`zbekiston
-                    Respublikаsining Dаvlаt mаdhiyasi O`zbekiston Respublikаsi
-                    Dаvlаt suverenitetining rаmzidir. O`zbekiston
-                    Respublikаsining Dаvlаt mаdhiyasigа zo`r ehtirom bilаn
-                    qаrаsh O`zbekiston Respublikаsi hаr bir fuqаrosining
-                    vаtаnpаrvаrlik burchidir. Mutal Burhonov musiqasi Abdulla
-                    Oripov so'zi
+                  <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl border-l-4 border-[#0E327F]">
+                    <h3 className="font-bold text-[#0E327F] mb-3 text-lg">
+                      Qonuniy ma'lumot
+                    </h3>
+                    <p className="text-gray-700 leading-relaxed text-sm">
+                      O'zbekiston Respublikasi Davlat madhiyasining matni va
+                      musiqasi O'zbekiston Respublikasining 1992 yil 10
+                      dekabrdagi 768-XII-sonli «O'zbekiston Respublikasining
+                      Davlat madhiyasi to'g'risida»gi Qonuni bilan tasdiqlangan.
+                    </p>
+                    <div className="mt-4 pt-4 border-t border-blue-200">
+                      <p className="text-gray-600 text-sm">
+                        <strong>Musiqa:</strong> Mutal Burhonov
+                        <br />
+                        <strong>So'z:</strong> Abdulla Oripov
+                      </p>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
@@ -523,18 +646,61 @@ export default function UzbekistanSymbols() {
                     <Music className="w-5 h-5 mr-2" />
                     Madhiya matni
                   </h2>
-                  <div className="space-y-4">
-                    Serquyosh hur o'lkam, elga baxt, najot, Sen o'zing
-                    do'stlarga yo'ldosh, mehribon! Yashnagay to abad ilmu fan,
-                    ijod, Shuhrating porlasin toki bor jahon! Naqorat: Oltin bu
-                    vodiylar - jon O'zbekiston, Ajdodlar mardona ruhi senga yor!
-                    Ulug' xalq qudrati jo'sh urgan zamon, Olamni mahliyo aylagan
-                    diyor! Bag'ri keng o'zbekning o'chmas iymoni, Erkin, yosh
-                    avlodlar senga zo'r qanot! Istiqlol mash'ali tinchlik
-                    posboni, Xaqsevar, ona yurt, mangu bo'l obod! Naqorat: Oltin
-                    bu vodiylar - jon O'zbekiston, Ajdodlar mardona ruhi senga
-                    yor! Ulug' xalq qudrati jo'sh urgan zamon, Olamni mahliyo
-                    aylagan diyor!
+                  <div className="space-y-6">
+                    <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl border-l-4 border-[#0E327F]">
+                      <div className="space-y-4 text-gray-700 leading-relaxed">
+                        <p className="font-medium">
+                          Serquyosh hur o'lkam, elga baxt, najot,
+                          <br />
+                          Sen o'zing do'stlarga yo'ldosh, mehribon!
+                          <br />
+                          Yashnagay to abad ilmu fan, ijod,
+                          <br />
+                          Shuhrating porlasin toki bor jahon!
+                        </p>
+
+                        <div className="bg-white/70 p-4 rounded-lg border-l-4 border-yellow-400">
+                          <p className="font-bold text-[#0E327F] mb-2">
+                            Naqorat:
+                          </p>
+                          <p>
+                            Oltin bu vodiylar - jon O'zbekiston,
+                            <br />
+                            Ajdodlar mardona ruhi senga yor!
+                            <br />
+                            Ulug' xalq qudrati jo'sh urgan zamon,
+                            <br />
+                            Olamni mahliyo aylagan diyor!
+                          </p>
+                        </div>
+
+                        <p className="font-medium">
+                          Bag'ri keng o'zbekning o'chmas iymoni,
+                          <br />
+                          Erkin, yosh avlodlar senga zo'r qanot!
+                          <br />
+                          Istiqlol mash'ali tinchlik posboni,
+                          <br />
+                          Xaqsevar, ona yurt, mangu bo'l obod!
+                        </p>
+
+                        <div className="bg-white/70 p-4 rounded-lg border-l-4 border-yellow-400">
+                          <p className="font-bold text-[#0E327F] mb-2">
+                            Naqorat:
+                          </p>
+                          <p>
+                            Oltin bu vodiylar - jon O'zbekiston,
+                            <br />
+                            Ajdodlar mardona ruhi senga yor!
+                            <br />
+                            Ulug' xalq qudrati jo'sh urgan zamon,
+                            <br />
+                            Olamni mahliyo aylagan diyor!
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
                     {/* Audio Status Indicator */}
                     {isPlaying && (
                       <div className="bg-[#0E327F] text-white p-4 rounded-lg text-center">
