@@ -26,7 +26,7 @@ const attoCards = [
     id: 1,
     name: "Yagona/Umumiy",
     type: "Ko'k",
-    price: "20.000 UZS",
+    price: "20.000 so'm",
     description: "Avtomatlashtirilgan transport To'lov Tizimi",
     color: "bg-blue-50 border-blue-200",
     iconColor: "bg-blue-500",
@@ -36,7 +36,7 @@ const attoCards = [
     id: 2,
     name: "Talabalar uchun",
     type: "Sariq",
-    price: "15.000 So'm",
+    price: "15.000 so'm",
     description: "Talabalar uchun imtiyozli tarif kartasi",
     color: "bg-yellow-50 border-yellow-200",
     iconColor: "bg-yellow-500",
@@ -46,7 +46,7 @@ const attoCards = [
     id: 3,
     name: "O'quvchilar uchun",
     type: "Yashil",
-    price: "0 So'm",
+    price: "0 so'm",
     description: "Maktab o'quvchilari uchun imtiyozli tarif kartasi",
     color: "bg-green-50 border-green-200",
     iconColor: "bg-green-500",
@@ -56,7 +56,7 @@ const attoCards = [
     id: 4,
     name: "Ijtimoiy",
     type: "Qizil",
-    price: "15.000 So'm",
+    price: "15.000 so'm",
     description:
       "Ijtimoiy himoya ostidagi fuqarolar uchun imtiyozli tarif kartasi",
     color: "bg-red-50 border-red-200",
@@ -210,7 +210,7 @@ export default function PaymentMethods() {
                   </li>
                   <li className="flex items-center">
                     <span className="w-2 h-2 bg-blue-500 rounded-full mr-3 flex-shrink-0"></span>
-                    Toshshahartrans xizmat bo'limlari
+                    "Toshshahartransxizmat" bo'limlari
                   </li>
                   <li className="flex items-center">
                     <span className="w-2 h-2 bg-blue-500 rounded-full mr-3 flex-shrink-0"></span>
@@ -288,7 +288,7 @@ export default function PaymentMethods() {
                   Bank kartalari va kontaktsiz to'lovlar
                 </h2>
                 <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 mt-2 sm:mt-3 lg:mt-4 leading-relaxed">
-                  kontaktsiz to'lov orqali metro va avtobusda to'lov - 1,700 UZS
+                  kontaktsiz to'lov orqali metro va avtobusda to'lov - 1,700 so'm
                 </p>
               </div>
             </div>
@@ -343,7 +343,7 @@ export default function PaymentMethods() {
                   QR-bilet va Alif ATM
                 </h2>
                 <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 mt-2 sm:mt-3 lg:mt-4 leading-relaxed">
-                  Bir martalik QR to'lov va ATM orqali QR kod
+                  Bir martalik QR-to'lov va ATM orqali QR-kod
                 </p>
               </div>
             </div>
@@ -366,7 +366,7 @@ export default function PaymentMethods() {
                     </p>
                     <div className="flex justify-between items-center">
                       <span className="font-bold text-blue-900 text-base sm:text-lg md:text-xl lg:text-2xl">
-                        3,000 UZS
+                        3,000 so'm
                       </span>
                     </div>
                   </CardContent>
@@ -391,7 +391,7 @@ export default function PaymentMethods() {
                       </h3>
                     </div>
                     <p className="text-gray-700 mb-4 sm:mb-5 md:mb-6 text-sm sm:text-base md:text-lg leading-relaxed">
-                      Alif ATMlaridan QR kod olish imkoniyati
+                      Alif ATMlaridan QR-kod olish imkoniyati
                     </p>
                     <Badge
                       variant="secondary"
@@ -537,7 +537,7 @@ export default function PaymentMethods() {
                       ATTO kartasi
                     </h4>
                     <p className="text-blue-100 text-sm sm:text-base md:text-lg leading-relaxed">
-                      1,700 UZS - eng tejamkor variant
+                      1,700 so'm - eng tejamkor variant
                     </p>
                   </div>
                   <div className="bg-white/15 backdrop-blur-md rounded-2xl p-4 sm:p-5 md:p-6 lg:p-8 border border-white/20 transition-all duration-500 hover:bg-white/20 hover:scale-105">
@@ -545,7 +545,7 @@ export default function PaymentMethods() {
                       kontaktsiz to'lov bank kartalar
                     </h4>
                     <p className="text-blue-100 text-sm sm:text-base md:text-lg leading-relaxed">
-                      1,700 UZS - tez va qulay
+                      1,700 so'm - tez va qulay
                     </p>
                   </div>
                 </div>

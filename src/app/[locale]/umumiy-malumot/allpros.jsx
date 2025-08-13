@@ -115,7 +115,7 @@ export default function TashkentMetroDashboard() {
             </p>
             <div className="flex flex-wrap justify-center gap-4 pt-4">
               <div className="bg-gradient-to-r from-[#0E327F] to-blue-600 text-white px-6 py-3 rounded-full text-sm font-medium shadow-lg">
-                6.481 Jami xodim
+                6.481 Jami xodimlar
               </div>
               <div className="bg-gradient-to-r from-pink-500 to-pink-600 text-white px-6 py-3 rounded-full text-sm font-medium shadow-lg">
                 39.13% Ayollar

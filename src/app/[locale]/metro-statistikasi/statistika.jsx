@@ -85,7 +85,7 @@ const MetroStatistics = () => {
     const getStatistika = async () => {
       try {
         const response = await fetch(
-          "https://metro-site.onrender.com/api/statistics/en/last-6-months/"
+          "https://metro-site.onrender.com/api/statistics/uz/"
         );
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);

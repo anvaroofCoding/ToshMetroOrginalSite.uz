@@ -50,7 +50,7 @@ const managementData = [
     image: rasm6,
 
     biography:
-      "1960 yilda Toshkent shahrida tug‘ilgan. Ma’lumoti – oliy. 1982 yilda Toshkent avtomobil-yo‘llar institutini avtomobil transporti ekspluatatsiyasi muhandisi mutaxassisligi bo‘yicha tamomlagan. Mehnat faoliyatini Toshkent shahar 1-Avtokorxonasida boshlagan, keyinchalik turli rahbarlik lavozimlarida ishlagan. 2003–2005 yillarda Yakkasaroy tumani hokimi, 2005–2012 yillarda Toshkent shahar hokimi o‘rinbosari, 2012–2018 yillarda Toshkent shahar hokimi lavozimlarida faoliyat yuritgan. 2021 yildan “Toshkent metropoliteni” DUK boshlig‘i lavozimida ishlamoqda. 2008 yilda “Mehnat shuhrati”, 2024 yilda “Fidokorona xizmatlari uchun” ordenlari bilan taqdirlangan.",
+      "1960-yilda Toshkent shahrida tug‘ilgan. Ma’lumoti oliy. 1982-yilda Toshkent avtomobil-yo‘llar institutini avtomobil transporti ekspluatatsiyasi muhandisi mutaxassisligi bo‘yicha tamomlagan. Mehnat faoliyatini Toshkent shahar 1-Avtokorxonasida boshlagan, keyinchalik turli rahbarlik lavozimlarida ishlagan. 2003–2005-yillarda Yakkasaroy tumani hokimi, 2005–2012-yillarda Toshkent shahar hokimi o‘rinbosari, 2012–2018-yillarda Toshkent shahar hokimi lavozimlarida faoliyat yuritgan. 2021-yildan “Toshkent metropoliteni” DUK boshlig‘i lavozimida ishlamoqda. 2008-yilda “Mehnat shuhrati”, 2024-yilda “Fidokorona xizmatlari uchun” ordenlari bilan taqdirlangan.",
   },
 
   {
@@ -75,7 +75,7 @@ const managementData = [
     image: rasm4,
 
     biography:
-      "Toshkent temir yo‘llari Chuqursoy stansiyasi poezdlar qabul qiluvchisi. 2018-2018 yy. – Toshkent temir yo‘llari Keles stansiyasi 3346 km strelka o‘tkazgich navbatchisi. 2018-2019 yy. – Yunusobod tuman hokimligi Investitsiya majmuasi kotibiyati bosh mutaxassisi. 2019-2019 yy. – Yunusobod tuman hokimligi Investitsiya va tashqi savdo bo‘limi boshlig‘i o‘rinbosari. 2019-2021 yy. – Yunusobod tuman hokimligi Investitsiya majmuasi kotibiyati bosh mutaxassisi. 2021-2021 yy. – “Toshkent metropoliteni” unitar korxonasi Harakat xizmati boshlig‘ining tashishni tashkil etish bo‘yicha o‘rinbosari. 2022-2024 yy. – “Toshkent metropoliteni” davlat unitar korxonasi ishlar boshqaruvchisi. 2024 y. – h.v. – “Toshkent metropoliteni” davlat unitar korxonasi bosh muhandisi. ",
+      "Toshkent temir yo‘llari Chuqursoy stansiyasi poyezdlar qabul qiluvchisi. 2018-2018-yillar – Toshkent temir yo‘llari Keles stansiyasi 3346 km strelka o‘tkazgich navbatchisi. 2018-2019-yillar – Yunusobod tuman hokimligi Investitsiya majmuasi kotibiyati bosh mutaxassisi. 2019-2019-yillar – Yunusobod tuman hokimligi Investitsiya va tashqi savdo bo‘limi boshlig‘i o‘rinbosari. 2019-2021-yillar – Yunusobod tuman hokimligi Investitsiya majmuasi kotibiyati bosh mutaxassisi. 2021-2021-yillar – “Toshkent metropoliteni” unitar korxonasi Harakat xizmati boshlig‘ining tashishni tashkil etish bo‘yicha o‘rinbosari. 2022-2024-yillar – “Toshkent metropoliteni” davlat unitar korxonasi ishlar boshqaruvchisi. 2024-yildan – h.v. – “Toshkent metropoliteni” davlat unitar korxonasi bosh muhandisi.",
   },
 
   {
@@ -101,7 +101,7 @@ const managementData = [
     image: rasm7,
 
     biography:
-      " 2001-2005 yy. – O‘zbekiston Respublikasi Davlat xavfsizlik xizmati instituti talabasi. 2005-2019 yy. – O‘zbekiston Respublikasi Qurolli Kuchlari 18836-h/q harbiy xizmatchi. 2019-2019 yy. – O‘zbekiston Respublikasi Qurolli Kuchlari 51411-h/q harbiy xizmatchi. 2019-2022 yy. – “Toshkent metropoliteni” unitar korxonasi Metropoliten boshlig‘ining xavfsizlik bo‘yicha o‘rinbosari. 2022 y. – h.v. – “Toshkent metropoliteni” davlat unitar korxonasi Metropoliten boshlig‘ining xavfsizlik bo‘yicha o‘rinbosari.",
+      "2019-2022-yillar – “Toshkent metropoliteni” unitar korxonasi Metropoliten boshlig‘ining xavfsizlik bo‘yicha o‘rinbosari. 2022-yildan – h.v. – “Toshkent metropoliteni” davlat unitar korxonasi Metropoliten boshlig‘ining xavfsizlik bo‘yicha o‘rinbosari.",
   },
 
   {
@@ -126,7 +126,7 @@ const managementData = [
     image: rasm5,
 
     biography:
-      "1988 yil Toshkent viloyatida tug’ilgan. Ma’lumoti – oliy. 2015 yilda Toshkent Moliya Institutining soliq va soliqqa tortish mutaxassisligi bo’yicha tamomlagan. Mehnat faoliyatini 2009-2011 yillarda Toshkent shahar Sobir Rahimov tumani hokimligi Moliya bo`limi bosh hisobchisi sifatida boshlagan.2011-2013 yillar  Toshkent shahar Olmazor tumani hokimligi Moliya boʻlimi mudir oʻrinbosari – “Byudjet nazorati” boʻlimi boshligʻi; 2013-2018 yillar  Toshkent shahar Olmazor tumani hokimligi Moliya boʻlimi mudiri; 2018-2019 yillar  Toshkent shahar Moliya bosh boshqarmasi “Xodimlar va maxsus ishlar” boʻlimi boshligʻi; 2019-2024 yillar  Toshkent shahar Shayxontohur tumani Moliya boʻlimi mudiri; 2024-2025 yillar  Toshkent shahar Iqtisodiyot va moliya bosh boshqarmasi shoʻbasi boshligʻi; 2025-2025 yillar  Oʻzbekiston Respublikasi Prezidenti huzuridagi Ijtimoiy himoya milliy agentligining Toshkent shahar Shayxontohur tumanidagi “Inson” ijtimoiy xizmatlar markazi direktori; 2025 yildan “Toshkent metropoliteni” DUK boshlig‘ining  o‘rinbosari lavozimida faoliyat yuritib kelmoqda.",
+      "1988-yil Toshkent viloyatida tug’ilgan. Ma’lumoti oliy. 2015-yilda Toshkent Moliya Institutining soliq va soliqqa tortish mutaxassisligi bo’yicha tamomlagan. Mehnat faoliyatini 2009-2011-yillarda Toshkent shahar Sobir Rahimov tumani hokimligi Moliya bo`limi bosh hisobchisi sifatida boshlagan. 2011-2013-yillar  Toshkent shahar Olmazor tumani hokimligi Moliya boʻlimi mudiri oʻrinbosari – “Byudjet nazorati” boʻlimi boshligʻi; 2013-2018-yillar  Toshkent shahar Olmazor tumani hokimligi Moliya boʻlimi mudiri; 2018-2019-yillar  Toshkent shahar Moliya bosh boshqarmasi “Xodimlar va maxsus ishlar” boʻlimi boshligʻi; 2019-2024-yillar  Toshkent shahar Shayxontohur tumani Moliya boʻlimi mudiri; 2024-2025-yillar  Toshkent shahar Iqtisodiyot va moliya bosh boshqarmasi shoʻba boshligʻi; 2025-2025-yillar  Oʻzbekiston Respublikasi Prezidenti huzuridagi Ijtimoiy himoya milliy agentligining Toshkent shahar Shayxontohur tumanidagi “Inson” ijtimoiy xizmatlar markazi direktori; 2025 yildan “Toshkent metropoliteni” DUK boshlig‘ining  o‘rinbosari lavozimida faoliyat yuritib kelmoqda.",
   },
 
   {
@@ -152,7 +152,7 @@ const managementData = [
     image: rasm8,
 
     biography:
-      "1985 yilda Sirdaryo viloyatida tug‘ilgan. Ma’lumoti – oliy. 2008 yilda Toshkent irrigatsiya va melioratsiya institutining menejment mutaxassisligi bo‘yicha tamomlagan. Mehnat faoliyatini 2002 yilda “Maroqand” MChJda boshlagan. Keyinchalik qator davlat va xo‘jalik tashkilotlarida rahbar va mutaxassis lavozimlarida ishlagan, jumladan, “Agro-nektar” sho‘ba korxonasi direktori, Yunusobod tuman hokimligi apparati rahbari bo‘lib faoliyat yuritgan. 2021 yildan “Toshkent metropoliteni” DUK boshlig‘ining marketing bo‘yicha o‘rinbosari lavozimida ishlab kelmoqda.",
+      "1985-yilda Sirdaryo viloyatida tug‘ilgan. Ma’lumoti oliy. 2008-yilda Toshkent irrigatsiya va melioratsiya institutining menejment mutaxassisligi bo‘yicha tamomlagan. Mehnat faoliyatini 2002-yilda “Maroqand” MChJda boshlagan. Keyinchalik qator davlat va xo‘jalik tashkilotlarida rahbar va mutaxassis lavozimlarida ishlagan, jumladan, “Agro-nektar” sho‘ba korxonasi direktori, Yunusobod tuman hokimligi apparati rahbari bo‘lib faoliyat yuritgan. 2021-yildan “Toshkent metropoliteni” DUK boshlig‘ining marketing bo‘yicha o‘rinbosari lavozimida ishlab kelmoqda.",
   },
 
   {
@@ -178,7 +178,7 @@ const managementData = [
     image: rasm2,
 
     biography:
-      "1995 yilda mehnat faoliyatini Respublika Bosh prokuraturasida ish yurituvchi sifatida boshlagan. 1996–2000 yillarda G.V. Plexanov nomidagi Rossiya iqtisodiyot akademiyasida tahsil olgan. Keyingi yillarda turli davlat va xususiy tashkilotlarda iqtisodchi, tergovchi, direktor va huquqshunos lavozimlarida ishlagan. 2019–2023 yillarda Shayxontohur tumani hokimligi uy-joy va kommunal xizmat bo‘limi boshlig‘i, 2023–2024 yillarda Shayxontohur tumani hokimining qurilish va ekologiya masalalari bo‘yicha o‘rinbosari lavozimida faoliyat yuritgan. 2024 yildan Yakkasaroy tuman hokimining ko‘kalamzorlashtirish masalalari bo‘yicha o‘rinbosari sifatida ishlamoqda.",
+      "1995-yilda mehnat faoliyatini Respublika Bosh prokuraturasida ish yurituvchi sifatida boshlagan. 1996–2000-yillarda G.V. Plexanov nomidagi Rossiya iqtisodiyot akademiyasida tahsil olgan. Keyingi yillarda turli davlat va xususiy tashkilotlarda iqtisodchi, tergovchi, direktor va huquqshunos lavozimlarida ishlagan. 2019–2023-yillarda Shayxontohur tumani hokimligi uy-joy va kommunal xizmat bo‘limi boshlig‘i, 2023–2024-yillarda Shayxontohur tumani hokimining qurilish va ekologiya masalalari bo‘yicha o‘rinbosari lavozimida faoliyat yuritgan. 2024-yildan Yakkasaroy tuman hokimining ko‘kalamzorlashtirish masalalari bo‘yicha o‘rinbosari sifatida ishlamoqda.",
   },
 
   {
@@ -191,7 +191,7 @@ const managementData = [
     lastName: "Norkulov",
 
     position:
-      "«Toshkent metropoliteni» DUK boshligining ilmiy innovatsion rivojlanish masalalari boyicha orinbosari-transport universiteti prorektori ",
+      "«Toshkent metropoliteni» DUK boshlig'ining ilmiy innovatsion rivojlanish masalalari bo'yicha o'rinbosari-transport universiteti prorektori ",
 
     department: "Executive Office",
 
@@ -199,12 +199,12 @@ const managementData = [
 
     email: "nzip@tashmetro.uz",
 
-    hours: "Seyshanba kuni 14:00-16:00",
+    hours: "Seshanba kuni 14:00-16:00",
 
     image: rasm1,
 
     biography:
-      "Suxrob Norkulov 1990 yilda Surxondaryo viloyati Uzun tumanida tug‘ilgan. Ma’lumoti – oliy. 2008 yilda Toshkent temir yo‘l transporti kasb-hunar kollejini, 2015 yilda Toshkent temir yo‘l muhandislari institutini, 2018 yilda Toshkent davlat iqtisodiyot universitetini, 2022 yilda esa O‘zbekiston Respublikasi Vazirlar Mahkamasi huzuridagi Biznes va tadbirkorlik oliy maktabining “Loyiha boshqaruvi” yo‘nalishida magistraturasini tamomlagan. Mehnat faoliyatini temir yo‘l sohasida boshlagan va keyingi yillarda turli rahbarlik lavozimlarida ishlagan. Tayinlovga qadar Transport vazirligi huzuridagi temir yo‘l xodimlarini malaka oshirish va qayta tayyorlash markazi direktori lavozimida faoliyat yuritgan. Hozirda “Toshkent metropoliteni” DUK boshlig‘ining ilmiy-innovatsion rivojlanish bo‘yicha o‘rinbosari lavozimida faoliyat yuritmoqda.",
+      "Suxrob Norkulov 1990-yilda Surxondaryo viloyati Uzun tumanida tug‘ilgan. Ma’lumoti oliy. 2008-yilda Toshkent temir yo‘l transporti kasb-hunar kollejini, 2015-yilda Toshkent temir yo‘l muhandislari institutini, 2018-yilda Toshkent davlat iqtisodiyot universitetini, 2022-yilda esa O‘zbekiston Respublikasi Vazirlar Mahkamasi huzuridagi Biznes va tadbirkorlik oliy maktabining “Loyiha boshqaruvi” yo‘nalishida magistraturasini tamomlagan. Mehnat faoliyatini temir yo‘l sohasida boshlagan va keyingi yillarda turli rahbarlik lavozimlarida ishlagan. Tayinlovga qadar Transport vazirligi huzuridagi temir yo‘l xodimlarini malaka oshirish va qayta tayyorlash markazi direktori lavozimida faoliyat yuritgan. Hozirda “Toshkent metropoliteni” DUK boshlig‘ining ilmiy-innovatsion rivojlanish bo‘yicha o‘rinbosari lavozimida faoliyat yuritmoqda.",
   },
 
   {
@@ -230,7 +230,7 @@ const managementData = [
     image: rasm3,
 
     biography:
-      "Ma’lumoti – oliy. 2014 yilda Toshkent temir yo‘l muhandislik instituti bakalavr bosqichini tamomlagan. 2016 yilda Toshkent temir yo‘l muhandislik instituti magistr bosqichini tamomlagan. 2019 yilda O‘zbekiston Respublikasi Prezidenti huzuridagi Davlat boshqaruv akademiyasini tamomlagan. Tayinlovga qadar D. Ergashev “Toshkent metropoliteni” DUK bosh muhandisining yer usti metro liniyalarini tasarruf etish bo‘yicha o‘rinbosari lavozimida faoliyat yuritgan.",
+      "Ma’lumoti oliy. 2014-yilda Toshkent temir yo‘l muhandislik instituti bakalavr bosqichini tamomlagan. 2016-yilda Toshkent temir yo‘l muhandislik instituti magistr bosqichini tamomlagan. 2019-yilda O‘zbekiston Respublikasi Prezidenti huzuridagi Davlat boshqaruvi akademiyasini tamomlagan. Tayinlovga qadar D. Ergashev “Toshkent metropoliteni” DUK bosh muhandisining yer usti metro liniyalarini tasarruf etish bo‘yicha o‘rinbosari lavozimida faoliyat yuritgan.",
   },
 ];
 

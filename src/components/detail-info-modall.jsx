@@ -34,7 +34,7 @@ export default function DetailedInfoModal({ isOpen, onClose, type }) {
 									</li>
 									<li>• "Toshkent metropoliteni" DUK barcha kassalari</li>
 									<li>
-										• Metro stansiyalarining yer osti va yer usti kassalari
+										• Metro bekatlarining yer osti va yer usti kassalari
 									</li>
 								</ul>
 							</div>
@@ -145,7 +145,7 @@ export default function DetailedInfoModal({ isOpen, onClose, type }) {
 								<div className='bg-yellow-50 p-4 rounded-lg text-center'>
 									<CreditCard className='w-8 h-8 text-yellow-600 mx-auto mb-2' />
 									<h4 className='font-semibold mb-2'>Kassalarda</h4>
-									<p className='text-xs'>Metro va transport kassalari</p>
+									<p className='text-xs'>Metro va transport kassalarida</p>
 								</div>
 							</div>
 						</div>

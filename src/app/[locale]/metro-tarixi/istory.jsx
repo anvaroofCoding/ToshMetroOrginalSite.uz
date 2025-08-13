@@ -118,7 +118,7 @@ function TashkentMetroPage() {
       opened: "2001",
       color: "#57be82",
       description:
-        "Yunusobod yo'li uchinchi ishga tushgan yo'nalish bo'lib, Turkiston bekatidan Ming o'rik bekatigacha davom etadi. ",
+        "Yunusobod yo'li uchinchi ishga tushgan yo'nalish bo'lib, Turkiston bekatidan Mingo'rik bekatigacha davom etadi. ",
       highlights: [
         "Turar-joy hududlari",
         "Zamonaviy dizayn",
@@ -147,7 +147,7 @@ function TashkentMetroPage() {
       event: "Metro qurilishi boshlandi",
       phase: "Asos",
       description:
-        "Markaziy Osiyoda birinchi va yagona metro tizimi qurilishi boshlandi",
+        "Markaziy Osiyoda birinchi va yagona metro tizimi qurilishi boshlandi.",
     },
     {
       year: "1977",
@@ -161,35 +161,35 @@ function TashkentMetroPage() {
       event: "Tez rivojlanish davri",
       phase: "2-bosqich Chilonzor",
       description:
-        "Uzunligi 4,2 km, “Amir Temur xiyoboni” bekatidan “Buyuk ipak yo‘li” bekatigacha bo‘lgan 3 ta bekat 1980-yil avgust oyida foydalanishga topshirildi. Ushbu bekatlar ishga tushirilgach, Chilonzor metro yonalishining qurilishi janubi-g‘arbdan shimoli-sharqqa shahar markazi orqali 12 bekat va uzunligi 16,3 km bo‘lgan.",
+        "Uzunligi 4,2 km, “Amir Temur xiyoboni” bekatidan “Buyuk ipak yo‘li” bekatigacha bo‘lgan 3 ta bekat 1980-yil avgust oyida foydalanishga topshirildi. Ushbu bekatlar ishga tushirilgach, Chilonzor metro yo'nalishining qurilishi janubi-g‘arbdan shimoli-sharqqa shahar markazi orqali 12 bekat va uzunligi 16,3 km bo‘lgan.",
     },
     {
       year: "1984",
       event: "O‘zbekiston yo‘nalishi",
       phase: "1-bosqich O'zbekiston",
       description:
-        "Alisher Navoiy bekatidan Toshkent bekatiga qadar uzunligi 5.6 kmdan ortiq bo'lgan shahar markazini temir yo'l vakzaliga tutashtiruvchi jami 5 ta bekat 1984-yil 26-noyabrda foydalanishga topshirildi",
+        "Alisher Navoiy bekatidan Toshkent bekatiga qadar uzunligi 5.6 kmdan ortiq bo'lgan shahar markazini temir yo'l vokzaliga tutashtiruvchi jami 5 ta bekat 1984-yil 26-noyabrda foydalanishga topshirildi.",
     },
     {
       year: "1987",
       event: "O'zbekiston yo'nalishining kengayishi",
       phase: "2-bosqich O'zbekiston",
       description:
-        "Uzunligi 3,2 km dan ortiq bo‘lgan, “Toshkent” bekatidan “Do‘stlik” bekatigacha bekat 1987-yil foydalanishga topshirildi.",
+        "Uzunligi 3,2 km dan ortiq bo‘lgan, “Toshkent”, “Mashinasozlar”, “Do‘stlik” bekatlari 1987-yil foydalanishga topshirildi.",
     },
     {
       year: "1989",
       event: "O'zbekiston yo'nalishining kengayishi",
       phase: "3-bosqich O'zbekiston",
       description:
-        "Uzunligi 2,2 km dan ortiq bo ‘lgan, “Alisher Navoiy” bekatidan “Chorsu” bekatiga qadar 2 ta bekat 1989 yil foydalanishga topshirildi.",
+        "Uzunligi 2,2 km dan ortiq bo‘lgan, “Alisher Navoiy” bekatidan “Chorsu” bekatiga qadar 2 ta bekat 1989-yil foydalanishga topshirildi.",
     },
     {
       year: "1991",
       event: "O'zbekiston yo'nalishining kengayishi",
       phase: "4-bosqich O'zbekiston",
       description:
-        "3,2 km uzunlikdagi Chorsu bekatidan Beruniy bekatigacha boʻlgan 2 ta bekat 1991-yil aprel oyida foydalanishga topshirilgan.Umumiy uzunligi 14,2 km boʻlgan Oʻzbekiston yo‘nalishi 11 ta bekat va Oʻzbekiston elektr deposini oʻz ichiga oladi.",
+        "3,2 km uzunlikdagi Chorsu bekatidan Beruniy bekatigacha boʻlgan 2 ta bekat 1991-yil aprel oyida foydalanishga topshirilgan.Umumiy uzunligi 14,2 km boʻlgan Oʻzbekiston yo‘nalishi 11 ta bekat va Oʻzbekiston elektrodeposini oʻz ichiga oladi.",
     },
     {
       year: "2001",
@@ -203,63 +203,56 @@ function TashkentMetroPage() {
       event: "Yunusobod yo’nalishi",
       phase: "2-bosqich Yunusobod",
       description:
-        "2016-yilda O‘zbekiston Respublikasi Prezidenti Sh.M. Mirziyoyev tomonidan metro qurilishini davom ettirishga qaratilgan qator qarorlar imzolandi. O‘zbekiston Respublikasi Prezidentining 2016-yil 7-noyabrdagi “Toshkent metropolitenining Yunusobod liniyasining ikkinchi bosqichini qurish” loyihasini amalga oshirish chora-tadbirlari to‘g‘risida”gi PQ-2653-sonli qaroriga muvofiq Yunusobod metro yo ‘nalishining 2,9 km uzunlikdagi ikki “Turkiston” va “Yunusobod” bekatlari qurilishi boshlandi. 2020-yilda avgust oyida ikkita “Turkiston” va “Yunusobod” bekatlari foydalanishga topshirildi. Hozirgi vaqtda Yunusobod yo ‘nalishining umumiy uzunligi 9,5 km bo‘lib, 8 bekat bilan yirik turar-joy massivini shahar markazi bilan bog‘laydi.",
+        "2016-yilda O‘zbekiston Respublikasi Prezidenti Sh.M. Mirziyoyev tomonidan metro qurilishini davom ettirishga qaratilgan qator qarorlar imzolandi. O‘zbekiston Respublikasi Prezidentining 2016-yil 7-noyabrdagi “Toshkent metropolitenining Yunusobod liniyasining ikkinchi bosqichini qurish” loyihasini amalga oshirish chora-tadbirlari to‘g‘risida”gi PQ-2653-sonli qaroriga muvofiq Yunusobod metro yo‘nalishining 2,9 km uzunlikdagi ikkita “Turkiston” va “Yunusobod” bekatlari qurilishi boshlandi. 2020-yilda avgust oyida ikkita “Turkiston” va “Yunusobod” bekatlari foydalanishga topshirildi. Hozirgi vaqtda Yunusobod yo‘nalishining umumiy uzunligi 9,5 km bo‘lib, 8 bekat bilan yirik turar-joy massivini shahar markazi bilan bog‘laydi.",
     },
     {
       year: "2017",
       event: "PQ-2979-son qarori",
       phase: "Yer usti halqa yo'li",
       description:
-        "O ‘zbekiston Respublikasi Prezidentining 2017-yil 19-maydagi PQ-2979-son qaroriga muvofiq “Toshkent shahrida halqa yer usti metro liniyasini qurish” loyihasi amalga oshirilmoqda.",
-    },
-    {
-      year: "2017",
-      event: "PQ-2979-son qarori",
-      phase: "Yer usti halqa yo'li",
-      description:
-        "O ‘zbekiston Respublikasi Prezidentining 2017-yil 19-maydagi PQ-2979-son qaroriga muvofiq “Toshkent shahrida halqa yer usti metro liniyasini qurish” loyihasi amalga oshirilmoqda.",
+        "O‘zbekiston Respublikasi Prezidentining 2017-yil 19-maydagi PQ-2979-son qaroriga muvofiq “Toshkent shahrida halqa yer usti metro liniyasini qurish” loyihasi amalga oshirilmoqda.",
     },
     {
       year: "2020",
       event: "Yer usti halqa yo'li",
       phase: "Yer usti halqa yo'li topshirildi",
       description:
-        "2020 yil avgust oyida metro halqa yer usti yo ‘nalishining 1–bosqichi – 11,5 km uzunlikdagi 7 ta bekat foydalanishga topshirildi.Ushbu qarorlar ijrosini ta ‘minlash maqsadida 2020-yilda umumiy uzunligi 21,4 km bo ‘lgan 14 ta yangi metro yo‘nalish va bekatlari qurilib, foydalanishga topshirildi.",
+        "2020-yil avgust oyida metro halqa yer usti yo‘nalishining 1–bosqichi – 11,5 km uzunlikdagi 7 ta bekat foydalanishga topshirildi.Ushbu qarorlar ijrosini ta'minlash maqsadida 2020-yilda umumiy uzunligi 21,4 km bo‘lgan 14 ta yangi metro yo‘nalish va bekatlari qurilib, foydalanishga topshirildi.",
     },
     {
       year: "2020",
       event: "Chilonzor yo'nalishining kengayishi",
       phase: "Sergili bekatlari",
       description:
-        "O‘zbekiston Respublikasi Prezidentining 2016-yil 29-noyabrdagi “Toshkent metropolitenining Sergeli liniyasini qurish” loyihasini amalga oshirish chora-tadbirlari to‘g‘risida”gi PQ-2664-sonli qaroriga muvofiq 2020-yil dekabr oyida 7,0 km uzunlikdagi yangi Sergeli metro yo‘lining 5 ta bekati qurildi va foydalanishga topshirildi",
+        "O‘zbekiston Respublikasi Prezidentining 2016-yil 29-noyabrdagi “Toshkent metropolitenining Sergeli liniyasini qurish” loyihasini amalga oshirish chora-tadbirlari to‘g‘risida”gi PQ-2664-sonli qaroriga muvofiq 2020-yil dekabr oyida 7,0 km uzunlikdagi yangi Sergeli metro yo‘lining 5 ta bekati qurildi va foydalanishga topshirildi.",
     },
     {
       year: "2021",
       event: "Yunusobod yo'nalishining kengayishi",
       phase: "Yangi bekatlar",
       description:
-        "Yunisobod-Turkiston bekatlar 2021-yilda foydalanishga topshirilgan",
+        "Yunusobod-Turkiston bekatlar 2021-yilda foydalanishga topshirilgan.",
     },
     {
       year: "2024",
-      event: "Yerusti xalqa yo'li kengayishi",
+      event: "Yerusti halqa yo'li kengayishi",
       phase: "Yangi bekatlar",
       description:
-        "Turon-Qipchoq bekatlari 2024-yilda foydalanishga topshirilgan",
+        "Turon-Qipchoq bekatlari 2024-yilda foydalanishga topshirilgan.",
     },
   ];
 
   const sliderHistory = [
     {
       image: "/galery/birinchisostav.png",
-      title: "Tarixiy metro poezdlari",
+      title: "Tarixiy metro poyezdlari",
       description: "Metro qurilishining ilk bosqichlari",
       badges: ["Tarixiy", "Madaniy"],
     },
     {
       image: "/galery/ortasastav.png",
-      title: "Yaqin o'tmishdagi metro poezdlari",
-      description: "Rivojlanish bosqichidagi poezdlar",
+      title: "Yaqin o'tmishdagi metro poyezdlari",
+      description: "Rivojlanish bosqichidagi poyezdlar",
       badges: ["Xavfsiz", "Samarali"],
     },
     {
@@ -392,7 +385,7 @@ function TashkentMetroPage() {
             Metro tarmog'i
           </h2>
           <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-            Toshkent shahar bo'ylab xizmat ko'rsatadigan hamda o'zaro bog'langan
+            Toshkent shahri bo'ylab xizmat ko'rsatadigan hamda o'zaro bog'langan
             metropoliten yo'nalishlari
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -582,7 +575,7 @@ function TashkentMetroPage() {
               <p className="text-base sm:text-lg lg:text-xl mb-6 sm:mb-8 opacity-90 leading-relaxed max-w-4xl mx-auto px-2">
                 Bugungi kunda Toshkent metropoliteni Markaziy Osiyoning yetakchi
                 shahar transport tizimi sifatida 70 kilometrdan ortiq uzunlikda
-                50 ta bekatlar bilan faoliyat yuritmoqda. 2024-yilning so'ngi
+                50 ta bekatlar bilan faoliyat yuritmoqda. 2024-yilning so'nggi
                 choragida kunlik yo'lovchi tashish soni 1 milliondan oshgan.
               </p>
 

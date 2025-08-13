@@ -16,14 +16,14 @@ const FaqAccordion = () => {
 			q: 'ATTO kartasini qayerdan sotib olish mumkin va karta balansini qanday to‘ldirish mumkin?',
 			a: `"ATTO" transport kartasining balansini ATTO, MyUzcard , Payme, Upay, Apelsin va boshqa elektron to‘lov tizimlarining mobil ilovalari orqali to‘ldirish mumkin.
 O‘z-o‘ziga xizmat ko‘rsatish terminallarida-infokiosklar.
-"Toshyulovchitrans" DUK va "Toshkent metropoliteni" DUK kompaniyasining barcha savdo nuqtalarida.`,
+"Toshyo'lovchitransxizmat" AJ va "Toshkent metropoliteni" DUK kompaniyasining barcha savdo nuqtalarida.`,
 		},
 		{
 			q: `Karta ishi bo'yicha qayerga murojaat qilishim mumkin?`,
-			a: `+998 78 140 08 08 raqamiga qo'ng'roq qilish yoki elektron pochta orqali info@atto.uz`,
+			a: `+998 78 140 08 08 raqamiga qo'ng'iroq qilish yoki elektron pochta orqali info@atto.uz`,
 		},
 		{
-			q: "Bazi bekatlarda kassa operator joylari yopilgan to'lovni qayerda qilsam bo'ladi?",
+			q: "Ba'zi bekatlarda kassa operator joylari yopilgan to'lovni qayerda qilsam bo'ladi?",
 			a: 'Yopilgan bekatlarda to‘lovni ATTO, MyUzcard, Payme, Upay, Apelsin va boshqa elektron to‘lov tizimlarining mobil ilovalari orqali amalga oshirish mumkin. Yoki paynet terminali orqali to‘lovni amalga oshirish mumkin.',
 		},
 	]
@@ -37,11 +37,10 @@ O‘z-o‘ziga xizmat ko‘rsatish terminallarida-infokiosklar.
 			{items.map((item, index) => (
 				<div
 					key={index}
-					className={`rounded-lg  transition-colors mt-4 duration-300 bg-transparent ${
-						openIndex === index
+					className={`rounded-lg  transition-colors mt-4 duration-300 bg-transparent ${openIndex === index
 							? 'border-blue-200 bg-blue-400/10'
 							: 'border-gray-300 bg-transparent'
-					}`}
+						}`}
 				>
 					<button
 						onClick={() => toggle(index)}

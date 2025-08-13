@@ -349,7 +349,7 @@ function ApiVakan() {
                   <p className="text-gray-600 text-center">
                     Toshkent shahar, Shayxontohur tumani,
                     <br />
-                    I.Karimov ko'chasi, 16a-uy
+                    I.Karimov ko'chasi, 16-A uy
                   </p>
                 </motion.div>
 

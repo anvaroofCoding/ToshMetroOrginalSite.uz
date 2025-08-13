@@ -20,37 +20,37 @@ const documents = [
     year: "2003",
   },
   {
-    title: "O'zbekiston Respublikasining \"Xotin-qizlarni tazyiq va zo'ravonlikdan himoya qilish to'g'risida\" Qonuni",
+    title: "\"Xotin-qizlarni tazyiq va zo'ravonlikdan himoya qilish to'g'risida\" O'zbekiston Respublikasining Qonuni",
     url: "https://lex.uz/acts/-4494709",
     year: "2019",
   },
   {
     title:
-      "O'zbekiston Respublikasining \"Xotin-qizlar va erkaklar uchun teng huquq hamda imkoniyatlar kafolatlari to'g'risida\" Qonuni",
+      "\"Xotin-qizlar va erkaklar uchun teng huquq hamda imkoniyatlar kafolatlari to'g'risida\" O'zbekiston Respublikasining Qonuni",
     url: "https://lex.uz/docs/-4494849",
     year: "2019",
   },
   {
     title:
-      "O'zbekiston Respublikasining \"Og'ir ijtimoiy ahvolda qolgan xotin-qizlar huquqlari kafolatlarini ta'minlash bo'yicha qo'shimcha chora-tadbirlar qabul qilinganligi munosabati bilan o'zbekiston respublikasining ayrim qonun hujjatlariga qo'shimcha va o'zgartishlar kiritish to'g'risida\" Qonuni",
+      "\"Og'ir ijtimoiy ahvolda qolgan xotin-qizlar huquqlari kafolatlarini ta'minlash bo'yicha qo'shimcha chora-tadbirlar qabul qilinganligi munosabati bilan O'zbekiston respublikasining ayrim qonun hujjatlariga qo'shimcha va o'zgartishlar kiritish to'g'risida\" O'zbekiston Respublikasining  Qonuni",
     url: "https://lex.uz/ru/docs/-5766205",
     year: "2020",
   },
   {
     title:
-      "O'zbekiston Respublikasining \"Xotin-qizlar va bolalar huquqlari, erkinliklari hamda qonuniy manfaatlarini ishonchli himoya qilish tizimi yanada takomillashtirilishi munosabati bilan O'zbekiston Respublikasining ayrim qonun hujjatlariga o'zgartish va qo'shimchalar kiritish to'g'risida\" Qonuni",
+      "\"Xotin-qizlar va bolalar huquqlari, erkinliklari hamda qonuniy manfaatlarini ishonchli himoya qilish tizimi yanada takomillashtirilishi munosabati bilan O'zbekiston Respublikasining ayrim qonun hujjatlariga o'zgartish va qo'shimchalar kiritish to'g'risida\" O'zbekiston Respublikasining Qonuni",
     url: "https://lex.uz/uz/docs/-6430272",
     year: "2021",
   },
   {
     title:
-      "O'zbekiston Respublikasi Oliy Majlisi Senatining \"2030-yilga qadar o'zbekiston respublikasida gender tenglikka erishish strategiyasini tasdiqlash haqida\" qarori",
+      "\"2030-yilga qadar o'zbekiston respublikasida gender tenglikka erishish strategiyasini tasdiqlash haqida\" O'zbekiston Respublikasi Oliy Majlisi Senatining Qarori",
     url: "https://lex.uz/docs/-5466673",
     year: "2022",
   },
   {
     title:
-      "O'zbekiston Respublikasi Oliy Majlisi Senati kengashining \"Xotin-qizlarning jamiyatdagi rolini oshirish, gender tenglik va oila masalalari bo'yicha respublika komissiyasini tashkil etish to'g'risida\" qarori",
+      "\"Xotin-qizlarning jamiyatdagi rolini oshirish, gender tenglik va oila masalalari bo'yicha respublika komissiyasini tashkil etish to'g'risida\" O'zbekiston Respublikasi Oliy Majlisi Senati kengashining Qarori",
     url: "https://lex.uz/en/docs/-5949556",
     year: "2023",
   },

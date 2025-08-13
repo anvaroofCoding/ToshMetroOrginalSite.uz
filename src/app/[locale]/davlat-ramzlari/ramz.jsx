@@ -372,8 +372,7 @@ export default function UzbekistanSymbols() {
                           Qizil chiziqlar
                         </h3>
                         <p className="text-gray-700 leading-relaxed">
-                          Hayot kuchi va barcha tirik mavjudotlardagi qon
-                          aylanishi ramzi.
+                          Har bir tirik jonning qon tomirida urib turgan hayotiy kuch, hayot ramzidir.
                         </p>
                       </div>
                     </div>
@@ -465,8 +464,8 @@ export default function UzbekistanSymbols() {
                         Bug'doy va paxta
                       </h3>
                       <p className="text-gray-700 leading-relaxed">
-                        So'l tomonida bug'doy boshoqlari, o'ng tomonida ochilgan
-                        paxta chanoqlari suvrati tushirilgan chambardan iborat.
+                        Chap tomonida bug'doy boshoqlari, o'ng tomonida ochilgan
+                        paxta chanoqlari tasvirlangan.
                       </p>
                     </div>
 
@@ -504,7 +503,7 @@ export default function UzbekistanSymbols() {
                       </h3>
                       <p className="text-gray-700 leading-relaxed">
                         Gerbning pastki qismida Respublika Davlat bayrog'ini
-                        ifoda etuvchi chambar lentasining bandiga «O'zbekiston»
+                        ifoda etuvchi chambar lentasining bantida «O'zbekiston»
                         deb yozib qo'yilgan.
                       </p>
                     </div>
@@ -661,7 +660,7 @@ export default function UzbekistanSymbols() {
 
                         <div className="bg-white/70 p-4 rounded-lg border-l-4 border-yellow-400">
                           <p className="font-bold text-[#0E327F] mb-2">
-                            Naqorat:
+                            Naqarot:
                           </p>
                           <p>
                             Oltin bu vodiylar - jon O'zbekiston,
@@ -686,7 +685,7 @@ export default function UzbekistanSymbols() {
 
                         <div className="bg-white/70 p-4 rounded-lg border-l-4 border-yellow-400">
                           <p className="font-bold text-[#0E327F] mb-2">
-                            Naqorat:
+                            Naqarot:
                           </p>
                           <p>
                             Oltin bu vodiylar - jon O'zbekiston,

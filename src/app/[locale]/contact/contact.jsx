@@ -33,7 +33,7 @@ const contactInfo = [
   {
     icon: MapPin,
     title: "Manzil",
-    content: "Toshkent shahri, Shayxontohur tumani, Islom Karimov 16А, 100027",
+    content: "Toshkent shahri, Shayxontohur tumani, Islom Karimov ko'chasi 16-А, 100027",
     delay: 0.1,
   },
   {

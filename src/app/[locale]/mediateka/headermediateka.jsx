@@ -17,37 +17,37 @@ const photos = [
   {
     id: 1,
     src: "/galery/1.jpg",
-    title: "Metropoliten ajoyib rasmlar",
+    title: "Metropolitenga fotonigoh",
     category: "Metro",
   },
   {
     id: 2,
     src: "/galery/2.jpg",
-    title: "Metropoliten ajoyib rasmlar",
+    title: "Metropolitenga fotonigoh",
     category: "Metro",
   },
   {
     id: 3,
     src: "/galery/3.jpg",
-    title: "Metropoliten ajoyib rasmlar",
+    title: "Metropolitenga fotonigoh",
     category: "Metro",
   },
   {
     id: 4,
     src: "/galery/4.jpg",
-    title: "Metropoliten ajoyib rasmlar",
+    title: "Metropolitenga fotonigoh",
     category: "Metro",
   },
   {
     id: 5,
     src: "/galery/5.jpg",
-    title: "Metropoliten ajoyib rasmlar",
+    title: "Metropolitenga fotonigoh",
     category: "Metro",
   },
   {
     id: 6,
     src: "/galery/6.jpg",
-    title: "Metropoliten ajoyib rasmlar",
+    title: "Metropolitenga fotonigoh",
     category: "Metro",
   },
 ];

@@ -22,8 +22,7 @@ import {
   MoveRight,
   ScanFace,
 } from "lucide-react";
-import BiometrikVideo1 from "../biometrik-video/video2";
-import BiometrikVideo from "../biometrik-video/video";
+import Component from "@/app/[locale]/FacePay/forFacepayanimation";
 
 function Facepay() {
   const observerRef = useRef(null);
@@ -50,19 +49,19 @@ function Facepay() {
     {
       icon: Download,
       title: "ATTO mobil ilovasini yuklab oling",
-      description: "Ilovani GooglePlay va AppStore dan yuklab olishing",
+      description: "Ilovani GooglePlay va AppStore dan yuklab oling",
       image: "https://www.atto.uz/image/step1.png",
     },
     {
       icon: LogIn,
-      title: "Ilovada avtorizasiyadan oʻting",
+      title: "Ilovada avtorizastiyadan oʻting",
       description: "Telefon raqamingizni va parolni kiriting",
       image: "https://www.atto.uz/image/step2.png",
     },
     {
       icon: Plus,
       title: "Transport kartasini qoʻshing",
-      description: "Yoki bepul virtual karta oching",
+      description: "yoki bepul virtual karta oching",
       image: "https://www.atto.uz/image/step3.png",
     },
     {
@@ -76,17 +75,17 @@ function Facepay() {
   const usageSteps = [
     {
       icon: CheckCircle,
-      title: "ATTO ilovasida FacePayning ishga tushirilganini tekshiring",
+      title: "ATTO ilovasida FacePay ishga tushirilganini tekshiring",
     },
     {
       icon: Wallet,
       title:
-        "Turniketdan oʻtishdan oldin, bogʻlangan transport kartasida toʻlov uchun etarli mablagʻ borligiga ishonch hosil qiling",
+        "Turniketdan oʻtishdan oldin, bogʻlangan transport kartasida toʻlov uchun yetarli mablagʻ borligiga ishonch hosil qiling",
     },
     {
       icon: ScanFace,
       title:
-        "Turniketdan oʻtishdan oldin bosh kiyimingizni eching va roʻmolchangizni yoki sharfingizni yuzingizni yopmaydigan qilib tuzating",
+        "Turniketdan oʻtishdan oldin bosh kiyimingizni yeching va roʻmolingiz yoki sharfingiz yuzingizni yopmaydigan holatda bo'lsin",
     },
     {
       icon: Scan,
@@ -95,7 +94,7 @@ function Facepay() {
     {
       icon: Zap,
       title:
-        "Toʻlov miqdori bogʻlangan transport kartasidan biroz vaqt oʻtib chegiriladi",
+        "Toʻlov summasi biroz vaqt o'tgach, ulangan transport kartasidan yechib olinadi",
     },
     {
       icon: MoveRight,
@@ -119,12 +118,8 @@ function Facepay() {
             <h1 className="text-5xl md:text-7xl font-bold text-blue-900 mb-8 leading-tight">
               FacePay
             </h1>
-            <div className=" flex justify-center items-center py-10">
-              <img
-                src="https://www.atto.uz/image/person.png"
-                alt="FacePay Hero"
-                className="w-full max-w-md"
-              />
+            <div className="relative flex justify-center items-center">
+              <Component />
             </div>
             <div className="max-w-2xl mx-auto">
               <h2 className="text-2xl md:text-3xl font-semibold text-blue-900 mb-4">
@@ -152,17 +147,18 @@ function Facepay() {
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="space-y-6">
                 <p className="text-lg text-blue-800/90 leading-relaxed">
-                  Bu toʻlovning toʻliq kontaktsiz usuli. Endi siz na smartfonga,
-                  na boshqa yuzalarga tegishingiz shart emas. Biometrik toʻlov
-                  xizmati barcha yoʻlovchilar uchun majburiy boʻlmaydi – boshqa
-                  barcha toʻlov usullari ham ishlab turishi davom etadi.
+                  Bu toʻlovning toʻliq kontaktsiz usuli. Endi siz na
+                  smartfonga, na boshqa yuzalarga tegishingiz shart emas.
+                  Biometrik toʻlov xizmati barcha yoʻlovchilar uchun majburiy
+                  boʻlmaydi – boshqa barcha toʻlov usullari ham ishlab turishi
+                  davom etadi.
                 </p>
                 <p className="text-lg text-blue-800/90 leading-relaxed">
                   Xizmatdan foydalanish uchun «ATTO» mobil ilovasida roʻyxatdan
                   oʻtib, yuzingizning suratini va toʻlov uchun mablagʻ boʻlgan
                   transport kartasini bogʻlashingiz kerak. Yuz bilan toʻlov
                   qilish juda oson: turniket oldiga borib, turniketga
-                  oʻrnatilgan kameraga qarashingiz kifoya. Eshiklar ochiladi va
+                  oʻrnatilgan kameraga qarashingiz kifoya. Turniket ochiladi va
                   toʻlov miqdori bogʻlangan transport kartasidan yechiladi.
                 </p>
 
@@ -170,13 +166,13 @@ function Facepay() {
                   <div className="flex items-center gap-3 p-4 bg-blue-900/5 rounded-xl border border-blue-900/10">
                     <CheckCircle className="w-6 h-6 text-blue-900 flex-shrink-0" />
                     <span className="text-blue-900 font-medium">
-                      Yunusobod va Chilonzor liniyalarining barcha bekatlarida
+                      Yunusobod va Chilonzor yo'nalishlarining barcha bekatlarida
                     </span>
                   </div>
                   <div className="flex items-center gap-3 p-4 bg-blue-900/5 rounded-xl border border-blue-900/10">
                     <Smartphone className="w-6 h-6 text-blue-900 flex-shrink-0" />
                     <span className="text-blue-900 font-medium">
-                      Smartfon va transport kartasiz metroda yo‘l haqi uchun
+                      Smartfon va transport kartasisiz metroda yo‘l haqi uchun
                       toʻlovlar
                     </span>
                   </div>
@@ -202,7 +198,7 @@ function Facepay() {
           <div className="fade-in opacity-0 translate-y-8 transition-all duration-1000">
             <div className="text-center mb-16">
               <h2 className="text-4xl font-bold text-blue-900 mb-6">
-                FacePay ni qanday ulash mumkin
+                FacePay ni qanday ulash mumkin?
               </h2>
               <div className="w-24 h-1 bg-gradient-to-r from-blue-900 to-blue-600 mx-auto rounded-full"></div>
             </div>
@@ -282,8 +278,6 @@ function Facepay() {
           transform: translateY(0);
         }
       `}</style>
-
-      <BiometrikVideo />
     </div>
   );
 }

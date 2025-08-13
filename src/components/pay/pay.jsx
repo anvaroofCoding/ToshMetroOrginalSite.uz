@@ -19,8 +19,7 @@ import {
   Star,
   Nfc,
 } from "lucide-react";
-import BiometrikVideo from "../biometrik-video/video";
-import BiometrikVideo1 from "../biometrik-video/video2";
+import Component from "@/app/[locale]/pay/components";
 
 function PalmpayPayments() {
   const observerRef = useRef(null);
@@ -47,19 +46,19 @@ function PalmpayPayments() {
     {
       icon: Download,
       title: "ATTO mobil ilovasini yuklab oling",
-      description: "Ilovani GooglePlay va AppStore dan yuklab olishing",
+      description: "Ilovani GooglePlay va AppStore dan yuklab oling",
       image: "https://www.atto.uz/image/step1.png",
     },
     {
       icon: LogIn,
-      title: "Ilovada avtorizasiyadan oʻting",
+      title: "Ilovada avtorizatsiyadan oʻting",
       description: "Telefon raqamingizni va parolni kiriting",
       image: "https://www.atto.uz/image/step2.png",
     },
     {
       icon: Plus,
       title: "Transport kartasini qoʻshing",
-      description: "Yoki bepul virtual karta oching",
+      description: "yoki bepul virtual karta oching",
       image: "https://www.atto.uz/image/step3.png",
     },
   ];
@@ -72,34 +71,34 @@ function PalmpayPayments() {
     {
       icon: Camera,
       title:
-        "Stol yaqinidagi hamkorlarimiz sizdan kaftingizni suratga oluvchi maxsus qurilma ustiga qoʻyishingizni soʻrashadi. Qoʻlingizni toʻgʻri tuting va uni qurilmadan 15 sm balandlikda ushlab turing.",
+        "Stol yaqinidagi hamkorlarimiz sizdan kaftingizni suratga oluvchi maxsus qurilma ustiga qoʻyishingizni soʻrashadi. Qoʻlingizni toʻgʻri tuting va uni qurilmadan 15 sm balandlikda tuting.",
     },
     {
       icon: Hand,
       title:
-        "Avval oʻng qoʻlingizni, soʻng chap qoʻlingizni qoʻying. Shundan soʻng ekranda QR kod paydo boʻladi.",
+        "Avval oʻng qoʻlingizni, soʻng chap qoʻlingizni qoʻying. Shundan soʻng ekranda QR-kod paydo boʻladi.",
     },
     {
       icon: QrCode,
       title:
-        'ATTO mobil ilovasi yordamida QR kodni skanerlang. Ilovaning bosh ekranida "PalmPay ni faollashtirish" tugmasini bosing, soʻng "QR kodni skanerlash" tugmasini bosing.',
+        'ATTO mobil ilovasi yordamida QR-kodni skanerlang. Ilovaning bosh ekranida "PalmPay ni faollashtirish" tugmasini bosing, soʻng "QR-kodni skanerlash" tugmasini bosing.',
     },
   ];
 
   const usageSteps = [
     {
       icon: CheckCircle,
-      title: "ATTO ilovasida PalmPayning ishga tushirilganini tekshiring.",
+      title: "ATTO ilovasida PalmPay ishga tushirilganini tekshiring",
     },
     {
       icon: Wallet,
       title:
-        "Turniketdan oʻtishdan oldin, bogʻlangan transport kartasida toʻlov uchun etarli mablagʻ borligiga ishonch hosil qiling. Qoʻlingizni qurilmadan 15 sm balandlikda ushlab turing.",
+        "Turniketdan oʻtishdan oldin, bogʻlangan transport kartasida toʻlov uchun yetarli mablagʻ borligiga ishonch hosil qiling. Qoʻlingizni qurilmadan 15 sm balandlikda tuting",
     },
     {
       icon: Hand,
       title:
-        "Turniketdan oʻtishdan oldin qoʻlqopni eching, kaftingiz yopmaydigan qilish uchun kiyim yengini yuqoriga torting.",
+        "Turniketdan oʻtishdan oldin qoʻlqopni yeching, kaftingizni yopmaydigan qilish uchun kiyim yengini yuqoriga torting",
     },
     {
       icon: Scan,
@@ -108,16 +107,16 @@ function PalmpayPayments() {
     {
       icon: Zap,
       title:
-        "Skaner ustiga kaftingizni tuting, yashil signal va eshiklarning ochilishini kuting",
+        "Kaftingizni skaner ustiga qo‘ying va yashil chiroq yonishini kuting. Chiroq yoqilgach, turniket orqali o‘ting",
     },
     {
       icon: CreditCard,
       title:
-        "Toʻlov miqdori biroz vaqt oʻtib bogʻlangan transport kartasidan yechiladi.",
+        "Toʻlov miqdori biroz vaqt oʻtib bogʻlangan transport kartasidan yechiladi",
     },
     {
       icon: Star,
-      title: "Metroga oʻting va xayrli sayohat!",
+      title: "Turniketdan oʻting va yo'lingiz bexatar bo'lsin!",
     },
   ];
 
@@ -137,12 +136,8 @@ function PalmpayPayments() {
             <h1 className="text-5xl md:text-7xl font-bold text-blue-900 mb-8 leading-tight">
               PalmPay
             </h1>
-            <div className=" flex justify-center items-center py-5">
-              <img
-                src="https://www.atto.uz/image/hand.png"
-                alt="FacePay Hero"
-                className="w-full max-w-md"
-              />
+            <div className="relative flex justify-center items-center">
+              <Component />
             </div>
             {/* Optimized PalmPay Video */}
           </div>
@@ -163,21 +158,21 @@ function PalmpayPayments() {
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="space-y-6">
                 <p className="text-lg text-blue-800/90 leading-relaxed">
-                  Bu yo'l haqi uchun toʻlovlar butunlay kontaktsiz, innovasion
+                  Bu yo'l haqi uchun toʻlovlar butunlay kontaktsiz, innovatsion
                   usuli. Endi siz bank kartasini olib yurish yoki hamyondan
                   chiqarish haqida oʻylashingiz shart emas, chunki qoʻlingiz
                   doim siz bilan.
                 </p>
                 <p className="text-lg text-blue-800/90 leading-relaxed">
                   Biometrik toʻlov xizmati barcha yoʻlovchilar uchun majburiy
-                  boʻlmaydi – boshqa barcha toʻlov usullari ham ishlab turishi
+                  boʻlmaydi – boshqa barcha toʻlov usullari ham ishlab turishda
                   davom etadi.
                 </p>
                 <p className="text-lg text-blue-800/90 leading-relaxed">
                   Kaft bilan toʻlov qilish juda oson: turniketga oʻrnatilgan
-                  qurilma ustiga istalgan kaftingizni tutib turing. Eshiklar
+                  qurilma ustiga istalgan kaftingizni tutib turing. Turniket
                   ochiladi va toʻlov miqdori bogʻlangan transport kartasidan
-                  chegiriladi.
+                  yechiladi.
                 </p>
 
                 <div className="grid sm:grid-cols-2 gap-4 mt-8">
@@ -331,8 +326,6 @@ function PalmpayPayments() {
           transform: translateY(0);
         }
       `}</style>
-
-      <BiometrikVideo1 />
     </div>
   );
 }

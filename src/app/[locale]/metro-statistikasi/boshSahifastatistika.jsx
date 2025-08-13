@@ -228,7 +228,7 @@ export default function TopStationsChart() {
       {/* Header - Responsive layout */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 border-b pb-3 sm:pb-4 mb-4">
         <h2 className="text-base sm:text-lg lg:text-xl font-semibold   leading-tight">
-          5ta eng ko'p yo'lovchilarga ega bekatlar
+          5 ta eng ko'p yo'lovchilarga ega bekatlar
         </h2>
         <Link href="/metro-statistikasi" className="self-start sm:self-auto">
           <button className="flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-1 text-sm sm:text-base rounded-2xl bg-blue-900 text-white transition-all duration-300 hover:bg-blue-800 hover:scale-105 whitespace-nowrap">

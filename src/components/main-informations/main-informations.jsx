@@ -162,7 +162,7 @@ export default function MetroPagesShowcase() {
               Interaktiv metro xaritasi
             </h3>
             <p className="mb-6 text-sm sm:text-base text-blue-100 max-w-xs">
-              Toshkent metrosining rasmiy interaktiv xaritasi. Stansiyalar va
+              Toshkent metrosining rasmiy interaktiv xaritasi. Bekatlar va
               yo'nalishlarni ko'ring.
             </p>
             <motion.a
@@ -222,7 +222,7 @@ export default function MetroPagesShowcase() {
             >
               Bugungi kunda Toshkent metropoliteni Markaziy Osiyoning yetakchi
               shahar transport tizimi sifatida 70 kilometrdan ortiq uzunlikda 50
-              ta bekatlar bilan faoliyat yuritmoqda. 2024-yilning so'ngi
+              ta bekatlar bilan faoliyat yuritmoqda. 2024-yilning so'nggi
               choragida kunlik yo'lovchi tashish soni 1 milliondan oshgan.
             </motion.p>
 
@@ -569,7 +569,7 @@ function AttoCardsCarousel() {
       ],
     },
     {
-      name: "ATTO Student",
+      name: "ATTO talaba",
       type: "Talaba kartasi",
       description:
         "Oliy o'quv yurtlari talabalari uchun maxsus imtiyozli karta",

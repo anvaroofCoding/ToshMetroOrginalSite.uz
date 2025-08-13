@@ -50,7 +50,7 @@ const socialLinks = [
 const contacts = [
   {
     icon: MapPin,
-    text: "Toshkent sh. Shayxontohur t. I.Karimov ko'chasi, 16a uy, 100027",
+    text: "Toshkent sh. Shayxontohur t. I.Karimov ko'chasi, 16-A uy, 100027",
     title: "Manzil",
     type: "address",
   },

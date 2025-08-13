@@ -346,8 +346,7 @@ export default function UzbekistanSymbols() {
                               Qizil chiziqlar
                             </h3>
                             <p className="text-gray-700 text-sm leading-relaxed">
-                              Vujudimizda jo'shib oqayotgan hayotiy qudrat
-                              irmoqlarini anglatadi.
+                              Har bir tirik jonning qon tomirida urib turgan hayotiy kuch, hayot ramzidir.
                             </p>
                           </div>
                         </div>
@@ -632,7 +631,7 @@ export default function UzbekistanSymbols() {
                         O'zbekiston Respublikasi Davlat madhiyasining matni va
                         musiqasi
                       </strong>{" "}
-                      O'zbekiston Respublikasining 1992 yil 10 dekabrdagi
+                      O'zbekiston Respublikasining 1992-yil 10-dekabrdagi
                       768-XII-sonli «O'zbekiston Respublikasining Davlat
                       madhiyasi to'g'risida»gi Qonuni bilan tasdiqlangan.
                     </p>
@@ -685,7 +684,7 @@ export default function UzbekistanSymbols() {
                     <div className="bg-gradient-to-br from-yellow-50 to-orange-100 p-6 rounded-xl animate-fade-in-up delay-200">
                       <div className="text-center mb-4">
                         <Badge className="bg-gradient-to-r from-yellow-500 to-orange-600 text-white px-4 py-2 animate-pulse">
-                          Naqorat
+                          Naqarot
                         </Badge>
                       </div>
                       <p className="text-gray-800 leading-relaxed text-center font-bold text-lg">
@@ -721,7 +720,7 @@ export default function UzbekistanSymbols() {
                     <div className="bg-gradient-to-br from-yellow-50 to-orange-100 p-6 rounded-xl animate-fade-in-up delay-600">
                       <div className="text-center mb-4">
                         <Badge className="bg-gradient-to-r from-yellow-500 to-orange-600 text-white px-4 py-2 animate-pulse">
-                          Naqorat
+                          Naqarot
                         </Badge>
                       </div>
                       <p className="text-gray-800 leading-relaxed text-center font-bold text-lg">

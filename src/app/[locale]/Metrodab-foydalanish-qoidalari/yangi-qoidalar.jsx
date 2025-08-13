@@ -50,7 +50,7 @@ export default function OptimizedMetroRegulations() {
           "yo'l chiptasi — metropolitendan foydalanish uchun QR-kodli bir martalik yo'l haqi to'lovi amalga oshirilganligini tasdiqlovchi hujjat;",
           "yo'lovchi — metropolitendan foydalanish uchun to'lovni amalga oshirgan yoki imtiyozga hamda bepul yurish huquqiga ega bo'lgan shaxs (iste'molchi);",
           "ko'zdan kechirish — metropolitenda xavfsizlikni ta'minlash maqsadida tashish va foydalanish taqiqlangan moddalar va buyumlarni aniqlash uchun mo'ljallangan, maxsus texnik vositalarni qo'llagan holda amalga oshiriladigan tadbirlar majmui;",
-          "metropoliten xodimi — metropolitenda faoliyat olib boruvchi va yo'lovchilarga xizmat ko'rsatuvchi xodim (bekat navbatchisi, mashinist va boshqalar);",
+          "metropoliten xodimi — metropolitenda faoliyat olib boruvchi va yo'lovchilarga xizmat ko'rsatuvchi xodim (bekat navbatchisi, mashinist va boshqalar).",
         ],
       },
       {
@@ -167,7 +167,7 @@ export default function OptimizedMetroRegulations() {
           "nogironligi bo'lgan va imkoniyati cheklangan shaxslar tomonidan metropolitenning texnik vositalaridan foydalanish;",
           "bekatlarni havaskorlik foto va videotasvirga olish;",
           "bekatlarda joylashgan tibbiy punktlar yordamidan foydalanish;",
-          "telefon va aloqa vositalaridan foydalanish;",
+          "telefon va aloqa vositalaridan foydalanish.",
         ],
       },
       {
@@ -185,7 +185,7 @@ export default function OptimizedMetroRegulations() {
           "qonunchilik hujjatlariga muvofiq yo'lkira haqini to'lashi;",
           "o'tish punktlariga yaqinlashganda yo'l chiptasini tayyorlashi;",
           "eskalatorda xavfsizlik qoidalariga rioya qilishi;",
-          "favqulodda vaziyatlar haqida darhol xabar berishi;",
+          "favqulodda vaziyatlar haqida darhol xabar berishi.",
         ],
       },
       {
@@ -201,7 +201,7 @@ export default function OptimizedMetroRegulations() {
           "metropolitenda bepul yurish huquqini beruvchi barcha hujjatlarni tekshirish;",
           "zaruratga ko'ra yo'lovchilarga yordam ko'rsatish;",
           "yo'lovchilardan metropoliten jihozlariga zarar yetkazmaslikni talab qilish;",
-          "xizmat vazifalarini o'tayotgan vaqtida metropolitendan bepul foydalanish;",
+          "xizmat vazifalarini o'tayotgan vaqtida metropolitendan bepul foydalanish.",
         ],
       },
       {
@@ -218,7 +218,7 @@ export default function OptimizedMetroRegulations() {
           "poyezdlar harakati jadvaliga rioya qilinishini ta'minlashi;",
           "xizmat vaqtida joriy qilingan formali kiyim-boshda bo'lishi;",
           "yo'lovchilarga ehtiyotkor va e'tiborli bo'lish to'g'risida xabar berishi;",
-          "favqulodda vaziyatlarda evakuatsiya ishlarini tashkil etishi;",
+          "favqulodda vaziyatlarda evakuatsiya ishlarini tashkil etishi.",
         ],
       },
       {
@@ -315,7 +315,7 @@ export default function OptimizedMetroRegulations() {
               Metropolitendan foydalanish qoidalari
             </h1>
             <p className="text-xl text-gray-600 mb-8 font-medium">
-              O'zbekiston Respublikasi Vazirlar Mahkamasi
+              O'zbekiston Respublikasi Vazirlar Mahkamasining
             </p>
             <div className="flex items-center justify-center gap-3 text-gray-500">
               <Scale className="w-5 h-5 text-blue-500" />
@@ -510,7 +510,7 @@ export default function OptimizedMetroRegulations() {
               <Train className="w-5 h-5 text-white" />
             </div>
             <p className="text-lg font-bold text-gray-900">
-              © 2023 O'zbekiston Respublikasi Vazirlar Mahkamasi
+              © 2023 O'zbekiston Respublikasi Vazirlar Mahkamasining
             </p>
           </div>
           <p className="text-gray-600">

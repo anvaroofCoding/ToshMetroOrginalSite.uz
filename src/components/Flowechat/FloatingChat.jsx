@@ -24,7 +24,7 @@ const metroQA = [
     id: 3,
     question: "Toshkent metrosida nechta liniya bor?",
     answer:
-      "Toshkent metrosida hozirda 3 ta ishlaydigan liniya mavjud: Chilonzor liniyasi (qizil), O'zbekiston liniyasi (ko'k) va Yunusobod liniyasi (yashil). Tizimda jami 29 ta bekat mavjud.",
+      "Toshkent metrosida hozirda 3 ta ishlaydigan liniya mavjud: Chilonzor yo'li (qizil), O'zbekiston yo'li (ko'k) va Yunusobod yo'li (yashil). Tizimda jami 29 ta bekat mavjud.",
     icon: <Train className="w-4 h-4" />,
   },
   {

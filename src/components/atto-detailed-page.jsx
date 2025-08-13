@@ -62,7 +62,7 @@ export default function AttoDetailedPage() {
       color: "bg-[#e2d317]",
       icon: <GraduationCap className="w-8 h-8 text-white" />,
       price: "Imtiyozli tarif",
-      features: ["Talaba ID kerak", "Imtiyozli tarif", "Universitet tasdiqi"],
+      features: ["Talaba ID kerak", "Imtiyozli tarif", "Universitet tasdig'i"],
       cardColor: "sariq",
     },
     {
@@ -71,7 +71,7 @@ export default function AttoDetailedPage() {
         "Jamoat transportida imtiyozli sayohat qilish huquqiga ega o'quvchilar uchun.",
       color: "bg-[#39b84d]",
       icon: <School className="w-8 h-8 text-white" />,
-      price: "0 So'm",
+      price: "0 so'm",
       features: ["Maktab guvohnomasi", "Katta chegirma", "Ota-ona nazorati"],
       cardColor: "yashil",
     },

@@ -17,37 +17,37 @@ const photos = [
   {
     id: 1,
     src: "/galery/1.jpg",
-    title: "Metropoliten ajoyib rasmlar",
+    title: "Metropolitenga fotonigoh",
     category: "Metro",
   },
   {
     id: 2,
     src: "/galery/2.jpg",
-    title: "Metropoliten ajoyib rasmlar",
+    title: "Metropolitenga fotonigoh",
     category: "Metro",
   },
   {
     id: 3,
     src: "/galery/3.jpg",
-    title: "Metropoliten ajoyib rasmlar",
+    title: "Metropolitenga fotonigoh",
     category: "Metro",
   },
   {
     id: 4,
     src: "/galery/4.jpg",
-    title: "Metropoliten ajoyib rasmlar",
+    title: "Metropolitenga fotonigoh",
     category: "Metro",
   },
   {
     id: 5,
     src: "/galery/5.jpg",
-    title: "Metropoliten ajoyib rasmlar",
+    title: "Metropolitenga fotonigoh",
     category: "Metro",
   },
   {
     id: 6,
     src: "/galery/6.jpg",
-    title: "Metropoliten ajoyib rasmlar",
+    title: "Metropolitenga fotonigoh",
     category: "Metro",
   },
 ];
@@ -60,7 +60,7 @@ const videos = [
     title: "Sirli eshiklar va yashirin yo'laklar",
     duration: "15:42",
     views: "125K",
-    category: "Metropoliteni",
+    category: "Metropoliten",
   },
   {
     id: 2,
@@ -69,7 +69,7 @@ const videos = [
     title: "Metro arxiv 2023",
     duration: "8:30",
     views: "89K",
-    category: "Metropoliteni",
+    category: "Metropoliten",
   },
   {
     id: 3,
@@ -78,7 +78,7 @@ const videos = [
     title: "Metro hayoti",
     duration: "12:15",
     views: "67K",
-    category: "Metropoliteni",
+    category: "Metropoliten",
   },
   {
     id: 4,
@@ -87,7 +87,7 @@ const videos = [
     title: "Metro haqida qiziqarli ma'lumot",
     duration: "6:45",
     views: "156K",
-    category: "Metropoliteni",
+    category: "Metropoliten",
   },
 ];
 
