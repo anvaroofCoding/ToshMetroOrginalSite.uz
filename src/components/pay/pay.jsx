@@ -19,7 +19,8 @@ import {
   Star,
   Nfc,
 } from "lucide-react";
-import Component from "@/app/[locale]/pay/components";
+import BiometrikVideo from "../biometrik-video/video";
+import BiometrikVideo1 from "../biometrik-video/video2";
 
 function PalmpayPayments() {
   const observerRef = useRef(null);
@@ -136,8 +137,12 @@ function PalmpayPayments() {
             <h1 className="text-5xl md:text-7xl font-bold text-blue-900 mb-8 leading-tight">
               PalmPay
             </h1>
-            <div className="relative flex justify-center items-center">
-              <Component />
+            <div className=" flex justify-center items-center py-5">
+              <img
+                src="https://www.atto.uz/image/hand.png"
+                alt="FacePay Hero"
+                className="w-full max-w-md"
+              />
             </div>
             {/* Optimized PalmPay Video */}
           </div>
@@ -326,6 +331,8 @@ function PalmpayPayments() {
           transform: translateY(0);
         }
       `}</style>
+
+      <BiometrikVideo1 />
     </div>
   );
 }

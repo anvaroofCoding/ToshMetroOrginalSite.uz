@@ -22,7 +22,8 @@ import {
   MoveRight,
   ScanFace,
 } from "lucide-react";
-import Component from "@/app/[locale]/FacePay/forFacepayanimation";
+import BiometrikVideo1 from "../biometrik-video/video2";
+import BiometrikVideo from "../biometrik-video/video";
 
 function Facepay() {
   const observerRef = useRef(null);
@@ -118,8 +119,12 @@ function Facepay() {
             <h1 className="text-5xl md:text-7xl font-bold text-blue-900 mb-8 leading-tight">
               FacePay
             </h1>
-            <div className="relative flex justify-center items-center">
-              <Component />
+            <div className=" flex justify-center items-center py-10">
+              <img
+                src="https://www.atto.uz/image/person.png"
+                alt="FacePay Hero"
+                className="w-full max-w-md"
+              />
             </div>
             <div className="max-w-2xl mx-auto">
               <h2 className="text-2xl md:text-3xl font-semibold text-blue-900 mb-4">
@@ -147,11 +152,10 @@ function Facepay() {
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="space-y-6">
                 <p className="text-lg text-blue-800/90 leading-relaxed">
-                  Bu toʻlovning toʻliq kontaktsiz usuli. Endi siz na
-                  smartfonga, na boshqa yuzalarga tegishingiz shart emas.
-                  Biometrik toʻlov xizmati barcha yoʻlovchilar uchun majburiy
-                  boʻlmaydi – boshqa barcha toʻlov usullari ham ishlab turishi
-                  davom etadi.
+                  Bu toʻlovning toʻliq kontaktsiz usuli. Endi siz na smartfonga,
+                  na boshqa yuzalarga tegishingiz shart emas. Biometrik toʻlov
+                  xizmati barcha yoʻlovchilar uchun majburiy boʻlmaydi – boshqa
+                  barcha toʻlov usullari ham ishlab turishi davom etadi.
                 </p>
                 <p className="text-lg text-blue-800/90 leading-relaxed">
                   Xizmatdan foydalanish uchun «ATTO» mobil ilovasida roʻyxatdan
@@ -278,6 +282,8 @@ function Facepay() {
           transform: translateY(0);
         }
       `}</style>
+
+      <BiometrikVideo />
     </div>
   );
 }
