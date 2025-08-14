@@ -280,7 +280,7 @@ export default function ManagementPage() {
               key={member.id}
               className="group overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 rounded-xl border-0"
             >
-              <CardContent className="p-0">
+              <CardContent className="p-0 ">
                 {/* Image Section with Enhanced Hover Effect */}
                 <div className="relative overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200">
                   <Dialog>
@@ -330,7 +330,7 @@ export default function ManagementPage() {
                 </div>
 
                 {/* Content Section */}
-                <div className="p-4 lg:p-6">
+                <div className="p-4 lg:p-6 flex flex-col justify-between h-[370px] ">
                   {/* Name and Position */}
                   <div className="mb-4">
                     <h3 className="text-lg lg:text-xl font-bold text-gray-900 mb-2 line-clamp-2 leading-tight">
@@ -366,7 +366,7 @@ export default function ManagementPage() {
                     <DialogTrigger asChild>
                       <Button
                         variant="outline"
-                        className="w-full border-[#0E327F] text-[#0E327F] hover:bg-[#0E327F] hover:text-white transition-all duration-300 font-medium bg-transparent"
+                        className="w-full border-[#0E327F] text-[#0E327F] hover:bg-[#0E327F] hover:text-white transition-all duration-300 font-medium bg-transparent "
                       >
                         <User className="w-4 h-4 mr-2" />
                         Biografiyani ko'rish
