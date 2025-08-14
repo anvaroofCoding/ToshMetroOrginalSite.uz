@@ -13,6 +13,7 @@ import {
 import { Line } from "react-chartjs-2";
 import Link from "next/link";
 import { BarChart3 } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 ChartJS.register(
   LineElement,
@@ -52,12 +53,14 @@ export default function TopStationsChart() {
   const [error, setError] = useState(null);
   const [selectedPoint, setSelectedPoint] = useState(null);
   const chartRef = useRef(null);
+  const path = usePathname();
+  const lang = path.split("/")[1] || "uz";
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const res = await fetch(
-          "https://metro-site.onrender.com/api/statistics/en"
+          `https://metro-site.onrender.com/api/statistics/last6months/${lang}`
         );
         const data = await res.json();
         const results = data;

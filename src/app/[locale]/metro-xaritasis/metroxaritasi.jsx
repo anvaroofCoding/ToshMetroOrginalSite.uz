@@ -942,10 +942,10 @@ export default function TashkentMetroMap() {
   };
 
   const lineNames = {
-    red: "Chilonzor liniyasi",
-    blue: "O'zbekiston liniyasi",
-    green: "Yunusobod liniyasi",
-    yellow: "Sirg'ali liniyasi",
+    red: "Chilonzor yo'li",
+    blue: "O'zbekiston yo'li",
+    green: "Yunusobod yo'li",
+    yellow: "Yer usti halqa yo'li",
   };
 
   const connections = [

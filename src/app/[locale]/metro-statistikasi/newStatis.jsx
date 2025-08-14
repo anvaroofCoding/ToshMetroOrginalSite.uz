@@ -74,8 +74,8 @@ const MetroStatisticsDashboard = () => {
   ];
 
   const quarters = [
-    { value: "1", label: "1-chorak (Yanvar-Mart)" },
-    { value: "2", label: "2-chorak (Aprel-Iyun)" },
+    { value: "1", label: "1-chorak 6 oy" },
+    { value: "2", label: "2-chorak 6 oy" },
   ];
 
   const fetchAvailableYears = async () => {
@@ -341,7 +341,7 @@ const MetroStatisticsDashboard = () => {
           >
             <div className="text-center space-y-2">
               <h2 className="text-lg sm:text-xl font-bold text-red-900">
-                Xatolik
+                Ma'lumot hali mavjud emas ctrl + r
               </h2>
             </div>
           </Alert>
