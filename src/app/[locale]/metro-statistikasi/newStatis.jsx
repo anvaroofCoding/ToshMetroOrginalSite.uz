@@ -352,7 +352,7 @@ const MetroStatisticsDashboard = () => {
 
   return (
     <div className="min-h-screen bg-transparent overflow-hidden">
-      <div className="container mx-auto px-3 sm:px-4 lg:px-6 py-4 sm:py-6">
+      <div className="container py-4 sm:py-6">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
