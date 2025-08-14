@@ -1,11 +1,11 @@
-import MetroStatistics from "./statistika"
+import MetroStatisticsDashboard from "./newStatis";
 
 const Page = () => {
-    return (
-        <div>
-            <MetroStatistics />
-        </div>
-    )
-}
+  return (
+    <div>
+      <MetroStatisticsDashboard />
+    </div>
+  );
+};
 
-export default Page
+export default Page;

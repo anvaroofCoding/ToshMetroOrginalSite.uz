@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 
 import BiometrikVideo1 from "../BiometrikVideo1";
+import { usePathname } from "next/navigation";
 
 function PalmpayPayments() {
   const observerRef = useRef(null);
@@ -42,6 +43,9 @@ function PalmpayPayments() {
 
     return () => observerRef.current?.disconnect();
   }, []);
+
+  const path = usePathname();
+  const lang = path.split("/")[1];
 
   const steps = [
     {
