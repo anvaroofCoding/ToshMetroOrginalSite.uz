@@ -19,7 +19,8 @@ import {
   Star,
   Nfc,
 } from "lucide-react";
-import Component from "@/app/[locale]/pay/components";
+
+import BiometrikVideo1 from "../BiometrikVideo1";
 
 function PalmpayPayments() {
   const observerRef = useRef(null);
@@ -125,21 +126,20 @@ function PalmpayPayments() {
       {/* Hero Section */}
       <section className="relative overflow-hidden py-10">
         <div className="absolute"></div>
-        <div className="container mx-auto max-w-6xl relative z-10">
-          <div className="text-center fade-in opacity-0 translate-y-8 transition-all duration-1000">
-            <div className="inline-flex items-center gap-3 mb-6 px-6 py-3 bg-blue-900/10 rounded-full border border-blue-900/20">
-              <Hand className="w-5 h-5 text-blue-900" />
-              <span className="text-blue-900 font-medium">
-                Biometrik to'lov
-              </span>
-            </div>
-            <h1 className="text-5xl md:text-7xl font-bold text-blue-900 mb-8 leading-tight">
-              PalmPay
-            </h1>
-            <div className="relative flex justify-center items-center">
-              <Component />
-            </div>
-            {/* Optimized PalmPay Video */}
+        <div className="text-center fade-in opacity-0 translate-y-8 transition-all duration-1000">
+          <div className="inline-flex items-center gap-3 mb-6 px-6 py-3 bg-blue-900/10 rounded-full border border-blue-900/20">
+            <Hand className="w-5 h-5 text-blue-900" />
+            <span className="text-blue-900 font-medium">Biometrik to'lov</span>
+          </div>
+          <h1 className="text-5xl md:text-7xl font-bold text-blue-900 mb-8 leading-tight">
+            PalmPay
+          </h1>
+          <div className=" flex justify-center items-center py-5">
+            <img
+              src="https://www.atto.uz/image/hand.png"
+              alt="FacePay Hero"
+              className="w-full max-w-md"
+            />
           </div>
         </div>
       </section>
@@ -326,6 +326,7 @@ function PalmpayPayments() {
           transform: translateY(0);
         }
       `}</style>
+      <BiometrikVideo1 />
     </div>
   );
 }
