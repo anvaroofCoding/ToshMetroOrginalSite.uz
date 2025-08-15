@@ -24,12 +24,12 @@ import {
 
 export default function MetroLostItemForm() {
   const [formData, setFormData] = useState({
-    name_uz: "",
+    name: "",
     phone: "+998",
     email: "",
     address: "",
     passport: "",
-    message_uz: "",
+    message: "",
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -134,12 +134,12 @@ export default function MetroLostItemForm() {
         setShowSuccess(true);
         // Reset form
         setFormData({
-          name_uz: "",
+          name: "",
           phone: "+998",
           email: "",
           address: "",
           passport: "",
-          message_uz: "",
+          message: "",
         });
       } else {
         throw new Error("Xatolik yuz berdi");
@@ -342,19 +342,17 @@ export default function MetroLostItemForm() {
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="space-y-2">
                   <Label
-                    htmlFor="name_uz"
+                    htmlFor="name"
                     className="text-sm font-medium text-gray-700 flex items-center gap-2"
                   >
                     <User className="w-4 h-4 text-blue-900" />
                     To'liq ismingiz
                   </Label>
                   <Input
-                    id="name_uz"
+                    id="name"
                     type="text"
-                    value={formData.name_uz}
-                    onChange={(e) =>
-                      handleInputChange("name_uz", e.target.value)
-                    }
+                    value={formData.name}
+                    onChange={(e) => handleInputChange("name", e.target.value)}
                     placeholder="F.I.Sh"
                     required
                     className="border-gray-300 focus:border-blue-900 focus:ring-blue-900"
@@ -447,17 +445,17 @@ export default function MetroLostItemForm() {
 
                 <div className="space-y-2">
                   <Label
-                    htmlFor="message_uz"
+                    htmlFor="message"
                     className="text-sm font-medium text-gray-700 flex items-center gap-2"
                   >
                     <MessageSquare className="w-4 h-4 text-blue-900" />
                     Murojaat matni
                   </Label>
                   <Textarea
-                    id="message_uz"
-                    value={formData.message_uz}
+                    id="message"
+                    value={formData.message}
                     onChange={(e) =>
-                      handleInputChange("message_uz", e.target.value)
+                      handleInputChange("message", e.target.value)
                     }
                     placeholder="Iltimos biz aniqroq ko'rib chiqishimiz uchun izohlarni to'liq yozishingizni so'raymiz..."
                     required

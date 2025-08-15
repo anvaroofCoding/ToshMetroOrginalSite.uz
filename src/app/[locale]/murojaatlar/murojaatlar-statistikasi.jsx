@@ -64,7 +64,6 @@ export default function Component() {
         answer_requests: Number(data.stats.answered_requests),
         unanswered_requests: Number(data.stats.unanswered_requests),
       };
-      console.log(validatedStats);
 
       setStats(validatedStats);
     } catch (err) {
