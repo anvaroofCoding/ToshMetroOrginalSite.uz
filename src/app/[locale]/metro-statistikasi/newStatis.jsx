@@ -74,8 +74,8 @@ const MetroStatisticsDashboard = () => {
   ];
 
   const quarters = [
-    { value: "1", label: "1-chorak 6 oy" },
-    { value: "2", label: "2-chorak 6 oy" },
+    { value: "1", label: "1-yarim yil" },
+    { value: "2", label: "2-yarim yil" },
   ];
 
   const fetchAvailableYears = async () => {
@@ -170,7 +170,7 @@ const MetroStatisticsDashboard = () => {
           setStations([]);
           setSelectedStation("");
           setError(
-            `${selectedYear}-yil ${selectedQuarter}-chorak uchun ma'lumotlar yo'q.`
+            `${selectedYear}-yil ${selectedQuarter}-yarim yil uchun ma'lumotlar yo'q.`
           );
           return;
         }
@@ -363,7 +363,7 @@ const MetroStatisticsDashboard = () => {
             Metropoliten yo'lovchilar statistikasi
           </h1>
           <p className="text-sm sm:text-base text-blue-900/70 max-w-2xl mx-auto px-2">
-            {selectedYear}-yil {selectedQuarter}-chorak yo'lovchi tashish
+            {selectedYear}-yil {selectedQuarter}-yarim yil yo'lovchi tashish
             ma'lumotlari
           </p>
         </motion.div>
@@ -591,7 +591,8 @@ const MetroStatisticsDashboard = () => {
                       {chartTypes.find((t) => t.value === chartType)?.label}
                     </CardTitle>
                     <CardDescription className="text-blue-900/70 text-xs sm:text-sm">
-                      {selectedYear}-yil {selectedQuarter}-chorak ma'lumotlari
+                      {selectedYear}-yil {selectedQuarter}-yarim yil
+                      ma'lumotlari
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="p-2 sm:p-6">

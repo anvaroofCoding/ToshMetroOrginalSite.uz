@@ -73,6 +73,7 @@ export default function OptimizedNews() {
       }
 
       const data = await res.json();
+      console.log(data);
 
       if (!Array.isArray(data)) {
         throw new Error("Invalid data format received");
@@ -205,6 +206,7 @@ export default function OptimizedNews() {
       const description = item[`description_${lang}`];
       const title = item[`title_${lang}`];
       const isLiking = likingItems.has(item.id);
+      console.log(imageUrl);
 
       return (
         <Card
@@ -214,7 +216,7 @@ export default function OptimizedNews() {
           <div className="relative h-48 bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden">
             {imageUrl ? (
               <Image
-                src={imageUrl || "/placeholder.svg"}
+                src={imageUrl}
                 alt={title || "News image"}
                 fill
                 className="object-cover transition-all duration-500 hover:scale-110"

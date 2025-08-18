@@ -288,7 +288,8 @@ export default function PaymentMethods() {
                   Bank kartalari va kontaktsiz to'lovlar
                 </h2>
                 <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 mt-2 sm:mt-3 lg:mt-4 leading-relaxed">
-                  kontaktsiz to'lov orqali metro va avtobusda to'lov - 1,700 so'm
+                  kontaktsiz to'lov orqali metro va avtobusda to'lov - 1,700
+                  so'm
                 </p>
               </div>
             </div>
@@ -444,7 +445,7 @@ export default function PaymentMethods() {
                         variant="outline"
                         className="text-xs sm:text-sm px-3 py-1"
                       >
-                        Sinov rejimida
+                        Ish rejimida
                       </Badge>
                       <Link href={"/FacePay"}>
                         <Button className="bg-blue-900 hover:bg-vlue-800">
