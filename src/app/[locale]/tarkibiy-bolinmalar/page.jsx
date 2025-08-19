@@ -1,11 +1,11 @@
-import TransportDirectory from './tarkib'
+import TransportDirectory from "./tarkib";
 
 const Page = () => {
-	return (
-		<div>
-			<TransportDirectory />
-		</div>
-	)
-}
+  return (
+    <div>
+      <TransportDirectory />
+    </div>
+  );
+};
 
-export default Page
+export default Page;

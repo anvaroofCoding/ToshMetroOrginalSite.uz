@@ -44,7 +44,7 @@ export default function JobApplicationPage() {
   // Form state
   const [formData, setFormData] = useState({
     jobVacancy: jobId,
-    name_en: "",
+    name_ru: "",
     phone: "",
     email: "",
     status: "pending",
@@ -140,10 +140,10 @@ export default function JobApplicationPage() {
   const validateForm = useCallback(() => {
     const newErrors = {};
 
-    if (!formData.name_en.trim()) {
-      newErrors.name_en = "Ism talab qilinadi";
-    } else if (formData.name_en.trim().length < 2) {
-      newErrors.name_en = "Ism kamida 2 ta belgidan iborat bo'lishi kerak";
+    if (!formData.name_ru.trim()) {
+      newErrors.name_ru = "Ism talab qilinadi";
+    } else if (formData.name_ru.trim().length < 2) {
+      newErrors.name_ru = "Ism kamida 2 ta belgidan iborat bo'lishi kerak";
     }
 
     if (!formData.phone.trim()) {
@@ -241,15 +241,44 @@ export default function JobApplicationPage() {
     setFormErrors({});
 
     try {
-      // Simulate API call with faster response
-      await new Promise((resolve) => setTimeout(resolve, 800));
+      const formDataToSend = new FormData();
+      formDataToSend.append("jobVacancy", formData.jobVacancy.toString());
+      formDataToSend.append("name_ru", formData.name_ru);
+      formDataToSend.append("phone", formData.phone);
+      formDataToSend.append("email", formData.email);
+      formDataToSend.append("status", formData.status);
+
+      if (selectedFile) {
+        formDataToSend.append("file", selectedFile);
+      }
+
+      const response = await fetch(
+        "https://metro-site.onrender.com/api/job-vacancy-requests/ru/",
+        {
+          method: "POST",
+          body: formDataToSend,
+        }
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(
+          errorData.message || `Server error: ${response.status}`
+        );
+      }
+
+      const result = await response.json();
+      console.log("Application submitted successfully:", result);
 
       setSubmitStatus("success");
       setIsFormHidden(true);
       setAttemptCount(0); // Reset attempts on success
     } catch (error) {
+      console.error("Error submitting application:", error);
       setFormErrors({
-        general: "Ariza yuborishda xatolik yuz berdi. Qaytadan urinib ko'ring.",
+        general:
+          error.message ||
+          "Ariza yuborishda xatolik yuz berdi. Qaytadan urinib ko'ring.",
       });
     } finally {
       setIsSubmitting(false);
@@ -518,29 +547,29 @@ export default function JobApplicationPage() {
                         <div className="grid md:grid-cols-2 gap-6">
                           <div className="space-y-2">
                             <Label
-                              htmlFor="name_en"
+                              htmlFor="name_ru"
                               className="text-sm font-medium"
                             >
                               To'liq ism *
                             </Label>
                             <Input
-                              id="name_en"
+                              id="name_ru"
                               type="text"
-                              value={formData.name_en}
+                              value={formData.name_ru}
                               onChange={(e) =>
-                                handleInputChange("name_en", e.target.value)
+                                handleInputChange("name_ru", e.target.value)
                               }
                               placeholder="To'liq ismingizni kiriting"
                               className={
-                                formErrors.name_en
+                                formErrors.name_ru
                                   ? "border-red-500 focus:border-red-500"
                                   : ""
                               }
                               disabled={isSubmitting || isDelayed}
                             />
-                            {formErrors.name_en && (
+                            {formErrors.name_ru && (
                               <p className="text-sm text-red-600">
-                                {formErrors.name_en}
+                                {formErrors.name_ru}
                               </p>
                             )}
                           </div>
