@@ -39,12 +39,11 @@ export default function JobApplicationPage() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState({});
   const [error, setError] = useState(null);
-  console.log(data);
 
   // Form state
   const [formData, setFormData] = useState({
     jobVacancy: jobId,
-    name_ru: "",
+    name: "",
     phone: "",
     email: "",
     status: "pending",
@@ -91,7 +90,6 @@ export default function JobApplicationPage() {
       }
 
       const items = await res.json();
-      // console.log(items);
 
       setData(items);
     } catch (err) {
@@ -140,10 +138,10 @@ export default function JobApplicationPage() {
   const validateForm = useCallback(() => {
     const newErrors = {};
 
-    if (!formData.name_ru.trim()) {
-      newErrors.name_ru = "Ism talab qilinadi";
-    } else if (formData.name_ru.trim().length < 2) {
-      newErrors.name_ru = "Ism kamida 2 ta belgidan iborat bo'lishi kerak";
+    if (!formData.name.trim()) {
+      newErrors.name = "Ism talab qilinadi";
+    } else if (formData.name.trim().length < 2) {
+      newErrors.name = "Ism kamida 2 ta belgidan iborat bo'lishi kerak";
     }
 
     if (!formData.phone.trim()) {
@@ -243,7 +241,7 @@ export default function JobApplicationPage() {
     try {
       const formDataToSend = new FormData();
       formDataToSend.append("jobVacancy", formData.jobVacancy.toString());
-      formDataToSend.append("name_ru", formData.name_ru);
+      formDataToSend.append("name", formData.name);
       formDataToSend.append("phone", formData.phone);
       formDataToSend.append("email", formData.email);
       formDataToSend.append("status", formData.status);
@@ -253,7 +251,7 @@ export default function JobApplicationPage() {
       }
 
       const response = await fetch(
-        "https://metro-site.onrender.com/api/job-vacancy-requests/ru/",
+        "https://metro-site.onrender.com/api/job-vacancy-requests/",
         {
           method: "POST",
           body: formDataToSend,
@@ -268,7 +266,6 @@ export default function JobApplicationPage() {
       }
 
       const result = await response.json();
-      console.log("Application submitted successfully:", result);
 
       setSubmitStatus("success");
       setIsFormHidden(true);
@@ -547,29 +544,29 @@ export default function JobApplicationPage() {
                         <div className="grid md:grid-cols-2 gap-6">
                           <div className="space-y-2">
                             <Label
-                              htmlFor="name_ru"
+                              htmlFor="name"
                               className="text-sm font-medium"
                             >
                               To'liq ism *
                             </Label>
                             <Input
-                              id="name_ru"
+                              id="name"
                               type="text"
-                              value={formData.name_ru}
+                              value={formData.name}
                               onChange={(e) =>
-                                handleInputChange("name_ru", e.target.value)
+                                handleInputChange("name", e.target.value)
                               }
                               placeholder="To'liq ismingizni kiriting"
                               className={
-                                formErrors.name_ru
+                                formErrors.name
                                   ? "border-red-500 focus:border-red-500"
                                   : ""
                               }
                               disabled={isSubmitting || isDelayed}
                             />
-                            {formErrors.name_ru && (
+                            {formErrors.name && (
                               <p className="text-sm text-red-600">
-                                {formErrors.name_ru}
+                                {formErrors.name}
                               </p>
                             )}
                           </div>

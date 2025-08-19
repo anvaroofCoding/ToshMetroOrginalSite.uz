@@ -30,21 +30,6 @@ function ApiVakan() {
   const [error, setError] = useState(null);
 
   async function getJob() {
-    const cacheKey = "jobData";
-    const cacheExpiryKey = "jobDataExpiry";
-    const now = Date.now();
-    const expiryTime = 10 * 60 * 1000; // 10 minut
-
-    // 1. Keshlangan ma'lumotni tekshirish
-    const cachedData = localStorage.getItem(cacheKey);
-    const cachedExpiry = localStorage.getItem(cacheExpiryKey);
-
-    if (cachedData && cachedExpiry && now < parseInt(cachedExpiry)) {
-      setData(JSON.parse(cachedData));
-      return;
-    }
-
-    // 2. Serverdan yangi ma'lumot olish
     try {
       setLoading(true);
       const res = await fetch(
@@ -56,11 +41,6 @@ function ApiVakan() {
       }
 
       const data = await res.json();
-
-      // 3. Ma'lumotni va muddati tugash vaqtini keshga saqlash
-      localStorage.setItem(cacheKey, JSON.stringify(data));
-      localStorage.setItem(cacheExpiryKey, (now + expiryTime).toString());
-
       setData(data);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Xatolik yuz berdi");
@@ -129,7 +109,7 @@ function ApiVakan() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center">
         <motion.div
           className="text-center p-8 bg-white rounded-lg shadow-lg"
           initial={{ opacity: 0, y: 20 }}
@@ -213,7 +193,7 @@ function ApiVakan() {
                     <div className="flex items-start justify-between ">
                       <div className="flex-1 min-w-0">
                         <CardTitle className="text-xl font-bold leading-tight mb-2 group-hover:text-blue-100 transition-colors">
-                          {truncateText(item.title_uz, 50)}
+                          {truncateText(item.title_uz, 22)}
                         </CardTitle>
                       </div>
                       <Briefcase className="w-8 h-8 text-blue-200 group-hover:scale-110 transition-transform flex-shrink-0 ml-2" />
