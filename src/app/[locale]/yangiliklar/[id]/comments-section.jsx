@@ -29,8 +29,8 @@ export default function CommentsSection({ newsId }) {
   const [submitting, setSubmitting] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [newComment, setNewComment] = useState({
-    author_uz: "",
-    content_uz: "",
+    author: "",
+    content: "",
   });
   const [editContent, setEditContent] = useState("");
 
@@ -40,7 +40,7 @@ export default function CommentsSection({ newsId }) {
     try {
       setLoading(true);
       const response = await fetch(
-        `https://metro-site.onrender.com/api/comments/uz/?news_id=${newsId}`,
+        `https://metro-site.onrender.com/api/comments/?news_id=${newsId}`,
         {
           cache: "no-store",
         }
@@ -67,7 +67,7 @@ export default function CommentsSection({ newsId }) {
   const handleSubmitComment = async (e) => {
     e.preventDefault();
 
-    if (!newComment.content_uz.trim() || !newComment.author_uz.trim()) {
+    if (!newComment.content.trim() || !newComment.author.trim()) {
       toast({
         title: "Xatolik",
         description: "Ism va izoh matnini to'ldiring",
@@ -79,7 +79,7 @@ export default function CommentsSection({ newsId }) {
     try {
       setSubmitting(true);
       const response = await fetch(
-        `https://metro-site.onrender.com/api/comments/uz/?news_id=${newsId}`,
+        `https://metro-site.onrender.com/api/comments/?news_id=${newsId}`,
         {
           method: "POST",
           headers: {
@@ -87,8 +87,8 @@ export default function CommentsSection({ newsId }) {
           },
           body: JSON.stringify({
             news: Number.parseInt(newsId),
-            author_uz: newComment.author_uz,
-            content_uz: newComment.content_uz,
+            author: newComment.author,
+            content: newComment.content,
             timestamp: new Date().toISOString(),
           }),
         }
@@ -100,7 +100,7 @@ export default function CommentsSection({ newsId }) {
 
       const newCommentData = await response.json();
       setComments((prev) => [newCommentData, ...prev]);
-      setNewComment({ author_uz: "", content_uz: "" });
+      setNewComment({ author: "", content: "" });
 
       toast({
         title: "Muvaffaqiyat",
@@ -130,14 +130,14 @@ export default function CommentsSection({ newsId }) {
 
     try {
       const response = await fetch(
-        `https://metro-site.onrender.com/api/comments/uz/${commentId}/`,
+        `https://metro-site.onrender.com/api/comments/${commentId}/`,
         {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            content_uz: editContent,
+            content: editContent,
           }),
         }
       );
@@ -179,7 +179,7 @@ export default function CommentsSection({ newsId }) {
 
     try {
       const response = await fetch(
-        `https://metro-site.onrender.com/api/comments/uz/?news_id=${newsId}`,
+        `https://metro-site.onrender.com/api/comments/?news_id=${newsId}`,
         {
           method: "DELETE",
         }
@@ -207,7 +207,7 @@ export default function CommentsSection({ newsId }) {
 
   const startEdit = (comment) => {
     setEditingId(comment.id);
-    setEditContent(comment.content_uz);
+    setEditContent(comment.content);
   };
 
   const cancelEdit = () => {
@@ -249,11 +249,11 @@ export default function CommentsSection({ newsId }) {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Input
                 placeholder="Ismingiz *"
-                value={newComment.author_uz}
+                value={newComment.author}
                 onChange={(e) =>
                   setNewComment((prev) => ({
                     ...prev,
-                    author_uz: e.target.value,
+                    author: e.target.value,
                   }))
                 }
                 required
@@ -261,11 +261,11 @@ export default function CommentsSection({ newsId }) {
             </div>
             <Textarea
               placeholder="Izohingizni yozing... *"
-              value={newComment.content_uz}
+              value={newComment.content}
               onChange={(e) =>
                 setNewComment((prev) => ({
                   ...prev,
-                  content_uz: e.target.value,
+                  content: e.target.value,
                 }))
               }
               rows={4}
@@ -316,7 +316,7 @@ export default function CommentsSection({ newsId }) {
                       <div className="flex items-center gap-3">
                         <Avatar className="w-8 h-8">
                           <AvatarImage
-                            src={`https://api.dicebear.com/7.x/initials/svg?seed=${comment.author_uz}`}
+                            src={`https://api.dicebear.com/7.x/initials/svg?seed=${comment.author}`}
                           />
                           <AvatarFallback>
                             <User className="w-4 h-4" />
@@ -324,7 +324,7 @@ export default function CommentsSection({ newsId }) {
                         </Avatar>
                         <div>
                           <p className="font-medium text-sm">
-                            {comment.author_uz}
+                            {comment.author}
                           </p>
                           <p className="text-xs text-gray-500">
                             {formatDate(comment.timestamp)}
@@ -358,7 +358,7 @@ export default function CommentsSection({ newsId }) {
                       </div>
                     ) : (
                       <p className="text-gray-700 whitespace-pre-line">
-                        {comment.content_uz}
+                        {comment.content}
                       </p>
                     )}
 

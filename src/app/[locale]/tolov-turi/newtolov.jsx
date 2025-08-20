@@ -483,7 +483,7 @@ export default function PaymentMethods() {
                         variant="outline"
                         className="text-xs sm:text-sm px-3 py-1"
                       >
-                        12 stansiyada
+                        Barcha bekatlarda
                       </Badge>
                       <Link href={"/pay"}>
                         <Button className="bg-blue-900 hover:bg-vlue-800">

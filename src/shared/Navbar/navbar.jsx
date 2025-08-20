@@ -52,8 +52,8 @@ const MENU_ITEMS = [
       { label: "To'lov turlari", href: "/tolov-turi", icon: CreditCard },
       { label: "ATTO kartalari", href: "/atto-kartalari", icon: CreditCard },
       {
-        label: "ATTO mobile ilovasi",
-        href: "/atto-mobile-ilovasi",
+        label: "ATTO mobil ilovasi",
+        href: "/atto-mobil-ilovasi",
         icon: Phone,
       },
       { label: "PalmPay", href: "/pay", icon: Hand },
@@ -680,7 +680,7 @@ export default function MetroNavbar() {
   return (
     <>
       <header
-        className={`sticky top-0 left-0 w-full z-50 transition-all rounded-b-[50px] duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] ${
+        className={`sticky top-0 left-0 w-full z-50 transition-all  duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] ${
           isScrolled
             ? "bg-gradient-to-r from-[#0E327F]/95 via-blue-800/95 to-[#0E327F]/95 backdrop-blur-xl pt-0"
             : "bg-transparent pt-5"

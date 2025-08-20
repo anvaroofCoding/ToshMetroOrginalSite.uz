@@ -98,7 +98,7 @@ const Footer = () => {
   return (
     <>
       <footer
-        className={`relative rounded-t-[50px] bg-gradient-to-r from-[#0E327F] to-blue-800 text-white overflow-hidden ${
+        className={`relative bg-gradient-to-r from-[#0E327F] to-blue-800 text-white overflow-hidden ${
           isHiddenPath ? "hidden" : ""
         }`}
       >

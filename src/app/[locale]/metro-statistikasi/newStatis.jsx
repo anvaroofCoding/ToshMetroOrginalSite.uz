@@ -363,7 +363,7 @@ const MetroStatisticsDashboard = () => {
             Metropoliten yo'lovchilar statistikasi
           </h1>
           <p className="text-sm sm:text-base text-blue-900/70 max-w-2xl mx-auto px-2">
-            {selectedYear}-yil {selectedQuarter}-yarim yil yo'lovchi tashish
+            {selectedYear}-yil {selectedQuarter}-yarim yillik yo'lovchi tashish
             ma'lumotlari
           </p>
         </motion.div>
@@ -411,7 +411,7 @@ const MetroStatisticsDashboard = () => {
               <CardHeader className="pb-2 sm:pb-3 border-none">
                 <CardTitle className="flex items-center gap-2 text-blue-900 text-xs sm:text-sm">
                   <Activity className="h-3 w-3 sm:h-4 sm:w-4" />
-                  Chorak
+                  Davr
                 </CardTitle>
               </CardHeader>
               <CardContent className="pt-0">
