@@ -40,7 +40,7 @@ export default function CommentsSection({ newsId }) {
     try {
       setLoading(true);
       const response = await fetch(
-        `https://metro-site.onrender.com/api/comments/?news_id=${newsId}`,
+        `https://metro-site.onrender.com/api/comments/`,
         {
           cache: "no-store",
         }
@@ -79,7 +79,7 @@ export default function CommentsSection({ newsId }) {
     try {
       setSubmitting(true);
       const response = await fetch(
-        `https://metro-site.onrender.com/api/comments/?news_id=${newsId}`,
+        `https://metro-site.onrender.com/api/comments/`,
         {
           method: "POST",
           headers: {
