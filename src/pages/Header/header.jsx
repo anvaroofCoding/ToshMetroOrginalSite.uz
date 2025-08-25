@@ -393,7 +393,7 @@ export default function MetroCarouselWithNews() {
               className="text-sm sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-bold text-white leading-tight"
               style={{ textShadow: "2px 2px 8px rgba(0,0,0,0.8)" }}
             >
-              {currentSlideData?.title_uz || currentSlideData?.title || ""}
+              {currentSlideData?.title_uz || currentSlideData?.title || ""}...
             </motion.h2>
           </div>
 
@@ -535,7 +535,7 @@ export default function MetroCarouselWithNews() {
                             </div>
                           </div>
                           <h4 className="text-xs sm:text-sm font-semibold text-slate-800 hover:text-blue-600 transition-colors mb-1 line-clamp-2">
-                            {announcement.title_uz}
+                            {announcement.title_uz}...
                           </h4>
                           <p className="text-xs text-slate-600 leading-relaxed line-clamp-2">
                             {announcement.description_uz}

@@ -271,6 +271,12 @@ export default function NewsArticlePage() {
                     data?.[`description_${lang}`]}
                 </p>
               </div>
+              <div className="prose prose-lg prose-slate max-w-none mt-5">
+                <p className="text-lg leading-relaxed whitespace-pre-line text-slate-700 font-medium">
+                  {data?.[`description_${lang}`] ||
+                    data?.[`fullContent_${lang}`]}
+                </p>
+              </div>
             </CardContent>
           </Card>
         </motion.div>
