@@ -53,7 +53,7 @@ const MENU_ITEMS = [
       { label: "ATTO kartalari", href: "/atto-kartalari", icon: CreditCard },
       {
         label: "ATTO mobil ilovasi",
-        href: "/atto-mobil-ilovasi",
+        href: "/atto-mobile-ilovasi",
         icon: Phone,
       },
       { label: "PalmPay", href: "/pay", icon: Hand },
