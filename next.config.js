@@ -3,6 +3,9 @@ const withNextIntl = createNextIntlPlugin();
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  reactStrictMode: true, // Xatolarni aniqlash va dev-time warning
+  swcMinify: true, // Kodni tezroq minify qiladi
+  compress: true, // Gzip/Brotli bilan response siqish
   images: {
     remotePatterns: [
       { protocol: "https", hostname: "tashmetro.uz", pathname: "/**" },
@@ -37,24 +40,45 @@ const nextConfig = {
       },
       { protocol: "https", hostname: "i.pinimg.com", pathname: "/**" },
       { protocol: "https", hostname: "media.zenfs.com", pathname: "/**" },
-      { protocol: "https", hostname: "atto.uz", pathname: "/**" },
     ],
+    unoptimized: false, // Next.js image optimization
+  },
+
+  experimental: {
+    esmExternals: true, // Modul importlarini tezlashtiradi
+    scrollRestoration: true, // Scroll tezroq ishlaydi
+  },
+
+  compiler: {
+    removeConsole: true, // Build vaqtida console.log larni olib tashlaydi
   },
 
   async headers() {
     return [
       {
-        // Har bir sahifa uchun keshlash
         source: "/(.*)",
         headers: [
           {
             key: "Cache-Control",
-            value: "public, max-age=600, stale-while-revalidate=59",
+            value: "public, max-age=3600, stale-while-revalidate=59", // 1 soatga cache
           },
         ],
       },
     ];
   },
+
+  poweredByHeader: false, // Xackerlar uchun ortiqcha headerni o‘chiradi
+  optimizeFonts: true, // Fontlarni avtomatik optimize qiladi
+  optimizeImages: true, // Rasm optimizatsiyasini yoqadi
+
+  // Optional: bundle analyzer
+  // webpack(config) {
+  //   if (process.env.ANALYZE) {
+  //     const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+  //     config.plugins.push(new BundleAnalyzerPlugin());
+  //   }
+  //   return config;
+  // }
 };
 
 module.exports = withNextIntl(nextConfig);
