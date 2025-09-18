@@ -60,7 +60,7 @@ const nextConfig = {
         headers: [
           {
             key: "Cache-Control",
-            value: "public, max-age=3600, stale-while-revalidate=59", // 1 soatga cache
+            value: "public, max-age=30, stale-while-revalidate=30", // 1 soatga cache
           },
         ],
       },
