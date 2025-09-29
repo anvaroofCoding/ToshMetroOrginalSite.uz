@@ -99,7 +99,7 @@ const MENU_ITEMS = [
       { label: "Tashkilot haqida", href: "/metro-tarixi", icon: Building },
       { label: "Rahbariyat", href: "/Raxbariyat", icon: Users },
       {
-        label: "Tarkibiy bo'linmalar",
+        label: "Tarkibiy tuzilmalar",
         href: "/tarkibiy-bolinmalar",
         icon: Building,
       },
