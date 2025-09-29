@@ -210,8 +210,8 @@ export default function MetroLostItemForm() {
   };
 
   return (
-    <div className=" py-12 px-4">
-      <div className="max-w-2xl mx-auto">
+    <div className="container py-12 ">
+      <div className="">
         {showSuccess ? (
           <Card className="shadow-lg border-0 bg-white">
             <CardContent className="p-8 text-center">

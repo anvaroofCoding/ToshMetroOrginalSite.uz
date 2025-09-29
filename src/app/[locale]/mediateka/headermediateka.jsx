@@ -50,6 +50,18 @@ const photos = [
     title: "Metropolitenga fotonigoh",
     category: "Metro",
   },
+  {
+    id: 7,
+    src: "/galery/7.jpg",
+    title: "Metropolitenga fotonigoh",
+    category: "Metro",
+  },
+  {
+    id: 8,
+    src: "/galery/8.jpg",
+    title: "Metropolitenga fotonigoh",
+    category: "Metro",
+  },
 ];
 
 const videos = [
@@ -78,15 +90,6 @@ const videos = [
     title: "Metro hayoti",
     duration: "12:15",
     views: "67K",
-    category: "Metropoliteni",
-  },
-  {
-    id: 4,
-    url: "https://www.youtube.com/embed/QoG87-EXSk4",
-    thumbnail: "/galery/1.jpg",
-    title: "Metro haqida qiziqarli ma'lumot",
-    duration: "6:45",
-    views: "156K",
     category: "Metropoliteni",
   },
 ];

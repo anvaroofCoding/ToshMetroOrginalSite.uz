@@ -4,7 +4,6 @@ const withNextIntl = createNextIntlPlugin();
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true, // Xatolarni aniqlash va dev-time warning
-  swcMinify: true, // Kodni tezroq minify qiladi
   compress: true, // Gzip/Brotli bilan response siqish
   images: {
     remotePatterns: [
@@ -52,33 +51,6 @@ const nextConfig = {
   compiler: {
     removeConsole: true, // Build vaqtida console.log larni olib tashlaydi
   },
-
-  async headers() {
-    return [
-      {
-        source: "/(.*)",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=30, stale-while-revalidate=30", // 1 soatga cache
-          },
-        ],
-      },
-    ];
-  },
-
-  poweredByHeader: false, // Xackerlar uchun ortiqcha headerni o‘chiradi
-  optimizeFonts: true, // Fontlarni avtomatik optimize qiladi
-  optimizeImages: true, // Rasm optimizatsiyasini yoqadi
-
-  // Optional: bundle analyzer
-  // webpack(config) {
-  //   if (process.env.ANALYZE) {
-  //     const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-  //     config.plugins.push(new BundleAnalyzerPlugin());
-  //   }
-  //   return config;
-  // }
 };
 
 module.exports = withNextIntl(nextConfig);

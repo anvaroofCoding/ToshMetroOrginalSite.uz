@@ -1,9 +1,19 @@
-"use client"
+"use client";
 
-import { useState, useEffect, useRef } from "react"
-import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
-import { MessageCircle, Train, Clock, MapPin, CreditCard, Users, X, Minimize2, Send } from "lucide-react"
+import { useState, useEffect, useRef } from "react";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import {
+  MessageCircle,
+  Train,
+  Clock,
+  MapPin,
+  CreditCard,
+  Users,
+  X,
+  Minimize2,
+  Send,
+} from "lucide-react";
 
 const metroQA = [
   {
@@ -48,29 +58,29 @@ const metroQA = [
       "Metro bekatlarida shaxsiy maqsadlarda suratga olish odatda ruxsat etiladi. Tijorat maqsadida suratga olish uchun maxsus ruxsat kerak bo'lishi mumkin. Bekatlar o'zining go'zal sovet davri me'morchiligi bilan mashhur.",
     icon: <MessageCircle className="w-4 h-4" />,
   },
-]
+];
 
 export default function TashkentMetroChat() {
-  const [isOpen, setIsOpen] = useState(false)
-  const [messages, setMessages] = useState([])
-  const [isTyping, setIsTyping] = useState(false)
-  const [showQuestions, setShowQuestions] = useState(true)
-  const messagesEndRef = useRef(null)
+  const [isOpen, setIsOpen] = useState(false);
+  const [messages, setMessages] = useState([]);
+  const [isTyping, setIsTyping] = useState(false);
+  const [showQuestions, setShowQuestions] = useState(true);
+  const messagesEndRef = useRef(null);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
-  }
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   useEffect(() => {
-    scrollToBottom()
-  }, [messages, isTyping])
+    scrollToBottom();
+  }, [messages, isTyping]);
 
   const getCurrentTime = () => {
     return new Date().toLocaleTimeString("uz-UZ", {
       hour: "2-digit",
       minute: "2-digit",
-    })
-  }
+    });
+  };
 
   useEffect(() => {
     if (isOpen && messages.length === 0) {
@@ -82,13 +92,13 @@ export default function TashkentMetroChat() {
           "Assalomu alaykum! 👋 Toshkent Metro Ma'lumot Markaziga xush kelibsiz. Men sizga metro tizimi haqida barcha savollaringizga javob berishga tayyorman. Nima bilmoqchisiz?",
         icon: <Train className="w-4 h-4" />,
         timestamp: getCurrentTime(),
-      }
+      };
 
       setTimeout(() => {
-        setMessages([welcomeMessage])
-      }, 800)
+        setMessages([welcomeMessage]);
+      }, 800);
     }
-  }, [isOpen, messages.length])
+  }, [isOpen, messages.length]);
 
   const handleQuestionClick = (qa) => {
     // Add question to chat
@@ -98,36 +108,36 @@ export default function TashkentMetroChat() {
       content: qa.question,
       icon: qa.icon,
       timestamp: getCurrentTime(),
-    }
+    };
 
-    setMessages((prev) => [...prev, questionMessage])
-    setShowQuestions(false)
-    setIsTyping(true)
+    setMessages((prev) => [...prev, questionMessage]);
+    setShowQuestions(false);
+    setIsTyping(true);
 
     // Simulate typing delay and add answer
     setTimeout(() => {
-      setIsTyping(false)
+      setIsTyping(false);
       const answerMessage = {
         id: qa.id * 2 + 1,
         type: "answer",
         content: qa.answer,
         icon: qa.icon,
         timestamp: getCurrentTime(),
-      }
-      setMessages((prev) => [...prev, answerMessage])
+      };
+      setMessages((prev) => [...prev, answerMessage]);
 
       // Show questions again after answer
       setTimeout(() => {
-        setShowQuestions(true)
-      }, 1200)
-    }, 2000)
-  }
+        setShowQuestions(true);
+      }, 1200);
+    }, 2000);
+  };
 
   const resetChat = () => {
-    setMessages([])
-    setShowQuestions(true)
-    setIsTyping(false)
-  }
+    setMessages([]);
+    setShowQuestions(true);
+    setIsTyping(false);
+  };
 
   return (
     <div>
@@ -137,8 +147,6 @@ export default function TashkentMetroChat() {
         <div className="absolute bottom-1/4 right-1/4 w-48 h-48 md:w-96 md:h-96 bg-cyan-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 md:w-[600px] md:h-[600px] bg-blue-600/5 rounded-full blur-3xl animate-pulse delay-500"></div>
       </div>
-
-      
 
       {/* Chat Widget */}
       <div className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50">
@@ -170,10 +178,14 @@ export default function TashkentMetroChat() {
                       <Train className="w-5 h-5 md:w-6 md:h-6 text-blue-200" />
                     </div>
                     <div>
-                      <h3 className="font-bold text-blue-100 text-base md:text-lg">Metro Yordamchisi</h3>
+                      <h3 className="font-bold text-blue-100 text-base md:text-lg">
+                        Metro Yordamchisi
+                      </h3>
                       <div className="flex items-center gap-2">
                         <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                        <p className="text-xs md:text-sm text-blue-300">Onlayn • Yordam berishga tayyor</p>
+                        <p className="text-xs md:text-sm text-blue-300">
+                          Onlayn • Yordam berishga tayyor
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -203,18 +215,30 @@ export default function TashkentMetroChat() {
                 {messages.map((message, index) => (
                   <div
                     key={message.id}
-                    className={`flex ${message.type === "question" ? "justify-end" : "justify-start"} animate-in slide-in-from-bottom-4 duration-500`}
+                    className={`flex ${
+                      message.type === "question"
+                        ? "justify-end"
+                        : "justify-start"
+                    } animate-in slide-in-from-bottom-4 duration-500`}
                     style={{ animationDelay: `${index * 150}ms` }}
                   >
                     <div
-                      className={`max-w-[85%] group ${message.type === "question" ? "ml-4 md:ml-8" : "mr-4 md:mr-8"}`}
+                      className={`max-w-[85%] group ${
+                        message.type === "question"
+                          ? "ml-4 md:ml-8"
+                          : "mr-4 md:mr-8"
+                      }`}
                     >
                       <div
                         className={`p-3 md:p-4 rounded-2xl md:rounded-3xl shadow-lg transition-all duration-300 ${
                           message.type === "question"
                             ? "bg-gradient-to-br from-blue-600 to-blue-700 text-blue-100 shadow-blue-600/25 hover:shadow-blue-600/40"
                             : "bg-gradient-to-br from-slate-700 to-slate-800 text-slate-100 shadow-slate-700/25 hover:shadow-slate-700/40 border border-slate-600/50"
-                        } ${message.type === "question" ? "rounded-br-lg" : "rounded-bl-lg"}`}
+                        } ${
+                          message.type === "question"
+                            ? "rounded-br-lg"
+                            : "rounded-bl-lg"
+                        }`}
                       >
                         <div className="flex items-start gap-2 md:gap-3">
                           {message.icon && (
@@ -229,11 +253,15 @@ export default function TashkentMetroChat() {
                             </div>
                           )}
                           <div className="flex-1">
-                            <p className="text-xs md:text-sm leading-relaxed font-medium">{message.content}</p>
+                            <p className="text-xs md:text-sm leading-relaxed font-medium">
+                              {message.content}
+                            </p>
                             {message.timestamp && (
                               <p
                                 className={`text-xs mt-1 md:mt-2 ${
-                                  message.type === "question" ? "text-blue-300" : "text-slate-400"
+                                  message.type === "question"
+                                    ? "text-blue-300"
+                                    : "text-slate-400"
                                 }`}
                               >
                                 {message.timestamp}
@@ -259,7 +287,9 @@ export default function TashkentMetroChat() {
                             <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-blue-400 rounded-full animate-bounce delay-100"></div>
                             <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-blue-400 rounded-full animate-bounce delay-200"></div>
                           </div>
-                          <span className="text-slate-300 text-xs md:text-sm font-medium">Yozmoqda...</span>
+                          <span className="text-slate-300 text-xs md:text-sm font-medium">
+                            Yozmoqda...
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -274,7 +304,9 @@ export default function TashkentMetroChat() {
                 <div className="p-3 md:p-6 border-t border-slate-700/50 bg-gradient-to-b from-slate-800/80 to-slate-900/80 animate-in slide-in-from-bottom-4 duration-500">
                   <div className="flex items-center gap-2 mb-3 md:mb-4">
                     <Send className="w-3 h-3 md:w-4 md:h-4 text-blue-400" />
-                    <p className="text-xs md:text-sm text-blue-300 font-semibold">Tez savollar:</p>
+                    <p className="text-xs md:text-sm text-blue-300 font-semibold">
+                      Tez savollar:
+                    </p>
                   </div>
                   <div className="space-y-2 md:space-y-3 max-h-32 md:max-h-40 overflow-y-auto">
                     {metroQA.slice(0, 4).map((qa, index) => (
@@ -289,7 +321,9 @@ export default function TashkentMetroChat() {
                           <div className="text-blue-400 group-hover:text-blue-300 transition-colors duration-200 p-1.5 md:p-2 bg-slate-700/50 group-hover:bg-slate-600/50 rounded-lg md:rounded-xl">
                             {qa.icon}
                           </div>
-                          <span className="font-medium leading-relaxed">{qa.question}</span>
+                          <span className="font-medium leading-relaxed">
+                            {qa.question}
+                          </span>
                         </div>
                       </Button>
                     ))}
@@ -310,7 +344,11 @@ export default function TashkentMetroChat() {
             hover:from-blue-700 hover:via-blue-800 hover:to-blue-900 
             shadow-2xl shadow-blue-600/50 border-0 
             transition-all duration-300 relative overflow-hidden group 
-            ${isOpen ? "rotate-0 scale-95" : "hover:scale-110 hover:-translate-y-1"}
+            ${
+              isOpen
+                ? "rotate-0 scale-95"
+                : "hover:scale-110 hover:-translate-y-1"
+            }
             touch-manipulation
           `}
         >
@@ -334,5 +372,5 @@ export default function TashkentMetroChat() {
         )}
       </div>
     </div>
-  )
+  );
 }

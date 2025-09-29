@@ -1,7 +1,6 @@
 // src/app/[locale]/layout.js
 
 import RouteLoader from "@/components/route-loader";
-import SplashScreen from "@/components/splashScreen/splashScreen";
 import Layout from "@/layout/Layout";
 import Navbar from "@/shared/Navbar/navbar";
 import { NextIntlClientProvider } from "next-intl";
@@ -61,7 +60,6 @@ export default async function RootLayout({ children, params }) {
               <Navbar />
               {/* <SplashScreen> */}
               {children}
-              {/* </SplashScreen> */}
               <Footer />
               <FloatingActionButton />
             </Layout>

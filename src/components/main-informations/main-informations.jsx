@@ -208,7 +208,7 @@ export default function MetroPagesShowcase() {
               // initial={{ opacity: 0, y: 20 }}
               // animate={{ opacity: 1, y: 0 }}
               // transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-center mb-3 sm:mb-4"
+              className="text-2xl sm:text-3xl lg:text-4xl xl:text-4xl font-bold text-center mb-3 sm:mb-4"
             >
               Metropoliten haqida
             </h2>
@@ -218,7 +218,7 @@ export default function MetroPagesShowcase() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
-              className="text-sm sm:text-base lg:text-lg xl:text-xl text-center opacity-90  max-w-xs sm:max-w-2xl lg:max-w-4xl mx-auto mb-6 sm:mb-8 px-2"
+              className="text-sm sm:text-base lg:text-lg xl:text-md text-center opacity-90  max-w-xs sm:max-w-2xl lg:max-w-3xl mx-auto mb-6 sm:mb-8 px-2"
             >
               Bugungi kunda Toshkent metropoliteni Markaziy Osiyoning yetakchi
               shahar transport tizimi sifatida 70 kilometrdan ortiq uzunlikda 50
@@ -241,7 +241,7 @@ export default function MetroPagesShowcase() {
                   // transition={{ duration: 0.5, delay: 1 + index * 0.1 }}
                   className="text-center group/stat cursor-default"
                 >
-                  <div className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold mb-1 sm:mb-2 group-hover/stat:scale-110 transition-transform duration-300 bg-gradient-to-b from-white to-gray-300 bg-clip-text text-transparent">
+                  <div className="text-xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold mb-1 sm:mb-2 group-hover/stat:scale-110 transition-transform duration-300 bg-gradient-to-b from-white to-gray-300 bg-clip-text text-transparent">
                     <AnimatedCounter end={stat.value} />
                   </div>
                   <div className="text-xs sm:text-sm lg:text-base opacity-80 font-medium">
