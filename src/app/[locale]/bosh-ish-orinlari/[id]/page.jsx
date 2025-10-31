@@ -82,7 +82,7 @@ export default function JobApplicationPage() {
 
     try {
       const res = await fetch(
-        `https://metro-site.onrender.com/api/job-vacancies/uz/${jobId}`
+        `https://abbos.uzmetro.uz/api/job-vacancies/uz/${jobId}`
       );
 
       if (!res.ok) {
@@ -251,7 +251,7 @@ export default function JobApplicationPage() {
       }
 
       const response = await fetch(
-        "https://metro-site.onrender.com/api/job-vacancy-requests/",
+        "https://abbos.uzmetro.uz/api/job-vacancy-requests/",
         {
           method: "POST",
           body: formDataToSend,

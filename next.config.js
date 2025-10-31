@@ -39,6 +39,13 @@ const nextConfig = {
       },
       { protocol: "https", hostname: "i.pinimg.com", pathname: "/**" },
       { protocol: "https", hostname: "media.zenfs.com", pathname: "/**" },
+
+      // 🆕 Qo‘shildi: abbos.uzmetro.uz domeni
+      {
+        protocol: "https",
+        hostname: "abbos.uzmetro.uz",
+        pathname: "/media/news_images/**",
+      },
     ],
     unoptimized: false, // Next.js image optimization
   },

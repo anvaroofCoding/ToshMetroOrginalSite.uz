@@ -32,9 +32,7 @@ function ApiVakan() {
   async function getJob() {
     try {
       setLoading(true);
-      const res = await fetch(
-        "https://metro-site.onrender.com/api/job-vacancies/uz/"
-      );
+      const res = await fetch("https://abbos.uzmetro.uz/api/job-vacancies/uz/");
 
       if (!res.ok) {
         throw new Error("Ish o'rinlarini yuklashda xatolik yuz berdi");

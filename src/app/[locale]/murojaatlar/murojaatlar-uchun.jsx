@@ -116,16 +116,13 @@ export default function MetroLostItemForm() {
     setShowSuccess(false);
 
     try {
-      const response = await fetch(
-        "https://metro-site.onrender.com/api/lost-items/",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+      const response = await fetch("https://abbos.uzmetro.uz/api/lost-items/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
       if (response.ok) {
         // Success - clear any failed attempts

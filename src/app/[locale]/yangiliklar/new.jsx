@@ -53,16 +53,13 @@ export default function OptimizedNews() {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
 
-      const res = await fetch(
-        `https://metro-site.onrender.com/api/news/${lang}/`,
-        {
-          signal: controller.signal,
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const res = await fetch(`https://abbos.uzmetro.uz/api/news/${lang}/`, {
+        signal: controller.signal,
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
 
       clearTimeout(timeoutId);
 
@@ -131,7 +128,7 @@ export default function OptimizedNews() {
         );
 
         const response = await fetch(
-          `https://metro-site.onrender.com/api/news/${itemId}/like/`,
+          `https://abbos.uzmetro.uz/api/news/${itemId}/like/`,
           {
             method: "POST",
             headers: {

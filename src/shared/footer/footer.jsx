@@ -84,7 +84,7 @@ const Footer = () => {
     parts[1] === "metro-xaritasis" || parts[1] === "normalMap";
   const getprosmotrsite = async () => {
     const res = await fetch(
-      "https://metro-site.onrender.com/api/sayt_foydalanuvchilari/"
+      "https://abbos.uzmetro.uz/api/sayt_foydalanuvchilari/"
     );
     const data = await res.json();
     setTotalVisitors(data.jami_foydalanuvchilar);
@@ -267,7 +267,7 @@ const Footer = () => {
             <div className="flex items-center gap-2 text-blue-300">
               <span>Manba:</span>
               <Link
-                href="https://tashmetro.uz"
+                href="https://uzmetro.uz"
                 target="_blank"
                 className="hover:text-white transition-colors duration-300 underline decoration-blue-400 hover:decoration-white"
               >

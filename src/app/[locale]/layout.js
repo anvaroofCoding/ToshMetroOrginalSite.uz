@@ -11,7 +11,7 @@ import FloatingActionButton from "@/components/ScreenFixsedButton/screenFixedBut
 import BgImage from "@/components/bg-main-images/bg-images";
 
 export const metadata = {
-  title: "Toshkent shahar metropoliteni | Rasmiy veb-sayt",
+  title: "Toshkent metropoliteni | Rasmiy veb-sayt",
   description:
     "Toshkent shahar metropolitenining rasmiy veb-sayti. Yo‘nalishlar, tariflar, yangiliklar, xizmatlar va boshqa foydali ma’lumotlar.",
   keywords:
@@ -38,7 +38,7 @@ export const metadata = {
     type: "website",
   },
   icons: {
-    icon: "/logo2.png",
+    icon: "/logos.png",
   },
 };
 

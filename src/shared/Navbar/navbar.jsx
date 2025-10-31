@@ -36,11 +36,6 @@ const MENU_ITEMS = [
   {
     label: "Xarita",
     href: "/metro-xaritasis",
-    // dropdown: true,
-    // dropdownItems: [
-    //   { label: "Oddiy xarita", href: "normalMap", icon: MapPinned },
-    //   { label: "Batafsil xarita", href: "/metro-xaritasis", icon: MapPinned },
-    // ],
     icon: MapPin,
   },
   {

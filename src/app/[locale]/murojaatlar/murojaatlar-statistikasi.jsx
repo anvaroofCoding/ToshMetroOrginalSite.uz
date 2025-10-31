@@ -35,17 +35,14 @@ export default function Component() {
       setLoading(true);
       setError(null);
 
-      const res = await fetch(
-        "https://metro-site.onrender.com/api/lost-items/",
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          // Add timeout
-          signal: AbortSignal.timeout(10000), // 10 second timeout
-        }
-      );
+      const res = await fetch("https://abbos.uzmetro.uz/api/lost-items/", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        // Add timeout
+        signal: AbortSignal.timeout(10000), // 10 second timeout
+      });
 
       if (!res.ok) {
         throw new Error(`HTTP error! status: ${res.status}`);

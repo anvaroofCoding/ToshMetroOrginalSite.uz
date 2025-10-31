@@ -195,18 +195,14 @@ export default function MetroCarouselWithNews() {
   const [announcements, Setannouncements] = useState([]);
 
   const getNewstVerticalSlider = async () => {
-    const res = await fetch(
-      "https://metro-site.onrender.com/api/news/latest/uz"
-    );
+    const res = await fetch("https://abbos.uzmetro.uz/api/news/latest/uz");
     const data = await res.json();
     Setannouncements(data);
   };
   const getNewsPaper = async () => {
     try {
       setIsLoading(true);
-      const res = await fetch(
-        "https://metro-site.onrender.com/api/news/main/uz"
-      );
+      const res = await fetch("https://abbos.uzmetro.uz/api/news/main/uz");
       const data = await res.json();
       setSlides(data);
     } catch (error) {
@@ -366,7 +362,7 @@ export default function MetroCarouselWithNews() {
               className="absolute inset-0"
             >
               <img
-                src={`https://metro-site.onrender.com${
+                src={`https://abbos.uzmetro.uz${
                   currentSlideData?.image ||
                   currentSlideData?.img ||
                   "/placeholder.jpg"
@@ -393,7 +389,10 @@ export default function MetroCarouselWithNews() {
               className="text-sm sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-bold text-white leading-tight"
               style={{ textShadow: "2px 2px 8px rgba(0,0,0,0.8)" }}
             >
-              {currentSlideData?.title_uz || currentSlideData?.title || ""}...
+              {currentSlideData?.title_uz.slice(0, 100) ||
+                currentSlideData?.title ||
+                ""}
+              ...
             </motion.h2>
           </div>
 
@@ -520,7 +519,7 @@ export default function MetroCarouselWithNews() {
                       <CardContent className="p-2 sm:p-3 lg:p-4 flex gap-2 sm:gap-3 items-start">
                         <img
                           src={
-                            `https://metro-site.onrender.com${announcement.image}` ||
+                            `https://abbos.uzmetro.uz${announcement.image}` ||
                             "/placeholder.svg"
                           }
                           alt={announcement.title_uz}
@@ -607,7 +606,7 @@ export default function MetroCarouselWithNews() {
                       <CardContent className="p-2 sm:p-3 lg:p-4 flex gap-2 sm:gap-3 items-start">
                         <img
                           src={
-                            `https://metro-site.onrender.com${announcement.image}` ||
+                            `https://abbos.uzmetro.uz${announcement.image}` ||
                             "/placeholder.svg"
                           }
                           alt={announcement.title_uz}
