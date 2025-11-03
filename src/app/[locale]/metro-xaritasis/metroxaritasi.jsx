@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useRef, useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   ZoomIn,
   ZoomOut,
@@ -41,7 +41,7 @@ export default function TashkentMetroMap() {
   const videoRef = useRef(null);
 
   // Route planning states
-  const [showRoutePanel, setShowRoutePanel] = useState(true);
+  const [showRoutePanel, setShowRoutePanel] = useState(false);
   const [fromStation, setFromStation] = useState("");
   const [toStation, setToStation] = useState("");
   const [currentRoute, setCurrentRoute] = useState([]);

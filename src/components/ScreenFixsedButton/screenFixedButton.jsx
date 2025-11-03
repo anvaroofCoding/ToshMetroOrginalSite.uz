@@ -1,13 +1,22 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Plus, FileText, X, Bot } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function FloatingActionButton() {
+  const path = usePathname();
+  const [hidden, setHidden] = useState(false);
+  useEffect(() => {
+    if (path === "/ru/metro-xaritasis") {
+      setHidden(true);
+    } else {
+      setHidden(false);
+    }
+  }, [path]);
   const [isOpen, setIsOpen] = useState(false);
   const [hoveredButton, setHoveredButton] = useState(null);
-
   const playClickSound = () => {
     // Create a simple click sound using Web Audio API
     const audioContext = new (window.AudioContext ||
@@ -33,22 +42,18 @@ export default function FloatingActionButton() {
     oscillator.start(audioContext.currentTime);
     oscillator.stop(audioContext.currentTime + 0.1);
   };
-
   const handleMainButtonClick = () => {
     playClickSound();
     setIsOpen(!isOpen);
   };
-
   const handleclosebutton = () => {
     setIsOpen(false);
   };
-
   const handleSubButtonClick = (action) => {
     playClickSound();
     console.log(`${action} clicked`);
     // Add your specific action handlers here
   };
-
   const buttons = [
     {
       id: "qa",
@@ -66,6 +71,7 @@ export default function FloatingActionButton() {
       btlink: "/murojaatlar",
     },
   ];
+  if (hidden) return null;
 
   return (
     <>

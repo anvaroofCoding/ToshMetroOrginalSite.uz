@@ -1,6 +1,30 @@
 {
-	"HomePage": {
-		"title": "Hello world!",
-		"about": "Go to the about page"
-	}
+  "menu": {
+    "map": "Карта",
+    "payments": "Платежи",
+    "paymentTypes": "Виды платежей",
+    "attoCards": "Карты ATTO",
+    "attoApp": "Мобильное приложение ATTO",
+    "palmpay": "PalmPay",
+    "facepay": "FacePay",
+    "passengers": "Пассажиры",
+    "metroRules": "Правила пользования метрополитеном",
+    "stateSymbols": "Государственные символы",
+    "passengerStats": "Статистика пассажиров",
+    "infoService": "Информационная служба",
+    "news": "Новости",
+    "media": "Медиатека",
+    "aboutMetro": "О метро",
+    "aboutOrganization": "О организации",
+    "management": "Руководство",
+    "structure": "Структурные подразделения",
+    "vacancies": "Вакансии",
+    "genderEquality": "Гендерное равенство",
+    "generalInfo": "Общая информация",
+    "genderInCountry": "Гендерное равенство в нашей стране",
+    "normativeDocs": "Нормативные документы",
+    "contact": "Связаться",
+    "fullName": "Государственное унитарное предприятие «Ташкентский метрополитен» Министерства транспорта Республики Узбекистан",
+    "Language": "Язык"
+  }
 }

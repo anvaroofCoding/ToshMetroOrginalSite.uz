@@ -1,6 +1,30 @@
 {
-	"HomePage": {
-		"title": "Hello world!",
-		"about": "Go to the about page"
-	}
+  "menu": {
+    "map": "Xarita",
+    "payments": "To'lovlar",
+    "paymentTypes": "To'lov turlari",
+    "attoCards": "ATTO kartalari",
+    "attoApp": "ATTO mobil ilovasi",
+    "palmpay": "PalmPay",
+    "facepay": "FacePay",
+    "passengers": "Yo'lovchilar",
+    "metroRules": "Metropolitenidan foydalanish qoidalari",
+    "stateSymbols": "Davlat ramzlari",
+    "passengerStats": "Yo'lovchilar statistikasi",
+    "infoService": "Axborot xizmati",
+    "news": "Yangiliklar",
+    "media": "Mediateka",
+    "aboutMetro": "Metropoliten haqida",
+    "aboutOrganization": "Tashkilot haqida",
+    "management": "Rahbariyat",
+    "structure": "Tarkibiy tuzilmalar",
+    "vacancies": "Bo'sh ish o'rinlari",
+    "genderEquality": "Gender tenglik",
+    "generalInfo": "Umumiy ma'lumot",
+    "genderInCountry": "Yurtimizda gender tenglik",
+    "normativeDocs": "Me'yoriy hujjatlar",
+    "contact": "Bog'lanish",
+    "fullName": "O'zbekiston Respublikasi Transport vazirligi \"Toshkent metropoliteni\" DUK",
+    "Language": "Til"
+  }
 }

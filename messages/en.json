@@ -1,6 +1,30 @@
 {
-	"HomePage": {
-		"title": "Hello world!",
-		"about": "Go to the about page"
-	}
+  "menu": {
+    "map": "Map",
+    "payments": "Payments",
+    "paymentTypes": "Payment Types",
+    "attoCards": "ATTO Cards",
+    "attoApp": "ATTO Mobile App",
+    "palmpay": "PalmPay",
+    "facepay": "FacePay",
+    "passengers": "Passengers",
+    "metroRules": "Metro Usage Rules",
+    "stateSymbols": "State Symbols",
+    "passengerStats": "Passenger Statistics",
+    "infoService": "Information Service",
+    "news": "News",
+    "media": "Media Library",
+    "aboutMetro": "About the Metro",
+    "aboutOrganization": "About the Organization",
+    "management": "Management",
+    "structure": "Organizational Structure",
+    "vacancies": "Vacancies",
+    "genderEquality": "Gender Equality",
+    "generalInfo": "General Information",
+    "genderInCountry": "Gender Equality in Our Country",
+    "normativeDocs": "Normative Documents",
+    "contact": "Contact",
+    "fullName": "State Unitary Enterprise 'Tashkent Metro' under the Ministry of Transport of the Republic of Uzbekistan",
+    "Language": "Language"
+  }
 }
