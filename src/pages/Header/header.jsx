@@ -158,8 +158,9 @@ const NewsCard = memo(({ announcement, onRelativeTime, titlek, locale }) => (
       <CardContent className="p-2 sm:p-3 lg:p-4 flex gap-2 sm:gap-3 items-start">
         <img
           src={
-            `https://abbos.uzmetro.uz${announcement.image}` ||
-            "/placeholder.svg"
+            `https://abbos.uzmetro.uz${
+              announcement.image || "/placeholder.svg"
+            }` || "/placeholder.svg"
           }
           alt={announcement.title_uz}
           className="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 object-cover rounded-md sm:rounded-lg flex-shrink-0"
@@ -316,7 +317,7 @@ export default function MetroCarouselWithNews() {
     const diffMs = now.getTime() - published.getTime();
     const diffSec = Math.floor(diffMs / 1000);
 
-    if (diffSec < 60) return `${diffSec} soniya oldin`;
+    if (diffSec < 60) return `${diffSec} sekund oldin`;
     const diffMin = Math.floor(diffSec / 60);
     if (diffMin < 60) return `${diffMin} daqiqa oldin`;
     const diffHour = Math.floor(diffMin / 60);
