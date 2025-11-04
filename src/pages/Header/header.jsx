@@ -7,7 +7,8 @@ import { useParams } from "next/navigation";
 
 export default function Header() {
   const [news, setNews] = useState([]);
-  const { locale } = useParams();
+  const params = useParams();
+  const locale = params?.locale;
   const lang = locale || "uz";
   const titleField = `title_${lang}`;
   const descField = `description_${lang}`;
