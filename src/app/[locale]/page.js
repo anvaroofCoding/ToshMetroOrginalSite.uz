@@ -11,10 +11,7 @@ const Home = () => {
       <div className="mt-5">
         <MetroCarouselWithNews />
       </div>
-      <div className="my-10">
-        <div className="container py-5">
-          <h2 className="md:text-[36px] text-[24px] font-bold">{malumot}</h2>
-        </div>
+      <div className="my-12">
         <MetroPagesShowcase />
       </div>
       <div>

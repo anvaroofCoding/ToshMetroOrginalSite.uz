@@ -9,7 +9,7 @@ export default function FloatingActionButton() {
   const path = usePathname();
   const [hidden, setHidden] = useState(false);
   useEffect(() => {
-    if (path === "/ru/metro-xaritasis") {
+    if (path.split("/")[2] === "metro-xaritasis") {
       setHidden(true);
     } else {
       setHidden(false);

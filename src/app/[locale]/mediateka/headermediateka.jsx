@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import {
   Play,
@@ -12,88 +11,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import Link from "next/link";
-
-const photos = [
-  {
-    id: 1,
-    src: "/galery/1.jpg",
-    title: "Metropolitenga fotonigoh",
-    category: "Metro",
-  },
-  {
-    id: 2,
-    src: "/galery/2.jpg",
-    title: "Metropolitenga fotonigoh",
-    category: "Metro",
-  },
-  {
-    id: 3,
-    src: "/galery/3.jpg",
-    title: "Metropolitenga fotonigoh",
-    category: "Metro",
-  },
-  {
-    id: 4,
-    src: "/galery/4.jpg",
-    title: "Metropolitenga fotonigoh",
-    category: "Metro",
-  },
-  {
-    id: 5,
-    src: "/galery/5.jpg",
-    title: "Metropolitenga fotonigoh",
-    category: "Metro",
-  },
-  {
-    id: 6,
-    src: "/galery/6.jpg",
-    title: "Metropolitenga fotonigoh",
-    category: "Metro",
-  },
-  {
-    id: 7,
-    src: "/galery/7.jpg",
-    title: "Metropolitenga fotonigoh",
-    category: "Metro",
-  },
-  {
-    id: 8,
-    src: "/galery/8.jpg",
-    title: "Metropolitenga fotonigoh",
-    category: "Metro",
-  },
-];
-
-const videos = [
-  {
-    id: 1,
-    url: "https://www.youtube.com/embed/s53QTJC72CE",
-    thumbnail: "/galery/5.jpg",
-    title: "Sirli eshiklar va yashirin yo'laklar",
-    duration: "15:42",
-    views: "125K",
-    category: "Metropoliteni",
-  },
-  {
-    id: 2,
-    url: "https://www.youtube.com/embed/BvjeqzSZ6eU",
-    thumbnail: "/galery/6.jpg",
-    title: "Metro arxiv 2023",
-    duration: "8:30",
-    views: "89K",
-    category: "Metropoliteni",
-  },
-  {
-    id: 3,
-    url: "https://www.youtube.com/embed/FFM30ZXqlug",
-    thumbnail: "/galery/4.jpg",
-    title: "Metro hayoti",
-    duration: "12:15",
-    views: "67K",
-    category: "Metropoliteni",
-  },
-];
-
+import { useTranslations } from "next-intl";
 function PhotoCard({ photo, index, onView }) {
   return (
     <div
@@ -131,7 +49,6 @@ function PhotoCard({ photo, index, onView }) {
     </div>
   );
 }
-
 function VideoCard({ video, index, onPlay }) {
   return (
     <div
@@ -190,13 +107,91 @@ function VideoCard({ video, index, onPlay }) {
     </div>
   );
 }
-
 export default function Mediateka() {
+  const t = useTranslations("menu");
   const [activeTab, setActiveTab] = useState("photos");
   const [selectedPhoto, setSelectedPhoto] = useState(null);
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [isAnimating, setIsAnimating] = useState(false);
-
+  const photos = [
+    {
+      id: 1,
+      src: "/galery/1.jpg",
+      title: t("photon_view"),
+      category: t("metro"),
+    },
+    {
+      id: 2,
+      src: "/galery/2.jpg",
+      title: t("photon_view"),
+      category: t("metro"),
+    },
+    {
+      id: 3,
+      src: "/galery/3.jpg",
+      title: t("photon_view"),
+      category: t("metro"),
+    },
+    {
+      id: 4,
+      src: "/galery/4.jpg",
+      title: t("photon_view"),
+      category: t("metro"),
+    },
+    {
+      id: 5,
+      src: "/galery/5.jpg",
+      title: t("photon_view"),
+      category: t("metro"),
+    },
+    {
+      id: 6,
+      src: "/galery/6.jpg",
+      title: t("photon_view"),
+      category: t("metro"),
+    },
+    {
+      id: 7,
+      src: "/galery/7.jpg",
+      title: t("photon_view"),
+      category: t("metro"),
+    },
+    {
+      id: 8,
+      src: "/galery/8.jpg",
+      title: t("photon_view"),
+      category: t("metro"),
+    },
+  ];
+  const videos = [
+    {
+      id: 1,
+      url: "https://www.youtube.com/embed/s53QTJC72CE",
+      thumbnail: "/galery/5.jpg",
+      title: t("mysterious_corridors"),
+      duration: "15:42",
+      views: "125K",
+      category: t("metropolitan"),
+    },
+    {
+      id: 2,
+      url: "https://www.youtube.com/embed/BvjeqzSZ6eU",
+      thumbnail: "/galery/6.jpg",
+      title: t("metro_archive_2023"),
+      duration: "8:30",
+      views: "89K",
+      category: t("metropolitan"),
+    },
+    {
+      id: 3,
+      url: "https://www.youtube.com/embed/FFM30ZXqlug",
+      thumbnail: "/galery/4.jpg",
+      title: t("metro_life"),
+      duration: "12:15",
+      views: "67K",
+      category: t("metropolitan"),
+    },
+  ];
   const handleTabChange = (tab) => {
     if (tab !== activeTab) {
       setIsAnimating(true);
@@ -206,46 +201,36 @@ export default function Mediateka() {
       }, 300);
     }
   };
-
   const handlePhotoView = (photo) => {
     setSelectedPhoto(photo);
   };
-
   const handleVideoPlay = (video) => {
     setSelectedVideo(video);
   };
-
   const closePhotoModal = () => {
     setSelectedPhoto(null);
   };
-
   const closeVideoModal = () => {
     setSelectedVideo(null);
   };
-
   const nextPhoto = () => {
     const currentIndex = photos.findIndex((p) => p.id === selectedPhoto.id);
     const nextIndex = (currentIndex + 1) % photos.length;
     setSelectedPhoto(photos[nextIndex]);
   };
-
   const prevPhoto = () => {
     const currentIndex = photos.findIndex((p) => p.id === selectedPhoto.id);
     const prevIndex = (currentIndex - 1 + photos.length) % photos.length;
     setSelectedPhoto(photos[prevIndex]);
   };
-
   return (
     <div>
       <div className="container">
-        {/* Header with More Button */}
-        {/* Header */}
         <div className="text-start mb-8">
           <h1 className="text-[36px] font-bold text-blue-900 mb-4 animate-in slide-in-from-top duration-1000">
-            Mediateka
+            {t("mediateka")}
           </h1>
         </div>
-
         {/* Modern Compact Tabs with More Button */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-12 animate-in zoom-in duration-1000 delay-300">
           {/* Compact Tabs */}
@@ -268,7 +253,7 @@ export default function Mediateka() {
                 }`}
               >
                 <ImageIcon className="w-4 h-4" />
-                <span>Fotolar</span>
+                <span>{t("photos")}</span>
               </button>
 
               <button
@@ -280,7 +265,7 @@ export default function Mediateka() {
                 }`}
               >
                 <Video className="w-4 h-4" />
-                <span>Videolar</span>
+                <span>{t("videos")}</span>
               </button>
             </div>
           </div>
@@ -289,10 +274,8 @@ export default function Mediateka() {
           <Link href="/mediateka">
             <button className="group relative bg-blue-900 hover:bg-blue-800 text-white px-5 py-2.5 lg:px-6 lg:py-3 rounded-xl font-medium text-sm lg:text-base transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-xl border-2 border-blue-900 hover:border-blue-700">
               <div className="flex items-center gap-2">
-                <span>Batafsil</span>
-                <div className="transform group-hover:translate-x-0.5 transition-transform duration-200">
-                  <ChevronRight className="w-4 h-4" />
-                </div>
+                <span>{t("readMore")}</span>
+                <div className="transform group-hover:translate-x-0.5 transition-transform duration-200"></div>
               </div>
 
               {/* Subtle glow effect */}

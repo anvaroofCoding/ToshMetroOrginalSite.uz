@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { MapPin, Phone, Clock, Utensils, Mail } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 
 // Custom Fax icon component since it's not in lucide-react
 const FaxIcon = () => (
@@ -33,7 +34,8 @@ const contactInfo = [
   {
     icon: MapPin,
     title: "Manzil",
-    content: "Toshkent shahri, Shayxontohur tumani, Islom Karimov ko'chasi 16-А, 100027",
+    content:
+      "Toshkent shahri, Shayxontohur tumani, Islom Karimov ko'chasi 16-А, 100027",
     delay: 0.1,
   },
   {
@@ -72,6 +74,8 @@ const contactInfo = [
 ];
 
 export default function ContactInfo() {
+  const { locale } = useParams();
+  console.log(locale);
   return (
     <div className=" py-20 px-4">
       <div className="container">

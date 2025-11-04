@@ -5,7 +5,10 @@ import { motion } from "framer-motion";
 import TopStationsChart from "@/app/[locale]/metro-statistikasi/boshSahifastatistika";
 import { AnimatedCounter } from "../animated-counter";
 import MetroInfoSection from "./for-about-metro";
+import { useTranslations } from "next-intl";
+import BoshSahifastatistika from "@/app/[locale]/metro-statistikasi/boshSahifastatistika";
 export default function MetroPagesShowcase() {
+  const t = useTranslations("menu");
   const [apiStats, setApiStats] = useState([]);
   const [error, setError] = useState(null);
   const [videoError, setVideoError] = useState(false);
@@ -14,7 +17,6 @@ export default function MetroPagesShowcase() {
   const [years, setYears] = useState(0);
   const animateValue = (setter, target, duration) => {
     let startTimestamp = null;
-
     const step = (timestamp) => {
       if (!startTimestamp) startTimestamp = timestamp;
       const progress = Math.min((timestamp - startTimestamp) / duration, 1);
@@ -23,7 +25,6 @@ export default function MetroPagesShowcase() {
         requestAnimationFrame(step);
       }
     };
-
     requestAnimationFrame(step);
   };
   useEffect(() => {
@@ -31,54 +32,50 @@ export default function MetroPagesShowcase() {
     animateValue(setStations, 50, 1500);
     animateValue(setYears, 53, 1500);
   }, []);
-  const stats = [
-    { value: "70", label: "Kilometr" },
-    { value: "50", label: "Bekat" },
-    { value: "53", label: "Xizmat yili" },
-  ];
+
   const payment = [
     {
-      name: "Humo Karta",
-      information: "Karta to'lovlari",
+      name: t("humo_card"),
+      information: t("humo_payment"),
       image:
         "https://humocard.uz/upload/medialibrary/208/8x0p9hi3h9jww0flwdm92dayhn0flulj/humo-logo-more.png",
       color: "#FF6B35",
       bgColor: "#FFF4F0",
     },
     {
-      name: "Uzcard Karta",
-      information: "Uzcard to'lovlari",
+      name: t("uzcard_card"),
+      information: t("uzcard_payment"),
       image:
         "https://avatars.mds.yandex.net/i?id=6c2035675ebdc7cc61ca8ab797d59752_sr-10878212-images-thumbs&n=13",
       color: "#0066CC",
       bgColor: "#F0F7FF",
     },
     {
-      name: "Click",
-      information: "Click ilovasi orqali to'lov",
+      name: t("click"),
+      information: t("click_payment"),
       image: "https://click.uz/click/images/click-white.jpg",
       color: "#00C851",
       bgColor: "#F0FFF4",
     },
     {
-      name: "Alif mobi",
-      information: "Alif mobi ilovasi orqali to'lov",
+      name: t("alif_mobi"),
+      information: t("alif_payment"),
       image:
         "https://play-lh.googleusercontent.com/kJJQYR2u11_8fCgrJl5lKScnlba5_5KXx6RUD6KQHm4tmxaZqiiOjVscwvFvtfce2vE=w600-h300-pc0xffffff-pd",
       color: "#0b9e48ff",
       bgColor: "#F0F7FF",
     },
     {
-      name: "Payme",
-      information: "Payme ilovasi orqali to'lov",
+      name: t("payme"),
+      information: t("payme_payment"),
       image:
         "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Paymeuz_logo.png/1600px-Paymeuz_logo.png",
       color: "#2ba6eeff",
       bgColor: "#F0FFF4",
     },
     {
-      name: "Paynet",
-      information: "Paynet ilovasi orqali to'lov",
+      name: t("paynet"),
+      information: t("paynet_payment"),
       image:
         "https://play-lh.googleusercontent.com/SKrx5xcp2Vu8Jj9Q4XTw2Cifdaix96xkb5U1T1NKyE-zKwbwuCvhV2RFLwHsVZS8r5k=w480-h960",
       color: "#00C851",
@@ -105,8 +102,21 @@ export default function MetroPagesShowcase() {
   if (error) return <p>Error: {error}</p>;
   return (
     <div className="container">
+      <h2 className="md:text-[36px] text-[24px] font-bold pb-5">
+        {t("usefulInfoForPassengers")}
+      </h2>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 ">
-        <motion.div className="lg:row-span-1 bg-gradient-to-br from-blue-900 to-blue-700 text-white rounded-2xl sm:rounded-3xl lg:rounded-[2.5rem] shadow-2xl p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden min-h-[300px] lg:max-h-[530px]">
+        <motion.div className="lg:row-span-1 bg-gradient-to-br from-blue-800 to-blue-700 text-white rounded-2xl sm:rounded-3xl lg:rounded-[2.5rem] shadow-2xl p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden min-h-[300px] lg:max-h-[530px]">
+          <div className="absolute inset-0 z-0 opacity-20">
+            <div
+              className="w-full h-full bg-repeat"
+              style={{
+                backgroundImage: 'url("/naqsh.png")',
+                backgroundRepeat: "repeat",
+                backgroundSize: "200px", // <<< kichikroq qilib, ko‘p takrorlanadi
+              }}
+            />
+          </div>
           <div className="absolute -bottom-50 inset-0 opacity-30">
             <MetroMap />
           </div>
@@ -115,24 +125,23 @@ export default function MetroPagesShowcase() {
               <MapPin className="w-12 h-12 sm:w-16 sm:h-16 mb-4" />
             </motion.div>
             <h3 className="text-md sm:text-2xl lg:text-2xl font-bold mb-2">
-              Interaktiv metro xaritasi
+              {t("interactiveMapTitle")}
             </h3>
             <p className="mb-6 text-sm sm:text-base text-blue-100 max-w-xs">
-              Toshkent metrosining rasmiy interaktiv xaritasi. Bekatlar va
-              yo'nalishlarni ko'ring.
+              {t("interactiveMapDescription")}
             </p>
             <motion.a
               href="/metro-xaritasis"
               className="inline-block px-4 sm:px-6 py-2 sm:py-3 rounded-full bg-white text-blue-900 font-semibold shadow hover:bg-blue-100 transition text-sm sm:text-base"
             >
-              Xarita sahifasiga
+              {t("goToMapPage")}
             </motion.a>
           </div>
         </motion.div>
         <MetroInfoSection />
         {/* for informatin */}
-        <motion.div className="lg:col-span-3 bg-white rounded-2xl sm:rounded-3xl shadow-xl p-6 sm:p-8 min-h-[280px]">
-          <TopStationsChart />
+        <motion.div className="lg:col-span-3">
+          <BoshSahifastatistika />
         </motion.div>
         {/* 4. Enhanced Payment Systems Card with Infinite Vertical Slider */}
         <motion.div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl sm:rounded-3xl shadow-xl p-6 sm:p-8 h-[500px] lg:h-[600px]">
@@ -147,7 +156,7 @@ export default function MetroPagesShowcase() {
               </motion.div>
               <div>
                 <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-blue-900">
-                  {"To'lov tizimlari"}
+                  {t("paymentSystemsTitle")}
                 </h3>
               </div>
             </div>
@@ -227,7 +236,7 @@ export default function MetroPagesShowcase() {
               >
                 <CreditCard className="w-5 h-5" />
                 <p className="text-xs sm:text-sm lg:text-base">
-                  {"Barcha to'lov usullari"}
+                  {t("allPaymentMethods")}
                 </p>
               </motion.a>
             </motion.div>
@@ -242,75 +251,68 @@ export default function MetroPagesShowcase() {
     </div>
   );
 }
-
 function AttoCardsCarousel() {
+  const t = useTranslations("menu");
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
-
   const attoCards = [
     {
-      name: "ATTO Classic",
-      type: "Klassik karta",
-      description: "Barcha yoshdagi fuqarolar uchun standart transport kartasi",
+      name: t("classic"),
+      type: t("classicName"),
+      description: t("classicDesc"),
       image: "https://atto.uz/image/blueCard.png",
       color: "#2563eb",
       bgGradient: "from-blue-500 to-blue-700",
       features: [
-        "Barcha transport turlari",
-        "Chegirmalar",
-        "Online to'ldirish",
+        t("classicFeature1"),
+        t("classicFeature2"),
+        t("classicFeature3"),
       ],
     },
     {
-      name: "ATTO talaba",
-      type: "Talaba kartasi",
-      description:
-        "Oliy o'quv yurtlari talabalari uchun maxsus imtiyozli karta",
+      name: t("student"),
+      type: t("studentName"),
+      description: t("studentDesc"),
       image: "https://atto.uz/icons/cards/yellow_transport_card.png",
       color: "#eab308",
       bgGradient: "from-yellow-500 to-orange-500",
-      features: ["50% chegirma", "Talaba ID bilan", "Semestr davomida"],
+      features: [
+        t("studentFeature1"),
+        t("studentFeature2"),
+        t("studentFeature3"),
+      ],
     },
     {
-      name: "ATTO O'quvchi",
-      type: "Maktab kartasi",
-      description: "Maktab o'quvchilari uchun maxsus transport kartasi",
+      name: t("school"),
+      type: t("schoolName"),
+      description: t("schoolDesc"),
       image: "https://atto.uz/icons/cards/green_transport_card.png",
       color: "#16a34a",
       bgGradient: "from-green-500 to-emerald-600",
-      features: ["Katta chegirmalar", "Ota-ona nazorati", "Xavfsiz to'lov"],
+      features: [t("schoolFeature1"), t("schoolFeature2"), t("schoolFeature3")],
     },
     {
-      name: "ATTO Ijtimoiy",
-      type: "Ijtimoiy karta",
-      description: "Nafaqaxo'rlar va imtiyozli toifalar uchun maxsus karta",
+      name: t("social"),
+      type: t("socialName"),
+      description: t("socialDesc"),
       image: "https://atto.uz/icons/cards/red_transport_card.png",
       color: "#dc2626",
       bgGradient: "from-red-500 to-pink-600",
-      features: [
-        "Maksimal chegirmalar",
-        "Ijtimoiy himoya",
-        "Bepul yo'nalishlar",
-      ],
+      features: [t("socialFeature1"), t("socialFeature2"), t("socialFeature3")],
     },
   ];
-
   const nextCard = () => {
     setCurrentCardIndex((prev) => (prev + 1) % attoCards.length);
   };
-
   const prevCard = () => {
     setCurrentCardIndex(
       (prev) => (prev - 1 + attoCards.length) % attoCards.length
     );
   };
-
   useEffect(() => {
     const interval = setInterval(nextCard, 4500);
     return () => clearInterval(interval);
   }, []);
-
   const currentCard = attoCards[currentCardIndex];
-
   return (
     <div className="h-full flex flex-col relative">
       {/* Header */}
@@ -322,8 +324,8 @@ function AttoCardsCarousel() {
           <Wallet className="w-8 h-8 text-white " />
         </motion.div>
         <div>
-          <h3 className="text-xl sm:text-2xl font-bold">ATTO kartalar</h3>
-          <p className="text-white/70 text-sm">Toshkent transport kartalari</p>
+          <h3 className="text-xl sm:text-2xl font-bold">{t("cards")}</h3>
+          <p className="text-white/70 text-sm">{t("transportCards")}</p>
         </div>
       </div>
 
@@ -461,7 +463,7 @@ function AttoCardsCarousel() {
           }}
         >
           <Wallet className="w-4 h-4" />
-          ATTO kartaga o'tish
+          {t("title")}
         </motion.a>
       </motion.div>
 
@@ -495,7 +497,6 @@ function AttoCardsCarousel() {
 
 function MetroMap() {
   const [active, setActive] = useState(0);
-
   const lines = [
     {
       name: "Chilonzor",
@@ -522,12 +523,10 @@ function MetroMap() {
       ],
     },
   ];
-
   useEffect(() => {
     const timer = setInterval(() => setActive((a) => (a + 1) % 12), 800);
     return () => clearInterval(timer);
   }, []);
-
   return (
     <svg
       viewBox="0 0 600 400"

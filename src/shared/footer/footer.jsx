@@ -1,5 +1,4 @@
 "use client";
-
 import {
   Facebook,
   Instagram,
@@ -17,9 +16,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import logo from "../../../public/logos.png";
 import { usePathname } from "next/navigation";
-
-// const logo = "/placeholder.svg?height=60&width=60&text=Metro"
-
+import { useTranslations } from "next-intl";
 const socialLinks = [
   {
     href: "https://t.me/Toshkent_metropoliteni_rasmiy",
@@ -47,34 +44,34 @@ const socialLinks = [
   },
 ];
 
-const contacts = [
-  {
-    icon: MapPin,
-    text: "Toshkent sh. Shayxontohur t. I.Karimov ko'chasi, 16-A uy, 100027",
-    title: "Manzil",
-    type: "address",
-  },
-  {
-    icon: Phone,
-    text: "+99871 241-65-14",
-    title: "Qabulxona raqami",
-    type: "phone",
-  },
-  {
-    icon: Mail,
-    text: "gup@tashmetro.uz",
-    title: "Korporativ pochta manzili",
-    type: "email",
-  },
-  {
-    icon: Mail,
-    text: "tash.metropoliten@mail.ru",
-    title: "Xalqaro pochta manzili",
-    type: "email",
-  },
-];
-
 const Footer = () => {
+  const t = useTranslations("menu");
+  const contacts = [
+    {
+      icon: MapPin,
+      text: t("addressValue"),
+      title: t("address"),
+      type: "address",
+    },
+    {
+      icon: Phone,
+      text: "+99871 241-65-14",
+      title: t("receptionPhone"),
+      type: "phone",
+    },
+    {
+      icon: Mail,
+      text: "gup@tashmetro.uz",
+      title: t("corporateEmail"),
+      type: "email",
+    },
+    {
+      icon: Mail,
+      text: "tash.metropoliten@mail.ru",
+      title: t("internationalPost"),
+      type: "email",
+    },
+  ];
   const [totalVisitors, setTotalVisitors] = useState();
   const [onlineVisitors, setOnlineVisitors] = useState();
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -90,11 +87,9 @@ const Footer = () => {
     setTotalVisitors(data.jami_foydalanuvchilar);
     setOnlineVisitors(data.onlayn_foydalanuvchilar);
   };
-
   useEffect(() => {
     getprosmotrsite();
   }, []);
-
   return (
     <>
       <footer
@@ -119,9 +114,9 @@ const Footer = () => {
 
         <div className="relative container py-8 ">
           {/* Main Content */}
-          <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-6">
+          <div className="grid grid-cols-1 xl:grid-cols-4 gap-6 mb-6">
             {/* Brand Section */}
-            <div className="lg:col-span-1 space-y-3">
+            <div className="lg:col-span-1 space-y-3 ">
               <div className="flex items-center gap-3">
                 <Link href={"/"}>
                   <Image
@@ -139,25 +134,24 @@ const Footer = () => {
                   <div className="border-l border-[#00B100] h-[30%] w-full"></div>
                 </div>
                 <h1 className="hidden md:block text-[11px] lg:text-[11] w-[150px] lg:w-[200px]">
-                  O'zbekiston Respublikasi Transport vazirligi{" "}
-                  <span>"Toshkent metropoliteni"</span> DUK
+                  {t("logo1")} <span>{t("logo2")}</span> {t("logo3")}
                 </h1>
               </div>
 
               <blockquote className="relative text-white">
-                <p className=" italic leading-relaxed text-3xl">
-                  Xavfsiz, tez va qulay yo’lovchilar tashishni ta’minlash.
+                <p className=" italic leading-relaxed text-2xl">
+                  {t("slogan")}
                 </p>
               </blockquote>
             </div>
 
             {/* Contact Information */}
-            <div className="lg:col-span-1 space-y-4">
+            <div className="lg:col-span-2 space-y-4 ">
               <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
                 <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center">
                   <Phone className="w-4 h-4" />
                 </div>
-                Bog'lanish
+                {t("contact")}
               </h3>
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
@@ -186,12 +180,12 @@ const Footer = () => {
             </div>
 
             {/* Social & Stats */}
-            <div className="lg:col-span-1 space-y-3">
+            <div className="lg:col-span-1 space-y-3 ">
               <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
                 <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
                   <Users className="w-4 h-4" />
                 </div>
-                Ijtimoiy tarmoqlar
+                {t("socialMedia")}
               </h3>
 
               {/* Social Links */}
@@ -222,7 +216,9 @@ const Footer = () => {
                         <Users className="w-5 h-5 text-white" />
                       </div>
                       <div>
-                        <p className="text-sm text-blue-200">Jami tashrif</p>
+                        <p className="text-sm text-blue-200">
+                          {t("totalVisits")}
+                        </p>
                         <p className="text-xl font-bold text-white">
                           {totalVisitors}
                         </p>
@@ -238,7 +234,9 @@ const Footer = () => {
                         <Eye className="w-5 h-5 text-white" />
                       </div>
                       <div>
-                        <p className="text-sm text-blue-200">Hozir onlayn</p>
+                        <p className="text-sm text-blue-200">
+                          {t("onlineNow")}
+                        </p>
                         <p className="text-xl font-bold text-white">
                           {onlineVisitors}
                         </p>
@@ -257,15 +255,13 @@ const Footer = () => {
           {/* Bottom Section */}
           <div className="flex flex-col md:flex-row items-center justify-between gap-2 text-xs">
             <div className="flex items-center gap-2 text-blue-200">
-              <span>© 2025 "Toshkent metropoliteni" DUK</span>
+              <span>{t("copyright")}</span>
               <span className="hidden md:inline">•</span>
-              <span className="hidden md:inline">
-                Barcha huquqlar himoyalangan
-              </span>
+              <span className="hidden md:inline">{t("rights")}</span>
             </div>
 
             <div className="flex items-center gap-2 text-blue-300">
-              <span>Manba:</span>
+              <span>{t("source")}</span>
               <Link
                 href="https://uzmetro.uz"
                 target="_blank"
@@ -277,17 +273,6 @@ const Footer = () => {
           </div>
         </div>
       </footer>
-
-      {/* Scroll to Top Button */}
-      {showScrollTop && (
-        <button
-          onClick={scrollToTop}
-          className="fixed bottom-8 right-8 w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 z-50 flex items-center justify-center"
-          aria-label="Scroll to top"
-        >
-          <ArrowUp className="w-5 h-5" />
-        </button>
-      )}
     </>
   );
 };

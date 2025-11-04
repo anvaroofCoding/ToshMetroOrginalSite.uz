@@ -204,8 +204,7 @@ export default function Navbar() {
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.6, duration: 0.5 }}
       >
-        O'zbekiston Respublikasi Transport vazirligi{" "}
-        <span>"Toshkent metropoliteni"</span> DUK
+        {t("logo1")} <span>{t("logo2")}</span> {t("logo3")}
       </motion.h1>
     </motion.div>
   );
