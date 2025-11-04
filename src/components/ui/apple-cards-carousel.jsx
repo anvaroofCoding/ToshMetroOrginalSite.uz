@@ -118,20 +118,20 @@ export const Carousel = ({ items, initialScroll = 0 }) => {
             ))}
           </div>
         </div>
-        <div className="mr-10 flex justify-end gap-2">
+        <div className="container mr-10 flex justify-start gap-2">
           <button
-            className="relative z-40 flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 disabled:opacity-50"
+            className="relative z-40 flex h-10 w-10 items-center justify-center rounded-full disabled:opacity-50 bg-blue-900"
             onClick={scrollLeft}
             disabled={!canScrollLeft}
           >
-            <IconArrowNarrowLeft className="h-6 w-6 text-gray-500" />
+            <IconArrowNarrowLeft className="h-6 w-6 text-white" />
           </button>
           <button
-            className="relative z-40 flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 disabled:opacity-50"
+            className="relative z-40 flex h-10 w-10 items-center justify-center rounded-full bg-blue-900 disabled:opacity-50"
             onClick={scrollRight}
             disabled={!canScrollRight}
           >
-            <IconArrowNarrowRight className="h-6 w-6 text-gray-500" />
+            <IconArrowNarrowRight className="h-6 w-6 text-white" />
           </button>
         </div>
       </div>
@@ -192,7 +192,7 @@ export const Card = ({ card, index, layout = false }) => {
               className="relative z-[60] mx-auto my-10 h-fit max-w-5xl rounded-3xl bg-white p-4 font-sans md:p-10 dark:bg-neutral-900"
             >
               <button
-                className="sticky top-4 right-0 ml-auto flex h-8 w-8 items-center justify-center rounded-full bg-black dark:bg-white"
+                className="sticky top-4 right-0 ml-auto flex h-8 w-8 items-center justify-center rounded-full bg-blue-900 dark:bg-white"
                 onClick={handleClose}
               >
                 <IconX className="h-6 w-6 text-neutral-100 dark:text-neutral-900" />
@@ -212,7 +212,7 @@ export const Card = ({ card, index, layout = false }) => {
               <BlurImage
                 src={card.src}
                 alt={card.title}
-                fill
+                fill={"true"}
                 className="mt-10 object-cover"
               />
               <div className="py-10">{card.content}</div>
@@ -229,13 +229,13 @@ export const Card = ({ card, index, layout = false }) => {
         <div className="relative z-40 p-8">
           <motion.p
             layoutId={layout ? `category-${card.category}` : undefined}
-            className="text-left font-sans text-sm font-medium text-white md:text-base"
+            className="text-left font-sans text-xl font-medium text-white md:text-3xl"
           >
             {card.category}
           </motion.p>
           <motion.p
             layoutId={layout ? `title-${card.title}` : undefined}
-            className="mt-2 text-left font-sans text-xl font-semibold [text-wrap:balance] text-white md:text-lg"
+            className="mt-2 text-left font-sans text-xl font-semibold [text-wrap:balance] text-white md:text-sm hidden lg:block"
           >
             {card.title.length > 50
               ? card.title.slice(0, 150) + "..."
@@ -245,10 +245,12 @@ export const Card = ({ card, index, layout = false }) => {
         <BlurImage
           src={card.src}
           alt={card.title}
-          fill
+          fill={"true"}
           className="absolute inset-0 z-10 object-cover"
         />
-        <div className="absolute z-11 inset-0 bg-black/30"></div>
+        <div className="absolute inset-x-0 bottom-0 h-24 z-10 pointer-events-none">
+          <div className="w-full h-full bg-blue-500/40 blur-3xl rounded-full" />
+        </div>
       </motion.button>
     </>
   );
@@ -269,7 +271,7 @@ export const BlurImage = ({ height, width, src, className, alt, ...rest }) => {
       height={height}
       loading="lazy"
       decoding="async"
-      blurDataURL={typeof src === "string" ? src : undefined}
+      blurdataurl={typeof src === "string" ? src : undefined}
       alt={alt ? alt : "Background of a beautiful view"}
       {...rest}
     />

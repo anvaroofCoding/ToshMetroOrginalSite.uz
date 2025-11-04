@@ -63,16 +63,16 @@ export default function Header() {
   ));
   return (
     <div className="w-full h-full">
-      <div className="container flex justify-between items-center mt-8">
+      <div className="container flex justify-between lg:items-center items-start gap-3 lg:flex-row  flex-col">
         <div>
-          <h2 className="text-xl md:text-4xl font-bold text-[#0e4bb3]">
+          <h2 className="text-2xl md:text-4xl font-bold text-[#0e4bb3]">
             {lang === "uz"
               ? "Metropoliten yangiliklari"
               : lang === "ru"
               ? "Новости метрополитена"
               : "Metro News"}
           </h2>
-          <p className="text-gray-600 max-w-[450px]">
+          <p className="text-gray-600 max-w-[450px] text-xs">
             {lang === "uz"
               ? "Toshkent metropolitenida e'lon qilinadigan barcha rasmiy yangiliklar"
               : lang === "ru"
