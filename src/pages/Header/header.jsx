@@ -72,7 +72,7 @@ export default function Header() {
               ? "Новости метрополитена"
               : "Metro News"}
           </h2>
-          <p className="text-gray-600 max-w-[450px] text-xs">
+          <p className="text-gray-600 max-w-[450px] text-xs lg:text-lg">
             {lang === "uz"
               ? "Toshkent metropolitenida e'lon qilinadigan barcha rasmiy yangiliklar"
               : lang === "ru"

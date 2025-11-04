@@ -4,10 +4,14 @@ import MetroCarouselWithNews from "@/pages/Header/header";
 import FaqAccordion from "@/work/test/questions";
 import Mediateka from "./mediateka/headermediateka";
 import Header from "@/pages/Header/header";
+import HomePage from "@/components/home/HomaPage";
 
 const Home = () => {
   return (
     <div className="relative z-[10] ">
+      <div>
+        <HomePage />
+      </div>
       <div className="mt-5">
         <Header />
       </div>

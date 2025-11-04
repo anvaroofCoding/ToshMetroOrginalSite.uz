@@ -12,8 +12,8 @@ import {
   Hand,
   ScanFace,
   Sparkles,
-  ChartNoAxesCombined,
-  ShieldUser,
+  ArrowUpFromLine as ChartNoAxesCombined,
+  ShieldAlert as ShieldUser,
   Film,
   Building,
   UsersRound,
@@ -23,7 +23,7 @@ import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   DropdownMenu,
@@ -140,6 +140,14 @@ export default function Navbar() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [expandedMenu, setExpandedMenu] = useState(null);
+  const [isScrolled, setIsScrolled] = useState(false);
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
   const changeLanguage = useCallback(
     (lang) => {
       const segments = pathname.split("/");
@@ -151,6 +159,7 @@ export default function Navbar() {
   );
   const isHidden =
     pathname.includes("metro-xaritasis") || pathname.includes("normalMap");
+  const isHomePage = pathname === "/" || pathname === `/${locale}`;
   const menuItems = getMenuItems(t);
   if (isHidden) return null;
   const Logo = () => (
@@ -178,7 +187,11 @@ export default function Navbar() {
 
       <div className="h-[40px] flex-col justify-center hidden sm:flex">
         {[
-          { color: "#00B0FF", height: "30%", delay: 0.1 },
+          {
+            color: "#00B0FF",
+            height: "30%",
+            delay: 0.1,
+          },
           { color: "#FF454B", height: "5%", delay: 0.2 },
           { color: "white", height: "30%", delay: 0.3 },
           { color: "#FF454B", height: "5%", delay: 0.4 },
@@ -208,23 +221,230 @@ export default function Navbar() {
       </motion.h1>
     </motion.div>
   );
+  if (isHomePage) {
+    return (
+      <header
+        className={`fixed top-0 z-50 w-full transition-all duration-300 ${
+          isScrolled ? "bg-[#173aad]" : "bg-transparent"
+        }`}
+      >
+        {isScrolled && (
+          <div className="absolute inset-0 opacity-20 -z-50">
+            <div
+              className="w-full h-full bg-repeat"
+              style={{
+                backgroundImage: 'url("/naqsh.png")',
+                backgroundRepeat: "repeat",
+                backgroundSize: "200px",
+              }}
+            />
+          </div>
+        )}
+        <div className="mx-auto flex container items-center justify-between py-4">
+          <div className="flex items-center gap-4">
+            <Logo />
+          </div>
+          <nav className="hidden gap-1 lg:flex">
+            {menuItems.map((item) =>
+              item.dropdown ? (
+                <DropdownMenu key={item.label}>
+                  <DropdownMenuTrigger className="border-none outline-none">
+                    <Button
+                      variant="ghost"
+                      className="gap-1 text-xs duration-500 text-white font-medium hover:bg-white/10 rounded-lg px-3 py-2 hover:text-gray-400"
+                    >
+                      {item.label}
+                      <ChevronDown className="h-4 w-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent
+                    align="start"
+                    className="w-56 bg-white/50 backdrop-blur-md border border-white/20 rounded-xl shadow-lg animate-in fade-in zoom-in-95 duration-200"
+                  >
+                    {Array.isArray(item.dropdownItems) &&
+                      item.dropdownItems.map((sub, idx) => {
+                        const IconComponent = sub.icon;
+                        return (
+                          <DropdownMenuItem
+                            key={sub.label}
+                            asChild
+                            className="cursor-pointer hover:bg-blue-100 transition-colors duration-150 focus:bg-blue-50 rounded-xl"
+                          >
+                            <Link
+                              href={sub.href}
+                              className="flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-slate-700"
+                            >
+                              <IconComponent className="h-4 w-4 text-blue-600 flex-shrink-0" />
+                              {sub.label}
+                            </Link>
+                          </DropdownMenuItem>
+                        );
+                      })}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              ) : (
+                <Button
+                  key={item.label}
+                  variant="ghost"
+                  className="text-xs text-white hover:text-gray-400 duration-500 hover:bg-white/10 rounded-lg px-3 py-2"
+                  asChild
+                >
+                  <Link href={item.href}>{item.label}</Link>
+                </Button>
+              )
+            )}
+          </nav>
+          <div className="flex items-center gap-2">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="gap-2 hidden sm:flex text-white bg-none border-none outline-none hover:bg-white/10 hover:text-white/60 rounded-lg px-3 py-2 transition-colors duration-200"
+                >
+                  <Globe className="h-4 w-4" />
+                  {locale.toUpperCase()}
+                  <ChevronDown className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent
+                align="center"
+                className="bg-white/95 backdrop-blur-md border border-white/20 rounded-xl shadow-lg animate-in fade-in zoom-in-95 duration-200 text-center"
+              >
+                {LANGUAGES.filter((l) => l !== locale.toUpperCase()).map(
+                  (lang) => (
+                    <DropdownMenuItem
+                      key={lang}
+                      onClick={() => changeLanguage(lang)}
+                      className="cursor-pointer hover:bg-blue-50 transition-colors duration-150 focus:bg-blue-50"
+                    >
+                      <span className="font-medium text-slate-700">{lang}</span>
+                    </DropdownMenuItem>
+                  )
+                )}
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className="lg:hidden hover:bg-white/10"
+              aria-label="Toggle menu"
+            >
+              {mobileOpen ? (
+                <X className="h-5 w-5 text-white" />
+              ) : (
+                <Menu className="h-5 w-5 text-white" />
+              )}
+            </Button>
+          </div>
+        </div>
+
+        {mobileOpen && (
+          <div className="border-t bg-white/10 backdrop-blur-sm lg:hidden">
+            <div className="space-y-1 px-4 py-4">
+              {menuItems?.map((item) =>
+                item.dropdownItems ? (
+                  <div key={item.label}>
+                    <button
+                      onClick={() =>
+                        setExpandedMenu(
+                          expandedMenu === item.label ? null : item.label
+                        )
+                      }
+                      className="w-full text-left px-2 py-2 text-sm font-medium rounded-md hover:bg-white/20 flex justify-between items-center text-white"
+                    >
+                      <span className="flex items-center gap-2">
+                        {item.icon && (
+                          <item.icon className="h-4 w-4 text-white flex-shrink-0" />
+                        )}
+                        {item.label}
+                      </span>
+                      <ChevronDown
+                        className={`h-4 w-4 transition-transform ${
+                          expandedMenu === item.label ? "rotate-180" : ""
+                        }`}
+                      />
+                    </button>
+
+                    {expandedMenu === item.label && (
+                      <div className="space-y-1 pl-4 py-1">
+                        {item.dropdownItems.map((sub) => {
+                          const IconComponent = sub.icon;
+                          return (
+                            <Link
+                              key={sub.label}
+                              href={sub.href}
+                              onClick={() => setMobileOpen(false)}
+                              className="flex items-center gap-2 px-2 py-1.5 text-sm text-white hover:text-gray-200 rounded-md hover:bg-white/20"
+                            >
+                              <IconComponent className="h-3.5 w-3.5 text-white flex-shrink-0" />
+                              {sub.label}
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    onClick={() => setMobileOpen(false)}
+                    className="block px-2 py-2 text-sm font-medium rounded-md hover:bg-white/20 text-white"
+                  >
+                    <span className="flex items-center gap-2">
+                      {item.icon && (
+                        <item.icon className="h-4 w-4 text-white flex-shrink-0" />
+                      )}
+                      {item.label}
+                    </span>
+                  </Link>
+                )
+              )}
+              <div className="border-t border-white/20 pt-4 mt-4">
+                <div className="text-xs font-semibold text-white px-2 mb-2 flex items-center gap-2">
+                  <Globe className="h-4 w-4" />
+                  {t("Language")}
+                </div>
+                <div className="flex gap-2">
+                  {LANGUAGES.filter((l) => l !== locale.toUpperCase()).map(
+                    (lang) => (
+                      <button
+                        key={lang}
+                        onClick={() => changeLanguage(lang)}
+                        className="flex-1 px-2 py-1.5 text-xs font-medium rounded-md bg-white/20 hover:bg-white/30 transition-colors duration-150 text-white"
+                      >
+                        {lang}
+                      </button>
+                    )
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </header>
+    );
+  }
+
   return (
     <>
-      <header className="sticky top-0 z-50 w-full  bg-[#173aad]">
-        <div className="absolute inset-0  opacity-20 -z-50">
+      <header className="sticky top-0 z-50 w-full bg-[#173aad]">
+        <div className="absolute inset-0 opacity-20 -z-50">
           <div
-            className="w-full h-full bg-repeat "
+            className="w-full h-full bg-repeat"
             style={{
               backgroundImage: 'url("/naqsh.png")',
               backgroundRepeat: "repeat",
-              backgroundSize: "200px", // <<< kichikroq qilib, ko‘p takrorlanadi
+              backgroundSize: "200px",
             }}
           />
         </div>
-        <div className="mx-auto flex container items-center justify-between py-4 ">
+        <div className="mx-auto flex container items-center justify-between py-4">
           <Logo />
 
-          {/* Desktop Nav */}
           <nav className="hidden gap-1 lg:flex">
             {menuItems.map((item) =>
               item.dropdown ? (
@@ -276,7 +496,6 @@ export default function Navbar() {
             )}
           </nav>
 
-          {/* Right side - Language + Mobile Menu */}
           <div className="flex items-center gap-2">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -308,7 +527,6 @@ export default function Navbar() {
               </DropdownMenuContent>
             </DropdownMenu>
 
-            {/* Mobile Menu Button */}
             <Button
               variant="ghost"
               size="sm"
@@ -325,7 +543,6 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Mobile Menu */}
         {mobileOpen && (
           <div className="border-t bg-white backdrop-blur-sm dark:bg-slate-950/50 lg:hidden">
             <div className="space-y-1 px-4 py-4">
@@ -338,11 +555,11 @@ export default function Navbar() {
                           expandedMenu === item.label ? null : item.label
                         )
                       }
-                      className="w-full text-left px-2 py-2 text-sm font-medium rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 flex justify-between items-center"
+                      className="w-full text-left px-2 py-2 text-sm font-medium rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 flex justify-between items-center text-slate-700 dark:text-slate-300"
                     >
                       <span className="flex items-center gap-2">
                         {item.icon && (
-                          <item.icon className="h-4 w-4 text-slate-700 dark:text-slate-300" />
+                          <item.icon className="h-4 w-4 text-slate-700 dark:text-slate-300 flex-shrink-0" />
                         )}
                         {item.label}
                       </span>
@@ -377,11 +594,11 @@ export default function Navbar() {
                     key={item.label}
                     href={item.href}
                     onClick={() => setMobileOpen(false)}
-                    className="block px-2 py-2 text-sm font-medium rounded-md hover:bg-slate-100 dark:hover:bg-slate-800"
+                    className="block px-2 py-2 text-sm font-medium rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300"
                   >
                     <span className="flex items-center gap-2">
                       {item.icon && (
-                        <item.icon className="h-4 w-4 text-slate-700 dark:text-slate-300" />
+                        <item.icon className="h-4 w-4 text-slate-700 dark:text-slate-300 flex-shrink-0" />
                       )}
                       {item.label}
                     </span>
@@ -389,8 +606,7 @@ export default function Navbar() {
                 )
               )}
 
-              {/* Mobile Language Selector */}
-              <div className="border-t pt-4 mt-4">
+              <div className="border-t border-slate-700 pt-4 mt-4">
                 <div className="text-xs font-semibold text-slate-500 dark:text-slate-400 px-2 mb-2 flex items-center gap-2">
                   <Globe className="h-4 w-4" />
                   {t("Language")}
