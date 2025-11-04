@@ -24,6 +24,7 @@
     "@radix-ui/react-slider": "^1.3.5",
     "@radix-ui/react-toast": "^1.2.14",
     "@reduxjs/toolkit": "^2.8.2",
+    "@vercel/analytics": "^1.5.0",
     "ai": "^4.3.16",
     "antd": "^5.27.6",
     "chart.js": "^4.5.0",

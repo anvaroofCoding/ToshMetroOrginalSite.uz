@@ -9,6 +9,7 @@ import "./globals.css";
 import Footer from "@/shared/footer/footer";
 import FloatingActionButton from "@/components/ScreenFixsedButton/screenFixedButton";
 import BgImage from "@/components/bg-main-images/bg-images";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata = {
   title: "Toshkent metropoliteni | Rasmiy veb-sayt",
@@ -60,6 +61,7 @@ export default async function RootLayout({ children, params }) {
               <Navbar />
               {/* <SplashScreen> */}
               {children}
+              <Analytics />
               <Footer />
               <FloatingActionButton />
             </Layout>
