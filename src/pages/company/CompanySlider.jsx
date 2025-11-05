@@ -14,25 +14,25 @@ export default function CompanySlider() {
   const animationRef = useRef(null);
   const companies = [
     {
-      name: t("company1_name"),
+      name: "company1_name",
       logo: "/ForSliderImage/hukumat.png",
       desc: "gov.uz",
       link: "https://gov.uz/uz",
     },
     {
-      name: t("company2_name"),
+      name: "company2_name",
       logo: "/ForSliderImage/senat.png",
       desc: "www.senat.uz",
       link: "https://senat.uz/",
     },
     {
-      name: t("company3_name"),
+      name: "company3_name",
       logo: "/ForSliderImage/prezident.png",
       desc: "www.president.uz",
       link: "https://president.uz/uz",
     },
     {
-      name: t("company4_name"),
+      name: "company4_name",
       logo: "/ForSliderImage/mintrans.png",
       desc: "mintrans.uz",
       link: "https://www.mintrans.uz/",
@@ -154,7 +154,7 @@ export default function CompanySlider() {
                   </div>
 
                   <h3 className="text-sm sm:text-base font-semibold text-gray-800 mb-3 line-clamp-3 leading-tight">
-                    {company.name}
+                    {t(company.name)}
                   </h3>
 
                   <a
