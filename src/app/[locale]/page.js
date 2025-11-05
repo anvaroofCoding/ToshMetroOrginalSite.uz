@@ -12,7 +12,7 @@ const Home = () => {
       <div>
         <HomePage />
       </div>
-      <div className="mt-5">
+      <div className="mt-20">
         <Header />
       </div>
       <div className="my-12">

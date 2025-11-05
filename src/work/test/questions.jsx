@@ -2,10 +2,12 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 const FaqAccordion = () => {
   const [openIndex, setOpenIndex] = useState(null);
+  const t = useTranslations("menu");
 
   const toggle = (index) => {
     setOpenIndex((prev) => (prev === index ? null : index));
@@ -13,25 +15,23 @@ const FaqAccordion = () => {
 
   const items = [
     {
-      q: "ATTO kartasini qayerdan sotib olish mumkin va karta balansini qanday to‘ldirish mumkin?",
-      a: `"ATTO" transport kartasining balansini ATTO, MyUzcard , Payme, Upay, Apelsin va boshqa elektron to‘lov tizimlarining mobil ilovalari orqali to‘ldirish mumkin.
-O‘z-o‘ziga xizmat ko‘rsatish terminallarida-infokiosklar.
-"Toshyo'lovchitransxizmat" AJ va "Toshkent metropoliteni" DUK kompaniyasining barcha savdo nuqtalarida.`,
+      q: t("q1"),
+      a: t("a1"),
     },
     {
-      q: `Karta ishi bo'yicha qayerga murojaat qilishim mumkin?`,
-      a: `+998 78 140 08 08 raqamiga qo'ng'iroq qilish yoki elektron pochta orqali info@atto.uz`,
+      q: t("q2"),
+      a: t("a2"),
     },
     {
-      q: "Ba'zi bekatlarda kassa operator joylari yopilgan to'lovni qayerda qilsam bo'ladi?",
-      a: "Yopilgan bekatlarda to‘lovni ATTO, MyUzcard, Payme, Upay, Apelsin va boshqa elektron to‘lov tizimlarining mobil ilovalari orqali amalga oshirish mumkin. Yoki paynet terminali orqali to‘lovni amalga oshirish mumkin.",
+      q: t("q3"),
+      a: t("a3"),
     },
   ];
 
   return (
     <div className="container ">
       <h2 className="text-start lg:text-[36px] font-bold text-[24px] text-blue-900 mb-6">
-        Ko‘p beriladigan <span className="text-blue-900">savollar</span>
+        {t("title_1")}
       </h2>
 
       {items.map((item, index) => (

@@ -2,34 +2,8 @@
 
 import { animate, motion, useMotionValue } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useEffect, useMemo, useRef, useState } from "react";
-
-const companies = [
-  {
-    name: `O'zbekiston Respublikasi hukumat portali`,
-    logo: "https://parliament.gov.uz/media/interactive_services/favicon_31jjx8x.png",
-    desc: "gov.uz",
-    link: "https://gov.uz/uz",
-  },
-  {
-    name: "Oʼzbekiston Respublikasi Oliy Majlisi Senati",
-    logo: "https://parliament.gov.uz/media/interactive_services/senat-build_tFdRS5u.png",
-    desc: "www.senat.uz",
-    link: "https://senat.uz/",
-  },
-  {
-    name: `O'zbekiston Respublikasi Prezidentining rasmiy veb-sayti`,
-    logo: "https://parliament.gov.uz/media/interactive_services/usefull5_T39hHvI.png",
-    desc: "www.president.uz",
-    link: "https://president.uz/uz",
-  },
-  {
-    name: `O'zbekiston Respublikasi Transport vazirligi`,
-    logo: "https://sirdaryo.mintrans.uz/logo.png",
-    desc: "mintrans.uz",
-    link: "https://www.mintrans.uz/",
-  },
-];
 
 export default function CompanySlider() {
   const x = useMotionValue(0);
@@ -37,6 +11,34 @@ export default function CompanySlider() {
   const [cardWidth, setCardWidth] = useState(280);
   const containerRef = useRef(null);
   const animationRef = useRef(null);
+  const t = useTranslations("menu");
+
+  const companies = [
+    {
+      name: t("company1_name"),
+      logo: "/ForSliderImage/hukumat.png",
+      desc: "gov.uz",
+      link: "https://gov.uz/uz",
+    },
+    {
+      name: t("company2_name"),
+      logo: "/ForSliderImage/senat.png",
+      desc: "www.senat.uz",
+      link: "https://senat.uz/",
+    },
+    {
+      name: t("company3_name"),
+      logo: "/ForSliderImage/prezident.png",
+      desc: "www.president.uz",
+      link: "https://president.uz/uz",
+    },
+    {
+      name: t("company4_name"),
+      logo: "/ForSliderImage/mintrans.png",
+      desc: "mintrans.uz",
+      link: "https://www.mintrans.uz/",
+    },
+  ];
 
   // Calculate responsive card width
   useEffect(() => {
@@ -119,7 +121,7 @@ export default function CompanySlider() {
       <div className="">
         <div className="flex justify-between items-center mb-8 container  pb-10">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-blue-900">
-            Foydali havolalar
+            {t("useful_links_uz")}
           </h2>
           <div className="flex gap-2">
             <button
@@ -153,7 +155,7 @@ export default function CompanySlider() {
                 // whileHover={{ y: -5 }}
               >
                 <div className="flex flex-col items-center text-center h-full ">
-                  <div className="w-12 h-12 bg-white sm:w-16 sm:h-16 mb-4 flex items-center justify-center rounded-lg shadow-sm">
+                  <div className="w-12 h-12  sm:w-16 sm:h-16 mb-4 flex items-center justify-center rounded-lg">
                     <img
                       src={company.logo || "/placeholder.svg"}
                       alt={`${company.name} logo`}

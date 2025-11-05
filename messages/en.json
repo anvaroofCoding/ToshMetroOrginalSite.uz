@@ -118,6 +118,18 @@
     "payme_payment": "Payment via Payme App",
     "paynet": "Paynet",
     "paynet_payment": "Payment via Paynet App",
-    "mediateka": "Media Library"
+    "mediateka": "Media Library",
+    "q1": "Where can I purchase an ATTO card and how can I top up the balance?",
+    "a1": "You can top up your ATTO transport card balance via mobile payment applications such as ATTO, MyUzcard, Payme, Upay, Apelsin, and other electronic payment systems. You can also top up via self-service terminals (infokiosks). The card is available at all sales points of \"Toshyulovchitranskhizmat\" JSC and \"Tashkent Metro\".",
+    "q2": "Where can I contact regarding card issues?",
+    "a2": "You can call +998 78 140 08 08 or contact via email at info@atto.uz.",
+    "q3": "If ticket offices are closed at some stations, where can I make a payment?",
+    "a3": "You can make payments using ATTO, MyUzcard, Payme, Upay, Apelsin, and other mobile payment applications, as well as Paynet terminals.",
+    "title_1": "Frequently Asked Questions",
+    "useful_links_uz": "Useful links",
+    "company1_name": "Government Portal of the Republic of Uzbekistan",
+    "company2_name": "Senate of the Oliy Majlis of the Republic of Uzbekistan",
+    "company3_name": "Official Website of the President of the Republic of Uzbekistan",
+    "company4_name": "Ministry of Transport of the Republic of Uzbekistan"
   }
 }
