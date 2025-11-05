@@ -6,12 +6,12 @@ import { useTranslations } from "next-intl";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 export default function CompanySlider() {
+  const t = useTranslations("menu");
   const x = useMotionValue(0);
   const [isHovered, setIsHovered] = useState(false);
   const [cardWidth, setCardWidth] = useState(280);
   const containerRef = useRef(null);
   const animationRef = useRef(null);
-  const t = useTranslations("menu");
   const companies = [
     {
       name: t("company1_name"),
