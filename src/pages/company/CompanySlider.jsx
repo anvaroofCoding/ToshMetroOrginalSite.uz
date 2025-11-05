@@ -12,7 +12,6 @@ export default function CompanySlider() {
   const containerRef = useRef(null);
   const animationRef = useRef(null);
   const t = useTranslations("menu");
-
   const companies = [
     {
       name: t("company1_name"),
@@ -39,8 +38,6 @@ export default function CompanySlider() {
       link: "https://www.mintrans.uz/",
     },
   ];
-
-  // Calculate responsive card width
   useEffect(() => {
     const updateCardWidth = () => {
       if (window.innerWidth < 640) {
@@ -56,8 +53,6 @@ export default function CompanySlider() {
     window.addEventListener("resize", updateCardWidth);
     return () => window.removeEventListener("resize", updateCardWidth);
   }, []);
-
-  // Duplicate companies for seamless loop
   const duplicatedCompanies = [
     ...companies,
     ...companies,
@@ -67,7 +62,6 @@ export default function CompanySlider() {
   const totalWidth = useMemo(() => {
     return duplicatedCompanies.length * (cardWidth + 24);
   }, [cardWidth]);
-
   const loopScroll = () => {
     const current = x.get();
     const next = current - 1;
@@ -76,18 +70,15 @@ export default function CompanySlider() {
 
     animationRef.current = requestAnimationFrame(loopScroll);
   };
-
   const startAnimation = () => {
     stopAnimation();
     animationRef.current = requestAnimationFrame(loopScroll);
   };
-
   const stopAnimation = () => {
     if (animationRef.current) {
       cancelAnimationFrame(animationRef.current);
     }
   };
-
   useEffect(() => {
     if (!isHovered) {
       startAnimation();
@@ -99,7 +90,6 @@ export default function CompanySlider() {
       stopAnimation();
     };
   }, [isHovered, cardWidth]);
-
   const handleShift = (direction) => {
     const currentX = x.get();
     const shiftAmount = direction * (cardWidth + 24) * 2;
@@ -115,7 +105,6 @@ export default function CompanySlider() {
       }
     });
   };
-
   return (
     <div className="relative overflow-hidden">
       <div className="">
