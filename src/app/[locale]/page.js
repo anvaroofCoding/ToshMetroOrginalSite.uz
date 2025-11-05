@@ -1,9 +1,14 @@
 import MetroPagesShowcase from "@/components/main-informations/main-informations";
-import CompanySlider from "@/pages/company/CompanySlider";
 import FaqAccordion from "@/work/test/questions";
 import Mediateka from "./mediateka/headermediateka";
 import Header from "@/pages/Header/header";
 import HomePage from "@/components/home/HomaPage";
+import dynamic from "next/dynamic";
+
+const CompanySlider = dynamic(
+  () => import("@/components/company/CompanySlider"),
+  { ssr: false }
+);
 
 const Home = () => {
   return (
