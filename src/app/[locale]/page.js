@@ -3,8 +3,7 @@ import FaqAccordion from "@/work/test/questions";
 import Mediateka from "./mediateka/headermediateka";
 import Header from "@/pages/Header/header";
 import HomePage from "@/components/home/HomaPage";
-import dynamic from "next/dynamic";
-import CompanySlider from "@/pages/company/CompanySlider";
+import CompanySlider from "@/components/company/CompanySlider";
 
 const Home = () => {
   return (
