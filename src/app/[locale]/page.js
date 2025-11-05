@@ -4,11 +4,7 @@ import Mediateka from "./mediateka/headermediateka";
 import Header from "@/pages/Header/header";
 import HomePage from "@/components/home/HomaPage";
 import dynamic from "next/dynamic";
-
-const CompanySlider = dynamic(
-  () => import("@/components/company/CompanySlider"),
-  { ssr: false }
-);
+import CompanySlider from "@/pages/company/CompanySlider";
 
 const Home = () => {
   return (
