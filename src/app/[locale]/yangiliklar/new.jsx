@@ -6,10 +6,16 @@ import { useEffect, useState, useCallback, useMemo } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Heart, Loader2, RefreshCw } from "lucide-react";
+import {
+  Heart,
+  Loader2,
+  RefreshCw,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useTranslations } from "next-intl";
 
-// Enhanced time ago function with better localization
 const getTimeAgo = (dateString) => {
   const now = new Date();
   const publishedDate = new Date(dateString);
@@ -17,42 +23,34 @@ const getTimeAgo = (dateString) => {
     (now.getTime() - publishedDate.getTime()) / 1000
   );
 
-  if (diffInSeconds < 60) {
-    return `${diffInSeconds} soniya oldin`;
-  } else if (diffInSeconds < 3600) {
-    const minutes = Math.floor(diffInSeconds / 60);
-    return `${minutes} daqiqa oldin`;
-  } else if (diffInSeconds < 86400) {
-    const hours = Math.floor(diffInSeconds / 3600);
-    return `${hours} soat oldin`;
-  } else if (diffInSeconds < 2592000) {
-    // 30 days
-    const days = Math.floor(diffInSeconds / 86400);
-    return `${days} kun oldin`;
-  } else {
-    return publishedDate.toLocaleDateString();
-  }
+  if (diffInSeconds < 60) return `${diffInSeconds} soniya oldin`;
+  else if (diffInSeconds < 3600)
+    return `${Math.floor(diffInSeconds / 60)} daqiqa oldin`;
+  else if (diffInSeconds < 86400)
+    return `${Math.floor(diffInSeconds / 3600)} soat oldin`;
+  else if (diffInSeconds < 2592000)
+    return `${Math.floor(diffInSeconds / 86400)} kun oldin`;
+  else return publishedDate.toLocaleDateString();
 };
 
 export default function OptimizedNews() {
+  const t = useTranslations("menu");
   const [newsdata, setNewsData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [likingItems, setLikingItems] = useState(new Set());
-
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(16); // har bir sahifada nechta yangilik ko‘rsatiladi
   const pathname = usePathname();
   const lang = pathname.split("/")[1] || "uz";
   const { toast } = useToast();
 
-  // Optimized news fetching with better error handling
   const getNews = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
-
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
-
+      const timeoutId = setTimeout(() => controller.abort(), 10000);
       const res = await fetch(`https://abbos.uzmetro.uz/api/news/${lang}/`, {
         signal: controller.signal,
         headers: {
@@ -63,56 +61,35 @@ export default function OptimizedNews() {
 
       clearTimeout(timeoutId);
 
-      if (!res.ok) {
+      if (!res.ok)
         throw new Error(
           `Failed to fetch news: ${res.status} ${res.statusText}`
         );
-      }
 
       const data = await res.json();
-      console.log(data);
-
-      if (!Array.isArray(data)) {
-        throw new Error("Invalid data format received");
-      }
-
+      if (!Array.isArray(data)) throw new Error("Invalid data format received");
       setNewsData(data);
     } catch (err) {
       let errorMessage = "Unknown error occurred";
-
       if (err instanceof Error) {
-        if (err.name === "AbortError") {
+        if (err.name === "AbortError")
           errorMessage = "Request timed out. Please check your connection.";
-        } else {
-          errorMessage = err.message;
-        }
+        else errorMessage = err.message;
       }
-
       setError(errorMessage);
       console.error("Error fetching news:", err);
-
-      toast({
-        title: "Error",
-        description: "Failed to load news. Please try again.",
-        variant: "destructive",
-      });
     } finally {
       setLoading(false);
     }
-  }, [lang, toast]);
+  }, [lang]);
 
-  // Optimized like handler with better state management
   const handleLike = useCallback(
     async (itemId) => {
       if (likingItems.has(itemId)) return;
-
       const currentItem = newsdata.find((item) => item.id === itemId);
       if (!currentItem) return;
-
       try {
         setLikingItems((prev) => new Set(prev).add(itemId));
-
-        // Optimistic update
         setNewsData((prevData) =>
           prevData.map((item) =>
             item.id === itemId
@@ -138,13 +115,10 @@ export default function OptimizedNews() {
           }
         );
 
-        if (!response.ok) {
+        if (!response.ok)
           throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
         const data = await response.json();
 
-        // Update with server response
         setNewsData((prevData) =>
           prevData.map((item) =>
             item.id === itemId
@@ -162,7 +136,6 @@ export default function OptimizedNews() {
           description: data.message || "Action completed successfully",
         });
       } catch (err) {
-        // Revert optimistic update on error
         setNewsData((prevData) =>
           prevData.map((item) =>
             item.id === itemId
@@ -174,13 +147,7 @@ export default function OptimizedNews() {
               : item
           )
         );
-
         console.error("Error liking news:", err);
-        toast({
-          title: "Error",
-          description: "Failed to update like. Please try again.",
-          variant: "destructive",
-        });
       } finally {
         setLikingItems((prev) => {
           const newSet = new Set(prev);
@@ -196,14 +163,19 @@ export default function OptimizedNews() {
     getNews();
   }, [getNews]);
 
-  // Memoized news items with improved layout and stylish like button
+  // Pagination calculation
+  const totalPages = Math.ceil(newsdata.length / itemsPerPage);
+  const paginatedNews = useMemo(() => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    return newsdata.slice(startIndex, startIndex + itemsPerPage);
+  }, [newsdata, currentPage, itemsPerPage]);
+
   const memoizedNewsItems = useMemo(() => {
-    return newsdata.map((item) => {
+    return paginatedNews.map((item) => {
       const imageUrl = item.images?.[0]?.image;
       const description = item[`description_${lang}`];
       const title = item[`title_${lang}`];
       const isLiking = likingItems.has(item.id);
-      console.log(imageUrl);
 
       return (
         <Card
@@ -217,8 +189,6 @@ export default function OptimizedNews() {
                 alt={title || "News image"}
                 fill
                 className="object-cover transition-all duration-500 hover:scale-110"
-                sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                priority={false}
               />
             ) : (
               <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
@@ -227,7 +197,6 @@ export default function OptimizedNews() {
                 </span>
               </div>
             )}
-            {/* Overlay gradient for better visual appeal */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300" />
           </div>
 
@@ -250,7 +219,6 @@ export default function OptimizedNews() {
             </div>
 
             <div className="flex items-center justify-between pt-3 border-t border-gray-100">
-              {/* Stylish Like Button */}
               <button
                 onClick={(e) => {
                   e.preventDefault();
@@ -284,14 +252,6 @@ export default function OptimizedNews() {
                 >
                   {item.like_count}
                 </span>
-                {/* Ripple effect */}
-                <div
-                  className={`absolute inset-0 rounded-full transition-all duration-300 pointer-events-none ${
-                    item.is_liked
-                      ? "bg-white/20 scale-0 group-active:scale-100 group-active:opacity-50"
-                      : "bg-red-500/10 scale-0 group-hover:scale-100 group-hover:opacity-30"
-                  }`}
-                />
               </button>
 
               <Link
@@ -299,14 +259,14 @@ export default function OptimizedNews() {
                 className="text-sm text-blue-600 hover:text-blue-800 transition-all duration-200 font-medium hover:underline decoration-2 underline-offset-2"
                 onClick={(e) => e.stopPropagation()}
               >
-                Batafsil
+                {t("readMore")}
               </Link>
             </div>
           </CardContent>
         </Card>
       );
     });
-  }, [newsdata, lang, likingItems, handleLike]);
+  }, [paginatedNews, lang, likingItems, handleLike]);
 
   if (loading) {
     return (
@@ -322,23 +282,21 @@ export default function OptimizedNews() {
   if (error) {
     return (
       <div className="w-full min-h-[400px]">
-        <div className="container py-8">
-          <div className="flex flex-col items-center justify-center min-h-[400px] gap-4 text-center">
-            <div className="p-4 bg-red-50 rounded-lg border border-red-200">
-              <p className="text-red-600 font-medium mb-2">
-                Failed to load news
-              </p>
-              <p className="text-sm text-red-500">{error}</p>
-            </div>
-            <Button
-              onClick={getNews}
-              variant="outline"
-              className="flex items-center gap-2 bg-transparent"
-            >
-              <RefreshCw className="h-4 w-4" />
-              Try Again
-            </Button>
+        <div className="container py-8 flex flex-col items-center justify-center min-h-[400px] gap-4 text-center">
+          <div className="p-4 bg-red-50 rounded-lg border border-red-200">
+            <p className="text-red-600 font-medium mb-2">
+              {t("two_hundred_thirty_six")}
+            </p>
+            <p className="text-sm text-red-500">{error}</p>
           </div>
+          <Button
+            onClick={getNews}
+            variant="outline"
+            className="flex items-center gap-2 bg-transparent"
+          >
+            <RefreshCw className="h-4 w-4" />
+            {t("two_hundred_thirty_five")}
+          </Button>
         </div>
       </div>
     );
@@ -346,27 +304,23 @@ export default function OptimizedNews() {
 
   if (newsdata.length === 0) {
     return (
-      <div className="w-full min-h-[400px]">
-        <div className="container py-8">
-          <div className="flex flex-col items-center justify-center min-h-[400px] gap-4">
-            <div className="p-6 bg-gray-50 rounded-lg border border-gray-200 text-center">
-              <p className="text-gray-600 font-medium mb-2">
-                No news available
-              </p>
-              <p className="text-sm text-gray-500">
-                Check back later for updates
-              </p>
-            </div>
-            <Button
-              onClick={getNews}
-              variant="outline"
-              className="flex items-center gap-2 bg-transparent"
-            >
-              <RefreshCw className="h-4 w-4" />
-              Refresh
-            </Button>
-          </div>
+      <div className="w-full min-h-[400px] flex flex-col items-center justify-center gap-4">
+        <div className="p-6 bg-gray-50 rounded-lg border border-gray-200 text-center">
+          <p className="text-gray-600 font-medium mb-2">
+            {t("two_hundred_thirty_seven")}
+          </p>
+          <p className="text-sm text-gray-500">
+            {t("two_hundred_thirty_eight")}
+          </p>
         </div>
+        <Button
+          onClick={getNews}
+          variant="outline"
+          className="flex items-center gap-2 bg-transparent"
+        >
+          <RefreshCw className="h-4 w-4" />
+          {t("two_hundred_thirty_nine")}
+        </Button>
       </div>
     );
   }
@@ -377,6 +331,38 @@ export default function OptimizedNews() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {memoizedNewsItems}
         </div>
+
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <div className="flex justify-center items-center gap-2 mt-8">
+            <Button
+              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1}
+              variant="outline"
+            >
+              <ChevronLeft className="h-4 w-4" />
+            </Button>
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+              <Button
+                key={page}
+                onClick={() => setCurrentPage(page)}
+                variant={page === currentPage ? "default" : "outline"}
+                className={page === currentPage ? "bg-blue-600 text-white" : ""}
+              >
+                {page}
+              </Button>
+            ))}
+            <Button
+              onClick={() =>
+                setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+              }
+              disabled={currentPage === totalPages}
+              variant="outline"
+            >
+              <ChevronRight className="h-4 w-4" />
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );

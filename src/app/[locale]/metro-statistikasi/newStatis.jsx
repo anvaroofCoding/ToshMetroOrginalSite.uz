@@ -47,8 +47,9 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-
+import { useTranslations } from "next-intl";
 const MetroStatisticsDashboard = () => {
+  const t = useTranslations("menu");
   const [apiStats, setApiStats] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -61,23 +62,20 @@ const MetroStatisticsDashboard = () => {
   const [animatedAverageUsers, setAnimatedAverageUsers] = useState(0);
   const [availableYears, setAvailableYears] = useState([]);
   const [yearsLoading, setYearsLoading] = useState(true);
-
   const path = usePathname();
   const lang = path.split("/")[1] || "uz";
-
   const chartTypes = [
-    { value: "bar", label: "Ustunli grafik" },
-    { value: "line", label: "Chiziqli grafik" },
-    { value: "area", label: "Maydonli grafik" },
-    { value: "pie", label: "Doira grafik" },
-    { value: "radar", label: "Radar grafik" },
+    { value: "bar", label: t("two_hundred_four") },
+    { value: "line", label: t("two_hundred_five") },
+    { value: "area", label: t("two_hundred_six") },
+    { value: "pie", label: t("two_hundred_seven") },
+    { value: "radar", label: t("two_hundred_eight") },
   ];
 
   const quarters = [
-    { value: "1", label: "1-yarim yil" },
-    { value: "2", label: "2-yarim yil" },
+    { value: "1", label: t("two_hundred_nine") },
+    { value: "2", label: t("two_hundred_ten") },
   ];
-
   const fetchAvailableYears = async () => {
     setYearsLoading(true);
     try {
@@ -116,11 +114,9 @@ const MetroStatisticsDashboard = () => {
       setYearsLoading(false);
     }
   };
-
   useEffect(() => {
     fetchAvailableYears();
   }, [lang]);
-
   const getMonthOrder = (monthName) => {
     const months = {
       January: 1,
@@ -150,7 +146,6 @@ const MetroStatisticsDashboard = () => {
     };
     return months[monthName] || 0;
   };
-
   useEffect(() => {
     if (!selectedYear || availableYears.length === 0) return;
 
@@ -199,7 +194,6 @@ const MetroStatisticsDashboard = () => {
 
     fetchStatistics();
   }, [lang, selectedYear, selectedQuarter, availableYears]);
-
   const selectedStationData = apiStats
     .filter((item) => item.station_name === selectedStation)
     .reduce((acc, monthData) => {
@@ -213,7 +207,6 @@ const MetroStatisticsDashboard = () => {
       return acc;
     }, [])
     .sort((a, b) => getMonthOrder(a.month) - getMonthOrder(b.month));
-
   const totalUsers = selectedStationData.reduce(
     (sum, item) => sum + item.user_count,
     0
@@ -222,7 +215,6 @@ const MetroStatisticsDashboard = () => {
     selectedStationData.length > 0
       ? Math.round(totalUsers / selectedStationData.length)
       : 0;
-
   useEffect(() => {
     if (totalUsers > 0) {
       const duration = 1000; // Reduced animation duration for better mobile performance
@@ -251,7 +243,6 @@ const MetroStatisticsDashboard = () => {
       setAnimatedAverageUsers(0);
     }
   }, [totalUsers, averageUsers]);
-
   if (yearsLoading) {
     return (
       <div className="min-h-screen bg-transparent flex items-center justify-center p-3 sm:p-4">
@@ -271,7 +262,7 @@ const MetroStatisticsDashboard = () => {
             <Loader2 className="h-8 w-8 sm:h-10 sm:w-10 text-blue-900" />
           </motion.div>
           <span className="text-base sm:text-lg font-medium text-blue-900 text-center">
-            Mavjud yillar tekshirilmoqda...
+            {t("two_hundred_eleven")}
           </span>
         </motion.div>
       </div>
@@ -292,7 +283,7 @@ const MetroStatisticsDashboard = () => {
           >
             <div className="text-center space-y-2">
               <h2 className="text-lg sm:text-xl font-bold text-red-900">
-                Bu ma'lumotar hali mavjud emas
+                {t("two_hundred_twelve")}
               </h2>
             </div>
           </Alert>
@@ -320,7 +311,7 @@ const MetroStatisticsDashboard = () => {
             <Loader2 className="h-8 w-8 sm:h-10 sm:w-10 text-blue-900" />
           </motion.div>
           <span className="text-base sm:text-lg font-medium text-blue-900">
-            Yuklanmoqda...
+            {t("two_hundred_thirteen")}
           </span>
         </motion.div>
       </div>
@@ -341,7 +332,7 @@ const MetroStatisticsDashboard = () => {
           >
             <div className="text-center space-y-2">
               <h2 className="text-lg sm:text-xl font-bold text-red-900">
-                Ma'lumot hali mavjud emas ctrl + r
+                {t("two_hundred_fourteen")}
               </h2>
             </div>
           </Alert>
@@ -360,11 +351,12 @@ const MetroStatisticsDashboard = () => {
           className="text-center space-y-2 sm:space-y-3 mb-6 sm:mb-8"
         >
           <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-blue-900 leading-tight px-2">
-            Metropoliten yo'lovchilar statistikasi
+            {t("two_hundred_fifteen")}
           </h1>
           <p className="text-sm sm:text-base text-blue-900/70 max-w-2xl mx-auto px-2">
-            {selectedYear}-yil {selectedQuarter}-yarim yillik yo'lovchi tashish
-            ma'lumotlari
+            {selectedYear}
+            {t("two_hundred_seventeen")} {selectedQuarter}
+            {t("two_hundred_sixteen")}
           </p>
         </motion.div>
 
@@ -378,13 +370,13 @@ const MetroStatisticsDashboard = () => {
               <CardHeader className="pb-2 sm:pb-3 border-none">
                 <CardTitle className="flex items-center gap-2 text-blue-900 text-xs sm:text-sm ">
                   <Calendar className="h-3 w-3 sm:h-4 sm:w-4" />
-                  Yil
+                  {t("two_hundred_thirty_two")}
                 </CardTitle>
               </CardHeader>
               <CardContent className="pt-0">
                 <Select value={selectedYear} onValueChange={setSelectedYear}>
                   <SelectTrigger className="border-blue-900/30 focus:border-blue-900 bg-white/20 backdrop-blur-sm h-8 sm:h-10 text-xs sm:text-sm">
-                    <SelectValue placeholder="Yilni tanlang" />
+                    <SelectValue placeholder={t("two_hundred_thirty_three")} />
                   </SelectTrigger>
                   <SelectContent className="bg-white/95 backdrop-blur-sm">
                     {availableYears.map((year) => (
@@ -411,7 +403,7 @@ const MetroStatisticsDashboard = () => {
               <CardHeader className="pb-2 sm:pb-3 border-none">
                 <CardTitle className="flex items-center gap-2 text-blue-900 text-xs sm:text-sm">
                   <Activity className="h-3 w-3 sm:h-4 sm:w-4" />
-                  Davr
+                  {t("two_hundred_eighteen")}
                 </CardTitle>
               </CardHeader>
               <CardContent className="pt-0">
@@ -447,7 +439,7 @@ const MetroStatisticsDashboard = () => {
               <CardHeader className="pb-2 sm:pb-3 border-none">
                 <CardTitle className="flex items-center gap-2 text-blue-900 text-xs sm:text-sm">
                   <MapPin className="h-3 w-3 sm:h-4 sm:w-4" />
-                  Bekat
+                  {t("two_hundred_nineteen")}
                 </CardTitle>
               </CardHeader>
               <CardContent className="pt-0">
@@ -456,7 +448,7 @@ const MetroStatisticsDashboard = () => {
                   onValueChange={setSelectedStation}
                 >
                   <SelectTrigger className="border-blue-900/30 focus:border-blue-900 bg-white/20 backdrop-blur-sm h-8 sm:h-10 text-xs sm:text-sm">
-                    <SelectValue placeholder="Bekatni tanlang" />
+                    <SelectValue placeholder={t("two_hundred_twenty")} />
                   </SelectTrigger>
                   <SelectContent className="bg-white/95 backdrop-blur-sm">
                     {stations.map((station) => (
@@ -483,7 +475,7 @@ const MetroStatisticsDashboard = () => {
               <CardHeader className="pb-2 sm:pb-3 border-none">
                 <CardTitle className="flex items-center gap-2 text-blue-900 text-xs sm:text-sm">
                   <BarChart3 className="h-3 w-3 sm:h-4 sm:w-4" />
-                  Grafik
+                  {t("two_hundred_twenty_one")}
                 </CardTitle>
               </CardHeader>
               <CardContent className="pt-0">
@@ -537,7 +529,7 @@ const MetroStatisticsDashboard = () => {
                             {animatedTotalUsers.toLocaleString()}
                           </motion.div>
                           <p className="text-xs sm:text-sm font-medium text-blue-900/70">
-                            Jami yo'lovchilar
+                            {t("two_hundred_twenty_two")}
                           </p>
                         </div>
                         <div className="p-2 bg-blue-900/20 rounded-lg flex-shrink-0 ml-2">
@@ -567,7 +559,7 @@ const MetroStatisticsDashboard = () => {
                             {animatedAverageUsers.toLocaleString()}
                           </motion.div>
                           <p className="text-xs sm:text-sm font-medium text-blue-900/70">
-                            O'rtacha oylik
+                            {t("two_hundred_twenty_three")}
                           </p>
                         </div>
                         <div className="p-2 bg-blue-900/20 rounded-lg flex-shrink-0 ml-2">
@@ -587,12 +579,13 @@ const MetroStatisticsDashboard = () => {
                 <Card className="border-blue-900/20 shadow-lg bg-white/10 backdrop-blur-sm">
                   <CardHeader className="pb-3 sm:pb-4">
                     <CardTitle className="text-blue-900 text-base sm:text-lg truncate">
-                      {selectedStation} bekati -{" "}
+                      {selectedStation} {t("two_hundred_twenty_four")}{" "}
                       {chartTypes.find((t) => t.value === chartType)?.label}
                     </CardTitle>
                     <CardDescription className="text-blue-900/70 text-xs sm:text-sm">
-                      {selectedYear}-yil {selectedQuarter}-yarim yil
-                      ma'lumotlari
+                      {selectedYear}
+                      {t("two_hundred_twenty_five")} {selectedQuarter}
+                      {t("two_hundred_twenty_six")}
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="p-2 sm:p-6">
@@ -641,7 +634,7 @@ const MetroStatisticsDashboard = () => {
                             <Tooltip
                               formatter={(value) => [
                                 value.toLocaleString(),
-                                "Yo'lovchilar",
+                                t("two_hundred_twenty_seven"),
                               ]}
                               labelStyle={{
                                 color: "#1e3a8a",
@@ -837,11 +830,13 @@ const MetroStatisticsDashboard = () => {
             <Alert className="border-amber-200 bg-amber-50/80 backdrop-blur-sm">
               <div className="text-center space-y-2">
                 <h2 className="text-base sm:text-lg font-bold text-amber-900">
-                  Ma'lumotlar yo'q
+                  {t("two_hundred_twenty_eight")}
                 </h2>
                 <p className="text-sm sm:text-base text-amber-700">
-                  {selectedStation} bekati uchun {selectedYear}-yil{" "}
-                  {selectedQuarter}-chorak ma'lumotlari topilmadi.
+                  {selectedStation} {t("two_hundred_twenty_nine")}
+                  {selectedYear}
+                  {t("two_hundred_thirty_one")} {selectedQuarter}
+                  {t("two_hundred_thirty")}
                 </p>
               </div>
             </Alert>

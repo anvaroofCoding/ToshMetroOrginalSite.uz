@@ -3,7 +3,6 @@ import {
   Card,
   CardBody,
   CardHeader,
-  Avatar,
   Input,
   Textarea,
   Button,
@@ -11,21 +10,19 @@ import {
   Pagination,
 } from "@nextui-org/react";
 import { MessageCircle, Send, User } from "lucide-react";
-
+import { useTranslations } from "next-intl";
 export default function CommentsSection({ newsId }) {
+  const t = useTranslations("menu");
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [newComment, setNewComment] = useState({ author: "", content: "" });
   const [submitting, setSubmitting] = useState(false);
-
-  // pagination uchun
   const [currentPage, setCurrentPage] = useState(1);
   const commentsPerPage = 5;
   const totalPages = Math.ceil(comments.length / commentsPerPage);
   const startIndex = (currentPage - 1) * commentsPerPage;
   const endIndex = startIndex + commentsPerPage;
   const currentComments = comments.slice(startIndex, endIndex);
-
   const fetchComments = async () => {
     setLoading(true);
     try {
@@ -35,12 +32,10 @@ export default function CommentsSection({ newsId }) {
       const data = await res.json();
       setComments(data);
     } catch {
-      alert("Izohlarni yuklab bo‘lmadi");
     } finally {
       setLoading(false);
     }
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!newComment.author || !newComment.content) return;
@@ -58,23 +53,19 @@ export default function CommentsSection({ newsId }) {
       setSubmitting(false);
     }
   };
-
   useEffect(() => {
     fetchComments();
   }, [newsId]);
-
   return (
     <div className="mt-10 bg-white rounded-2xl shadow-sm">
       <Card shadow="lg" className="bg-white">
         <CardHeader className="flex items-center gap-2 text-blue-600 font-semibold text-lg">
-          <MessageCircle /> Izohlar ({comments.length})
+          <MessageCircle /> {t("two_hundred_forty_four")} ({comments.length})
         </CardHeader>
-
         <CardBody className="space-y-6">
-          {/* Comment form */}
           <form onSubmit={handleSubmit} className="space-y-3">
             <Input
-              placeholder="Ismingiz"
+              placeholder={t("two_hundred_forty_five")}
               variant="bordered"
               value={newComment.author}
               onChange={(e) =>
@@ -82,7 +73,7 @@ export default function CommentsSection({ newsId }) {
               }
             />
             <Textarea
-              placeholder="Izohingizni yozing..."
+              placeholder={t("two_hundred_forty_six")}
               variant="bordered"
               value={newComment.content}
               onChange={(e) =>
@@ -97,17 +88,19 @@ export default function CommentsSection({ newsId }) {
               isLoading={submitting}
               startContent={<Send size={16} />}
             >
-              Izoh qo‘shish
+              {t("two_hundred_forty_seven")}
             </Button>
           </form>
 
           {/* Comment list */}
           {loading ? (
             <div className="flex justify-center py-6">
-              <Spinner color="primary" label="Yuklanmoqda..." />
+              <Spinner color="primary" label={t("two_hundred_forty_nine")} />
             </div>
           ) : comments.length === 0 ? (
-            <p className="text-center text-gray-500">Hozircha izohlar yo‘q</p>
+            <p className="text-center text-gray-500">
+              {t("two_hundred_forty_eight")}
+            </p>
           ) : (
             <>
               <div className="space-y-3">

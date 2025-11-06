@@ -2,33 +2,21 @@
 
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  ArrowRight,
-  Calendar,
-  Clock,
-  Leaf,
-  MapPin,
-  Shield,
-  Train,
-  TrendingUp,
-  Users,
-  Zap,
-} from "lucide-react";
+import { TrendingUp } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { AnimatedCounter } from "@/components/animated-counter";
+import { useTranslations } from "next-intl";
 
 function TashkentMetroPage() {
+  const t = useTranslations("menu");
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const [scrollY, setScrollY] = useState(0);
   const [activeSection, setActiveSection] = useState(0);
   const [animatedStats, setAnimatedStats] = useState([0, 0, 0, 0]);
   const sectionRefs = useRef([]);
-
   useEffect(() => {
     setIsVisible(true);
-
-    // Image carousel
     const imageInterval = setInterval(() => {
       setCurrentImageIndex((prev) => (prev + 1) % 3);
     }, 3500);
@@ -81,191 +69,168 @@ function TashkentMetroPage() {
       timers.forEach((timer) => clearInterval(timer));
     };
   }, []);
-
   const metroLines = [
     {
-      name: "Chilonzor yo'nalishi",
-      length: "22.6 km",
+      name: t("two_hundred_sixty"),
+      length: t("two_hundred_sixty_one"),
       stations: 17,
       opened: "1977",
       color: "#fb7e7e",
-      description:
-        "Chilonzor yo'nalishi birinchi ishga tushgan yo'nalish bo'lib, Buyuk Ipak yo'li bekatidan Chinor bekatigacha davom etadi. ",
+      description: t("two_hundred_sixty_two"),
       highlights: [
-        "Tarixiy birinchi yo'nalish",
-        "Shahar markazi aloqasi",
-        "12 ta zamonaviy bekat",
+        t("two_hundred_sixty_three"),
+        t("two_hundred_sixty_four"),
+        t("two_hundred_sixty_five"),
       ],
     },
     {
-      name: "O'zbekiston yo'nalishi",
-      length: "14.8 km",
+      name: t("two_hundred_sixty_six"),
+      length: t("two_hundred_sixty_seven"),
       stations: 11,
       opened: "1984",
       color: "#2563eb",
-      description:
-        "O'zbekiston yo'nalishi ikkinchi ishga tushgan yo'nalish bo'lib, Beruniy bekatidan Do'stlik bekatigacha davom etadi.",
+      description: t("two_hundred_sixty_eight"),
       highlights: [
-        "Temir yo'l aloqasi",
-        "Biznes hududi",
-        "Madaniy yodgorliklar",
+        t("two_hundred_sixty_nine"),
+        t("two_hundred_seventy"),
+        t("two_hundred_seventy_one"),
       ],
     },
     {
-      name: "Yunusobod yo'nalishi",
-      length: "10.05 km",
+      name: t("two_hundred_seventy_two"),
+      length: t("two_hundred_seventy_three"),
       stations: 8,
       opened: "2001",
       color: "#57be82",
-      description:
-        "Yunusobod yo'li uchinchi ishga tushgan yo'nalish bo'lib, Turkiston bekatidan Mingo'rik bekatigacha davom etadi. ",
+      description: t("two_hundred_seventy_four"),
       highlights: [
-        "Turar-joy hududlari",
-        "Zamonaviy dizayn",
-        "Rivojlanayotgan rayonlar",
+        t("two_hundred_seventy_five"),
+        t("two_hundred_seventy_six"),
+        t("two_hundred_seventy_seven"),
       ],
     },
     {
-      name: "Yer usti halqa yo'li",
-      length: "22.34 km",
+      name: t("two_hundred_seventy_eight"),
+      length: t("two_hundred_seventy_nine"),
       stations: 14,
       opened: "2020",
       color: "#eecf53",
-      description:
-        "Yer usti halqa yo'li to'rtinchi ishga tushgan yo'nalish bo'lib, Texnopark bekatidan Qipchoq bekatigacha davom etadi. ",
+      description: t("two_hundred_eighty"),
       highlights: [
-        "So'nggi texnologiya",
-        "Ekologik toza",
-        "Kelajakda kengayish",
+        t("two_hundred_eighty_one"),
+        t("two_hundred_eighty_two"),
+        t("two_hundred_eighty_three"),
       ],
     },
   ];
-
   const timeline = [
     {
       year: "1972",
-      event: "Metro qurilishi boshlandi",
-      phase: "Asos",
-      description:
-        "Markaziy Osiyoda birinchi va yagona metro tizimi qurilishi boshlandi.",
+      event: t("two_hundred_eighty_four"),
+      phase: t("two_hundred_eighty_five"),
+      description: t("two_hundred_eighty_six"),
     },
     {
       year: "1977",
-      event: "Birinchi yo'nalish ochildi",
-      phase: "1-bosqich Chilonzor",
-      description:
-        "1977-yil 6-noyabrda “Olmazor” bekatidan “Amir Temur xiyoboni” bekatiga qadar, “Chilonzor” elektrodepo kompleksi va aloqa uyi foydalanishga topshirildi.",
+      event: t("two_hundred_eighty_seven"),
+      phase: t("two_hundred_eighty_eight"),
+      description: t("two_hundred_eighty_nine"),
     },
     {
       year: "1980",
-      event: "Tez rivojlanish davri",
-      phase: "2-bosqich Chilonzor",
-      description:
-        "Uzunligi 4,2 km, “Amir Temur xiyoboni” bekatidan “Buyuk ipak yo‘li” bekatigacha bo‘lgan 3 ta bekat 1980-yil avgust oyida foydalanishga topshirildi. Ushbu bekatlar ishga tushirilgach, Chilonzor metro yo'nalishining qurilishi janubi-g‘arbdan shimoli-sharqqa shahar markazi orqali 12 bekat va uzunligi 16,3 km bo‘lgan.",
+      event: t("two_hundred_ninety"),
+      phase: t("two_hundred_ninety_one"),
+      description: t("two_hundred_ninety_two"),
     },
     {
       year: "1984",
-      event: "O‘zbekiston yo‘nalishi",
-      phase: "1-bosqich O'zbekiston",
-      description:
-        "Alisher Navoiy bekatidan Toshkent bekatiga qadar uzunligi 5.6 kmdan ortiq bo'lgan shahar markazini temir yo'l vokzaliga tutashtiruvchi jami 5 ta bekat 1984-yil 26-noyabrda foydalanishga topshirildi.",
+      event: t("two_hundred_ninety_three"),
+      phase: t("two_hundred_ninety_four"),
+      description: t("two_hundred_ninety_five"),
     },
     {
       year: "1987",
-      event: "O'zbekiston yo'nalishining kengayishi",
-      phase: "2-bosqich O'zbekiston",
-      description:
-        "Uzunligi 3,2 km dan ortiq bo‘lgan, “Toshkent”, “Mashinasozlar”, “Do‘stlik” bekatlari 1987-yil foydalanishga topshirildi.",
+      event: t("two_hundred_ninety_six"),
+      phase: t("two_hundred_ninety_seven"),
+      description: t("two_hundred_ninety_eight"),
     },
     {
       year: "1989",
-      event: "O'zbekiston yo'nalishining kengayishi",
-      phase: "3-bosqich O'zbekiston",
-      description:
-        "Uzunligi 2,2 km dan ortiq bo‘lgan, “Alisher Navoiy” bekatidan “Chorsu” bekatiga qadar 2 ta bekat 1989-yil foydalanishga topshirildi.",
+      event: t("two_hundred_ninety_nine"),
+      phase: t("three_hundred"),
+      description: t("three_hundred_one"),
     },
     {
       year: "1991",
-      event: "O'zbekiston yo'nalishining kengayishi",
-      phase: "4-bosqich O'zbekiston",
-      description:
-        "3,2 km uzunlikdagi Chorsu bekatidan Beruniy bekatigacha boʻlgan 2 ta bekat 1991-yil aprel oyida foydalanishga topshirilgan.Umumiy uzunligi 14,2 km boʻlgan Oʻzbekiston yo‘nalishi 11 ta bekat va Oʻzbekiston elektrodeposini oʻz ichiga oladi.",
+      event: t("three_hundred_two"),
+      phase: t("three_hundred_three"),
+      description: t("three_hundred_four"),
     },
     {
       year: "2001",
-      event: "Yunusobod yo’nalishi",
-      phase: "1-bosqich Yunusobod",
-      description:
-        "Shahar aholisiga transport xizmati koʻrsatishni yanada yaxshilash maqsadida, 2001-yil 26-oktabr sanasida Ming oʻrik bekatidan Shahriston bekatigacha boʻlgan Yunusobod metro yo’nalishining 1-bosqichi, umumiy uzunligi 7,15 km boʻlgan 6 ta bekat foydalanishga topshirildi.",
+      event: t("three_hundred_five"),
+      phase: t("three_hundred_six"),
+      description: t("three_hundred_seven"),
     },
     {
       year: "2016-2020",
-      event: "Yunusobod yo’nalishi",
-      phase: "2-bosqich Yunusobod",
-      description:
-        "2016-yilda O‘zbekiston Respublikasi Prezidenti Sh.M. Mirziyoyev tomonidan metro qurilishini davom ettirishga qaratilgan qator qarorlar imzolandi. O‘zbekiston Respublikasi Prezidentining 2016-yil 7-noyabrdagi “Toshkent metropolitenining Yunusobod liniyasining ikkinchi bosqichini qurish” loyihasini amalga oshirish chora-tadbirlari to‘g‘risida”gi PQ-2653-sonli qaroriga muvofiq Yunusobod metro yo‘nalishining 2,9 km uzunlikdagi ikkita “Turkiston” va “Yunusobod” bekatlari qurilishi boshlandi. 2020-yilda avgust oyida ikkita “Turkiston” va “Yunusobod” bekatlari foydalanishga topshirildi. Hozirgi vaqtda Yunusobod yo‘nalishining umumiy uzunligi 9,5 km bo‘lib, 8 bekat bilan yirik turar-joy massivini shahar markazi bilan bog‘laydi.",
+      event: t("three_hundred_eight"),
+      phase: t("three_hundred_nine"),
+      description: t("three_hundred_ten"),
     },
     {
       year: "2017",
-      event: "PQ-2979-son qarori",
-      phase: "Yer usti halqa yo'li",
-      description:
-        "O‘zbekiston Respublikasi Prezidentining 2017-yil 19-maydagi PQ-2979-son qaroriga muvofiq “Toshkent shahrida halqa yer usti metro liniyasini qurish” loyihasi amalga oshirilmoqda.",
+      event: t("three_hundred_eleven"),
+      phase: t("three_hundred_twelve"),
+      description: t("three_hundred_thirteen"),
     },
     {
       year: "2020",
-      event: "Yer usti halqa yo'li",
-      phase: "Yer usti halqa yo'li topshirildi",
-      description:
-        "2020-yil avgust oyida metro halqa yer usti yo‘nalishining 1–bosqichi – 11,5 km uzunlikdagi 7 ta bekat foydalanishga topshirildi.Ushbu qarorlar ijrosini ta'minlash maqsadida 2020-yilda umumiy uzunligi 21,4 km bo‘lgan 14 ta yangi metro yo‘nalish va bekatlari qurilib, foydalanishga topshirildi.",
+      event: t("three_hundred_twelve"),
+      phase: t("three_hundred_fourteen"),
+      description: t("three_hundred_fifteen"),
     },
     {
       year: "2020",
-      event: "Chilonzor yo'nalishining kengayishi",
-      phase: "Sergili bekatlari",
-      description:
-        "O‘zbekiston Respublikasi Prezidentining 2016-yil 29-noyabrdagi “Toshkent metropolitenining Sergeli liniyasini qurish” loyihasini amalga oshirish chora-tadbirlari to‘g‘risida”gi PQ-2664-sonli qaroriga muvofiq 2020-yil dekabr oyida 7,0 km uzunlikdagi yangi Sergeli metro yo‘lining 5 ta bekati qurildi va foydalanishga topshirildi.",
+      event: t("three_hundred_sixteen"),
+      phase: t("three_hundred_seventeen"),
+      description: t("three_hundred_eighteen"),
     },
     {
       year: "2021",
-      event: "Yunusobod yo'nalishining kengayishi",
-      phase: "Yangi bekatlar",
-      description:
-        "Yunusobod-Turkiston bekatlar 2021-yilda foydalanishga topshirilgan.",
+      event: t("three_hundred_nineteen"),
+      phase: t("three_hundred_twenty"),
+      description: t("three_hundred_twenty_one"),
     },
     {
       year: "2024",
-      event: "Yerusti halqa yo'li kengayishi",
-      phase: "Yangi bekatlar",
-      description:
-        "Turon-Qipchoq bekatlari 2024-yilda foydalanishga topshirilgan.",
+      event: t("three_hundred_twenty_two"),
+      phase: t("three_hundred_twenty_three"),
+      description: t("three_hundred_twenty_four"),
     },
   ];
-
   const sliderHistory = [
     {
       image: "/galery/birinchisostav.png",
-      title: "Tarixiy metro poyezdlari",
-      description: "Metro qurilishining ilk bosqichlari",
-      badges: ["Tarixiy", "Madaniy"],
+      title: t("three_hundred_twenty_five"),
+      description: t("three_hundred_twenty_six"),
+      badges: [t("three_hundred_twenty_seven")],
     },
     {
       image: "/galery/ortasastav.png",
-      title: "Yaqin o'tmishdagi metro poyezdlari",
-      description: "Rivojlanish bosqichidagi poyezdlar",
-      badges: ["Xavfsiz", "Samarali"],
+      title: t("three_hundred_twenty_eight"),
+      description: t("three_hundred_twenty_nine"),
+      badges: [t("three_hundred_thirty")],
     },
     {
       image: "/galery/yangisastav.png",
-      title: "Hozirgi zamonaviy poyezdlar",
-      description: "Yangi texnologiyalar va kengaygan imkoniyatlar",
-      badges: ["Zamonaviy", "Qulay transport"],
+      title: t("three_hundred_thirty_one"),
+      description: t("three_hundred_thirty_two"),
+      badges: [t("three_hundred_thirty_three")],
     },
   ];
-
   return (
     <div className="min-h-screen mt-10  overflow-hidden">
-      {/* Floating Background Elements */}
       <div className="fixed inset-0 pointer-events-none">
         <div
           className="absolute top-20 left-10 w-32 h-32 bg-[#0E327F]/5 rounded-full blur-xl animate-pulse"
@@ -280,9 +245,7 @@ function TashkentMetroPage() {
           style={{ transform: `translateY(${scrollY * -0.1}px)` }}
         />
       </div>
-
       <div className="container mx-auto px-4 py-8 max-w-7xl relative">
-        {/* Hero Section */}
         <div
           ref={(el) => (sectionRefs.current[0] = el)}
           className={`text-center mb-16 transition-all duration-1500 ${
@@ -292,15 +255,13 @@ function TashkentMetroPage() {
           <div className="inline-flex items-center gap-4 mb-8 group">
             <div>
               <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-[#0E327F] to-blue-600 bg-clip-text text-transparent">
-                Toshkent metropoliteni
+                {t("three_hundred_thirty_four")}
               </h1>
             </div>
           </div>
           <div className="max-w-4xl mx-auto">
             <p className="text-xl md:text-2xl text-gray-600 leading-relaxed mb-8">
-              Markaziy Osiyodagi birinchi, xavfsiz, qulay va tez jamoat
-              transportlaridan bo'lib 1977-yildan beri faoliyat yuritib
-              kelmoqda.
+              {t("three_hundred_thirty_five")}
             </p>
           </div>
         </div>
@@ -382,11 +343,10 @@ function TashkentMetroPage() {
         {/* Enhanced Metro Lines */}
         <div ref={(el) => (sectionRefs.current[3] = el)} className="mb-20">
           <h2 className="text-4xl font-bold text-[#0E327F] mb-4 text-center">
-            Metro tarmog'i
+            {t("three_hundred_thirty_six")}
           </h2>
           <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-            Toshkent shahri bo'ylab xizmat ko'rsatadigan hamda o'zaro bog'langan
-            metropoliten yo'nalishlari
+            {t("three_hundred_thirty_seven")}
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {metroLines.map((line, index) => (
@@ -425,20 +385,24 @@ function TashkentMetroPage() {
                       <div className="text-2xl font-bold text-[#0E327F]">
                         {line.length}
                       </div>
-                      <div className="text-xs text-gray-600">Uzunlik</div>
+                      <div className="text-xs text-gray-600">
+                        {t("three_hundred_thirty_eight")}
+                      </div>
                     </div>
                     <div className="group-hover:scale-105 transition-transform duration-300">
                       <div className="text-2xl font-bold text-[#0E327F]">
                         {line.stations}
                       </div>
-                      <div className="text-xs text-gray-600">Bekatlar</div>
+                      <div className="text-xs text-gray-600">
+                        {t("three_hundred_thirty_nine")}
+                      </div>
                     </div>
                     <div className="group-hover:scale-105 transition-transform duration-300">
                       <div className="text-2xl font-bold text-[#0E327F]">
                         {line.opened}
                       </div>
                       <div className="text-xs text-gray-600">
-                        Ishga tushirilgan
+                        {t("three_hundred_forty")}
                       </div>
                     </div>
                   </div>
@@ -450,11 +414,10 @@ function TashkentMetroPage() {
         {/* Enhanced Timeline */}
         <div ref={(el) => (sectionRefs.current[5] = el)} className="mb-20">
           <h2 className="text-4xl font-bold text-[#0E327F] mb-4 text-center">
-            Vaqt bo'ylab sayohat
+            {t("three_hundred_forty_one")}
           </h2>
           <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-            Poydevor qo'yishdan zamonaviy kengayishgacha - doimiy o'sish va
-            innovatsiyalar.
+            {t("three_hundred_forty_two")}
           </p>
           <div className="relative">
             <div className="absolute left-8 md:left-1/2 transform md:-translate-x-1/2 h-full w-1 bg-gradient-to-b from-[#0E327F] via-blue-400 to-blue-600 opacity-30"></div>
@@ -498,58 +461,10 @@ function TashkentMetroPage() {
                     </CardContent>
                   </Card>
                 </div>
-                {/* <div className="absolute xl:block hidden left-8 md:left-1/2 transform md:-translate-x-1/2 w-6 h-6 bg-gradient-to-r from-[#0E327F] to-blue-600 rounded-full border-4 border-white shadow-xl z-10 group-hover:scale-125 transition-transform duration-300">
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#0E327F] to-blue-600 rounded-full animate-ping opacity-20"></div>
-                </div> */}
               </div>
             ))}
           </div>
         </div>
-        {/* Enhanced Current Status */}
-        {/* <div className="w-full space-y-8">
-          <Card className="border-0 shadow-2xl bg-transparent  text-white overflow-hidden relative">
-            <div className="absolute " />
-            <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-32 translate-x-32" />
-            <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full translate-y-24 -translate-x-24" />
-            <CardContent className="p-12 bg-black/50 text-center relative z-10">
-              <div className="inline-flex items-center gap-4 mb-8 group">
-                <div className="p-4 rounded-full bg-white/20 group-hover:bg-white/30 transition-colors duration-300 group-hover:rotate-12">
-                  <TrendingUp size={40} className="animate-pulse" />
-                </div>
-                <h2 className="text-4xl font-bold">Hozirgi yutuqlar</h2>
-              </div>
-              <p className="text-xl mb-8 opacity-90 leading-relaxed max-w-4xl mx-auto">
-                Bugungi kunda Toshkent metropoliteni Markaziy Osiyoning yetakchi
-                shahar transport tizimi sifatida 70 kilometrdan ortiq uzunlikda
-                50 ta bekatlar bilan faoliyat yuritmoqda. 2024-yilning so'ngi
-                choragida kunlik yo'lovchi tashish soni 1 milliondan oshgan.
-              </p>
-              <div className="flex flex-wrap justify-center gap-6 mb-8">
-                <div className="text-center group hover:scale-110 transition-transform duration-300">
-                  <div className="text-4xl font-bold mb-2">70+</div>
-                  <div className="text-sm opacity-80">Kilometr</div>
-                </div>
-                <div className="text-center group hover:scale-110 transition-transform duration-300">
-                  <div className="text-4xl font-bold mb-2">50</div>
-                  <div className="text-sm opacity-80">Bekat</div>
-                </div>
-                <div className="text-center group hover:scale-110 transition-transform duration-300">
-                  <div className="text-4xl font-bold mb-2">53</div>
-                  <div className="text-sm opacity-80">Xizmat yili</div>
-                </div>
-              </div>
-            </CardContent>
-            <video
-              className="w-full h-auto top-0 absolute"
-              autoPlay
-              loop
-              muted
-              playsInline
-              controls={false}
-              src="/videos/05.mp4"
-            />
-          </Card>
-        </div> */}
         <div className="w-full space-y-8">
           <Card className="border-0 shadow-2xl bg-transparent text-white overflow-hidden relative">
             {/* Background decorative elements */}
@@ -567,16 +482,13 @@ function TashkentMetroPage() {
                   />
                 </div>
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold">
-                  Hozirgi yutuqlar
+                  {t("three_hundred_forty_three")}
                 </h2>
               </div>
 
               {/* Description */}
               <p className="text-base sm:text-lg lg:text-xl mb-6 sm:mb-8 opacity-90 leading-relaxed max-w-4xl mx-auto px-2">
-                Bugungi kunda Toshkent metropoliteni Markaziy Osiyoning yetakchi
-                shahar transport tizimi sifatida 70 kilometrdan ortiq uzunlikda
-                50 ta bekatlar bilan faoliyat yuritmoqda. 2024-yilning so'nggi
-                choragida kunlik yo'lovchi tashish soni 1 milliondan oshgan.
+                {t("three_hundred_forty_four")}
               </p>
 
               {/* Stats */}
@@ -585,20 +497,24 @@ function TashkentMetroPage() {
                   <div className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-1 sm:mb-2">
                     <AnimatedCounter end={70} suffix="+" />
                   </div>
-                  <div className="text-xs sm:text-sm opacity-80">Kilometr</div>
+                  <div className="text-xs sm:text-sm opacity-80">
+                    {t("three_hundred_forty_five")}
+                  </div>
                 </div>
                 <div className="text-center group hover:scale-110 transition-transform duration-300">
                   <div className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-1 sm:mb-2">
                     <AnimatedCounter end={50} />
                   </div>
-                  <div className="text-xs sm:text-sm opacity-80">Bekat</div>
+                  <div className="text-xs sm:text-sm opacity-80">
+                    {t("three_hundred_forty_six")}
+                  </div>
                 </div>
                 <div className="text-center group hover:scale-110 transition-transform duration-300">
                   <div className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-1 sm:mb-2">
                     <AnimatedCounter end={1000000} />
                   </div>
                   <div className="text-xs sm:text-sm opacity-80">
-                    Yo'lovchilar kunlik soni
+                    {t("three_hundred_forty_seven")}
                   </div>
                 </div>
               </div>

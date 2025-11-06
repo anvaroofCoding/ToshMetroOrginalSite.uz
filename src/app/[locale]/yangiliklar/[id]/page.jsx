@@ -16,16 +16,15 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import CommentsSection from "./comments-section";
-
+import { useTranslations } from "next-intl";
 export default function NewsArticlePage() {
+  const t = useTranslations("menu");
   const path = usePathname();
   const lang = path.split("/")[1];
   const id = path.split("/")[3];
-
   const [data, setData] = useState(null);
   const [index, setIndex] = useState(0);
-  const [status, setStatus] = useState("loading"); // 'loading' | 'error' | 'success'
-
+  const [status, setStatus] = useState("loading");
   useEffect(() => {
     (async () => {
       try {
@@ -42,40 +41,35 @@ export default function NewsArticlePage() {
       }
     })();
   }, [id, lang]);
-
   if (status === "loading") {
     return (
       <div className="flex items-center justify-center min-h-screen text-slate-600">
         <Loader2 className="w-6 h-6 mr-2 animate-spin text-blue-600" />
-        Yuklanmoqda...
+        {t("one_hundred_ninety_eight")}
       </div>
     );
   }
-
   if (status === "error") {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen text-center">
         <AlertCircle className="w-12 h-12 text-red-500 mb-3" />
         <p className="text-red-600 font-medium mb-4">
-          Ma'lumotni yuklab bo‘lmadi.
+          {t("two_hundred_forty")}
         </p>
         <Button
           onClick={() => location.reload()}
           className="bg-blue-600 hover:bg-blue-700"
         >
-          Qayta urinish
+          {t("two_hundred_forty_one")}
         </Button>
       </div>
     );
   }
-
   const images = data?.images || [];
   const currentImage = images[index]?.image || "/placeholder.svg";
-
   const nextImage = () => setIndex((i) => (i + 1) % images.length);
   const prevImage = () =>
     setIndex((i) => (i - 1 + images.length) % images.length);
-
   const formatDate = (d) =>
     d
       ? new Date(d).toLocaleDateString("uz-UZ", {
@@ -86,14 +80,11 @@ export default function NewsArticlePage() {
           minute: "2-digit",
         })
       : "";
-
   return (
     <div className="max-w-5xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-      {/* Sarlavha */}
       <h1 className="text-3xl sm:text-4xl font-bold mb-4 text-slate-900">
         {data?.[`title_${lang}`] || "Sarlavha topilmadi"}
       </h1>
-
       <div className="flex flex-wrap items-center gap-4 text-sm text-slate-600 mb-8">
         {data?.publishedAt && (
           <div className="flex items-center gap-2 bg-white px-3 py-1.5 rounded-full shadow-sm">
@@ -103,7 +94,9 @@ export default function NewsArticlePage() {
         )}
         <div className="flex items-center gap-2 bg-white px-3 py-1.5 rounded-full shadow-sm">
           <Heart className="w-4 h-4 text-red-500" />
-          <span>{data?.like_count || 0} ta yoqtirish</span>
+          <span>
+            {data?.like_count || 0} {t("two_hundred_forty_three")}
+          </span>
         </div>
         {data?.category_ru && (
           <Badge className="bg-blue-100 text-blue-800">
@@ -111,8 +104,6 @@ export default function NewsArticlePage() {
           </Badge>
         )}
       </div>
-
-      {/* Rasm galereyasi */}
       {images.length > 0 && (
         <Card className="shadow-xl border-0 overflow-hidden mb-8">
           <CardContent className="relative p-0">
@@ -124,7 +115,6 @@ export default function NewsArticlePage() {
                 priority
                 className="object-cover"
               />
-
               {images.length > 1 && (
                 <>
                   <Button
@@ -135,7 +125,6 @@ export default function NewsArticlePage() {
                   >
                     <ChevronLeft className="w-6 h-6" />
                   </Button>
-
                   <Button
                     size="icon"
                     variant="ghost"
@@ -151,7 +140,6 @@ export default function NewsArticlePage() {
                 </>
               )}
             </div>
-
             {images.length > 1 && (
               <div className="flex gap-2 overflow-x-auto p-3 bg-white border-t">
                 {images.map((img, i) => (
@@ -176,8 +164,6 @@ export default function NewsArticlePage() {
           </CardContent>
         </Card>
       )}
-
-      {/* Matn */}
       <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm">
         <CardContent className="p-8 text-slate-700 leading-relaxed">
           <p>
@@ -185,11 +171,7 @@ export default function NewsArticlePage() {
           </p>
         </CardContent>
       </Card>
-
-      {/* Izohlar */}
       <CommentsSection newsId={id} />
-
-      {/* Orqaga */}
       <div className="mt-8 text-center">
         <Button
           variant="outline"
@@ -197,7 +179,7 @@ export default function NewsArticlePage() {
           className="px-6 py-2 bg-white border border-slate-200 hover:bg-slate-100"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
-          Orqaga qaytish
+          {t("two_hundred_forty_two")}
         </Button>
       </div>
     </div>
