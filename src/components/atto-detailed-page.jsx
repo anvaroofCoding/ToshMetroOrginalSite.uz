@@ -23,99 +23,109 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import DetailedInfoModal from "./detail-info-modall";
+import { useTranslations } from "next-intl";
 
 const mainColor = "#0E327F";
 
 export default function AttoDetailedPage() {
+  const t = useTranslations("menu");
   const [modalType, setModalType] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState(null);
-
   const openModal = (type) => {
     setModalType(type);
     setIsModalOpen(true);
   };
-
   const toggleFaq = (index) => {
     setOpenFaq(openFaq === index ? null : index);
   };
-
   const cardTypes = [
     {
-      title: "Umumiy transport kartasi",
-      description:
-        "Aholiga, ya'ni barcha turdagi yo'lovchilarga mo'ljallangan.",
+      title: t("carduz1_title"),
+      description: t("carduz1_description"),
       color: "bg-[#3939c6]",
       icon: <Users className="w-8 h-8 text-white" />,
-      price: "Oddiy narx",
+      price: t("carduz1_price"),
       features: [
-        "Barcha transport turlari",
-        "Cheksiz foydalanish",
-        "Tezkor to'lov",
+        t("carduz1_feature1"),
+        t("carduz1_feature2"),
+        t("carduz1_feature3"),
       ],
       cardColor: "ko'k",
     },
     {
-      title: "Talabalar uchun",
-      description:
-        "Jamoat transportida imtiyozli sayohat qilish huquqiga ega talabalar uchun.",
+      title: t("carduz2_title"),
+      description: t("carduz2_description"),
       color: "bg-[#e2d317]",
       icon: <GraduationCap className="w-8 h-8 text-white" />,
-      price: "Imtiyozli tarif",
-      features: ["Talaba ID kerak", "Imtiyozli tarif", "Universitet tasdig'i"],
+      price: t("carduz2_price"),
+      features: [
+        t("carduz2_feature1"),
+        t("carduz2_feature2"),
+        t("carduz2_feature3"),
+      ],
       cardColor: "sariq",
     },
     {
-      title: "O'quvchilar uchun",
-      description:
-        "Jamoat transportida imtiyozli sayohat qilish huquqiga ega o'quvchilar uchun.",
+      title: t("carduz3_title"),
+      description: t("carduz3_description"),
       color: "bg-[#39b84d]",
       icon: <School className="w-8 h-8 text-white" />,
-      price: "0 so'm",
-      features: ["Maktab guvohnomasi", "Katta chegirma", "Ota-ona nazorati"],
+      price: t("carduz3_price"),
+      features: [
+        t("carduz3_feature1"),
+        t("carduz3_feature2"),
+        t("carduz3_feature3"),
+      ],
       cardColor: "yashil",
     },
     {
-      title: "Ijtimoiy karta",
-      description: "Nafaqaxo'rlar va nogironlar uchun mo'ljallangan.",
+      title: t("carduz4_title"),
+      description: t("carduz4_description"),
       color: "bg-[#ec3641]",
       icon: <CreditCard className="w-8 h-8 text-white" />,
-      price: "Imtiyozli/Bepul",
-      features: ["Ijtimoiy himoya", "To'liq imtiyoz", "Maxsus yordam"],
+      price: t("carduz4_price"),
+      features: [
+        t("carduz4_feature1"),
+        t("carduz4_feature2"),
+        t("carduz4_feature3"),
+      ],
       cardColor: "qizil",
     },
   ];
-
   const benefits = [
     {
       icon: <Clock className="w-6 h-6" />,
-      title: "Tezkor to'lov",
-      desc: "2 soniyada to'lov",
+      title: t("benefit1_title"),
+      desc: t("benefit1_desc"),
     },
     {
       icon: <Shield className="w-6 h-6" />,
-      title: "Xavfsiz",
-      desc: "NFC texnologiyasi",
+      title: t("benefit2_title"),
+      desc: t("benefit2_desc"),
     },
-    { icon: <Star className="w-6 h-6" />, title: "Qulay", desc: "Naqd pulsiz" },
+    {
+      icon: <Star className="w-6 h-6" />,
+      title: t("benefit3_title"),
+      desc: t("benefit3_desc"),
+    },
   ];
-
   const detailedServices = [
     {
-      title: "Qoldiqni tekshirish",
-      description: "Kartangiz balansini har doim nazorat qiling",
+      title: t("service1_title"),
+      description: t("service1_desc"),
       icon: <Clock className="w-6 h-6" />,
       action: () => openModal("balance-check"),
     },
     {
-      title: "Kam balans haqida",
-      description: "1700 so'mdan kam balans bo'lsa nima qilish kerak",
+      title: t("service2_title"),
+      description: t("service2_desc"),
       icon: <Shield className="w-6 h-6" />,
       action: () => openModal("low-balance"),
     },
     {
-      title: "Foydalanish qoidalari",
-      description: "Kartani boshqalarga berish va cheklovlar haqida",
+      title: t("service3_title"),
+      description: t("service3_desc"),
       icon: <Users className="w-6 h-6" />,
       action: () => openModal("sharing-rules"),
     },
@@ -123,33 +133,28 @@ export default function AttoDetailedPage() {
 
   const faqs = [
     {
-      question: "ATTO transport kartasi nima?",
-      answer:
-        '"ATTO" transport kartasi Toshkent shahridagi jamoat transportida yo\'l haqini tez va qulay tarzda to\'lash imkonini beradi. Ular "Toshshahartransxizmat" aksiyadorlik jamiyatining barcha avtobuslarida hamda "Toshkent metropoliteni"ning yer osti va yer usti bekatlarining barcha turniketlarida qabul qilinmoqda.',
+      question: t("faq1_question"),
+      answer: t("faq1_answer"),
     },
     {
-      question: "Transport kartasidagi qoldiqni qanday aniqlash mumkin?",
-      answer: `"ATTO" transport kartasi balansini ATTO, MyUzcard, Payme, Upay, Apelsin, Click, Oson, Ipak yo'li bank, Alif mobi, Mavrid, Plum, Uzum bank mobil ilovalari, bank infokiosklari, yoki "Toshshahartransxizmat" AJ va metro kassalarida tekshirish mumkin.`,
+      question: t("faq2_question"),
+      answer: t("faq2_answer"),
     },
     {
-      question:
-        "Transport kartasidagi balans 1700 so'mdan kam bo'lsa nima bo'ladi?",
-      answer:
-        "Agar qoldiq 1700 so'mdan kam bo'lsa, karta vaqtincha bloklanadi. Balansni to'ldirgandan so'ng 10 daqiqa ichida avtomatik ravishda blokdan chiqariladi. Muammosiz foydalanish uchun balansda 1700 so'mdan ortiq mablag' saqlash tavsiya etiladi.",
+      question: t("faq3_question"),
+      answer: t("faq3_answer"),
     },
     {
-      question: "ATTO transport kartasini uchinchi shaxslarga berish mumkinmi?",
-      answer:
-        "Yo'q, ATTO transport kartasidan faqat bitta yo'lovchi foydalanishi mumkin. Yo'lovchilar oqimining to'g'ri statistikasini yuritish maqsadida kartani uchinchi shaxslarga o'tkazish yoki qayta ishlatish mumkin emas. Tasodifiy qayta to'lovlarni oldini olish uchun 6 daqiqalik limit o'rnatilgan.",
+      question: t("faq4_question"),
+      answer: t("faq4_answer"),
     },
     {
-      question: "ATTO kartasini qayerdan sotib olsam bo'ladi?",
-      answer:
-        '"ATTO" transport kartalari "Toshshahartransxizmat" AJning barcha chiptalarni sotish nuqtalarida, shuningdek, "Toshkent metropoliteni" DUKning barcha kassalarida sotiladi.',
+      question: t("faq5_question"),
+      answer: t("faq5_answer"),
     },
     {
-      question: "ATTO transport kartasi balansini qanday to'ldirish mumkin?",
-      answer: `"ATTO" transport kartasi balansini ATTO, MyUzcard, Payme, Upay, Apelsin, Click, Oson, Ipak yo'li bank, Alif mobi, Mavrid, Plum, Uzum bank  toʻlov xizmatlari va boshqa elektron toʻlov tizimlarining mobil ilovalari orqali toʻldirish mumkin. Shuningdek, bank infokiosklari va kassalarda ham to\'ldirish mumkin.`,
+      question: t("faq6_question"),
+      answer: t("faq6_answer"),
     },
   ];
 
@@ -177,25 +182,24 @@ export default function AttoDetailedPage() {
                 >
                   <Zap className="w-4 h-4 text-blue-600" />
                   <span className="text-sm font-medium text-blue-800">
-                    Kontaktsiz (NFC) texnologiyasi
+                    {t("step1_title")}
                   </span>
                 </motion.div>
 
                 <h1 className="text-5xl lg:text-7xl font-black leading-tight mb-6">
                   <span className="block" style={{ color: mainColor }}>
-                    ATTO
+                    {t("step2_title")}
                   </span>
                   <span className="block bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                    Transport
+                    {t("step3_title")}
                   </span>
                   <span className="block" style={{ color: mainColor }}>
-                    Kartasi
+                    {t("step4_title")}
                   </span>
                 </h1>
 
                 <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                  Toshkent jamoat transportida kontaktsiz to'lov tizimi. Tez va
-                  qulay tarzda yo'l haqini to'lang.
+                  {t("step5_description")}
                 </p>
 
                 <div className="flex flex-wrap gap-4 mb-8">
@@ -227,7 +231,7 @@ export default function AttoDetailedPage() {
                     style={{ backgroundColor: mainColor }}
                     onClick={() => openModal("where-to-buy")}
                   >
-                    Kartani olish <ArrowRight className="w-5 h-5 ml-2" />
+                    {t("step6_button")} <ArrowRight className="w-5 h-5 ml-2" />
                   </Button>
                 </motion.div>
               </motion.div>
@@ -260,10 +264,10 @@ export default function AttoDetailedPage() {
                             className="text-2xl font-bold"
                             style={{ color: mainColor }}
                           >
-                            ATTO
+                            {t("step2_title")}
                           </h3>
                           <p className="text-sm text-gray-500">
-                            Transport Card
+                            {t("step7_card_name")}
                           </p>
                         </div>
                         <div className="w-12 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-md flex items-center justify-center">
@@ -281,13 +285,15 @@ export default function AttoDetailedPage() {
                           />
                         </div>
                         <p className="text-xs text-gray-500">
-                          Balans: 45,000 so'm
+                          {t("step8_balance")}
                         </p>
                       </div>
 
                       <div className="flex justify-between items-end">
                         <div>
-                          <p className="text-xs text-gray-500">Karta raqami</p>
+                          <p className="text-xs text-gray-500">
+                            {t("step9_card_number")}
+                          </p>
                           <p
                             className="font-mono text-sm font-semibold"
                             style={{ color: mainColor }}
@@ -296,7 +302,9 @@ export default function AttoDetailedPage() {
                           </p>
                         </div>
                         <div className="text-right">
-                          <p className="text-xs text-gray-500">Amal qiladi</p>
+                          <p className="text-xs text-gray-500">
+                            {t("step10_valid")}
+                          </p>
                           <p
                             className="font-mono text-sm font-semibold"
                             style={{ color: mainColor }}
@@ -359,12 +367,10 @@ export default function AttoDetailedPage() {
                 className="text-4xl lg:text-5xl font-bold mb-4"
                 style={{ color: mainColor }}
               >
-                ATTO transport kartalari turlari
+                {t("step11_section_title")}
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Hozirgi vaqtda yo'lovchilarning turli toifalari uchun
-                mo'ljallangan to'rt turdagi ATTO transport kartalari joriy
-                qilingan
+                {t("step12_section_desc")}
               </p>
             </motion.div>
 
@@ -423,7 +429,7 @@ export default function AttoDetailedPage() {
                         style={{ backgroundColor: mainColor }}
                         onClick={() => openModal("where-to-buy")}
                       >
-                        Tanlash
+                        {t("step13_button")}
                       </Button>
                     </CardContent>
                   </Card>
@@ -446,10 +452,10 @@ export default function AttoDetailedPage() {
                 className="text-4xl lg:text-5xl font-bold mb-4"
                 style={{ color: mainColor }}
               >
-                Qo'shimcha xizmatlar
+                {t("step14_section_title")}
               </h2>
               <p className="text-xl text-gray-600">
-                ATTO kartasidan samarali foydalanish uchun muhim ma'lumotlar
+                {t("step15_section_desc")}
               </p>
             </motion.div>
 
@@ -489,7 +495,7 @@ export default function AttoDetailedPage() {
                         style={{ borderColor: mainColor, color: mainColor }}
                       >
                         <Info className="w-4 h-4 mr-2" />
-                        Batafsil
+                        {t("tolov26")}
                       </Button>
                     </CardContent>
                   </Card>
@@ -512,10 +518,10 @@ export default function AttoDetailedPage() {
                 className="text-4xl lg:text-5xl font-bold mb-4"
                 style={{ color: mainColor }}
               >
-                Savol-javoblar
+                {t("step16_section_title")}
               </h2>
               <p className="text-xl text-gray-600">
-                Eng ko'p beriladigan savollar va ularning javoblari
+                {t("step17_section_desc")}
               </p>
             </motion.div>
 

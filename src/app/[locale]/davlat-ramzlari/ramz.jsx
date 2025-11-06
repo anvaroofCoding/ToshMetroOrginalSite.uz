@@ -18,10 +18,11 @@ import {
   SkipForward,
   VolumeX,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
-
 export default function UzbekistanSymbols() {
+  const t = useTranslations("menu");
   const [isPlaying, setIsPlaying] = useState(false);
   const [activeTab, setActiveTab] = useState("flag");
   const [currentTime, setCurrentTime] = useState(0);
@@ -29,7 +30,6 @@ export default function UzbekistanSymbols() {
   const [volume, setVolume] = useState(0.7);
   const [isMuted, setIsMuted] = useState(false);
   const audioRef = useRef(null);
-
   const [isRecording, setIsRecording] = useState(false);
   const [recordedAudio, setRecordedAudio] = useState(null);
   const [mediaRecorder, setMediaRecorder] = useState(null);
@@ -38,14 +38,11 @@ export default function UzbekistanSymbols() {
   const [micVolume, setMicVolume] = useState(0);
   const recordingTimerRef = useRef(null);
   const recordingAudioRef = useRef(null);
-
   const tabs = [
-    { id: "flag", label: "Bayroq", icon: Flag },
-    { id: "coat", label: "Gerb", icon: Shield },
-    { id: "anthem", label: "Madhiya", icon: Music },
+    { id: "flag", label: t("one_hundred_twenty_nine"), icon: Flag },
+    { id: "coat", label: t("one_hundred_thirty"), icon: Shield },
+    { id: "anthem", label: t("one_hundred_thirty_one"), icon: Music },
   ];
-
-  // Audio event handlers
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
@@ -64,7 +61,6 @@ export default function UzbekistanSymbols() {
       audio.removeEventListener("ended", handleEnded);
     };
   }, []);
-
   const togglePlayPause = () => {
     const audio = audioRef.current;
     if (!audio) return;
@@ -76,7 +72,6 @@ export default function UzbekistanSymbols() {
     }
     setIsPlaying(!isPlaying);
   };
-
   const handleSeek = (value) => {
     const audio = audioRef.current;
     if (!audio) return;
@@ -84,7 +79,6 @@ export default function UzbekistanSymbols() {
     audio.currentTime = value[0];
     setCurrentTime(value[0]);
   };
-
   const handleVolumeChange = (value) => {
     const audio = audioRef.current;
     if (!audio) return;
@@ -94,7 +88,6 @@ export default function UzbekistanSymbols() {
     audio.volume = newVolume;
     setIsMuted(newVolume === 0);
   };
-
   const toggleMute = () => {
     const audio = audioRef.current;
     if (!audio) return;
@@ -107,13 +100,11 @@ export default function UzbekistanSymbols() {
       setIsMuted(true);
     }
   };
-
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time % 60);
     return `${minutes}:${seconds.toString().padStart(2, "0")}`;
   };
-
   const restartAudio = () => {
     const audio = audioRef.current;
     if (!audio) return;
@@ -121,7 +112,6 @@ export default function UzbekistanSymbols() {
     audio.currentTime = 0;
     setCurrentTime(0);
   };
-
   const startRecording = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
@@ -185,7 +175,6 @@ export default function UzbekistanSymbols() {
       alert("Mikrofon ruxsati berilmadi yoki xatolik yuz berdi");
     }
   };
-
   const stopRecording = () => {
     if (mediaRecorder && isRecording) {
       mediaRecorder.stop();
@@ -197,7 +186,6 @@ export default function UzbekistanSymbols() {
       }
     }
   };
-
   const deleteRecording = () => {
     if (recordedAudio) {
       URL.revokeObjectURL(recordedAudio);
@@ -205,7 +193,6 @@ export default function UzbekistanSymbols() {
       setRecordingTime(0);
     }
   };
-
   const downloadRecording = () => {
     if (recordedAudio) {
       const a = document.createElement("a");
@@ -216,11 +203,9 @@ export default function UzbekistanSymbols() {
       document.body.removeChild(a);
     }
   };
-
   const handleRecordingQualityChange = (value) => {
     setRecordingQuality(value[0]);
   };
-
   useEffect(() => {
     return () => {
       if (recordingTimerRef.current) {
@@ -231,32 +216,27 @@ export default function UzbekistanSymbols() {
       }
     };
   }, [recordedAudio]);
-
   return (
     <div className="min-h-screen">
-      {/* Hidden Audio Element */}
       <audio
         ref={audioRef}
         src="/mathiya-auido/mathiya.mp3"
         preload="metadata"
       />
-
-      {/* Header */}
       <header>
         <div className="container mx-auto px-4 py-8">
           <div className="text-center mb-8">
             <h1 className="text-3xl md:text-4xl font-bold text-[#0E327F] mb-2">
-              O'ZBEKISTON RESPUBLIKASI
+              {t("one_hundred_thirty_two")}
             </h1>
-            <p className="text-lg text-gray-600">Davlat ramzlari</p>
+            <p className="text-lg text-gray-600">
+              {t("one_hundred_thirty_three")}
+            </p>
           </div>
-
-          {/* Navigation Tabs */}
           <div className="flex bg-[#0E327F] p-1 rounded-lg w-full max-w-2xl mx-auto">
             {tabs.map((tab) => {
               const Icon = tab.icon;
               const isActive = activeTab === tab.id;
-
               return (
                 <button
                   key={tab.id}
@@ -267,7 +247,6 @@ export default function UzbekistanSymbols() {
                       : "text-blue-100 hover:text-white hover:bg-blue-800/50"
                   }`}
                 >
-                  {/* <Icon className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" /> */}
                   <span className="break-words text-center leading-tight">
                     {tab.label}
                   </span>
@@ -277,9 +256,7 @@ export default function UzbekistanSymbols() {
           </div>
         </div>
       </header>
-
       <main className="container mx-auto px-4 py-8">
-        {/* Flag Section */}
         {activeTab === "flag" && (
           <div>
             <div className="flex justify-center mb-8">
@@ -298,20 +275,19 @@ export default function UzbekistanSymbols() {
                     <div className="text-center">
                       <Badge className="bg-[#0E327F] text-white">
                         <Calendar className="w-3 h-3 mr-1" />
-                        1991-yil 18-noyabr
+                        {t("one_hundred_thirty_four")}
                       </Badge>
                     </div>
                   </CardContent>
                 </Card>
               </div>
             </div>
-
             <div className="max-w-4xl mx-auto">
               <Card className="w-full transition-all duration-300 shadow-lg hover:shadow-xl border-l-4 border-l-[#0E327F]">
                 <CardContent className="p-8">
                   <div className="text-center mb-8">
                     <h2 className="text-2xl font-bold text-[#0E327F] mb-4">
-                      O'zbekiston Respublikasi Davlat Bayrog'i
+                      {t("one_hundred_thirty_five")}
                     </h2>
                     <div className="w-24 h-1 bg-gradient-to-r from-[#0E327F] to-blue-400 mx-auto rounded-full"></div>
                   </div>
@@ -320,14 +296,11 @@ export default function UzbekistanSymbols() {
                     <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl mb-8 border-l-4 border-[#0E327F]">
                       <p className="text-gray-700 leading-relaxed text-justify animate-fade-in-up">
                         <strong className="text-[#0E327F] text-lg">
-                          "O'zbekiston Respublikasi Davlat bayrog'i
-                          to'g'risida"gi Qonun
+                          {t("one_hundred_thirty_six")}
                         </strong>
                         <br />
                         <span className="text-gray-600 italic">
-                          1991-yil 18-noyabrda O'zbekiston Respublikasi Oliy
-                          Kengashining navbatdan tashqari sessiyasida qabul
-                          qilingan.
+                          {t("one_hundred_thirty_seven")}
                         </span>
                       </p>
                     </div>
@@ -336,43 +309,39 @@ export default function UzbekistanSymbols() {
                       <div className="bg-gradient-to-br from-sky-50 to-blue-50 p-6 rounded-xl animate-fade-in-up delay-200 hover:shadow-md transition-shadow">
                         <h3 className="font-bold text-[#0E327F] mb-3 flex items-center text-lg">
                           <div className="w-3 h-3 bg-sky-400 rounded-full mr-3"></div>
-                          Moviy rang
+                          {t("one_hundred_thirty_eight")}
                         </h3>
                         <p className="text-gray-700 leading-relaxed">
-                          Osmon va suv ramzi, tabiat go'zalligi, hayot manbai va
-                          tinchlik timsoli.
+                          {t("one_hundred_thirty_nine")}
                         </p>
                       </div>
 
                       <div className="bg-gradient-to-br from-emerald-50 to-green-50 p-6 rounded-xl animate-fade-in-up delay-300 hover:shadow-md transition-shadow">
                         <h3 className="font-bold text-[#0E327F] mb-3 flex items-center text-lg">
                           <div className="w-3 h-3 bg-green-400 rounded-full mr-3"></div>
-                          Yashil rang
+                          {t("one_hundred_forty")}
                         </h3>
                         <p className="text-gray-700 leading-relaxed">
-                          Tabiat yangilanishi, bahor va umid ramzi, xalqimizning
-                          farovonlik yo'lidagi intilishi.
+                          {t("one_hundred_forty_one")}
                         </p>
                       </div>
 
                       <div className="bg-gradient-to-br from-gray-50 to-slate-50 p-6 rounded-xl animate-fade-in-up delay-400 hover:shadow-md transition-shadow">
                         <h3 className="font-bold text-[#0E327F] mb-3 flex items-center text-lg">
                           <div className="w-3 h-3 bg-gray-300 rounded-full mr-3"></div>
-                          Oq rang
+                          {t("one_hundred_forty_two")}
                         </h3>
                         <p className="text-gray-700 leading-relaxed">
-                          Poklik va halollik ramzi, tinchlik va xotirjamlik
-                          timsoli.
+                          {t("one_hundred_forty_three")}
                         </p>
                       </div>
-
                       <div className="bg-gradient-to-br from-red-50 to-rose-50 p-6 rounded-xl animate-fade-in-up delay-500 hover:shadow-md transition-shadow">
                         <h3 className="font-bold text-[#0E327F] mb-3 flex items-center text-lg">
                           <div className="w-3 h-3 bg-red-400 rounded-full mr-3"></div>
-                          Qizil chiziqlar
+                          {t("one_hundred_forty_four")}
                         </h3>
                         <p className="text-gray-700 leading-relaxed">
-                          Har bir tirik jonning qon tomirida urib turgan hayotiy kuch, hayot ramzidir.
+                          {t("one_hundred_forty_five")}
                         </p>
                       </div>
                     </div>
@@ -380,12 +349,10 @@ export default function UzbekistanSymbols() {
                     <div className="mt-8 bg-gradient-to-br from-yellow-50 to-amber-50 p-6 rounded-xl animate-fade-in-up delay-600 border-l-4 border-yellow-400">
                       <h3 className="font-bold text-[#0E327F] mb-3 flex items-center text-lg">
                         <div className="w-3 h-3 bg-yellow-400 rounded-full mr-3"></div>
-                        Yarim oy va yulduzlar
+                        {t("one_hundred_forty_six")}
                       </h3>
                       <p className="text-gray-700 leading-relaxed">
-                        O'zbekiston xalqining an'anaviy ramzi. Yarim oy -
-                        yangilanish ramzi, 12 yulduz - yil oylarini va qadimiy
-                        burjlar tizimini ifodalaydi.
+                        {t("one_hundred_forty_seven")}
                       </p>
                     </div>
                   </div>
@@ -414,7 +381,7 @@ export default function UzbekistanSymbols() {
                     <div className="text-center">
                       <Badge className="bg-[#0E327F] text-white">
                         <Calendar className="w-3 h-3 mr-1" />
-                        1992-yil 2-iyul
+                        {t("one_hundred_forty_eight")}
                       </Badge>
                     </div>
                   </CardContent>
@@ -427,7 +394,7 @@ export default function UzbekistanSymbols() {
                 <CardContent className="p-8">
                   <div className="text-center mb-8">
                     <h2 className="text-2xl font-bold text-[#0E327F] mb-4">
-                      O'zbekiston Respublikasi Davlat Gerbi
+                      {t("one_hundred_forty_nine")}
                     </h2>
                     <div className="w-24 h-1 bg-gradient-to-r from-[#0E327F] to-blue-400 mx-auto rounded-full"></div>
                   </div>
@@ -435,13 +402,11 @@ export default function UzbekistanSymbols() {
                   <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl mb-8 border-l-4 border-[#0E327F]">
                     <p className="text-gray-700 leading-relaxed text-justify">
                       <strong className="text-[#0E327F] text-lg">
-                        "O'zbekiston Respublikasi Davlat gerbi to'g'risida"gi
-                        Qonun
+                        {t("one_hundred_fifty")}
                       </strong>
                       <br />
                       <span className="text-gray-600 italic">
-                        1992-yil 2-iyulda O'zbekiston Respublikasi Oliy
-                        Kengashining X sessiyasida qabul qilingan.
+                        {t("one_hundred_fifty_one")}
                       </span>
                     </p>
                   </div>
@@ -450,61 +415,50 @@ export default function UzbekistanSymbols() {
                     <div className="bg-gradient-to-br from-yellow-50 to-amber-50 p-6 rounded-xl animate-fade-in-up delay-200 hover:shadow-md transition-shadow border-l-4 border-yellow-400">
                       <h3 className="font-bold text-[#0E327F] mb-3 flex items-center text-lg">
                         <div className="w-3 h-3 bg-yellow-400 rounded-full mr-3"></div>
-                        Quyosh va vodiy
+                        {t("one_hundred_fifty_two")}
                       </h3>
                       <p className="text-gray-700 leading-relaxed">
-                        O'zbekiston Respublikasining Davlat gerbi gullagan vodiy
-                        uzra charaqlab turgan quyosh tasviridan iborat.
+                        {t("one_hundred_fifty_three")}
                       </p>
                     </div>
 
                     <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-xl animate-fade-in-up delay-300 hover:shadow-md transition-shadow border-l-4 border-green-400">
                       <h3 className="font-bold text-[#0E327F] mb-3 flex items-center text-lg">
                         <div className="w-3 h-3 bg-green-400 rounded-full mr-3"></div>
-                        Bug'doy va paxta
+                        {t("one_hundred_fifty_four")}
                       </h3>
                       <p className="text-gray-700 leading-relaxed">
-                        Chap tomonida bug'doy boshoqlari, o'ng tomonida ochilgan
-                        paxta chanoqlari tasvirlangan.
+                        {t("one_hundred_fifty_five")}
                       </p>
                     </div>
 
                     <div className="bg-gradient-to-br from-blue-50 to-sky-50 p-6 rounded-xl animate-fade-in-up delay-400 hover:shadow-md transition-shadow border-l-4 border-blue-400">
                       <h3 className="font-bold text-[#0E327F] mb-3 flex items-center text-lg">
                         <div className="w-3 h-3 bg-blue-400 rounded-full mr-3"></div>
-                        Sakkiz qirrali yulduz
+                        {t("one_hundred_fifty_six")}
                       </h3>
                       <p className="text-gray-700 leading-relaxed">
-                        Gerbning yuqori qismida Respublika jipsligining ramzi
-                        sifatida sakkiz qirrali yulduz tasvirlangan: sakkiz
-                        qirra ichida joylashgan yarim oy va yulduz
-                        musulmonlarning qutlug' ramzidir.
+                        {t("one_hundred_fifty_seven")}
                       </p>
                     </div>
 
                     <div className="bg-gradient-to-br from-purple-50 to-violet-50 p-6 rounded-xl animate-fade-in-up delay-500 hover:shadow-md transition-shadow border-l-4 border-purple-400">
                       <h3 className="font-bold text-[#0E327F] mb-3 flex items-center text-lg">
                         <div className="w-3 h-3 bg-purple-400 rounded-full mr-3"></div>
-                        Humo qushi
+                        {t("one_hundred_fifty_eight")}
                       </h3>
                       <p className="text-gray-700 leading-relaxed">
-                        Gerbning markazida himmat, oliyjanoblik va fidoyilik
-                        timsoli bo'lgan afsonaviy Humo qushi qanotlarini yozib
-                        turibdi. Ushbu ramz va timsollar xalqimizning tinchlik,
-                        yaxshilik, baxt-saodat, farovonlik yo'lidagi
-                        orzu-umidlarini ifodalaydi.
+                        {t("one_hundred_fifty_nine")}
                       </p>
                     </div>
 
                     <div className="bg-gradient-to-br from-red-50 to-rose-50 p-6 rounded-xl animate-fade-in-up delay-600 hover:shadow-md transition-shadow border-l-4 border-red-400">
                       <h3 className="font-bold text-[#0E327F] mb-3 flex items-center text-lg">
                         <div className="w-3 h-3 bg-red-400 rounded-full mr-3"></div>
-                        "O'zbekiston" yozuvi
+                        {t("one_hundred_sixty")}
                       </h3>
                       <p className="text-gray-700 leading-relaxed">
-                        Gerbning pastki qismida Respublika Davlat bayrog'ini
-                        ifoda etuvchi chambar lentasining bantida «O'zbekiston»
-                        deb yozib qo'yilgan.
+                        {t("one_hundred_sixty_one")}
                       </p>
                     </div>
                   </div>
@@ -524,7 +478,7 @@ export default function UzbekistanSymbols() {
                   <div className="flex items-center space-x-3 mb-6">
                     <Volume2 className="w-5 h-5 text-[#0E327F]" />
                     <h2 className="text-xl font-bold text-[#0E327F]">
-                      Audio player
+                      {t("one_hundred_sixty_two")}
                     </h2>
                   </div>
 
@@ -532,9 +486,11 @@ export default function UzbekistanSymbols() {
                   <div className="bg-gradient-to-r from-[#0E327F] to-blue-600 text-white p-6 rounded-lg mb-6">
                     <div className="text-center mb-4">
                       <h3 className="text-lg font-bold">
-                        O'zbekiston Respublikasi Madhiyasi
+                        {t("one_hundred_sixty_three")}
                       </h3>
-                      <p className="text-blue-100 text-sm">Davlat Madhiyasi</p>
+                      <p className="text-blue-100 text-sm">
+                        {t("one_hundred_sixty_four")}
+                      </p>
                     </div>
 
                     {/* Progress Bar */}
@@ -619,19 +575,16 @@ export default function UzbekistanSymbols() {
 
                   <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl border-l-4 border-[#0E327F]">
                     <h3 className="font-bold text-[#0E327F] mb-3 text-lg">
-                      Qonuniy ma'lumot
+                      {t("one_hundred_sixty_five")}
                     </h3>
                     <p className="text-gray-700 leading-relaxed text-sm">
-                      O'zbekiston Respublikasi Davlat madhiyasining matni va
-                      musiqasi O'zbekiston Respublikasining 1992 yil 10
-                      dekabrdagi 768-XII-sonli «O'zbekiston Respublikasining
-                      Davlat madhiyasi to'g'risida»gi Qonuni bilan tasdiqlangan.
+                      {t("one_hundred_sixty_six")}
                     </p>
                     <div className="mt-4 pt-4 border-t border-blue-200">
                       <p className="text-gray-600 text-sm">
-                        <strong>Musiqa:</strong> Mutal Burhonov
+                        <strong> {t("one_hundred_sixty_seven")}</strong>
                         <br />
-                        <strong>So'z:</strong> Abdulla Oripov
+                        <strong>{t("one_hundred_sixty_eight")}</strong>
                       </p>
                     </div>
                   </div>
@@ -643,7 +596,7 @@ export default function UzbekistanSymbols() {
                 <CardContent className="p-6">
                   <h2 className="text-xl font-bold text-[#0E327F] mb-4 text-center flex items-center justify-center">
                     <Music className="w-5 h-5 mr-2" />
-                    Madhiya matni
+                    {t("one_hundred_sixty_nine")}
                   </h2>
                   <div className="space-y-6">
                     <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-xl border-l-4 border-[#0E327F]">
@@ -714,7 +667,7 @@ export default function UzbekistanSymbols() {
                         </div>
                         <p className="text-sm flex items-center justify-center">
                           <Volume2 className="w-4 h-4 mr-2" />
-                          Madhiya ijro etilmoqda...
+                          {t("one_hundred_seventy")}
                         </p>
                       </div>
                     )}

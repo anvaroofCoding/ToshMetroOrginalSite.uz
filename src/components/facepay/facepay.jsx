@@ -3,31 +3,22 @@
 import { useEffect, useRef } from "react";
 import {
   Smartphone,
-  Hand,
-  CreditCard,
-  Shield,
   Zap,
   CheckCircle,
   Download,
   LogIn,
   Plus,
-  MapPin,
-  Camera,
-  QrCode,
   Scan,
   Wallet,
-  ArrowRight,
-  Star,
-  Nfc,
   MoveRight,
   ScanFace,
 } from "lucide-react";
-import Component from "@/app/[locale]/FacePay/forFacepayanimation";
 import BiometrikVideo from "../BiometrikVideo";
+import { useTranslations } from "next-intl";
 
 function Facepay() {
   const observerRef = useRef(null);
-
+  const t = useTranslations("menu");
   useEffect(() => {
     observerRef.current = new IntersectionObserver(
       (entries) => {
@@ -45,61 +36,56 @@ function Facepay() {
 
     return () => observerRef.current?.disconnect();
   }, []);
-
   const steps = [
     {
       icon: Download,
-      title: "ATTO mobil ilovasini yuklab oling",
-      description: "Ilovani GooglePlay va AppStore dan yuklab oling",
+      title: t("thirteen"),
+      description: t("fourteen"),
       image: "https://www.atto.uz/image/step1.png",
     },
     {
       icon: LogIn,
-      title: "Ilovada avtorizastiyadan oʻting",
-      description: "Telefon raqamingizni va parolni kiriting",
+      title: t("fifteen"),
+      description: t("sixteen"),
       image: "https://www.atto.uz/image/step2.png",
     },
     {
       icon: Plus,
-      title: "Transport kartasini qoʻshing",
-      description: "yoki bepul virtual karta oching",
+      title: t("seventeen"),
+      description: t("eighteen"),
       image: "https://www.atto.uz/image/step3.png",
     },
     {
       icon: ScanFace,
-      title: "FacePay ni ishga tushiring",
-      description: "Koʻrsatilgan karta uchun FacePay belgisini bosing",
+      title: t("forty_two"),
+      description: t("forty_three"),
       image: "https://www.atto.uz/image/step4.png",
     },
   ];
-
   const usageSteps = [
     {
       icon: CheckCircle,
-      title: "ATTO ilovasida FacePay ishga tushirilganini tekshiring",
+      title: t("forty_four"),
     },
     {
       icon: Wallet,
-      title:
-        "Turniketdan oʻtishdan oldin, bogʻlangan transport kartasida toʻlov uchun yetarli mablagʻ borligiga ishonch hosil qiling",
+      title: t("forty_five"),
     },
     {
       icon: ScanFace,
-      title:
-        "Turniketdan oʻtishdan oldin bosh kiyimingizni yeching va roʻmolingiz yoki sharfingiz yuzingizni yopmaydigan holatda bo'lsin",
+      title: t("forty_six"),
     },
     {
       icon: Scan,
-      title: "FacePay terminali boʻlgan turniketga yaqinlashing",
+      title: t("forty_seven"),
     },
     {
       icon: Zap,
-      title:
-        "Toʻlov summasi biroz vaqt o'tgach, ulangan transport kartasidan yechib olinadi",
+      title: t("forty_eight"),
     },
     {
       icon: MoveRight,
-      title: "Metroga oʻting",
+      title: t("forty_nine"),
     },
   ];
 
@@ -112,12 +98,10 @@ function Facepay() {
           <div className="text-center fade-in opacity-0 translate-y-8 transition-all duration-1000">
             <div className="inline-flex items-center gap-3 mb-6 px-6 py-3 bg-blue-900/10 rounded-full border border-blue-900/20">
               <ScanFace className="w-5 h-5 text-blue-900" />
-              <span className="text-blue-900 font-medium">
-                Biometrik to'lov
-              </span>
+              <span className="text-blue-900 font-medium">{t("fifty")}</span>
             </div>
             <h1 className="text-5xl md:text-7xl font-bold text-blue-900 mb-8 leading-tight">
-              FacePay
+              {t("fifty_one")}
             </h1>
             <div className=" flex justify-center items-center py-10">
               <img
@@ -128,10 +112,10 @@ function Facepay() {
             </div>
             <div className="max-w-2xl mx-auto">
               <h2 className="text-2xl md:text-3xl font-semibold text-blue-900 mb-4">
-                FacePay ulang
+                {t("fifty_two")}
               </h2>
               <p className="text-lg text-blue-800/80 leading-relaxed">
-                Metroga yo‘l haqini smartfonsiz, yuzni skanerlash orqali to‘lang
+                {t("fifty_three")}
               </p>
             </div>
           </div>
@@ -144,7 +128,7 @@ function Facepay() {
           <div className="fade-in opacity-0 translate-y-8 transition-all duration-1000">
             <div className="text-center mb-16">
               <h2 className="text-4xl font-bold text-blue-900 mb-6">
-                FacePay nima?
+                {t("fifty_four")}
               </h2>
               <div className="w-24 h-1 bg-gradient-to-r from-blue-900 to-blue-600 mx-auto rounded-full"></div>
             </div>
@@ -152,38 +136,23 @@ function Facepay() {
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="space-y-6">
                 <p className="text-lg text-blue-800/90 leading-relaxed">
-                  Bu toʻlovning toʻliq kontaktsiz usuli. Endi siz na smartfonga,
-                  na boshqa yuzalarga tegishingiz shart emas. Biometrik toʻlov
-                  xizmati barcha yoʻlovchilar uchun majburiy boʻlmaydi – boshqa
-                  barcha toʻlov usullari ham ishlab turishi davom etadi. Bu
-                  toʻlovning toʻliq kontaktsiz usuli. Endi siz na smartfonga, na
-                  boshqa yuzalarga tegishingiz shart emas. Biometrik toʻlov
-                  xizmati barcha yoʻlovchilar uchun majburiy boʻlmaydi – boshqa
-                  barcha toʻlov usullari ham ishlab turishi davom etadi.
+                  {t("fifty_five")}
                 </p>
                 <p className="text-lg text-blue-800/90 leading-relaxed">
-                  Xizmatdan foydalanish uchun «ATTO» mobil ilovasida roʻyxatdan
-                  oʻtib, yuzingizning suratini va toʻlov uchun mablagʻ boʻlgan
-                  transport kartasini bogʻlashingiz kerak. Yuz bilan toʻlov
-                  qilish juda oson: turniket oldiga borib, turniketga
-                  oʻrnatilgan kameraga qarashingiz kifoya. Turniket ochiladi va
-                  toʻlov miqdori bogʻlangan transport kartasidan yechiladi.
+                  {t("fifty_six")}
                 </p>
 
                 <div className="grid sm:grid-cols-2 gap-4 mt-8">
                   <div className="flex items-center gap-3 p-4 bg-blue-900/5 rounded-xl border border-blue-900/10">
                     <CheckCircle className="w-6 h-6 text-blue-900 flex-shrink-0" />
                     <span className="text-blue-900 font-medium">
-                      Yunusobod va Chilonzor yo'nalishlarining barcha
-                      bekatlarida Yunusobod va Chilonzor yo'nalishlarining
-                      barcha bekatlarida
+                      {t("fifty_seven")}
                     </span>
                   </div>
                   <div className="flex items-center gap-3 p-4 bg-blue-900/5 rounded-xl border border-blue-900/10">
                     <Smartphone className="w-6 h-6 text-blue-900 flex-shrink-0" />
                     <span className="text-blue-900 font-medium">
-                      Smartfon va transport kartasisiz metroda yo‘l haqi uchun
-                      toʻlovlar
+                      {t("fifty_eight")}
                     </span>
                   </div>
                 </div>
@@ -208,7 +177,7 @@ function Facepay() {
           <div className="fade-in opacity-0 translate-y-8 transition-all duration-1000">
             <div className="text-center mb-16">
               <h2 className="text-4xl font-bold text-blue-900 mb-6">
-                FacePay ni qanday ulash mumkin?
+                {t("fifty_nine")}
               </h2>
               <div className="w-24 h-1 bg-gradient-to-r from-blue-900 to-blue-600 mx-auto rounded-full"></div>
             </div>
@@ -250,7 +219,7 @@ function Facepay() {
           <div className="fade-in opacity-0 translate-y-8 transition-all duration-1000">
             <div className="text-center mb-16">
               <h2 className="text-4xl font-bold text-blue-900 mb-6">
-                FacePay dan qanday foydalanish mumkin
+                {t("sixty")}
               </h2>
               <div className="w-24 h-1 bg-gradient-to-r from-blue-900 to-blue-600 mx-auto rounded-full"></div>
             </div>

@@ -17,15 +17,14 @@ import {
   Wallet,
   ArrowRight,
   Star,
-  Nfc,
 } from "lucide-react";
 
 import BiometrikVideo1 from "../BiometrikVideo1";
 import { usePathname } from "next/navigation";
-
+import { useTranslations } from "next-intl";
 function PalmpayPayments() {
   const observerRef = useRef(null);
-
+  const t = useTranslations("menu");
   useEffect(() => {
     observerRef.current = new IntersectionObserver(
       (entries) => {
@@ -43,27 +42,25 @@ function PalmpayPayments() {
 
     return () => observerRef.current?.disconnect();
   }, []);
-
   const path = usePathname();
   const lang = path.split("/")[1];
-
   const steps = [
     {
       icon: Download,
-      title: "ATTO mobil ilovasini yuklab oling",
-      description: "Ilovani GooglePlay va AppStore dan yuklab oling",
+      title: t("thirteen"),
+      description: t("fourteen"),
       image: "https://www.atto.uz/image/step1.png",
     },
     {
       icon: LogIn,
-      title: "Ilovada avtorizatsiyadan oʻting",
-      description: "Telefon raqamingizni va parolni kiriting",
+      title: t("fifteen"),
+      description: t("sixteen"),
       image: "https://www.atto.uz/image/step2.png",
     },
     {
       icon: Plus,
-      title: "Transport kartasini qoʻshing",
-      description: "yoki bepul virtual karta oching",
+      title: t("seventeen"),
+      description: t("eighteen"),
       image: "https://www.atto.uz/image/step3.png",
     },
   ];
@@ -71,57 +68,50 @@ function PalmpayPayments() {
   const activationSteps = [
     {
       icon: MapPin,
-      title: "Metro bekatidagi roʻyxatdan oʻtish stoliga boring.",
+      title: t("nineteen"),
     },
     {
       icon: Camera,
-      title:
-        "Stol yaqinidagi hamkorlarimiz sizdan kaftingizni suratga oluvchi maxsus qurilma ustiga qoʻyishingizni soʻrashadi. Qoʻlingizni toʻgʻri tuting va uni qurilmadan 15 sm balandlikda tuting.",
+      title: t("twenty"),
     },
     {
       icon: Hand,
-      title:
-        "Avval oʻng qoʻlingizni, soʻng chap qoʻlingizni qoʻying. Shundan soʻng ekranda QR-kod paydo boʻladi.",
+      title: t("twenty_one"),
     },
     {
       icon: QrCode,
-      title:
-        'ATTO mobil ilovasi yordamida QR-kodni skanerlang. Ilovaning bosh ekranida "PalmPay ni faollashtirish" tugmasini bosing, soʻng "QR-kodni skanerlash" tugmasini bosing.',
+      title: t("twenty_two"),
     },
   ];
 
   const usageSteps = [
     {
       icon: CheckCircle,
-      title: "ATTO ilovasida PalmPay ishga tushirilganini tekshiring",
+      title: t("twenty_three"),
     },
     {
       icon: Wallet,
-      title:
-        "Turniketdan oʻtishdan oldin, bogʻlangan transport kartasida toʻlov uchun yetarli mablagʻ borligiga ishonch hosil qiling. Qoʻlingizni qurilmadan 15 sm balandlikda tuting",
+      title: t("twenty_four"),
     },
     {
       icon: Hand,
-      title:
-        "Turniketdan oʻtishdan oldin qoʻlqopni yeching, kaftingizni yopmaydigan qilish uchun kiyim yengini yuqoriga torting",
+      title: t("twenty_five"),
     },
     {
       icon: Scan,
-      title: "Maxsus qurilma oʻrnatilgan turniketga yaqinlashing",
+      title: t("twenty_six"),
     },
     {
       icon: Zap,
-      title:
-        "Kaftingizni skaner ustiga qo‘ying va yashil chiroq yonishini kuting. Chiroq yoqilgach, turniket orqali o‘ting",
+      title: t("twenty_seven"),
     },
     {
       icon: CreditCard,
-      title:
-        "Toʻlov miqdori biroz vaqt oʻtib bogʻlangan transport kartasidan yechiladi",
+      title: t("twenty_eight"),
     },
     {
       icon: Star,
-      title: "Turniketdan oʻting va yo'lingiz bexatar bo'lsin!",
+      title: t("twenty_nine"),
     },
   ];
 
@@ -133,10 +123,10 @@ function PalmpayPayments() {
         <div className="text-center fade-in opacity-0 translate-y-8 transition-all duration-1000">
           <div className="inline-flex items-center gap-3 mb-6 px-6 py-3 bg-blue-900/10 rounded-full border border-blue-900/20">
             <Hand className="w-5 h-5 text-blue-900" />
-            <span className="text-blue-900 font-medium">Biometrik to'lov</span>
+            <span className="text-blue-900 font-medium">{t("thirty")}</span>
           </div>
           <h1 className="text-5xl md:text-7xl font-bold text-blue-900 mb-8 leading-tight">
-            PalmPay
+            {t("thirty_one")}
           </h1>
           <div className=" flex justify-center items-center py-5">
             <img
@@ -154,7 +144,7 @@ function PalmpayPayments() {
           <div className="fade-in opacity-0 translate-y-8 transition-all duration-1000">
             <div className="text-center mb-16">
               <h2 className="text-4xl font-bold text-blue-900 mb-6">
-                PalmPay nima?
+                {t("thirty_two")}
               </h2>
               <div className="w-24 h-1 bg-gradient-to-r from-blue-900 to-blue-600 mx-auto rounded-full"></div>
             </div>
@@ -162,34 +152,26 @@ function PalmpayPayments() {
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div className="space-y-6">
                 <p className="text-lg text-blue-800/90 leading-relaxed">
-                  Bu yo'l haqi uchun toʻlovlar butunlay kontaktsiz, innovatsion
-                  usuli. Endi siz bank kartasini olib yurish yoki hamyondan
-                  chiqarish haqida oʻylashingiz shart emas, chunki qoʻlingiz
-                  doim siz bilan.
+                  {t("thirty_three")}
                 </p>
                 <p className="text-lg text-blue-800/90 leading-relaxed">
-                  Biometrik toʻlov xizmati barcha yoʻlovchilar uchun majburiy
-                  boʻlmaydi – boshqa barcha toʻlov usullari ham ishlab turishda
-                  davom etadi.
+                  {t("thirty_four")}
                 </p>
                 <p className="text-lg text-blue-800/90 leading-relaxed">
-                  Kaft bilan toʻlov qilish juda oson: turniketga oʻrnatilgan
-                  qurilma ustiga istalgan kaftingizni tutib turing. Turniket
-                  ochiladi va toʻlov miqdori bogʻlangan transport kartasidan
-                  yechiladi.
+                  {t("thirty_five")}
                 </p>
 
                 <div className="grid sm:grid-cols-2 gap-4 mt-8">
                   <div className="flex items-center gap-3 p-4 bg-blue-900/5 rounded-xl border border-blue-900/10">
                     <CheckCircle className="w-6 h-6 text-blue-900 flex-shrink-0" />
                     <span className="text-blue-900 font-medium">
-                      Barcha metro bekatlarida mavjud
+                      {t("thirty_six")}
                     </span>
                   </div>
                   <div className="flex items-center gap-3 p-4 bg-blue-900/5 rounded-xl border border-blue-900/10">
                     <Smartphone className="w-6 h-6 text-blue-900 flex-shrink-0" />
                     <span className="text-blue-900 font-medium">
-                      Smartfon va kartasiz to'lov
+                      {t("thirty_seven")}
                     </span>
                   </div>
                 </div>
@@ -214,7 +196,7 @@ function PalmpayPayments() {
           <div className="fade-in opacity-0 translate-y-8 transition-all duration-1000">
             <div className="text-center mb-16">
               <h2 className="text-4xl font-bold text-blue-900 mb-6">
-                PalmPayni qanday ulash kerak
+                {t("thirty_eight")}
               </h2>
               <div className="w-24 h-1 bg-gradient-to-r from-blue-900 to-blue-600 mx-auto rounded-full"></div>
             </div>
@@ -256,7 +238,7 @@ function PalmpayPayments() {
           <div className="fade-in opacity-0 translate-y-8 transition-all duration-1000">
             <div className="text-center mb-16">
               <h2 className="text-4xl font-bold text-blue-900 mb-6">
-                Palm to'lovini faollashtirish
+                {t("thirty_nine")}
               </h2>
               <div className="w-24 h-1 bg-gradient-to-r from-blue-900 to-blue-600 mx-auto rounded-full"></div>
             </div>
@@ -292,7 +274,7 @@ function PalmpayPayments() {
           <div className="fade-in opacity-0 translate-y-8 transition-all duration-1000">
             <div className="text-center mb-16">
               <h2 className="text-4xl font-bold text-blue-900 mb-6">
-                PalmPay dan qanday foydalanish mumkin
+                {t("forty")}
               </h2>
               <div className="w-24 h-1 bg-gradient-to-r from-blue-900 to-blue-600 mx-auto rounded-full"></div>
             </div>

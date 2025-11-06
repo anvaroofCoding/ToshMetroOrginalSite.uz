@@ -21,7 +21,7 @@ import {
   MessageSquare,
   MapPin,
 } from "lucide-react";
-
+import { useTranslations } from "next-intl";
 export default function MetroLostItemForm() {
   const [formData, setFormData] = useState({
     name: "",
@@ -31,7 +31,6 @@ export default function MetroLostItemForm() {
     passport: "",
     message: "",
   });
-
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [showError, setShowError] = useState(false);
@@ -40,25 +39,20 @@ export default function MetroLostItemForm() {
   const [isBlocked, setIsBlocked] = useState(false);
   const [blockTimeRemaining, setBlockTimeRemaining] = useState(0);
   const [failedAttempts, setFailedAttempts] = useState(0);
-
-  // Check if user is blocked on component mount and set up timer
+  const t = useTranslations("menu");
   useEffect(() => {
     const checkBlockStatus = () => {
       const blockData = localStorage.getItem("formBlockData");
       if (blockData) {
         const { attempts, blockStartTime } = JSON.parse(blockData);
         const currentTime = Date.now();
-        const blockDuration = 10 * 60 * 1000; // 10 minutes in milliseconds
+        const blockDuration = 10 * 60 * 1000;
         const timeElapsed = currentTime - blockStartTime;
-
         if (attempts >= 3 && timeElapsed < blockDuration) {
-          // Still blocked
           setIsBlocked(true);
           setFailedAttempts(attempts);
           const remainingTime = Math.ceil((blockDuration - timeElapsed) / 1000);
           setBlockTimeRemaining(remainingTime);
-
-          // Start countdown timer
           const timer = setInterval(() => {
             setBlockTimeRemaining((prev) => {
               if (prev <= 1) {
@@ -71,7 +65,6 @@ export default function MetroLostItemForm() {
               return prev - 1;
             });
           }, 1000);
-
           return () => clearInterval(timer);
         } else if (attempts >= 3 && timeElapsed >= blockDuration) {
           // Block period has expired
@@ -84,17 +77,14 @@ export default function MetroLostItemForm() {
         }
       }
     };
-
     checkBlockStatus();
   }, []);
-
   const handleInputChange = (field, value) => {
     setFormData((prev) => ({
       ...prev,
       [field]: value,
     }));
   };
-
   const handlePhoneChange = (value) => {
     // Allow user to delete the +998 prefix if they want
     setFormData((prev) => ({
@@ -102,11 +92,8 @@ export default function MetroLostItemForm() {
       phone: value,
     }));
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Check if user is blocked
     if (isBlocked) {
       return;
     }
@@ -195,17 +182,14 @@ export default function MetroLostItemForm() {
       setIsSubmitting(false);
     }
   };
-
   const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
     return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
   };
-
   const resetSuccess = () => {
     setShowSuccess(false);
   };
-
   return (
     <div className="container py-12 ">
       <div className="">
@@ -229,16 +213,16 @@ export default function MetroLostItemForm() {
                   </svg>
                 </div>
                 <h2 className="text-2xl font-bold text-green-600 mb-2">
-                  Murojaatingiz muvaffaqiyatli qabul qilindi!
+                  {t("one_hundred_seventy_one")}
                 </h2>
                 <p className="text-gray-600 mb-6">
-                  5 ish kuni davomida murojaatlaringiz ko'rib chiqiladi
+                  {t("one_hundred_seventy_two")}
                 </p>
                 <Button
                   onClick={resetSuccess}
                   className="bg-blue-900 hover:bg-blue-800 text-white"
                 >
-                  Yangi murojaat yuborish
+                  {t("one_hundred_seventy_three")}
                 </Button>
               </div>
             </CardContent>
@@ -263,22 +247,22 @@ export default function MetroLostItemForm() {
                   </svg>
                 </div>
                 <h2 className="text-2xl font-bold text-orange-600 mb-2">
-                  Forma vaqtincha bloklangan
+                  {t("one_hundred_seventy_four")}
                 </h2>
                 <p className="text-gray-600 mb-4">
-                  3 marta muvaffaqiyatsiz urinish tufayli forma 10 daqiqaga
-                  bloklangan.
+                  {t("one_hundred_seventy_five")}
                 </p>
                 <div className="mb-4">
                   <div className="text-4xl font-bold text-blue-900 mb-2">
                     {formatTime(blockTimeRemaining)}
                   </div>
-                  <p className="text-sm text-gray-500">qolgan vaqt</p>
+                  <p className="text-sm text-gray-500">
+                    {t("one_hundred_seventy_six")}
+                  </p>
                 </div>
                 <div className="bg-gray-100 rounded-lg p-4">
                   <p className="text-sm text-gray-600">
-                    Xavfsizlik choralari sababli forma vaqtincha ishlamaydi.
-                    Iltimos, belgilangan vaqtdan keyin qayta urinib ko'ring.
+                    {t("one_hundred_seventy_seven")}
                   </p>
                 </div>
               </div>
@@ -304,11 +288,10 @@ export default function MetroLostItemForm() {
                   </svg>
                 </div>
                 <h2 className="text-2xl font-bold text-red-600 mb-2">
-                  Xatolik yuz berdi
+                  {t("one_hundred_seventy_eight")}
                 </h2>
                 <p className="text-gray-600 mb-4">
-                  Murojaat yuborishda xatolik yuz berdi. Iltimos, ma'lumotlarni
-                  tekshirib qayta urinib ko'ring.
+                  {t("one_hundred_seventy_nine")}
                 </p>
                 {isCountingDown && (
                   <div className="mb-4">
@@ -316,7 +299,7 @@ export default function MetroLostItemForm() {
                       {countdown}
                     </div>
                     <p className="text-sm text-gray-500">
-                      soniyadan keyin forma qayta ko'rsatiladi
+                      {t("one_hundred_eighty")}
                     </p>
                   </div>
                 )}
@@ -328,10 +311,10 @@ export default function MetroLostItemForm() {
             <CardHeader className="bg-blue-900 text-white rounded-t-lg">
               <CardTitle className="text-xl font-semibold flex items-center gap-2">
                 <MessageSquare className="w-5 h-5" />
-                Murojaat shakli
+                {t("one_hundred_eighty_one")}
               </CardTitle>
               <CardDescription className="text-blue-100">
-                Barcha maydonlarni to'ldiring va murojaatingizni yuboring.
+                {t("one_hundred_eighty_two")}
               </CardDescription>
             </CardHeader>
 
@@ -343,7 +326,7 @@ export default function MetroLostItemForm() {
                     className="text-sm font-medium text-gray-700 flex items-center gap-2"
                   >
                     <User className="w-4 h-4 text-blue-900" />
-                    To'liq ismingiz
+                    {t("one_hundred_eighty_three")}
                   </Label>
                   <Input
                     id="name"
@@ -362,7 +345,7 @@ export default function MetroLostItemForm() {
                     className="text-sm font-medium text-gray-700 flex items-center gap-2"
                   >
                     <Phone className="w-4 h-4 text-blue-900" />
-                    Telefon raqami
+                    {t("one_hundred_eighty_four")}
                   </Label>
                   <Input
                     id="phone"
@@ -374,8 +357,7 @@ export default function MetroLostItemForm() {
                     className="border-gray-300 focus:border-blue-900 focus:ring-blue-900"
                   />
                   <p className="text-xs text-gray-500">
-                    Misol: +998 90 123 45 67 (Kerak bo'lsa +998 ni o'chirib
-                    tashlashingiz mumkin)
+                    {t("one_hundred_eighty_five")}
                   </p>
                 </div>
 
@@ -385,7 +367,7 @@ export default function MetroLostItemForm() {
                     className="text-sm font-medium text-gray-700 flex items-center gap-2"
                   >
                     <Mail className="w-4 h-4 text-blue-900" />
-                    Elektron pochta
+                    {t("one_hundred_eighty_six")}
                   </Label>
                   <Input
                     id="email"
@@ -404,7 +386,7 @@ export default function MetroLostItemForm() {
                     className="text-sm font-medium text-gray-700 flex items-center gap-2"
                   >
                     <MapPin className="w-4 h-4 text-blue-900" />
-                    Manzil
+                    {t("one_hundred_eighty_seven")}
                   </Label>
                   <Input
                     id="address"
@@ -413,7 +395,7 @@ export default function MetroLostItemForm() {
                     onChange={(e) =>
                       handleInputChange("address", e.target.value)
                     }
-                    placeholder="Manzilning to'liq nomi"
+                    placeholder={t("one_hundred_eighty_eight")}
                     required
                     className="border-gray-300 focus:border-blue-900 focus:ring-blue-900"
                   />
@@ -425,7 +407,7 @@ export default function MetroLostItemForm() {
                     className="text-sm font-medium text-gray-700 flex items-center gap-2"
                   >
                     <MapPin className="w-4 h-4 text-blue-900" />
-                    Pasport seriyasi
+                    {t("one_hundred_eighty_nine")}
                   </Label>
                   <Input
                     id="passport"
@@ -446,7 +428,7 @@ export default function MetroLostItemForm() {
                     className="text-sm font-medium text-gray-700 flex items-center gap-2"
                   >
                     <MessageSquare className="w-4 h-4 text-blue-900" />
-                    Murojaat matni
+                    {t("one_hundred_ninety")}
                   </Label>
                   <Textarea
                     id="message"
@@ -454,7 +436,7 @@ export default function MetroLostItemForm() {
                     onChange={(e) =>
                       handleInputChange("message", e.target.value)
                     }
-                    placeholder="Iltimos biz aniqroq ko'rib chiqishimiz uchun izohlarni to'liq yozishingizni so'raymiz..."
+                    placeholder={t("one_hundred_ninety_one")}
                     required
                     rows={6}
                     className="border-gray-300 focus:border-blue-900 focus:ring-blue-900 resize-none"
@@ -465,9 +447,9 @@ export default function MetroLostItemForm() {
                   {failedAttempts > 0 && failedAttempts < 3 && (
                     <div className="mb-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
                       <p className="text-sm text-yellow-800">
-                        Ogohlantirish: {failedAttempts}/3 muvaffaqiyatsiz
-                        urinish.
-                        {3 - failedAttempts} ta urinish qoldi.
+                        {t("one_hundred_ninety_two")} {failedAttempts}
+                        {t("one_hundred_ninety_three")}
+                        {3 - failedAttempts} {t("one_hundred_ninety_four")}
                       </p>
                     </div>
                   )}
@@ -479,14 +461,14 @@ export default function MetroLostItemForm() {
                     {isSubmitting ? (
                       <>
                         <Loader2 className="w-4 h-4 animate-spin" />
-                        Yuborilmoqda...
+                        {t("one_hundred_ninety_five")}
                       </>
                     ) : isBlocked ? (
-                      <>Forma bloklangan</>
+                      <> {t("one_hundred_ninety_six")}</>
                     ) : (
                       <>
                         <Send className="w-4 h-4" />
-                        Murojaatni yuborish
+                        {t("one_hundred_ninety_seven")}
                       </>
                     )}
                   </Button>

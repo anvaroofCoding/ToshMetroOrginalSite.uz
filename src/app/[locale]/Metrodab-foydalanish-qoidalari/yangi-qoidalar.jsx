@@ -14,239 +14,223 @@ import {
   UserCheck,
   Users,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState, useMemo, useCallback } from "react";
-
 export default function OptimizedMetroRegulations() {
   const [visibleSections, setVisibleSections] = useState(new Set());
   const [scrollProgress, setScrollProgress] = useState(0);
   const sectionRefs = useRef([]);
   const timelineRef = useRef(null);
-
+  const t = useTranslations("menu");
   const allSections = useMemo(
     () => [
       {
         id: 1,
         number: "1",
-        title: "Umumiy qoidalar - 1-bob",
+        title: t("sixty_one"),
         icon: <Home className="w-5 h-5" />,
         color: "from-blue-500 to-blue-600",
         bgColor: "bg-blue-50",
         borderColor: "border-blue-200",
-        content:
-          "Ushbu qoidalar metropolitenda yo'lovchilar hamda boshqa shaxslarning (metropoliten xodimlari, metropolitenda o'z xizmat vazifasini bajaruvchi ichki ishlar organlari va O'zbekiston Respublikasi Favqulodda vaziyatlar vazirligi xodimlari hamda metropoliten rahbariyatining ruxsati bilan tashrif buyuruvchi shaxslar) bo'lishi, ularning huquq va majburiyatlarini, shuningdek, metropolitendan foydalanish tartibini belgilaydi.",
+        content: t("sixty_two"),
       },
       {
         id: 2,
         number: "2",
-        title: "Asosiy tushunchalar",
+        title: t("sixty_three"),
         icon: <FileText className="w-5 h-5" />,
         color: "from-indigo-500 to-indigo-600",
         bgColor: "bg-indigo-50",
         borderColor: "border-indigo-200",
-        content:
-          "Ushbu qoidalarda quyidagi asosiy tushunchalardan foydalaniladi:",
+        content: t("sixty_four"),
         definitions: [
-          "bekat platformasi — bekatdagi poyezdlarni kutish joyi;",
-          "yo'l chiptasi — metropolitendan foydalanish uchun QR-kodli bir martalik yo'l haqi to'lovi amalga oshirilganligini tasdiqlovchi hujjat;",
-          "yo'lovchi — metropolitendan foydalanish uchun to'lovni amalga oshirgan yoki imtiyozga hamda bepul yurish huquqiga ega bo'lgan shaxs (iste'molchi);",
-          "ko'zdan kechirish — metropolitenda xavfsizlikni ta'minlash maqsadida tashish va foydalanish taqiqlangan moddalar va buyumlarni aniqlash uchun mo'ljallangan, maxsus texnik vositalarni qo'llagan holda amalga oshiriladigan tadbirlar majmui;",
-          "metropoliten xodimi — metropolitenda faoliyat olib boruvchi va yo'lovchilarga xizmat ko'rsatuvchi xodim (bekat navbatchisi, mashinist va boshqalar).",
+          t("sixty_five"),
+          t("sixty_six"),
+          t("sixty_seven"),
+          t("sixty_eight"),
+          t("sixty_nine"),
         ],
       },
       {
         id: 3,
         number: "3",
-        title: "Shartnoma tasdiqlanishi",
+        title: t("seventy"),
         icon: <CheckCircle className="w-5 h-5" />,
         color: "from-green-500 to-green-600",
         bgColor: "bg-green-50",
         borderColor: "border-green-200",
-        content:
-          "Metropolitenda yo'lovchining bo'lishi va uning yukini tashish shartnomasi tuzilganligi yo'l chiptasi orqali yoki imtiyozga hamda bepul yurish huquqiga ega bo'lgan shaxslarning tegishli hujjatini ko'rsatishi bilan tasdiqlanadi.",
+        content: t("seventy_one"),
       },
       {
         id: 4,
         number: "4",
-        title: "Xavfsiz harakatlanish",
+        title: t("seventy_two"),
         icon: <Shield className="w-5 h-5" />,
         color: "from-emerald-500 to-emerald-600",
         bgColor: "bg-emerald-50",
         borderColor: "border-emerald-200",
-        content:
-          "Metropolitenda yo'lovchilarning xavfsiz va qulay harakatlanishi ta'minlanadi.",
+        content: t("seventy_three"),
       },
       {
         id: 5,
         number: "5",
-        title: "Xavfsizlik talablari - 2-bob",
+        title: t("seventy_four"),
         icon: <Shield className="w-5 h-5" />,
         color: "from-red-500 to-red-600",
         bgColor: "bg-red-50",
         borderColor: "border-red-200",
-        content:
-          "Metropolitenda harakatlanish davomida metropoliten xodimlari va yo'lovchilar ogoh, hushyor va e'tiborli bo'lishi lozim.",
+        content: t("seventy_five"),
       },
       {
         id: 6,
         number: "6",
-        title: "Shubhali ashyolar haqida xabar berish",
+        title: t("seventy_six"),
         icon: <AlertTriangle className="w-5 h-5" />,
         color: "from-orange-500 to-orange-600",
         bgColor: "bg-orange-50",
         borderColor: "border-orange-200",
-        content:
-          "O'tish yo'llari, vestibyullar, bekat platformasi va vagonlarda shubhali va qoldirilgan ashyolar (buyumlar) aniqlanganda, metropolitenning navbatchi xodimlariga yoki ichki ishlar organlari xodimlariga xabar berilishi lozim.",
+        content: t("seventy_seven"),
       },
       {
         id: 7,
         number: "7",
-        title: "Qoldirilgan ashyolarga ta'sir qilish taqiqi",
+        title: t("seventy_eight"),
         icon: <AlertTriangle className="w-5 h-5" />,
         color: "from-red-600 to-red-700",
         bgColor: "bg-red-50",
         borderColor: "border-red-300",
-        content:
-          "Qoldirilgan ashyoga (buyumga) biron-bir mexanik ta'sir ko'rsatish (boshqa joyga olib o'tish, ochish va boshqalar), uning atrofidagi yorug'likni, haroratni va tovushni o'zgartirish hamda ashyo yaqinida radioelektr uskunalaridan, shuningdek, aloqa vositalaridan foydalanish qat'iyan man etiladi.",
+        content: t("seventy_nine"),
       },
       {
         id: 8,
         number: "8",
-        title: "Ko'zdan kechirish tartibi",
+        title: t("eighty"),
         icon: <Shield className="w-5 h-5" />,
         color: "from-purple-500 to-purple-600",
         bgColor: "bg-purple-50",
         borderColor: "border-purple-200",
-        content:
-          "Yo'lovchilar va boshqa shaxslar ichki ishlar organlari xodimlarining qonuniy talabiga asosan yuklarini ko'zdan kechirish uchun taqdim etadi. Bunda qidiruvdagi shaxslar deb gumon qilingan yoki ko'zdan kechirish jarayonida o'zini shubhali tutayotgan shaxslar qonunchilikda belgilangan tartibda shaxsiy ko'zdan kechirilishi mumkin.",
+        content: t("eighty_one"),
       },
       {
         id: 9,
         number: "13",
-        title: "Favqulodda vaziyatlar - 3-bob",
+        title: t("eighty_two"),
         icon: <AlertTriangle className="w-5 h-5" />,
         color: "from-yellow-500 to-orange-500",
         bgColor: "bg-yellow-50",
         borderColor: "border-yellow-200",
-        content:
-          "Yo'lovchilarning hayoti va sog'lig'i uchun xavf tug'diradigan favqulodda vaziyatlar yuz berganda, ular bekatdan tashqariga yoki poyezdda qo'shni bekatga evakuatsiya qilinadilar, shuningdek, metropoliten xodimlarining ko'rsatmalari bo'yicha harakatlanadilar.",
+        content: t("eighty_three"),
       },
       {
         id: 10,
         number: "14",
-        title: "Texnik nosozliklar",
+        title: t("eighty_four"),
         icon: <AlertTriangle className="w-5 h-5" />,
         color: "from-orange-600 to-red-500",
         bgColor: "bg-orange-50",
         borderColor: "border-orange-300",
-        content:
-          "Poyezd yoki boshqa texnik qurilmalarda nosozlik yuz berganda, vaziyatdan kelib chiqqan holda yo'lovchilar poyezdlarda bir yo'ldan ikki tomonlama harakatlanish yo'li bilan bekatlarga yetkaziladi.",
+        content: t("eighty_five"),
       },
       {
         id: 11,
         number: "15",
-        title: "Xavfsiz evakuatsiya",
+        title: t("eighty_six"),
         icon: <Shield className="w-5 h-5" />,
         color: "from-red-500 to-pink-500",
         bgColor: "bg-red-50",
         borderColor: "border-red-200",
-        content:
-          "Bekatlar yoki yer usti yo'llari oralig'idagi harakat xavfsizligiga ta'sir etuvchi texnik vositalarda nosozliklar yuz berganda, metropoliten xodimlari tomonidan yo'lovchilarni tonnel va estakada orqali xavfsiz evakuatsiya qilish choralari ko'riladi.",
+        content: t("eighty_seven"),
       },
       {
         id: 12,
         number: "16",
-        title: "Yo'lovchilar huquqlari - 4-bob",
+        title: t("eighty_eight"),
         icon: <Users className="w-5 h-5" />,
         color: "from-green-500 to-teal-500",
         bgColor: "bg-green-50",
         borderColor: "border-green-200",
-        content:
-          "Yo'lovchilar metropolitendan foydalanishda quyidagi huquqlarga ega:",
+        content: t("eighty_nine"),
         rights: [
-          "o'zlari bilan birgalikda yetti yoshgacha bo'lgan bolalarini, bolalar va nogironligi bo'lgan shaxslar aravachalarini bepul olib yurish;",
-          "nogironligi bo'lgan va imkoniyati cheklangan shaxslar tomonidan metropolitenning texnik vositalaridan foydalanish;",
-          "bekatlarni havaskorlik foto va videotasvirga olish;",
-          "bekatlarda joylashgan tibbiy punktlar yordamidan foydalanish;",
-          "telefon va aloqa vositalaridan foydalanish.",
+          t("ninety"),
+          t("ninety_one"),
+          t("ninety_two"),
+          t("ninety_three"),
+          t("ninety_four"),
         ],
       },
       {
         id: 13,
         number: "17",
-        title: "Yo'lovchilar majburiyatlari",
+        title: t("ninety_five"),
         icon: <Users className="w-5 h-5" />,
         color: "from-blue-500 to-cyan-500",
         bgColor: "bg-blue-50",
         borderColor: "border-blue-200",
-        content:
-          "Yo'lovchilar metropolitendan foydalanishda quyidagi majburiyatlarga ega:",
+        content: t("ninety_six"),
         obligations: [
-          "jamoat tartibi, sanitariya-gigiyena normalari va qoidalariga rioya qilishi;",
-          "qonunchilik hujjatlariga muvofiq yo'lkira haqini to'lashi;",
-          "o'tish punktlariga yaqinlashganda yo'l chiptasini tayyorlashi;",
-          "eskalatorda xavfsizlik qoidalariga rioya qilishi;",
-          "favqulodda vaziyatlar haqida darhol xabar berishi.",
+          t("ninety_seven"),
+          t("ninety_eight"),
+          t("ninety_nine"),
+          t("one_hundred"),
+          t("one_hundred_one"),
         ],
       },
       {
         id: 14,
         number: "18",
-        title: "Xodimlar huquqlari - 5-bob",
+        title: t("one_hundred_two"),
         icon: <UserCheck className="w-5 h-5" />,
         color: "from-purple-500 to-indigo-500",
         bgColor: "bg-purple-50",
         borderColor: "border-purple-200",
-        content: "Metropoliten xodimlari quyidagi huquqlarga ega:",
+        content: t("one_hundred_three"),
         rights: [
-          "metropolitenda bepul yurish huquqini beruvchi barcha hujjatlarni tekshirish;",
-          "zaruratga ko'ra yo'lovchilarga yordam ko'rsatish;",
-          "yo'lovchilardan metropoliten jihozlariga zarar yetkazmaslikni talab qilish;",
-          "xizmat vazifalarini o'tayotgan vaqtida metropolitendan bepul foydalanish.",
+          t("one_hundred_four"),
+          t("one_hundred_five"),
+          t("one_hundred_six"),
+          t("one_hundred_seven"),
         ],
       },
       {
         id: 15,
         number: "19",
-        title: "Xodimlar majburiyatlari",
+        title: t("one_hundred_eight"),
         icon: <UserCheck className="w-5 h-5" />,
         color: "from-indigo-500 to-purple-500",
         bgColor: "bg-indigo-50",
         borderColor: "border-indigo-200",
-        content: "Metropoliten xodimlari quyidagi majburiyatlarga ega:",
+        content: t("one_hundred_nine"),
         obligations: [
-          "metropoliten poyezdlarini kutib olishi va jo'natishni ta'minlashi;",
-          "poyezdlar harakati jadvaliga rioya qilinishini ta'minlashi;",
-          "xizmat vaqtida joriy qilingan formali kiyim-boshda bo'lishi;",
-          "yo'lovchilarga ehtiyotkor va e'tiborli bo'lish to'g'risida xabar berishi;",
-          "favqulodda vaziyatlarda evakuatsiya ishlarini tashkil etishi.",
+          t("one_hundred_ten"),
+          t("one_hundred_eleven"),
+          t("one_hundred_twelve"),
+          t("one_hundred_thirteen"),
+          t("one_hundred_fourteen"),
         ],
       },
       {
         id: 16,
         number: "20",
-        title: "Yakunlovchi qoidalar - 6-bob",
+        title: t("one_hundred_fifteen"),
         icon: <FileText className="w-5 h-5" />,
         color: "from-slate-500 to-gray-600",
         bgColor: "bg-slate-50",
         borderColor: "border-slate-200",
-        content:
-          "Mazkur qoidalar talablarini qo'llashda yuzaga keladigan nizolar qonunchilik hujjatlarida belgilangan tartibda hal etiladi.",
+        content: t("one_hundred_sixteen"),
       },
       {
         id: 17,
         number: "21",
-        title: "Javobgarlik",
+        title: t("one_hundred_seventeen"),
         icon: <Scale className="w-5 h-5" />,
         color: "from-gray-500 to-slate-600",
         bgColor: "bg-gray-50",
         borderColor: "border-gray-200",
-        content:
-          "Ushbu qoidalar talablarining buzilishida aybdor bo'lgan shaxslar qonunchilik hujjatlarida belgilangan tartibda javobgar bo'ladi.",
+        content: t("one_hundred_eighteen"),
       },
     ],
     []
   );
-
   const handleObserver = useCallback(
     (entries) => {
       const newVisibleSections = new Set(visibleSections);
@@ -264,7 +248,6 @@ export default function OptimizedMetroRegulations() {
     },
     [visibleSections]
   );
-
   const handleScroll = useCallback(() => {
     if (timelineRef.current) {
       const { scrollTop, scrollHeight, clientHeight } =
@@ -273,7 +256,6 @@ export default function OptimizedMetroRegulations() {
       setScrollProgress(Math.min(progress, 100));
     }
   }, []);
-
   useEffect(() => {
     const observer = new IntersectionObserver(handleObserver, {
       threshold: 0.3,
@@ -291,7 +273,6 @@ export default function OptimizedMetroRegulations() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [handleObserver, handleScroll]);
-
   return (
     <div className="min-h-screen ">
       {/* Progress Bar */}
@@ -312,16 +293,14 @@ export default function OptimizedMetroRegulations() {
               </div>
             </div>
             <h1 className="text-5xl md:text-6xl font-bold text-blue-900 mb-6">
-              Metropolitendan foydalanish qoidalari
+              {t("one_hundred_nineteen")}
             </h1>
             <p className="text-xl text-gray-600 mb-8 font-medium">
-              O'zbekiston Respublikasi Vazirlar Mahkamasining
+              {t("one_hundred_twenty")}
             </p>
             <div className="flex items-center justify-center gap-3 text-gray-500">
               <Scale className="w-5 h-5 text-blue-500" />
-              <span className="font-medium">
-                2023-yil 10-oktabr, 535-son qarori
-              </span>
+              <span className="font-medium">{t("one_hundred_twenty_one")}</span>
             </div>
           </div>
         </div>
@@ -349,7 +328,7 @@ export default function OptimizedMetroRegulations() {
               }`}
             >
               {/* Timeline Dot */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-2 z-20">
+              <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-2 z-20 hidden lg:block">
                 <div
                   className={`w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-all duration-500 ${
                     visibleSections.has(section.id)
@@ -390,7 +369,8 @@ export default function OptimizedMetroRegulations() {
                             variant="outline"
                             className="mb-1 text-xs font-semibold border-current"
                           >
-                            {section.number}-modda
+                            {section.number}
+                            {t("one_hundred_twenty_two")}
                           </Badge>
                           <h2 className="text-lg font-bold text-gray-900 leading-tight">
                             {section.title}
@@ -409,7 +389,7 @@ export default function OptimizedMetroRegulations() {
                           <div className="space-y-3">
                             <h4 className="font-semibold text-indigo-700 text-sm flex items-center gap-2">
                               <FileText className="w-4 h-4" />
-                              Asosiy tushunchalar:
+                              {t("one_hundred_twenty_three")}
                             </h4>
                             <div className="space-y-2">
                               {section.definitions.map((def, defIndex) => (
@@ -429,7 +409,7 @@ export default function OptimizedMetroRegulations() {
                           <div className="space-y-3">
                             <h4 className="font-semibold text-green-700 text-sm flex items-center gap-2">
                               <CheckCircle className="w-4 h-4" />
-                              Huquqlar:
+                              {t("one_hundred_twenty_four")}
                             </h4>
                             <div className="space-y-2">
                               {section.rights.map((right, rightIndex) => (
@@ -450,7 +430,7 @@ export default function OptimizedMetroRegulations() {
                           <div className="space-y-3">
                             <h4 className="font-semibold text-orange-700 text-sm flex items-center gap-2">
                               <AlertTriangle className="w-4 h-4" />
-                              Majburiyatlar:
+                              {t("one_hundred_twenty_five")}
                             </h4>
                             <div className="space-y-2">
                               {section.obligations.map(
@@ -510,18 +490,17 @@ export default function OptimizedMetroRegulations() {
               <Train className="w-5 h-5 text-white" />
             </div>
             <p className="text-lg font-bold text-gray-900">
-              © 2023 O'zbekiston Respublikasi Vazirlar Mahkamasining
+              {t("one_hundred_twenty_six")}
             </p>
           </div>
           <p className="text-gray-600">
-            Qonunchilik ma'lumotlari milliy bazasi, 11.10.2023-y.
+            {t("one_hundred_twenty_seven")}
             <a
               href="https://lex.uz/uz/docs/-6631523"
               className="text-blue-900"
               target="_blank"
             >
-              {" "}
-              09/23/535/0766-son
+              {t("one_hundred_twenty_eight")}
             </a>
           </p>
         </div>

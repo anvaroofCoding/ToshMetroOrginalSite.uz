@@ -7,139 +7,131 @@ import {
   CreditCard,
   Smartphone,
   QrCode,
-  Scan,
   Wallet,
   User2,
   Check,
   ScanFace,
-  LocationEdit,
   MapPin,
-  MoveRight,
-  ArrowRight,
 } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-
-const attoCards = [
-  {
-    id: 1,
-    name: "Yagona/Umumiy",
-    type: "Ko'k",
-    price: "20.000 so'm",
-    description: "Avtomatlashtirilgan transport To'lov Tizimi",
-    color: "bg-blue-50 border-blue-200",
-    iconColor: "bg-blue-500",
-    img: "https://atto.uz/image/blueCard.png",
-  },
-  {
-    id: 2,
-    name: "Talabalar uchun",
-    type: "Sariq",
-    price: "15.000 so'm",
-    description: "Talabalar uchun imtiyozli tarif kartasi",
-    color: "bg-yellow-50 border-yellow-200",
-    iconColor: "bg-yellow-500",
-    img: "https://atto.uz/icons/cards/yellow_transport_card.png",
-  },
-  {
-    id: 3,
-    name: "O'quvchilar uchun",
-    type: "Yashil",
-    price: "0 so'm",
-    description: "Maktab o'quvchilari uchun imtiyozli tarif kartasi",
-    color: "bg-green-50 border-green-200",
-    iconColor: "bg-green-500",
-    img: "https://atto.uz/icons/cards/green_transport_card.png",
-  },
-  {
-    id: 4,
-    name: "Ijtimoiy",
-    type: "Qizil",
-    price: "15.000 so'm",
-    description:
-      "Ijtimoiy himoya ostidagi fuqarolar uchun imtiyozli tarif kartasi",
-    color: "bg-red-50 border-red-200",
-    iconColor: "bg-red-500",
-    img: "https://atto.uz/icons/cards/red_transport_card.png",
-  },
-];
-
-const mobileApps = [
-  {
-    name: "ATTO",
-    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcmy22XjFSD_2_0EMVrZtvEIMPzDNWKm1rAQ&s",
-    color: "bg-blue-500",
-  },
-  {
-    name: "Payme",
-    img: "https://api.logobank.uz/media/logos_png/payme-01.png",
-    color: "bg-green-500",
-  },
-  {
-    name: "Click",
-    img: "https://api.logobank.uz/media/logos_png/Click-01_hjB080W.png",
-    color: "bg-yellow-500",
-  },
-  {
-    name: "Uzum",
-    img: "https://api.logobank.uz/media/logos_png/Uzum-01.png",
-    color: "bg-purple-500",
-  },
-  {
-    name: "Alif",
-    img: "https://media.zenfs.com/en/accesswire.ca/972c408ebf2955d752992970cc69417f",
-    color: "bg-blue-600",
-  },
-  {
-    name: "Paynet",
-    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSnNwqMFpCEfJ45_z_mJfHVj-y3kz8F3NcsA&s",
-    color: "bg-red-500",
-  },
-];
-
-const bankCards = [
-  {
-    name: "UZCARD",
-    color: "bg-blue-600",
-    img: "https://api.logobank.uz/media/logos_png/Uzcard-01.png",
-  },
-  {
-    name: "Humo",
-    color: "bg-green-600",
-    img: "https://api.logobank.uz/media/logos_png/Humo-01.jpg",
-  },
-  {
-    name: "Visa",
-    color: "bg-blue-700",
-    img: "https://by.visa.com/dam/VCOM/regional/ve/romania/blogs/hero-image/visa-logo-800x450.jpg",
-  },
-  {
-    name: "MasterCard",
-    color: "bg-red-600",
-    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXnXkBmw2uSAI7UPnfI8ZWleOP_9jguz46rQ&s",
-  },
-  {
-    name: "UnionPay",
-    color: "bg-red-700",
-    img: "https://1000logos.net/wp-content/uploads/2021/04/UnionPay-logo.png",
-  },
-];
+import { useTranslations } from "next-intl";
 
 export default function PaymentMethods() {
+  const t = useTranslations("menu");
   const [hoveredCard, setHoveredCard] = useState(null);
-
+  const attoCards = [
+    {
+      id: 1,
+      name: t("card1_name"), // "Yagona/Umumiy"
+      type: t("card1_type"), // "Ko'k"
+      price: t("card1_price"), // "20.000 so'm"
+      description: t("card1_description"), // "Avtomatlashtirilgan transport To'lov Tizimi"
+      color: "bg-blue-50 border-blue-200",
+      iconColor: "bg-blue-500",
+      img: "https://atto.uz/image/blueCard.png",
+    },
+    {
+      id: 2,
+      name: t("card2_name"), // "Talabalar uchun"
+      type: t("card2_type"), // "Sariq"
+      price: t("card2_price"), // "15.000 so'm"
+      description: t("card2_description"), // "Talabalar uchun imtiyozli tarif kartasi"
+      color: "bg-yellow-50 border-yellow-200",
+      iconColor: "bg-yellow-500",
+      img: "https://atto.uz/icons/cards/yellow_transport_card.png",
+    },
+    {
+      id: 3,
+      name: t("card3_name"), // "O'quvchilar uchun"
+      type: t("card3_type"), // "Yashil"
+      price: t("card3_price"), // "0 so'm"
+      description: t("card3_description"), // "Maktab o'quvchilari uchun imtiyozli tarif kartasi"
+      color: "bg-green-50 border-green-200",
+      iconColor: "bg-green-500",
+      img: "https://atto.uz/icons/cards/green_transport_card.png",
+    },
+    {
+      id: 4,
+      name: t("card4_name"), // "Ijtimoiy"
+      type: t("card4_type"), // "Qizil"
+      price: t("card4_price"), // "15.000 so'm"
+      description: t("card4_description"), // "Ijtimoiy himoya ostidagi fuqarolar uchun imtiyozli tarif kartasi"
+      color: "bg-red-50 border-red-200",
+      iconColor: "bg-red-500",
+      img: "https://atto.uz/icons/cards/red_transport_card.png",
+    },
+  ];
+  const mobileApps = [
+    {
+      name: "ATTO",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcmy22XjFSD_2_0EMVrZtvEIMPzDNWKm1rAQ&s",
+      color: "bg-blue-500",
+    },
+    {
+      name: "Payme",
+      img: "https://api.logobank.uz/media/logos_png/payme-01.png",
+      color: "bg-green-500",
+    },
+    {
+      name: "Click",
+      img: "https://api.logobank.uz/media/logos_png/Click-01_hjB080W.png",
+      color: "bg-yellow-500",
+    },
+    {
+      name: "Uzum",
+      img: "https://api.logobank.uz/media/logos_png/Uzum-01.png",
+      color: "bg-purple-500",
+    },
+    {
+      name: "Alif",
+      img: "https://media.zenfs.com/en/accesswire.ca/972c408ebf2955d752992970cc69417f",
+      color: "bg-blue-600",
+    },
+    {
+      name: "Paynet",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSnNwqMFpCEfJ45_z_mJfHVj-y3kz8F3NcsA&s",
+      color: "bg-red-500",
+    },
+  ];
+  const bankCards = [
+    {
+      name: "UZCARD",
+      color: "bg-blue-600",
+      img: "https://api.logobank.uz/media/logos_png/Uzcard-01.png",
+    },
+    {
+      name: "Humo",
+      color: "bg-green-600",
+      img: "https://api.logobank.uz/media/logos_png/Humo-01.jpg",
+    },
+    {
+      name: "Visa",
+      color: "bg-blue-700",
+      img: "https://by.visa.com/dam/VCOM/regional/ve/romania/blogs/hero-image/visa-logo-800x450.jpg",
+    },
+    {
+      name: "MasterCard",
+      color: "bg-red-600",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXnXkBmw2uSAI7UPnfI8ZWleOP_9jguz46rQ&s",
+    },
+    {
+      name: "UnionPay",
+      color: "bg-red-700",
+      img: "https://1000logos.net/wp-content/uploads/2021/04/UnionPay-logo.png",
+    },
+  ];
   return (
     <div className="min-h-screen">
       <div className="container py-8 sm:py-12 lg:py-16 xl:py-20 ">
         {/* Header - Fluid Typography */}
         <div className="text-center mb-12 sm:mb-16 lg:mb-20 xl:mb-24">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-blue-900 mb-4 sm:mb-6 lg:mb-8 leading-tight tracking-tight">
-            To'lov turlari
+            {t("tolov1")}
           </h1>
           <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 max-w-4xl mx-auto px-4 leading-relaxed">
-            Toshkent metropolitenida mavjud bo'lgan barcha to'lov turlari haqida
-            batafsil ma'lumot
+            {t("tolov2")}
           </p>
         </div>
 
@@ -153,10 +145,10 @@ export default function PaymentMethods() {
               </div>
               <div className="ml-4 sm:ml-6 md:ml-8 lg:ml-12">
                 <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-blue-900 leading-tight tracking-tight">
-                  ATTO transport kartasi
+                  {t("tolov3")}
                 </h2>
                 <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 mt-2 sm:mt-3 lg:mt-4 leading-relaxed">
-                  Avtomatlashtirilgan transport to'lov tizimi
+                  {t("tolov4")}
                 </p>
               </div>
             </div>
@@ -201,20 +193,20 @@ export default function PaymentMethods() {
               <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-5 sm:p-6 md:p-7 lg:p-8 xl:p-10 mb-6 sm:mb-8 border border-blue-200 shadow-lg">
                 <h4 className="font-bold text-blue-900 mb-3 sm:mb-4 md:mb-5 text-base sm:text-lg md:text-xl lg:text-2xl flex items-center gap-1">
                   <MapPin />
-                  Qayerdan sotib olish mumkin:
+                  {t("tolov40")}
                 </h4>
                 <ul className="text-gray-700 space-y-2 sm:space-y-3 text-sm sm:text-base md:text-lg leading-relaxed">
                   <li className="flex items-center">
                     <span className="w-2 h-2 bg-blue-500 rounded-full mr-3 flex-shrink-0"></span>
-                    Metro kassalari
+                    {t("tolov41")}
                   </li>
                   <li className="flex items-center">
                     <span className="w-2 h-2 bg-blue-500 rounded-full mr-3 flex-shrink-0"></span>
-                    "Toshshahartransxizmat" bo'limlari
+                    {t("tolov42")}
                   </li>
                   <li className="flex items-center">
                     <span className="w-2 h-2 bg-blue-500 rounded-full mr-3 flex-shrink-0"></span>
-                    UzPost pochta ofislari
+                    {t("tolov43")}
                   </li>
                 </ul>
               </div>
@@ -229,10 +221,10 @@ export default function PaymentMethods() {
               </div>
               <div className="ml-4 sm:ml-6 md:ml-8 lg:ml-12">
                 <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-blue-900 leading-tight tracking-tight">
-                  Mobil ilovalar orqali to'lov
+                  {t("tolov5")}
                 </h2>
                 <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 mt-2 sm:mt-3 lg:mt-4 leading-relaxed">
-                  Turli mobil ilovalar orqali to'lov qilish imkoniyati
+                  {t("tolov6")}
                 </p>
               </div>
             </div>
@@ -266,12 +258,10 @@ export default function PaymentMethods() {
 
               <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl p-5 sm:p-6 md:p-7 lg:p-8 xl:p-10 border border-green-200 shadow-lg">
                 <h4 className="font-bold text-blue-900 mb-3 sm:mb-4 md:mb-5 text-base sm:text-lg md:text-xl lg:text-2xl">
-                  Balansni to'ldirish:
+                  {t("tolov7")}
                 </h4>
                 <p className="text-gray-700 text-sm sm:text-base md:text-lg leading-relaxed">
-                  ATTO mobil ilovasi, MyUzCard, Payme, Upay, Apelsin va boshqa
-                  elektron to'lov tizimlari orqali yoki kassalarda va
-                  infokiosklarda naqd va plastik kartalar bilan
+                  {t("tolov8")}
                 </p>
               </div>
             </div>
@@ -285,11 +275,10 @@ export default function PaymentMethods() {
               </div>
               <div className="ml-4 sm:ml-6 md:ml-8 lg:ml-12">
                 <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-blue-900 leading-tight tracking-tight">
-                  Bank kartalari va kontaktsiz to'lovlar
+                  {t("tolov9")}
                 </h2>
                 <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 mt-2 sm:mt-3 lg:mt-4 leading-relaxed">
-                  kontaktsiz to'lov orqali metro va avtobusda to'lov - 1,700
-                  so'm
+                  {t("tolov10")}
                 </p>
               </div>
             </div>
@@ -323,11 +312,10 @@ export default function PaymentMethods() {
 
               <div className="bg-gradient-to-r from-purple-50 to-violet-50 rounded-2xl p-5 sm:p-6 md:p-7 lg:p-8 xl:p-10 border border-purple-200 shadow-lg">
                 <h4 className="font-bold text-blue-900 mb-3 sm:mb-4 md:mb-5 text-base sm:text-lg md:text-xl lg:text-2xl">
-                  Qo'shimcha imkoniyatlar:
+                  {t("tolov11")}
                 </h4>
                 <p className="text-gray-700 text-sm sm:text-base md:text-lg leading-relaxed">
-                  Uzum bank, Paynet, Click, Payme, Alif mobi ilovalari orqali
-                  chegirmalar bilan to'lov qilishingiz mumkin
+                  {t("tolov12")}
                 </p>
               </div>
             </div>
@@ -341,10 +329,10 @@ export default function PaymentMethods() {
               </div>
               <div className="ml-4 sm:ml-6 md:ml-8 lg:ml-12">
                 <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-blue-900 leading-tight tracking-tight">
-                  QR-bilet va Alif ATM
+                  {t("tolov13")}
                 </h2>
                 <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 mt-2 sm:mt-3 lg:mt-4 leading-relaxed">
-                  Bir martalik QR-to'lov va ATM orqali QR-kod
+                  {t("tolov14")}
                 </p>
               </div>
             </div>
@@ -359,15 +347,15 @@ export default function PaymentMethods() {
                         {/* <Image src={"https://api.logobank.uz/media/logos_png/alif-01.png"} alt="alif atm" width={28} height={28} /> */}
                       </div>
                       <h3 className="font-bold text-blue-900 text-base sm:text-lg md:text-xl lg:text-2xl">
-                        QR-Bilet
+                        {t("tolov15")}
                       </h3>
                     </div>
                     <p className="text-gray-700 mb-4 sm:mb-5 md:mb-6 text-sm sm:text-base md:text-lg leading-relaxed">
-                      Naqd pul orqali kassalarda sotiladigan QR-bilet
+                      {t("tolov16")}
                     </p>
                     <div className="flex justify-between items-center">
                       <span className="font-bold text-blue-900 text-base sm:text-lg md:text-xl lg:text-2xl">
-                        3,000 so'm
+                        {t("tolov17")}
                       </span>
                     </div>
                   </CardContent>
@@ -388,17 +376,17 @@ export default function PaymentMethods() {
                         />
                       </div>
                       <h3 className="font-bold text-blue-900 text-base sm:text-lg md:text-xl lg:text-2xl">
-                        Alif ATM QR
+                        {t("tolov18")}
                       </h3>
                     </div>
                     <p className="text-gray-700 mb-4 sm:mb-5 md:mb-6 text-sm sm:text-base md:text-lg leading-relaxed">
-                      Alif ATMlaridan QR-kod olish imkoniyati
+                      {t("tolov19")}
                     </p>
                     <Badge
                       variant="secondary"
                       className="text-xs sm:text-sm px-3 py-1"
                     >
-                      Tez va qulay
+                      {t("tolov20")}
                     </Badge>
                   </CardContent>
                 </Card>
@@ -414,10 +402,10 @@ export default function PaymentMethods() {
               </div>
               <div className="ml-4 sm:ml-6 md:ml-8 lg:ml-12">
                 <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-blue-900 leading-tight tracking-tight">
-                  Biometrik to'lovlar
+                  {t("tolov21")}
                 </h2>
                 <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 mt-2 sm:mt-3 lg:mt-4 leading-relaxed">
-                  Kelajak texnologiyalari asosida to'lov
+                  {t("tolov22")}
                 </p>
               </div>
             </div>
@@ -434,22 +422,22 @@ export default function PaymentMethods() {
                         <ScanFace className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 text-white" />
                       </div>
                       <h3 className="font-bold text-blue-900 text-base sm:text-lg md:text-xl lg:text-2xl">
-                        FacePay
+                        {t("tolov23")}
                       </h3>
                     </div>
                     <p className="text-gray-700 mb-4 sm:mb-5 md:mb-6 text-sm sm:text-base md:text-lg leading-relaxed">
-                      Yuz tanish texnologiyasi asosida to'lov
+                      {t("tolov24")}
                     </p>
                     <div className="flex w-full justify-between items-center">
                       <Badge
                         variant="outline"
                         className="text-xs sm:text-sm px-3 py-1"
                       >
-                        Ish rejimida
+                        {t("tolov25")}
                       </Badge>
                       <Link href={"/FacePay"}>
                         <Button className="bg-blue-900 hover:bg-vlue-800">
-                          Batafsil
+                          {t("tolov26")}
                         </Button>
                       </Link>
                     </div>
@@ -471,11 +459,11 @@ export default function PaymentMethods() {
                         </div>
                       </div>
                       <h3 className="font-bold text-blue-900 text-base sm:text-lg md:text-xl lg:text-2xl">
-                        PalmPay
+                        {t("tolov27")}
                       </h3>
                     </div>
                     <p className="text-gray-700 mb-4 sm:mb-5 md:mb-6 text-sm sm:text-base md:text-lg leading-relaxed">
-                      Kaftni skanerlash orqali to'lov
+                      {t("tolov28")}
                     </p>
 
                     <div className="flex w-full justify-between items-center">
@@ -483,11 +471,11 @@ export default function PaymentMethods() {
                         variant="outline"
                         className="text-xs sm:text-sm px-3 py-1"
                       >
-                        Barcha bekatlarda
+                        {t("tolov29")}
                       </Badge>
                       <Link href={"/pay"}>
                         <Button className="bg-blue-900 hover:bg-vlue-800">
-                          Batafsil
+                          {t("tolov26")}
                         </Button>
                       </Link>
                     </div>
@@ -497,12 +485,10 @@ export default function PaymentMethods() {
 
               <div className="bg-gradient-to-r from-blue-50 via-purple-50 to-pink-50 rounded-2xl p-5 sm:p-6 md:p-7 lg:p-8 xl:p-10 border border-blue-200 shadow-lg">
                 <h4 className="font-bold text-blue-900 mb-3 sm:mb-4 md:mb-5 text-base sm:text-lg md:text-xl lg:text-2xl">
-                  Qanday ishlatiladi:
+                  {t("tolov30")}
                 </h4>
                 <p className="text-gray-700 text-sm sm:text-base md:text-lg leading-relaxed">
-                  Foydalanuvchi mobil ilovada biometrik profilni yaratib, ATTO
-                  kartasiga bog'laydi. Metro burilish turniketida kaft yoki
-                  yuzni skaner qilib o'tadi.
+                  {t("tolov31")}
                 </p>
               </div>
             </div>
@@ -516,10 +502,10 @@ export default function PaymentMethods() {
               </div>
               <div className="ml-4 sm:ml-6 md:ml-8 lg:ml-12">
                 <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-blue-900 leading-tight tracking-tight">
-                  Tavsiyalar
+                  {t("tolov32")}
                 </h2>
                 <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 mt-2 sm:mt-3 lg:mt-4 leading-relaxed">
-                  Eng qulay va tejamkor to'lov usullari
+                  {t("tolov33")}
                 </p>
               </div>
             </div>
@@ -530,29 +516,28 @@ export default function PaymentMethods() {
                   <span className="text-2xl sm:text-3xl md:text-4xl mr-3 sm:mr-4">
                     <Check />
                   </span>
-                  Eng arzon va keng tarqalgan:
+                  {t("tolov34")}
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 md:gap-6 lg:gap-8 mb-6 sm:mb-8">
                   <div className="bg-white/15 backdrop-blur-md rounded-2xl p-4 sm:p-5 md:p-6 lg:p-8 border border-white/20 transition-all duration-500 hover:bg-white/20 hover:scale-105">
                     <h4 className="font-bold mb-2 sm:mb-3 md:mb-4 text-base sm:text-lg md:text-xl lg:text-2xl">
-                      ATTO kartasi
+                      {t("tolov35")}
                     </h4>
                     <p className="text-blue-100 text-sm sm:text-base md:text-lg leading-relaxed">
-                      1,700 so'm - eng tejamkor variant
+                      {t("tolov36")}
                     </p>
                   </div>
                   <div className="bg-white/15 backdrop-blur-md rounded-2xl p-4 sm:p-5 md:p-6 lg:p-8 border border-white/20 transition-all duration-500 hover:bg-white/20 hover:scale-105">
                     <h4 className="font-bold mb-2 sm:mb-3 md:mb-4 text-base sm:text-lg md:text-xl lg:text-2xl">
-                      kontaktsiz to'lov bank kartalar
+                      {t("tolov37")}
                     </h4>
                     <p className="text-blue-100 text-sm sm:text-base md:text-lg leading-relaxed">
-                      1,700 so'm - tez va qulay
+                      {t("tolov38")}
                     </p>
                   </div>
                 </div>
                 <p className="text-blue-100 text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed">
-                  Biometrik to'lovlar yaqin kelajakda metro tarmoqlarining
-                  barchasida joriy etilishi kutilmoqda.
+                  {t("tolov39")}
                 </p>
               </div>
             </div>

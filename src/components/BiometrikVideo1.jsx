@@ -4,9 +4,11 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog";
 import { X } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export default function BiometrikVideo1() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const t = useTranslations("menu");
 
   return (
     <div className="text-center space-y-6 py-10">
@@ -14,7 +16,7 @@ export default function BiometrikVideo1() {
         onClick={() => setIsModalOpen(true)}
         className="bg-blue-900 hover:bg-blue-800 text-white px-8 py-3 text-lg font-semibold"
       >
-        Videoni ko'rish
+        {t("forty_one")}
       </Button>
 
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
