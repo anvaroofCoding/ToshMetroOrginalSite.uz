@@ -18,9 +18,11 @@ import {
   UserCheck,
   Users,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 
 export default function TashkentMetroDashboard() {
+  const t = useTranslations("menu");
   const [animatedStats, setAnimatedStats] = useState({
     totalEmployees: 0,
     womenEmployees: 0,
@@ -28,9 +30,7 @@ export default function TashkentMetroDashboard() {
     womenPercentage: 0,
     menPercentage: 0,
   });
-
   const [currentSection, setCurrentSection] = useState(0);
-
   const finalStats = {
     totalEmployees: 6481,
     womenEmployees: 2536,
@@ -38,7 +38,6 @@ export default function TashkentMetroDashboard() {
     womenPercentage: 39.13,
     menPercentage: 60.87,
   };
-
   useEffect(() => {
     const duration = 2000;
     const steps = 60;
@@ -65,39 +64,31 @@ export default function TashkentMetroDashboard() {
 
     return () => clearInterval(timer);
   }, []);
-
   const initiatives = [
     {
       icon: Scale,
-      title: "Teng huquqlar",
-      description: "Erkaklar va ayollar uchun teng imkoniyatlar yaratilgan",
+      title: t("four_hundred_forty_eight"),
+      description: t("four_hundred_forty_nine"),
       color: "bg-blue-500",
     },
     {
       icon: UserCheck,
-      title: "Erkaklar va ayollar uchun ish o'rinlari",
-      description: "Ochiq mustaqil tanlov asosida kadrlar tanlash jarayoni",
+      title: t("four_hundred_fifty"),
+      description: t("four_hundred_fifty_one"),
       color: "bg-green-500",
     },
     {
       icon: Heart,
-      title: "Oilaviy qo'llab-quvvatlash",
-      description: "Homilador ayollar va bolali onalar uchun imtiyozlar",
+      title: t("four_hundred_fifty_two"),
+      description: t("four_hundred_fifty_three"),
       color: "bg-pink-500",
     },
     {
       icon: Shield,
-      title: "Huquqiy himoya",
-      description:
-        "Xodimlarning ijtimoiy himoyasi va huquqiy bilimini oshirish",
+      title: t("four_hundred_fifty_four"),
+      description: t("four_hundred_fifty_five"),
       color: "bg-purple-500",
     },
-  ];
-
-  const achievements = [
-    { label: "Maslahat kengashi", value: "Faol", icon: Building2 },
-    { label: "Huquqiy targ'ibot", value: "Doimiy", icon: Award },
-    { label: "Anonim so'rov", value: "Tizimli", icon: TrendingUp },
   ];
 
   return (
@@ -107,21 +98,20 @@ export default function TashkentMetroDashboard() {
         <div className="">
           <div className="text-center space-y-6">
             <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-[#0E327F] via-blue-600 to-[#0E327F] bg-clip-text text-transparent leading-tight">
-              Gender tenglik
+              {t("four_hundred_fifty_six")}
             </h1>
             <p className="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
-              Ayollar va erkaklar uchun teng huquq va imkoniyatlarni ta'minlash
-              bo'yicha statistika
+              {t("four_hundred_fifty_seven")}
             </p>
             <div className="flex flex-wrap justify-center gap-4 pt-4">
               <div className="bg-gradient-to-r from-[#0E327F] to-blue-600 text-white px-6 py-3 rounded-full text-sm font-medium shadow-lg">
-                6.481 Jami xodimlar
+                {t("four_hundred_fifty_eight")}
               </div>
               <div className="bg-gradient-to-r from-pink-500 to-pink-600 text-white px-6 py-3 rounded-full text-sm font-medium shadow-lg">
-                39.13% Ayollar
+                {t("four_hundred_fifty_nine")}
               </div>
               <div className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 py-3 rounded-full text-sm font-medium shadow-lg">
-                60.87% Erkaklar
+                {t("four_hundred_sixty")}
               </div>
             </div>
           </div>
@@ -135,7 +125,7 @@ export default function TashkentMetroDashboard() {
             <CardHeader className="pb-3">
               <CardTitle className="flex items-center gap-2 text-[#0E327F]">
                 <Users className="w-5 h-5" />
-                Jami xodimlar
+                {t("four_hundred_sixty_one")}
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -143,7 +133,7 @@ export default function TashkentMetroDashboard() {
                 {animatedStats.totalEmployees.toLocaleString()}
               </div>
               <div className="text-sm text-gray-600">
-                Toshkent metropolitenida faoliyat yurituvchi xodimlar soni
+                {t("four_hundred_sixty_two")}
               </div>
             </CardContent>
             <div className="absolute top-0 right-0 w-20 h-20 bg-[#0E327F]/5 rounded-full -translate-y-10 translate-x-10 group-hover:scale-150 transition-transform duration-500"></div>
@@ -153,7 +143,7 @@ export default function TashkentMetroDashboard() {
             <CardHeader className="pb-3">
               <CardTitle className="flex items-center gap-2 text-pink-600">
                 <Users className="w-5 h-5" />
-                Ayol xodimlar
+                {t("four_hundred_sixty_three")}
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -172,8 +162,8 @@ export default function TashkentMetroDashboard() {
                 </span>
               </div>
               <div className="text-sm text-gray-600">
-                Jami xodimlarning {animatedStats.womenPercentage} foizini
-                tashkil etadi
+                {t("four_hundred_eighty_three")} {animatedStats.womenPercentage}{" "}
+                {t("four_hundred_eighty_four")}
               </div>
             </CardContent>
             <div className="absolute top-0 right-0 w-20 h-20 bg-pink-500/5 rounded-full -translate-y-10 translate-x-10 group-hover:scale-150 transition-transform duration-500"></div>
@@ -183,7 +173,7 @@ export default function TashkentMetroDashboard() {
             <CardHeader className="pb-3">
               <CardTitle className="flex items-center gap-2 text-blue-600">
                 <Users className="w-5 h-5" />
-                Erkak xodimlar
+                {t("four_hundred_sixty_five")}
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -202,8 +192,8 @@ export default function TashkentMetroDashboard() {
                 </span>
               </div>
               <div className="text-sm text-gray-600">
-                Jami xodimlarning {animatedStats.menPercentage} foizini tashkil
-                etadi
+                {t("four_hundred_eighty_three")} {animatedStats.menPercentage}{" "}
+                {t("four_hundred_eighty_four")}
               </div>
             </CardContent>
             <div className="absolute top-0 right-0 w-20 h-20 bg-blue-500/5 rounded-full -translate-y-10 translate-x-10 group-hover:scale-150 transition-transform duration-500"></div>
@@ -215,11 +205,10 @@ export default function TashkentMetroDashboard() {
           <CardHeader>
             <CardTitle className="text-2xl text-[#0E327F] flex items-center gap-2">
               <Scale className="w-6 h-6" />
-              Gender tenglik tashabbuslari
+              {t("four_hundred_sixty_seven")}
             </CardTitle>
             <CardDescription className="text-lg">
-              Ayollar va erkaklar uchun teng imkoniyatlar yaratish bo'yicha
-              amalga oshirilayotgan chora-tadbirlar
+              {t("four_hundred_sixty_eight")}
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -252,49 +241,43 @@ export default function TashkentMetroDashboard() {
           <CardHeader>
             <CardTitle className="text-2xl flex items-center gap-2 text-[#0E327F]">
               <Shield className="w-6 h-6" />
-              Huquqiy asos
+              {t("four_hundred_sixty_nine")}
             </CardTitle>
             <CardDescription className="text-gray-600">
-              Gender tenglikni ta'minlovchi asosiy hujjatlar va qonunlar
+              {t("four_hundred_seventy")}
             </CardDescription>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-3">
                 <h4 className="font-semibold text-lg text-[#0E327F]">
-                  Asosiy qonunlar:
+                  {t("four_hundred_seventy_one")}
                 </h4>
                 <ul className="space-y-2 text-gray-600">
                   <li className="flex items-start gap-2">
                     <div className="w-2 h-2 bg-[#0E327F] rounded-full mt-2 flex-shrink-0"></div>
-                    <span>
-                      O'RQ-562-sonli "Ayollar va erkaklarning teng huquq va
-                      imkoniyatlarining kafolatlari to'g'risida"gi Qonun
-                    </span>
+                    <span>{t("four_hundred_seventy_two")}</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <div className="w-2 h-2 bg-[#0E327F] rounded-full mt-2 flex-shrink-0"></div>
-                    <span>Transport vazirining 2021-yil 69-son buyrug'i</span>
+                    <span> {t("four_hundred_seventy_three")}</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <div className="w-2 h-2 bg-[#0E327F] rounded-full mt-2 flex-shrink-0"></div>
-                    <span>
-                      Transport vazirining 2023-yil 137-sonli buyrug'i
-                    </span>
+                    <span>{t("four_hundred_seventy_four")}</span>
                   </li>
                 </ul>
               </div>
               <div className="space-y-3">
                 <h4 className="font-semibold text-lg text-[#0E327F]">
-                  Tashkiliy tuzilma:
+                  {t("four_hundred_seventy_five")}
                 </h4>
                 <div className="bg-blue-50 backdrop-blur-sm rounded-lg p-4">
                   <h5 className="font-medium mb-2 text-gray-700">
-                    Maslahat kengashi
+                    {t("four_hundred_seventy_six")}
                   </h5>
                   <p className="text-sm text-gray-700 leading-relaxed">
-                    Ayollar va erkaklar teng huquq va imkoniyatlarini ta'minlash
-                    masalalari bo'yicha maxsus kengash tashkil etilgan
+                    {t("four_hundred_seventy_seven")}
                   </p>
                 </div>
               </div>

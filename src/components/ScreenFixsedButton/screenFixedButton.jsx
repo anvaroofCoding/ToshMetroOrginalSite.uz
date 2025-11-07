@@ -4,8 +4,10 @@ import { useEffect, useState } from "react";
 import { Plus, FileText, X, Bot } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 export default function FloatingActionButton() {
+  const t = useTranslations("menu");
   const path = usePathname();
   const [hidden, setHidden] = useState(false);
   useEffect(() => {
@@ -58,7 +60,7 @@ export default function FloatingActionButton() {
     {
       id: "qa",
       icon: Bot,
-      title: "Tezkor savol javob",
+      title: t("five_hundred_six"),
       action: "Quick Q&A",
       btlink: "/mister-ai",
     },
@@ -66,7 +68,7 @@ export default function FloatingActionButton() {
     {
       id: "applications",
       icon: FileText,
-      title: "Murojaatlar",
+      title: t("five_hundred_seven"),
       action: "Applications",
       btlink: "/murojaatlar",
     },
@@ -114,10 +116,10 @@ export default function FloatingActionButton() {
                 >
                   {/* Title Tooltip */}
                   <div
-                    className={`mr-4 px-3 py-2 bg-gray-900 text-white text-sm rounded-lg shadow-lg whitespace-nowrap transition-all duration-200 ${
+                    className={`mr-4 px-3 py-2 bg-gray-900  text-white text-sm rounded-lg shadow-lg whitespace-nowrap transition-all duration-200 ${
                       hoveredButton === button.id
                         ? "opacity-100 translate-x-0"
-                        : "opacity-0 translate-x-2 pointer-events-none"
+                        : "opacity-0 translate-x-2 pointer-events-none "
                     }`}
                   >
                     {button.title}
@@ -131,7 +133,7 @@ export default function FloatingActionButton() {
                   >
                     <Icon
                       size={20}
-                      className="group-hover:scale-110 transition-transform duration-200"
+                      className="group-hover:scale-110 transition-transform duration-200 text-white"
                     />
                   </button>
                 </div>
@@ -150,12 +152,12 @@ export default function FloatingActionButton() {
           {isOpen ? (
             <X
               size={24}
-              className="group-hover:scale-110 transition-transform duration-200"
+              className="group-hover:scale-110 transition-transform duration-200 text-white"
             />
           ) : (
             <Plus
               size={24}
-              className="group-hover:scale-110 transition-transform duration-200"
+              className="group-hover:scale-110 transition-transform duration-200 text-white"
             />
           )}
         </button>

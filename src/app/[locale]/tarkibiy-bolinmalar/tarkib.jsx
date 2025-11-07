@@ -22,129 +22,111 @@ import {
   DialogTrigger,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { useTranslations } from "next-intl";
 
 export default function TransportDirectory() {
+  const t = useTranslations("menu");
   const departments = [
     {
-      title: "Kadrlar bilan ishlash xizmati",
+      title: t("three_hundred_four_hundred"),
       titleEn: "Human Resources Service",
-      head: "Xusanov Qudratilla Komiljon o'g'li",
-      schedule: "Dushanba-juma kunlari 08:00 dan 17:00 ga qadar",
-      reception: "Haftaning chorshanba kuni 14:00 dan 17:00 gacha",
+      head: t("three_hundred_four_hundred_one"),
+      schedule: t("three_hundred_four_hundred_two"),
+      reception: t("three_hundred_four_hundred_three"),
       phone: "+99871-239-89-27",
       image: tarkib1,
       email: "kadr@tashmetro.uz",
     },
     {
-      title: "Harakat xizmati",
+      title: t("three_hundred_four_hundred_four"),
       titleEn: "Movement Service",
-      head: "Saidxodjayev Jasur Sa'dullayevich",
-      schedule: "Dushanba-juma kunlari 08:00 dan 17:00 ga qadar",
-      reception: "Haftaning chorshanba kuni 14:00 dan 17:00 gacha",
+      head: t("three_hundred_four_hundred_five"),
+      schedule: t("three_hundred_four_hundred_six"),
+      reception: t("three_hundred_four_hundred_seven"),
       phone: "+99871-293-89-31",
       image: tarkib2,
       email: "d@tashmetro.uz",
     },
     {
-      title: "Chilonzor elektrodeposi",
+      title: t("three_hundred_four_hundred_eight"),
       titleEn: "Chilonzor Electrodepot",
-      head: "Shafikov Rustam Rafikovich",
-      schedule: "Dushanba-juma kunlari 08:00 dan 17:00 ga qadar",
-      reception: "Haftaning seshanba kuni 10:00 da",
+      head: t("three_hundred_four_hundred_nine"),
+      schedule: t("three_hundred_four_hundred_ten"),
+      reception: t("three_hundred_four_hundred_eleven"),
       phone: "+998-93-500-25-20",
       image: tarkib3,
       email: "tch1@tashmetro.uz",
     },
     {
-      title: "O'zbekiston elektrodeposi",
+      title: t("three_hundred_four_hundred_twelve"),
       titleEn: "Uzbekistan Electrodepot",
-      head: "Iskandarov Gulamjan Rustamovich",
-      schedule: "Dushanba-juma kunlari 08:00 dan 17:00 ga qadar",
-      reception: "Haftaning seshanba kuni 10:00 da",
+      head: t("three_hundred_four_hundred_thirteen"),
+      schedule: t("three_hundred_four_hundred_fourteen"),
+      reception: t("three_hundred_four_hundred_fifteen"),
       phone: "+998-93-500-55-89",
       image: tarkib4,
       email: "tch2@tashmetro.uz",
     },
     {
-      title: "Elektromexanika xizmati",
+      title: t("three_hundred_four_hundred_sixteen"),
       titleEn: "Electromechanical Service",
-      head: "Karimjonov Omonjon Alimjonovich",
-      schedule: "Dushanba-juma kunlari 08:00 dan 17:00 ga qadar",
-      reception: "Haftaning seshanba kuni 09:00 da",
+      head: t("three_hundred_four_hundred_seventeen"),
+      schedule: t("three_hundred_four_hundred_eighteen"),
+      reception: t("three_hundred_four_hundred_nineteen"),
       phone: "+99893-501-79-70",
       image: tarkib5,
       email: "m@tashmetro.uz",
     },
     {
-      title: "Elektr ta'minot xizmati",
+      title: t("four_hundred_twenty_three"),
       titleEn: "Power Supply Service",
-      head: "Baxromov Behzod To'xtamurodovich",
-      schedule: "Dushanba-juma kunlari 08:00 dan 17:00 ga qadar",
-      reception: "Haftaning dushanba kuni 13:30 da",
+      head: t("four_hundred_twenty_four"),
+      schedule: t("four_hundred_twenty_five"),
+      reception: t("four_hundred_twenty_six"),
       phone: "+99893-501-79-72",
       image: tarkib6,
       email: "e@tashmetro.uz",
     },
     {
-      title: "Signallashtirish va aloqa xizmati",
+      title: t("four_hundred_twenty_seven"),
       titleEn: "Signaling and Communication Service",
-      head: "Agzamov Shaxzod Sherzod o'g'li",
-      schedule: "Dushanba-juma kunlari 08:00 dan 17:00 ga qadar",
-      reception: "Haftaning chorshanba kuni 14:00 dan 17:00 gacha",
+      head: t("four_hundred_twenty_eight"),
+      schedule: t("four_hundred_twenty_nine"),
+      reception: t("four_hundred_thirty"),
       phone: "+998998026218",
       image: tarkib7,
       email: "sh@tashmetro.uz",
     },
     {
-      title: "Yo'l xizmati",
+      title: t("four_hundred_thirty_one"),
       titleEn: "Road Service",
-      head: "Xolmurodov Ruslan Beknazar o'g'li",
-      schedule: "Dushanba-juma kunlari 08:00 dan 17:00 ga qadar",
-      reception: "Haftaning seshanba kuni 09:00 da",
+      head: t("four_hundred_thirty_two"),
+      schedule: t("four_hundred_thirty_three"),
+      reception: t("four_hundred_thirty_four"),
       phone: "+99894-100-26-26",
       image: tarkib8,
       email: "p@tashmetro.uz",
     },
     {
-      title: "Tonnel inshootlari xizmati",
+      title: t("four_hundred_thirty_five"),
       titleEn: "Tunnel Structures Service",
-      head: "Musayev Bobomurod Faxriddinovich",
-      schedule: "Dushanba-juma kunlari 08:00 dan 17:00 ga qadar",
-      reception: "Haftaning seshanba kuni 14:00 da",
+      head: t("four_hundred_thirty_six"),
+      schedule: t("four_hundred_thirty_seven"),
+      reception: t("four_hundred_thirty_eight"),
       phone: "+998-93-501-79-71",
       image: tarkib9,
       email: "ts@tashmetro.uz",
     },
+
     {
-      title: "Korrupsiyani oldini olish xizmati",
-      titleEn: "Anti-Corruption Service",
-      head: "Kabirov Qobiljon Qosimovich",
-      schedule: "Dushanba-juma kunlari 08:00 dan 17:00 ga qadar",
-      reception: "Hafta ish kunlari davomida",
-      phone: "+998-93-700-03-25",
-      image: tarkib10,
-      email: "nk@tashmetro.uz",
-    },
-    {
-      title:
-        "Axborot xavfsizligini ta'minlash va axborot-kommunikatsiya texnologiyalarini rivojlantirish xizmati",
+      title: t("four_hundred_thirty_nine"),
       titleEn: "Information Security and Technical Support Service",
-      head: "Toshpo'lotov Feruz G'olib o'g'li",
-      schedule: "Dushanba-juma kunlari 08:00 dan 17:00 ga qadar",
-      reception: "Haftaning payshanba kuni 15:00 dan 16:00 gacha",
+      head: t("four_hundred_forty"),
+      schedule: t("four_hundred_forty_one"),
+      reception: t("four_hundred_forty_two"),
       phone: "+998 71-241-31-40",
       image: tarkib11,
       email: "cybersecurity@tashmetro.uz",
-    },
-    {
-      title: "Matbuot xizmati",
-      titleEn: "Press Service",
-      head: "Mirzayev To'ychi Farxod o'g'li",
-      schedule: "Dushanba-juma kunlari 08:00 dan 17:00 ga qadar",
-      reception: "Haftaning chorshanba kuni 14:00 dan 17:00 gacha",
-      phone: "+998-90-370-19-98",
-      image: tarkib12,
-      email: "pressa@tashmetro.uz",
     },
   ];
 
@@ -155,7 +137,7 @@ export default function TransportDirectory() {
         <div className="container mx-auto px-4 py-8 sm:py-12 lg:py-16">
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold mb-3 sm:mb-4 text-[#0E327F] leading-tight">
-              Toshkent metropoliteni DUK tarkibiy tuzulmalarining rahbarlari
+              {t("four_hundred_forty_three")}
             </h1>
           </div>
         </div>
@@ -194,7 +176,7 @@ export default function TransportDirectory() {
                             {/* Department Head */}
                             <div className="space-y-1">
                               <p className="text-xs sm:text-sm font-semibold text-gray-700">
-                                Xizmat boshlig'i
+                                {t("four_hundred_forty_four")}
                               </p>
                               <p className="text-xs sm:text-sm text-gray-600 line-clamp-2">
                                 {dept.head}
@@ -211,7 +193,7 @@ export default function TransportDirectory() {
                               </div>
                               <div className="min-w-0">
                                 <h3 className="font-semibold text-gray-700 mb-1 text-sm sm:text-base">
-                                  Qabul kuni
+                                  {t("four_hundred_forty_five")}
                                 </h3>
                                 <p className="text-gray-900 text-sm sm:text-base">
                                   {dept.reception}
@@ -266,7 +248,7 @@ export default function TransportDirectory() {
                             </div>
                             <div className="min-w-0">
                               <h3 className="font-semibold text-gray-700 mb-1 text-sm sm:text-base">
-                                Xizmat boshlig'i
+                                {t("four_hundred_forty_four")}
                               </h3>
                               <p className="text-gray-900 font-medium text-sm sm:text-base">
                                 {dept.head}
@@ -281,7 +263,7 @@ export default function TransportDirectory() {
                             </div>
                             <div className="min-w-0">
                               <h3 className="font-semibold text-gray-700 mb-1 text-sm sm:text-base">
-                                Ish jadvali
+                                {t("four_hundred_forty_six")}
                               </h3>
                               <p className="text-gray-900 text-sm sm:text-base">
                                 {dept.schedule}
@@ -297,7 +279,7 @@ export default function TransportDirectory() {
                               </div>
                               <div className="min-w-0">
                                 <h3 className="font-semibold text-gray-700 mb-1 text-sm sm:text-base">
-                                  Qabul kuni
+                                  {t("four_hundred_forty_seven")}
                                 </h3>
                                 <p className="text-gray-900 text-sm sm:text-base">
                                   {dept.reception}

@@ -48,95 +48,87 @@ export default function ManagementPage() {
   const managementData = [
     {
       id: 6,
-      firstName: "Raxmonbek",
-      middleName: "Djaxongirovich",
-      lastName: "Usmanov",
-      position: "«Toshkent metropoliteni» DUK boshlig’i",
+      firstName: t("three_hundred_forty_nine"),
+      middleName: t("three_hundred_fifty"),
+      lastName: t("three_hundred_fifty_one"),
+      position: t("three_hundred_fifty_two"),
       department: "Safety & Security",
       phone: "+998 71-241-65-14",
       email: "tash.metropoliten@mail.ru metro@tashmetro.uz",
-      hours: "Oyning 3- va 4- haftasi payshanba kuni",
+      hours: t("three_hundred_fifty_three"),
       image: rasm6,
-      biography:
-        "1960-yilda Toshkent shahrida tug‘ilgan. Ma’lumoti oliy. 1982-yilda Toshkent avtomobil-yo‘llar institutini avtomobil transporti ekspluatatsiyasi muhandisi mutaxassisligi bo‘yicha tamomlagan. Mehnat faoliyatini Toshkent shahar 1-Avtokorxonasida boshlagan, keyinchalik turli rahbarlik lavozimlarida ishlagan. 2003–2005-yillarda Yakkasaroy tumani hokimi, 2005–2012-yillarda Toshkent shahar hokimi o‘rinbosari, 2012–2018-yillarda Toshkent shahar hokimi lavozimlarida faoliyat yuritgan. 2021-yildan “Toshkent metropoliteni” DUK boshlig‘i lavozimida ishlamoqda. 2008-yilda “Mehnat shuhrati”, 2024-yilda “Fidokorona xizmatlari uchun” ordenlari bilan taqdirlangan.",
+      biography: t("three_hundred_fifty_four"),
     },
     {
       id: 4,
-      firstName: "Mirhokim",
-      middleName: "Mirxasilovich",
-      lastName: "Mirhusanov",
-      position: "«Toshkent metropoliteni» DUK bosh muhandisi",
+      firstName: t("three_hundred_fifty_five"),
+      middleName: t("three_hundred_fifty_six"),
+      lastName: t("three_hundred_fifty_seven"),
+      position: t("three_hundred_fifty_eight"),
       department: "Human Resources",
       phone: "+998 71-239-89-33",
       email: "ng@tashmetro.uz",
-      hours: "Chorshanba kuni 10:00-11:00",
+      hours: t("three_hundred_fifty_nine"),
       image: rasm4,
-      biography:
-        "Toshkent temir yo‘llari Chuqursoy stansiyasi poyezdlar qabul qiluvchisi. 2018-2018-yillar – Toshkent temir yo‘llari Keles stansiyasi 3346 km strelka o‘tkazgich navbatchisi. 2018-2019-yillar – Yunusobod tuman hokimligi Investitsiya majmuasi kotibiyati bosh mutaxassisi. 2019-2019-yillar – Yunusobod tuman hokimligi Investitsiya va tashqi savdo bo‘limi boshlig‘i o‘rinbosari. 2019-2021-yillar – Yunusobod tuman hokimligi Investitsiya majmuasi kotibiyati bosh mutaxassisi. 2021-2021-yillar – “Toshkent metropoliteni” unitar korxonasi Harakat xizmati boshlig‘ining tashishni tashkil etish bo‘yicha o‘rinbosari. 2022-2024-yillar – “Toshkent metropoliteni” davlat unitar korxonasi ishlar boshqaruvchisi. 2024-yildan – h.v. – “Toshkent metropoliteni” davlat unitar korxonasi bosh muhandisi.",
+      biography: t("three_hundred_sixty"),
     },
     {
       id: 7,
-      firstName: "To‘lqin",
-      middleName: "Turg’unovich",
-      lastName: "Xalikov",
-      position:
-        "«Toshkent metropoliteni» DUK boshlig’ining xavfsizlik masalalari bo‘yicha o‘rinbosari",
+      firstName: t("three_hundred_sixty_one"),
+      middleName: t("three_hundred_sixty_two"),
+      lastName: t("three_hundred_sixty_three"),
+      position: t("three_hundred_sixty_four"),
       department: "Maintenance & Engineering",
       phone: "+998 71-227-44-03",
       email: "nzb@tashmetro.uz",
-      hours: "Juma kuni 14:00-16:00",
+      hours: t("three_hundred_sixty_five"),
       image: rasm7,
-      biography:
-        "2019-2022-yillar – “Toshkent metropoliteni” unitar korxonasi Metropoliten boshlig‘ining xavfsizlik bo‘yicha o‘rinbosari. 2022-yildan – h.v. – “Toshkent metropoliteni” davlat unitar korxonasi Metropoliten boshlig‘ining xavfsizlik bo‘yicha o‘rinbosari.",
+      biography: t("three_hundred_sixty_six"),
     },
 
     {
       id: 5,
-      firstName: "Yuldash",
-      middleName: "Ergashevich",
-      lastName: "Yusupov",
-      position: "«Toshkent metropoliteni» DUK boshlig’ining o‘rinbosari",
+      firstName: t("three_hundred_sixty_seven"),
+      middleName: t("three_hundred_sixty_eight"),
+      lastName: t("three_hundred_sixty_nine"),
+      position: t("three_hundred_seventy"),
       department: "Information Technology",
       phone: "+998 71-245-13-99",
       email: "nzf@tashmetro.uz",
-      hours: "Chorshanba kuni 14:00-17:00",
+      hours: t("three_hundred_seventy_one"),
       image: rasm5,
-      biography:
-        "1988-yil Toshkent viloyatida tug’ilgan. Ma’lumoti oliy. 2015-yilda Toshkent Moliya Institutining soliq va soliqqa tortish mutaxassisligi bo’yicha tamomlagan. Mehnat faoliyatini 2009-2011-yillarda Toshkent shahar Sobir Rahimov tumani hokimligi Moliya bo`limi bosh hisobchisi sifatida boshlagan. 2011-2013-yillar  Toshkent shahar Olmazor tumani hokimligi Moliya boʻlimi mudiri oʻrinbosari – “Byudjet nazorati” boʻlimi boshligʻi; 2013-2018-yillar  Toshkent shahar Olmazor tumani hokimligi Moliya boʻlimi mudiri; 2018-2019-yillar  Toshkent shahar Moliya bosh boshqarmasi “Xodimlar va maxsus ishlar” boʻlimi boshligʻi; 2019-2024-yillar  Toshkent shahar Shayxontohur tumani Moliya boʻlimi mudiri; 2024-2025-yillar  Toshkent shahar Iqtisodiyot va moliya bosh boshqarmasi shoʻba boshligʻi; 2025-2025-yillar  Oʻzbekiston Respublikasi Prezidenti huzuridagi Ijtimoiy himoya milliy agentligining Toshkent shahar Shayxontohur tumanidagi “Inson” ijtimoiy xizmatlar markazi direktori; 2025 yildan “Toshkent metropoliteni” DUK boshlig‘ining  o‘rinbosari lavozimida faoliyat yuritib kelmoqda.",
+      biography: t("three_hundred_seventy_two"),
     },
 
     {
       id: 8,
-      firstName: "Elyor",
-      middleName: "Rustamovich",
-      lastName: "Eltayev",
-      position:
-        "«Toshkent metropoliteni» DUK boshlig’ining marketing masalalari bo‘yicha o‘rinbosari",
+      firstName: t("three_hundred_seventy_three"),
+      middleName: t("three_hundred_seventy_four"),
+      lastName: t("three_hundred_ninety_nine"),
+      position: t("three_hundred_seventy_five"),
       department: "Customer Service",
 
       phone: "+998 71-245-27-35",
 
       email: "nzm@tashmetro.uz",
 
-      hours: "Chorshanba kuni 14:00-17:00",
+      hours: t("three_hundred_seventy_six"),
 
       image: rasm8,
 
-      biography:
-        "1985-yilda Sirdaryo viloyatida tug‘ilgan. Ma’lumoti oliy. 2008-yilda Toshkent irrigatsiya va melioratsiya institutining menejment mutaxassisligi bo‘yicha tamomlagan. Mehnat faoliyatini 2002-yilda “Maroqand” MChJda boshlagan. Keyinchalik qator davlat va xo‘jalik tashkilotlarida rahbar va mutaxassis lavozimlarida ishlagan, jumladan, “Agro-nektar” sho‘ba korxonasi direktori, Yunusobod tuman hokimligi apparati rahbari bo‘lib faoliyat yuritgan. 2021-yildan “Toshkent metropoliteni” DUK boshlig‘ining marketing bo‘yicha o‘rinbosari lavozimida ishlab kelmoqda.",
+      biography: t("three_hundred_seventy_seven"),
     },
 
     {
       id: 2,
 
-      firstName: "Aʼlojon",
+      firstName: t("three_hundred_seventy_eight"),
 
-      middleName: "Qamarovich",
+      middleName: t("three_hundred_seventy_nine"),
 
-      lastName: "Kuchkarov",
+      lastName: t("three_hundred_eighty"),
 
-      position:
-        "«Toshkent metropoliteni» DUK boshlig’ining qurilish bo‘yicha o‘rinbosari v.v.b.",
+      position: t("three_hundred_eighty_one"),
 
       department: "Operations",
 
@@ -144,25 +136,23 @@ export default function ManagementPage() {
 
       email: "nzs@tashmetro.uz",
 
-      hours: "Payshanba kuni 10:00-11:00",
+      hours: t("three_hundred_eighty_two"),
 
       image: rasm2,
 
-      biography:
-        "1995-yilda mehnat faoliyatini Respublika Bosh prokuraturasida ish yurituvchi sifatida boshlagan. 1996–2000-yillarda G.V. Plexanov nomidagi Rossiya iqtisodiyot akademiyasida tahsil olgan. Keyingi yillarda turli davlat va xususiy tashkilotlarda iqtisodchi, tergovchi, direktor va huquqshunos lavozimlarida ishlagan. 2019–2023-yillarda Shayxontohur tumani hokimligi uy-joy va kommunal xizmat bo‘limi boshlig‘i, 2023–2024-yillarda Shayxontohur tumani hokimining qurilish va ekologiya masalalari bo‘yicha o‘rinbosari lavozimida faoliyat yuritgan. 2024-yildan Yakkasaroy tuman hokimining ko‘kalamzorlashtirish masalalari bo‘yicha o‘rinbosari sifatida ishlamoqda.",
+      biography: t("three_hundred_eighty_three"),
     },
 
     {
       id: 1,
 
-      firstName: "Suxrob",
+      firstName: t("three_hundred_eighty_four"),
 
-      middleName: "Turakulovich",
+      middleName: t("three_hundred_eighty_five"),
 
-      lastName: "Norkulov",
+      lastName: t("three_hundred_eighty_six"),
 
-      position:
-        "«Toshkent metropoliteni» DUK boshlig'ining ilmiy innovatsion rivojlanish masalalari bo'yicha o'rinbosari-transport universiteti prorektori ",
+      position: t("three_hundred_eighty_seven"),
 
       department: "Executive Office",
 
@@ -170,25 +160,23 @@ export default function ManagementPage() {
 
       email: "nzip@tashmetro.uz",
 
-      hours: "Seshanba kuni 14:00-16:00",
+      hours: t("three_hundred_eighty_eight"),
 
       image: rasm1,
 
-      biography:
-        "Suxrob Norkulov 1990-yilda Surxondaryo viloyati Uzun tumanida tug‘ilgan. Ma’lumoti oliy. 2008-yilda Toshkent temir yo‘l transporti kasb-hunar kollejini, 2015-yilda Toshkent temir yo‘l muhandislari institutini, 2018-yilda Toshkent davlat iqtisodiyot universitetini, 2022-yilda esa O‘zbekiston Respublikasi Vazirlar Mahkamasi huzuridagi Biznes va tadbirkorlik oliy maktabining “Loyiha boshqaruvi” yo‘nalishida magistraturasini tamomlagan. Mehnat faoliyatini temir yo‘l sohasida boshlagan va keyingi yillarda turli rahbarlik lavozimlarida ishlagan. Tayinlovga qadar Transport vazirligi huzuridagi temir yo‘l xodimlarini malaka oshirish va qayta tayyorlash markazi direktori lavozimida faoliyat yuritgan. Hozirda “Toshkent metropoliteni” DUK boshlig‘ining ilmiy-innovatsion rivojlanish bo‘yicha o‘rinbosari lavozimida faoliyat yuritmoqda.",
+      biography: t("three_hundred_eighty_nine"),
     },
 
     {
       id: 3,
 
-      firstName: "Dostonjon",
+      firstName: t("three_hundred_ninety"),
 
-      middleName: "Qobiljonovich",
+      middleName: t("three_hundred_ninety_one"),
 
-      lastName: "Ergashev ",
+      lastName: t("three_hundred_ninety_two"),
 
-      position:
-        "«Toshkent metropoliteni» DUK boshlig'ining o'rinbosari harakat xavfsizligi bo'yicha bosh taftishchi",
+      position: t("three_hundred_ninety_three"),
 
       department: "Finance",
 
@@ -196,12 +184,11 @@ export default function ManagementPage() {
 
       email: "rb@tashmetro.uz",
 
-      hours: "Juma kuni 10:00-17:00",
+      hours: t("three_hundred_ninety_four"),
 
       image: rasm3,
 
-      biography:
-        "Ma’lumoti oliy. 2014-yilda Toshkent temir yo‘l muhandislik instituti bakalavr bosqichini tamomlagan. 2016-yilda Toshkent temir yo‘l muhandislik instituti magistr bosqichini tamomlagan. 2019-yilda O‘zbekiston Respublikasi Prezidenti huzuridagi Davlat boshqaruvi akademiyasini tamomlagan. Tayinlovga qadar D. Ergashev “Toshkent metropoliteni” DUK bosh muhandisining yer usti metro liniyalarini tasarruf etish bo‘yicha o‘rinbosari lavozimida faoliyat yuritgan.",
+      biography: t("three_hundred_ninety_five"),
     },
   ];
 
@@ -212,7 +199,7 @@ export default function ManagementPage() {
         <div className="container">
           <div className="text-center lg:text-left">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-blue-900">
-              Rahbariyat
+              {t("three_hundred_ninety_six")}
             </h1>
           </div>
         </div>
