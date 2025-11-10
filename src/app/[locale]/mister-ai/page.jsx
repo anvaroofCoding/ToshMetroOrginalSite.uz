@@ -1,10 +1,10 @@
-import React from 'react'
-import AIChat from './ai'
+import React from "react";
+import FAQPage from "./ai";
 
 export default function page() {
-    return (
-        <div>
-            <AIChat />
-        </div>
-    )
+  return (
+    <div>
+      <FAQPage />
+    </div>
+  );
 }

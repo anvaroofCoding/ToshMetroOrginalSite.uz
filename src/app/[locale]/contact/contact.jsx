@@ -4,9 +4,7 @@ import { motion } from "framer-motion";
 import { MapPin, Phone, Clock, Utensils, Mail } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import Link from "next/link";
-import { useParams } from "next/navigation";
-
-// Custom Fax icon component since it's not in lucide-react
+import { useTranslations } from "next-intl";
 const FaxIcon = () => (
   <svg
     width="24"
@@ -30,52 +28,46 @@ const FaxIcon = () => (
   </svg>
 );
 
-const contactInfo = [
-  {
-    icon: MapPin,
-    title: "Manzil",
-    content:
-      "Toshkent shahri, Shayxontohur tumani, Islom Karimov ko'chasi 16-А, 100027",
-    delay: 0.1,
-  },
-  {
-    icon: Phone,
-    title: "Telefon",
-    content: [
-      "Qabul xona: +998 (71) 241-65-14",
-      "Murojaatlar uchun: +998 (71) 245-56-03",
-    ],
-    delay: 0.2,
-  },
-  {
-    icon: Clock,
-    title: "Ish rejimi",
-    content: "Dushanba - Juma (8:00 - 17:00)",
-    delay: 0.3,
-  },
-  {
-    icon: Utensils,
-    title: "Tushlik vaqti",
-    content: "12:00 - 13:00",
-    delay: 0.4,
-  },
-  {
-    icon: Mail,
-    title: "Korporativ pochta manzili",
-    content: "gup@tashmetro.uz",
-    delay: 0.5,
-  },
-  {
-    icon: Mail,
-    title: "Xalqaro pochta manzili",
-    content: "tash.metropoliten@mail.ru",
-    delay: 0.6,
-  },
-];
-
 export default function ContactInfo() {
-  const { locale } = useParams();
-  console.log(locale);
+  const t = useTranslations("menu");
+  const contactInfo = [
+    {
+      icon: MapPin,
+      title: t("address_label"),
+      content: t("addresster"),
+      delay: 0.1,
+    },
+    {
+      icon: Phone,
+      title: t("phone_label"),
+      content: [t("reception"), t("inquiries")],
+      delay: 0.2,
+    },
+    {
+      icon: Clock,
+      title: "Ish rejimi",
+      content: t("work_hours"),
+      delay: 0.3,
+    },
+    {
+      icon: Utensils,
+      title: t("lunch_time"),
+      content: "12:00 - 13:00",
+      delay: 0.4,
+    },
+    {
+      icon: Mail,
+      title: t("corporate_email"),
+      content: "gup@tashmetro.uz",
+      delay: 0.5,
+    },
+    {
+      icon: Mail,
+      title: t("international_mail"),
+      content: "tash.metropoliten@mail.ru",
+      delay: 0.6,
+    },
+  ];
   return (
     <div className=" py-20 px-4">
       <div className="container">
@@ -86,10 +78,10 @@ export default function ContactInfo() {
           className="text-center mb-12"
         >
           <h2 className="text-4xl font-bold text-blue-900 mb-4">
-            Bog'lanish ma'lumotlari
+            {t("contact_info")}
           </h2>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-            Biz bilan bog'lanish uchun quyidagi ma'lumotlardan foydalaning
+            {t("contact_us")}
           </p>
         </motion.div>
 

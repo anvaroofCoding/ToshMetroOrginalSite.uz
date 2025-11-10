@@ -846,6 +846,31 @@
     "five_hundred_four": "Keyingi",
     "five_hundred_five": "Ta'lim",
     "five_hundred_six": "Tezkor savol javob",
-    "five_hundred_seven": "Murojaatlar"
+    "five_hundred_seven": "Murojaatlar",
+
+    "five_hundred_eight": "O'zbekiston Respublikasi Konstitutsiyasi",
+    "five_hundred_nine": "O'zbekiston Respublikasining \"Oila kodeksi\"",
+    "five_hundred_ten": "O'zbekiston Respublikasining Mehnat Kodeksi",
+    "five_hundred_eleven": "\"Xotin-qizlarni tazyiq va zo'ravonlikdan himoya qilish to'g'risida\" O'zbekiston Respublikasining Qonuni",
+    "five_hundred_twelve": "\"Xotin-qizlar va erkaklar uchun teng huquq hamda imkoniyatlar kafolatlari to'g'risida\" O'zbekiston Respublikasining Qonuni",
+    "five_hundred_thirteen": "\"Og'ir ijtimoiy ahvolda qolgan xotin-qizlar huquqlari kafolatlarini ta'minlash bo'yicha qo'shimcha chora-tadbirlar qabul qilinganligi munosabati bilan O'zbekiston Respublikasining ayrim qonun hujjatlariga qo'shimcha va o'zgartishlar kiritish to'g'risida\" O'zbekiston Respublikasining Qonuni",
+    "five_hundred_fourteen": "\"Xotin-qizlar va bolalar huquqlari, erkinliklari hamda qonuniy manfaatlarini ishonchli himoya qilish tizimi yanada takomillashtirilishi munosabati bilan O'zbekiston Respublikasining ayrim qonun hujjatlariga o'zgartish va qo'shimchalar kiritish to'g'risida\" O'zbekiston Respublikasining Qonuni",
+    "five_hundred_fifteen": "\"2030-yilga qadar O'zbekiston Respublikasida gender tenglikka erishish strategiyasini tasdiqlash haqida\" O'zbekiston Respublikasi Oliy Majlisi Senatining Qarori",
+    "five_hundred_sixteen": "\"Xotin-qizlarning jamiyatdagi rolini oshirish, gender tenglik va oila masalalari bo'yicha Respublika komissiyasini tashkil etish to'g'risida\" O'zbekiston Respublikasi Oliy Majlisi Senati kengashining Qarori",
+    "five_hundred_seventeen": "Me'yoriy hujjatlar",
+    "five_hundred_eighteen": "O'zbekiston Respublikasining asosiy qonun hujjatlari va me'yoriy aktlari",
+    "five_hundred_nineteen": "Onlayn o'qish",
+
+    "addresster": "Toshkent shahri, Shayxontohur tumani, Islom Karimov ko'chasi 16-А, 100027",
+    "reception": "Qabul xona: +998 (71) 241-65-14",
+    "inquiries": "Murojaatlar uchun: +998 (71) 245-56-03",
+    "work_hours": "Dushanba - Juma (8:00 - 17:00)",
+    "lunch_time": "Tushlik vaqti",
+    "corporate_email": "Korporativ pochta manzili",
+    "international_mail": "Xalqaro pochta manzili",
+    "contact_info": "Bog'lanish ma'lumotlari",
+    "contact_us": "Biz bilan bog'lanish uchun quyidagi ma'lumotlardan foydalaning",
+    "address_label": "Manzil",
+    "phone_label": "Telefon"
   }
 }

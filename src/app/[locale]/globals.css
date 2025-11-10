@@ -22,27 +22,25 @@ body {
   background-color: #ffffff; /* oq fon */
   color: #0e327f; /* ko'k matn rangi */
 }
-
+/* Scrollbarni yashiradi, lekin scrollni o'chirmaydi */
 body {
-  overflow: hidden; /* butun body scrollini o'chiradi */
+  overflow: auto; /* scroll ishlasin */
 }
 
-/* Agar ba'zi elementlar scroll qilsa, ularga alohida ruxsat berishingiz mumkin */
-/* misol uchun: */
-/*
-.scrollable {
-  overflow: auto;  // faqat shu element scroll qilishi mumkin
-}
-*/
-
-/* Agar siz hali ham scrollbarni butunlay yashirmoqchi bo'lsangiz, Webkit va Firefox uchun */
+/* Chrome, Edge, Safari uchun */
 ::-webkit-scrollbar {
-  display: none; /* Chrome, Edge, Safari */
+  width: 0px; /* scrollbar kengligini 0 qiladi */
+  background: transparent; /* fonini yashiradi */
 }
 
+/* Firefox uchun */
 html {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE va Edge */
+  scrollbar-width: none; /* scrollbarni yashiradi */
+}
+
+/* IE va eski Edge uchun */
+html {
+  -ms-overflow-style: none; /* scrollbarni yashiradi */
 }
 
 .under-none {
