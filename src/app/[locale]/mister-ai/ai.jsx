@@ -8,89 +8,79 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { useTranslations } from "next-intl";
 export default function FAQPage() {
+  const t = useTranslations("menu");
   const faqData = [
     {
       id: 1,
-      question: `Toshkent metropoliteni" DUK ga ishga kirmoqchiman. Qayerga murojaat qilsam bo'ladi?`,
-      answer:
-        "Toshkent metropoliten rasmiy saytidan bo'sh ish o'rinlari qismidan, ishga kirish haqida ma'lumotlar olsangiz bo'ladi",
-      category: "Asosiy",
+      question: t("question1"),
+      answer: t("answer1"),
+      category: t("category1"),
     },
     {
       id: 2,
-      question: "ATTO kartasini qayerdan xarid qilishim mumkin?",
-      answer:
-        "ATTO kartasini metro kassalaridan yoki ayrim terminal nuqtalaridan xarid qilishingiz mumkin.",
-      category: "To'lov tizimi",
+      question: t("question2"),
+      answer: t("answer2"),
+      category: t("category2"),
     },
     {
       id: 3,
-      question: "Metro tokenlari hali ham ishlatiladimi?",
-      answer:
-        "Yo'q, hozirda metroda faqat ATTO kartalari orqali to'lov amalga oshiriladi.",
-      category: "To'lov tizimi",
+      question: t("question3"),
+      answer: t("answer3"),
+      category: t("category3"),
     },
     {
       id: 4,
-      question: "Bekatlar ish vaqti qanday?",
-      answer:
-        "Toshkent metropoliteni har kuni 05:00 dan 00:00 gacha faoliyat yuritadi.",
-      category: "Asosiy",
+      question: t("question4"),
+      answer: t("answer4"),
+      category: t("category4"),
     },
     {
       id: 5,
-      question:
-        "Yo'nalishlar va bekatlar haqida qayerdan ma'lumot olsam bo'ladi?",
-      answer:
-        "Metro xaritasi va bekatlar haqida rasmiy sayt yoki mobil ilova orqali ma'lumot olishingiz mumkin.",
-      category: "Xarita va yo'nalishlar",
+      question: t("question5"),
+      answer: t("answer5"),
+      category: t("category5"),
     },
     {
       id: 6,
-      question: "Yo'lovchi ko'p bo'lgan vaqtlar qaysilar?",
-      answer:
-        "Asosan ertalab soat 7:00-9:00 va kechqurun 17:00-19:00 oralig'ida metroda yo'lovchilar soni ko'p bo'ladi.",
-      category: "Asosiy",
+      question: t("five_hundred_twenty_1"),
+      answer: t("five_hundred_twenty_2"),
+      category: t("category4"),
     },
     {
       id: 7,
-      question: "Nega metroda internet ishlamaydi?",
-      answer:
-        "Metroda aloqa uzilishi tunellar va yer osti infratuzilmasi bilan bog'liq. Aloqa yaxshilash ustida ish olib borilmoqda.",
-      category: "Asosiy",
+      question: t("five_hundred_twenty_3"),
+      answer: t("five_hundred_twenty_4"),
+      category: t("category4"),
     },
     {
       id: 8,
-      question: "ATTO kartasini qanday to'ldirish mumkin?",
-      answer:
-        "ATTO kartasini terminallar, mobil ilovalar yoki bank ilovalari orqali to'ldirish mumkin.",
-      category: "To'lov tizimi",
+      question: t("five_hundred_twenty_5"),
+      answer: t("five_hundred_twenty_6"),
+      category: t("category3"),
     },
     {
       id: 9,
-      question:
-        "Yo'l haqini to'lamasdan metroga kirganlarga qanday choralar ko'riladi?",
-      answer:
-        "Nazoratchilar tomonidan aniqlansa, jarima yoki boshqa ma'muriy choralar qo'llaniladi.",
-      category: "Asosiy",
+      question: t("five_hundred_twenty_7"),
+      answer: t("five_hundred_twenty_8"),
+      category: t("category4"),
     },
     {
       id: 10,
-      question: "Metrodagi videokuzatuv tizimi ishlaydimi?",
-      answer:
-        "Ha, barcha bekatlarda va vagonlarda videokuzatuv tizimi mavjud va faoliyat yuritadi.",
-      category: "Xavfsizlik",
+      question: t("five_hundred_twenty_9"),
+      answer: t("five_hundred_twenty_10"),
+      category: t("five_hundred_twenty_14"),
     },
   ];
   const [selectedFAQ, setSelectedFAQ] = useState(null);
-  const [selectedCategory, setSelectedCategory] = useState("Barchasi");
+  const [selectedCategory, setSelectedCategory] = useState(t("all"));
   const categories = [
-    "Barchasi",
+    t("all"),
     ...Array.from(new Set(faqData.map((faq) => faq.category))),
   ];
   const filteredFAQ =
-    selectedCategory === "Barchasi"
+    selectedCategory === t("all")
       ? faqData
       : faqData.filter((faq) => faq.category === selectedCategory);
   return (
@@ -99,11 +89,9 @@ export default function FAQPage() {
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-blue-900 mb-3">
-            Tez-Tez So'raladigan Savollar
+            {t("five_hundred_twenty_11")}
           </h1>
-          <p className="text-gray-600 text-lg">
-            Metro haqida sizning savollaringizga javoblar
-          </p>
+          <p className="text-gray-600 text-lg">{t("five_hundred_twenty_12")}</p>
         </div>
 
         {/* Category Filter */}
@@ -113,7 +101,7 @@ export default function FAQPage() {
               key={category}
               variant={selectedCategory === category ? "default" : "outline"}
               onClick={() => setSelectedCategory(category)}
-              className="rounded-full bg-blue-900 text-white hover:bg-blue-800 hover:text-white/80"
+              className="rounded-full bg-blue-900 text-white hover:bg-blue-800 hover:text-white/80 cursor-pointer"
             >
               {category}
             </Button>
@@ -147,7 +135,7 @@ export default function FAQPage() {
                   }}
                   className="mt-4 bg-blue-900 hover:bg-blue-800 text-white"
                 >
-                  Javobni ko'rish
+                  {t("five_hundred_twenty_13")}
                 </Button>
               </CardContent>
             </Card>

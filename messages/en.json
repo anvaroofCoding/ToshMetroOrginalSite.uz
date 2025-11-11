@@ -841,6 +841,39 @@
     "contact_info": "Contact information",
     "contact_us": "Use the following information to contact us",
     "address_label": "Address",
-    "phone_label": "Phone"
+    "phone_label": "Phone",
+    "question1": "I want to work at 'Tashkent Metro' DUK. Where can I apply?",
+    "answer1": "You can get information about job openings and applications from the 'Vacancies' section on the official Tashkent Metro website.",
+    "category1": "General",
+
+    "question2": "Where can I buy an ATTO card?",
+    "answer2": "You can purchase an ATTO card at metro ticket offices or at some terminal points.",
+    "category2": "Payment system",
+
+    "question3": "Are metro tokens still used?",
+    "answer3": "No, currently payments in the metro are made only through ATTO cards.",
+    "category3": "Payment system",
+
+    "question4": "What are the metro station working hours?",
+    "answer4": "Tashkent Metro operates daily from 05:00 to 00:00.",
+    "category4": "General",
+
+    "question5": "Where can I find information about metro lines and stations?",
+    "answer5": "You can find information about metro maps and stations on the official website or through the mobile app.",
+    "category5": "Map and routes",
+    "five_hundred_twenty_1": "What are the peak passenger hours?",
+    "five_hundred_twenty_2": "Mostly between 7:00–9:00 in the morning and 17:00–19:00 in the evening, the metro experiences the highest number of passengers.",
+    "five_hundred_twenty_3": "Why doesn’t the internet work in the metro?",
+    "five_hundred_twenty_4": "The lack of connection in the metro is due to tunnels and underground infrastructure. Work is ongoing to improve connectivity.",
+    "five_hundred_twenty_5": "How can I top up my ATTO card?",
+    "five_hundred_twenty_6": "You can top up your ATTO card via terminals, mobile apps, or banking applications.",
+    "five_hundred_twenty_7": "What happens if someone enters the metro without paying?",
+    "five_hundred_twenty_8": "If detected by inspectors, a fine or other administrative measures will be applied.",
+    "five_hundred_twenty_9": "Does the metro have a video surveillance system?",
+    "five_hundred_twenty_10": "Yes, all stations and train cars are equipped with an active video surveillance system.",
+    "five_hundred_twenty_11": "Frequently Asked Questions",
+    "five_hundred_twenty_12": "Answers to your questions about the metro",
+    "five_hundred_twenty_13": "View answer",
+    "five_hundred_twenty_14": "Safety"
   }
 }

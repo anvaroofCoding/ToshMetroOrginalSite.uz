@@ -871,6 +871,41 @@
     "contact_info": "Bog'lanish ma'lumotlari",
     "contact_us": "Biz bilan bog'lanish uchun quyidagi ma'lumotlardan foydalaning",
     "address_label": "Manzil",
-    "phone_label": "Telefon"
+    "phone_label": "Telefon",
+
+    "question1": "Toshkent metropoliteni\" DUK ga ishga kirmoqchiman. Qayerga murojaat qilsam bo'ladi?",
+    "answer1": "Toshkent metropoliten rasmiy saytidan bo'sh ish o'rinlari qismidan, ishga kirish haqida ma'lumotlar olsangiz bo'ladi",
+    "category1": "Asosiy",
+
+    "question2": "ATTO kartasini qayerdan xarid qilishim mumkin?",
+    "answer2": "\"ATTO kartasini metro kassalaridan yoki ayrim terminal nuqtalaridan xarid qilishingiz mumkin.",
+    "category2": "To'lov tizimi",
+
+    "question3": "Metro tokenlari hali ham ishlatiladimi?",
+    "answer3": "Yo'q, hozirda metroda faqat ATTO kartalari orqali to'lov amalga oshiriladi.",
+    "category3": "To'lov tizimi",
+
+    "question4": "Bekatlar ish vaqti qanday?",
+    "answer4": "Toshkent metropoliteni har kuni 05:00 dan 00:00 gacha faoliyat yuritadi.",
+    "category4": "Asosiy",
+
+    "question5": "Yo'nalishlar va bekatlar haqida qayerdan ma'lumot olsam bo'ladi?",
+    "answer5": "Metro xaritasi va bekatlar haqida rasmiy sayt yoki mobil ilova orqali ma'lumot olishingiz mumkin.",
+    "category5": "Xarita va yo'nalishlar",
+
+    "five_hundred_twenty_1": "Yo'lovchi ko'p bo'lgan vaqtlar qaysilar?",
+    "five_hundred_twenty_2": "Asosan ertalab soat 7:00-9:00 va kechqurun 17:00-19:00 oralig'ida metroda yo'lovchilar soni ko'p bo'ladi.",
+    "five_hundred_twenty_3": "Nega metroda internet ishlamaydi?",
+    "five_hundred_twenty_4": "Metroda aloqa uzilishi tunellar va yer osti infratuzilmasi bilan bog'liq. Aloqa yaxshilash ustida ish olib borilmoqda.",
+    "five_hundred_twenty_5": "ATTO kartasini qanday to'ldirish mumkin?",
+    "five_hundred_twenty_6": "ATTO kartasini terminallar, mobil ilovalar yoki bank ilovalari orqali to'ldirish mumkin.",
+    "five_hundred_twenty_7": "Yo'l haqini to'lamasdan metroga kirganlarga qanday choralar ko'riladi?",
+    "five_hundred_twenty_8": "Nazoratchilar tomonidan aniqlansa, jarima yoki boshqa ma'muriy choralar qo'llaniladi.",
+    "five_hundred_twenty_9": "Metrodagi videokuzatuv tizimi ishlaydimi?",
+    "five_hundred_twenty_10": "Ha, barcha bekatlarda va vagonlarda videokuzatuv tizimi mavjud va faoliyat yuritadi.",
+    "five_hundred_twenty_11": "Tez-Tez So'raladigan Savollar",
+    "five_hundred_twenty_12": "Metro haqida sizning savollaringizga javoblar",
+    "five_hundred_twenty_13": "Javobni ko'rish",
+    "five_hundred_twenty_14": "Xavfsizlik"
   }
 }
