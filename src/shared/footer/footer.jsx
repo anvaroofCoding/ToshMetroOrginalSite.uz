@@ -1,22 +1,21 @@
 "use client";
 import {
+  Eye,
   Facebook,
   Instagram,
   Mail,
   MapPin,
   Phone,
   Send,
-  Youtube,
   Users,
-  Eye,
-  ArrowUp,
+  Youtube,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import logo from "../../../public/logos.png";
-import { usePathname } from "next/navigation";
-import { useTranslations } from "next-intl";
 const socialLinks = [
   {
     href: "https://t.me/Toshkent_metropoliteni_rasmiy",
@@ -81,7 +80,7 @@ const Footer = () => {
     parts[1] === "metro-xaritasis" || parts[1] === "normalMap";
   const getprosmotrsite = async () => {
     const res = await fetch(
-      "https://abbos.uzmetro.uz/api/sayt_foydalanuvchilari/"
+      "https://back.uzmetro.uz/api/sayt_foydalanuvchilari/",
     );
     const data = await res.json();
     setTotalVisitors(data.jami_foydalanuvchilar);

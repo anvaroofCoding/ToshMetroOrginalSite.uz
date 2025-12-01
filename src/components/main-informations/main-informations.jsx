@@ -1,12 +1,10 @@
 "use client";
-import { CreditCard, MapPin, Wallet, ArrowRight } from "lucide-react";
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import TopStationsChart from "@/app/[locale]/metro-statistikasi/boshSahifastatistika";
-import { AnimatedCounter } from "../animated-counter";
-import MetroInfoSection from "./for-about-metro";
-import { useTranslations } from "next-intl";
 import BoshSahifastatistika from "@/app/[locale]/metro-statistikasi/boshSahifastatistika";
+import { motion } from "framer-motion";
+import { CreditCard, MapPin, Wallet } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { useEffect, useState } from "react";
+import MetroInfoSection from "./for-about-metro";
 export default function MetroPagesShowcase() {
   const t = useTranslations("menu");
   const [apiStats, setApiStats] = useState([]);
@@ -84,7 +82,7 @@ export default function MetroPagesShowcase() {
   ];
   const getStatistika = async () => {
     try {
-      const res = await fetch("https://abbos.uzmetro.uz/api/statistics/en/");
+      const res = await fetch("https://back.uzmetro.uz/api/statistics/en/");
 
       if (!res.ok) {
         throw new Error(`Server error: ${res.status}`);
@@ -305,7 +303,7 @@ function AttoCardsCarousel() {
   };
   const prevCard = () => {
     setCurrentCardIndex(
-      (prev) => (prev - 1 + attoCards.length) % attoCards.length
+      (prev) => (prev - 1 + attoCards.length) % attoCards.length,
     );
   };
   useEffect(() => {

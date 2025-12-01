@@ -1,33 +1,32 @@
 "use client";
 
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import {
-  CardTitle,
   Card,
   CardContent,
   CardDescription,
   CardHeader,
+  CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import {
+  AlertCircle,
+  ArrowLeft,
   Briefcase,
+  CheckCircle,
+  Clock,
   GraduationCap,
   Loader2,
-  Users,
-  AlertCircle,
-  CheckCircle,
   Star,
   Upload,
+  Users,
   X,
-  ArrowLeft,
-  Clock,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
-import { useState, useCallback, useEffect, useMemo } from "react";
-import { AnimatePresence } from "framer-motion";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 export default function JobApplicationPage() {
   const pathname = usePathname();
@@ -82,7 +81,7 @@ export default function JobApplicationPage() {
 
     try {
       const res = await fetch(
-        `https://abbos.uzmetro.uz/api/job-vacancies/uz/${jobId}`
+        `https://back.uzmetro.uz/api/job-vacancies/uz/${jobId}`,
       );
 
       if (!res.ok) {
@@ -116,7 +115,7 @@ export default function JobApplicationPage() {
         },
       },
     }),
-    []
+    [],
   );
 
   const itemVariants = useMemo(
@@ -131,7 +130,7 @@ export default function JobApplicationPage() {
         },
       },
     }),
-    []
+    [],
   );
 
   // Form validation
@@ -251,17 +250,17 @@ export default function JobApplicationPage() {
       }
 
       const response = await fetch(
-        "https://abbos.uzmetro.uz/api/job-vacancy-requests/",
+        "https://back.uzmetro.uz/api/job-vacancy-requests/",
         {
           method: "POST",
           body: formDataToSend,
-        }
+        },
       );
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
         throw new Error(
-          errorData.message || `Server error: ${response.status}`
+          errorData.message || `Server error: ${response.status}`,
         );
       }
 
@@ -294,7 +293,7 @@ export default function JobApplicationPage() {
         setFormErrors((prev) => ({ ...prev, [field]: undefined }));
       }
     },
-    [formErrors]
+    [formErrors],
   );
 
   const formatFileSize = useCallback((bytes) => {

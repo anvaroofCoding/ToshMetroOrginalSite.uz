@@ -15,18 +15,19 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import {
+  Activity,
+  BarChart3,
+  Calendar,
   Loader2,
+  MapPin,
   TrendingUp,
   Users,
-  BarChart3,
-  Activity,
-  Calendar,
-  MapPin,
 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import {
   Area,
   AreaChart,
@@ -47,7 +48,6 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { useTranslations } from "next-intl";
 const MetroStatisticsDashboard = () => {
   const t = useTranslations("menu");
   const [apiStats, setApiStats] = useState([]);
@@ -85,7 +85,7 @@ const MetroStatisticsDashboard = () => {
       for (const year of years) {
         try {
           const response = await fetch(
-            `https://abbos.uzmetro.uz/api/statistics/${lang}/${year}/1/`
+            `https://back.uzmetro.uz/api/statistics/${lang}/${year}/1/`,
           );
           if (response.ok) {
             const data = await response.json();
@@ -153,7 +153,7 @@ const MetroStatisticsDashboard = () => {
       setLoading(true);
       try {
         const response = await fetch(
-          `https://abbos.uzmetro.uz/api/statistics/${lang}/${selectedYear}/${selectedQuarter}/`
+          `https://back.uzmetro.uz/api/statistics/${lang}/${selectedYear}/${selectedQuarter}/`,
         );
         if (!response.ok) {
           throw new Error(`HTTP xatolik! Status: ${response.status}`);
@@ -165,7 +165,7 @@ const MetroStatisticsDashboard = () => {
           setStations([]);
           setSelectedStation("");
           setError(
-            `${selectedYear}-yil ${selectedQuarter}-yarim yil uchun ma'lumotlar yo'q.`
+            `${selectedYear}-yil ${selectedQuarter}-yarim yil uchun ma'lumotlar yo'q.`,
           );
           return;
         }
@@ -174,7 +174,7 @@ const MetroStatisticsDashboard = () => {
         setError(null);
 
         const uniqueStations = Array.from(
-          new Set(data.map((stat) => stat.station_name))
+          new Set(data.map((stat) => stat.station_name)),
         );
         setStations(uniqueStations);
 
@@ -209,7 +209,7 @@ const MetroStatisticsDashboard = () => {
     .sort((a, b) => getMonthOrder(a.month) - getMonthOrder(b.month));
   const totalUsers = selectedStationData.reduce(
     (sum, item) => sum + item.user_count,
-    0
+    0,
   );
   const averageUsers =
     selectedStationData.length > 0
@@ -730,7 +730,7 @@ const MetroStatisticsDashboard = () => {
                                       window.innerWidth < 640
                                         ? `${(percent * 100).toFixed(0)}%`
                                         : `${month} ${(percent * 100).toFixed(
-                                            0
+                                            0,
                                           )}%`
                                     }
                                     outerRadius={

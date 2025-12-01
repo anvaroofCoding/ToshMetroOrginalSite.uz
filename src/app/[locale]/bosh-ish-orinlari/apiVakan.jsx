@@ -1,17 +1,6 @@
 "use client";
 
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import {
-  Briefcase,
-  GraduationCap,
-  Users,
-  ChevronRight,
-  Clock,
-  Train,
-  Loader2,
-} from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -20,12 +9,22 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { useParams } from "next/navigation";
+import { AnimatePresence, motion } from "framer-motion";
+import {
+  Briefcase,
+  ChevronRight,
+  Clock,
+  GraduationCap,
+  Loader2,
+  Train,
+  Users,
+} from "lucide-react";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
+import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 // Import antd Pagination
-import { Pagination } from "antd";
 import "antd/dist/reset.css";
 
 function ApiVakan() {
@@ -41,7 +40,7 @@ function ApiVakan() {
     try {
       setLoading(true);
       const res = await fetch(
-        `https://abbos.uzmetro.uz/api/job-vacancies/${locale}/`
+        `https://back.uzmetro.uz/api/job-vacancies/${locale}/`,
       );
       if (!res.ok)
         throw new Error("Ish o'rinlarini yuklashda xatolik yuz berdi");
@@ -65,7 +64,7 @@ function ApiVakan() {
   const totalPages = Math.ceil(data.length / itemsPerPage);
   const paginatedData = data.slice(
     (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
+    currentPage * itemsPerPage,
   );
 
   if (loading) {
@@ -131,7 +130,7 @@ function ApiVakan() {
                     <CardTitle className="text-xl font-bold leading-tight mb-2">
                       {truncateText(
                         item[`title_${locale}`] || item.education_title_uz,
-                        22
+                        22,
                       )}
                     </CardTitle>
                     <Briefcase className="w-8 h-8 text-blue-200" />
@@ -149,7 +148,7 @@ function ApiVakan() {
                         {truncateText(
                           item[`education_status_${locale}`] ||
                             item.education_status_uz,
-                          60
+                          60,
                         )}
                       </p>
                     </div>
@@ -165,7 +164,7 @@ function ApiVakan() {
                         {truncateText(
                           item[`mutaxasislik_${locale}`] ||
                             item.mutaxasislik_uz,
-                          60
+                          60,
                         )}
                       </p>
                     </div>
@@ -178,7 +177,7 @@ function ApiVakan() {
                     <p className="text-blue-800 text-sm leading-relaxed break-words">
                       {truncateText(
                         item[`requirements_${locale}`] || item.requirements_uz,
-                        80
+                        80,
                       )}
                     </p>
                   </div>

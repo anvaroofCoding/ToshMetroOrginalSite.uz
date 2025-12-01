@@ -1,22 +1,22 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
-import Image from "next/image";
-import {
-  Calendar,
-  Heart,
-  ChevronLeft,
-  ChevronRight,
-  ArrowLeft,
-  Loader2,
-  AlertCircle,
-} from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import CommentsSection from "./comments-section";
+import {
+  AlertCircle,
+  ArrowLeft,
+  Calendar,
+  ChevronLeft,
+  ChevronRight,
+  Heart,
+  Loader2,
+} from "lucide-react";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import CommentsSection from "./comments-section";
 export default function NewsArticlePage() {
   const t = useTranslations("menu");
   const path = usePathname();
@@ -29,7 +29,7 @@ export default function NewsArticlePage() {
     (async () => {
       try {
         const res = await fetch(
-          `https://abbos.uzmetro.uz/api/news/${lang}/${id}/`
+          `https://back.uzmetro.uz/api/news/${lang}/${id}/`,
         );
         if (!res.ok) throw new Error("Ma'lumotni olishda xatolik");
         const json = await res.json();

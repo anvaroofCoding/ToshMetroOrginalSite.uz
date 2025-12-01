@@ -40,10 +40,10 @@ const nextConfig = {
       { protocol: "https", hostname: "i.pinimg.com", pathname: "/**" },
       { protocol: "https", hostname: "media.zenfs.com", pathname: "/**" },
 
-      // 🆕 Qo‘shildi: abbos.uzmetro.uz domeni
+      // 🆕 Qo‘shildi: back.uzmetro.uz domeni
       {
         protocol: "https",
-        hostname: "abbos.uzmetro.uz",
+        hostname: "back.uzmetro.uz",
         pathname: "/media/news_images/**",
       },
     ],

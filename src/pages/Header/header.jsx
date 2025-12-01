@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { Carousel, Card } from "@/components/ui/apple-cards-carousel";
+import { Card, Carousel } from "@/components/ui/apple-cards-carousel";
 import { Button } from "@/components/ui/button";
 import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function Header() {
   const [news, setNews] = useState([]);
@@ -15,7 +15,7 @@ export default function Header() {
   const categoryField = `category_${lang}`;
   const getNews = async () => {
     try {
-      const res = await fetch("https://abbos.uzmetro.uz/api/news/" + lang);
+      const res = await fetch("https://back.uzmetro.uz/api/news/" + lang);
       const data = await res.json();
       const latestTen = Array.isArray(data) ? data.slice(0, 10) : [];
       setNews(latestTen);

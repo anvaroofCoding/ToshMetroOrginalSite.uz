@@ -1,22 +1,10 @@
 "use client";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  CheckCircle,
-  Clock,
-  MessageSquare,
-  TrendingUp,
-  AlertCircle,
-} from "lucide-react";
-import { useEffect, useState } from "react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { AlertCircle, CheckCircle, Clock } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { useEffect, useState } from "react";
 
 export default function Component() {
   const t = useTranslations("menu");
@@ -34,7 +22,7 @@ export default function Component() {
     try {
       setLoading(true);
       setError(null);
-      const res = await fetch("https://abbos.uzmetro.uz/api/lost-items/", {
+      const res = await fetch("https://back.uzmetro.uz/api/lost-items/", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -58,7 +46,7 @@ export default function Component() {
     } catch (err) {
       console.error("Error fetching statistics:", err);
       setError(
-        err instanceof Error ? err.message : "Failed to fetch statistics"
+        err instanceof Error ? err.message : "Failed to fetch statistics",
       );
       setStats({
         total_requests: 0,
@@ -94,7 +82,7 @@ export default function Component() {
           answer_percentage: Math.floor(stats.answer_percentage * easeOutQuart),
           answer_requests: Math.floor(stats.answer_requests * easeOutQuart),
           unanswered_requests: Math.floor(
-            stats.unanswered_requests * easeOutQuart
+            stats.unanswered_requests * easeOutQuart,
           ),
         });
 

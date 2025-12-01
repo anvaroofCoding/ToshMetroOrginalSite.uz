@@ -1,16 +1,16 @@
-import { useState, useEffect } from "react";
 import {
+  Button,
   Card,
   CardBody,
   CardHeader,
   Input,
-  Textarea,
-  Button,
-  Spinner,
   Pagination,
+  Spinner,
+  Textarea,
 } from "@nextui-org/react";
 import { MessageCircle, Send, User } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { useEffect, useState } from "react";
 export default function CommentsSection({ newsId }) {
   const t = useTranslations("menu");
   const [comments, setComments] = useState([]);
@@ -27,7 +27,7 @@ export default function CommentsSection({ newsId }) {
     setLoading(true);
     try {
       const res = await fetch(
-        `https://abbos.uzmetro.uz/api/comments/?news_id=${newsId}`
+        `https://back.uzmetro.uz/api/comments/?news_id=${newsId}`,
       );
       const data = await res.json();
       setComments(data);
@@ -41,7 +41,7 @@ export default function CommentsSection({ newsId }) {
     if (!newComment.author || !newComment.content) return;
     setSubmitting(true);
     try {
-      const res = await fetch(`https://abbos.uzmetro.uz/api/comments/`, {
+      const res = await fetch(`https://back.uzmetro.uz/api/comments/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ news: +newsId, ...newComment }),

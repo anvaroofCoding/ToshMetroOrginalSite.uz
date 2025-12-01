@@ -1,26 +1,26 @@
 "use client";
 
-import Image from "next/image";
-import { usePathname } from "next/navigation";
-import { useEffect, useState, useCallback, useMemo } from "react";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { useToast } from "@/hooks/use-toast";
 import {
+  ChevronLeft,
+  ChevronRight,
   Heart,
   Loader2,
   RefreshCw,
-  ChevronLeft,
-  ChevronRight,
 } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 const getTimeAgo = (dateString) => {
   const now = new Date();
   const publishedDate = new Date(dateString);
   const diffInSeconds = Math.floor(
-    (now.getTime() - publishedDate.getTime()) / 1000
+    (now.getTime() - publishedDate.getTime()) / 1000,
   );
 
   if (diffInSeconds < 60) return `${diffInSeconds} soniya oldin`;
@@ -51,10 +51,10 @@ export default function OptimizedNews() {
       setError(null);
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 10000);
-      const res = await fetch(`https://abbos.uzmetro.uz/api/news/${lang}/`, {
+      const res = await fetch(`https://back.uzmetro.uz/api/news/${lang}/`, {
         signal: controller.signal,
         headers: {
-          Accept: "application/json",
+          "Accept": "application/json",
           "Content-Type": "application/json",
         },
       });
@@ -63,7 +63,7 @@ export default function OptimizedNews() {
 
       if (!res.ok)
         throw new Error(
-          `Failed to fetch news: ${res.status} ${res.statusText}`
+          `Failed to fetch news: ${res.status} ${res.statusText}`,
         );
 
       const data = await res.json();
@@ -100,19 +100,19 @@ export default function OptimizedNews() {
                     : item.like_count + 1,
                   is_liked: !item.is_liked,
                 }
-              : item
-          )
+              : item,
+          ),
         );
 
         const response = await fetch(
-          `https://abbos.uzmetro.uz/api/news/${itemId}/like/`,
+          `https://back.uzmetro.uz/api/news/${itemId}/like/`,
           {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              Accept: "application/json",
+              "Accept": "application/json",
             },
-          }
+          },
         );
 
         if (!response.ok)
@@ -127,8 +127,8 @@ export default function OptimizedNews() {
                   like_count: data.like_count,
                   is_liked: data.is_liked ?? true,
                 }
-              : item
-          )
+              : item,
+          ),
         );
 
         toast({
@@ -144,8 +144,8 @@ export default function OptimizedNews() {
                   like_count: currentItem.like_count,
                   is_liked: currentItem.is_liked,
                 }
-              : item
-          )
+              : item,
+          ),
         );
         console.error("Error liking news:", err);
       } finally {
@@ -156,7 +156,7 @@ export default function OptimizedNews() {
         });
       }
     },
-    [likingItems, newsdata, toast]
+    [likingItems, newsdata, toast],
   );
 
   useEffect(() => {

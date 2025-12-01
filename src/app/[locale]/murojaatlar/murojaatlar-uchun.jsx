@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -14,14 +13,15 @@ import { Label } from "@/components/ui/label";
 import Textarea from "@/components/ui/textarea";
 import {
   Loader2,
-  Send,
-  Phone,
   Mail,
-  User,
-  MessageSquare,
   MapPin,
+  MessageSquare,
+  Phone,
+  Send,
+  User,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { useEffect, useState } from "react";
 export default function MetroLostItemForm() {
   const [formData, setFormData] = useState({
     name: "",
@@ -103,7 +103,7 @@ export default function MetroLostItemForm() {
     setShowSuccess(false);
 
     try {
-      const response = await fetch("https://abbos.uzmetro.uz/api/lost-items/", {
+      const response = await fetch("https://back.uzmetro.uz/api/lost-items/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
