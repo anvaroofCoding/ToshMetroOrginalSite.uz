@@ -51,7 +51,7 @@ export default function OptimizedNews() {
       setError(null);
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 10000);
-      const res = await fetch(`https://back.uzmetro.uz/api/news/${lang}/`, {
+      const res = await fetch(`http://88.88.150.151:8090/api/news/${lang}/`, {
         signal: controller.signal,
         headers: {
           "Accept": "application/json",
@@ -105,7 +105,7 @@ export default function OptimizedNews() {
         );
 
         const response = await fetch(
-          `https://back.uzmetro.uz/api/news/${itemId}/like/`,
+          `http://88.88.150.151:8090/api/news/${itemId}/like/`,
           {
             method: "POST",
             headers: {

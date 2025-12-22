@@ -2,34 +2,29 @@
 
 import { Card, Carousel } from "@/components/ui/apple-cards-carousel";
 import { Button } from "@/components/ui/button";
+import { useGetPopularNewsQuery } from "@/store/services/api";
+import { ArrowRight, Loader2 } from "lucide-react";
 import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
 
 export default function Header() {
-  const [news, setNews] = useState([]);
   const params = useParams();
   const locale = params?.locale;
   const lang = locale || "uz";
-  const titleField = `title_${lang}`;
-  const descField = `description_${lang}`;
-  const categoryField = `category_${lang}`;
-  const getNews = async () => {
-    try {
-      const res = await fetch("https://back.uzmetro.uz/api/news/" + lang);
-      const data = await res.json();
-      const latestTen = Array.isArray(data) ? data.slice(0, 10) : [];
-      setNews(latestTen);
-    } catch (error) {
-      console.error("News fetch error:", error);
-    }
-  };
-  useEffect(() => {
-    getNews();
-  }, [lang]);
+  const titleField = `title`;
+  const descField = `description`;
+  const categoryField = `category`;
+  const { data: news, isLoading } = useGetPopularNewsQuery(lang);
   const trimText = (text, limit) => {
     if (!text) return "";
     return text.length > limit ? text.slice(0, limit) + "..." : text;
   };
+  if (isLoading) {
+    return (
+      <div className="container flex justify-center items-center h-screen">
+        <Loader2 className="w-10 h-10 animate-spin text-primary" />
+      </div>
+    );
+  }
   const cards = news.map((item, index) => (
     <Card
       key={item.id}
@@ -37,7 +32,7 @@ export default function Header() {
       card={{
         category: item[categoryField] ?? "",
         title: trimText(item[titleField]), // ✅ Title shorten
-        src: item.images?.[0]?.image || "/default-news.jpg",
+        src: item.images?.[0]?.image,
         content: (
           <div className="p-4">
             <p className="text-gray-700 text-sm mb-2">
@@ -90,21 +85,12 @@ export default function Header() {
             ? "Batafsil ko‘rish"
             : lang === "ru"
             ? "Посмотреть все"
-            : "View all"}
+            : "View all"}{" "}
+          <ArrowRight className="w-4 ml-2" />
         </Button>
       </div>
 
-      {news.length > 0 ? (
-        <Carousel items={cards} />
-      ) : (
-        <p className="text-center mt-10 text-gray-500">
-          {lang === "uz"
-            ? "Yuklanmoqda..."
-            : lang === "ru"
-            ? "Загрузка..."
-            : "Loading..."}
-        </p>
-      )}
+      <Carousel items={cards} />
     </div>
   );
 }

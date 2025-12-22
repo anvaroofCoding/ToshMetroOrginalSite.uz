@@ -54,10 +54,6 @@ const nextConfig = {
     esmExternals: true, // Modul importlarini tezlashtiradi
     scrollRestoration: true, // Scroll tezroq ishlaydi
   },
-
-  // compiler: {
-  //   removeConsole: true, // Build vaqtida console.log larni olib tashlaydi
-  // },
 };
 
 module.exports = withNextIntl(nextConfig);

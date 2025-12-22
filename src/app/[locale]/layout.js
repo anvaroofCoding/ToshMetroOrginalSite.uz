@@ -1,5 +1,3 @@
-// src/app/[locale]/layout.js
-
 import FloatingActionButton from "@/components/ScreenFixsedButton/screenFixedButton";
 import BgImage from "@/components/bg-main-images/bg-images";
 import RouteLoader from "@/components/route-loader";
@@ -10,14 +8,19 @@ import { Analytics } from "@vercel/analytics/next";
 import { NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
 import "./globals.css";
+import Providers from "./providers";
 
 export const metadata = {
-  title: "Toshkent metropoliteni | Rasmiy veb-sayt",
+  title: "Toshkent metropoliten DUK | Rasmiy veb-sayt",
   description:
-    "Toshkent shahar metropolitenining rasmiy veb-sayti. Yo‘nalishlar, tariflar, yangiliklar, xizmatlar va boshqa foydali ma’lumotlar.",
+    "Toshkent metropolitenining rasmiy veb-sayti. Metro yo‘nalishlari, tariflar, so‘nggi yangiliklar va yo‘lovchilar uchun foydali xizmatlar haqida to‘liq ma’lumot.",
   keywords:
-    "Toshkent metro, Toshkent metropoliteni, metro yo‘nalishlari, metro tariflari, metro yangiliklari, metro xizmatlari",
-  authors: [{ name: "Toshkent metropoliteni IT bo‘limi" }],
+    "Toshkent metro, Toshkent metropoliteni, metro yo‘nalishlari, metro tariflari, metro yangiliklari, metro xizmatlari, tashmetro.uz, tashmetro, metropoliten, metro, uzmetro, metro xatitasi, metro haqida, tash metro haqida, uzbekiston gerbi, o'zbekiston metrosi, o'zmetro, o'zbekiston metrosi, tashkent metrosi, toshkent metrosi, metro rasmiy sayti, asia metro, osiyoda yagona eng katta metro, toshkent metro, kosmonavtlar bekati, chilonzor metrosi, olmazor metrosi",
+  authors: [
+    {
+      name: "Toshkent metropoliteni Axborot xavfsizligini ta'minlash va Axborot kamunikatsiyalarini rivojlantirish bo'limi",
+    },
+  ],
   creator: "Toshkent shahar metropoliteni",
   publisher: "Toshkent shahar metropoliteni",
   metadataBase: new URL("https://uzmetro.uz"),
@@ -29,17 +32,23 @@ export const metadata = {
     siteName: "Toshkent shahar metropoliteni",
     images: [
       {
-        url: "/logos.png",
-        width: 800,
-        height: 600,
-        alt: "Toshkent metropoliteni logotipi",
+        url: "/logo.png",
+        width: 512,
+        height: 512,
+        alt: "Toshkent metropoliteni rasmiy logotipi (logosi)",
       },
     ],
     locale: "uz_UZ",
     type: "website",
   },
+
   icons: {
-    icon: "/logos.png",
+    icon: [
+      { url: "/logo2.png" },
+      { url: "/logo2.pngg", sizes: "32x32", type: "image/png" },
+      { url: "/logo2.png", sizes: "16x16", type: "image/png" },
+    ],
+    Logos: [{ url: "/logo2.png", sizes: "180x180" }],
   },
 };
 
@@ -54,19 +63,21 @@ export default async function RootLayout({ children, params }) {
   return (
     <html lang={locale}>
       <body className="roboto">
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          <BgImage>
-            <RouteLoader />
-            <Layout>
-              <Navbar />
-              {/* <SplashScreen> */}
-              {children}
-              <Analytics />
-              <Footer />
-              <FloatingActionButton />
-            </Layout>
-          </BgImage>
-        </NextIntlClientProvider>
+        <Providers>
+          <NextIntlClientProvider locale={locale} messages={messages}>
+            <BgImage>
+              <RouteLoader />
+              <Layout>
+                <Navbar />
+                {/* <SplashScreen> */}
+                {children}
+                <Analytics />
+                <Footer />
+                <FloatingActionButton />
+              </Layout>
+            </BgImage>
+          </NextIntlClientProvider>
+        </Providers>
       </body>
     </html>
   );

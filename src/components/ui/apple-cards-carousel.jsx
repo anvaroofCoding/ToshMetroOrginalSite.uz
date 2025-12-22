@@ -1,19 +1,19 @@
 "use client";
-import React, {
-  useEffect,
-  useRef,
-  useState,
-  createContext,
-  useContext,
-} from "react";
+import { useOutsideClick } from "@/hooks/use-outside-click";
+import { cn } from "@/lib/utils";
 import {
   IconArrowNarrowLeft,
   IconArrowNarrowRight,
   IconX,
 } from "@tabler/icons-react";
-import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "motion/react";
-import { useOutsideClick } from "@/hooks/use-outside-click";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 export const CarouselContext = createContext({
   onCardClose: () => {},
@@ -25,7 +25,6 @@ export const Carousel = ({ items, initialScroll = 0 }) => {
   const [canScrollLeft, setCanScrollLeft] = React.useState(false);
   const [canScrollRight, setCanScrollRight] = React.useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
-  console.log(items);
 
   useEffect(() => {
     if (carouselRef.current) {
@@ -83,7 +82,7 @@ export const Carousel = ({ items, initialScroll = 0 }) => {
         >
           <div
             className={cn(
-              "absolute right-0 z-[1000] h-auto w-[5%] overflow-hidden bg-gradient-to-l"
+              "absolute right-0 z-[1000] h-auto w-[5%] overflow-hidden bg-gradient-to-l",
             )}
           ></div>
 
@@ -91,7 +90,7 @@ export const Carousel = ({ items, initialScroll = 0 }) => {
             className={cn(
               "flex flex-row justify-start gap-4 ",
               // remove max-w-4xl if you want the carousel to span the full width of its container
-              "mx-auto container"
+              "mx-auto container",
             )}
           >
             {items.map((item, index) => (
@@ -263,7 +262,7 @@ export const BlurImage = ({ height, width, src, className, alt, ...rest }) => {
       className={cn(
         "h-full w-full transition duration-300",
 
-        className
+        className,
       )}
       onLoad={() => setLoading(false)}
       src={src}

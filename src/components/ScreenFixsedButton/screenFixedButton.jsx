@@ -53,8 +53,6 @@ export default function FloatingActionButton() {
   };
   const handleSubButtonClick = (action) => {
     playClickSound();
-    console.log(`${action} clicked`);
-    // Add your specific action handlers here
   };
   const buttons = [
     {

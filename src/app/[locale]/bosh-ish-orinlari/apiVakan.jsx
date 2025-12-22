@@ -40,7 +40,7 @@ function ApiVakan() {
     try {
       setLoading(true);
       const res = await fetch(
-        `https://back.uzmetro.uz/api/job-vacancies/${locale}/`,
+        `http://88.88.150.151:8090/api/job-vacancies/${locale}/`,
       );
       if (!res.ok)
         throw new Error("Ish o'rinlarini yuklashda xatolik yuz berdi");

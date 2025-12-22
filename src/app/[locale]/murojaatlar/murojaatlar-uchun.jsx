@@ -1,483 +1,283 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import Textarea from "@/components/ui/textarea";
-import {
-  Loader2,
+  ArrowLeft,
+  ArrowRight,
+  CheckCircle2,
+  CreditCard,
   Mail,
   MapPin,
   MessageSquare,
   Phone,
-  Send,
-  User,
 } from "lucide-react";
-import { useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { usePostMurojaatMutation } from "@/store/services/api";
+import { toast, Toaster } from "sonner";
+
 export default function MetroLostItemForm() {
+  const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
-    name: "",
+    lastName: "",
+    firstName: "",
+    middleName: "",
+    // Step 2: Aloqa
     phone: "+998",
     email: "",
+    // Step 3: Passport & Manzil
+    passportSeries: "",
+    passportNumber: "",
     address: "",
-    passport: "",
+    // Step 4: Izoh
     message: "",
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [showSuccess, setShowSuccess] = useState(false);
-  const [showError, setShowError] = useState(false);
-  const [countdown, setCountdown] = useState(10);
-  const [isCountingDown, setIsCountingDown] = useState(false);
-  const [isBlocked, setIsBlocked] = useState(false);
-  const [blockTimeRemaining, setBlockTimeRemaining] = useState(0);
-  const [failedAttempts, setFailedAttempts] = useState(0);
-  const t = useTranslations("menu");
-  useEffect(() => {
-    const checkBlockStatus = () => {
-      const blockData = localStorage.getItem("formBlockData");
-      if (blockData) {
-        const { attempts, blockStartTime } = JSON.parse(blockData);
-        const currentTime = Date.now();
-        const blockDuration = 10 * 60 * 1000;
-        const timeElapsed = currentTime - blockStartTime;
-        if (attempts >= 3 && timeElapsed < blockDuration) {
-          setIsBlocked(true);
-          setFailedAttempts(attempts);
-          const remainingTime = Math.ceil((blockDuration - timeElapsed) / 1000);
-          setBlockTimeRemaining(remainingTime);
-          const timer = setInterval(() => {
-            setBlockTimeRemaining((prev) => {
-              if (prev <= 1) {
-                clearInterval(timer);
-                setIsBlocked(false);
-                setFailedAttempts(0);
-                localStorage.removeItem("formBlockData");
-                return 0;
-              }
-              return prev - 1;
-            });
-          }, 1000);
-          return () => clearInterval(timer);
-        } else if (attempts >= 3 && timeElapsed >= blockDuration) {
-          // Block period has expired
-          localStorage.removeItem("formBlockData");
-          setIsBlocked(false);
-          setFailedAttempts(0);
-        } else {
-          // Not blocked but has some failed attempts
-          setFailedAttempts(attempts);
-        }
-      }
-    };
-    checkBlockStatus();
-  }, []);
-  const handleInputChange = (field, value) => {
-    setFormData((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
+  const [postLostITems, { isLoading }] = usePostMurojaatMutation();
+
+  const totalSteps = 4;
+
+  const handleChange = (field, value) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
   };
-  const handlePhoneChange = (value) => {
-    // Allow user to delete the +998 prefix if they want
-    setFormData((prev) => ({
-      ...prev,
-      phone: value,
-    }));
+
+  const nextStep = () => {
+    if (step < totalSteps) setStep(step + 1);
   };
+
+  const prevStep = () => {
+    if (step > 1) setStep(step - 1);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (isBlocked) {
+
+    if (!formData.email.endsWith("@gmail.com")) {
+      toast.info("Faqat @gmail.com email manzili ruxsat etiladi");
       return;
     }
 
-    setIsSubmitting(true);
-    setShowError(false);
-    setShowSuccess(false);
-
-    try {
-      const response = await fetch("https://back.uzmetro.uz/api/lost-items/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        // Success - clear any failed attempts
-        localStorage.removeItem("formBlockData");
-        setFailedAttempts(0);
-        setShowSuccess(true);
-        // Reset form
-        setFormData({
-          name: "",
-          phone: "+998",
-          email: "",
-          address: "",
-          passport: "",
-          message: "",
-        });
-      } else {
-        throw new Error("Xatolik yuz berdi");
-      }
-    } catch (error) {
-      // Handle failed attempt
-      const newFailedAttempts = failedAttempts + 1;
-      setFailedAttempts(newFailedAttempts);
-
-      const blockData = {
-        attempts: newFailedAttempts,
-        blockStartTime: Date.now(),
-      };
-
-      localStorage.setItem("formBlockData", JSON.stringify(blockData));
-
-      if (newFailedAttempts >= 3) {
-        // Block the user for 10 minutes
-        setIsBlocked(true);
-        setBlockTimeRemaining(10 * 60); // 10 minutes in seconds
-
-        // Start 10-minute countdown
-        const blockTimer = setInterval(() => {
-          setBlockTimeRemaining((prev) => {
-            if (prev <= 1) {
-              clearInterval(blockTimer);
-              setIsBlocked(false);
-              setFailedAttempts(0);
-              localStorage.removeItem("formBlockData");
-              return 0;
-            }
-            return prev - 1;
-          });
-        }, 1000);
-      } else {
-        // Show error and start countdown
-        setShowError(true);
-        setIsCountingDown(true);
-        setCountdown(10);
-
-        // Start countdown timer
-        const timer = setInterval(() => {
-          setCountdown((prev) => {
-            if (prev <= 1) {
-              clearInterval(timer);
-              setShowError(false);
-              setIsCountingDown(false);
-              setCountdown(10);
-              return 10;
-            }
-            return prev - 1;
-          });
-        }, 1000);
-      }
-    } finally {
-      setIsSubmitting(false);
-    }
+    const finalData = {
+      name: `${formData.lastName} ${formData.firstName} ${formData.middleName}`.trim(),
+      phone: formData.phone,
+      email: formData.email,
+      passport: `${formData.passportSeries}${formData.passportNumber}`,
+      address: formData.address,
+      message: formData.message,
+    };
+    await postLostITems(finalData).unwrap();
+    toast.success("Murojaatingiz muvaffaqiyatli qabul qilindi!");
   };
-  const formatTime = (seconds) => {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
-  };
-  const resetSuccess = () => {
-    setShowSuccess(false);
-  };
+
+  // Progress bar uchun foiz hisoblash
+  const progress = (step / totalSteps) * 100;
+
   return (
-    <div className="container py-12 ">
-      <div className="">
-        {showSuccess ? (
-          <Card className="shadow-lg border-0 bg-white">
-            <CardContent className="p-8 text-center">
-              <div className="mb-6 py-5">
-                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg
-                    className="w-8 h-8 text-green-600"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
-                </div>
-                <h2 className="text-2xl font-bold text-green-600 mb-2">
-                  {t("one_hundred_seventy_one")}
-                </h2>
-                <p className="text-gray-600 mb-6">
-                  {t("one_hundred_seventy_two")}
-                </p>
-                <Button
-                  onClick={resetSuccess}
-                  className="bg-blue-900 hover:bg-blue-800 text-white"
-                >
-                  {t("one_hundred_seventy_three")}
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        ) : isBlocked ? (
-          <Card className="shadow-lg border-0 bg-white">
-            <CardContent className="p-8 text-center">
-              <div className="mb-6">
-                <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg
-                    className="w-8 h-8 text-orange-600"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 15v2m0 0v2m0-2h2m-2 0H10m2-5V9m0 0V7m0 2h2m-2 0H10M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                </div>
-                <h2 className="text-2xl font-bold text-orange-600 mb-2">
-                  {t("one_hundred_seventy_four")}
-                </h2>
-                <p className="text-gray-600 mb-4">
-                  {t("one_hundred_seventy_five")}
-                </p>
-                <div className="mb-4">
-                  <div className="text-4xl font-bold text-blue-900 mb-2">
-                    {formatTime(blockTimeRemaining)}
-                  </div>
-                  <p className="text-sm text-gray-500">
-                    {t("one_hundred_seventy_six")}
-                  </p>
-                </div>
-                <div className="bg-gray-100 rounded-lg p-4">
-                  <p className="text-sm text-gray-600">
-                    {t("one_hundred_seventy_seven")}
-                  </p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        ) : showError ? (
-          <Card className="shadow-lg border-0 bg-white">
-            <CardContent className="p-8 text-center">
-              <div className="mb-6">
-                <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg
-                    className="w-8 h-8 text-red-600"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  </svg>
-                </div>
-                <h2 className="text-2xl font-bold text-red-600 mb-2">
-                  {t("one_hundred_seventy_eight")}
-                </h2>
-                <p className="text-gray-600 mb-4">
-                  {t("one_hundred_seventy_nine")}
-                </p>
-                {isCountingDown && (
-                  <div className="mb-4">
-                    <div className="text-3xl font-bold text-blue-900 mb-2">
-                      {countdown}
-                    </div>
-                    <p className="text-sm text-gray-500">
-                      {t("one_hundred_eighty")}
-                    </p>
-                  </div>
-                )}
-              </div>
-            </CardContent>
-          </Card>
-        ) : (
-          <Card className="shadow-lg border-0 bg-white">
-            <CardHeader className="bg-blue-900 text-white rounded-t-lg">
-              <CardTitle className="text-xl font-semibold flex items-center gap-2">
-                <MessageSquare className="w-5 h-5" />
-                {t("one_hundred_eighty_one")}
-              </CardTitle>
-              <CardDescription className="text-blue-100">
-                {t("one_hundred_eighty_two")}
-              </CardDescription>
-            </CardHeader>
+    <Card className="container bg-white shadow-2xl border-blue-100 overflow-hidden">
+      {/* Progress Bar */}
+      <Toaster richColors position="bottom-right" expand={true} closeButton />
 
-            <CardContent className="p-8">
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="space-y-2">
-                  <Label
-                    htmlFor="name"
-                    className="text-sm font-medium text-gray-700 flex items-center gap-2"
-                  >
-                    <User className="w-4 h-4 text-blue-900" />
-                    {t("one_hundred_eighty_three")}
-                  </Label>
-                  <Input
-                    id="name"
-                    type="text"
-                    value={formData.name}
-                    onChange={(e) => handleInputChange("name", e.target.value)}
-                    placeholder="F.I.Sh"
-                    required
-                    className="border-gray-300 focus:border-blue-900 focus:ring-blue-900"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label
-                    htmlFor="phone"
-                    className="text-sm font-medium text-gray-700 flex items-center gap-2"
-                  >
-                    <Phone className="w-4 h-4 text-blue-900" />
-                    {t("one_hundred_eighty_four")}
-                  </Label>
-                  <Input
-                    id="phone"
-                    type="tel"
-                    value={formData.phone}
-                    onChange={(e) => handlePhoneChange(e.target.value)}
-                    placeholder="+998 XX XXX XX XX"
-                    required
-                    className="border-gray-300 focus:border-blue-900 focus:ring-blue-900"
-                  />
-                  <p className="text-xs text-gray-500">
-                    {t("one_hundred_eighty_five")}
-                  </p>
-                </div>
-
-                <div className="space-y-2">
-                  <Label
-                    htmlFor="email"
-                    className="text-sm font-medium text-gray-700 flex items-center gap-2"
-                  >
-                    <Mail className="w-4 h-4 text-blue-900" />
-                    {t("one_hundred_eighty_six")}
-                  </Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={(e) => handleInputChange("email", e.target.value)}
-                    placeholder="example@email.com"
-                    required
-                    className="border-gray-300 focus:border-blue-900 focus:ring-blue-900"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label
-                    htmlFor="address"
-                    className="text-sm font-medium text-gray-700 flex items-center gap-2"
-                  >
-                    <MapPin className="w-4 h-4 text-blue-900" />
-                    {t("one_hundred_eighty_seven")}
-                  </Label>
-                  <Input
-                    id="address"
-                    type="text"
-                    value={formData.address}
-                    onChange={(e) =>
-                      handleInputChange("address", e.target.value)
-                    }
-                    placeholder={t("one_hundred_eighty_eight")}
-                    required
-                    className="border-gray-300 focus:border-blue-900 focus:ring-blue-900"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label
-                    htmlFor="passport"
-                    className="text-sm font-medium text-gray-700 flex items-center gap-2"
-                  >
-                    <MapPin className="w-4 h-4 text-blue-900" />
-                    {t("one_hundred_eighty_nine")}
-                  </Label>
-                  <Input
-                    id="passport"
-                    type="text"
-                    value={formData.passport}
-                    onChange={(e) =>
-                      handleInputChange("passport", e.target.value)
-                    }
-                    placeholder="AD0000000"
-                    required
-                    className="border-gray-300 focus:border-blue-900 focus:ring-blue-900"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label
-                    htmlFor="message"
-                    className="text-sm font-medium text-gray-700 flex items-center gap-2"
-                  >
-                    <MessageSquare className="w-4 h-4 text-blue-900" />
-                    {t("one_hundred_ninety")}
-                  </Label>
-                  <Textarea
-                    id="message"
-                    value={formData.message}
-                    onChange={(e) =>
-                      handleInputChange("message", e.target.value)
-                    }
-                    placeholder={t("one_hundred_ninety_one")}
-                    required
-                    rows={6}
-                    className="border-gray-300 focus:border-blue-900 focus:ring-blue-900 resize-none"
-                  />
-                </div>
-
-                <div className="pt-4">
-                  {failedAttempts > 0 && failedAttempts < 3 && (
-                    <div className="mb-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
-                      <p className="text-sm text-yellow-800">
-                        {t("one_hundred_ninety_two")} {failedAttempts}
-                        {t("one_hundred_ninety_three")}
-                        {3 - failedAttempts} {t("one_hundred_ninety_four")}
-                      </p>
-                    </div>
-                  )}
-                  <Button
-                    type="submit"
-                    disabled={isSubmitting || isBlocked}
-                    className="w-full bg-blue-900 hover:bg-blue-800 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <Loader2 className="w-4 h-4 animate-spin" />
-                        {t("one_hundred_ninety_five")}
-                      </>
-                    ) : isBlocked ? (
-                      <> {t("one_hundred_ninety_six")}</>
-                    ) : (
-                      <>
-                        <Send className="w-4 h-4" />
-                        {t("one_hundred_ninety_seven")}
-                      </>
-                    )}
-                  </Button>
-                </div>
-              </form>
-            </CardContent>
-          </Card>
-        )}
+      <div className="h-1.5 w-full bg-blue-50">
+        <div
+          className="h-full bg-blue-600 transition-all duration-500 ease-in-out"
+          style={{ width: `${progress}%` }}
+        />
       </div>
-    </div>
+
+      <CardHeader>
+        <div className="flex justify-between items-center">
+          <CardTitle className="text-blue-900 flex items-center gap-2">
+            <div>
+              <MessageSquare size={20} />
+            </div>
+            Murojaat yo‘llash
+          </CardTitle>
+          <span className="text-sm font-medium text-blue-600 bg-blue-100 px-3 py-1 rounded-full">
+            Bosqich {step}/{totalSteps}
+          </span>
+        </div>
+      </CardHeader>
+
+      <CardContent className="pt-8">
+        <form onSubmit={handleSubmit} className="space-y-6">
+          {/* STEP 1: SHAXSIY MA'LUMOTLAR */}
+          {step === 1 && (
+            <div className="space-y-4 animate-in fade-in slide-in-from-right-4 duration-300">
+              <div className="grid gap-4">
+                <div className="space-y-2">
+                  <Label className="text-blue-900 font-semibold">
+                    Familiya
+                  </Label>
+                  <Input
+                    required
+                    placeholder="Familiyangizni kiriting"
+                    className="focus:border-blue-500 focus:ring-blue-500"
+                    value={formData.lastName}
+                    onChange={(e) => handleChange("lastName", e.target.value)}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label className="text-blue-900 font-semibold">Ism</Label>
+                  <Input
+                    required
+                    placeholder="Ismingizni kiriting"
+                    value={formData.firstName}
+                    onChange={(e) => handleChange("firstName", e.target.value)}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label className="text-blue-900 font-semibold">
+                    Otasining ismi
+                  </Label>
+                  <Input
+                    placeholder="Otangizning ismini kiriting"
+                    value={formData.middleName}
+                    onChange={(e) => handleChange("middleName", e.target.value)}
+                  />
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* STEP 2: ALOQA */}
+          {step === 2 && (
+            <div className="space-y-4 animate-in fade-in slide-in-from-right-4 duration-300">
+              <div className="space-y-2">
+                <Label className="text-blue-900 font-semibold flex items-center gap-2">
+                  <Phone size={16} className="text-blue-600" /> Telefon raqam
+                </Label>
+                <Input
+                  required
+                  value={formData.phone}
+                  onChange={(e) => {
+                    let value = e.target.value.replace(/\D/g, "");
+                    if (!value.startsWith("998")) value = "998";
+                    handleChange("phone", "+" + value);
+                  }}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label className="text-blue-900 font-semibold flex items-center gap-2">
+                  <Mail size={16} className="text-blue-600" /> Email (Faqat
+                  Gmail)
+                </Label>
+                <Input
+                  required
+                  type="email"
+                  placeholder="example@gmail.com"
+                  value={formData.email}
+                  onChange={(e) => handleChange("email", e.target.value)}
+                />
+              </div>
+            </div>
+          )}
+
+          {/* STEP 3: PASSPORT VA MANZIL */}
+          {step === 3 && (
+            <div className="space-y-4 animate-in fade-in slide-in-from-right-4 duration-300">
+              <div className="space-y-2">
+                <Label className="text-blue-900 font-semibold flex items-center gap-2">
+                  <CreditCard size={16} className="text-blue-600" /> Passport
+                  ma'lumotlari
+                </Label>
+                <div className="flex gap-2">
+                  <Input
+                    required
+                    placeholder="AD"
+                    maxLength={2}
+                    className="w-24 uppercase font-bold text-center border-blue-200"
+                    value={formData.passportSeries}
+                    onChange={(e) =>
+                      handleChange(
+                        "passportSeries",
+                        e.target.value.replace(/[^A-Za-z]/g, "").toUpperCase(),
+                      )
+                    }
+                  />
+                  <Input
+                    required
+                    placeholder="1234567"
+                    maxLength={7}
+                    className="font-mono tracking-widest border-blue-200"
+                    value={formData.passportNumber}
+                    onChange={(e) =>
+                      handleChange(
+                        "passportNumber",
+                        e.target.value.replace(/\D/g, ""),
+                      )
+                    }
+                  />
+                </div>
+              </div>
+              <div className="space-y-2">
+                <Label className="text-blue-900 font-semibold flex items-center gap-2">
+                  <MapPin size={16} className="text-blue-600" /> Yashash manzili
+                </Label>
+                <Input
+                  required
+                  placeholder="Viloyat, tuman, ko'cha, uy..."
+                  value={formData.address}
+                  onChange={(e) => handleChange("address", e.target.value)}
+                />
+              </div>
+            </div>
+          )}
+
+          {/* STEP 4: XABAR */}
+          {step === 4 && (
+            <div className="space-y-4 animate-in fade-in slide-in-from-right-4 duration-300">
+              <div className="space-y-2">
+                <Label className="text-blue-900 font-semibold flex items-center gap-2">
+                  <MessageSquare size={16} className="text-blue-600" /> Batafsil
+                  izoh
+                </Label>
+                <Textarea
+                  required
+                  rows={6}
+                  placeholder="Yo'qotilgan buyum haqida yoki murojaatingiz mazmunini yozing..."
+                  className="border-blue-200 focus:ring-blue-500"
+                  value={formData.message}
+                  onChange={(e) => handleChange("message", e.target.value)}
+                />
+              </div>
+            </div>
+          )}
+
+          {/* Tugmalar paneli */}
+          <div className="flex gap-3 pt-4 border-t border-blue-50">
+            {step > 1 && (
+              <Button
+                type="button"
+                variant="outline"
+                onClick={prevStep}
+                className="flex-1 border-blue-200 text-blue-700 hover:bg-blue-50"
+              >
+                <ArrowLeft size={18} className="mr-2" /> Orqaga
+              </Button>
+            )}
+
+            {step < totalSteps ? (
+              <Button
+                type="button"
+                onClick={nextStep}
+                className="flex-1 bg-blue-600 hover:bg-blue-700 text-white"
+              >
+                Keyingisi <ArrowRight size={18} className="ml-2" />
+              </Button>
+            ) : (
+              <Button
+                type="submit"
+                className="flex-1 bg-green-600 hover:bg-green-700 text-white shadow-lg shadow-green-100"
+              >
+                <CheckCircle2 size={18} className="mr-2" /> Yuborish
+              </Button>
+            )}
+          </div>
+        </form>
+      </CardContent>
+    </Card>
   );
 }

@@ -1,4 +1,5 @@
 "use client";
+import { useGetFoydalanuvchilarQuery } from "@/store/services/api";
 import {
   Eye,
   Facebook,
@@ -76,19 +77,13 @@ const Footer = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const pathname = usePathname();
   const parts = pathname.split("/").filter(Boolean);
+  const { data } = useGetFoydalanuvchilarQuery();
   const isHiddenPath =
     parts[1] === "metro-xaritasis" || parts[1] === "normalMap";
-  const getprosmotrsite = async () => {
-    const res = await fetch(
-      "https://back.uzmetro.uz/api/sayt_foydalanuvchilari/",
-    );
-    const data = await res.json();
-    setTotalVisitors(data.jami_foydalanuvchilar);
-    setOnlineVisitors(data.onlayn_foydalanuvchilar);
-  };
   useEffect(() => {
-    getprosmotrsite();
-  }, []);
+    setTotalVisitors(data?.jami_foydalanuvchilar);
+    setOnlineVisitors(data?.onlayn_foydalanuvchilar);
+  }, [data]);
   return (
     <>
       <footer

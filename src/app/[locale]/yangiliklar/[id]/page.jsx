@@ -29,7 +29,7 @@ export default function NewsArticlePage() {
     (async () => {
       try {
         const res = await fetch(
-          `https://back.uzmetro.uz/api/news/${lang}/${id}/`,
+          `http://88.88.150.151:8090/api/news/${lang}/${id}/`,
         );
         if (!res.ok) throw new Error("Ma'lumotni olishda xatolik");
         const json = await res.json();
