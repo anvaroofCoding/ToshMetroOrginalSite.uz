@@ -12,147 +12,156 @@ import {
   Heart,
   Loader2,
 } from "lucide-react";
-import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import CommentsSection from "./comments-section";
+
 export default function NewsArticlePage() {
-  const t = useTranslations("menu");
   const path = usePathname();
   const lang = path.split("/")[1];
   const id = path.split("/")[3];
+
   const [data, setData] = useState(null);
   const [index, setIndex] = useState(0);
   const [status, setStatus] = useState("loading");
+
   useEffect(() => {
     (async () => {
       try {
         const res = await fetch(
-          `http://88.88.150.151:8090/api/news/${lang}/${id}/`,
+          `https://abbos.uzmetro.uz/api/news/${lang}/${id}/`,
         );
-        if (!res.ok) throw new Error("Ma'lumotni olishda xatolik");
+        if (!res.ok) throw new Error("Xatolik");
         const json = await res.json();
         setData(json);
         setStatus("success");
-      } catch (err) {
-        console.error(err);
+      } catch (e) {
+        console.error(e);
         setStatus("error");
       }
     })();
   }, [id, lang]);
+
+  /* ================= DATE FORMAT ================= */
+  const formatDate = (dateStr) => {
+    if (!dateStr) return "";
+    const d = new Date(dateStr);
+    const hh = String(d.getHours()).padStart(2, "0");
+    const mm = String(d.getMinutes()).padStart(2, "0");
+    const dd = String(d.getDate()).padStart(2, "0");
+    const MM = String(d.getMonth() + 1).padStart(2, "0");
+    const yyyy = d.getFullYear();
+    return `${hh}:${mm} ${dd}-${MM}-${yyyy}`;
+  };
+
   if (status === "loading") {
     return (
-      <div className="flex items-center justify-center min-h-screen text-slate-600">
-        <Loader2 className="w-6 h-6 mr-2 animate-spin text-blue-600" />
-        {t("one_hundred_ninety_eight")}
+      <div className="flex items-center justify-center min-h-screen text-blue-700">
+        <Loader2 className="w-6 h-6 mr-2 animate-spin text-blue-700" />
+        Yuklanmoqda...
       </div>
     );
   }
+
   if (status === "error") {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen text-center">
-        <AlertCircle className="w-12 h-12 text-red-500 mb-3" />
-        <p className="text-red-600 font-medium mb-4">
-          {t("two_hundred_forty")}
-        </p>
+      <div className="flex flex-col items-center justify-center min-h-screen">
+        <AlertCircle className="w-12 h-12 text-red-600 mb-3" />
+        <p className="text-red-600 mb-4">Ma’lumotni olishda xatolik</p>
         <Button
           onClick={() => location.reload()}
-          className="bg-blue-600 hover:bg-blue-700"
+          className="bg-blue-700 hover:bg-blue-800"
         >
-          {t("two_hundred_forty_one")}
+          Qayta yuklash
         </Button>
       </div>
     );
   }
+
   const images = data?.images || [];
-  const currentImage = images[index]?.image || "/placeholder.svg";
-  const nextImage = () => setIndex((i) => (i + 1) % images.length);
-  const prevImage = () =>
-    setIndex((i) => (i - 1 + images.length) % images.length);
-  const formatDate = (d) =>
-    d
-      ? new Date(d).toLocaleDateString("uz-UZ", {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-          hour: "2-digit",
-          minute: "2-digit",
-        })
-      : "";
+  const currentImage = images[index]?.image;
+  const next = () => setIndex((i) => (i + 1) % images.length);
+  const prev = () => setIndex((i) => (i - 1 + images.length) % images.length);
+
   return (
-    <div className="max-w-5xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-      <h1 className="text-3xl sm:text-4xl font-bold mb-4 text-slate-900">
-        {data?.[`title_${lang}`] || "Sarlavha topilmadi"}
+    <div className="max-w-5xl mx-auto py-8 px-4">
+      {/* TITLE */}
+      <h1 className="text-3xl sm:text-4xl font-bold text-blue-800 mb-4">
+        {data.title}
       </h1>
-      <div className="flex flex-wrap items-center gap-4 text-sm text-slate-600 mb-8">
-        {data?.publishedAt && (
-          <div className="flex items-center gap-2 bg-white px-3 py-1.5 rounded-full shadow-sm">
-            <Calendar className="w-4 h-4 text-blue-600" />
-            <span>{formatDate(data.publishedAt)}</span>
+
+      {/* META */}
+      <div className="flex flex-wrap gap-3 mb-8">
+        {data.publishedAt && (
+          <div className="flex items-center gap-2 bg-blue-50 text-blue-800 px-3 py-1.5 rounded-full text-sm">
+            <Calendar className="w-4 h-4" />
+            {formatDate(data.publishedAt)}
           </div>
         )}
-        <div className="flex items-center gap-2 bg-white px-3 py-1.5 rounded-full shadow-sm">
+
+        <div className="flex items-center gap-2 bg-blue-50 text-blue-800 px-3 py-1.5 rounded-full text-sm">
           <Heart className="w-4 h-4 text-red-500" />
-          <span>
-            {data?.like_count || 0} {t("two_hundred_forty_three")}
-          </span>
+          {data.like_count} ta like
         </div>
-        {data?.category_ru && (
-          <Badge className="bg-blue-100 text-blue-800">
-            {data.category_ru}
-          </Badge>
+
+        {data.category && (
+          <Badge className="bg-blue-700 text-white">{data.category}</Badge>
         )}
       </div>
+
+      {/* IMAGES */}
       {images.length > 0 && (
-        <Card className="shadow-xl border-0 overflow-hidden mb-8">
-          <CardContent className="relative p-0">
-            <div className="relative w-full aspect-video bg-gray-100">
+        <Card className="mb-8 p-0 overflow-hidden border border-blue-100 shadow-lg">
+          <CardContent className="p-0 relative">
+            <div className="relative aspect-video bg-slate-100">
               <Image
                 src={currentImage}
-                alt="Yangilik rasmi"
+                alt="news image"
                 fill
-                priority
                 className="object-cover"
+                priority
               />
+
               {images.length > 1 && (
                 <>
                   <Button
                     size="icon"
                     variant="ghost"
-                    onClick={prevImage}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white rounded-full"
+                    onClick={prev}
+                    className="absolute left-3 top-1/2 -translate-y-1/2 bg-blue-700/70 hover:bg-blue-800 text-white rounded-full"
                   >
-                    <ChevronLeft className="w-6 h-6" />
+                    <ChevronLeft />
                   </Button>
                   <Button
                     size="icon"
                     variant="ghost"
-                    onClick={nextImage}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white rounded-full"
+                    onClick={next}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 bg-blue-700/70 hover:bg-blue-800 text-white rounded-full"
                   >
-                    <ChevronRight className="w-6 h-6" />
+                    <ChevronRight />
                   </Button>
 
-                  <div className="absolute top-4 right-4 bg-black/40 text-white px-3 py-1 rounded-full text-sm">
-                    {index + 1} / {images.length}
+                  <div className="absolute top-3 right-3 bg-blue-800 text-white text-xs px-3 py-1 rounded-full">
+                    {index + 1}/{images.length}
                   </div>
                 </>
               )}
             </div>
+
             {images.length > 1 && (
-              <div className="flex gap-2 overflow-x-auto p-3 bg-white border-t">
+              <div className="flex gap-2 p-3 border-t bg-white overflow-x-auto">
                 {images.map((img, i) => (
                   <button
                     key={i}
                     onClick={() => setIndex(i)}
                     className={`w-16 h-16 rounded-md overflow-hidden border-2 ${
-                      i === index ? "border-blue-500" : "border-gray-200"
+                      i === index ? "border-blue-700" : "border-slate-200"
                     }`}
                   >
                     <Image
-                      src={img.image || "/placeholder.svg"}
-                      alt={`thumb-${i}`}
+                      src={img.image}
+                      alt="thumb"
                       width={64}
                       height={64}
                       className="object-cover w-full h-full"
@@ -164,22 +173,26 @@ export default function NewsArticlePage() {
           </CardContent>
         </Card>
       )}
-      <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm">
+
+      {/* CONTENT */}
+      <Card className="border border-blue-100 shadow-md">
         <CardContent className="p-8 text-slate-700 leading-relaxed">
-          <p>
-            {data?.[`fullContent_${lang}`] || data?.[`description_${lang}`]}
-          </p>
+          <p>{data.fullContent || data.description}</p>
         </CardContent>
       </Card>
+
+      {/* COMMENTS */}
       <CommentsSection newsId={id} />
+
+      {/* BACK */}
       <div className="mt-8 text-center">
         <Button
           variant="outline"
           onClick={() => history.back()}
-          className="px-6 py-2 bg-white border border-slate-200 hover:bg-slate-100"
+          className="border-blue-700 text-blue-700 hover:bg-blue-50"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
-          {t("two_hundred_forty_two")}
+          Orqaga
         </Button>
       </div>
     </div>

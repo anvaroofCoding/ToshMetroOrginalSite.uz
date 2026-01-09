@@ -1,9 +1,9 @@
+import CompanySlider from "@/components/company/CompanySlider";
+import HomePage from "@/components/home/HomaPage";
 import MetroPagesShowcase from "@/components/main-informations/main-informations";
+import Header from "@/pages/Header/header";
 import FaqAccordion from "@/work/test/questions";
 import Mediateka from "./mediateka/headermediateka";
-import Header from "@/pages/Header/header";
-import HomePage from "@/components/home/HomaPage";
-import CompanySlider from "@/components/company/CompanySlider";
 
 const Home = () => {
   return (

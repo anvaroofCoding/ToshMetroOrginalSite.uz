@@ -5,6 +5,7 @@ import {
   ArrowRight,
   CheckCircle2,
   CreditCard,
+  Loader2,
   Mail,
   MapPin,
   MessageSquare,
@@ -26,14 +27,11 @@ export default function MetroLostItemForm() {
     lastName: "",
     firstName: "",
     middleName: "",
-    // Step 2: Aloqa
     phone: "+998",
     email: "",
-    // Step 3: Passport & Manzil
     passportSeries: "",
     passportNumber: "",
     address: "",
-    // Step 4: Izoh
     message: "",
   });
   const [postLostITems, { isLoading }] = usePostMurojaatMutation();
@@ -54,22 +52,29 @@ export default function MetroLostItemForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (!formData.email.endsWith("@gmail.com")) {
       toast.info("Faqat @gmail.com email manzili ruxsat etiladi");
       return;
     }
-
-    const finalData = {
-      name: `${formData.lastName} ${formData.firstName} ${formData.middleName}`.trim(),
-      phone: formData.phone,
-      email: formData.email,
-      passport: `${formData.passportSeries}${formData.passportNumber}`,
-      address: formData.address,
-      message: formData.message,
-    };
-    await postLostITems(finalData).unwrap();
-    toast.success("Murojaatingiz muvaffaqiyatli qabul qilindi!");
+    try {
+      const finalData = {
+        name: `${formData.lastName} ${formData.firstName} ${formData.middleName}`.trim(),
+        phone: formData.phone,
+        email: formData.email,
+        passport: `${formData.passportSeries}${formData.passportNumber}`,
+        address: formData.address,
+        message: formData.message,
+        status: "pending",
+      };
+      await postLostITems(finalData).unwrap();
+      toast.success("Murojaatingiz muvaffaqiyatli qabul qilindi!");
+    } catch (error) {
+      if (error?.data?.phone) toast.error(error?.data.phone[0]);
+      if (error?.data?.message) toast.error("Itlimos izohingizni yozing!");
+      if (error?.data?.name) toast.error("Itlimos FIOni yozing!");
+      if (error?.data?.passport)
+        toast.error("Itlimos pasport ma'lumotlarini yozing!");
+    }
   };
 
   // Progress bar uchun foiz hisoblash
@@ -102,7 +107,7 @@ export default function MetroLostItemForm() {
       </CardHeader>
 
       <CardContent className="pt-8">
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form className="space-y-6">
           {/* STEP 1: SHAXSIY MA'LUMOTLAR */}
           {step === 1 && (
             <div className="space-y-4 animate-in fade-in slide-in-from-right-4 duration-300">
@@ -269,10 +274,16 @@ export default function MetroLostItemForm() {
               </Button>
             ) : (
               <Button
-                type="submit"
+                onClick={handleSubmit}
+                disabled={isLoading}
                 className="flex-1 bg-green-600 hover:bg-green-700 text-white shadow-lg shadow-green-100"
               >
-                <CheckCircle2 size={18} className="mr-2" /> Yuborish
+                {isLoading ? (
+                  <Loader2 size={18} className="animate-spin mr-2" />
+                ) : (
+                  <CheckCircle2 size={18} className="mr-2" />
+                )}
+                {isLoading ? "Yuborilmoqda..." : "Yuborish"}
               </Button>
             )}
           </div>

@@ -7,6 +7,12 @@ const nextConfig = {
   compress: true, // Gzip/Brotli bilan response siqish
   images: {
     remotePatterns: [
+      {
+        protocol: "http",
+        hostname: "88.88.150.151",
+        port: "8090",
+        pathname: "/media/**",
+      },
       { protocol: "https", hostname: "tashmetro.uz", pathname: "/**" },
       { protocol: "https", hostname: "atto.uz", pathname: "/**" },
       {

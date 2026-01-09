@@ -1,11 +1,9 @@
 "use client";
 
 import Loading from "@/components/management/loading";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function RouteLoading({ children }) {
-  const router = useRouter();
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {

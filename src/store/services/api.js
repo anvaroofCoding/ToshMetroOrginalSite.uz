@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://88.88.150.151:8090/api",
+    baseUrl: "https://abbos.uzmetro.uz/api",
   }),
   tagTypes: ["Post"],
   endpoints: (builder) => ({
@@ -20,8 +20,8 @@ export const api = createApi({
       providesTags: ["Post"],
     }),
     postMurojaat: builder.mutation({
-      query: ({ finalData }) => ({
-        url: "/lost-items",
+      query: (finalData) => ({
+        url: "/lost-items/",
         method: "POST",
         body: finalData,
       }),

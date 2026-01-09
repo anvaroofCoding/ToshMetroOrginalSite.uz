@@ -118,6 +118,7 @@ const Footer = () => {
                     alt="Toshkent metro logo"
                     width={50}
                     height={50}
+                    className="object-cover w-[50px] h-[50px]"
                   />
                 </Link>
                 <div className="h-[40px] flex-col justify-center hidden sm:flex">

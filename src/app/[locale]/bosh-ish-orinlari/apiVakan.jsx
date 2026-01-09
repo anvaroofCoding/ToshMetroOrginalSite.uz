@@ -24,9 +24,6 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-// Import antd Pagination
-import "antd/dist/reset.css";
-
 function ApiVakan() {
   const t = useTranslations("menu");
   const { locale } = useParams();
@@ -40,7 +37,7 @@ function ApiVakan() {
     try {
       setLoading(true);
       const res = await fetch(
-        `http://88.88.150.151:8090/api/job-vacancies/${locale}/`,
+        `https://abbos.uzmetro.uz/api/job-vacancies/${locale}/`,
       );
       if (!res.ok)
         throw new Error("Ish o'rinlarini yuklashda xatolik yuz berdi");
@@ -52,6 +49,8 @@ function ApiVakan() {
       setLoading(false);
     }
   }
+
+  console.log(data);
 
   useEffect(() => {
     getJob();
@@ -128,10 +127,7 @@ function ApiVakan() {
                 <CardHeader className="bg-gradient-to-r from-blue-900 to-blue-800 text-white p-6 rounded-xl">
                   <div className="flex items-start justify-between">
                     <CardTitle className="text-xl font-bold leading-tight mb-2">
-                      {truncateText(
-                        item[`title_${locale}`] || item.education_title_uz,
-                        22,
-                      )}
+                      {truncateText(item.title, 22)}
                     </CardTitle>
                     <Briefcase className="w-8 h-8 text-blue-200" />
                   </div>
@@ -145,11 +141,7 @@ function ApiVakan() {
                         {t("five_hundred_five")}
                       </p>
                       <p className="text-gray-600 text-sm leading-relaxed break-words">
-                        {truncateText(
-                          item[`education_status_${locale}`] ||
-                            item.education_status_uz,
-                          60,
-                        )}
+                        {truncateText(item.education_status, 60)}
                       </p>
                     </div>
                   </div>
@@ -161,11 +153,7 @@ function ApiVakan() {
                         {t("four_hundred_ninety_eight")}
                       </p>
                       <p className="text-gray-600 text-sm leading-relaxed break-words">
-                        {truncateText(
-                          item[`mutaxasislik_${locale}`] ||
-                            item.mutaxasislik_uz,
-                          60,
-                        )}
+                        {truncateText(item.mutaxasislik, 60)}
                       </p>
                     </div>
                   </div>
@@ -175,10 +163,7 @@ function ApiVakan() {
                       {t("four_hundred_ninety_nine")}
                     </p>
                     <p className="text-blue-800 text-sm leading-relaxed break-words">
-                      {truncateText(
-                        item[`requirements_${locale}`] || item.requirements_uz,
-                        80,
-                      )}
+                      {truncateText(item.requirements, 80)}
                     </p>
                   </div>
                 </CardContent>

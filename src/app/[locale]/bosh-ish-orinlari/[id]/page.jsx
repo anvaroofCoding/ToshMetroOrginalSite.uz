@@ -25,7 +25,7 @@ import {
   Users,
   X,
 } from "lucide-react";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 export default function JobApplicationPage() {
@@ -38,6 +38,7 @@ export default function JobApplicationPage() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState({});
   const [error, setError] = useState(null);
+  const { locale } = useParams();
 
   // Form state
   const [formData, setFormData] = useState({
@@ -81,7 +82,7 @@ export default function JobApplicationPage() {
 
     try {
       const res = await fetch(
-        `http://88.88.150.151:8090/api/job-vacancies/uz/${jobId}`,
+        `https://abbos.uzmetro.uz/api/job-vacancies/${locale}/${jobId}`,
       );
 
       if (!res.ok) {
@@ -250,7 +251,7 @@ export default function JobApplicationPage() {
       }
 
       const response = await fetch(
-        "http://88.88.150.151:8090/api/job-vacancy-requests/",
+        "https://abbos.uzmetro.uz/api/job-vacancy-requests/",
         {
           method: "POST",
           body: formDataToSend,
@@ -392,7 +393,7 @@ export default function JobApplicationPage() {
                       transition={{ delay: 0.4, duration: 0.5 }}
                     >
                       <CardTitle className="text-3xl font-bold mb-2 leading-tight">
-                        {data.title_uz}
+                        {data.title || "Lavozim nomi mavjud emas"}
                       </CardTitle>
                       <div className="flex items-center space-x-4 text-blue-100">
                         <div className="flex items-center space-x-1">
@@ -443,7 +444,7 @@ export default function JobApplicationPage() {
                             Ta'lim darajasi
                           </h3>
                           <p className="text-gray-700 text-base leading-relaxed">
-                            {data.education_status_uz || "Ma'lumot yo'q"}
+                            {data.education_status || "Ma'lumot yo'q"}
                           </p>
                         </div>
                       </div>
@@ -467,7 +468,7 @@ export default function JobApplicationPage() {
                             Mutaxassislik darajasi
                           </h3>
                           <p className="text-gray-700 text-base leading-relaxed">
-                            {data.mutaxasislik_uz || "Ma'lumot yo'q"}
+                            {data.mutaxasislik || "Ma'lumot yo'q"}
                           </p>
                         </div>
                       </div>
@@ -492,7 +493,7 @@ export default function JobApplicationPage() {
                         Asosiy talablar
                       </h3>
                       <p className="text-gray-700 text-base leading-relaxed">
-                        {data.requirements_uz || "Ma'lumot yo'q"}
+                        {data.requirements || "Ma'lumot yo'q"}
                       </p>
                     </motion.div>
                   </motion.div>

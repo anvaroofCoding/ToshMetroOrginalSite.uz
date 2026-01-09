@@ -4,9 +4,10 @@ import { Card, Carousel } from "@/components/ui/apple-cards-carousel";
 import { Button } from "@/components/ui/button";
 import { useGetPopularNewsQuery } from "@/store/services/api";
 import { ArrowRight, Loader2 } from "lucide-react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 export default function Header() {
+  const router = useRouter();
   const params = useParams();
   const locale = params?.locale;
   const lang = locale || "uz";
@@ -32,7 +33,7 @@ export default function Header() {
       card={{
         category: item[categoryField] ?? "",
         title: trimText(item[titleField]), // ✅ Title shorten
-        src: item.images?.[0]?.image,
+        src: item.images[0]?.image,
         content: (
           <div className="p-4">
             <p className="text-gray-700 text-sm mb-2">
@@ -42,9 +43,7 @@ export default function Header() {
             <Button
               variant="ghost"
               className="text-[#0e4bb3]"
-              onClick={() =>
-                (window.location.href = `/${lang}/yangiliklar/${item.id}`)
-              }
+              onClick={() => router(`/${lang}/yangiliklar/${item.id}`)}
             >
               {lang === "uz"
                 ? "Batafsil →"

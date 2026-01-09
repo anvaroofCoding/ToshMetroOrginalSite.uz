@@ -82,7 +82,7 @@ export default function MetroPagesShowcase() {
   ];
   const getStatistika = async () => {
     try {
-      const res = await fetch("http://88.88.150.151:8090/api/statistics/en/");
+      const res = await fetch("https://abbos.uzmetro.uz/api/statistics/en/");
 
       if (!res.ok) {
         throw new Error(`Server error: ${res.status}`);

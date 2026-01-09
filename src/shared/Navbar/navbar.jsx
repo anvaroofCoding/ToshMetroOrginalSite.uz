@@ -433,7 +433,7 @@ function Logo({ t }) {
             alt="Toshkent metro logo"
             width={50}
             height={50}
-            className="rounded-full"
+            className="rounded-full  object-cover"
             priority
           />
         </motion.div>

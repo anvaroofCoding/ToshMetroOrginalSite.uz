@@ -51,7 +51,7 @@ export default function OptimizedNews() {
       setError(null);
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 10000);
-      const res = await fetch(`http://88.88.150.151:8090/api/news/${lang}/`, {
+      const res = await fetch(`https://abbos.uzmetro.uz/api/news/${lang}/`, {
         signal: controller.signal,
         headers: {
           "Accept": "application/json",
@@ -105,7 +105,7 @@ export default function OptimizedNews() {
         );
 
         const response = await fetch(
-          `http://88.88.150.151:8090/api/news/${itemId}/like/`,
+          `https://abbos.uzmetro.uz/api/news/${itemId}/like/`,
           {
             method: "POST",
             headers: {
@@ -147,7 +147,6 @@ export default function OptimizedNews() {
               : item,
           ),
         );
-        console.error("Error liking news:", err);
       } finally {
         setLikingItems((prev) => {
           const newSet = new Set(prev);
@@ -172,22 +171,19 @@ export default function OptimizedNews() {
 
   const memoizedNewsItems = useMemo(() => {
     return paginatedNews.map((item) => {
-      const imageUrl = item.images?.[0]?.image;
-      const description = item[`description_${lang}`];
-      const title = item[`title_${lang}`];
       const isLiking = likingItems.has(item.id);
-
       return (
         <Card
           key={item.id}
-          className="h-[450px] flex flex-col overflow-hidden hover:shadow-xl transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 bg-white border border-gray-200 hover:border-gray-300"
+          className="h-[450px] flex flex-col overflow-hidden hover:shadow-xl transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 bg-white border border-gray-200 hover:border-gray-300 p-0"
         >
           <div className="relative h-48 bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden">
-            {imageUrl ? (
+            {item?.images[0]?.image ? (
               <Image
-                src={imageUrl}
-                alt={title || "News image"}
+                src={item?.images[0]?.image}
+                alt={item?.title || "News image"}
                 fill
+                sizes="(max-width: 768px) 100vw, 800px" // mobil 100%, katta ekran max 800px
                 className="object-cover transition-all duration-500 hover:scale-110"
               />
             ) : (
@@ -207,13 +203,13 @@ export default function OptimizedNews() {
                 className="block group"
               >
                 <h3 className="font-semibold text-lg line-clamp-2 mb-2 group-hover:text-blue-600 transition-colors duration-200">
-                  {title || "Untitled"}
+                  {item?.title || "Untitled"}
                 </h3>
                 <p className="text-sm text-gray-600 line-clamp-3 mb-3">
-                  {description || "No description available"}
+                  {item?.description || "No description available"}
                 </p>
               </Link>
-              <p className="text-xs text-muted-foreground absolute bottom-0">
+              <p className="text-xs text-muted-foreground">
                 {getTimeAgo(item.publishedAt)}
               </p>
             </div>

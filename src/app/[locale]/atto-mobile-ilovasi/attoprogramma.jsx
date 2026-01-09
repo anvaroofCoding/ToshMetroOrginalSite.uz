@@ -3,10 +3,10 @@
 import { Button } from "@/components/ui/button";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import { Bell, ChevronRight, Menu, QrCode } from "lucide-react";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import img1 from "../../../images/AppStore.png";
 import img2 from "../../../images/PlayMarket.png";
-import { useTranslations } from "next-intl";
 
 export default function AttoLandingPage() {
   const t = useTranslations("menu");
@@ -110,13 +110,6 @@ export default function AttoLandingPage() {
                       {t("eight")}
                     </p>
                   </div>
-                  <Image
-                    src="/placeholder.svg?width=200&height=100"
-                    alt="Bus"
-                    width={200}
-                    height={100}
-                    className="absolute bottom-2 right-0 opacity-20"
-                  />
                 </motion.div>
 
                 {/* Buttons */}
@@ -170,9 +163,7 @@ export default function AttoLandingPage() {
               <Image
                 src={img1}
                 alt="App Store"
-                width={160}
-                height={54}
-                className="rounded-lg shadow-md"
+                className="rounded-lg shadow-md w-[160px] h-[54px] object-contain"
               />
             </a>
             <a
@@ -184,9 +175,7 @@ export default function AttoLandingPage() {
               <Image
                 src={img2}
                 alt="Google Play"
-                width={160}
-                height={54}
-                className="rounded-lg shadow-md"
+                className="rounded-lg shadow-md w-[160px] h-[54px] object-contain"
               />
             </a>
           </motion.div>

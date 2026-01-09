@@ -1,7 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
-import News from "./new";
-import NewsSection from "./new";
+import OptimizedNews from "./new";
 
 const Page = () => {
   const t = useTranslations("menu");
@@ -12,7 +11,7 @@ const Page = () => {
           {t("two_hundred_thirty_four")}
         </h1>
       </div>
-      <News />
+      <OptimizedNews />
     </div>
   );
 };

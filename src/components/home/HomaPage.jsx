@@ -1,12 +1,18 @@
 "use client";
 import { motion } from "motion/react";
-import React from "react";
-import { ImagesSlider } from "../ui/images-slider";
 import { useTranslations } from "next-intl";
+import { ImagesSlider } from "../ui/images-slider";
 
 export default function HomePage() {
   const t = useTranslations("menu");
-  const images = ["/bosh.jpg", "/galery/7.jpg", "/galery/6.jpg"];
+  const images = [
+    "/header/1.jpg",
+    "/header/3.jpg",
+    "/header/4.jpg",
+    "/header/5.jpg",
+    "/header/6.jpg",
+    "/header/7.jpg",
+  ];
   return (
     <ImagesSlider className="h-[40rem] " images={images}>
       <motion.div
