@@ -11,9 +11,6 @@ export default function Header() {
   const params = useParams();
   const locale = params?.locale;
   const lang = locale || "uz";
-  const titleField = `title`;
-  const descField = `description`;
-  const categoryField = `category`;
   const { data: news, isLoading } = useGetPopularNewsQuery(lang);
   const trimText = (text, limit) => {
     if (!text) return "";
@@ -31,13 +28,13 @@ export default function Header() {
       key={item.id}
       index={index}
       card={{
-        category: item[categoryField] ?? "",
-        title: trimText(item[titleField]), // ✅ Title shorten
+        category: item.category ?? "",
+        title: trimText(item?.title), // ✅ Title shorten
         src: item.images[0]?.image,
         content: (
           <div className="p-4">
             <p className="text-gray-700 text-sm mb-2">
-              {trimText(item[descField])}
+              {trimText(item?.description)}
             </p>
 
             <Button
