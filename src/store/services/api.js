@@ -4,7 +4,12 @@ export const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
     baseUrl: "https://abbos.uzmetro.uz/api",
+    prepareHeaders: (headers) => {
+      headers.set("X-API-KEY", "UZMETRO_SECRET_2026");
+      return headers;
+    },
   }),
+
   tagTypes: ["Post"],
   endpoints: (builder) => ({
     getPopularNews: builder.query({

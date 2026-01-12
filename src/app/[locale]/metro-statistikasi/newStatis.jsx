@@ -86,6 +86,11 @@ const MetroStatisticsDashboard = () => {
         try {
           const response = await fetch(
             `https://abbos.uzmetro.uz/api/statistics/${lang}/${year}/1/`,
+            {
+              headers: {
+                "X-API-KEY": "UZMETRO_SECRET_2026",
+              },
+            },
           );
           if (response.ok) {
             const data = await response.json();
@@ -154,6 +159,11 @@ const MetroStatisticsDashboard = () => {
       try {
         const response = await fetch(
           `https://abbos.uzmetro.uz/api/statistics/${lang}/${selectedYear}/${selectedQuarter}/`,
+          {
+            headers: {
+              "X-API-KEY": "UZMETRO_SECRET_2026",
+            },
+          },
         );
         if (!response.ok) {
           throw new Error(`HTTP xatolik! Status: ${response.status}`);

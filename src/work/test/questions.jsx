@@ -34,7 +34,7 @@ const FaqAccordion = () => {
         {t("title_1")}
       </h2>
 
-      {items.map((item, index) => (
+      {items?.map((item, index) => (
         <div
           key={index}
           className={`rounded-lg  transition-colors mt-4 duration-300 bg-transparent ${

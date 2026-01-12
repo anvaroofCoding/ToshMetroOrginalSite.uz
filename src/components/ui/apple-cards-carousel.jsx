@@ -93,7 +93,7 @@ export const Carousel = ({ items, initialScroll = 0 }) => {
               "mx-auto container",
             )}
           >
-            {items.map((item, index) => (
+            {items?.map((item, index) => (
               <motion.div
                 initial={{
                   opacity: 0,

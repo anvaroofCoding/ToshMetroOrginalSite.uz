@@ -83,6 +83,11 @@ export default function JobApplicationPage() {
     try {
       const res = await fetch(
         `https://abbos.uzmetro.uz/api/job-vacancies/${locale}/${jobId}`,
+        {
+          headers: {
+            "X-API-KEY": "UZMETRO_SECRET_2026",
+          },
+        },
       );
 
       if (!res.ok) {
@@ -253,8 +258,9 @@ export default function JobApplicationPage() {
       const response = await fetch(
         "https://abbos.uzmetro.uz/api/job-vacancy-requests/",
         {
-          method: "POST",
-          body: formDataToSend,
+          "method": "POST",
+          "body": formDataToSend,
+          "X-API-KEY": "UZMETRO_SECRET_2026",
         },
       );
 

@@ -33,6 +33,11 @@ export default function CommentsSection({ newsId }) {
     try {
       const res = await fetch(
         `https://abbos.uzmetro.uz/api/comments/?news_id=${newsId}`,
+        {
+          headers: {
+            "X-API-KEY": "UZMETRO_SECRET_2026",
+          },
+        },
       );
       const data = await res.json();
       setComments(data);
@@ -49,7 +54,10 @@ export default function CommentsSection({ newsId }) {
     try {
       const res = await fetch(`https://abbos.uzmetro.uz/api/comments/`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "X-API-KEY": "UZMETRO_SECRET_2026",
+        },
         body: JSON.stringify({ news: +newsId, ...newComment }),
       });
       const data = await res.json();

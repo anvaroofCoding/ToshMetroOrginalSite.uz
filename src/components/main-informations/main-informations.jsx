@@ -82,7 +82,11 @@ export default function MetroPagesShowcase() {
   ];
   const getStatistika = async () => {
     try {
-      const res = await fetch("https://abbos.uzmetro.uz/api/statistics/en/");
+      const res = await fetch("https://abbos.uzmetro.uz/api/statistics/en/", {
+        headers: {
+          "X-API-KEY": "UZMETRO_SECRET_2026",
+        },
+      });
 
       if (!res.ok) {
         throw new Error(`Server error: ${res.status}`);

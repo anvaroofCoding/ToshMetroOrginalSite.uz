@@ -38,6 +38,11 @@ function ApiVakan() {
       setLoading(true);
       const res = await fetch(
         `https://abbos.uzmetro.uz/api/job-vacancies/${locale}/`,
+        {
+          headers: {
+            "X-API-KEY": "UZMETRO_SECRET_2026",
+          },
+        },
       );
       if (!res.ok)
         throw new Error("Ish o'rinlarini yuklashda xatolik yuz berdi");
@@ -49,8 +54,6 @@ function ApiVakan() {
       setLoading(false);
     }
   }
-
-  console.log(data);
 
   useEffect(() => {
     getJob();

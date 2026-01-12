@@ -23,7 +23,7 @@ export default function Header() {
       </div>
     );
   }
-  const cards = news.map((item, index) => (
+  const cards = news?.map((item, index) => (
     <Card
       key={item.id}
       index={index}

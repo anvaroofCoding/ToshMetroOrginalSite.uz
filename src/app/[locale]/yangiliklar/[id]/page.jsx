@@ -31,6 +31,11 @@ export default function NewsArticlePage() {
       try {
         const res = await fetch(
           `https://abbos.uzmetro.uz/api/news/${lang}/${id}/`,
+          {
+            headers: {
+              "X-API-KEY": "UZMETRO_SECRET_2026",
+            },
+          },
         );
         if (!res.ok) throw new Error("Xatolik");
         const json = await res.json();

@@ -56,6 +56,7 @@ export default function OptimizedNews() {
         headers: {
           "Accept": "application/json",
           "Content-Type": "application/json",
+          "X-API-KEY": "UZMETRO_SECRET_2026",
         },
       });
 
@@ -111,6 +112,7 @@ export default function OptimizedNews() {
             headers: {
               "Content-Type": "application/json",
               "Accept": "application/json",
+              "X-API-KEY": "UZMETRO_SECRET_2026",
             },
           },
         );
