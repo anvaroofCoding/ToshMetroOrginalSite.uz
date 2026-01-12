@@ -1,8 +1,8 @@
 import CompanySlider from "@/components/company/CompanySlider";
 import Header from "@/components/header";
 import HomePage from "@/components/home/HomaPage";
+import ForPageFAq from "@/components/main-informations/forPageFAq";
 import MetroPagesShowcase from "@/components/main-informations/main-informations";
-import FaqAccordion from "@/work/test/questions";
 import Mediateka from "./mediateka/headermediateka";
 
 const Home = () => {
@@ -20,8 +20,8 @@ const Home = () => {
       <div>
         <Mediateka />
       </div>
-      <div className="my-10">
-        <FaqAccordion />
+      <div className="pt-10 container ">
+        <ForPageFAq />
       </div>
       <div className="my-10 bg-transparent">
         <CompanySlider />

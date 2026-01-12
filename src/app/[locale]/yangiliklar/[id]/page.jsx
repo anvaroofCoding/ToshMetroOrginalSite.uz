@@ -3,18 +3,20 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { useGetPopularNewsDetailsQuery } from "@/store/services/api";
 import {
   AlertCircle,
   ArrowLeft,
   Calendar,
   ChevronLeft,
   ChevronRight,
+  Eye,
   Heart,
   Loader2,
 } from "lucide-react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import CommentsSection from "./comments-section";
 
 export default function NewsArticlePage() {
@@ -22,31 +24,18 @@ export default function NewsArticlePage() {
   const lang = path.split("/")[1];
   const id = path.split("/")[3];
 
-  const [data, setData] = useState(null);
   const [index, setIndex] = useState(0);
   const [status, setStatus] = useState("loading");
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const res = await fetch(
-          `https://abbos.uzmetro.uz/api/news/${lang}/${id}/`,
-          {
-            headers: {
-              "X-API-KEY": "UZMETRO_SECRET_2026",
-            },
-          },
-        );
-        if (!res.ok) throw new Error("Xatolik");
-        const json = await res.json();
-        setData(json);
-        setStatus("success");
-      } catch (e) {
-        console.error(e);
-        setStatus("error");
-      }
-    })();
-  }, [id, lang]);
+  const { data, isLoading, isError } = useGetPopularNewsDetailsQuery({
+    lang,
+    id,
+  });
+  if (isLoading) {
+    <div className="flex items-center justify-center min-h-screen text-blue-700">
+      <Loader2 className="w-6 h-6 mr-2 animate-spin text-blue-700" />
+      Yuklanmoqda...
+    </div>;
+  }
 
   /* ================= DATE FORMAT ================= */
   const formatDate = (dateStr) => {
@@ -59,15 +48,6 @@ export default function NewsArticlePage() {
     const yyyy = d.getFullYear();
     return `${hh}:${mm} ${dd}-${MM}-${yyyy}`;
   };
-
-  if (status === "loading") {
-    return (
-      <div className="flex items-center justify-center min-h-screen text-blue-700">
-        <Loader2 className="w-6 h-6 mr-2 animate-spin text-blue-700" />
-        Yuklanmoqda...
-      </div>
-    );
-  }
 
   if (status === "error") {
     return (
@@ -89,35 +69,40 @@ export default function NewsArticlePage() {
   const next = () => setIndex((i) => (i + 1) % images.length);
   const prev = () => setIndex((i) => (i - 1 + images.length) % images.length);
 
+  console.log(data);
   return (
-    <div className="max-w-5xl mx-auto py-8 px-4">
+    <div className="container mx-auto py-8 px-4">
       {/* TITLE */}
-      <h1 className="text-3xl sm:text-4xl font-bold text-blue-800 mb-4">
-        {data.title}
+      <h1 className="text-3xl sm:text-4xl font-bold text-black mb-4">
+        {data?.title}
       </h1>
 
       {/* META */}
       <div className="flex flex-wrap gap-3 mb-8">
-        {data.publishedAt && (
-          <div className="flex items-center gap-2 bg-blue-50 text-blue-800 px-3 py-1.5 rounded-full text-sm">
+        {data?.publishedAt && (
+          <div className="flex items-center gap-2 bg-blue-100 text-black px-3 py-1.5 rounded-full text-sm">
             <Calendar className="w-4 h-4" />
-            {formatDate(data.publishedAt)}
+            {formatDate(data?.publishedAt)}
           </div>
         )}
 
-        <div className="flex items-center gap-2 bg-blue-50 text-blue-800 px-3 py-1.5 rounded-full text-sm">
+        <div className="flex items-center gap-2 bg-blue-100 text-black px-3 py-1.5 rounded-full text-sm">
           <Heart className="w-4 h-4 text-red-500" />
-          {data.like_count} ta like
+          {data?.like_count} ta
+        </div>
+        <div className="flex items-center gap-2 bg-blue-100 text-black px-3 py-1.5 rounded-full text-sm">
+          <Eye className="w-4 h-4 text-blue-800" />
+          12002 ta
         </div>
 
-        {data.category && (
-          <Badge className="bg-blue-700 text-white">{data.category}</Badge>
+        {data?.category && (
+          <Badge className="bg-blue-700 text-white">{data?.category}</Badge>
         )}
       </div>
 
       {/* IMAGES */}
       {images.length > 0 && (
-        <Card className="mb-8 p-0 overflow-hidden border border-blue-100 shadow-lg">
+        <Card className=" max-w-5xl mx-auto mb-8 p-0 overflow-hidden border border-blue-100 shadow-lg">
           <CardContent className="p-0 relative">
             <div className="relative aspect-video bg-slate-100">
               <Image
@@ -134,7 +119,7 @@ export default function NewsArticlePage() {
                     size="icon"
                     variant="ghost"
                     onClick={prev}
-                    className="absolute left-3 top-1/2 -translate-y-1/2 bg-blue-700/70 hover:bg-blue-800 text-white rounded-full"
+                    className="absolute left-3 top-1/2 -translate-y-1/2 bg-blue-700/70 hover:bg-blue-800 text-white hover:text-gray-200 rounded-full"
                   >
                     <ChevronLeft />
                   </Button>
@@ -142,7 +127,7 @@ export default function NewsArticlePage() {
                     size="icon"
                     variant="ghost"
                     onClick={next}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 bg-blue-700/70 hover:bg-blue-800 text-white rounded-full"
+                    className="absolute  hover:text-gray-200 right-3 top-1/2 -translate-y-1/2 bg-blue-700/70 hover:bg-blue-800 text-white rounded-full"
                   >
                     <ChevronRight />
                   </Button>
@@ -182,7 +167,10 @@ export default function NewsArticlePage() {
       {/* CONTENT */}
       <Card className="border border-blue-100 shadow-md">
         <CardContent className="p-8 text-slate-700 leading-relaxed">
-          <p>{data.fullContent || data.description}</p>
+          <p>{data?.description}</p>
+        </CardContent>
+        <CardContent className="p-8 text-slate-700 leading-relaxed">
+          <p>{data?.fullContent}</p>
         </CardContent>
       </Card>
 

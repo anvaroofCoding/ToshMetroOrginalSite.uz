@@ -89,7 +89,6 @@ export const Carousel = ({ items, initialScroll = 0 }) => {
           <div
             className={cn(
               "flex flex-row justify-start gap-4 ",
-              // remove max-w-4xl if you want the carousel to span the full width of its container
               "mx-auto container",
             )}
           >

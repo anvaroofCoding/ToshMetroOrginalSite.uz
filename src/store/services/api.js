@@ -3,13 +3,8 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://abbos.uzmetro.uz/api",
-    prepareHeaders: (headers) => {
-      headers.set("X-API-KEY", "UZMETRO_SECRET_2026");
-      return headers;
-    },
+    baseUrl: "http://88.88.150.151:8090/api",
   }),
-
   tagTypes: ["Post"],
   endpoints: (builder) => ({
     getPopularNews: builder.query({
@@ -32,10 +27,15 @@ export const api = createApi({
       }),
       invalidatesTags: ["Post"],
     }),
+    getPopularNewsDetails: builder.query({
+      query: ({ lang, id }) => `/news/${lang}/${id}`,
+      providesTags: ["Post"],
+    }),
   }),
 });
 
 export const {
+  useGetPopularNewsDetailsQuery,
   usePostMurojaatMutation,
   useGetMurojaatStatistikasiQuery,
   useGetFoydalanuvchilarQuery,

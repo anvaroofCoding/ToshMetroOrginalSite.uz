@@ -82,7 +82,7 @@ export default function JobApplicationPage() {
 
     try {
       const res = await fetch(
-        `https://abbos.uzmetro.uz/api/job-vacancies/${locale}/${jobId}`,
+        `http://88.88.150.151:8090/api/job-vacancies/${locale}/${jobId}`,
         {
           headers: {
             "X-API-KEY": "UZMETRO_SECRET_2026",
@@ -256,7 +256,7 @@ export default function JobApplicationPage() {
       }
 
       const response = await fetch(
-        "https://abbos.uzmetro.uz/api/job-vacancy-requests/",
+        "http://88.88.150.151:8090/api/job-vacancy-requests/",
         {
           "method": "POST",
           "body": formDataToSend,

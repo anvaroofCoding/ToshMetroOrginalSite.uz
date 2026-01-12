@@ -32,14 +32,18 @@ export default function Header() {
         title: trimText(item?.title), // ✅ Title shorten
         src: item.images[0]?.image,
         content: (
-          <div className="p-4">
+          <div>
             <p className="text-gray-700 text-sm mb-2">
               {trimText(item?.description)}
             </p>
 
+            <p className="text-gray-700 text-sm mb-2">
+              {trimText(item?.fullContent)}
+            </p>
+
             <Button
-              variant="ghost"
-              className="text-[#0e4bb3]"
+              variant="link"
+              className="text-[#0e4bb3] px-0"
               onClick={() => router(`/${lang}/yangiliklar/${item.id}`)}
             >
               {lang === "uz"
@@ -64,13 +68,6 @@ export default function Header() {
               ? "Новости метрополитена"
               : "Metro News"}
           </h2>
-          <p className="text-gray-600 max-w-[450px] text-xs lg:text-lg">
-            {lang === "uz"
-              ? "Toshkent metropolitenida e'lon qilinadigan barcha rasmiy yangiliklar"
-              : lang === "ru"
-              ? "Все официальные новости Ташкентского метрополитена"
-              : "All official news from Tashkent Metro"}
-          </p>
         </div>
 
         <Button

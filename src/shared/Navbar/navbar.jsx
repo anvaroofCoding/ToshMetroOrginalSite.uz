@@ -458,7 +458,7 @@ function Logo({ t }) {
         ))}
       </div>
 
-      <h1 className="hidden md:block text-[11px] lg:text-[10px] w-[150px] font-medium leading-tight text-white">
+      <h1 className="hidden md:block text-[11px] lg:text-[10px] w-[150px] font-bold leading-tight text-white">
         {t("logo1")} <span>{t("logo2")}</span> {t("logo3")}
       </h1>
     </motion.div>

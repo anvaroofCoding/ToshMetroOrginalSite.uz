@@ -37,7 +37,7 @@ function ApiVakan() {
     try {
       setLoading(true);
       const res = await fetch(
-        `https://abbos.uzmetro.uz/api/job-vacancies/${locale}/`,
+        `http://88.88.150.151:8090/api/job-vacancies/${locale}/`,
         {
           headers: {
             "X-API-KEY": "UZMETRO_SECRET_2026",

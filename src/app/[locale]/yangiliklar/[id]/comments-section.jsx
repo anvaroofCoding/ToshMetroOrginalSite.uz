@@ -32,7 +32,7 @@ export default function CommentsSection({ newsId }) {
     setLoading(true);
     try {
       const res = await fetch(
-        `https://abbos.uzmetro.uz/api/comments/?news_id=${newsId}`,
+        `http://88.88.150.151:8090/api/comments/?news_id=${newsId}`,
         {
           headers: {
             "X-API-KEY": "UZMETRO_SECRET_2026",
@@ -52,7 +52,7 @@ export default function CommentsSection({ newsId }) {
     if (!newComment.author || !newComment.content) return;
     setSubmitting(true);
     try {
-      const res = await fetch(`https://abbos.uzmetro.uz/api/comments/`, {
+      const res = await fetch(`http://88.88.150.151:8090/api/comments/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
