@@ -1,10 +1,10 @@
-import { motion } from "framer-motion";
-import { ArrowRight, TrainFront, BarChart3, Users2 } from "lucide-react";
-import { useState } from "react";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { AnimatedCounter } from "../animated-counter";
+import { motion } from "framer-motion";
+import { ArrowRight, BarChart3, TrainFront, Users2 } from "lucide-react";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
+import { useState } from "react";
+import { AnimatedCounter } from "../animated-counter";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 15 },
@@ -47,7 +47,7 @@ export default function MetroInfoSection() {
           onError={() => setVideoError(true)}
           aria-hidden="true"
         >
-          <source src="/videos/01.mp4" type="video/mp4" />
+          <source src="/videos/header.mp4" type="video/mp4" />
         </video>
       ) : (
         <div className="absolute inset-0 bg-gradient-to-br from-blue-800 to-indigo-900" />
