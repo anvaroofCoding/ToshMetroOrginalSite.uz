@@ -6,39 +6,90 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
-import { useGetPopularNewsQuery } from "@/store/services/api";
-import { ArrowRight, Eye } from "lucide-react";
+import { useGetPopularNewsQuery, useLikedMutation } from "@/store/services/api";
+import { IconEye, IconThumbUp, IconThumbUpFilled } from "@tabler/icons-react";
+import { ArrowRight, Loader, Search, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import { Input } from "../ui/input";
+import WheelPagination from "../ui/wheel-pagination";
 
-const Blog7 = ({
-  tagline = "Latest Updates",
-  heading = "Blog Posts",
-  description = "Discover the latest trends, tips, and best practices in modern web development. From UI components to design systems, stay updated with our expert insights.",
-  buttonText = "View all articles",
-  buttonUrl = "https://shadcnblocks.com",
-}) => {
+const Blog7 = () => {
+  const [search, setSearch] = useState("");
+  console.log(search);
+  const [page, setPage] = useState(1);
+  const PAGE_SIZE = 12;
   const { locale } = useParams();
   const t = useTranslations("menu");
-  const { data: posts, isLoading } = useGetPopularNewsQuery(locale || "uz");
+
+  const {
+    data: posts,
+    isLoading,
+    isFetching,
+  } = useGetPopularNewsQuery({
+    lang: locale,
+    search,
+    page,
+    pageSize: PAGE_SIZE,
+  });
+
+  const [liked] = useLikedMutation();
+
+  const clickLike = (id) => {
+    try {
+      liked(id).unwrap();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    setPage(1);
+  }, [search]);
+
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="w-full h-screen flex justify-center items-center">
+        <Loader className="mx-auto my-20 animate-spin" />
+      </div>
+    );
   }
-  console.log(posts);
+
+  const totalPages = Math.ceil((posts?.count ?? 0) / PAGE_SIZE);
+
   return (
     <section className="py-20">
-      <div className="container mx-auto flex flex-col items-center gap-16 lg:px-16">
+      <div className="container mx-auto flex flex-col items-center gap-16 ">
         <div className="text-center">
           <h2 className="text-pretty text-3xl font-semibold md:text-4xl lg:max-w-3xl lg:text-5xl">
             {t("two_hundred_thirty_four")}
           </h2>
+          <div className="border mt-5 rounded-lg overflow-hidden relative bg-white border border-blue-800/30">
+            <Input
+              className={"pr-10 border-none outline-none"}
+              placeholder="Qidiruv..."
+              value={search}
+              onChange={(e) => {
+                setSearch(e.target.value);
+              }}
+            />
+            {search == "" ? (
+              <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 text-blue-800" />
+            ) : (
+              <X
+                onClick={() => setSearch("")}
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-blue-800"
+              />
+            )}
+          </div>
         </div>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-          {posts?.map((post) => (
+          {posts?.results?.map((post) => (
             <Card
               key={post.id}
-              className="grid grid-rows-[auto_auto_1fr_auto] rounded-lg overflow-hidden"
+              className="grid grid-rows-[auto_auto_1fr_auto] rounded-lg overflow-hidden pt-0"
             >
               <div className="aspect-[16/9] w-full">
                 <Link
@@ -71,18 +122,48 @@ const Blog7 = ({
               </CardContent>
               <CardFooter className="flex items-center justify-between">
                 <Link
-                  href={`${post?.id}`}
+                  href={`yangiliklar/${post?.id}`}
                   className="flex items-center text-foreground hover:underline"
                 >
                   {t("readMore")}
                   <ArrowRight className="ml-2 size-4" />
                 </Link>
-                <p className="flex items-center gap-1 text-muted-foreground text-sm">
-                  <Eye className="w-5" /> 40431
-                </p>
+                <div className="flex items-center gap-3">
+                  <p
+                    onClick={() => {
+                      clickLike(post?.id);
+                    }}
+                    className="flex items-center gap-0.5 text-muted-foreground text-sm cursor-pointer"
+                  >
+                    {post?.liked ? (
+                      <IconThumbUpFilled stroke={2} />
+                    ) : (
+                      <IconThumbUp stroke={2} />
+                    )}
+                    {post?.like_count}
+                  </p>
+                  <p className="flex items-center gap-0.5 text-muted-foreground text-sm">
+                    <IconEye stroke={2} /> {post?.view_count}
+                  </p>
+                </div>
               </CardFooter>
             </Card>
           ))}
+        </div>
+        {posts?.results?.length === 0 && (
+          <div className="w-full flex justify-center items-center mt-20">
+            <p className="text-center text-muted-foreground">
+              Ma'lumot topilmadi
+            </p>
+          </div>
+        )}
+        <div>
+          <WheelPagination
+            totalPages={totalPages}
+            visibleCount={7}
+            onChange={(newPage) => setPage(newPage + 1)}
+            disabled={isFetching}
+          />
         </div>
       </div>
     </section>

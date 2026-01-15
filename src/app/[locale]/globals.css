@@ -22,26 +22,6 @@ body {
   background-color: #ffffff; /* oq fon */
   color: #0e327f; /* ko'k matn rangi */
 }
-/* Scrollbarni yashiradi, lekin scrollni o'chirmaydi */
-body {
-  overflow: auto; /* scroll ishlasin */
-}
-
-/* Chrome, Edge, Safari uchun */
-::-webkit-scrollbar {
-  width: 0px; /* scrollbar kengligini 0 qiladi */
-  background: transparent; /* fonini yashiradi */
-}
-
-/* Firefox uchun */
-html {
-  scrollbar-width: none; /* scrollbarni yashiradi */
-}
-
-/* IE va eski Edge uchun */
-html {
-  -ms-overflow-style: none; /* scrollbarni yashiradi */
-}
 
 .under-none {
   text-transform: none;
@@ -83,6 +63,12 @@ html {
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-geist-foreground: var(----geist-foreground);
+  --color-geist-violet: var(----geist-violet);
+  --color-geist-warning: var(----geist-warning);
+  --color-geist-error: var(----geist-error);
+  --color-geist-success: var(----geist-success);
+  --color-ds-background-100: var(----ds-background-100);
 }
 
 :root {
@@ -118,6 +104,12 @@ html {
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --ds-background-100: hsla(0, 0%, 100%, 1);
+  --geist-success: #0070f3;
+  --geist-error: #ee0000;
+  --geist-warning: #f5a623;
+  --geist-violet: #7928ca;
+  --geist-foreground: #000;
 }
 
 .dark {
@@ -152,6 +144,9 @@ html {
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+  --ds-background-100: hsla(0, 0%, 4%, 1);
+  --geist-error: #ff0000;
+  --geist-foreground: #fff;
 }
 
 @layer base {

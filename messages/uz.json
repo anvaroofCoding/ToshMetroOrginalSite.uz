@@ -906,6 +906,37 @@
     "five_hundred_twenty_11": "Tez-Tez So'raladigan Savollar",
     "five_hundred_twenty_12": "Metro haqida sizning savollaringizga javoblar",
     "five_hundred_twenty_13": "Javobni ko'rish",
-    "five_hundred_twenty_14": "Xavfsizlik"
+    "five_hundred_twenty_14": "Xavfsizlik",
+
+    "loginTitle": "Shaxsiy hisobingizga kirish",
+    "loginSubtitle": "Telefon raqamingiz orqali tizimga kiring",
+    "enterPhoneFull": "Telefon raqamingizni to‘liq kiriting",
+    "sendCode": "Kod jo'natish",
+    "register": "Ro'yxatdan o'tish",
+    "createAccount": "Shaxsiy kabinetni yarating",
+    "registerSubtitle": "Ro'yxatdan o'tish uchun quyidagi ma'lumotlarni kiriting",
+    "firstName": "Ism",
+    "firstNamePlaceholder": "Ismingizni yozing...",
+    "lastName": "Familya",
+    "lastNamePlaceholder": "Familyangizni yozing...",
+    "phone": "Telefon raqam",
+    "phonePlaceholder": "Telefon raqamingizni yozing",
+    "phoneError": "Iltimos raqamingizni to'liq yozing",
+    "login": "Kirish",
+    "logout": "Chiqish",
+    "enterCode": "Kodni kiriting",
+    "codeSent": "Biz sizning raqamingizga kod yubordik",
+    "resend": "Qayta yuborish",
+    "confirm": "Tastiqlash",
+    "confirmCode": "Tastiqlash kodi",
+    "successTitle": "Muvaffaqiyatli kirildi",
+    "successDescription": "Telefon raqamingiz orqali tizimga muvaffaqiyatli kirildingiz.",
+    "backHome": "Bosh sahifaga qaytish",
+
+    "loginz": "Shaxsiy hisobga kirish",
+    "logoutConfirmTitle": "Shaxsiy hisobdan chiqishni xohlaysizmi?",
+    "logoutConfirmText": "Agar hisobingizdan chiqib ketsangiz, tizimga qayta kirishingiz kerak bo‘ladi.",
+    "cancel": "Bekor qilish",
+    "commentPlaceholder": "Komment yozish..."
   }
 }

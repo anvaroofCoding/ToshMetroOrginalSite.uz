@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog";
+import { VisuallyHidden } from "@nextui-org/react";
+import * as Dialog from "@radix-ui/react-dialog";
 import { X } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { useState } from "react";
 
 export default function BiometrikVideo1() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -19,33 +20,48 @@ export default function BiometrikVideo1() {
         {t("forty_one")}
       </Button>
 
-      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogContent className="max-w-xs p-0 bg-black border-0">
-          <DialogHeader className="absolute top-2 right-2 z-10">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setIsModalOpen(false)}
-              className="text-white hover:bg-white/20 rounded-full"
-            >
-              <X className="h-4 w-4" />
-            </Button>
-          </DialogHeader>
+      <Dialog.Root open={isModalOpen} onOpenChange={setIsModalOpen}>
+        <Dialog.Portal>
+          {/* Overlay */}
+          <Dialog.Overlay className="fixed inset-0 bg-black/80 z-50" />
 
-          <div className="aspect-[9/16] w-full">
-            <video
-              className="w-full h-full object-cover rounded-lg"
-              controls
-              autoPlay
-              loop
-              muted
-              poster="/instagram-reel-thumbnail.png"
+          {/* Content */}
+          <Dialog.Content
+            className="
+    fixed inset-0 z-50 
+    flex items-center justify-center 
+    bg-black
+  "
+          >
+            {/* ACCESSIBILITY TITLE (hidden) */}
+            <VisuallyHidden>
+              <Dialog.Title>Biometrik tasdiqlash videosi</Dialog.Title>
+            </VisuallyHidden>
+
+            {/* Close button */}
+            <button
+              onClick={() => setIsModalOpen(false)}
+              className="absolute top-4 right-4 z-50 text-white hover:bg-white/20 p-2 rounded-full"
             >
-              <source src="/videos/hand-video1.mp4" type="video/mp4" />
-            </video>
-          </div>
-        </DialogContent>
-      </Dialog>
+              <X className="h-6 w-6" />
+            </button>
+
+            {/* Video */}
+            <div className="w-full h-full">
+              <video
+                className="w-full h-full object-cover"
+                controls
+                autoPlay
+                loop
+                muted
+                playsInline
+              >
+                <source src="/videos/hand-video1.mp4" type="video/mp4" />
+              </video>
+            </div>
+          </Dialog.Content>
+        </Dialog.Portal>
+      </Dialog.Root>
     </div>
   );
 }

@@ -2,7 +2,7 @@
 
 import { Card, Carousel } from "@/components/ui/apple-cards-carousel";
 import { Button } from "@/components/ui/button";
-import { useGetPopularNewsQuery } from "@/store/services/api";
+import { useGetPopularNewssQuery } from "@/store/services/api";
 import { ArrowRight, Loader2 } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 
@@ -11,7 +11,7 @@ export default function Header() {
   const params = useParams();
   const locale = params?.locale;
   const lang = locale || "uz";
-  const { data: news, isLoading } = useGetPopularNewsQuery(lang);
+  const { data: news, isLoading } = useGetPopularNewssQuery(lang);
   const trimText = (text, limit) => {
     if (!text) return "";
     return text.length > limit ? text.slice(0, limit) + "..." : text;
@@ -23,13 +23,13 @@ export default function Header() {
       </div>
     );
   }
-  const cards = news?.map((item, index) => (
+  const cards = news?.results?.map((item, index) => (
     <Card
       key={item.id}
       index={index}
       card={{
         category: item.category ?? "",
-        title: trimText(item?.title), // ✅ Title shorten
+        title: trimText(item?.title),
         src: item.images[0]?.image,
         content: (
           <div>
@@ -44,7 +44,7 @@ export default function Header() {
             <Button
               variant="link"
               className="text-[#0e4bb3] px-0"
-              onClick={() => router(`/${lang}/yangiliklar/${item.id}`)}
+              onClick={() => router.push(`/${lang}/yangiliklar/${item.id}`)}
             >
               {lang === "uz"
                 ? "Batafsil →"

@@ -1,180 +1,105 @@
 "use client";
-
-import {
-  Button,
-  Card,
-  CardBody,
-  CardHeader,
-  Input,
-  Pagination,
-  Spinner,
-  Textarea,
-} from "@nextui-org/react";
-import { MessageCircle, Send, User } from "lucide-react";
-import { useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
-
-export default function CommentsSection({ newsId }) {
-  const t = useTranslations("menu");
-  const [comments, setComments] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [newComment, setNewComment] = useState({ author: "", content: "" });
-  const [submitting, setSubmitting] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const commentsPerPage = 5;
-  const totalPages = Math.ceil(comments.length / commentsPerPage);
-  const startIndex = (currentPage - 1) * commentsPerPage;
-  const endIndex = startIndex + commentsPerPage;
-  const currentComments = comments.slice(startIndex, endIndex);
-
-  const fetchComments = async () => {
-    setLoading(true);
-    try {
-      const res = await fetch(
-        `http://88.88.150.151:8090/api/comments/?news_id=${newsId}`,
-        {
-          headers: {
-            "X-API-KEY": "UZMETRO_SECRET_2026",
-          },
-        },
-      );
-      const data = await res.json();
-      setComments(data);
-    } catch {
-    } finally {
-      setLoading(false);
+import { Button } from "@/components/ui/button";
+import { useCommentPostMutation, useCommentQuery } from "@/store/services/api";
+import { Send } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+export default function CommentsSection({ id }) {
+  const { data, isLoading, error } = useCommentQuery(id);
+  const [postComment, { isLoading: loadingComment }] = useCommentPostMutation();
+  const [inputValue, setInputValue] = useState("");
+  const scrollContainer = useRef(null);
+  useEffect(() => {
+    if (scrollContainer.current) {
+      scrollContainer.current.scrollTop = scrollContainer.current.scrollHeight;
     }
-  };
-
+  }, [data]);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!newComment.author || !newComment.content) return;
-    setSubmitting(true);
+    if (!inputValue.trim()) return;
+
     try {
-      const res = await fetch(`http://88.88.150.151:8090/api/comments/`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-API-KEY": "UZMETRO_SECRET_2026",
-        },
-        body: JSON.stringify({ news: +newsId, ...newComment }),
+      await postComment({
+        news: id,
+        content: inputValue,
       });
-      const data = await res.json();
-      setComments([data, ...comments]);
-      setNewComment({ author: "", content: "" });
-    } finally {
-      setSubmitting(false);
+      setInputValue("");
+    } catch (err) {
+      console.error("Failed to post comment:", err);
     }
   };
-
-  const formatDate = (timestamp) => {
-    const d = new Date(timestamp);
-    const hh = String(d.getHours()).padStart(2, "0");
-    const mm = String(d.getMinutes()).padStart(2, "0");
-    const dd = String(d.getDate()).padStart(2, "0");
-    const MM = String(d.getMonth() + 1).padStart(2, "0");
-    const yyyy = d.getFullYear();
-    return `${hh}:${mm} ${dd}-${MM}-${yyyy}`;
+  const formatTime = (timestamp) => {
+    const date = new Date(timestamp);
+    return date.toLocaleTimeString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
   };
-
-  useEffect(() => {
-    fetchComments();
-  }, [newsId]);
-
   return (
-    <div className="mt-10">
-      <Card className="bg-white rounded-2xl shadow-lg border border-blue-100">
-        <CardHeader className="flex items-center gap-2 text-blue-700 font-semibold text-lg">
-          <MessageCircle /> {t("two_hundred_forty_four")} ({comments.length})
-        </CardHeader>
-        <CardBody className="space-y-6">
-          {/* Comment Form */}
-          <form onSubmit={handleSubmit} className="space-y-3">
-            <Input
-              placeholder={t("two_hundred_forty_five")}
-              variant="bordered"
-              value={newComment.author}
-              className="border-blue-700"
-              onChange={(e) =>
-                setNewComment({ ...newComment, author: e.target.value })
-              }
-            />
-            <Textarea
-              placeholder={t("two_hundred_forty_six")}
-              variant="bordered"
-              value={newComment.content}
-              minRows={3}
-              className="border-blue-700"
-              onChange={(e) =>
-                setNewComment({ ...newComment, content: e.target.value })
-              }
-            />
-            <Button
-              color="primary"
-              type="submit"
-              isLoading={submitting}
-              startContent={<Send size={16} />}
-              className="w-full sm:w-auto bg-blue-700 hover:bg-blue-800"
-            >
-              {t("two_hundred_forty_seven")}
-            </Button>
-          </form>
+    <div className="flex flex-col h-full bg-background border border-border rounded-lg overflow-hidden mt-10">
+      <div
+        ref={scrollContainer}
+        className="flex-1 overflow-y-auto p-4 space-y-3"
+      >
+        {isLoading && (
+          <div className="flex justify-center items-center h-full">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" />
+          </div>
+        )}
 
-          {/* Comment list */}
-          {loading ? (
-            <div className="flex justify-center py-6">
-              <Spinner color="primary" label={t("two_hundred_forty_nine")} />
+        {error && (
+          <div className="text-center text-destructive text-sm py-4">
+            Failed to load comments
+          </div>
+        )}
+
+        {!isLoading && !error && (!data || data.length === 0) && (
+          <div className="text-center text-muted-foreground text-sm py-8">
+            No comments yet. Be the first to comment!
+          </div>
+        )}
+
+        {data?.map((comment) => (
+          <div
+            key={comment.id}
+            className="flex flex-col gap-1 animate-in fade-in "
+          >
+            <div className="flex items-baseline gap-2">
+              <span className="font-medium text-sm text-foreground">
+                {comment.author}
+              </span>
+              <span className="text-xs text-muted-foreground">
+                {formatTime(comment.timestamp)}
+              </span>
             </div>
-          ) : comments.length === 0 ? (
-            <p className="text-center text-gray-500">
-              {t("two_hundred_forty_eight")}
-            </p>
-          ) : (
-            <>
-              <div className="space-y-3">
-                {currentComments.map((c) => (
-                  <Card
-                    key={c.id}
-                    className="p-4 bg-white/80 shadow-sm border border-blue-100 rounded-xl hover:shadow-md transition-all duration-200"
-                  >
-                    <div className="flex items-start gap-3">
-                      <User className="text-blue-700 mt-1" />
-                      <div className="flex-1">
-                        <div className="flex justify-between items-center">
-                          <p className="font-semibold text-blue-700 text-sm">
-                            {c.author}
-                          </p>
-                          <p className="text-xs text-gray-400">
-                            {formatDate(c.timestamp)}
-                          </p>
-                        </div>
-                        <p className="mt-2 text-gray-700 text-sm leading-relaxed">
-                          {c.content}
-                        </p>
-                      </div>
-                    </div>
-                  </Card>
-                ))}
-              </div>
+            <div className="bg-muted rounded-lg px-3 py-2 w-fit ">
+              <p className="text-sm text-foreground break-words">
+                {comment.content}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
 
-              {/* Pagination */}
-              {totalPages > 1 && (
-                <div className="flex justify-center mt-6">
-                  <Pagination
-                    total={totalPages}
-                    page={currentPage}
-                    onChange={setCurrentPage}
-                    color="primary"
-                    showControls
-                    size="sm"
-                  />
-                </div>
-              )}
-            </>
-          )}
-        </CardBody>
-      </Card>
+      <div className="border-t border-border bg-background p-4">
+        <form onSubmit={handleSubmit} className="flex gap-2">
+          <input
+            type="text"
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            placeholder="Write a comment..."
+            disabled={loadingComment}
+            className="flex-1 px-3 py-2 rounded-lg bg-muted border border-input text-foreground placeholder-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:opacity-50"
+          />
+          <Button
+            type="submit"
+            disabled={loadingComment || !inputValue.trim()}
+            size="icon"
+            className="bg-blue-800 hover:bg-blue-900 text-primary-foreground"
+          >
+            <Send className="h-4 w-4" />
+          </Button>
+        </form>
+      </div>
     </div>
   );
 }

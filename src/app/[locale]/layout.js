@@ -7,6 +7,7 @@ import Footer from "@/shared/footer/footer";
 import { Analytics } from "@vercel/analytics/next";
 import { NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
+import { Toaster } from "sonner";
 import "./globals.css";
 import Providers from "./providers";
 
@@ -69,8 +70,8 @@ export default async function RootLayout({ children, params }) {
               <RouteLoader />
               <Layout>
                 <Navbar />
-                {/* <SplashScreen> */}
                 {children}
+                <Toaster position="bottom-right" richColors />
                 <Analytics />
                 <Footer />
                 <FloatingActionButton />

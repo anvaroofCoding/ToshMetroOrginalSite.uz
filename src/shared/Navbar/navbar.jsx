@@ -1,7 +1,19 @@
 "use client";
 
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
+import { Tooltip } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
+import { useMeQuery } from "@/store/services/api";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   Building,
@@ -208,7 +220,10 @@ function LanguageDropdown({ locale, onChangeLanguage }) {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <button className="flex items-center gap-2 text-white hover:bg-white/10 hover:text-white/60 rounded-lg px-3 py-2 transition-colors duration-200">
+      <Button
+        variant="link"
+        className="flex items-center gap-2 text-white hover:bg-white/10 hover:text-white/60 rounded-lg  py-2 transition-colors duration-200"
+      >
         <Globe className="h-4 w-4" />
         {locale.toUpperCase()}
         <ChevronDown
@@ -217,7 +232,7 @@ function LanguageDropdown({ locale, onChangeLanguage }) {
             isOpen && "rotate-180",
           )}
         />
-      </button>
+      </Button>
 
       <AnimatePresence>
         {isOpen && (
@@ -237,7 +252,7 @@ function LanguageDropdown({ locale, onChangeLanguage }) {
                       onChangeLanguage(lang);
                       setIsOpen(false);
                     }}
-                    className="block w-full px-6 py-2.5 text-sm font-medium text-slate-700 hover:bg-blue-100 transition-colors text-center"
+                    className="block w-full px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-blue-100 transition-colors text-center"
                   >
                     {lang}
                   </button>
@@ -261,6 +276,9 @@ function MobileMenu({
   t,
 }) {
   const [expandedMenu, setExpandedMenu] = useState(null);
+  const [open, setOpen] = useState(false);
+  const [token, setToken] = useState(null);
+  const router = useRouter();
 
   // Lock body scroll when menu is open
   useEffect(() => {
@@ -273,6 +291,12 @@ function MobileMenu({
       document.body.style.overflow = "";
     };
   }, [isOpen]);
+
+  useEffect(() => {
+    // faqat browserda ishlaydi
+    const t = localStorage.getItem("token");
+    setToken(t);
+  }, []);
   return (
     <AnimatePresence>
       {isOpen && (
@@ -286,6 +310,31 @@ function MobileMenu({
             className="fixed inset-0 bg-black/50 z-40 lg:hidden"
             onClick={onClose}
           />
+
+          <AlertDialog open={false} onOpenChange={setOpen}>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>{t("logoutConfirmTitle")}</AlertDialogTitle>
+                <AlertDialogDescription>
+                  {t("logoutConfirmText")}
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel onClick={() => setOpen(false)}>
+                  {t("cancel")}
+                </AlertDialogCancel>
+                <AlertDialogAction
+                  onClick={() => {
+                    localStorage.removeItem("token");
+                    setOpen(false);
+                    window.location.reload();
+                  }}
+                >
+                  {t("logout")}
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
 
           {/* Sliding panel from right */}
           <motion.div
@@ -308,7 +357,28 @@ function MobileMenu({
 
             <div className="relative z-10">
               {/* Close button */}
-              <div className="flex justify-end p-4">
+              <div className="flex justify-between p-4">
+                {token ? (
+                  <Button
+                    onClick={() => {
+                      setOpen(true);
+                    }}
+                    variant="default"
+                    className="text-white font-bold bg-white/10 hover:bg-white/20 lg:hidden block"
+                  >
+                    Chiqish
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={() => {
+                      router.push("/login");
+                    }}
+                    variant="default"
+                    className="text-white font-bold bg-white/10 hover:bg-white/20 lg:hidden block"
+                  >
+                    Kirish
+                  </Button>
+                )}
                 <button
                   onClick={onClose}
                   className="p-2 rounded-lg hover:bg-white/10 transition-colors"
@@ -467,12 +537,15 @@ function Logo({ t }) {
 
 // Main Navbar component
 export default function Navbar() {
+  const { data: me } = useMeQuery();
+  const [token, setToken] = useState(null);
   const t = useTranslations("menu");
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const menuItems = getMenuItems(t);
   const isHidden =
@@ -483,6 +556,12 @@ export default function Navbar() {
     const handleScroll = () => setIsScrolled(window.scrollY > 0);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    // faqat browserda ishlaydi
+    const t = localStorage.getItem("token");
+    setToken(t);
   }, []);
 
   const changeLanguage = useCallback(
@@ -519,6 +598,31 @@ export default function Navbar() {
           </div>
         )}
 
+        <AlertDialog open={open} onOpenChange={setOpen}>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>{t("logoutConfirmTitle")}</AlertDialogTitle>
+              <AlertDialogDescription>
+                {t("logoutConfirmText")}
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel onClick={() => setOpen(false)}>
+                {t("cancel")}
+              </AlertDialogCancel>
+              <AlertDialogAction
+                onClick={() => {
+                  localStorage.removeItem("token");
+                  setOpen(false);
+                  window.location.reload();
+                }}
+              >
+                {t("logout")}
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+
         <div className="container mx-auto flex items-center justify-between py-4">
           <Logo t={t} />
 
@@ -545,6 +649,32 @@ export default function Navbar() {
               locale={locale}
               onChangeLanguage={changeLanguage}
             />
+
+            {token ? (
+              <Tooltip text={me?.first_name + " " + me?.last_name}>
+                <Button
+                  variant="link"
+                  onClick={() => {
+                    setOpen(true);
+                  }}
+                  className="text-white font-bold lg:block hidden"
+                >
+                  {t("logout")}
+                </Button>
+              </Tooltip>
+            ) : (
+              <Tooltip text={t("loginz")}>
+                <Button
+                  variant="link"
+                  onClick={() => {
+                    router.push("/login");
+                  }}
+                  className="text-white font-bold lg:block hidden"
+                >
+                  {t("login")}
+                </Button>
+              </Tooltip>
+            )}
 
             <Button
               variant="ghost"
