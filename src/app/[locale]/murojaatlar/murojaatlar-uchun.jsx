@@ -1,294 +1,167 @@
 "use client";
-
-import {
-  ArrowLeft,
-  ArrowRight,
-  CheckCircle2,
-  CreditCard,
-  Loader2,
-  Mail,
-  MapPin,
-  MessageSquare,
-  Phone,
-} from "lucide-react";
-import { useState } from "react";
-
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { usePostMurojaatMutation } from "@/store/services/api";
-import { toast, Toaster } from "sonner";
-
+import {
+  useLostItemsMeQuery,
+  usePostMurojaatMutation,
+} from "@/store/services/api";
+import { CheckCircle, Loader, Send } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { useState } from "react";
+import { toast } from "sonner";
 export default function MetroLostItemForm() {
-  const [step, setStep] = useState(1);
+  const { data } = useLostItemsMeQuery();
+  const t = useTranslations("menu");
   const [formData, setFormData] = useState({
-    lastName: "",
-    firstName: "",
-    middleName: "",
-    phone: "+998",
     email: "",
-    passportSeries: "",
-    passportNumber: "",
+    passport: "",
     address: "",
     message: "",
   });
   const [postLostITems, { isLoading }] = usePostMurojaatMutation();
-
-  const totalSteps = 4;
-
-  const handleChange = (field, value) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
-  };
-
-  const nextStep = () => {
-    if (step < totalSteps) setStep(step + 1);
-  };
-
-  const prevStep = () => {
-    if (step > 1) setStep(step - 1);
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.email.endsWith("@gmail.com")) {
-      toast.info("Faqat @gmail.com email manzili ruxsat etiladi");
-      return;
-    }
     try {
       const finalData = {
-        name: `${formData.lastName} ${formData.firstName} ${formData.middleName}`.trim(),
-        phone: formData.phone,
         email: formData.email,
-        passport: `${formData.passportSeries}${formData.passportNumber}`,
+        passport: formData.passport,
         address: formData.address,
         message: formData.message,
         status: "pending",
       };
       await postLostITems(finalData).unwrap();
-      toast.success("Murojaatingiz muvaffaqiyatli qabul qilindi!");
+      toast.success(t("success_received"));
     } catch (error) {
       if (error?.data?.phone) toast.error(error?.data.phone[0]);
-      if (error?.data?.message) toast.error("Itlimos izohingizni yozing!");
-      if (error?.data?.name) toast.error("Itlimos FIOni yozing!");
-      if (error?.data?.passport)
-        toast.error("Itlimos pasport ma'lumotlarini yozing!");
+      if (error?.data?.message) toast.error(t("comment_required"));
+      if (error?.data?.passport) toast.error(t("passport_required"));
     }
   };
-
-  // Progress bar uchun foiz hisoblash
-  const progress = (step / totalSteps) * 100;
-
-  return (
-    <Card className="container bg-white shadow-2xl border-blue-100 overflow-hidden">
-      {/* Progress Bar */}
-      <Toaster richColors position="bottom-right" expand={true} closeButton />
-
-      <div className="h-1.5 w-full bg-blue-50">
-        <div
-          className="h-full bg-blue-600 transition-all duration-500 ease-in-out"
-          style={{ width: `${progress}%` }}
-        />
-      </div>
-
-      <CardHeader>
-        <div className="flex justify-between items-center">
-          <CardTitle className="text-blue-900 flex items-center gap-2">
-            <div>
-              <MessageSquare size={20} />
+  if (data?.can_send_new_request == true) {
+    return (
+      <Card className="container">
+        <CardHeader>
+          <CardTitle className={"text-blue-900"}>{t("send_request")}</CardTitle>
+          <CardDescription>{t("form_warning")}</CardDescription>
+        </CardHeader>
+        <CardContent className={"grid grid-cols-1 lg:grid-cols-2 gap-2"}>
+          <div className="flex flex-col gap-6">
+            <div className="grid gap-2">
+              <Label htmlFor="email">{t("one_hundred_eighty_six")}</Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="m@example.com"
+                required
+                value={formData.email}
+                onChange={(e) =>
+                  setFormData({ ...formData, email: e.target.value })
+                }
+              />
             </div>
-            Murojaat yo‘llash
-          </CardTitle>
-          <span className="text-sm font-medium text-blue-600 bg-blue-100 px-3 py-1 rounded-full">
-            Bosqich {step}/{totalSteps}
-          </span>
-        </div>
-      </CardHeader>
-
-      <CardContent className="pt-8">
-        <form className="space-y-6">
-          {/* STEP 1: SHAXSIY MA'LUMOTLAR */}
-          {step === 1 && (
-            <div className="space-y-4 animate-in fade-in slide-in-from-right-4 duration-300">
-              <div className="grid gap-4">
-                <div className="space-y-2">
-                  <Label className="text-blue-900 font-semibold">
-                    Familiya
-                  </Label>
-                  <Input
-                    required
-                    placeholder="Familiyangizni kiriting"
-                    className="focus:border-blue-500 focus:ring-blue-500"
-                    value={formData.lastName}
-                    onChange={(e) => handleChange("lastName", e.target.value)}
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label className="text-blue-900 font-semibold">Ism</Label>
-                  <Input
-                    required
-                    placeholder="Ismingizni kiriting"
-                    value={formData.firstName}
-                    onChange={(e) => handleChange("firstName", e.target.value)}
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label className="text-blue-900 font-semibold">
-                    Otasining ismi
-                  </Label>
-                  <Input
-                    placeholder="Otangizning ismini kiriting"
-                    value={formData.middleName}
-                    onChange={(e) => handleChange("middleName", e.target.value)}
-                  />
-                </div>
-              </div>
+            <div className="grid gap-2">
+              <Label htmlFor="passport">{t("passport_label")}</Label>
+              <Input
+                id="passport"
+                type="text"
+                placeholder="AD1234567"
+                required
+                value={formData.passport}
+                onChange={(e) =>
+                  setFormData({ ...formData, passport: e.target.value })
+                }
+              />
             </div>
-          )}
-
-          {/* STEP 2: ALOQA */}
-          {step === 2 && (
-            <div className="space-y-4 animate-in fade-in slide-in-from-right-4 duration-300">
-              <div className="space-y-2">
-                <Label className="text-blue-900 font-semibold flex items-center gap-2">
-                  <Phone size={16} className="text-blue-600" /> Telefon raqam
-                </Label>
-                <Input
-                  required
-                  value={formData.phone}
-                  onChange={(e) => {
-                    let value = e.target.value.replace(/\D/g, "");
-                    if (!value.startsWith("998")) value = "998";
-                    handleChange("phone", "+" + value);
-                  }}
-                />
-              </div>
-              <div className="space-y-2">
-                <Label className="text-blue-900 font-semibold flex items-center gap-2">
-                  <Mail size={16} className="text-blue-600" /> Email (Faqat
-                  Gmail)
-                </Label>
-                <Input
-                  required
-                  type="email"
-                  placeholder="example@gmail.com"
-                  value={formData.email}
-                  onChange={(e) => handleChange("email", e.target.value)}
-                />
-              </div>
+            <div className="grid gap-2">
+              <Label htmlFor="address">{t("address_labels")}</Label>
+              <Input
+                id="address"
+                type="text"
+                placeholder={t("address_placeholder")}
+                required
+                value={formData.address}
+                onChange={(e) =>
+                  setFormData({ ...formData, address: e.target.value })
+                }
+              />
             </div>
-          )}
-
-          {/* STEP 3: PASSPORT VA MANZIL */}
-          {step === 3 && (
-            <div className="space-y-4 animate-in fade-in slide-in-from-right-4 duration-300">
-              <div className="space-y-2">
-                <Label className="text-blue-900 font-semibold flex items-center gap-2">
-                  <CreditCard size={16} className="text-blue-600" /> Passport
-                  ma'lumotlari
-                </Label>
-                <div className="flex gap-2">
-                  <Input
-                    required
-                    placeholder="AD"
-                    maxLength={2}
-                    className="w-24 uppercase font-bold text-center border-blue-200"
-                    value={formData.passportSeries}
-                    onChange={(e) =>
-                      handleChange(
-                        "passportSeries",
-                        e.target.value.replace(/[^A-Za-z]/g, "").toUpperCase(),
-                      )
-                    }
-                  />
-                  <Input
-                    required
-                    placeholder="1234567"
-                    maxLength={7}
-                    className="font-mono tracking-widest border-blue-200"
-                    value={formData.passportNumber}
-                    onChange={(e) =>
-                      handleChange(
-                        "passportNumber",
-                        e.target.value.replace(/\D/g, ""),
-                      )
-                    }
-                  />
-                </div>
-              </div>
-              <div className="space-y-2">
-                <Label className="text-blue-900 font-semibold flex items-center gap-2">
-                  <MapPin size={16} className="text-blue-600" /> Yashash manzili
-                </Label>
-                <Input
-                  required
-                  placeholder="Viloyat, tuman, ko'cha, uy..."
-                  value={formData.address}
-                  onChange={(e) => handleChange("address", e.target.value)}
-                />
-              </div>
-            </div>
-          )}
-
-          {/* STEP 4: XABAR */}
-          {step === 4 && (
-            <div className="space-y-4 animate-in fade-in slide-in-from-right-4 duration-300">
-              <div className="space-y-2">
-                <Label className="text-blue-900 font-semibold flex items-center gap-2">
-                  <MessageSquare size={16} className="text-blue-600" /> Batafsil
-                  izoh
-                </Label>
-                <Textarea
-                  required
-                  rows={6}
-                  placeholder="Yo'qotilgan buyum haqida yoki murojaatingiz mazmunini yozing..."
-                  className="border-blue-200 focus:ring-blue-500"
-                  value={formData.message}
-                  onChange={(e) => handleChange("message", e.target.value)}
-                />
-              </div>
-            </div>
-          )}
-
-          {/* Tugmalar paneli */}
-          <div className="flex gap-3 pt-4 border-t border-blue-50">
-            {step > 1 && (
-              <Button
-                type="button"
-                variant="outline"
-                onClick={prevStep}
-                className="flex-1 border-blue-200 text-blue-700 hover:bg-blue-50"
-              >
-                <ArrowLeft size={18} className="mr-2" /> Orqaga
-              </Button>
-            )}
-
-            {step < totalSteps ? (
-              <Button
-                type="button"
-                onClick={nextStep}
-                className="flex-1 bg-blue-600 hover:bg-blue-700 text-white"
-              >
-                Keyingisi <ArrowRight size={18} className="ml-2" />
-              </Button>
-            ) : (
-              <Button
-                onClick={handleSubmit}
-                disabled={isLoading}
-                className="flex-1 bg-green-600 hover:bg-green-700 text-white shadow-lg shadow-green-100"
-              >
-                {isLoading ? (
-                  <Loader2 size={18} className="animate-spin mr-2" />
-                ) : (
-                  <CheckCircle2 size={18} className="mr-2" />
-                )}
-                {isLoading ? "Yuborilmoqda..." : "Yuborish"}
-              </Button>
-            )}
           </div>
-        </form>
-      </CardContent>
-    </Card>
-  );
+          <div className="flex flex-col gap-6">
+            <div className="w-full h-full">
+              <Label htmlFor="discription" className={"mb-2"}>
+                {t("message_label")}
+              </Label>
+
+              <Textarea
+                id="discription"
+                placeholder={t("message_placeholder")}
+                required
+                className={"h-[91%]"}
+                value={formData.message}
+                onChange={(e) =>
+                  setFormData({ ...formData, message: e.target.value })
+                }
+              />
+            </div>
+          </div>
+        </CardContent>
+        <CardFooter className="text-center">
+          {isLoading ? (
+            <Button
+              type="button"
+              disabled={isLoading}
+              className="w-full bg-blue-900 hover:bg-blue-800 duration-300"
+            >
+              {t("sending_button")}{" "}
+              <Loader className="ml-2 spin-animate" size={15} />
+            </Button>
+          ) : (
+            <Button
+              type="button"
+              className="w-full bg-blue-900 hover:bg-blue-800 duration-300"
+              onClick={handleSubmit}
+            >
+              {t("send_button")} <Send className="ml-2" size={15} />
+            </Button>
+          )}
+        </CardFooter>
+      </Card>
+    );
+  } else {
+    return (
+      <Card className="max-w-lg mx-auto mt-10 p-6 bg-white/50 rounded-2xl shadow-lg border animate-fadeIn">
+        <CardHeader className="text-center">
+          {/* Success icon */}
+          <div className="flex justify-center mb-4">
+            <CheckCircle className="text-green-500 w-16 h-16" />
+          </div>
+
+          <CardTitle className="text-2xl font-bold text-green-700">
+            {t("success_title")}
+          </CardTitle>
+          <CardDescription className="mt-2 text-gray-600">
+            {t("success_description", {
+              date: data?.requests[0].deadline,
+            })}
+          </CardDescription>
+        </CardHeader>
+
+        <CardContent className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
+          <div className="col-span-1 lg:col-span-2 text-center">
+            <p className="text-green-600 font-medium">{t("thanks_message")}</p>
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
 }

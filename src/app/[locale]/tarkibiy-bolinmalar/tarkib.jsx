@@ -1,135 +1,32 @@
 "use client";
 
-import tarkib1 from "./tarkib/kadr.jpg";
-import tarkib2 from "./tarkib/harakatxiz.jpg";
-import tarkib3 from "./tarkib/tch-1.jpg";
-import tarkib4 from "./tarkib/tch-2.jpg";
-import tarkib5 from "./tarkib/Elektromexanika.jpg";
-import tarkib6 from "./tarkib/elektrtaminot.jpg";
-import tarkib7 from "./tarkib/signallashtirish.jpg";
-import tarkib8 from "./tarkib/yolxiz.jpg";
-import tarkib9 from "./tarkib/Tonnel.jpg";
-import tarkib10 from "./tarkib/korrupsiya.jpg";
-import tarkib11 from "./tarkib/AKT.png";
-import tarkib12 from "./tarkib/matbuot.jpg";
+import { useParams } from "next/navigation";
 
-import { Phone, Train, Eye, Clock, User, Calendar, Mail } from "lucide-react";
-import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Dialog,
   DialogContent,
-  DialogTrigger,
   DialogTitle,
-} from "@/components/ui/dialog";
+  DialogTrigger,
+} from "@/components/ui/shadcn_dialog";
+import { useTarkibiyTuzilmalarQuery } from "@/store/services/api";
+import { Calendar, Clock, Eye, Mail, Phone, User } from "lucide-react";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 
 export default function TransportDirectory() {
   const t = useTranslations("menu");
-  const departments = [
-    {
-      title: t("three_hundred_four_hundred"),
-      titleEn: "Human Resources Service",
-      head: t("three_hundred_four_hundred_one"),
-      schedule: t("three_hundred_four_hundred_two"),
-      reception: t("three_hundred_four_hundred_three"),
-      phone: "+99871-239-89-27",
-      image: tarkib1,
-      email: "kadr@tashmetro.uz",
-    },
-    {
-      title: t("three_hundred_four_hundred_four"),
-      titleEn: "Movement Service",
-      head: t("three_hundred_four_hundred_five"),
-      schedule: t("three_hundred_four_hundred_six"),
-      reception: t("three_hundred_four_hundred_seven"),
-      phone: "+99871-293-89-31",
-      image: tarkib2,
-      email: "d@tashmetro.uz",
-    },
-    {
-      title: t("three_hundred_four_hundred_eight"),
-      titleEn: "Chilonzor Electrodepot",
-      head: t("three_hundred_four_hundred_nine"),
-      schedule: t("three_hundred_four_hundred_ten"),
-      reception: t("three_hundred_four_hundred_eleven"),
-      phone: "+998-93-500-25-20",
-      image: tarkib3,
-      email: "tch1@tashmetro.uz",
-    },
-    {
-      title: t("three_hundred_four_hundred_twelve"),
-      titleEn: "Uzbekistan Electrodepot",
-      head: t("three_hundred_four_hundred_thirteen"),
-      schedule: t("three_hundred_four_hundred_fourteen"),
-      reception: t("three_hundred_four_hundred_fifteen"),
-      phone: "+998-93-500-55-89",
-      image: tarkib4,
-      email: "tch2@tashmetro.uz",
-    },
-    {
-      title: t("three_hundred_four_hundred_sixteen"),
-      titleEn: "Electromechanical Service",
-      head: t("three_hundred_four_hundred_seventeen"),
-      schedule: t("three_hundred_four_hundred_eighteen"),
-      reception: t("three_hundred_four_hundred_nineteen"),
-      phone: "+99893-501-79-70",
-      image: tarkib5,
-      email: "m@tashmetro.uz",
-    },
-    {
-      title: t("four_hundred_twenty_three"),
-      titleEn: "Power Supply Service",
-      head: t("four_hundred_twenty_four"),
-      schedule: t("four_hundred_twenty_five"),
-      reception: t("four_hundred_twenty_six"),
-      phone: "+99893-501-79-72",
-      image: tarkib6,
-      email: "e@tashmetro.uz",
-    },
-    {
-      title: t("four_hundred_twenty_seven"),
-      titleEn: "Signaling and Communication Service",
-      head: t("four_hundred_twenty_eight"),
-      schedule: t("four_hundred_twenty_nine"),
-      reception: t("four_hundred_thirty"),
-      phone: "+998998026218",
-      image: tarkib7,
-      email: "sh@tashmetro.uz",
-    },
-    {
-      title: t("four_hundred_thirty_one"),
-      titleEn: "Road Service",
-      head: t("four_hundred_thirty_two"),
-      schedule: t("four_hundred_thirty_three"),
-      reception: t("four_hundred_thirty_four"),
-      phone: "+99894-100-26-26",
-      image: tarkib8,
-      email: "p@tashmetro.uz",
-    },
-    {
-      title: t("four_hundred_thirty_five"),
-      titleEn: "Tunnel Structures Service",
-      head: t("four_hundred_thirty_six"),
-      schedule: t("four_hundred_thirty_seven"),
-      reception: t("four_hundred_thirty_eight"),
-      phone: "+998-93-501-79-71",
-      image: tarkib9,
-      email: "ts@tashmetro.uz",
-    },
-
-    {
-      title: t("four_hundred_thirty_nine"),
-      titleEn: "Information Security and Technical Support Service",
-      head: t("four_hundred_forty"),
-      schedule: t("four_hundred_forty_one"),
-      reception: t("four_hundred_forty_two"),
-      phone: "+998 71-241-31-40",
-      image: tarkib11,
-      email: "cybersecurity@tashmetro.uz",
-    },
-  ];
-
+  const { locale } = useParams();
+  const { data: departments, isLoading } = useTarkibiyTuzilmalarQuery({
+    locale,
+  });
+  if (isLoading) {
+    return (
+      <div className="w-full h-screen justify-center flex items-center">
+        <p>{t("two_hundred_thirteen")}</p>
+      </div>
+    );
+  }
   return (
     <div className="min-h-screen">
       {/* Header Section */}
@@ -158,7 +55,7 @@ export default function TransportDirectory() {
                           <div className="w-32 h-40 sm:w-36 sm:h-44 lg:w-40 lg:h-48 rounded-lg overflow-hidden shadow-md group-hover:shadow-lg transition-shadow duration-300">
                             <Image
                               src={dept.image || "/placeholder.svg"}
-                              alt={dept.head}
+                              alt={dept?.biography}
                               width={160}
                               height={192}
                               className="w-full h-full object-cover"
@@ -229,7 +126,7 @@ export default function TransportDirectory() {
                       <div className="w-48 h-60 sm:w-52 sm:h-64 rounded-lg overflow-hidden border-4 border-blue-100 shadow-lg">
                         <Image
                           src={dept.image || "/placeholder.svg"}
-                          alt={dept.head}
+                          alt={dept.head || "Bo‘lim rahbari rasmi"}
                           width={208}
                           height={256}
                           className="w-full h-full object-cover"

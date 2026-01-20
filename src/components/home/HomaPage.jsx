@@ -1,20 +1,16 @@
 "use client";
+import { useHeaderImageQuery } from "@/store/services/api";
 import { motion } from "motion/react";
 import { useTranslations } from "next-intl";
 import { ImagesSlider } from "../ui/images-slider";
 
 export default function HomePage() {
   const t = useTranslations("menu");
-  const images = [
-    "/header/1.jpg",
-    "/header/3.jpg",
-    "/header/4.jpg",
-    "/header/5.jpg",
-    "/header/6.jpg",
-    "/header/7.jpg",
-  ];
+  const { data, isLoading } = useHeaderImageQuery();
+
+  const images = data?.main_page;
   return (
-    <ImagesSlider className="h-[40rem] " images={images}>
+    <ImagesSlider className="h-screen " images={images} loading={isLoading}>
       <motion.div
         initial={{
           opacity: 0,

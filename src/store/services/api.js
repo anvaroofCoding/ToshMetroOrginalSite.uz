@@ -133,11 +133,154 @@ export const api = createApi({
       query: () => `/simpleuser/me/`,
       providesTags: ["Post"],
     }),
+    /* ---------- TENDERS ---------- */
+    tenders: builder.query({
+      query: ({ lang, search, page = 1, pageSize = 12 }) =>
+        `/announcements/${lang}?search=${search}&page=${page}&page_size=${pageSize}`,
+      providesTags: ["Post"],
+    }),
+    LikedRender: builder.mutation({
+      query: (id) => ({
+        url: `/announcements/${id}/like/`,
+        method: "POST",
+      }),
+      invalidatesTags: ["Post"],
+    }),
+    getTenderDetails: builder.query({
+      query: ({ lang, id }) => `/announcements/${lang}/${id}`,
+      providesTags: ["Post"],
+    }),
+
+    CommentTender: builder.query({
+      query: (id) => `/announcement-comments/${id}/`,
+      providesTags: ["Post"],
+    }),
+
+    CommentPostTender: builder.mutation({
+      query: (form) => ({
+        url: "/announcement-comments/",
+        method: "POST",
+        body: form,
+      }),
+      invalidatesTags: ["Post"],
+    }),
+
+    // korubsiya
+    corrubsiya: builder.query({
+      query: ({ lang, search, page = 1, pageSize = 12 }) =>
+        `/korrupsiya/${lang}?search=${search}&page=${page}&page_size=${pageSize}`,
+      providesTags: ["Post"],
+    }),
+    LikedCorrubsiya: builder.mutation({
+      query: (id) => ({
+        url: `/korrupsiya/${id}/like/`,
+        method: "POST",
+      }),
+      invalidatesTags: ["Post"],
+    }),
+    GetCorrubsiyaDetails: builder.query({
+      query: ({ lang, id }) => `/korrupsiya/${lang}/${id}`,
+      providesTags: ["Post"],
+    }),
+    CorrubsiyaComment: builder.query({
+      query: (id) => `/korrupsiya-comments/${id}/`,
+      providesTags: ["Post"],
+    }),
+
+    CorrubsiyaPost: builder.mutation({
+      query: (form) => ({
+        url: "/korrupsiya-comments/",
+        method: "POST",
+        body: form,
+      }),
+      invalidatesTags: ["Post"],
+    }),
+
+    headerImage: builder.query({
+      query: () => `/frontend-images/`,
+      providesTags: ["Post"],
+    }),
+
+    lostItemsMe: builder.query({
+      query: () => `/lost-items/`,
+      providesTags: ["Post"],
+    }),
+
+    // ======= vakansiya ========
+    vakan: builder.query({
+      query: ({ locale }) => `/job-vacancies/${locale}`,
+      providesTags: ["Post"],
+    }),
+
+    VakanDetail: builder.query({
+      query: ({ lang, id }) => `/job-vacancies/${lang}/${id}`,
+      providesTags: ["Post"],
+    }),
+
+    VakanRequest: builder.mutation({
+      query: (form) => ({
+        url: "/job-vacancy-requests/",
+        method: "POST",
+        body: form,
+      }),
+      invalidatesTags: ["Post"],
+    }),
+
+    VakanRequestDetails: builder.query({
+      query: () => `/job-vacancy-requests/`,
+      providesTags: ["Post"],
+    }),
+
+    Map: builder.query({
+      query: () => `/station-fronts/`,
+      providesTags: ["Post"],
+    }),
+
+    MediaPhoto: builder.query({
+      query: ({ locale }) => `/media-photos/${locale}`,
+      providesTags: ["Post"],
+    }),
+
+    MediaVideo: builder.query({
+      query: ({ locale }) => `/media-videos/${locale}`,
+      providesTags: ["Post"],
+    }),
+
+    Rahbariyat: builder.query({
+      query: ({ locale }) => `/managements/${locale}`,
+      providesTags: ["Post"],
+    }),
+
+    TarkibiyTuzilmalar: builder.query({
+      query: ({ locale }) => `/managements/${locale}`,
+      providesTags: ["Post"],
+    }),
   }),
 });
 
 /* ================= HOOKS ================= */
 export const {
+  useTarkibiyTuzilmalarQuery,
+  useRahbariyatQuery,
+  useMediaVideoQuery,
+  useMediaPhotoQuery,
+  useMapQuery,
+  useVakanRequestDetailsQuery,
+  useVakanRequestMutation,
+  useVakanDetailQuery,
+  useVakanQuery,
+  useLostItemsMeQuery,
+  useHeaderImageQuery,
+  useCorrubsiyaCommentQuery,
+  useCorrubsiyaPostMutation,
+  useGetCorrubsiyaDetailsQuery,
+  useLikedCorrubsiyaMutation,
+  useCorrubsiyaQuery,
+  useCommentPostTenderMutation,
+  useCommentTenderQuery,
+  useGetTenderDetailsQuery,
+  useLikedRenderMutation,
+  useTendersQuery,
   useMeQuery,
   useCommentPostMutation,
   useCommentQuery,

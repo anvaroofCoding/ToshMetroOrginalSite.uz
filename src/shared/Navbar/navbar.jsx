@@ -14,23 +14,38 @@ import { Button } from "@/components/ui/button";
 import { Tooltip } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import { useMeQuery } from "@/store/services/api";
+import {
+  IconBrandRumble,
+  IconBrandStorytel,
+  IconBriefcase,
+  IconBubbleText,
+  IconBuilding,
+  IconChartArrowsVertical,
+  IconClipboardText,
+  IconCreditCard,
+  IconCreditCardFilled,
+  IconDatabaseExport,
+  IconDeviceMobile,
+  IconFaceId,
+  IconHandStop,
+  IconInfoSquareRounded,
+  IconReportMoney,
+  IconSparkles,
+  IconTrain,
+  IconUsers,
+  IconUserSquareRounded,
+  IconWorld,
+} from "@tabler/icons-react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   Building,
-  ArrowUpFromLine as ChartNoAxesCombined,
   ChevronDown,
   CreditCard,
-  FileCheck2,
-  Film,
   Globe,
-  Hand,
-  Info,
   MapPin,
   Menu,
   Phone,
-  ScanFace,
   ShieldAlert as ShieldUser,
-  Sparkles,
   Users,
   UsersRound,
   X,
@@ -51,11 +66,19 @@ const getMenuItems = (t) => [
     dropdown: true,
     icon: CreditCard,
     dropdownItems: [
-      { label: t("paymentTypes"), href: "/tolov-turi", icon: CreditCard },
-      { label: t("attoCards"), href: "/atto-kartalari", icon: CreditCard },
-      { label: t("attoApp"), href: "/atto-mobile-ilovasi", icon: Phone },
-      { label: t("palmpay"), href: "/pay", icon: Hand },
-      { label: t("facepay"), href: "/FacePay", icon: ScanFace },
+      { label: t("paymentTypes"), href: "/tolov-turi", icon: IconCreditCard },
+      {
+        label: t("attoCards"),
+        href: "/atto-kartalari",
+        icon: IconCreditCardFilled,
+      },
+      {
+        label: t("attoApp"),
+        href: "/atto-mobile-ilovasi",
+        icon: IconDeviceMobile,
+      },
+      { label: t("palmpay"), href: "/pay", icon: IconHandStop },
+      { label: t("facepay"), href: "/FacePay", icon: IconFaceId },
     ],
   },
   {
@@ -67,14 +90,18 @@ const getMenuItems = (t) => [
       {
         label: t("metroRules"),
         href: "/Metrodab-foydalanish-qoidalari",
-        icon: Info,
+        icon: IconInfoSquareRounded,
       },
-      { label: t("stateSymbols"), href: "/davlat-ramzlari", icon: Sparkles },
-      { label: t("contact"), href: "/murojaatlar", icon: Phone },
+      {
+        label: t("stateSymbols"),
+        href: "/davlat-ramzlari",
+        icon: IconSparkles,
+      },
+      { label: t("contact"), href: "/murojaatlar", icon: IconBrandStorytel },
       {
         label: t("passengerStats"),
         href: "/metro-statistikasi",
-        icon: ChartNoAxesCombined,
+        icon: IconChartArrowsVertical,
       },
     ],
   },
@@ -84,8 +111,10 @@ const getMenuItems = (t) => [
     dropdown: true,
     icon: ShieldUser,
     dropdownItems: [
-      { label: t("news"), href: "/yangiliklar", icon: Info },
-      { label: t("media"), href: "/mediateka", icon: Film },
+      { label: t("news"), href: "/yangiliklar", icon: IconInfoSquareRounded },
+      { label: t("antiCorruption"), href: "/korubsiya", icon: IconWorld },
+      { label: t("tenders"), href: "/tenderlar", icon: IconReportMoney },
+      { label: t("media"), href: "/mediateka", icon: IconBrandRumble },
     ],
   },
   {
@@ -94,10 +123,18 @@ const getMenuItems = (t) => [
     dropdown: true,
     icon: Building,
     dropdownItems: [
-      { label: t("aboutOrganization"), href: "/metro-tarixi", icon: Building },
-      { label: t("management"), href: "/Raxbariyat", icon: Users },
-      { label: t("structure"), href: "/tarkibiy-bolinmalar", icon: Building },
-      { label: t("vacancies"), href: "/bosh-ish-orinlari", icon: Users },
+      { label: t("aboutOrganization"), href: "/metro-tarixi", icon: IconTrain },
+      { label: t("management"), href: "/Raxbariyat", icon: IconUsers },
+      {
+        label: t("structure"),
+        href: "/tarkibiy-bolinmalar",
+        icon: IconBuilding,
+      },
+      {
+        label: t("vacancies"),
+        href: "/bosh-ish-orinlari",
+        icon: IconBriefcase,
+      },
     ],
   },
   {
@@ -106,16 +143,20 @@ const getMenuItems = (t) => [
     dropdown: true,
     icon: UsersRound,
     dropdownItems: [
-      { label: t("generalInfo"), href: "/umumiy-malumot", icon: Info },
+      {
+        label: t("generalInfo"),
+        href: "/umumiy-malumot",
+        icon: IconDatabaseExport,
+      },
       {
         label: t("genderInCountry"),
         href: "/country-gender",
-        icon: UsersRound,
+        icon: IconUserSquareRounded,
       },
       {
         label: t("normativeDocs"),
         href: "/meyoriy-xujjatlar",
-        icon: FileCheck2,
+        icon: IconClipboardText,
       },
     ],
   },
@@ -124,7 +165,9 @@ const getMenuItems = (t) => [
     href: "",
     dropdown: true,
     icon: Phone,
-    dropdownItems: [{ label: t("contact"), href: "/contact", icon: Phone }],
+    dropdownItems: [
+      { label: t("contact"), href: "/contact", icon: IconBubbleText },
+    ],
   },
 ];
 

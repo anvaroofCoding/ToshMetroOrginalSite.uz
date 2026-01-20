@@ -7,10 +7,8 @@ import Mediateka from "./mediateka/headermediateka";
 
 const Home = () => {
   return (
-    <div className="relative z-[10] ">
-      <div>
-        <HomePage />
-      </div>
+    <div className="relative z-[10]   ">
+      <HomePage />
       <div className="mt-20">
         <Header />
       </div>

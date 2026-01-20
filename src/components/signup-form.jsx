@@ -114,7 +114,7 @@ export function SignupForm({ ...props }) {
                   </Button>
                   <Button
                     variant="outline"
-                    onClick={() => router.push("/login")}
+                    onClick={() => (window.location.href = "/login")}
                     type="button"
                   >
                     {t("login")}

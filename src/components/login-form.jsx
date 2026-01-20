@@ -140,7 +140,7 @@ export function LoginForm({ className, ...props }) {
                 <Button
                   variant="outline"
                   type="button"
-                  onClick={() => router.push("/register")}
+                  onClick={() => (window.location.href = "/register")}
                   className={"w-full"}
                 >
                   {t("register")}

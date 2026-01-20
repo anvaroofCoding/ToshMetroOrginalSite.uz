@@ -7,20 +7,16 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
+} from "@/components/ui/shadcn_dialog";
+import { useRahbariyatQuery } from "@/store/services/api";
 import { Clock, Eye, Mail, Phone, User } from "lucide-react";
-import Image from "next/image";
-import rasm1 from "../../../../public/raxbatiyat-metro/raxbar3.jpg";
-import rasm2 from "../../../../public/raxbatiyat-metro/raxbar6.jpg";
-import rasm3 from "../../../../public/raxbatiyat-metro/raxbar4.jpg";
-import rasm4 from "../../../../public/raxbatiyat-metro/4.jpg";
-import rasm5 from "../../../../public/raxbatiyat-metro/raxbar5.jpg";
-import rasm6 from "../../../../public/raxbatiyat-metro/6.jpg";
-import rasm7 from "../../../../public/raxbatiyat-metro/raxbar1.jpg";
-import rasm8 from "../../../../public/raxbatiyat-metro/raxbar2.jpg";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
+import { useParams } from "next/navigation";
 
 export default function ManagementPage() {
+  const { locale } = useParams();
+  const { data: managementData, isLoading } = useRahbariyatQuery({ locale });
   const t = useTranslations("menu");
   const formatBiography = (biography) => {
     if (biography === "Aniq emas") {
@@ -45,153 +41,14 @@ export default function ManagementPage() {
 
     return paragraphs;
   };
-  const managementData = [
-    {
-      id: 6,
-      firstName: t("three_hundred_forty_nine"),
-      middleName: t("three_hundred_fifty"),
-      lastName: t("three_hundred_fifty_one"),
-      position: t("three_hundred_fifty_two"),
-      department: "Safety & Security",
-      phone: "+998 71-241-65-14",
-      email: "tash.metropoliten@mail.ru metro@tashmetro.uz",
-      hours: t("three_hundred_fifty_three"),
-      image: rasm6,
-      biography: t("three_hundred_fifty_four"),
-    },
-    {
-      id: 4,
-      firstName: t("three_hundred_fifty_five"),
-      middleName: t("three_hundred_fifty_six"),
-      lastName: t("three_hundred_fifty_seven"),
-      position: t("three_hundred_fifty_eight"),
-      department: "Human Resources",
-      phone: "+998 71-239-89-33",
-      email: "ng@tashmetro.uz",
-      hours: t("three_hundred_fifty_nine"),
-      image: rasm4,
-      biography: t("three_hundred_sixty"),
-    },
-    {
-      id: 7,
-      firstName: t("three_hundred_sixty_one"),
-      middleName: t("three_hundred_sixty_two"),
-      lastName: t("three_hundred_sixty_three"),
-      position: t("three_hundred_sixty_four"),
-      department: "Maintenance & Engineering",
-      phone: "+998 71-227-44-03",
-      email: "nzb@tashmetro.uz",
-      hours: t("three_hundred_sixty_five"),
-      image: rasm7,
-      biography: t("three_hundred_sixty_six"),
-    },
 
-    {
-      id: 5,
-      firstName: t("three_hundred_sixty_seven"),
-      middleName: t("three_hundred_sixty_eight"),
-      lastName: t("three_hundred_sixty_nine"),
-      position: t("three_hundred_seventy"),
-      department: "Information Technology",
-      phone: "+998 71-245-13-99",
-      email: "nzf@tashmetro.uz",
-      hours: t("three_hundred_seventy_one"),
-      image: rasm5,
-      biography: t("three_hundred_seventy_two"),
-    },
-
-    {
-      id: 8,
-      firstName: t("three_hundred_seventy_three"),
-      middleName: t("three_hundred_seventy_four"),
-      lastName: t("three_hundred_ninety_nine"),
-      position: t("three_hundred_seventy_five"),
-      department: "Customer Service",
-
-      phone: "+998 71-245-27-35",
-
-      email: "nzm@tashmetro.uz",
-
-      hours: t("three_hundred_seventy_six"),
-
-      image: rasm8,
-
-      biography: t("three_hundred_seventy_seven"),
-    },
-
-    {
-      id: 2,
-
-      firstName: t("three_hundred_seventy_eight"),
-
-      middleName: t("three_hundred_seventy_nine"),
-
-      lastName: t("three_hundred_eighty"),
-
-      position: t("three_hundred_eighty_one"),
-
-      department: "Operations",
-
-      phone: "+998 71-245-47-68",
-
-      email: "nzs@tashmetro.uz",
-
-      hours: t("three_hundred_eighty_two"),
-
-      image: rasm2,
-
-      biography: t("three_hundred_eighty_three"),
-    },
-
-    {
-      id: 1,
-
-      firstName: t("three_hundred_eighty_four"),
-
-      middleName: t("three_hundred_eighty_five"),
-
-      lastName: t("three_hundred_eighty_six"),
-
-      position: t("three_hundred_eighty_seven"),
-
-      department: "Executive Office",
-
-      phone: "+998 71-245-71-69",
-
-      email: "nzip@tashmetro.uz",
-
-      hours: t("three_hundred_eighty_eight"),
-
-      image: rasm1,
-
-      biography: t("three_hundred_eighty_nine"),
-    },
-
-    {
-      id: 3,
-
-      firstName: t("three_hundred_ninety"),
-
-      middleName: t("three_hundred_ninety_one"),
-
-      lastName: t("three_hundred_ninety_two"),
-
-      position: t("three_hundred_ninety_three"),
-
-      department: "Finance",
-
-      phone: "+998 71-296-03-24",
-
-      email: "rb@tashmetro.uz",
-
-      hours: t("three_hundred_ninety_four"),
-
-      image: rasm3,
-
-      biography: t("three_hundred_ninety_five"),
-    },
-  ];
-
+  if (isLoading) {
+    return (
+      <div className="w-full h-screen justify-center flex items-center">
+        <p>{t("two_hundred_thirteen")}</p>
+      </div>
+    );
+  }
   return (
     <div className="min-h-screen">
       {/* Header Section */}
@@ -251,10 +108,10 @@ export default function ManagementPage() {
                           className="w-full h-auto rounded-lg"
                         />
                         <div className="text-center">
-                          <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                          <DialogTitle className="text-2xl font-bold text-gray-900 mb-2">
                             {member.lastName} {member.firstName}{" "}
                             {member.middleName}{" "}
-                          </h3>
+                          </DialogTitle>
                           <p className="text-gray-600">{member.position}</p>
                         </div>
                       </div>
@@ -323,7 +180,7 @@ export default function ManagementPage() {
                           </h4>
                           <div className="space-y-4">
                             {Array.isArray(
-                              formatBiography(member.biography)
+                              formatBiography(member.biography),
                             ) ? (
                               formatBiography(member.biography).map(
                                 (paragraph, index) => (
@@ -333,7 +190,7 @@ export default function ManagementPage() {
                                   >
                                     {paragraph}
                                   </p>
-                                )
+                                ),
                               )
                             ) : (
                               <p className="text-sm text-gray-700 leading-relaxed italic">

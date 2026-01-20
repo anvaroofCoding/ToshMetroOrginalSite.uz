@@ -1,17 +1,19 @@
 "use client";
-import { useState } from "react";
+import { useMediaPhotoQuery, useMediaVideoQuery } from "@/store/services/api";
 import {
-  Play,
-  X,
-  Eye,
-  Clock,
-  ImageIcon,
-  Video,
   ChevronLeft,
   ChevronRight,
+  Clock,
+  Eye,
+  ImageIcon,
+  Play,
+  Video,
+  X,
 } from "lucide-react";
-import Link from "next/link";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
+import { useParams } from "next/navigation";
+import { useState } from "react";
 function PhotoCard({ photo, index, onView }) {
   return (
     <div
@@ -109,89 +111,44 @@ function VideoCard({ video, index, onPlay }) {
 }
 export default function Mediateka() {
   const t = useTranslations("menu");
+  const { locale } = useParams();
   const [activeTab, setActiveTab] = useState("photos");
   const [selectedPhoto, setSelectedPhoto] = useState(null);
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [isAnimating, setIsAnimating] = useState(false);
-  const photos = [
-    {
-      id: 1,
-      src: "/galery/1.jpg",
-      title: t("photon_view"),
-      category: t("metro"),
-    },
-    {
-      id: 2,
-      src: "/galery/2.jpg",
-      title: t("photon_view"),
-      category: t("metro"),
-    },
-    {
-      id: 3,
-      src: "/galery/3.jpg",
-      title: t("photon_view"),
-      category: t("metro"),
-    },
-    {
-      id: 4,
-      src: "/galery/4.jpg",
-      title: t("photon_view"),
-      category: t("metro"),
-    },
-    {
-      id: 5,
-      src: "/galery/5.jpg",
-      title: t("photon_view"),
-      category: t("metro"),
-    },
-    {
-      id: 6,
-      src: "/galery/6.jpg",
-      title: t("photon_view"),
-      category: t("metro"),
-    },
-    {
-      id: 7,
-      src: "/galery/7.jpg",
-      title: t("photon_view"),
-      category: t("metro"),
-    },
-    {
-      id: 8,
-      src: "/galery/8.jpg",
-      title: t("photon_view"),
-      category: t("metro"),
-    },
-  ];
-  const videos = [
-    {
-      id: 1,
-      url: "https://www.youtube.com/embed/s53QTJC72CE",
-      thumbnail: "/galery/5.jpg",
-      title: t("mysterious_corridors"),
-      duration: "15:42",
-      views: "125K",
-      category: t("metropolitan"),
-    },
-    {
-      id: 2,
-      url: "https://www.youtube.com/embed/BvjeqzSZ6eU",
-      thumbnail: "/galery/6.jpg",
-      title: t("metro_archive_2023"),
-      duration: "8:30",
-      views: "89K",
-      category: t("metropolitan"),
-    },
-    {
-      id: 3,
-      url: "https://www.youtube.com/embed/FFM30ZXqlug",
-      thumbnail: "/galery/4.jpg",
-      title: t("metro_life"),
-      duration: "12:15",
-      views: "67K",
-      category: t("metropolitan"),
-    },
-  ];
+  const { data } = useMediaPhotoQuery({ locale });
+  const photos = data?.slice(0, 8);
+  const { data: videochi } = useMediaVideoQuery({ locale });
+  const videos = videochi?.slice(0, 8);
+  // const videos = [
+  //   {
+  //     id: 1,
+  //     url: "https://www.youtube.com/embed/s53QTJC72CE",
+  //     thumbnail: "/galery/5.jpg",
+  //     title: t("mysterious_corridors"),
+  //     duration: "15:42",
+  //     views: "125K",
+  //     category: t("metropolitan"),
+  //   },
+  //   {
+  //     id: 2,
+  //     url: "https://www.youtube.com/embed/BvjeqzSZ6eU",
+  //     thumbnail: "/galery/6.jpg",
+  //     title: t("metro_archive_2023"),
+  //     duration: "8:30",
+  //     views: "89K",
+  //     category: t("metropolitan"),
+  //   },
+  //   {
+  //     id: 3,
+  //     url: "https://www.youtube.com/embed/FFM30ZXqlug",
+  //     thumbnail: "/galery/4.jpg",
+  //     title: t("metro_life"),
+  //     duration: "12:15",
+  //     views: "67K",
+  //     category: t("metropolitan"),
+  //   },
+  // ];
   const handleTabChange = (tab) => {
     if (tab !== activeTab) {
       setIsAnimating(true);
@@ -223,6 +180,13 @@ export default function Mediateka() {
     const prevIndex = (currentIndex - 1 + photos.length) % photos.length;
     setSelectedPhoto(photos[prevIndex]);
   };
+
+  function getYoutubeEmbed(url) {
+    const regExp =
+      /(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([^&?/]+)/;
+    const match = url.match(regExp);
+    return match ? `https://www.youtube.com/embed/${match[1]}` : null;
+  }
   return (
     <div>
       <div className="container">
@@ -296,7 +260,7 @@ export default function Mediateka() {
           >
             {activeTab === "photos" && (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-6 animate-in fade-in slide-in-from-bottom duration-700">
-                {photos.map((photo, index) => (
+                {photos?.map((photo, index) => (
                   <PhotoCard
                     key={photo.id}
                     photo={photo}
@@ -386,8 +350,8 @@ export default function Mediateka() {
               {/* Video iframe */}
               <div className="aspect-video">
                 <iframe
-                  src={`${selectedVideo.url}?autoplay=1&rel=0`}
-                  title={selectedVideo.title}
+                  src={getYoutubeEmbed(selectedVideo?.url)}
+                  title={selectedVideo?.title}
                   className="w-full h-full"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen

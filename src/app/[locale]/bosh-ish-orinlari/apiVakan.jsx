@@ -9,6 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { useVakanQuery } from "@/store/services/api";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   Briefcase,
@@ -22,49 +23,23 @@ import {
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 function ApiVakan() {
   const t = useTranslations("menu");
   const { locale } = useParams();
-  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 20;
-
-  async function getJob() {
-    try {
-      setLoading(true);
-      const res = await fetch(
-        `http://88.88.150.151:8090/api/job-vacancies/${locale}/`,
-        {
-          headers: {
-            "X-API-KEY": "UZMETRO_SECRET_2026",
-          },
-        },
-      );
-      if (!res.ok)
-        throw new Error("Ish o'rinlarini yuklashda xatolik yuz berdi");
-      const data = await res.json();
-      setData(data);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Xatolik yuz berdi");
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  useEffect(() => {
-    getJob();
-  }, [locale]);
+  const { data, isLoading } = useVakanQuery({ locale });
 
   const truncateText = (text, maxLength) =>
     text?.length > maxLength ? text.substring(0, maxLength) + "..." : text;
 
   // Pagination calculations
-  const totalPages = Math.ceil(data.length / itemsPerPage);
-  const paginatedData = data.slice(
+  const totalPages = Math.ceil(data?.length / itemsPerPage);
+  const paginatedData = data?.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage,
   );
@@ -124,7 +99,7 @@ function ApiVakan() {
       {/* Job Cards Grid */}
       <AnimatePresence>
         <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {paginatedData.map((item) => (
+          {paginatedData?.map((item) => (
             <motion.div key={item.id} className="h-full" whileHover={{ y: -8 }}>
               <Card className="h-full bg-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col">
                 <CardHeader className="bg-gradient-to-r from-blue-900 to-blue-800 text-white p-6 rounded-xl">

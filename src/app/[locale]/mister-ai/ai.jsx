@@ -7,7 +7,7 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
+} from "@/components/ui/shadcn_dialog";
 import { useTranslations } from "next-intl";
 export default function FAQPage() {
   const t = useTranslations("menu");

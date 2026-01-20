@@ -262,7 +262,7 @@ const Footer = () => {
                 target="_blank"
                 className="hover:text-white transition-colors duration-300 underline decoration-blue-400 hover:decoration-white"
               >
-                tashmetro.uz
+                uzmetro.uz
               </Link>
             </div>
           </div>

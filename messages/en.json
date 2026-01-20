@@ -903,6 +903,25 @@
     "logoutConfirmTitle": "Do you want to log out?",
     "logoutConfirmText": "If you log out, you will need to sign in again.",
     "cancel": "Cancel",
-    "commentPlaceholder": "Write a comment..."
+    "commentPlaceholder": "Write a comment...",
+    "antiCorruption": "Anti-corruption",
+    "tenders": "Tenders",
+    "tender": "Tenders in the Metro",
+    "success_title": "Your request has been successfully sent",
+    "success_description": "Your request will be reviewed within 5 business days. During this time, you will receive a response by phone. The response will be provided by {date}.",
+    "thanks_message": "Thank you! We have received your request.",
+    "send_request": "Send request",
+    "form_warning": "To send a request, you must fill in all the fields in the form.",
+    "passport_label": "Passport series and number",
+    "address_labels": "Address",
+    "message_label": "Request details",
+    "message_placeholder": "Please describe your request in detail...",
+    "send_button": "Send",
+    "sending_button": "Sending",
+
+    "address_placeholder": "Please enter your full address",
+    "comment_required": "Please write your comment!",
+    "success_received": "Your request has been successfully received!",
+    "passport_required": "Please enter your passport details!"
   }
 }

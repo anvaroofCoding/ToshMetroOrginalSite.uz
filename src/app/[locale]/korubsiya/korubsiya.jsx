@@ -6,17 +6,19 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
-import { useGetPopularNewsQuery, useLikedMutation } from "@/store/services/api";
+import { Input } from "@/components/ui/input";
+import WheelPagination from "@/components/ui/wheel-pagination";
+import {
+  useCorrubsiyaQuery,
+  useLikedCorrubsiyaMutation,
+} from "@/store/services/api";
 import { IconEye, IconThumbUp, IconThumbUpFilled } from "@tabler/icons-react";
 import { ArrowRight, Loader, Search, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Input } from "../ui/input";
-import WheelPagination from "../ui/wheel-pagination";
-
-const Blog7 = () => {
+const Corubsiya = () => {
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const PAGE_SIZE = 12;
@@ -27,14 +29,14 @@ const Blog7 = () => {
     data: posts,
     isLoading,
     isFetching,
-  } = useGetPopularNewsQuery({
+  } = useCorrubsiyaQuery({
     lang: locale,
     search,
     page,
     pageSize: PAGE_SIZE,
   });
 
-  const [liked] = useLikedMutation();
+  const [liked] = useLikedCorrubsiyaMutation();
 
   const clickLike = (id) => {
     try {
@@ -63,7 +65,7 @@ const Blog7 = () => {
       <div className="container mx-auto flex flex-col items-center gap-16 ">
         <div className="text-center">
           <h2 className="text-pretty text-3xl font-semibold md:text-4xl lg:max-w-3xl lg:text-5xl">
-            {t("two_hundred_thirty_four")}
+            {t("tender")}
           </h2>
           <div className="border mt-5 rounded-lg overflow-hidden relative bg-white border border-blue-800/30">
             <Input
@@ -92,7 +94,7 @@ const Blog7 = () => {
             >
               <div className="aspect-[16/9] w-full">
                 <Link
-                  href={`yangiliklar/${post?.id}`}
+                  href={`korubsiya/${post?.id}`}
                   className="transition-opacity duration-200 fade-in hover:opacity-70"
                 >
                   <img
@@ -105,23 +107,24 @@ const Blog7 = () => {
               <CardHeader>
                 <h3 className="text-lg font-semibold hover:underline md:text-xl">
                   <Link
-                    href={`yangiliklar/${post?.id}`}
+                    href={`korubsiya/${post?.id}`}
                     className="cursor-pointer"
                   >
                     {post?.title?.split(" ").slice(0, 10).join(" ") +
-                      (post?.title?.split(" ").length > 10 ? "..." : "")}
+                      (post?.title.split(" ").length > 10 ? "..." : "")}
                   </Link>
                 </h3>
+               
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
                   {post?.description?.split(" ").slice(0, 20).join(" ") +
-                    (post?.description?.split(" ").length > 20 ? "..." : "")}
+                    (post?.description.split(" ").length > 20 ? "..." : "")}
                 </p>
               </CardContent>
               <CardFooter className="flex items-center justify-between">
                 <Link
-                  href={`yangiliklar/${post?.id}`}
+                  href={`korubsiya/${post?.id}`}
                   className="flex items-center text-foreground hover:underline"
                 >
                   {t("readMore")}
@@ -169,4 +172,4 @@ const Blog7 = () => {
   );
 };
 
-export { Blog7 };
+export { Corubsiya };

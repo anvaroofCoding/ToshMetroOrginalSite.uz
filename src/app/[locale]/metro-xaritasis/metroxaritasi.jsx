@@ -1,28 +1,30 @@
 "use client";
 
-import { useCallback, useRef, useState, useEffect } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useMapQuery } from "@/store/services/api";
 import {
-  ZoomIn,
-  ZoomOut,
-  RotateCcw,
-  Maximize,
-  X,
+  ArrowLeft,
+  ArrowRight,
+  ArrowUpDown,
   ChevronLeft,
   ChevronRight,
-  Play,
   MapPin,
-  Train,
-  ArrowLeft,
-  ArrowUpDown,
+  Maximize,
   Navigation,
-  ArrowRight,
+  Play,
+  RotateCcw,
+  Train,
+  X,
+  ZoomIn,
+  ZoomOut,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useRouter } from "next/navigation";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 export default function TashkentMetroMap() {
+  const { data: stationDetails } = useMapQuery();
   const router = useRouter();
   const [transform, setTransform] = useState({ x: 0, y: 0, scale: 1 });
   const [isDragging, setIsDragging] = useState(false);
@@ -68,15 +70,15 @@ export default function TashkentMetroMap() {
   // Optimized station positions with better spacing for mobile
   const stations = {
     // Red Line (Chilonzor Line) - Optimized spacing
-    Olmazor: { x: 180, y: 1200, line: "red", nameUz: "Olmazor" },
-    Choshtepa: { x: 180, y: 1290, line: "red", nameUz: "Choshtepa" },
+    "Olmazor": { x: 180, y: 1200, line: "red", nameUz: "Olmazor" },
+    "Choshtepa": { x: 180, y: 1290, line: "red", nameUz: "Choshtepa" },
     "O'zgarish": { x: 180, y: 1350, line: "red", nameUz: "O'zgarish" },
-    Sergeli: { x: 180, y: 1410, line: "red", nameUz: "Sergeli" },
-    Yangihayot: { x: 180, y: 1470, line: "red", nameUz: "Yangihayot" },
-    Chinor: { x: 180, y: 1550, line: "red", nameUz: "Chinor" },
-    Chilonzor: { x: 180, y: 1100, line: "red", nameUz: "Chilonzor" },
+    "Sergeli": { x: 180, y: 1410, line: "red", nameUz: "Sergeli" },
+    "Yangihayot": { x: 180, y: 1470, line: "red", nameUz: "Yangihayot" },
+    "Chinor": { x: 180, y: 1550, line: "red", nameUz: "Chinor" },
+    "Chilonzor": { x: 180, y: 1100, line: "red", nameUz: "Chilonzor" },
     "Mirzo Ulugbek": { x: 180, y: 1000, line: "red", nameUz: "Mirzo Ulug'bek" },
-    Novza: { x: 180, y: 900, line: "red", nameUz: "Novza" },
+    "Novza": { x: 180, y: 900, line: "red", nameUz: "Novza" },
     "Milliy bog'": { x: 250, y: 830, line: "red", nameUz: "Milliy bog'" },
     "Xalqlar do'stligi": {
       x: 330,
@@ -84,7 +86,7 @@ export default function TashkentMetroMap() {
       line: "red",
       nameUz: "Xalqlar do'stligi",
     },
-    Paxtakor: { x: 420, y: 670, line: "red", nameUz: "Paxtakor" },
+    "Paxtakor": { x: 420, y: 670, line: "red", nameUz: "Paxtakor" },
     "Mustaqillik maydoni": {
       x: 570,
       y: 670,
@@ -98,7 +100,7 @@ export default function TashkentMetroMap() {
       nameUz: "Amir Temur xiyoboni",
     },
     "Hamid Olimjon": { x: 950, y: 670, line: "red", nameUz: "Hamid Olimjon" },
-    Pushkin: { x: 950, y: 600, line: "red", nameUz: "Pushkin" },
+    "Pushkin": { x: 950, y: 600, line: "red", nameUz: "Pushkin" },
     "Buyuk ipak yo'li": {
       x: 950,
       y: 530,
@@ -107,9 +109,9 @@ export default function TashkentMetroMap() {
     },
 
     // Blue Line (O'zbekiston Line) - Optimized spacing
-    Beruniy: { x: 180, y: 200, line: "blue", nameUz: "Beruniy" },
-    Tinchlik: { x: 180, y: 320, line: "blue", nameUz: "Tinchlik" },
-    Chorsu: { x: 240, y: 420, line: "blue", nameUz: "Chorsu" },
+    "Beruniy": { x: 180, y: 200, line: "blue", nameUz: "Beruniy" },
+    "Tinchlik": { x: 180, y: 320, line: "blue", nameUz: "Tinchlik" },
+    "Chorsu": { x: 240, y: 420, line: "blue", nameUz: "Chorsu" },
     "G'afur G'ulom": { x: 300, y: 520, line: "blue", nameUz: "G'afur G'ulom" },
     "Alisher Navoiy": {
       x: 420,
@@ -118,18 +120,18 @@ export default function TashkentMetroMap() {
       nameUz: "Alisher Navoiy",
     },
     "O'zbekiston": { x: 420, y: 850, line: "blue", nameUz: "O'zbekiston" },
-    Kosmonavtlar: { x: 570, y: 850, line: "blue", nameUz: "Kosmonavtlar" },
-    Oybek: { x: 750, y: 850, line: "blue", nameUz: "Oybek" },
-    Toshkent: { x: 950, y: 850, line: "blue", nameUz: "Toshkent" },
-    Mashinasozlar: { x: 950, y: 950, line: "blue", nameUz: "Mashinasozlar" },
+    "Kosmonavtlar": { x: 570, y: 850, line: "blue", nameUz: "Kosmonavtlar" },
+    "Oybek": { x: 750, y: 850, line: "blue", nameUz: "Oybek" },
+    "Toshkent": { x: 950, y: 850, line: "blue", nameUz: "Toshkent" },
+    "Mashinasozlar": { x: 950, y: 950, line: "blue", nameUz: "Mashinasozlar" },
     "Do'stlik": { x: 950, y: 1050, line: "blue", nameUz: "Do'stlik" },
 
     // Green Line (Yunusobod Line) - Optimized spacing
-    Turkiston: { x: 750, y: 200, line: "green", nameUz: "Turkiston" },
-    Yunusobod: { x: 750, y: 270, line: "green", nameUz: "Yunusobod" },
-    Shahriston: { x: 750, y: 340, line: "green", nameUz: "Shahriston" },
-    Bodomzor: { x: 750, y: 410, line: "green", nameUz: "Bodomzor" },
-    Minor: { x: 750, y: 480, line: "green", nameUz: "Minor" },
+    "Turkiston": { x: 750, y: 200, line: "green", nameUz: "Turkiston" },
+    "Yunusobod": { x: 750, y: 270, line: "green", nameUz: "Yunusobod" },
+    "Shahriston": { x: 750, y: 340, line: "green", nameUz: "Shahriston" },
+    "Bodomzor": { x: 750, y: 410, line: "green", nameUz: "Bodomzor" },
+    "Minor": { x: 750, y: 480, line: "green", nameUz: "Minor" },
     "Abdulla Qodiriy": {
       x: 750,
       y: 550,
@@ -140,799 +142,23 @@ export default function TashkentMetroMap() {
     "Mingo'rik": { x: 750, y: 800, line: "green", nameUz: "Mingo'rik" },
 
     // Yellow Line (Sirg'ali Line) - Optimized spacing
-    Texnopark: { x: 950, y: 1100, line: "yellow", nameUz: "Texnopark" },
-    Yashnobod: { x: 950, y: 1170, line: "yellow", nameUz: "Yashnobod" },
-    Tuzel: { x: 950, y: 1240, line: "yellow", nameUz: "Tuzel" },
-    Olmos: { x: 950, y: 1310, line: "yellow", nameUz: "Olmos" },
-    Rohat: { x: 950, y: 1380, line: "yellow", nameUz: "Rohat" },
-    Yangiobod: { x: 950, y: 1450, line: "yellow", nameUz: "Yangiobod" },
+    "Texnopark": { x: 950, y: 1100, line: "yellow", nameUz: "Texnopark" },
+    "Yashnobod": { x: 950, y: 1170, line: "yellow", nameUz: "Yashnobod" },
+    "Tuzel": { x: 950, y: 1240, line: "yellow", nameUz: "Tuzel" },
+    "Olmos": { x: 950, y: 1310, line: "yellow", nameUz: "Olmos" },
+    "Rohat": { x: 950, y: 1380, line: "yellow", nameUz: "Rohat" },
+    "Yangiobod": { x: 950, y: 1450, line: "yellow", nameUz: "Yangiobod" },
     "Qo'yliq": { x: 950, y: 1550, line: "yellow", nameUz: "Qo'yliq" },
-    Matonat: { x: 850, y: 1550, line: "yellow", nameUz: "Matonat" },
-    Qiyot: { x: 750, y: 1550, line: "yellow", nameUz: "Qiyot" },
-    Tolariq: { x: 650, y: 1550, line: "yellow", nameUz: "Tolariq" },
-    Xonobod: { x: 550, y: 1550, line: "yellow", nameUz: "Xonobod" },
-    Quruvchilar: { x: 450, y: 1550, line: "yellow", nameUz: "Quruvchilar" },
-    Turon: { x: 350, y: 1550, line: "yellow", nameUz: "Turon" },
-    Qipchoq: { x: 250, y: 1550, line: "yellow", nameUz: "Qipchoq" },
+    "Matonat": { x: 850, y: 1550, line: "yellow", nameUz: "Matonat" },
+    "Qiyot": { x: 750, y: 1550, line: "yellow", nameUz: "Qiyot" },
+    "Tolariq": { x: 650, y: 1550, line: "yellow", nameUz: "Tolariq" },
+    "Xonobod": { x: 550, y: 1550, line: "yellow", nameUz: "Xonobod" },
+    "Quruvchilar": { x: 450, y: 1550, line: "yellow", nameUz: "Quruvchilar" },
+    "Turon": { x: 350, y: 1550, line: "yellow", nameUz: "Turon" },
+    "Qipchoq": { x: 250, y: 1550, line: "yellow", nameUz: "Qipchoq" },
   };
 
   // Station information with optimized image URLs
-  const stationDetails = {
-    "Mustaqillik maydoni": {
-      description:
-        "Mustaqillik Maydoni — Toshkent metrosining Chilonzor yo'nalishidagi bekat bo'lib, 1977-yilda ochilgan. Ilgari \"Lenin maydoni\" deb atalgan. Bekat oq marmar, granit va milliy naqshlar bilan bezatilgan bo'lib, arxitekturasi bilan ajralib turadi. 1991-yilda O'zbekiston mustaqillikka erishgach, bekatga hozirgi nom berilgan. U Mustaqillik maydoni markazida joylashgan bo'lib, yodgorliklar va davlat muassasalariga yaqin.",
-      images: [
-        "/station/Chilonzor/Mustaqillik.png",
-        "/station/Chilonzor/Mustaqillik1.png",
-      ],
-      videos: [
-        {
-          title: "Mustaqillik maydoni",
-          url: "https://www.youtube.com/embed/vrYXZa5es4A",
-          thumbnail:
-            "https://avatars.mds.yandex.net/get-vh/6331688/2a0000018f628a33aac7a8b6b3fe0eb629e7/smart_crop_516x290",
-        },
-      ],
-    },
-    "Buyuk ipak yo'li": {
-      description:
-        "Buyuk Ipak Yoli — Toshkent metrosining Chilonzor yo‘nalishidagi so‘nggi (sharqiy) bekatidir. Bu bekat 2001-yil 24-oktabrda ochilgan. U Toshkent shahrining Yakkasaroy tumanida joylashgan. Bekat nomi qadimgi dunyo savdo yo‘llarining eng mashhuri — Buyuk Ipak Yo‘li sharafiga qo‘yilgan. Arxitekturasi milliy uslubda bezatilgan bo‘lib, devorlarida qadimiy karvonlar, ipak yo‘li xaritalari va Sharqona naqshlar tasvirlangan. Platforma yer ostida joylashgan, yo‘lovchilarga qulay sharoitlar yaratilgan.",
-      images: [
-        "/station/Chilonzor/Buyuk_ipak_yoli_1.png",
-        "/station/Chilonzor/Buyuk.png",
-      ],
-      videos: [
-        {
-          title: "Buyuk ipak yo'li",
-          url: "https://www.youtube.com/embed/oJeTS92hCBQ?si=tFQ1MLrYrNqFBsXN",
-          thumbnail:
-            "https://avatars.mds.yandex.net/get-altay/6203703/2a0000018955bfa463d4ecb3c7ac5483cb1d/orig",
-        },
-      ],
-    },
-    Pushkin: {
-      description:
-        "Buyuk Ipak Yoli — Toshkent metrosining Chilonzor yo‘nalishidagi so‘nggi (sharqiy) bekatidir. Bu bekat 2001-yil 24-oktabrda ochilgan. U Toshkent shahrining Yakkasaroy tumanida joylashgan. Bekat nomi qadimgi dunyo savdo yo‘llarining eng mashhuri — Buyuk Ipak Yo‘li sharafiga qo‘yilgan. Arxitekturasi milliy uslubda bezatilgan bo‘lib, devorlarida qadimiy karvonlar, ipak yo‘li xaritalari va Sharqona naqshlar tasvirlangan. Platforma yer ostida joylashgan, yo‘lovchilarga qulay sharoitlar yaratilgan.",
-      images: [
-        "/station/Chilonzor/Pushkin.png",
-        "/station/Chilonzor/Pushkin_1.png",
-      ],
-      videos: [
-        {
-          title: "Pushkin",
-          url: "https://www.youtube.com/embed/bm9OJk61wbw?si=A42d21XEaXmeZYB2",
-          thumbnail:
-            "https://avatars.mds.yandex.net/get-altay/9724410/2a0000018951c7b274de203bee7975c35a01/XXXL",
-        },
-      ],
-    },
-    Beruniy: {
-      description:
-        "Beruniy — Toshkent metrosining Oʻzbekiston yo‘nalishidagi shimoli-g‘arbiy oxirgi bekatidir. Bu bekat 1991-yil 30-aprelda ochilgan. U Toshkent shahrining Olmazor tumanida joylashgan. Bekat nomi buyuk alloma va olim Abu Rayhon Beruniy sharafiga qo‘yilgan. Arxitekturasi milliy uslubda bezatilgan bo‘lib, marmar va granit bilan ishlangan kubli tom, geometrik naqshlar hamda kristall lyustralar bilan ajralib turadi. Platforma yer ostida joylashgan bo‘lib, yo‘lovchilar uchun qulay va keng sharoitlar yaratilgan.",
-      images: [
-        "/station/O'zbekiston/Beruniy.jpg",
-        "/station/O'zbekiston/Beruniy1.jpg",
-      ],
-      videos: [
-        {
-          title: "Beruniy",
-          url: "https://www.youtube.com/embed/sP8Zbwxk5VU?si=9bf6YbAnk3cf--Uk",
-          thumbnail:
-            "https://avatars.mds.yandex.net/get-altay/13719877/2a000001924ef5cec6805751a756cd4958c2/XXXL",
-        },
-      ],
-    },
-    Tinchlik: {
-      description:
-        "Tinchlik — Toshkent metrosining Oʻzbekiston yo‘nalishidagi bekatlaridan biridir. Bu bekat 1991-yil 30-aprelda ochilgan. U Toshkent shahrining Shayxontohur tumanida joylashgan. Bekat nomi “Tinchlik” — osoyishtalik va sulh ma’nosini anglatadi. Arxitekturasi milliy uslubda yaratilgan bo‘lib, marmor ustunlar, rang-barang vitrajlar va geometrik mozaikalar bilan bezatilgan. Platforma yer ostida joylashgan, ikki yo‘lga ega va yo‘lovchilar uchun qulay sharoitlar yaratilgan.",
-      images: [
-        "/station/O'zbekiston/tinchilik1.jpg",
-        "/station/O'zbekiston/tinchilik.jpg",
-      ],
-      videos: [
-        {
-          title: "Tinchlik",
-          url: "https://www.youtube.com/embed/GHxbrqEYUrM?si=lN77KlUkS4MB4U2s",
-          thumbnail:
-            "https://avatars.mds.yandex.net/get-altay/13668123/2a000001964a8793ba32ad245a6d68dcfe13/XXXL",
-        },
-      ],
-    },
-    Chorsu: {
-      description:
-        "Chorsu — Toshkent metrosining Oʻzbekiston yo‘nalishidagi bekatlaridan biridir. Bu bekat 1989-yil 6-noyabrda ochilgan. U Toshkent shahrining Shayxontohur tumanida, mashhur Chorsu bozori yaqinida joylashgan. Bekat nomi bozordagi qadimiy Chorsu maydonidan olingan. Arxitekturasi milliy uslubda bo‘lib, ko‘k rangli gumbaz naqshlari va keramika panellari bilan bezatilgan. Platforma yer ostida joylashgan, yo‘lovchilar uchun qulay sharoitlarga ega.",
-      images: [
-        "/station/O'zbekiston/Chorsu.jpg",
-        "/station/O'zbekiston/Chorsu1.jpg",
-      ],
-      videos: [
-        {
-          title: "Chorsu",
-          url: "https://www.youtube.com/embed/UQQH9SpqBuo?si=2u-dSxWxfjyerd0A",
-          thumbnail:
-            "https://avatars.mds.yandex.net/get-altay/13525210/2a0000019678ae48d5110f2fc0433fe9d6a4/XXXL",
-        },
-      ],
-    },
-    "G'afur G'ulom": {
-      description:
-        "Gʻafur Gʻulom — Toshkent metrosining Oʻzbekiston yo‘nalishidagi bekatlaridan biridir. Bu bekat 1989-yil 6-noyabrda ochilgan. U Shayxontohur tumanida joylashgan. Bekat nomi o‘zbek adabiyoti namoyandasi Gʻafur Gʻulom sharafiga qo‘yilgan. Arxitekturasi o‘zbek milliy uslubida bo‘lib, devorlari marmar va keramika bilan bezatilgan. Platforma yer ostida joylashgan va keng yoritishga ega.",
-      images: [
-        "/station/O'zbekiston/gafur.jpg",
-        "/station/O'zbekiston/gafur1.jpg",
-      ],
-      videos: [
-        {
-          title: "Gʻafur Gʻulom",
-          url: "https://www.youtube.com/embed/ksW8uOo1o9c?si=icuMR35NmIAknHKP",
-          thumbnail:
-            "https://avatars.mds.yandex.net/get-altay/7186075/2a00000184650b17a5ce62fc3c23ac95d662/XXXL",
-        },
-      ],
-    },
-    "Alisher Navoiy": {
-      description:
-        "Alisher Navoiy — Toshkent metrosining Oʻzbekiston yo‘nalishidagi markaziy bekatlaridan biridir. Bu bekat 1984-yil 6-noyabrda ochilgan. U Toshkent shahrining Shayxontohur tumanida joylashgan. Bekat nomi buyuk o‘zbek shoiri va mutafakkiri Alisher Navoiy sharafiga qo‘yilgan. Arxitekturasi Sharqona uslubda bo‘lib, ko‘k va oq rangli gumbazlar, naqshlar va marmar ustunlar bilan bezatilgan. Platforma keng va yo‘lovchilar uchun qulay sharoitga ega.",
-      images: [
-        "/station/O'zbekiston/Alisher.jpg",
-        "/station/O'zbekiston/Alisher1.jpg",
-      ],
-      videos: [
-        {
-          title: "Alisher Navoiy",
-          url: "https://www.youtube.com/embed/EcworO7ykWs?si=zRw9eG5i05s3QjmQ",
-          thumbnail:
-            "https://avatars.mds.yandex.net/get-altay/7760835/2a000001846545bbc613be31754dbdb3b318/XXXL",
-        },
-      ],
-    },
-    "Abdulla Qodiriy": {
-      description:
-        "Abdulla Qodiriy — Toshkent metrosining Yunusobod yo‘nalishidagi bekatlaridan biridir. Bu bekat 2001-yil 24-oktabrda ochilgan. U Toshkent shahrining Shayxontohur tumanida joylashgan. Bekat nomi mashhur yozuvchi Abdulla Qodiriy sharafiga qo‘yilgan. Arxitekturasi zamonaviy uslubda bo‘lib, yorqin rangli naqshlar va oynavand panellar bilan bezatilgan. Platforma yer ostida, qulay va zamonaviy yoritish tizimiga ega.",
-      images: [
-        "/station/Yunusobod/Abdulla.png",
-        "/station/Yunusobod/Abdulla1.png",
-      ],
-      videos: [
-        {
-          title: "Abdulla Qodiriy",
-          url: "https://www.youtube.com/embed/jQpYU2L_WQw?si=W_tDCU6yDpm0zPfX",
-          thumbnail:
-            "https://avatars.mds.yandex.net/get-altay/7734890/2a000001846687ace28a3b49f096eceed479/XXXL",
-        },
-      ],
-    },
-    Novza: {
-      description:
-        "Novza — Toshkent metrosining Chilonzor yo‘nalishidagi bekatlaridan biridir. Bu bekat 1977-yil 6-noyabrda ochilgan. U Toshkent shahrining Chilonzor tumanida joylashgan. Bekat nomi Novza mahallasi nomidan olingan. Arxitekturasi sodda va zamonaviy bo‘lib, marmar ustunlar va geometrik naqshlar bilan ajralib turadi. Platforma yer ostida joylashgan va yo‘lovchilar uchun qulay.",
-      images: ["/station/Chilonzor/Novza.png", "/station/Chilonzor/Novza1.png"],
-      videos: [
-        {
-          title: "Novza",
-          url: "https://www.youtube.com/embed/gAsMRQECH6c?si=i8mOTQKkLu0MPQxM",
-          thumbnail:
-            "https://avatars.mds.yandex.net/get-altay/7379963/2a000001846075ae23589e595b77d343b1e3/XXXL",
-        },
-      ],
-    },
-    "Milliy bog'": {
-      description:
-        "Milliy bogʻ — Toshkent metrosining Chilonzor yo‘nalishidagi bekatlaridan biridir. Bu bekat 1984-yil 6-noyabrda ochilgan. U Toshkent shahrining Mirzo Ulug‘bek tumanida joylashgan. Bekat nomi yonida joylashgan Milliy bog‘ (Hozirgi Istiqlol bog‘i) sharafiga qo‘yilgan. Arxitekturasi milliy uslubda bo‘lib, oq marmar ustunlar va yengil geometrik naqshlar bilan bezatilgan. Platforma yer ostida joylashgan va yo‘lovchilar uchun qulay.",
-      images: [
-        "/station/Chilonzor/Milliy.png",
-        "/station/Chilonzor/Milliy1.png",
-      ],
-      videos: [
-        {
-          title: "Milliy bogʻ",
-          url: "https://www.youtube.com/embed/86mlltZsKb4?si=7jMfb7C7z0C8YBya",
-          thumbnail:
-            "https://avatars.mds.yandex.net/get-altay/6310045/2a0000018460606875fe23a4f693392fdb93/XXXL",
-        },
-      ],
-    },
-    "Xalqlar do'stligi": {
-      description:
-        "Xalqlar doʻstligi — Toshkent metrosining Chilonzor yo‘nalishidagi markaziy bekatlaridan biridir. Bu bekat 1977-yil 6-noyabrda ochilgan. U Toshkent shahrining Shayxontohur tumanida joylashgan. Bekat nomi xalqlar o‘rtasidagi do‘stlik g‘oyasidan ilhomlangan. Arxitekturasi Sharqona va sovet davri uslublarini uyg‘unlashtirgan bo‘lib, rangli mozaikalar va marmar ustunlar bilan bezatilgan. Platforma yer ostida joylashgan va keng.",
-      images: [
-        "/station/Chilonzor/Xalqlar.png",
-        "/station/Chilonzor/Xalqlar1.png",
-      ],
-      videos: [
-        {
-          title: "Xalqlar doʻstligi",
-          url: "https://www.youtube.com/embed/Ys0LBXGa8xk?si=yDEsMjic-4b2QsPv",
-          thumbnail:
-            "https://avatars.mds.yandex.net/get-altay/7650129/2a000001846045ddd2f4f52f6aef055b1e98/XXXL",
-        },
-      ],
-    },
-    Chilonzor: {
-      description:
-        "Chilonzor — Toshkent metrosining Chilonzor yo‘nalishidagi bekatlaridan biridir. Bu bekat 1977-yil 6-noyabrda ochilgan. U Toshkent shahrining Chilonzor tumanida joylashgan. Bekat nomi shu tuman va hudud nomidan olingan. Arxitekturasi sodda, oq marmar bilan ishlangan, minimal naqshlar bilan ajralib turadi. Platforma yer ostida va yo‘lovchilar uchun qulay sharoitlarga ega.",
-      images: [
-        "/station/Chilonzor/Chilonzor.png",
-        "/station/Chilonzor/Chilonzor_1.png",
-      ],
-      videos: [
-        {
-          title: "Chilonzor",
-          url: "https://www.youtube.com/embed/F5gXlHVZMj4?si=UXOwznagMFvi2iTN",
-          thumbnail:
-            "https://avatars.mds.yandex.net/get-altay/1005628/2a000001895242bcedd6bd8c58fd25afd5d8/XXXL",
-        },
-      ],
-    },
-    "Mirzo Ulugbek": {
-      description:
-        "Mirzo Ulugʻbek — Toshkent metrosining Chilonzor yo‘nalishidagi bekatlaridan biridir. Bu bekat 1980-yil 2-noyabrda ochilgan. U Toshkent shahrining Mirzo Ulug‘bek tumanida joylashgan. Bekat nomi buyuk olim va astronom Mirzo Ulug‘bek sharafiga qo‘yilgan. Arxitekturasi ilmiy mavzuga mos bo‘lib, osmon xaritalari va yulduz naqshlari bilan bezatilgan. Platforma yer ostida joylashgan va keng.",
-      images: ["/station/Chilonzor/Mirzo.jpg", "/station/Chilonzor/Mirzo1.jpg"],
-      videos: [
-        {
-          title: "Mirzo Ulug'bek",
-          url: "https://www.youtube.com/embed/OVtByLeY3YU?si=hHZGGq2T5mPX4vOH",
-          thumbnail:
-            "https://avatars.mds.yandex.net/get-altay/5538812/2a0000018462383b690db77df02343375ac2/XXXL",
-        },
-      ],
-    },
-    Olmazor: {
-      description:
-        "Olmazor — Toshkent metrosining Chilonzor yo‘nalishidagi shimoliy oxirgi bekatidir. Bu bekat 1977-yil 6-noyabrda ochilgan. U Toshkent shahrining Olmazor tumanida joylashgan. Bekat nomi hududdagi Olmazor mahallasi nomidan olingan. Arxitekturasi sodda bo‘lib, oq marmar va geometrik naqshlar bilan ishlangan. Platforma yer ostida joylashgan va yo‘lovchilar uchun qulay.",
-      images: [
-        "/station/Chilonzor/Olmazor.png",
-        "/station/Chilonzor/Olmazor_1.png",
-      ],
-      videos: [
-        {
-          title: "Olmazor",
-          url: "https://www.youtube.com/embed/RBarxmLY2o4?si=-vKENlGBaz1yD6sD",
-          thumbnail:
-            "https://avatars.mds.yandex.net/get-altay/7636462/2a000001846264c5ef84f9925e3335a8caca/XXXL",
-        },
-      ],
-    },
-    "Do'stlik": {
-      description:
-        "Doʻstlik — Toshkent metrosining Chilonzor yo‘nalishidagi bekatlaridan biridir. Bu bekat 1977-yil 6-noyabrda ochilgan. U Toshkent shahrining Yakkasaroy tumanida joylashgan. Bekat nomi xalqlar do‘stligi va birligi g‘oyasidan ilhomlangan. Arxitekturasi sodda va amaliy bo‘lib, oq marmar ustunlar va minimal bezaklarga ega. Platforma yer ostida joylashgan va yo‘lovchilar uchun qulay.",
-      images: [
-        "/station/O'zbekiston/dostlik.jpg",
-        "/station/O'zbekiston/dostlik1.jpg",
-      ],
-      videos: [
-        {
-          title: "Doʻstlik",
-          url: "https://www.youtube.com/embed/cie6e8kRIFg?si=7JWxBlekFOhFQuUG",
-          thumbnail:
-            "https://avatars.mds.yandex.net/get-altay/5527230/2a0000018466189acfd737173c0c2eac99f9/XXXL",
-        },
-      ],
-    },
-    Mashinasozlar: {
-      description:
-        "Mashinasozlar — Toshkent metrosining Chilonzor yo‘nalishidagi bekatlaridan biridir. Bu bekat 1977-yil 6-noyabrda ochilgan. U Toshkent shahrining Yashnobod tumanida joylashgan. Bekat nomi yaqinidagi mashinasozlik zavodlari va sanoat hududlari nomidan olingan. Arxitekturasi sovet davri sanoat uslubida bo‘lib, soddaligi va amaliyoti bilan ajralib turadi. Platforma yer ostida joylashgan va keng.",
-      images: [
-        "/station/O'zbekiston/mashinasozlar.jpg",
-        "/station/O'zbekiston/mashinasozlar1.jpg",
-      ],
-      videos: [
-        {
-          title: "Mashinasozlar",
-          url: "https://www.youtube.com/embed/C74E5tZ2iws?si=wmZKMhpzqYcbvUUo",
-          thumbnail:
-            "https://avatars.mds.yandex.net/get-altay/9742646/2a000001898b124cbcf45dd716306b05fc5d/XXXL",
-        },
-      ],
-    },
-    Toshkent: {
-      description:
-        "Toshkent — Toshkent metrosining Oʻzbekiston yo‘nalishidagi bekatlaridan biridir. Bu bekat 1984-yil 6-noyabrda ochilgan. U Toshkent shahrining Yashnobod tumanida, temir yo‘l vokzali yaqinida joylashgan. Bekat nomi shahar nomidan olingan. Arxitekturasi sharqona va milliy uslubda bo‘lib, oq marmar va dekorativ naqshlar bilan bezatilgan. Platforma yer ostida joylashgan va vokzal bilan bog‘langan.",
-      images: [
-        "/station/O'zbekiston/Toshkent.jpg",
-        "/station/O'zbekiston/Toshkent1.jpg",
-      ],
-      videos: [
-        {
-          title: "Toshkent",
-          url: "https://www.youtube.com/embed/F-uVioqXfUE?si=_UrEAsqd3B-VDNOb",
-          thumbnail:
-            "https://avatars.mds.yandex.net/get-altay/7730813/2a0000018465ec6a77c80a5663c3691c1ac6/XXXL",
-        },
-      ],
-    },
-    Oybek: {
-      description:
-        "Oybek — Toshkent metrosining Oʻzbekiston yo‘nalishidagi bekatlaridan biridir. Bu bekat 1984-yil 6-noyabrda ochilgan. U Toshkent shahrining Mirobod tumanida joylashgan. Bekat nomi o‘zbek yozuvchisi Oybek sharafiga qo‘yilgan. Arxitekturasi milliy uslubda bo‘lib, oq marmar ustunlar va geometrik naqshlar bilan bezatilgan. Platforma yer ostida joylashgan va Alisher Navoiy bekati bilan o‘tish yo‘liga ega.",
-      images: [
-        "/station/O'zbekiston/Oybek.jpg",
-        "/station/O'zbekiston/Oybek1.jpg",
-      ],
-      videos: [
-        {
-          title: "Oybek",
-          url: "https://www.youtube.com/embed/2J6SKfAquT8?si=995KcJ8rnSgShCmA",
-          thumbnail:
-            "https://avatars.mds.yandex.net/get-altay/7979597/2a0000018465c0895e863024efdbbde075d9/XXXL",
-        },
-      ],
-    },
-    Kosmonavtlar: {
-      description:
-        "Kosmonavtlar — Toshkent metrosining Oʻzbekiston yo‘nalishidagi bekatlaridan biridir. Bu bekat 1984-yil 6-noyabrda ochilgan. U Toshkent shahrining Shayxontohur tumanida joylashgan. Bekat nomi kosmonavtika mavzusiga bag‘ishlangan. Arxitekturasi koinot uslubida bo‘lib, devorlarida sayyoralar, yulduzlar va kosmonavtlar tasvirlari bilan bezatilgan. Platforma yer ostida joylashgan va yo‘lovchilar uchun keng va qulay.",
-      images: [
-        "/station/O'zbekiston/kosmanavtlar.jpg",
-        "/station/O'zbekiston/kosmanavtlar1.jpg",
-      ],
-      videos: [
-        {
-          title: "Kosmonavtlar",
-          url: "https://www.youtube.com/embed/rKMT8OGs6X4?si=1PjgOJjam4SSYB2W",
-          thumbnail:
-            "https://avatars.mds.yandex.net/get-altay/15251163/2a000001964a6d56b063df2b62347ef41826/XXXL",
-        },
-      ],
-    },
-    "O'zbekiston": {
-      description:
-        "Oʻzbekiston — Toshkent metrosining Oʻzbekiston yo‘nalishidagi markaziy bekatlaridan biridir. Bu bekat 1984-yil 6-noyabrda ochilgan. U Toshkent shahrining Shayxontohur tumanida joylashgan. Bekat nomi mamlakat nomidan olingan. Arxitekturasi milliy va zamonaviy uslub uyg‘unligida bezatilgan bo‘lib, oq marmar va dekorativ panellar bilan ajralib turadi. Platforma yer ostida joylashgan va yo‘lovchilar uchun qulay sharoitlarga ega.",
-      images: [
-        "/station/O'zbekiston/ozbekiston.jpg",
-        "/station/O'zbekiston/ozbekiston1.jpg",
-      ],
-      videos: [
-        {
-          title: "Oʻzbekiston",
-          url: "https://www.youtube.com/embed/IvVE03PWN6I?si=u4y0YxKJc9qioYtB",
-          thumbnail:
-            "https://avatars.mds.yandex.net/get-altay/8075227/2a000001846564186351a94f0d2e30425132/XXXL",
-        },
-      ],
-    },
-    "Hamid Olimjon": {
-      description:
-        "Hamid Olimjon — Toshkent metrosining Oʻzbekiston yo‘nalishidagi bekatlaridan biridir. Bu bekat 1989-yil 6-noyabrda ochilgan. U Toshkent shahrining Mirobod tumanida joylashgan. Bekat nomi o‘zbek shoiri Hamid Olimjon sharafiga qo‘yilgan. Arxitekturasi Sharqona uslubda bo‘lib, rang-barang naqshlar va marmar panellar bilan bezatilgan. Platforma yer ostida joylashgan va keng yoritish tizimiga ega.",
-      images: ["/station/Chilonzor/Hamid.png", "/station/Chilonzor/Hamid1.png"],
-      videos: [
-        {
-          title: "Hamid Olimjon",
-          url: "https://www.youtube.com/embed/ZgnqW7qbp5g?si=Ih8yTxdPQO2fukJY",
-          thumbnail:
-            "https://avatars.mds.yandex.net/get-altay/13805978/2a000001924e559efe9df202f6968074b81b/XXXL",
-        },
-      ],
-    },
-    "Mingo'rik": {
-      description:
-        "Ming Oʻrik — Toshkent metrosining Yunusobod yo‘nalishidagi bekatlaridan biridir. Bu bekat 2001-yil 24-oktabrda ochilgan. U Toshkent shahrining Mirobod tumanida joylashgan. Bekat nomi yaqin hududdagi Ming O‘rik bozori nomidan olingan. Arxitekturasi zamonaviy bo‘lib, yorqin rangli bezaklar va minimal dizayn bilan ajralib turadi. Platforma yer ostida joylashgan va yo‘lovchilar uchun qulay.",
-      images: [
-        "/station/Yunusobod/Mingorik.png",
-        "/station/Yunusobod/Mingorik_1.png",
-      ],
-      videos: [
-        {
-          title: "Ming Oʻrik",
-          url: "https://www.youtube.com/embed/c2nn2AZTNao?si=Xhl7gXzudLgN3xjE",
-          thumbnail:
-            "https://avatars.mds.yandex.net/get-altay/7779554/2a00000184663d73c552169d518cfa11b7e6/XXXL",
-        },
-      ],
-    },
-    "Yunus Rajabiy": {
-      description:
-        "Yunus Rajabiy — Toshkent metrosining Yunusobod yo‘nalishidagi bekatlaridan biridir. Bu bekat 2001-yil 24-oktabrda ochilgan. U Toshkent shahrining Shayxontohur tumanida joylashgan. Bekat nomi mashhur bastakor Yunus Rajabiy sharafiga qo‘yilgan. Arxitekturasi musiqiy mavzuga mos bo‘lib, devorlarida notalar va sharqona naqshlar tasvirlangan. Platforma yer ostida joylashgan va keng.",
-      images: ["/station/Yunusobod/Yunus.png", "/station/Yunusobod/Yunus1.png"],
-      videos: [
-        {
-          title: "Yunus Rajabiy",
-          url: "https://www.youtube.com/embed/rEqMYnEBfRE?si=jD6p_qYu_WErVM2d",
-          thumbnail:
-            "https://avatars.mds.yandex.net/get-altay/7730813/2a0000018466584826f6ce3921100b176969/XXXL",
-        },
-      ],
-    },
-    Shahriston: {
-      description:
-        "Shahriston — Toshkent metrosining Yunusobod yo‘nalishidagi bekatlaridan biridir. Bu bekat 2001-yil 24-oktabrda ochilgan. U Toshkent shahrining Yunusobod tumanida joylashgan. Bekat nomi qadimiy shahriston hududi nomidan olingan. Arxitekturasi milliy va zamonaviy uslub uyg‘unligida bo‘lib, oq marmar va geometrik naqshlar bilan bezatilgan. Platforma yer ostida joylashgan va yo‘lovchilar uchun qulay.",
-      images: [
-        "/station/Yunusobod/Shahriston.jpg",
-        "/station/Yunusobod/Shahriston1.jpg",
-      ],
-      videos: [
-        {
-          title: "Shahriston",
-          url: "https://www.youtube.com/embed/8bt4aJfWb0U?si=enkyP8UlHHC7q4Hl",
-          thumbnail:
-            "https://avatars.mds.yandex.net/get-altay/14092818/2a000001932c58dac61c2750c15b1c9bfc10/XXXL",
-        },
-      ],
-    },
-    Bodomzor: {
-      description:
-        "Bodomzor — Toshkent metrosining Yunusobod yo‘nalishidagi bekatlaridan biridir. Bu bekat 2001-yil 24-oktabrda ochilgan. U Toshkent shahrining Yunusobod tumanida joylashgan. Bekat nomi hududdagi Bodomzor mahallasi nomidan olingan. Arxitekturasi zamonaviy uslubda bo‘lib, yorqin yoritish va marmar panellar bilan bezatilgan. Platforma yer ostida joylashgan va yo‘lovchilar uchun qulay.",
-      images: [
-        "/station/Yunusobod/bodomzor.jpg",
-        "/station/Yunusobod/bodomzor1.jpg",
-      ],
-      videos: [
-        {
-          title: "Bodomzor",
-          url: "https://www.youtube.com/embed/ei7tRoTdBVU?si=9Dz82dHPBpWi-Yfr",
-          thumbnail:
-            "https://avatars.mds.yandex.net/get-altay/6236655/2a0000018466c8c4b166e8c0a1b6897d5d99/XXXL",
-        },
-      ],
-    },
-    Minor: {
-      description:
-        "Minor — Toshkent metrosining Yunusobod yo‘nalishidagi bekatlaridan biridir. Bu bekat 2001-yil 24-oktabrda ochilgan. U Toshkent shahrining Shayxontohur tumanida joylashgan. Bekat nomi Minor masjidi va shu hudud nomidan olingan. Arxitekturasi milliy va diniy uslub uyg‘unligida bo‘lib, oq marmar va sharqona naqshlar bilan bezatilgan. Platforma yer ostida joylashgan va keng.",
-      images: [
-        "/station/Yunusobod/Minor_1.png",
-        "/station/Yunusobod/Minor.png",
-      ],
-      videos: [
-        {
-          title: "Minor",
-          url: "https://www.youtube.com/embed/sR5N2BrzR7o?si=WzLpNpTLA3ZwgSf0",
-          thumbnail:
-            "https://avatars.mds.yandex.net/get-altay/15510144/2a00000196ab7abfd2ca2b59bcd9b172cc7f/XXXL",
-        },
-      ],
-    },
-    Turkiston: {
-      description:
-        "Turkiston — Toshkent metrosining Yunusobod yo‘nalishidagi bekatlaridan biridir. Bu bekat 2001-yil 24-oktabrda ochilgan. U Toshkent shahrining Yunusobod tumanida joylashgan. Bekat nomi Turkiston saroyi va hudud nomidan olingan. Arxitekturasi zamonaviy bo‘lib, dekorativ panellar va yengil yoritish elementlari bilan ajralib turadi. Platforma yer ostida joylashgan va yo‘lovchilar uchun qulay.",
-      images: [
-        "/station/Yunusobod/turkiston.jpg",
-        "/station/Yunusobod/turkiston1.jpg",
-      ],
-      videos: [
-        {
-          title: "Turkiston",
-          url: "https://www.youtube.com/embed/oEJJJyC_7G4?si=59v9PvGWQ-TtiveY",
-          thumbnail:
-            "https://avatars.mds.yandex.net/get-altay/7650129/2a0000018467582c9184a711d9c84fb59691/XXXL",
-        },
-      ],
-    },
-    Yunusobod: {
-      description:
-        "Yunusobod — Toshkent metrosining Yunusobod yo‘nalishidagi shimoliy oxirgi bekatidir. Bu bekat 2001-yil 24-oktabrda ochilgan. U Toshkent shahrining Yunusobod tumanida joylashgan. Bekat nomi tumanning nomidan olingan. Arxitekturasi zamonaviy va minimal uslubda bo‘lib, oq marmar panellar bilan bezatilgan. Platforma yer ostida joylashgan va yo‘lovchilar uchun qulay.",
-      images: [
-        "/station/Yunusobod/Yunusobod.jpg",
-        "/station/Yunusobod/Yunusobod1.jpg",
-      ],
-      videos: [
-        {
-          title: "Yunusobod",
-          url: "https://www.youtube.com/embed/wPfdsohphs0?si=ONEqkRoEPAnVSorf",
-          thumbnail:
-            "https://avatars.mds.yandex.net/get-altay/7723428/2a0000018467279ccc909f4e3f70e5358af3/XXXL",
-        },
-      ],
-    },
-    Tuzel: {
-      description:
-        "Tuzel — Toshkent metrosining Sergeli yo‘nalishidagi bekatlaridan biridir. Bu bekat 2020-yil 26-dekabrda ochilgan. U Toshkent shahrining Sergeli tumanida joylashgan. Bekat nomi Tuzel mahallasi nomidan olingan. Arxitekturasi zamonaviy bo‘lib, yengil ranglar va minimalistik bezaklardan foydalanilgan. Platforma yer ostida joylashgan va yo‘lovchilar uchun qulay sharoitlarga ega.",
-      images: ["/station/Yer_usti/Tuzel1.jpg", "/station/Yer_usti/Tuzel2.jpg"],
-      videos: [
-        {
-          title: "Tuzel",
-          url: "https://www.youtube.com/embed/niWfFKkG7-M?si=yuG1H6t_OP4MvVIl",
-          thumbnail:
-            "https://avatars.mds.yandex.net/get-altay/14105192/2a0000019255c45918226e7a1c21a988e2cd/XXXL",
-        },
-      ],
-    },
-    Yashnobod: {
-      description:
-        "Yashnobod — Toshkent metrosining Yunusobod yo‘nalishidagi bekatlaridan biridir. Bu bekat 2020-yil 26-dekabrda ochilgan. U Toshkent shahrining Yashnobod tumanida joylashgan. Bekat nomi tuman nomidan olingan. Arxitekturasi zamonaviy bo‘lib, oq marmar va yengil ranglar bilan bezatilgan. Platforma yer ostida joylashgan va yo‘lovchilar uchun qulay.",
-      images: [
-        "/station/Yer_usti/Yashnobod1.jpg",
-        "/station/Yer_usti/Yashnobod2.jpg",
-      ],
-      videos: [
-        {
-          title: "Yashnobod",
-          url: "https://www.youtube.com/embed/ndRrDZ-hFoo?si=sGNvNeme7QXTL16M",
-          thumbnail:
-            "https://avatars.mds.yandex.net/get-altay/6197788/2a000001846a6f2cf60ba41c6d98e0eed343/XXXL",
-        },
-      ],
-    },
-    Texnopark: {
-      description:
-        "Texnopark — Toshkent metrosining Yunusobod yo‘nalishidagi bekatlaridan biridir. Bu bekat 2020-yil 26-dekabrda ochilgan. U Toshkent shahrining Yunusobod tumanida, Texnopark sanoat hududi yaqinida joylashgan. Bekat nomi shu hududdagi texnoparkdan olingan. Arxitekturasi zamonaviy, minimalistik va sanoat ruhidagi dizaynga ega. Platforma yer ostida joylashgan va keng.",
-      images: [
-        "/station/Yer_usti/texnopark1.jpg",
-        "/station/Yer_usti/texnopark2.jpg",
-      ],
-      videos: [
-        {
-          title: "Texnopark",
-          url: "https://www.youtube.com/embed/MdMn01MUe-4?si=r-nC9CMz3Ij7Y_S7",
-          thumbnail:
-            "https://avatars.mds.yandex.net/get-altay/14092818/2a0000019255b4eb9a89bbe319dded949e24/XXXL",
-        },
-      ],
-    },
-
-    Sergeli: {
-      description:
-        "Sergeli — Toshkent metrosining Sergeli yo‘nalishidagi markaziy bekatlaridan biridir. Bu bekat 2020-yil 26-dekabrda ochilgan. U Toshkent shahrining Sergeli tumanida joylashgan. Bekat nomi Sergeli tumani nomidan olingan. Arxitekturasi zamonaviy bo‘lib, yengil rangli panellar va yorqin yoritish bilan ajralib turadi. Platforma yer ostida joylashgan va keng.",
-      images: [
-        "/station/Chilonzor/sergeli.jpg",
-        "/station/Chilonzor/sergeli1.jpg",
-      ],
-      videos: [
-        {
-          title: "Sergeli",
-          url: "https://www.youtube.com/embed/Bpy9csSkl_A?si=ycVc92wi2pcQwa44",
-          thumbnail:
-            "https://avatars.mds.yandex.net/get-altay/7044542/2a00000184627c9b86e33b428345eb32e8e4/XXXL",
-        },
-      ],
-    },
-    Choshtepa: {
-      description:
-        "Choshtepa — Toshkent metrosining Sergeli yo‘nalishidagi bekatlaridan biridir. Bu bekat 2020-yil 26-dekabrda ochilgan. U Toshkent shahrining Sergeli tumanida joylashgan. Bekat nomi Choshtepa hududi nomidan olingan. Arxitekturasi zamonaviy bo‘lib, yengil rangli panellar va minimalistik dizayn bilan bezatilgan. Platforma yer ostida joylashgan va yo‘lovchilar uchun qulay.",
-      images: [
-        "/station/Chilonzor/choshtepa.jpg",
-        "/station/Chilonzor/choshtepa1.jpg",
-      ],
-      videos: [
-        {
-          title: "Choshtepa",
-          url: "https://www.youtube.com/embed/c6eVSdJqI04?si=XqPnJxlUGYvF4taP",
-          thumbnail:
-            "https://avatars.mds.yandex.net/get-altay/10812438/2a00000189b4a41e8d459b8b53ccb638f6f4/XXXL",
-        },
-      ],
-    },
-    Turon: {
-      description:
-        "Turon — Toshkent metrosining Sergeli yo‘nalishidagi bekatlaridan biridir. Bu bekat 2020-yil 26-dekabrda ochilgan. U Toshkent shahrining Sergeli tumanida joylashgan. Bekat nomi qadimiy Turkiston hududi tarixidan ilhomlangan. Arxitekturasi zamonaviy uslubda bo‘lib, oq marmar va geometrik naqshlar bilan ishlangan. Platforma yer ostida joylashgan va keng.",
-      images: ["/station/Yer_usti/Turon1.jpg", "/station/Yer_usti/Turon2.jpg"],
-      videos: [
-        {
-          title: "Turon",
-          url: "https://www.youtube.com/embed/RguMOtIA2iU?si=StfZ0CMi7djc8nfM",
-          thumbnail:
-            "https://avatars.mds.yandex.net/get-altay/12728107/2a0000019255fdeaa2a32466488476cdf583/XXXL",
-        },
-      ],
-    },
-    Chinor: {
-      description:
-        "Chinor — Toshkent metrosining Sergeli yo‘nalishidagi bekatlaridan biridir. Bu bekat 2020-yil 26-dekabrda ochilgan. U Toshkent shahrining Sergeli tumanida joylashgan. Bekat nomi Chinor daraxtlari va shu hudud nomidan olingan. Arxitekturasi sodda va zamonaviy bo‘lib, yengil ranglar va toza dizayn bilan bezatilgan. Platforma yer ostida joylashgan va yo‘lovchilar uchun qulay.",
-      images: [
-        "/station/Chilonzor/Chinor.jpg",
-        "/station/Chilonzor/Chinor1.jpg",
-      ],
-      videos: [
-        {
-          title: "Chinor",
-          url: "https://www.youtube.com/embed/g9YRkCqnrNs?si=dYfR40DsdoZi9vNV",
-          thumbnail:
-            "https://avatars.mds.yandex.net/get-altay/14097168/2a00000192b6037bf266de66398edccc986c/XXXL",
-        },
-      ],
-    },
-    Yangiobod: {
-      description:
-        "Yangiobod — Toshkent metrosining Sergeli yo‘nalishidagi bekatlaridan biridir. Bu bekat 2020-yil 26-dekabrda ochilgan. U Toshkent shahrining Sergeli tumanida joylashgan. Bekat nomi Yangiobod hududi nomidan olingan. Arxitekturasi zamonaviy va minimalistik uslubda bo‘lib, oq ranglar bilan bezatilgan. Platforma yer ostida joylashgan va keng.",
-      images: [
-        "/station/Yer_usti/yangiobod1.jpg",
-        "/station/Yer_usti/yangiobod2.jpg",
-      ],
-      videos: [
-        {
-          title: "Yangiobod",
-          url: "https://www.youtube.com/embed/W8uDkmGwQ5E?si=-OG8wrFYKd8AFuH_",
-          thumbnail:
-            "https://avatars.mds.yandex.net/get-altay/5102477/2a000001846a93f40c2490f6fe830e41d3d7/XXXL",
-        },
-      ],
-    },
-    Rohat: {
-      description:
-        "Rohat — Toshkent metrosining Sergeli yo‘nalishidagi bekatlaridan biridir. Bu bekat 2020-yil 26-dekabrda ochilgan. U Toshkent shahrining Sergeli tumanida joylashgan. Bekat nomi Rohat mahallasi va shu hududdan olingan. Arxitekturasi sodda, zamonaviy uslubda bo‘lib, marmar panellar bilan bezatilgan. Platforma yer ostida joylashgan va yo‘lovchilar uchun qulay.",
-      images: ["/station/Yer_usti/Rohat1.jpg", "/station/Yer_usti/Rohat2.jpg"],
-      videos: [
-        {
-          title: "Rohat",
-          url: "https://www.youtube.com/embed/mgSAQceblYA?si=Tdupnpn4pl9Od2Zp",
-          thumbnail:
-            "https://avatars.mds.yandex.net/get-altay/11395962/2a0000018dea2f3a604b15b3501674b9c6a4/XXXL",
-        },
-      ],
-    },
-    "O'zgarish": {
-      description:
-        "Oʻzgarish — Toshkent metrosining Yangihayot yo‘nalishidagi bekatlaridan biridir. Bu bekat 2024-yil ochilgan. U Toshkent shahrining Yangihayot tumanida joylashgan. Bekat nomi yangilanish va rivojlanish ma’nosini anglatadi. Arxitekturasi zamonaviy, yorqin ranglar va minimalistik panellar bilan bezatilgan. Platforma yer ostida joylashgan va keng.",
-      images: [
-        "/station/Chilonzor/ozgarish.jpg",
-        "/station/Chilonzor/ozgarish1.jpg",
-      ],
-      videos: [
-        {
-          title: "Oʻzgarish",
-          url: "https://www.youtube.com/embed/NMSDOjNywR8?si=eu7NLaQ0CIfNhdTp",
-          thumbnail:
-            "https://avatars.mds.yandex.net/get-altay/14782168/2a00000197be8698014a1eed52d6f675640c/XXXL",
-        },
-      ],
-    },
-    Yangihayot: {
-      description:
-        "Yangihayot — Toshkent metrosining Yangihayot yo‘nalishidagi bekatlaridan biridir. Bu bekat 2024-yil ochilgan. U Toshkent shahrining Yangihayot tumanida joylashgan. Bekat nomi tumanning nomidan olingan. Arxitekturasi zamonaviy bo‘lib, oq marmar va geometrik naqshlar bilan ishlangan. Platforma yer ostida joylashgan va yo‘lovchilar uchun qulay.",
-      images: [
-        "/station/Chilonzor/Yangihayot.jpg",
-        "/station/Chilonzor/Yangihayot1.jpg",
-      ],
-      videos: [
-        {
-          title: "Yangihayot",
-          url: "https://www.youtube.com/embed/kDUxjRzWbiw?si=WPFgE2t55bABPuC1",
-          thumbnail:
-            "https://avatars.mds.yandex.net/get-altay/11277832/2a000001924dc0ff0ea60b3ff0c4f9a8c5ac/XXXL",
-        },
-      ],
-    },
-    "Qo'yliq": {
-      description:
-        "Qoʻyliq — Toshkent metrosining Yangihayot yo‘nalishidagi bekatlaridan biridir. Bu bekat 2024-yil ochilgan. U Toshkent shahrining Sergeli va Yangihayot tumanlari chegarasida joylashgan. Bekat nomi Qo‘ylik bozori va hududi nomidan olingan. Arxitekturasi sodda va zamonaviy bo‘lib, yengil ranglar bilan bezatilgan. Platforma yer ostida joylashgan va yo‘lovchilar uchun qulay.",
-      images: [
-        "/station/Yer_usti/Qoyliq1.jpg",
-        "/station/Yer_usti/Qoyliq2.jpg",
-      ],
-      videos: [
-        {
-          title: "Qoʻyliq",
-          url: "https://www.youtube.com/embed/pm2mbJWfPEI?si=Gewf87Lq_0zClVCP",
-          thumbnail:
-            "https://avatars.mds.yandex.net/get-altay/7649870/2a000001846ab4afdecb0e576d5d0c3fc169/XXXL",
-        },
-      ],
-    },
-    Matonat: {
-      description:
-        "Matonat — Toshkent metrosining Yangihayot yo‘nalishidagi bekatlaridan biridir. Bu bekat 2024-yil ochilgan. U Toshkent shahrining Yangihayot tumanida joylashgan. Bekat nomi matonat — jasorat va chidamlilik ma’nosini anglatadi. Arxitekturasi zamonaviy, oq marmar va dekorativ elementlar bilan bezatilgan. Platforma yer ostida joylashgan va keng.",
-      images: [
-        "/station/Yer_usti/Matonat1.jpg",
-        "/station/Yer_usti/Matonat2.jpg",
-      ],
-      videos: [
-        {
-          title: "Matonat",
-          url: "https://www.youtube.com/embed/RrbJZiGShr4?si=FOsqGXPHh2S_fKM9",
-          thumbnail:
-            "https://avatars.mds.yandex.net/get-altay/13994056/2a0000019255e1e4e08e9083c26f5d570d26/XXXL",
-        },
-      ],
-    },
-    Qiyot: {
-      description:
-        "Qiyot — Toshkent metrosining Yangihayot yo‘nalishidagi bekatlaridan biridir. Bu bekat 2024-yil ochilgan. U Toshkent shahrining Yangihayot tumanida joylashgan. Bekat nomi qadimiy Qiyot hududi nomidan olingan. Arxitekturasi zamonaviy va minimalistik bo‘lib, yengil ranglar bilan bezatilgan. Platforma yer ostida joylashgan va yo‘lovchilar uchun qulay.",
-      images: ["/station/Yer_usti/Qiyot1.jpg", "/station/Yer_usti/Qiyot2.jpg"],
-      videos: [
-        {
-          title: "Qiyot",
-          url: "https://www.youtube.com/embed/Hyd80yl3TLE?si=pHKAR_rwA-ca9pSk",
-          thumbnail:
-            "https://avatars.mds.yandex.net/get-altay/11375099/2a0000018ea4993c07745728105188975d53/XXXL",
-        },
-      ],
-    },
-    Tolariq: {
-      description:
-        "Tolariq — Toshkent metrosining Yangihayot yo‘nalishidagi bekatlaridan biridir. Bu bekat 2024-yil ochilgan. U Toshkent shahrining Yangihayot tumanida joylashgan. Bekat nomi Tolariq hududi nomidan olingan. Arxitekturasi zamonaviy bo‘lib, oq rangli panellar va geometrik naqshlar bilan ishlangan. Platforma yer ostida joylashgan va keng.",
-      images: [
-        "/station/Yer_usti/Tolariq1.jpg",
-        "/station/Yer_usti/Tolariq2.jpg",
-      ],
-      videos: [
-        {
-          title: "Tolariq",
-          url: "https://www.youtube.com/embed/WR4KXjQk0zs?si=4CjWOuRkTrI0ZLEW",
-          thumbnail:
-            "https://avatars.mds.yandex.net/get-altay/14014620/2a0000019255e87bb6f500bf25e9f23b8bb2/XXXL",
-        },
-      ],
-    },
-    Xonobod: {
-      description:
-        "Xonabod — Toshkent metrosining Yangihayot yo‘nalishidagi bekatlaridan biridir. Bu bekat 2024-yil ochilgan. U Toshkent shahrining Yangihayot tumanida joylashgan. Bekat nomi Xonobod mahallasi va tarixiy nomdan olingan. Arxitekturasi zamonaviy va milliy uslub uyg‘unligida bo‘lib, oq marmar bilan bezatilgan. Platforma yer ostida joylashgan va yo‘lovchilar uchun qulay.",
-      images: [
-        "/station/Yer_usti/Xonobod1.jpg",
-        "/station/Yer_usti/Xonobod2.jpg",
-      ],
-      videos: [
-        {
-          title: "Xonabod",
-          url: "https://www.youtube.com/embed/IwjSxhmZ8hU?si=oR8Aw8nKLHXiWLHS",
-          thumbnail:
-            "https://avatars.mds.yandex.net/get-altay/14090927/2a0000019255ed7b1536b5bbd8915a05ffd6/XXXL",
-        },
-      ],
-    },
-    Quruvchilar: {
-      description:
-        "Quruvchilar — Toshkent metrosining Yangihayot yo‘nalishidagi bekatlaridan biridir. Bu bekat 2024-yil ochilgan. U Toshkent shahrining Yangihayot tumanida joylashgan. Bekat nomi quruvchilar mehnati sharafiga qo‘yilgan. Arxitekturasi zamonaviy, minimal dizayn va yorqin yoritish elementlariga ega. Platforma yer ostida joylashgan va keng.",
-      images: [
-        "/station/Yer_usti/Quruvchilar1.jpg",
-        "/station/Yer_usti/Quruvchilar2.jpg",
-      ],
-      videos: [
-        {
-          title: "Quruvchilar",
-          url: "https://www.youtube.com/embed/vBsO6MmbDXg?si=RNhpSYa6aT4MAgRR",
-          thumbnail:
-            "https://avatars.mds.yandex.net/get-altay/14010724/2a0000019255f2307d3171645a03de9cc77f/XXXL",
-        },
-      ],
-    },
-    Olmos: {
-      description:
-        "Olmos — Toshkent metrosining Yangihayot yo‘nalishidagi bekatlaridan biridir. Bu bekat 2024-yil ochilgan. U Toshkent shahrining Yangihayot tumanida joylashgan. Bekat nomi qimmatbaho tosh — olmos nomidan olingan. Arxitekturasi zamonaviy va yorqin ranglar bilan bezatilgan. Platforma yer ostida joylashgan va yo‘lovchilar uchun qulay.",
-      images: ["/station/Yer_usti/Olmos1.jpg", "/station/Yer_usti/Olmos2.jpg"],
-      videos: [
-        {
-          title: "Olmos",
-          url: "https://www.youtube.com/embed/QLO3Y3KyVIQ?si=STT-X0-RMZlAgIJo",
-          thumbnail:
-            "https://avatars.mds.yandex.net/get-altay/7659180/2a000001846a85f1187f07b4d1d9ae4844ce/XXXL",
-        },
-      ],
-    },
-    "Amir Temur xiyoboni": {
-      description:
-        "Amir Temur xiyoboni — Toshkent metrosining Yunusobod yo‘nalishidagi markaziy bekatlaridan biridir. Bu bekat 1977-yil 6-noyabrda ochilgan. U Toshkent shahrining Shayxontohur tumanida, Amir Temur xiyoboni markazida joylashgan. Bekat nomi buyuk sarkarda Amir Temur sharafiga qo‘yilgan. Arxitekturasi milliy va tarixiy uslub uyg‘unligida bo‘lib, marmar ustunlar va sharqona naqshlar bilan bezatilgan. Platforma yer ostida joylashgan va yo‘lovchilar uchun keng.",
-      images: [
-        "/station/Chilonzor/Amir-Temur-xiyoboni_1.png",
-        "/station/Chilonzor/Amir_Temur_xiyoboni.png",
-      ],
-      videos: [
-        {
-          title: "Amir Temur xiyoboni",
-          url: "https://www.youtube.com/embed/mWi6pjkZAd0?si=hpUuR3nkb6uEs_Pn",
-          thumbnail:
-            "https://avatars.mds.yandex.net/get-altay/8093564/2a0000018951f26182537abcd7ca07e2c8f5/XXXL",
-        },
-      ],
-    },
-    Paxtakor: {
-      description:
-        "Paxtakor — Toshkent metrosining Chilonzor yo‘nalishidagi markaziy bekatlaridan biridir. Bu bekat 1977-yil 6-noyabrda ochilgan. U Toshkent shahrining Shayxontohur tumanida joylashgan va Alisher Navoiy bekati bilan kesishuv nuqtasini tashkil etadi. Bekat nomi paxtachilik sohasiga bag‘ishlab qo‘yilgan. Arxitekturasi sovet davri milliy uslubida bo‘lib, oq marmar ustunlar va rang-barang naqshlar bilan bezatilgan. Platforma yer ostida joylashgan va yo‘lovchilar uchun keng sharoitlar yaratilgan.",
-      images: [
-        "/station/Chilonzor/Paxtakor.png",
-        "/station/Chilonzor/Paxtakor_1.png",
-      ],
-      videos: [
-        {
-          title: "Paxtakor",
-          url: "https://www.youtube.com/embed/NHvXk9jEYxI?si=bj4IBoSfPjSqkWjT",
-          thumbnail:
-            "https://avatars.mds.yandex.net/get-altay/7810332/2a000001846011fde0dfde4a1273b04c1cc6/XXXL",
-        },
-      ],
-    },
-    Qipchoq: {
-      description:
-        "Qipchoq — Toshkent metrosining Yangihayot yo‘nalishidagi bekatlaridan biridir. Bu bekat 2024-yil ochilgan. U Toshkent shahrining Yangihayot tumanida joylashgan. Bekat nomi qadimiy qipchoq qabilasi nomidan olingan. Arxitekturasi zamonaviy va minimalistik bo‘lib, oq marmar panellar va geometrik naqshlar bilan ishlangan. Platforma yer ostida joylashgan va yo‘lovchilar uchun qulay.",
-      images: [
-        "/station/Yer_usti/qipchoq1.jpg",
-        "/station/Yer_usti/qipchoq2.jpg",
-      ],
-      videos: [
-        {
-          title: "Qipchoq",
-          url: "https://www.youtube.com/embed/NHvXk9jEYxI?si=bj4IBoSfPjSqkWjT",
-          thumbnail:
-            "https://avatars.mds.yandex.net/get-altay/10247515/2a000001926033dc71384bf3ea1ee7588494/XXXL",
-        },
-      ],
-    },
-  };
 
   const lineColors = {
     red: "#E53E3E",
@@ -1050,7 +276,7 @@ export default function TashkentMetroMap() {
 
       return [];
     },
-    [connections, stations]
+    [connections, stations],
   );
 
   // Calculate route with animation
@@ -1186,24 +412,16 @@ export default function TashkentMetroMap() {
         `${station?.nameUz} stansiyasi Toshkent metropoliteni tizimining muhim qismi bo'lib, har kuni minglab yo'lovchilarga xizmat ko'rsatadi va shaharning turli qismlarini bog'laydi.`,
       images: details?.images || [
         `/placeholder.svg?height=400&width=600&text=${encodeURIComponent(
-          station?.nameUz + " 1"
+          station?.nameUz + " 1",
         )}`,
         `/placeholder.svg?height=400&width=600&text=${encodeURIComponent(
-          station?.nameUz + " 2"
+          station?.nameUz + " 2",
         )}`,
         `/placeholder.svg?height=400&width=600&text=${encodeURIComponent(
-          station?.nameUz + " 3"
+          station?.nameUz + " 3",
         )}`,
       ],
-      videos: details?.videos || [
-        {
-          title: "Virtual tur",
-          url: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-          thumbnail: `/placeholder.svg?height=200&width=300&text=${encodeURIComponent(
-            station?.nameUz + " Video"
-          )}`,
-        },
-      ],
+      videos: details?.videos,
     };
   };
 
@@ -1216,7 +434,7 @@ export default function TashkentMetroMap() {
   const prevImage = () => {
     const details = getStationDetails(selectedStation);
     setCurrentImageIndex(
-      (prev) => (prev - 1 + details.images.length) % details.images.length
+      (prev) => (prev - 1 + details.images.length) % details.images.length,
     );
   };
 
@@ -1234,7 +452,7 @@ export default function TashkentMetroMap() {
   const prevViewerImage = () => {
     const details = getStationDetails(selectedStation);
     setViewerImageIndex(
-      (prev) => (prev - 1 + details.images.length) % details.images.length
+      (prev) => (prev - 1 + details.images.length) % details.images.length,
     );
   };
 
@@ -1360,7 +578,7 @@ export default function TashkentMetroMap() {
       setIsDragging(true);
       setDragStart({ x: e.clientX - transform.x, y: e.clientY - transform.y });
     },
-    [transform]
+    [transform],
   );
 
   const handleMouseMove = useCallback(
@@ -1374,7 +592,7 @@ export default function TashkentMetroMap() {
         y: newY,
       }));
     },
-    [isDragging, dragStart]
+    [isDragging, dragStart],
   );
 
   const handleMouseUp = useCallback(() => {
@@ -1392,7 +610,7 @@ export default function TashkentMetroMap() {
         scale: Math.max(minScale, Math.min(maxScale, prev.scale * delta)),
       }));
     },
-    [isFullscreen]
+    [isFullscreen],
   );
 
   const currentStationDetails = selectedStation
@@ -1601,8 +819,8 @@ export default function TashkentMetroMap() {
                               index === 0
                                 ? "bg-blue-100"
                                 : index === currentRoute.length - 1
-                                ? "bg-red-100"
-                                : "bg-gray-50"
+                                  ? "bg-red-100"
+                                  : "bg-gray-50"
                             }`}
                           >
                             <div className="flex flex-col items-center">
@@ -2039,8 +1257,8 @@ export default function TashkentMetroMap() {
                         isSelected
                           ? "0.4"
                           : isInRoute
-                          ? "0.5"
-                          : stationOpacity * 0.2
+                            ? "0.5"
+                            : stationOpacity * 0.2
                       }
                     />
                     {/* Station outer ring */}
@@ -2053,8 +1271,8 @@ export default function TashkentMetroMap() {
                         isSelected
                           ? "0.6"
                           : isInRoute
-                          ? "0.6"
-                          : stationOpacity * 0.4
+                            ? "0.6"
+                            : stationOpacity * 0.4
                       }
                     />
                     {/* Station main circle - Better touch target */}
@@ -2112,17 +1330,17 @@ export default function TashkentMetroMap() {
                         isSelected
                           ? "fill-blue-800"
                           : isInRoute
-                          ? "fill-green-700"
-                          : "fill-gray-800"
+                            ? "fill-green-700"
+                            : "fill-gray-800"
                       }`}
                       style={{
                         fontSize: isSelected
                           ? "16px"
                           : isInRoute
-                          ? "15px"
-                          : isMobile
-                          ? "12px"
-                          : "14px",
+                            ? "15px"
+                            : isMobile
+                              ? "12px"
+                              : "14px",
                         textShadow:
                           "2px 2px 4px rgba(255,255,255,0.9), -1px -1px 2px rgba(255,255,255,0.9)",
                         fontFamily: "system-ui, -apple-system, sans-serif",
@@ -2267,7 +1485,7 @@ export default function TashkentMetroMap() {
                                       loading="lazy"
                                     />
                                   </div>
-                                )
+                                ),
                               )}
                             </div>
                           </div>

@@ -79,18 +79,13 @@ const MetroStatisticsDashboard = () => {
   const fetchAvailableYears = async () => {
     setYearsLoading(true);
     try {
-      const years = ["2020", "2021", "2022", "2023", "2024", "2025", "2026"];
+      const years = ["2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028"];
       const availableYearsList = [];
 
       for (const year of years) {
         try {
           const response = await fetch(
             `http://88.88.150.151:8090/api/statistics/${lang}/${year}/1/`,
-            {
-              headers: {
-                "X-API-KEY": "UZMETRO_SECRET_2026",
-              },
-            },
           );
           if (response.ok) {
             const data = await response.json();
@@ -159,11 +154,6 @@ const MetroStatisticsDashboard = () => {
       try {
         const response = await fetch(
           `http://88.88.150.151:8090/api/statistics/${lang}/${selectedYear}/${selectedQuarter}/`,
-          {
-            headers: {
-              "X-API-KEY": "UZMETRO_SECRET_2026",
-            },
-          },
         );
         if (!response.ok) {
           throw new Error(`HTTP xatolik! Status: ${response.status}`);

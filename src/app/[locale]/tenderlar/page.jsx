@@ -1,9 +1,9 @@
-import { NewsMain } from "./new";
+import { Tender } from "./tender";
 
 const Page = () => {
   return (
     <div>
-      <NewsMain />
+      <Tender />
     </div>
   );
 };

@@ -937,6 +937,31 @@
     "logoutConfirmTitle": "Shaxsiy hisobdan chiqishni xohlaysizmi?",
     "logoutConfirmText": "Agar hisobingizdan chiqib ketsangiz, tizimga qayta kirishingiz kerak bo‘ladi.",
     "cancel": "Bekor qilish",
-    "commentPlaceholder": "Komment yozish..."
+    "commentPlaceholder": "Komment yozish...",
+    "antiCorruption": "Korrupsiyaga qarshi kurashish",
+    "tenders": "Tenderlar",
+
+    "three_hundred_four_hundred_sixteen": "Elektromexanika xizmati",
+    "three_hundred_four_hundred_seventeen": "Karimjonov Omonjon Alimjonovich",
+    "three_hundred_four_hundred_eighteen": "Dushanbadan jumagacha 08:00 dan 17:00 gacha",
+    "three_hundred_four_hundred_nineteen": "Seshanba kuni soat 09:00 da",
+    "tender": "Metropolitendagi tenderlar",
+
+    "success_title": "Murojaatingiz muvaffaqiyatli yuborildi",
+    "success_description": "Sizning murojaatingiz 5 ish kunida ko'rib chiqiladi. Bu vaqt ichida sizga murojaatingiz javobi qo'ng'iroq orqali aytib beriladi. Murojaat javobi {date} sanagacha ko'rib chiqiladi.",
+    "thanks_message": "Rahmat! Biz sizning murojaatingizni qabul qildik.",
+    "send_request": "Murojaat yuborish",
+    "form_warning": "Murojaat yo'llash uchun formadagi barcha ma'lumotlarni to'ldirishingiz shart. Barcha maydonlarni to'ldirishingiz kerak.",
+    "passport_label": "Passport seriya va raqamlari",
+    "address_labels": "Manzil",
+    "message_label": "Murojaat tavsiloti",
+    "message_placeholder": "Murojaat tavsilotini batafsil yozing...",
+    "send_button": "Jo'natish",
+    "sending_button": "Jo'natilmoqda",
+
+    "address_placeholder": "Yashash joyingizni to'liq yozing",
+    "comment_required": "Iltimos, izohingizni yozing!",
+    "success_received": "Murojaatingiz muvaffaqiyatli qabul qilindi!",
+    "passport_required": "Iltimos, pasport ma'lumotlarini yozing!"
   }
 }
