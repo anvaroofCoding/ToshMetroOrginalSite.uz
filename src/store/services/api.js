@@ -255,11 +255,17 @@ export const api = createApi({
       query: ({ locale }) => `/managements/${locale}`,
       providesTags: ["Post"],
     }),
+
+    video: builder.query({
+      query: () => `/videos/`,
+      providesTags: ["Post"],
+    }),
   }),
 });
 
 /* ================= HOOKS ================= */
 export const {
+  useVideoQuery,
   useTarkibiyTuzilmalarQuery,
   useRahbariyatQuery,
   useMediaVideoQuery,

@@ -80,23 +80,23 @@ export default function MetroPagesShowcase() {
       bgColor: "#F0FFF4",
     },
   ];
-  const getStatistika = async () => {
-    try {
-      const res = await fetch("https://abbos.uzmetro.uz/api/statistics/en/");
+  // const getStatistika = async () => {
+  //   try {
+  //     const res = await fetch("https://abbos.uzmetro.uz/api/statistics/en/");
 
-      if (!res.ok) {
-        throw new Error(`Server error: ${res.status}`);
-      }
+  //     if (!res.ok) {
+  //       throw new Error(`Server error: ${res.status}`);
+  //     }
 
-      const data = await res.json();
-      setApiStats(data);
-    } catch (err) {
-      setError(err.message);
-    }
-  };
-  useEffect(() => {
-    getStatistika();
-  }, []);
+  //     const data = await res.json();
+  //     setApiStats(data);
+  //   } catch (err) {
+  //     setError(err.message);
+  //   }
+  // };
+  // useEffect(() => {
+  //   getStatistika();
+  // }, []);
   if (error) return <p>Error: {error}</p>;
   return (
     <div className="container">
