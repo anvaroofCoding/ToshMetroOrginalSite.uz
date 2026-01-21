@@ -120,12 +120,6 @@
     "paynet_payment": "Paynet ilovasi orqali to'lov",
     "mediateka3": "Mediateka3",
     "mediateka": "Mediateka",
-    "q1": "ATTO kartasini qayerdan sotib olish mumkin va karta balansini qanday to‘ldirish mumkin?",
-    "a1": "\"ATTO\" transport kartasining balansini ATTO, MyUzcard, Payme, Upay, Apelsin va boshqa elektron to‘lov tizimlarining mobil ilovalari orqali to‘ldirish mumkin. Shuningdek, o‘z-o‘ziga xizmat ko‘rsatish terminallari (infokiosklar) orqali to‘ldirish mumkin. Karta \"Toshyo'lovchitransxizmat\" AJ va \"Toshkent metropoliteni\" DUKning barcha savdo nuqtalarida sotiladi.",
-    "q2": "Karta ishi bo‘yicha qayerga murojaat qilishim mumkin?",
-    "a2": "+998 78 140 08 08 raqamiga qo‘ng‘iroq qilish yoki info@atto.uz elektron pochtasi orqali murojaat qilish mumkin.",
-    "q3": "Ba'zi bekatlarda kassa operator joylari yopilgan, to‘lovni qayerda qilsam bo‘ladi?",
-    "a3": "Yopilgan bekatlarda to‘lovni ATTO, MyUzcard, Payme, Upay, Apelsin va boshqa elektron to‘lov tizimlarining mobil ilovalari orqali amalga oshirish mumkin. Shuningdek, Paynet terminallari orqali ham to‘lovni amalga oshirish mumkin.",
     "title_1": "Ko‘p beriladigan savollar",
     "useful_links_uz": "Foydali havolalar",
     "company1_name": "O'zbekiston Respublikasi hukumat portali",
@@ -962,6 +956,17 @@
     "address_placeholder": "Yashash joyingizni to'liq yozing",
     "comment_required": "Iltimos, izohingizni yozing!",
     "success_received": "Murojaatingiz muvaffaqiyatli qabul qilindi!",
-    "passport_required": "Iltimos, pasport ma'lumotlarini yozing!"
+    "passport_required": "Iltimos, pasport ma'lumotlarini yozing!",
+
+    "q1": "Metropoliten poyezdlari oralig‘idagi intervalni qisqartirish mumkinmi?",
+    "a1": "Ha, yangi metro poyezd vagonlari olib kelish rejalashtirilgan bo‘lib, bu kelgusida poyezdlar oralig‘idagi intervalni qisqartirish imkonini beradi.",
+    "q2": "Metropolitenga qanday ishga kirish mumkin?",
+    "a2": "Ishga kirish uchun metropoliten kadrlar bilan ishlash xizmatiga murojaat qilishingiz mumkin. Telefon: 71 239 89 27.",
+    "q3": "Metropoliten ventilyatsiyasini yaxshilash mumkinmi?",
+    "a3": "Ha, ventilyatsiyani yaxshilash bo‘yicha bosqichma-bosqich ishlar olib borilmoqda.",
+    "q4": "Elektropoyezd mashinisti bo‘lish uchun qanday hujjatlar kerak bo‘ladi?",
+    "a4": "Elektropoyezd mashinisti bo‘lish uchun teplovoz va elektrovoz haydovchilik huquqiga ega hujjat hamda tegishli ish staji talab qilinadi.",
+    "q5": "Metropolitenga taalluqli murojaatlarni qanday yuborish mumkin?",
+    "a5": "Murojaatlarni rasmiy sayt orqali yuborish mumkin. Ekranda turgan o‘ng tomondagi tugmani bosing va “Murojaatlar” bo‘limiga o‘tib, murojaat yo‘llashingiz mumkin."
   }
 }

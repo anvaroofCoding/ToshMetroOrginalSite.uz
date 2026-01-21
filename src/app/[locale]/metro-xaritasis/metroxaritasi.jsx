@@ -1380,19 +1380,20 @@ export default function TashkentMetroMap() {
                     <div
                       className="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex-shrink-0 shadow-lg border-2 border-white/20"
                       style={{
-                        backgroundColor: lineColors[currentStationDetails.line],
+                        backgroundColor:
+                          lineColors[currentStationDetails?.line],
                       }}
                     />
                     <div className="min-w-0 flex-1">
                       <h1 className="text-lg sm:text-2xl font-bold text-white truncate mb-1">
-                        {currentStationDetails.nameUz}
+                        {currentStationDetails?.nameUz}
                       </h1>
                       <div className="flex items-center gap-2">
                         <Badge
                           variant="secondary"
                           className="bg-blue-700 text-white border-blue-600 hover:bg-blue-600 text-xs sm:text-sm"
                         >
-                          {lineNames[currentStationDetails.line]}
+                          {lineNames[currentStationDetails?.line]}
                         </Badge>
                       </div>
                     </div>
@@ -1425,10 +1426,11 @@ export default function TashkentMetroMap() {
                         <div className="relative h-100 sm:h-174 p-2 lg:h-180 bg-gray-100 overflow-hidden">
                           <img
                             src={
-                              currentStationDetails.images[currentImageIndex] ||
-                              "/placeholder.svg"
+                              currentStationDetails?.images[
+                                currentImageIndex
+                              ] || "/placeholder.svg"
                             }
-                            alt={`${currentStationDetails.nameUz} ${
+                            alt={`${currentStationDetails?.nameUz} ${
                               currentImageIndex + 1
                             }`}
                             className="w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-300"
@@ -1437,7 +1439,7 @@ export default function TashkentMetroMap() {
                             style={{ imageRendering: "optimizeQuality" }}
                           />
                           {/* Carousel Controls */}
-                          {currentStationDetails.images.length > 1 && (
+                          {currentStationDetails?.images.length > 1 && (
                             <>
                               <Button
                                 variant="ghost"
@@ -1460,14 +1462,14 @@ export default function TashkentMetroMap() {
                           {/* Image Counter */}
                           <div className="absolute bottom-2 sm:bottom-4 right-2 sm:right-4 bg-blue-900/60 text-white px-2 py-1 rounded-full text-xs font-medium backdrop-blur-sm">
                             {currentImageIndex + 1} /{" "}
-                            {currentStationDetails.images.length}
+                            {currentStationDetails?.images.length}
                           </div>
                         </div>
                         {/* Thumbnail Strip - Optimized */}
-                        {currentStationDetails.images.length > 1 && (
+                        {currentStationDetails?.images.length > 1 && (
                           <div className="p-2 sm:p-4 bg-gray-50">
                             <div className="flex gap-2 sm:gap-3 overflow-x-auto pb-2">
-                              {currentStationDetails.images.map(
+                              {currentStationDetails?.images.map(
                                 (image, index) => (
                                   <div
                                     key={index}
@@ -1504,7 +1506,7 @@ export default function TashkentMetroMap() {
                     </CardHeader>
                     <CardContent>
                       <div className="grid gap-3 sm:gap-4">
-                        {currentStationDetails.videos.map((video, index) => (
+                        {currentStationDetails?.videos?.map((video, index) => (
                           <div
                             key={index}
                             className="relative bg-blue-50 rounded-xl overflow-hidden shadow-md cursor-pointer hover:shadow-lg transition-all duration-200 group border border-blue-200"
@@ -1547,10 +1549,10 @@ export default function TashkentMetroMap() {
               <div className="relative h-[70vh]">
                 <img
                   src={
-                    currentStationDetails.images[viewerImageIndex] ||
+                    currentStationDetails?.images[viewerImageIndex] ||
                     "/placeholder.svg"
                   }
-                  alt={`${currentStationDetails.nameUz} ${
+                  alt={`${currentStationDetails?.nameUz} ${
                     viewerImageIndex + 1
                   }`}
                   className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
@@ -1567,7 +1569,7 @@ export default function TashkentMetroMap() {
                   <X className="w-5 h-5 sm:w-6 sm:h-6" />
                 </Button>
                 {/* Navigation */}
-                {currentStationDetails.images.length > 1 && (
+                {currentStationDetails?.images.length > 1 && (
                   <>
                     <Button
                       variant="ghost"
@@ -1591,7 +1593,8 @@ export default function TashkentMetroMap() {
                 )}
                 {/* Image Counter */}
                 <div className="absolute bottom-2 sm:bottom-4 left-1/2 transform -translate-x-1/2 bg-blue-900/60 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full font-medium backdrop-blur-sm text-sm sm:text-base">
-                  {viewerImageIndex + 1} / {currentStationDetails.images.length}
+                  {viewerImageIndex + 1} /{" "}
+                  {currentStationDetails?.images.length}
                 </div>
               </div>
             </div>

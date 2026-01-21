@@ -119,12 +119,6 @@
     "paynet": "Paynet",
     "paynet_payment": "Payment via Paynet App",
     "mediateka": "Media Library",
-    "q1": "Where can I purchase an ATTO card and how can I top up the balance?",
-    "a1": "You can top up your ATTO transport card balance via mobile payment applications such as ATTO, MyUzcard, Payme, Upay, Apelsin, and other electronic payment systems. You can also top up via self-service terminals (infokiosks). The card is available at all sales points of \"Toshyulovchitranskhizmat\" JSC and \"Tashkent Metro\".",
-    "q2": "Where can I contact regarding card issues?",
-    "a2": "You can call +998 78 140 08 08 or contact via email at info@atto.uz.",
-    "q3": "If ticket offices are closed at some stations, where can I make a payment?",
-    "a3": "You can make payments using ATTO, MyUzcard, Payme, Upay, Apelsin, and other mobile payment applications, as well as Paynet terminals.",
     "title_1": "Frequently Asked Questions",
     "useful_links_uz": "Useful links",
     "company1_name": "Government Portal of the Republic of Uzbekistan",
@@ -922,6 +916,17 @@
     "address_placeholder": "Please enter your full address",
     "comment_required": "Please write your comment!",
     "success_received": "Your request has been successfully received!",
-    "passport_required": "Please enter your passport details!"
+    "passport_required": "Please enter your passport details!",
+
+    "q1": "Is it possible to reduce the interval between metro trains?",
+    "a1": "Yes, the delivery of new metro train cars is planned, which will allow the train intervals to be reduced in the future.",
+    "q2": "How can I get a job at the metro?",
+    "a2": "To apply for a job, you can contact the metro human resources department. Phone: 71 239 89 27.",
+    "q3": "Is it possible to improve the ventilation in the metro?",
+    "a3": "Yes, step-by-step work is being carried out to improve the ventilation system.",
+    "q4": "What documents are required to become an electric train driver?",
+    "a4": "To become an electric train driver, you need a valid license to operate diesel and electric locomotives, as well as relevant work experience.",
+    "q5": "How can I submit requests related to the metro?",
+    "a5": "Requests can be submitted through the official website. Click the button on the right side of the screen and go to the \"Requests\" section to submit your message."
   }
 }

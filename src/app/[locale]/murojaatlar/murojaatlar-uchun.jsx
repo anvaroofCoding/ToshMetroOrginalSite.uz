@@ -20,7 +20,7 @@ import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { toast } from "sonner";
 export default function MetroLostItemForm() {
-  const { data } = useLostItemsMeQuery();
+  const { data, isLoading: loadsn, refetch } = useLostItemsMeQuery();
   const t = useTranslations("menu");
   const [formData, setFormData] = useState({
     email: "",
@@ -41,13 +41,22 @@ export default function MetroLostItemForm() {
       };
       await postLostITems(finalData).unwrap();
       toast.success(t("success_received"));
+      refetch();
     } catch (error) {
       if (error?.data?.phone) toast.error(error?.data.phone[0]);
       if (error?.data?.message) toast.error(t("comment_required"));
       if (error?.data?.passport) toast.error(t("passport_required"));
     }
   };
-  if (data?.can_send_new_request == true) {
+
+  if (loadsn) {
+    return (
+      <div className="w-full h-screen justify-center flex items-center">
+        <p>{t("two_hundred_thirteen")}</p>
+      </div>
+    );
+  }
+  if (data?.requests[0]?.can_send_new_request == true) {
     return (
       <Card className="container">
         <CardHeader>

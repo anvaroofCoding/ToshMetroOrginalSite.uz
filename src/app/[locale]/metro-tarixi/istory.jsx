@@ -466,7 +466,7 @@ function TashkentMetroPage() {
           </div>
         </div>
         <div className="w-full space-y-8">
-          <Card className="border-0 shadow-2xl bg-transparent text-white overflow-hidden relative">
+          <Card className="border-0 shadow-2xl bg-transparent text-white overflow-hidden relative p-0">
             {/* Background decorative elements */}
             <div className="absolute" />
             <div className="absolute top-0 right-0 w-40 h-40 sm:w-48 sm:h-48 lg:w-64 lg:h-64 bg-white/5 rounded-full -translate-y-20 sm:-translate-y-28 lg:-translate-y-32 translate-x-20 sm:translate-x-28 lg:translate-x-32" />
