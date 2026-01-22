@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 /* ================= BASE QUERY ================= */
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://88.88.150.151:8090/api",
+  baseUrl: "https://abbos.uzmetro.uz//api",
   prepareHeaders: (headers) => {
     // 🔑 tokenni localStorage dan olish
     const token = localStorage.getItem("token");
