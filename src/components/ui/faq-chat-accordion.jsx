@@ -14,7 +14,7 @@ export function FaqAccordion({
   const [openItem, setOpenItem] = React.useState(null);
 
   return (
-    <div className={cn("p-4 w-full", className)}>
+    <div className={cn("w-full", className)}>
       <Accordion.Root
         type="single"
         collapsible
@@ -29,7 +29,7 @@ export function FaqAccordion({
             className="mb-2 "
           >
             <Accordion.Header>
-              <Accordion.Trigger className="flex w-full items-center justify-start gap-x-4">
+              <Accordion.Trigger className="flex w-full items-center justify-start gap-x-1">
                 <div
                   className={cn(
                     "relative flex items-center space-x-2 rounded-xl  p-2 transition-colors",
@@ -55,7 +55,7 @@ export function FaqAccordion({
                       {item.icon}
                     </span>
                   )}
-                  <span className="font-medium text-white">{item.question}</span>
+                  <span className="font-medium text-white text-start">{item.question}</span>
                 </div>
 
                 <span

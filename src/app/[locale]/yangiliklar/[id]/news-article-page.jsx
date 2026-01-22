@@ -166,7 +166,7 @@ export default function NewsArticlePage() {
   };
 
   return (
-    <div className="container mx-auto py-8 px-4 ">
+    <div className="container mx-auto py-8">
       <h1 className="text-3xl sm:text-4xl font-bold mb-4">{data?.title}</h1>
 
       <div className="flex flex-wrap gap-3 mb-8">
@@ -214,19 +214,19 @@ export default function NewsArticlePage() {
                 <>
                   <Button
                     size="icon"
-                    variant="ghost"
+                    variant="link"
                     onClick={() =>
                       setIndex((i) => (i - 1 + images.length) % images.length)
                     }
-                    className="absolute left-3 top-1/2 -translate-y-1/2 bg-blue-700/70 text-white"
+                    className="absolute left-3 top-1/2 -translate-y-1/2  text-white"
                   >
                     <ChevronLeft />
                   </Button>
                   <Button
                     size="icon"
-                    variant="ghost"
+                    variant="link"
                     onClick={() => setIndex((i) => (i + 1) % images.length)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 bg-blue-700/70 text-white"
+                    className="absolute right-3 top-1/2 -translate-y-1/2  text-white"
                   >
                     <ChevronRight />
                   </Button>

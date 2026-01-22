@@ -22,21 +22,21 @@ export const metadata = {
       name: "Toshkent metropoliteni Axborot xavfsizligini ta'minlash va Axborot kamunikatsiyalarini rivojlantirish bo'limi",
     },
   ],
-  creator: "Toshkent shahar metropoliteni",
-  publisher: "Toshkent shahar metropoliteni",
+  creator: "Toshkent metropoliten DUK | Rasmiy veb-sayt",
+  publisher: "Toshkent metropoliten DUK | Rasmiy veb-sayt",
   metadataBase: new URL("https://uzmetro.uz"),
   openGraph: {
-    title: "Toshkent shahar metropoliteni | Rasmiy veb-sayt",
+    title: "Toshkent metropoliten DUK | Rasmiy veb-sayt",
     description:
       "Toshkent shahar metropolitenining rasmiy veb-sayti. Yo‘nalishlar, tariflar, yangiliklar, xizmatlar va boshqa foydali ma’lumotlar.",
     url: "https://uzmetro.uz",
-    siteName: "Toshkent shahar metropoliteni",
+    siteName: "Toshkent metropoliten DUK | Rasmiy veb-sayt",
     images: [
       {
         url: "/logo.png",
         width: 512,
         height: 512,
-        alt: "Toshkent metropoliteni rasmiy logotipi (logosi)",
+        alt: "Toshkent metropoliten DUK | Rasmiy veb-sayt logosi",
       },
     ],
     locale: "uz_UZ",

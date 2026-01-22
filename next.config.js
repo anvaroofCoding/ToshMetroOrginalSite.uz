@@ -46,19 +46,18 @@ const nextConfig = {
       { protocol: "https", hostname: "i.pinimg.com", pathname: "/**" },
       { protocol: "https", hostname: "media.zenfs.com", pathname: "/**" },
 
-      // 🆕 Qo‘shildi: back.uzmetro.uz domeni
       {
         protocol: "https",
-        hostname: "back.uzmetro.uz",
-        pathname: "/media/news_images/**",
+        hostname: "abbos.uzmetro.uz",
+        pathname: "/media/**",
       },
     ],
-    unoptimized: false, // Next.js image optimization
+    unoptimized: false,
   },
 
   experimental: {
-    esmExternals: true, // Modul importlarini tezlashtiradi
-    scrollRestoration: true, // Scroll tezroq ishlaydi
+    esmExternals: true,
+    scrollRestoration: true,
   },
 };
 

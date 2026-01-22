@@ -12,10 +12,7 @@ export default function Header() {
   const locale = params?.locale;
   const lang = locale || "uz";
   const { data: news, isLoading } = useGetPopularNewssQuery(lang);
-  const trimText = (text, limit) => {
-    if (!text) return "";
-    return text.length > limit ? text.slice(0, limit) + "..." : text;
-  };
+
   if (isLoading) {
     return (
       <div className="container flex justify-center items-center h-screen">
@@ -23,6 +20,10 @@ export default function Header() {
       </div>
     );
   }
+  const trimText = (text, limit) => {
+    if (!text) return "";
+    return text.length > limit ? text.slice(0, limit) + "..." : text;
+  };
   const cards = news?.results?.map((item, index) => (
     <Card
       key={item.id}
@@ -49,8 +50,8 @@ export default function Header() {
               {lang === "uz"
                 ? "Batafsil →"
                 : lang === "ru"
-                ? "Подробнее →"
-                : "Read more →"}
+                  ? "Подробнее →"
+                  : "Read more →"}
             </Button>
           </div>
         ),
@@ -65,8 +66,8 @@ export default function Header() {
             {lang === "uz"
               ? "Metropoliten yangiliklari"
               : lang === "ru"
-              ? "Новости метрополитена"
-              : "Metro News"}
+                ? "Новости метрополитена"
+                : "Metro News"}
           </h2>
         </div>
 
@@ -77,8 +78,8 @@ export default function Header() {
           {lang === "uz"
             ? "Batafsil ko‘rish"
             : lang === "ru"
-            ? "Посмотреть все"
-            : "View all"}{" "}
+              ? "Посмотреть все"
+              : "View all"}{" "}
           <ArrowRight className="w-4 ml-2" />
         </Button>
       </div>

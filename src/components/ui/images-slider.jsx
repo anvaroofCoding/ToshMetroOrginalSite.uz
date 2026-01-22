@@ -16,10 +16,11 @@ export const ImagesSlider = ({
   direction = "up",
   interval = 5000,
 }) => {
+  const t = useTranslations("menu");
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loadedImages, setLoadedImages] = useState([]);
   const [error, setError] = useState(false);
-  const t = useTranslations("menu");
 
   // ==============================
   // PRELOAD IMAGES
@@ -29,7 +30,7 @@ export const ImagesSlider = ({
 
     setError(false);
 
-    const loadPromises = images.map((image) => {
+    const loadPromises = images?.map((image) => {
       return new Promise((resolve, reject) => {
         const img = new Image();
         img.src = image;
@@ -39,7 +40,7 @@ export const ImagesSlider = ({
       });
     });
 
-    Promise.all(loadPromises)
+    Promise?.all(loadPromises)
       .then((loaded) => {
         setLoadedImages(loaded);
       })
@@ -65,9 +66,9 @@ export const ImagesSlider = ({
 
   const handlePrevious = useCallback(() => {
     setCurrentIndex((prev) =>
-      prev - 1 < 0 ? loadedImages.length - 1 : prev - 1,
+      prev - 1 < 0 ? loadedImages?.length - 1 : prev - 1,
     );
-  }, [loadedImages.length]);
+  }, [loadedImages?.length]);
 
   // ==============================
   // KEYBOARD + AUTOPLAY
@@ -120,7 +121,8 @@ export const ImagesSlider = ({
   // ==============================
   // UI STATES
   // ==============================
-  const areImagesLoaded = loadedImages.length > 0;
+  const areImagesLoaded = loadedImages?.length > 0;
+
   if (loading) {
     return (
       <div className="fixed  w-full h-screen inset-0 z-1030 flex items-center justify-center bg-white text-white">
@@ -130,7 +132,6 @@ export const ImagesSlider = ({
       </div>
     );
   }
-
   return (
     <div
       className={cn(

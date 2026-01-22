@@ -30,7 +30,6 @@ export default function MetroPagesShowcase() {
     animateValue(setStations, 50, 1500);
     animateValue(setYears, 53, 1500);
   }, []);
-
   const payment = [
     {
       name: t("humo_card"),
@@ -80,25 +79,6 @@ export default function MetroPagesShowcase() {
       bgColor: "#F0FFF4",
     },
   ];
-  // const getStatistika = async () => {
-  //   try {
-  //     const res = await fetch("
-  //88.88.150.151:8090/api/statistics/en/");
-
-  //     if (!res.ok) {
-  //       throw new Error(`Server error: ${res.status}`);
-  //     }
-
-  //     const data = await res.json();
-  //     setApiStats(data);
-  //   } catch (err) {
-  //     setError(err.message);
-  //   }
-  // };
-  // useEffect(() => {
-  //   getStatistika();
-  // }, []);
-  http: if (error) return <p>Error: {error}</p>;
   return (
     <div className="container">
       <h2 className="md:text-[36px] text-[24px] font-bold pb-5">
@@ -112,7 +92,7 @@ export default function MetroPagesShowcase() {
               style={{
                 backgroundImage: 'url("/naqsh.png")',
                 backgroundRepeat: "repeat",
-                backgroundSize: "200px", // <<< kichikroq qilib, ko‘p takrorlanadi
+                backgroundSize: "200px",
               }}
             />
           </div>
@@ -300,11 +280,11 @@ function AttoCardsCarousel() {
     },
   ];
   const nextCard = () => {
-    setCurrentCardIndex((prev) => (prev + 1) % attoCards.length);
+    setCurrentCardIndex((prev) => (prev + 1) % attoCards?.length);
   };
   const prevCard = () => {
     setCurrentCardIndex(
-      (prev) => (prev - 1 + attoCards.length) % attoCards.length,
+      (prev) => (prev - 1 + attoCards?.length) % attoCards?.length,
     );
   };
   useEffect(() => {
