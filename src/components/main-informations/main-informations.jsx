@@ -82,7 +82,8 @@ export default function MetroPagesShowcase() {
   ];
   // const getStatistika = async () => {
   //   try {
-  //     const res = await fetch("https://abbos.uzmetro.uz/api/statistics/en/");
+  //     const res = await fetch("
+  //88.88.150.151:8090/api/statistics/en/");
 
   //     if (!res.ok) {
   //       throw new Error(`Server error: ${res.status}`);
@@ -97,7 +98,7 @@ export default function MetroPagesShowcase() {
   // useEffect(() => {
   //   getStatistika();
   // }, []);
-  if (error) return <p>Error: {error}</p>;
+  http: if (error) return <p>Error: {error}</p>;
   return (
     <div className="container">
       <h2 className="md:text-[36px] text-[24px] font-bold pb-5">

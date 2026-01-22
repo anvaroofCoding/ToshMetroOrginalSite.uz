@@ -95,7 +95,8 @@ const MetroStatisticsDashboard = () => {
       for (const year of years) {
         try {
           const response = await fetch(
-            `https://abbos.uzmetro.uz/api/statistics/${lang}/${year}/1/`,
+            `
+http://88.88.150.151:8090/api/statistics/${lang}/${year}/1/`,
           );
           if (response.ok) {
             const data = await response.json();
@@ -163,7 +164,8 @@ const MetroStatisticsDashboard = () => {
       setLoading(true);
       try {
         const response = await fetch(
-          `https://abbos.uzmetro.uz/api/statistics/${lang}/${selectedYear}/${selectedQuarter}/`,
+          `
+http://88.88.150.151:8090/api/statistics/${lang}/${selectedYear}/${selectedQuarter}/`,
         );
         if (!response.ok) {
           throw new Error(`HTTP xatolik! Status: ${response.status}`);

@@ -65,7 +65,7 @@ const Corubsiya = () => {
       <div className="container mx-auto flex flex-col items-center gap-16 ">
         <div className="text-center">
           <h2 className="text-pretty text-3xl font-semibold md:text-4xl lg:max-w-3xl lg:text-5xl">
-            {t("tender")}
+            {t("antiCorruption")}
           </h2>
           <div className="border mt-5 rounded-lg overflow-hidden relative bg-white border border-blue-800/30">
             <Input
@@ -114,7 +114,6 @@ const Corubsiya = () => {
                       (post?.title.split(" ").length > 10 ? "..." : "")}
                   </Link>
                 </h3>
-               
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
