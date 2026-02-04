@@ -58,7 +58,7 @@ export default function ContactInfo() {
     {
       icon: Mail,
       title: t("corporate_email"),
-      content: "gup@tashmetro.uz",
+      content: "gup@uzmetro.uz",
       delay: 0.5,
     },
     {

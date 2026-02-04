@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 /* ================= BASE QUERY ================= */
 const baseQuery = fetchBaseQuery({
-  baseUrl: "https://abbos.uzmetro.uz//api",
+  baseUrl: "https://abbos.uzmetro.uz/api",
   prepareHeaders: (headers) => {
     // 🔑 tokenni localStorage dan olish
     const token = localStorage.getItem("token");
@@ -252,7 +252,7 @@ export const api = createApi({
     }),
 
     TarkibiyTuzilmalar: builder.query({
-      query: ({ locale }) => `/managements/${locale}`,
+      query: ({ locale }) => `/departments/${locale}`,
       providesTags: ["Post"],
     }),
 

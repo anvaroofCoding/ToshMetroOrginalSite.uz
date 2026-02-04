@@ -12,31 +12,31 @@ import "./globals.css";
 import Providers from "./providers";
 
 export const metadata = {
-  title: "Toshkent metropoliten DUK | Rasmiy veb-sayt",
+  title: "TOSHKENT METROPOLITENI DUK | Rasmiy veb-sayt",
   description:
     "Toshkent metropolitenining rasmiy veb-sayti. Metro yo‘nalishlari, tariflar, so‘nggi yangiliklar va yo‘lovchilar uchun foydali xizmatlar haqida to‘liq ma’lumot.",
   keywords:
-    "Toshkent metro, Toshkent metropoliteni, metro yo‘nalishlari, metro tariflari, metro yangiliklari, metro xizmatlari, tashmetro.uz, tashmetro, metropoliten, metro, uzmetro, metro xatitasi, metro haqida, tash metro haqida, uzbekiston gerbi, o'zbekiston metrosi, o'zmetro, o'zbekiston metrosi, tashkent metrosi, toshkent metrosi, metro rasmiy sayti, asia metro, osiyoda yagona eng katta metro, toshkent metro, kosmonavtlar bekati, chilonzor metrosi, olmazor metrosi",
+    "Toshkent metro, Toshkent metropoliteni, metro yo‘nalishlari, metro tariflari, metro yangiliklari, metro xizmatlari, tashmetro.uz, tashmetro, metropoliten, metro, uzmetro, metro xatitasi, metro haqida, tash metro haqida, uzbekiston gerbi, o'zbekiston metrosi, o'zmetro, o'zbekiston metrosi, tashkent metrosi, toshkent metrosi, metro rasmiy sayti, asia metro, osiyoda yagona eng katta metro, toshkent metro, kosmonavtlar bekati, chilonzor metrosi, olmazor metrosi, tashmetro.uz, tashmetro, metro, Media metro, metro rasmlar, metro photo",
   authors: [
     {
       name: "Toshkent metropoliteni Axborot xavfsizligini ta'minlash va Axborot kamunikatsiyalarini rivojlantirish bo'limi",
     },
   ],
-  creator: "Toshkent metropoliten DUK | Rasmiy veb-sayt",
-  publisher: "Toshkent metropoliten DUK | Rasmiy veb-sayt",
+  creator: "TOSHKENT METROPOLITENI DUK | Rasmiy veb-sayt",
+  publisher: "TOSHKENT METROPOLITENI DUK | Rasmiy veb-sayt",
   metadataBase: new URL("https://uzmetro.uz"),
   openGraph: {
-    title: "Toshkent metropoliten DUK | Rasmiy veb-sayt",
+    title: "TOSHKENT METROPOLITENI DUK | Rasmiy veb-sayt",
     description:
       "Toshkent shahar metropolitenining rasmiy veb-sayti. Yo‘nalishlar, tariflar, yangiliklar, xizmatlar va boshqa foydali ma’lumotlar.",
     url: "https://uzmetro.uz",
-    siteName: "Toshkent metropoliten DUK | Rasmiy veb-sayt",
+    siteName: "TOSHKENT METROPOLITENI DUK | Rasmiy veb-sayt",
     images: [
       {
         url: "/logo.png",
         width: 512,
         height: 512,
-        alt: "Toshkent metropoliten DUK | Rasmiy veb-sayt logosi",
+        alt: "TOSHKENT METROPOLITENI DUK | Rasmiy veb-sayt logosi",
       },
     ],
     locale: "uz_UZ",

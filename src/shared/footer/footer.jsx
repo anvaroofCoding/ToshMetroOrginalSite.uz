@@ -61,7 +61,7 @@ const Footer = () => {
     },
     {
       icon: Mail,
-      text: "gup@tashmetro.uz",
+      text: "gup@uzmetro.uz",
       title: t("corporateEmail"),
       type: "email",
     },
