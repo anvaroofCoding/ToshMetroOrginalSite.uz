@@ -1,7 +1,6 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { VisuallyHidden } from "@nextui-org/react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { X } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -33,10 +32,9 @@ export default function BiometrikVideo1() {
     bg-black
   "
           >
-            {/* ACCESSIBILITY TITLE (hidden) */}
-            <VisuallyHidden>
-              <Dialog.Title>Biometrik tasdiqlash videosi</Dialog.Title>
-            </VisuallyHidden>
+            <Dialog.Title className="sr-only">
+              Biometrik tasdiqlash videosi
+            </Dialog.Title>
 
             {/* Close button */}
             <button
