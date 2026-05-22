@@ -10,6 +10,12 @@
   max-width: 1440px;
 }
 
+@media (max-width: 767px) {
+  .container {
+    width: 90%;
+  }
+}
+
 .sans {
   font-family: "DM Sans", sans-serif;
 }
@@ -161,4 +167,13 @@ body {
 .my-element {
   offset-path: path("M0,0 L100,0");
   offset-distance: 50%;
+}
+
+@keyframes loading-bar {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(400%);
+  }
 }

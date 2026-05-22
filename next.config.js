@@ -1,5 +1,7 @@
 const createNextIntlPlugin = require('next-intl/plugin')
-const withNextIntl = createNextIntlPlugin()
+const withNextIntl = createNextIntlPlugin('./src/i18n/request.js')
+
+const isDev = process.env.NODE_ENV === 'development'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -58,12 +60,24 @@ const nextConfig = {
 				pathname: '/media/**',
 			},
 		],
-		unoptimized: false,
+		// Dev: Node SSL (UNABLE_TO_VERIFY_LEAF_SIGNATURE) — tashqi URL lar brauzerda to'g'ridan-to'g'ri yuklanadi
+		unoptimized: isDev,
 	},
 
 	experimental: {
 		esmExternals: true,
 		scrollRestoration: true,
+		optimizePackageImports: [
+			'lucide-react',
+			'@tabler/icons-react',
+			'framer-motion',
+			'antd',
+			'recharts',
+		],
+		staleTimes: {
+			dynamic: 30,
+			static: 180,
+		},
 	},
 }
 

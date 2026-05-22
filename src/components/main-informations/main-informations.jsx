@@ -66,7 +66,7 @@ export default function MetroPagesShowcase() {
 			name: t('payme'),
 			information: t('payme_payment'),
 			image:
-				'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Paymeuz_logo.png/1600px-Paymeuz_logo.png',
+				'https://api.logobank.uz/media/logos_png/payme-01.png',
 			color: '#2ba6eeff',
 			bgColor: '#F0FFF4',
 		},

@@ -1,19 +1,13 @@
 'use client'
 import { Button } from '@/components/ui/button'
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardHeader,
-	CardTitle,
-} from '@/components/ui/card'
-import {
-	Field,
-	FieldDescription,
-	FieldGroup,
-	FieldLabel,
-} from '@/components/ui/field'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Field, FieldGroup, FieldLabel } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
+import {
+	formatUzPhoneE164,
+	isValidUzPhone,
+	UzPhoneInput,
+} from '@/components/uz-phone-input'
 import { usePostRegisterMutation } from '@/store/services/api'
 import { Loader, Send } from 'lucide-react'
 import { useTranslations } from 'next-intl'
@@ -33,6 +27,7 @@ export function SignupForm({ ...props }) {
 		phone: '',
 		is_verified: false,
 	})
+	const [phoneDigits, setPhoneDigits] = useState('')
 
 	function handleChange(e) {
 		const { name, value, type, checked } = e.target
@@ -42,9 +37,25 @@ export function SignupForm({ ...props }) {
 		}))
 	}
 
+	function handlePhoneChange(digits) {
+		setPhoneDigits(digits)
+		setFormData(prev => ({
+			...prev,
+			phone: digits ? formatUzPhoneE164(digits) : '',
+		}))
+	}
+
 	async function Submit() {
+		if (!isValidUzPhone(phoneDigits)) {
+			toast.error(t('phoneError'))
+			return
+		}
+
 		try {
-			const response = await postRegister(formData).unwrap()
+			const response = await postRegister({
+				...formData,
+				phone: formatUzPhoneE164(phoneDigits),
+			}).unwrap()
 			toast.success("Parol muvaffaqiyatli Jo'natildi!")
 			setShow(true)
 		} catch (error) {
@@ -61,7 +72,6 @@ export function SignupForm({ ...props }) {
 			<Card {...props}>
 				<CardHeader>
 					<CardTitle>{t('createAccount')}</CardTitle>
-					<CardDescription>{t('registerSubtitle')}</CardDescription>
 				</CardHeader>
 				<CardContent>
 					<form>
@@ -87,13 +97,11 @@ export function SignupForm({ ...props }) {
 							</Field>
 							<Field>
 								<FieldLabel htmlFor='phone'>{t('phone')}</FieldLabel>
-								<Input
-									name='phone'
-									value={formData.phone}
-									onChange={handleChange}
-									placeholder='+998901234567'
+								<UzPhoneInput
+									id='phone'
+									value={phoneDigits}
+									onChange={handlePhoneChange}
 								/>
-								<FieldDescription>{t('phoneError')}</FieldDescription>
 							</Field>
 							<FieldGroup>
 								<Field>

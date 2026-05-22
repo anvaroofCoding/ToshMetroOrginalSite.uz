@@ -11,11 +11,12 @@ export default function FloatingActionButton() {
 	const path = usePathname()
 	const [hidden, setHidden] = useState(false)
 	useEffect(() => {
-		if (path.split('/')[2] === 'metro-xaritasi') {
-			setHidden(true)
-		} else {
-			setHidden(false)
-		}
+		const segment = path.split('/')[2] ?? ''
+		setHidden(
+			segment === 'metro-xaritasi' ||
+				segment === 'kirish' ||
+				segment === 'royxatdan-otish',
+		)
 	}, [path])
 	const [isOpen, setIsOpen] = useState(false)
 	const [hoveredButton, setHoveredButton] = useState(null)

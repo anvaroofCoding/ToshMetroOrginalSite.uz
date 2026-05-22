@@ -13,8 +13,7 @@ import {
 } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import Image from 'next/image'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { Link, usePathname } from '@/i18n/navigation'
 import { useEffect, useState } from 'react'
 import logo from '../../../public/logos.png'
 const socialLinks = [
@@ -76,10 +75,12 @@ const Footer = () => {
 	const [onlineVisitors, setOnlineVisitors] = useState()
 	const [showScrollTop, setShowScrollTop] = useState(false)
 	const pathname = usePathname()
-	const parts = pathname.split('/').filter(Boolean)
 	const { data } = useGetFoydalanuvchilarQuery()
 	const isHiddenPath =
-		parts[1] === 'metro-xaritasi' || parts[1] === 'metro-rejasi'
+		pathname.includes('/metro-xaritasi') ||
+		pathname.includes('/metro-rejasi') ||
+		pathname.includes('/kirish') ||
+		pathname.includes('/royxatdan-otish')
 	useEffect(() => {
 		setTotalVisitors(data?.jami_foydalanuvchilar)
 		setOnlineVisitors(data?.onlayn_foydalanuvchilar)

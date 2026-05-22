@@ -1,10 +1,9 @@
-import React from "react";
-import TashkentMetroMap from "./newMapMertopoliten";
+'use client'
 
-export default function page() {
-  return (
-    <div>
-      <TashkentMetroMap />
-    </div>
-  );
+import { loadPage } from '@/lib/load-page'
+
+const TashkentMetroMap = loadPage(() => import('./newMapMertopoliten'))
+
+export default function Page() {
+	return <TashkentMetroMap />
 }

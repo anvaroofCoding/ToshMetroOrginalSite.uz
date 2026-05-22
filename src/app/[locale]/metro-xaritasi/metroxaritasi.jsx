@@ -28,8 +28,21 @@ export default function TashkentMetroMap() {
   const router = useRouter();
   const [transform, setTransform] = useState({ x: 0, y: 0, scale: 1 });
   const [isDragging, setIsDragging] = useState(false);
-  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const transformRef = useRef({ x: 0, y: 0, scale: 1 });
+  const pointersRef = useRef(new Map());
+  const panStartRef = useRef({ x: 0, y: 0, transformX: 0, transformY: 0 });
+  const pinchStartRef = useRef({
+    distance: 0,
+    scale: 1,
+    centerX: 0,
+    centerY: 0,
+    x: 0,
+    y: 0,
+  });
+  const hasMovedRef = useRef(false);
+  const isMobileRef = useRef(false);
+  const isFullscreenRef = useRef(false);
   const [selectedStation, setSelectedStation] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -66,6 +79,55 @@ export default function TashkentMetroMap() {
     window.addEventListener("resize", checkScreenSize);
     return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
+
+  useEffect(() => {
+    isMobileRef.current = isMobile;
+  }, [isMobile]);
+
+  useEffect(() => { 
+    isFullscreenRef.current = isFullscreen;
+  }, [isFullscreen]);
+
+  const getScaleLimits = useCallback(() => {
+    if (isFullscreenRef.current) return { min: 0.2, max: 8 };
+    return { min: 0.3, max: isMobileRef.current ? 4 : 3 };
+  }, []);
+
+  const applyTransformToSvg = useCallback((next, withTransition = false) => {
+    transformRef.current = next;
+    const svg = svgRef.current;
+    if (!svg) return;
+    svg.style.transform = `translate(${next.x}px, ${next.y}px) scale(${next.scale})`;
+    svg.style.transition = withTransition
+      ? "transform 0.2s cubic-bezier(0.4, 0, 0.2, 1)"
+      : "none";
+  }, []);
+
+  const commitTransform = useCallback(
+    (next) => {
+      applyTransformToSvg(next, false);
+      setTransform(next);
+    },
+    [applyTransformToSvg],
+  );
+
+  useEffect(() => {
+    transformRef.current = transform;
+    if (!isDragging) {
+      applyTransformToSvg(transform, true);
+    }
+  }, [transform, isDragging, applyTransformToSvg]);
+
+  const getPointerDistance = (points) => {
+    const dx = points[0].x - points[1].x;
+    const dy = points[0].y - points[1].y;
+    return Math.hypot(dx, dy);
+  };
+
+  const getPointerCenter = (points) => ({
+    x: (points[0].x + points[1].x) / 2,
+    y: (points[0].y + points[1].y) / 2,
+  });
 
   // Optimized station positions with better spacing for mobile
   const stations = {
@@ -380,6 +442,7 @@ export default function TashkentMetroMap() {
 
   // Handle station click
   const handleStationClick = (stationName, e) => {
+    if (hasMovedRef.current) return;
     e.stopPropagation();
     if (!isFullscreen) {
       setSelectedStation(stationName);
@@ -476,128 +539,132 @@ export default function TashkentMetroMap() {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [isFullscreen, showModal, showImageViewer, showVideoPlayer, isMobile]);
 
-  // Improved touch handling for mobile
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
+  const handlePointerDown = useCallback(
+    (e) => {
+      if (
+        e.button > 0 ||
+        e.target.closest("button, a, input, select, textarea, label")
+      ) {
+        return;
+      }
 
-    let lastTouchDistance = 0;
-    let lastTouchCenter = { x: 0, y: 0 };
+      const container = containerRef.current;
+      if (!container) return;
 
-    const getTouchDistance = (touches) => {
-      const dx = touches[0].clientX - touches[1].clientX;
-      const dy = touches[0].clientY - touches[1].clientY;
-      return Math.sqrt(dx * dx + dy * dy);
-    };
+      container.setPointerCapture(e.pointerId);
+      pointersRef.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
 
-    const getTouchCenter = (touches) => {
-      return {
-        x: (touches[0].clientX + touches[1].clientX) / 2,
-        y: (touches[0].clientY + touches[1].clientY) / 2,
-      };
-    };
+      const points = Array.from(pointersRef.current.values());
+      const current = transformRef.current;
 
-    const handleTouchStart = (e) => {
-      // Don't start dragging if touching a station
-      if (e.target.tagName === "circle") return;
-
-      if (e.touches.length === 1) {
-        const touch = e.touches[0];
+      if (points.length === 1) {
+        hasMovedRef.current = false;
+        panStartRef.current = {
+          x: e.clientX,
+          y: e.clientY,
+          transformX: current.x,
+          transformY: current.y,
+        };
         setIsDragging(true);
-        setDragStart({
-          x: touch.clientX - transform.x,
-          y: touch.clientY - transform.y,
-        });
-      } else if (e.touches.length === 2) {
-        // Pinch zoom start
-        lastTouchDistance = getTouchDistance(e.touches);
-        lastTouchCenter = getTouchCenter(e.touches);
+      } else if (points.length === 2) {
+        const center = getPointerCenter(points);
+        pinchStartRef.current = {
+          distance: getPointerDistance(points),
+          scale: current.scale,
+          centerX: center.x,
+          centerY: center.y,
+          x: current.x,
+          y: current.y,
+        };
         setIsDragging(false);
       }
-      e.preventDefault();
-    };
+    },
+    [],
+  );
 
-    const handleTouchMove = (e) => {
-      if (e.touches.length === 1 && isDragging) {
-        const touch = e.touches[0];
-        const newX = touch.clientX - dragStart.x;
-        const newY = touch.clientY - dragStart.y;
-        setTransform((prev) => ({
-          ...prev,
-          x: newX,
-          y: newY,
-        }));
-      } else if (e.touches.length === 2) {
-        // Pinch zoom
-        const distance = getTouchDistance(e.touches);
-        const center = getTouchCenter(e.touches);
+  const handlePointerMove = useCallback(
+    (e) => {
+      if (!pointersRef.current.has(e.pointerId)) return;
 
-        if (lastTouchDistance > 0) {
-          const scale = distance / lastTouchDistance;
-          const maxScale = isFullscreen ? 8 : 3;
-          const minScale = isFullscreen ? 0.2 : 0.3;
+      pointersRef.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      const points = Array.from(pointersRef.current.values());
+      const { min, max } = getScaleLimits();
 
-          setTransform((prev) => ({
-            ...prev,
-            scale: Math.max(minScale, Math.min(maxScale, prev.scale * scale)),
-            x: prev.x + (center.x - lastTouchCenter.x),
-            y: prev.y + (center.y - lastTouchCenter.y),
-          }));
+      if (points.length === 1) {
+        const dx = e.clientX - panStartRef.current.x;
+        const dy = e.clientY - panStartRef.current.y;
+
+        if (Math.abs(dx) > 2 || Math.abs(dy) > 2) {
+          hasMovedRef.current = true;
         }
 
-        lastTouchDistance = distance;
-        lastTouchCenter = center;
+        applyTransformToSvg({
+          x: panStartRef.current.transformX + dx,
+          y: panStartRef.current.transformY + dy,
+          scale: transformRef.current.scale,
+        });
+
+        if (e.pointerType === "touch") e.preventDefault();
+      } else if (points.length === 2) {
+        const distance = getPointerDistance(points);
+        const center = getPointerCenter(points);
+        const pinch = pinchStartRef.current;
+
+        if (pinch.distance > 0) {
+          const scaleFactor = distance / pinch.distance;
+          const nextScale = Math.max(
+            min,
+            Math.min(max, pinch.scale * scaleFactor),
+          );
+
+          applyTransformToSvg({
+            scale: nextScale,
+            x: pinch.x + (center.x - pinch.centerX),
+            y: pinch.y + (center.y - pinch.centerY),
+          });
+        }
+
+        if (e.pointerType === "touch") e.preventDefault();
       }
-      e.preventDefault();
-    };
-
-    const handleTouchEnd = (e) => {
-      setIsDragging(false);
-      lastTouchDistance = 0;
-      e.preventDefault();
-    };
-
-    container.addEventListener("touchstart", handleTouchStart, {
-      passive: false,
-    });
-    container.addEventListener("touchmove", handleTouchMove, {
-      passive: false,
-    });
-    container.addEventListener("touchend", handleTouchEnd, { passive: false });
-
-    return () => {
-      container.removeEventListener("touchstart", handleTouchStart);
-      container.removeEventListener("touchmove", handleTouchMove);
-      container.removeEventListener("touchend", handleTouchEnd);
-    };
-  }, [isDragging, dragStart, transform, isFullscreen]);
-
-  // Mouse handlers
-  const handleMouseDown = useCallback(
-    (e) => {
-      setIsDragging(true);
-      setDragStart({ x: e.clientX - transform.x, y: e.clientY - transform.y });
     },
-    [transform],
+    [applyTransformToSvg, getScaleLimits],
   );
 
-  const handleMouseMove = useCallback(
+  const handlePointerUp = useCallback(
     (e) => {
-      if (!isDragging) return;
-      const newX = e.clientX - dragStart.x;
-      const newY = e.clientY - dragStart.y;
-      setTransform((prev) => ({
-        ...prev,
-        x: newX,
-        y: newY,
-      }));
-    },
-    [isDragging, dragStart],
-  );
+      const container = containerRef.current;
+      pointersRef.current.delete(e.pointerId);
 
-  const handleMouseUp = useCallback(() => {
-    setIsDragging(false);
-  }, []);
+      try {
+        container?.releasePointerCapture(e.pointerId);
+      } catch {
+        // capture already released
+      }
+
+      const points = Array.from(pointersRef.current.values());
+
+      if (points.length === 0) {
+        setIsDragging(false);
+        commitTransform(transformRef.current);
+        return;
+      }
+
+      if (points.length === 1) {
+        const entry = pointersRef.current.entries().next().value;
+        if (!entry) return;
+        const [, point] = entry;
+        const current = transformRef.current;
+        panStartRef.current = {
+          x: point.x,
+          y: point.y,
+          transformX: current.x,
+          transformY: current.y,
+        };
+        setIsDragging(true);
+      }
+    },
+    [commitTransform],
+  );
 
   const handleWheel = useCallback(
     (e) => {
@@ -621,7 +688,11 @@ export default function TashkentMetroMap() {
     <>
       <div
         className={`${
-          isFullscreen ? "fixed inset-0 z-[9999] bg-red-900" : "w-full h-screen"
+          isFullscreen
+            ? "fixed inset-0 z-[9999] bg-red-900"
+            : isMobile
+              ? "w-full h-[calc(100dvh-4.5rem)]"
+              : "w-full h-screen"
         } relative flex`}
       >
         {/* Route Planning Panel - Left Side */}
@@ -920,7 +991,13 @@ export default function TashkentMetroMap() {
         )}
 
         {/* Main Content */}
-        <div className="flex-1 relative ">
+        <div
+          className={`flex-1 relative min-h-0 ${
+            isMobile && !isFullscreen
+              ? "flex items-center justify-center overflow-hidden"
+              : ""
+          }`}
+        >
           {/* Back Button - Top Left */}
           <div className="absolute top-4 left-4 z-20">
             <Button
@@ -988,15 +1065,20 @@ export default function TashkentMetroMap() {
           {/* Map Container */}
           <div
             ref={containerRef}
-            className={`relative overflow-hidden  ${
-              showModal && !isFullscreen && !isMobile
-                ? "w-full lg:w-2/3"
-                : "w-full"
-            } h-full transition-all duration-300`}
-            onMouseDown={handleMouseDown}
-            onMouseMove={handleMouseMove}
-            onMouseUp={handleMouseUp}
-            onMouseLeave={handleMouseUp}
+            className={`relative overflow-hidden touch-none select-none transition-all duration-300 ${
+              isFullscreen
+                ? "h-full w-full"
+                : isMobile
+                  ? "h-[90%] w-[90%]"
+                  : showModal
+                    ? "h-full w-full lg:w-2/3"
+                    : "h-full w-full"
+            }`}
+            style={{ touchAction: "none" }}
+            onPointerDown={handlePointerDown}
+            onPointerMove={handlePointerMove}
+            onPointerUp={handlePointerUp}
+            onPointerCancel={handlePointerUp}
             onWheel={handleWheel}
           >
             <svg
@@ -1004,11 +1086,7 @@ export default function TashkentMetroMap() {
               viewBox="0 0 1400 1600"
               className="w-full h-[110%] cursor-grab active:cursor-grabbing select-none"
               style={{
-                transform: `translate(${transform.x}px, ${transform.y}px) scale(${transform.scale})`,
                 transformOrigin: "center center",
-                transition: isDragging
-                  ? "none"
-                  : "transform 0.2s cubic-bezier(0.4, 0, 0.2, 1)",
               }}
             >
               <defs>
@@ -1286,7 +1364,6 @@ export default function TashkentMetroMap() {
                       filter="url(#dropshadow)"
                       className="cursor-pointer hover:r-13 transition-all duration-200"
                       onClick={(e) => handleStationClick(name, e)}
-                      style={{ touchAction: "manipulation" }}
                       opacity={stationOpacity}
                     />
                     {/* Station inner dot */}
@@ -1298,7 +1375,6 @@ export default function TashkentMetroMap() {
                       opacity={stationOpacity * 0.9}
                       className="cursor-pointer"
                       onClick={(e) => handleStationClick(name, e)}
-                      style={{ touchAction: "manipulation" }}
                     />
 
                     {/* Special markers for start/end stations */}

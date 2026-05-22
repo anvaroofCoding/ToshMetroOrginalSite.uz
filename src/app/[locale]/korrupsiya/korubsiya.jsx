@@ -7,7 +7,8 @@ import {
 	useCorrubsiyaQuery,
 	useLikedCorrubsiyaMutation,
 } from '@/store/services/api'
-import { IconEye, IconThumbUp, IconThumbUpFilled } from '@tabler/icons-react'
+import { LikeButton } from '@/components/like-button'
+import { IconEye } from '@tabler/icons-react'
 import { ArrowRight, Loader, Search, X } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import Link from 'next/link'
@@ -32,14 +33,6 @@ const Corubsiya = () => {
 	})
 
 	const [liked] = useLikedCorrubsiyaMutation()
-
-	const clickLike = id => {
-		try {
-			liked(id).unwrap()
-		} catch (error) {
-			console.log(error)
-		}
-	}
 
 	useEffect(() => {
 		setPage(1)
@@ -94,7 +87,7 @@ const Corubsiya = () => {
 								>
 									<img
 										src={post?.images[0]?.image}
-										alt={post?.title}
+										alt={post?.title || 'Korrupsiya yangiliklari'}
 										className='h-full w-full object-cover object-center'
 									/>
 								</Link>
@@ -125,19 +118,12 @@ const Corubsiya = () => {
 									<ArrowRight className='ml-2 size-4' />
 								</Link>
 								<div className='flex items-center gap-3'>
-									<p
-										onClick={() => {
-											clickLike(post?.id)
-										}}
-										className='flex items-center gap-0.5 text-muted-foreground text-sm cursor-pointer'
-									>
-										{post?.liked ? (
-											<IconThumbUpFilled stroke={2} />
-										) : (
-											<IconThumbUp stroke={2} />
-										)}
-										{post?.like_count}
-									</p>
+									<LikeButton
+										id={post?.id}
+										liked={post?.liked}
+										count={post?.like_count}
+										onLike={id => liked(id).unwrap()}
+									/>
 									<p className='flex items-center gap-0.5 text-muted-foreground text-sm'>
 										<IconEye stroke={2} /> {post?.view_count}
 									</p>

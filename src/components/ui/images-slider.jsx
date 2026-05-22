@@ -172,23 +172,6 @@ export const ImagesSlider = ({
         </AnimatePresence>
       )}
 
-      {/* CONTROLS */}
-      {areImagesLoaded && loadedImages.length > 1 && (
-        <>
-          <button
-            onClick={handlePrevious}
-            className="absolute left-4 z-50 bg-black/50 hover:bg-black/70 text-white px-4 py-2 rounded-xl transition lg:block hidden"
-          >
-            ◀
-          </button>
-          <button
-            onClick={handleNext}
-            className="absolute right-4 z-50 bg-black/50 hover:bg-black/70 text-white px-4 py-2 rounded-xl transition lg:block hidden"
-          >
-            ▶
-          </button>
-        </>
-      )}
     </div>
   );
 };

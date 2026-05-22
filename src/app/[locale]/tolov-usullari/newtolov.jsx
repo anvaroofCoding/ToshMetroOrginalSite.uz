@@ -366,13 +366,11 @@ export default function PaymentMethods() {
 										<div className='flex items-center mb-4 sm:mb-5 md:mb-6'>
 											<div className='w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14  rounded-2xl flex items-center justify-center mr-3 sm:mr-4 shadow-lg group-hover:scale-110 transition-transform duration-500'>
 												<Image
-													src={
-														'https://api.logobank.uz/media/logos_png/alif-01.png'
-													}
-													alt='alif atm'
+													src='/alif/alif.png'
+													alt='Alif bank logotipi'
 													width={28}
 													height={28}
-													className=' w-full '
+													className='w-full rounded-full'
 												/>
 											</div>
 											<h3 className='font-bold text-blue-900 text-base sm:text-lg md:text-xl lg:text-2xl'>

@@ -1,9 +1,15 @@
+import { metadataFromSegment } from '@/lib/seo/build-metadata'
 import CompanySlider from "@/components/company/CompanySlider";
 import Header from "@/components/header";
 import HomePage from "@/components/home/HomaPage";
 import ForPageFAq from "@/components/main-informations/forPageFAq";
 import MetroPagesShowcase from "@/components/main-informations/main-informations";
 import Mediateka from "./mediateka/headermediateka";
+
+export async function generateMetadata({ params }) {
+	const { locale } = await params
+	return metadataFromSegment('home', locale)
+}
 
 const Home = () => {
   return (

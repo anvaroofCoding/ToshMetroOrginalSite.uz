@@ -1,11 +1,9 @@
-import ManagementPage from './raxbariyat'
+'use client'
 
-const Page = () => {
-	return (
-		<div>
-			<ManagementPage />
-		</div>
-	)
+import { loadPage } from '@/lib/load-page'
+
+const ManagementPage = loadPage(() => import('./raxbariyat'))
+
+export default function Page() {
+	return <ManagementPage />
 }
-
-export default Page

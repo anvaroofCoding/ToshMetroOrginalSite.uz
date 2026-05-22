@@ -170,9 +170,6 @@ export default function Dialog01({ open, onOpenChange }) {
 
         <DialogHeader className="text-center gap-0">
           <DialogTitle className="text-center">{t("successTitle")}</DialogTitle>
-          <DialogDescription className="mt-2 text-center mx-auto sm:max-w-[90%]">
-            {t("successDescription")}
-          </DialogDescription>
         </DialogHeader>
         <DialogFooter className="sm:justify-center w-full">
           <DialogClose asChild>

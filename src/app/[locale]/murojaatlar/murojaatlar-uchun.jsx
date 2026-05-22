@@ -1,5 +1,6 @@
 'use client'
 import { Button } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
 import {
 	Card,
 	CardContent,
@@ -10,6 +11,13 @@ import {
 } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
 import {
 	useLostItemsMeQuery,
@@ -19,22 +27,47 @@ import { CheckCircle, Loader, Send } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 import { toast } from 'sonner'
+
+const PASSPORT_SERIES = Array.from({ length: 26 }, (_, i) =>
+	Array.from({ length: 26 }, (_, j) =>
+		String.fromCharCode(65 + i) + String.fromCharCode(65 + j),
+	),
+).flat()
+
+const fieldClassName =
+	'h-9 min-h-9 rounded-md border border-blue-200 bg-white px-3 py-1 text-base text-gray-900 shadow-xs transition-[color,box-shadow] outline-none md:text-sm focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]'
+
+const inputClassName = `${fieldClassName} w-full placeholder:text-gray-400`
+
 export default function MetroLostItemForm() {
 	const { data, isLoading: loadsn, refetch } = useLostItemsMeQuery()
 	const t = useTranslations('menu')
 	const [formData, setFormData] = useState({
 		email: '',
-		passport: '',
+		passportSeries: 'AD',
+		passportNumber: '',
 		address: '',
 		message: '',
 	})
 	const [postLostITems, { isLoading }] = usePostMurojaatMutation()
+
+	const handlePassportNumberChange = e => {
+		const digits = e.target.value.replace(/\D/g, '').slice(0, 7)
+		setFormData(prev => ({ ...prev, passportNumber: digits }))
+	}
+
 	const handleSubmit = async e => {
 		e.preventDefault()
+
+		if (formData.passportNumber.length !== 7) {
+			toast.error(t('passport_number_invalid'))
+			return
+		}
+
 		try {
 			const finalData = {
 				email: formData.email,
-				passport: formData.passport,
+				passport: `${formData.passportSeries}${formData.passportNumber}`,
 				address: formData.address,
 				message: formData.message,
 				status: 'pending',
@@ -56,17 +89,37 @@ export default function MetroLostItemForm() {
 			</div>
 		)
 	}
-	if (data?.requests[0]?.can_send_new_request == true) {
+
+	// Faqat avval murojaat yuborilgan va yangi yuborish taqiqlanganda success ko'rsatiladi
+	const latestRequest = data?.requests?.[0]
+	const hasPendingRequest = latestRequest?.can_send_new_request === false
+
+	if (!hasPendingRequest) {
 		return (
-			<Card className='container'>
+			<Card className='container bg-white shadow-md border border-blue-100'>
 				<CardHeader>
-					<CardTitle className={'text-blue-900'}>{t('send_request')}</CardTitle>
-					<CardDescription>{t('form_warning')}</CardDescription>
+					<CardTitle className='text-blue-900'>{t('send_request')}</CardTitle>
+					<CardDescription className='text-gray-600 leading-relaxed'>
+						{t.rich('form_warning', {
+							link: chunks => (
+								<a
+									href='https://murojaat.gov.uz'
+									target='_blank'
+									rel='noopener noreferrer'
+									className='font-medium text-blue-700 underline hover:text-blue-900'
+								>
+									{chunks}
+								</a>
+							),
+						})}
+					</CardDescription>
 				</CardHeader>
-				<CardContent className={'grid grid-cols-1 lg:grid-cols-2 gap-2'}>
+				<CardContent className='grid grid-cols-1 lg:grid-cols-2 gap-6'>
 					<div className='flex flex-col gap-6'>
 						<div className='grid gap-2'>
-							<Label htmlFor='email'>{t('one_hundred_eighty_six')}</Label>
+							<Label htmlFor='email' className='text-blue-900'>
+								{t('one_hundred_eighty_six')}
+							</Label>
 							<Input
 								id='email'
 								type='email'
@@ -76,23 +129,57 @@ export default function MetroLostItemForm() {
 								onChange={e =>
 									setFormData({ ...formData, email: e.target.value })
 								}
+								className={inputClassName}
 							/>
 						</div>
 						<div className='grid gap-2'>
-							<Label htmlFor='passport'>{t('passport_label')}</Label>
-							<Input
-								id='passport'
-								type='text'
-								placeholder='AD1234567'
-								required
-								value={formData.passport}
-								onChange={e =>
-									setFormData({ ...formData, passport: e.target.value })
-								}
-							/>
+							<Label htmlFor='passport-number' className='text-blue-900'>
+								{t('passport_label')}
+							</Label>
+							<div className='flex items-center gap-2'>
+								<Select
+									value={formData.passportSeries}
+									onValueChange={value =>
+										setFormData(prev => ({ ...prev, passportSeries: value }))
+									}
+								>
+									<SelectTrigger
+										id='passport-series'
+										className={cn(
+											fieldClassName,
+											'w-[92px] shrink-0 ring-offset-0 focus:ring-offset-0',
+										)}
+										aria-label={t('passport_series_label')}
+									>
+										<SelectValue />
+									</SelectTrigger>
+									<SelectContent className='max-h-60 bg-white'>
+										{PASSPORT_SERIES.map(series => (
+											<SelectItem key={series} value={series}>
+												{series}
+											</SelectItem>
+										))}
+									</SelectContent>
+								</Select>
+								<Input
+									id='passport-number'
+									type='text'
+									inputMode='numeric'
+									placeholder='1234567'
+									required
+									minLength={7}
+									maxLength={7}
+									pattern='\d{7}'
+									value={formData.passportNumber}
+									onChange={handlePassportNumberChange}
+									className={`min-h-9 flex-1 ${inputClassName}`}
+								/>
+							</div>
 						</div>
 						<div className='grid gap-2'>
-							<Label htmlFor='address'>{t('address_labels')}</Label>
+							<Label htmlFor='address' className='text-blue-900'>
+								{t('address_labels')}
+							</Label>
 							<Input
 								id='address'
 								type='text'
@@ -102,26 +189,24 @@ export default function MetroLostItemForm() {
 								onChange={e =>
 									setFormData({ ...formData, address: e.target.value })
 								}
+								className={inputClassName}
 							/>
 						</div>
 					</div>
-					<div className='flex flex-col gap-6'>
-						<div className='w-full h-full'>
-							<Label htmlFor='discription' className={'mb-2'}>
-								{t('message_label')}
-							</Label>
-
-							<Textarea
-								id='discription'
-								placeholder={t('message_placeholder')}
-								required
-								className={'h-[91%]'}
-								value={formData.message}
-								onChange={e =>
-									setFormData({ ...formData, message: e.target.value })
-								}
-							/>
-						</div>
+					<div className='flex flex-col gap-2'>
+						<Label htmlFor='discription' className='text-blue-900'>
+							{t('message_label')}
+						</Label>
+						<Textarea
+							id='discription'
+							placeholder={t('message_placeholder')}
+							required
+							className={cn(inputClassName, 'h-[180px] min-h-[180px] resize-y')}
+							value={formData.message}
+							onChange={e =>
+								setFormData({ ...formData, message: e.target.value })
+							}
+						/>
 					</div>
 				</CardContent>
 				<CardFooter className='text-center'>
@@ -160,7 +245,7 @@ export default function MetroLostItemForm() {
 					</CardTitle>
 					<CardDescription className='mt-2 text-gray-600'>
 						{t('success_description', {
-							date: data?.requests[0]?.deadline,
+							date: latestRequest?.deadline ?? '—',
 						})}
 					</CardDescription>
 				</CardHeader>

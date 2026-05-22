@@ -1,13 +1,17 @@
-import MurojaatlaStatistikasi from "./murojaatlar-statistikasi";
-import MetroLostItemForm from "./murojaatlar-uchun";
+'use client'
 
-export default function page() {
-  return (
-    <div className="py-10">
-      <MetroLostItemForm />
-      <div>
-        <MurojaatlaStatistikasi />
-      </div>
-    </div>
-  );
+import { loadPage } from '@/lib/load-page'
+
+const MurojaatlaStatistikasi = loadPage(() =>
+	import('./murojaatlar-statistikasi'),
+)
+const MetroLostItemForm = loadPage(() => import('./murojaatlar-uchun'))
+
+export default function Page() {
+	return (
+		<>
+			<MurojaatlaStatistikasi />
+			<MetroLostItemForm />
+		</>
+	)
 }

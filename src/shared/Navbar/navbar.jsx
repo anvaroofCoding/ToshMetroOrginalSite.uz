@@ -11,6 +11,14 @@ import {
 	AlertDialogTitle,
 } from '@/components/ui/alert-dialog'
 import { Button } from '@/components/ui/button'
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuLabel,
+	DropdownMenuSeparator,
+	DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
 import { Tooltip } from '@/components/ui/tooltip'
 import { cn } from '@/lib/utils'
 import { useMeQuery } from '@/store/services/api'
@@ -43,20 +51,80 @@ import {
 	CreditCard,
 	Globe,
 	MapPin,
+	LogOut,
 	Menu,
 	Phone,
 	ShieldAlert as ShieldUser,
+	User,
 	Users,
 	UsersRound,
 	X,
 } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl'
 import Image from 'next/image'
-import Link from 'next/link'
-import { usePathname, useRouter } from 'next/navigation'
+import { Link, usePathname, useRouter } from '@/i18n/navigation'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 const LANGUAGES = ['UZ', 'RU', 'EN']
+
+function readAuthToken() {
+	if (typeof window === 'undefined') return null
+	return localStorage.getItem('token')
+}
+
+function AuthNavButton({ isAuthenticated, me, t, onLogoutRequest, className }) {
+	if (!isAuthenticated) {
+		return (
+			<Button
+				variant='link'
+				asChild
+				className={cn('font-bold text-white hover:text-white/80', className)}
+			>
+				<Link href='/kirish'>{t('login')}</Link>
+			</Button>
+		)
+	}
+
+	const displayName = [me?.first_name, me?.last_name].filter(Boolean).join(' ')
+
+	return (
+		<DropdownMenu>
+			<DropdownMenuTrigger asChild>
+				<Button
+					variant='ghost'
+					className={cn(
+						'flex h-auto items-center gap-1 border-0 bg-transparent px-2 py-1 font-bold text-white shadow-none',
+						'no-underline outline-none ring-0 hover:bg-white/10 hover:text-white/90 hover:no-underline',
+						'focus:outline-none focus-visible:ring-0 focus-visible:ring-offset-0',
+						'data-[state=open]:bg-white/10 data-[state=open]:outline-none data-[state=open]:ring-0',
+						className,
+					)}
+				>
+					<User className='h-4 w-4 shrink-0' />
+					<span className='max-w-[140px] truncate'>
+						{displayName || t('logout')}
+					</span>
+					<ChevronDown className='h-4 w-4 shrink-0 opacity-80' />
+				</Button>
+			</DropdownMenuTrigger>
+			<DropdownMenuContent align='end' className='min-w-[200px] border-blue-100'>
+				{displayName ? (
+					<DropdownMenuLabel className='text-blue-900'>
+						{displayName}
+					</DropdownMenuLabel>
+				) : null}
+				{displayName ? <DropdownMenuSeparator /> : null}
+				<DropdownMenuItem
+					className='cursor-pointer text-red-600 focus:bg-red-50 focus:text-red-600'
+					onSelect={() => onLogoutRequest()}
+				>
+					<LogOut className='h-4 w-4' />
+					{t('logout')}
+				</DropdownMenuItem>
+			</DropdownMenuContent>
+		</DropdownMenu>
+	)
+}
 
 const getMenuItems = t => [
 	{ label: t('map'), href: '/metro-xaritasi', icon: MapPin },
@@ -181,12 +249,16 @@ const getMenuItems = t => [
 
 // Desktop hover dropdown component
 function HoverDropdown({ item }) {
+	const router = useRouter()
 	const [isOpen, setIsOpen] = useState(false)
 	const timeoutRef = useRef(null)
 
 	const handleMouseEnter = () => {
 		if (timeoutRef.current) clearTimeout(timeoutRef.current)
 		setIsOpen(true)
+		item.dropdownItems?.forEach(sub => {
+			if (sub.href) router.prefetch(sub.href)
+		})
 	}
 
 	const handleMouseLeave = () => {
@@ -231,6 +303,7 @@ function HoverDropdown({ item }) {
 									<Link
 										key={sub.label}
 										href={sub.href}
+										prefetch
 										className='flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-700 hover:bg-blue-100 transition-colors'
 									>
 										<Icon className='h-4 w-4 text-blue-600 shrink-0' />
@@ -322,12 +395,11 @@ function MobileMenu({
 	menuItems,
 	locale,
 	onChangeLanguage,
+	isAuthenticated,
+	onLogoutRequest,
 	t,
 }) {
 	const [expandedMenu, setExpandedMenu] = useState(null)
-	const [open, setOpen] = useState(false)
-	const [token, setToken] = useState(null)
-	const router = useRouter()
 
 	// Lock body scroll when menu is open
 	useEffect(() => {
@@ -341,11 +413,6 @@ function MobileMenu({
 		}
 	}, [isOpen])
 
-	useEffect(() => {
-		// faqat browserda ishlaydi
-		const t = localStorage.getItem('token')
-		setToken(t)
-	}, [])
 	return (
 		<AnimatePresence>
 			{isOpen && (
@@ -359,31 +426,6 @@ function MobileMenu({
 						className='fixed inset-0 bg-black/50 z-40 lg:hidden'
 						onClick={onClose}
 					/>
-
-					<AlertDialog open={false} onOpenChange={setOpen}>
-						<AlertDialogContent>
-							<AlertDialogHeader>
-								<AlertDialogTitle>{t('logoutConfirmTitle')}</AlertDialogTitle>
-								<AlertDialogDescription>
-									{t('logoutConfirmText')}
-								</AlertDialogDescription>
-							</AlertDialogHeader>
-							<AlertDialogFooter>
-								<AlertDialogCancel onClick={() => setOpen(false)}>
-									{t('cancel')}
-								</AlertDialogCancel>
-								<AlertDialogAction
-									onClick={() => {
-										localStorage.removeItem('token')
-										setOpen(false)
-										window.location.reload()
-									}}
-								>
-									{t('logout')}
-								</AlertDialogAction>
-							</AlertDialogFooter>
-						</AlertDialogContent>
-					</AlertDialog>
 
 					{/* Sliding panel from right */}
 					<motion.div
@@ -407,25 +449,26 @@ function MobileMenu({
 						<div className='relative z-10'>
 							{/* Close button */}
 							<div className='flex justify-between p-4'>
-								{token ? (
+								{isAuthenticated ? (
 									<Button
 										onClick={() => {
-											setOpen(true)
+											onLogoutRequest()
+											onClose()
 										}}
 										variant='default'
 										className='text-white font-bold bg-white/10 hover:bg-white/20 lg:hidden block'
 									>
-										Chiqish
+										{t('logout')}
 									</Button>
 								) : (
 									<Button
-										onClick={() => {
-											router.push('/kirish')
-										}}
+										asChild
 										variant='default'
 										className='text-white font-bold bg-white/10 hover:bg-white/20 lg:hidden block'
 									>
-										Kirish
+										<Link href='/kirish' onClick={onClose}>
+											{t('login')}
+										</Link>
 									</Button>
 								)}
 								<button
@@ -478,6 +521,7 @@ function MobileMenu({
 																	<Link
 																		key={sub.label}
 																		href={sub.href}
+																		prefetch
 																		onClick={onClose}
 																		className='flex items-center gap-3 px-3 py-2.5 text-sm text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-colors'
 																	>
@@ -495,6 +539,7 @@ function MobileMenu({
 										<Link
 											key={item.label}
 											href={item.href}
+											prefetch
 											onClick={onClose}
 											className='flex items-center gap-3 px-3 py-3 text-sm font-medium text-white rounded-lg hover:bg-white/10 transition-colors'
 										>
@@ -586,20 +631,29 @@ function Logo({ t }) {
 
 // Main Navbar component
 export default function Navbar() {
-	const { data: me } = useMeQuery()
 	const [token, setToken] = useState(null)
+	const isAuthenticated = Boolean(token)
+	const { data: me } = useMeQuery(undefined, {
+		skip: !isAuthenticated,
+		refetchOnMountOrArgChange: false,
+		refetchOnFocus: false,
+		refetchOnReconnect: false,
+	})
 	const t = useTranslations('menu')
 	const locale = useLocale()
 	const router = useRouter()
 	const pathname = usePathname()
 	const [mobileOpen, setMobileOpen] = useState(false)
 	const [isScrolled, setIsScrolled] = useState(false)
-	const [open, setOpen] = useState(false)
+	const [logoutDialogOpen, setLogoutDialogOpen] = useState(false)
 
 	const menuItems = getMenuItems(t)
 	const isHidden =
-		pathname.includes('metro-xaritasi') || pathname.includes('metro-rejasi')
-	const isHomePage = pathname === '/' || pathname === `/${locale}`
+		pathname.includes('metro-xaritasi') ||
+		pathname.includes('metro-rejasi') ||
+		pathname.includes('/kirish') ||
+		pathname.includes('/royxatdan-otish')
+	const isHomePage = pathname === '/'
 
 	useEffect(() => {
 		const handleScroll = () => setIsScrolled(window.scrollY > 0)
@@ -608,20 +662,48 @@ export default function Navbar() {
 	}, [])
 
 	useEffect(() => {
-		// faqat browserda ishlaydi
-		const t = localStorage.getItem('token')
-		setToken(t)
+		const syncToken = () => setToken(readAuthToken())
+
+		syncToken()
+		window.addEventListener('storage', syncToken)
+		window.addEventListener('auth-change', syncToken)
+
+		return () => {
+			window.removeEventListener('storage', syncToken)
+			window.removeEventListener('auth-change', syncToken)
+		}
 	}, [])
+
+	const handleLogoutRequest = useCallback(() => {
+		setLogoutDialogOpen(true)
+	}, [])
+
+	const handleLogoutConfirm = useCallback(() => {
+		localStorage.removeItem('token')
+		window.dispatchEvent(new Event('auth-change'))
+		setLogoutDialogOpen(false)
+		setMobileOpen(false)
+		router.push('/')
+	}, [router])
 
 	const changeLanguage = useCallback(
 		lang => {
-			const segments = pathname.split('/')
-			segments[1] = lang.toLowerCase()
-			router.push(segments.join('/'))
+			router.replace(pathname, { locale: lang.toLowerCase() })
 			setMobileOpen(false)
 		},
 		[pathname, router],
 	)
+
+	useEffect(() => {
+		const routes = [
+			'/metro-xaritasi',
+			'/tolov-usullari',
+			'/yangiliklar',
+			'/murojaatlar',
+			'/statistika',
+		]
+		routes.forEach(href => router.prefetch(href))
+	}, [router])
 
 	if (isHidden) return null
 
@@ -647,7 +729,7 @@ export default function Navbar() {
 					</div>
 				)}
 
-				<AlertDialog open={open} onOpenChange={setOpen}>
+				<AlertDialog open={logoutDialogOpen} onOpenChange={setLogoutDialogOpen}>
 					<AlertDialogContent>
 						<AlertDialogHeader>
 							<AlertDialogTitle>{t('logoutConfirmTitle')}</AlertDialogTitle>
@@ -656,15 +738,10 @@ export default function Navbar() {
 							</AlertDialogDescription>
 						</AlertDialogHeader>
 						<AlertDialogFooter>
-							<AlertDialogCancel onClick={() => setOpen(false)}>
-								{t('cancel')}
-							</AlertDialogCancel>
+							<AlertDialogCancel>{t('cancel')}</AlertDialogCancel>
 							<AlertDialogAction
-								onClick={() => {
-									localStorage.removeItem('token')
-									setOpen(false)
-									window.location.reload()
-								}}
+								className='bg-red-600 hover:bg-red-700'
+								onClick={handleLogoutConfirm}
 							>
 								{t('logout')}
 							</AlertDialogAction>
@@ -684,6 +761,7 @@ export default function Navbar() {
 								<Link
 									key={item.label}
 									href={item.href}
+									prefetch
 									className='text-xs font-medium text-white hover:bg-white/10 hover:text-gray-300 rounded-lg px-3 py-2 transition-colors duration-200'
 								>
 									{item.label}
@@ -699,31 +777,23 @@ export default function Navbar() {
 							onChangeLanguage={changeLanguage}
 						/>
 
-						{token ? (
-							<Tooltip text={me?.first_name + ' ' + me?.last_name}>
-								<Button
-									variant='link'
-									onClick={() => {
-										setOpen(true)
-									}}
-									className='text-white font-bold lg:block hidden'
-								>
-									{t('logout')}
-								</Button>
-							</Tooltip>
-						) : (
-							<Tooltip text={t('loginz')}>
-								<Button
-									variant='link'
-									onClick={() => {
-										router.push('/kirish')
-									}}
-									className='text-white font-bold lg:block hidden'
-								>
-									{t('login')}
-								</Button>
-							</Tooltip>
-						)}
+						<Tooltip
+							text={
+								isAuthenticated
+									? [me?.first_name, me?.last_name].filter(Boolean).join(' ') ||
+										t('logout')
+									: t('loginz')
+							}
+						>
+							<div className='hidden lg:block'>
+								<AuthNavButton
+									isAuthenticated={isAuthenticated}
+									me={me}
+									t={t}
+									onLogoutRequest={handleLogoutRequest}
+								/>
+							</div>
+						</Tooltip>
 
 						<Button
 							variant='ghost'
@@ -745,6 +815,8 @@ export default function Navbar() {
 				menuItems={menuItems}
 				locale={locale}
 				onChangeLanguage={changeLanguage}
+				isAuthenticated={isAuthenticated}
+				onLogoutRequest={handleLogoutRequest}
 				t={t}
 			/>
 		</>

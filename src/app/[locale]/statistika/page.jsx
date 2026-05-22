@@ -1,11 +1,9 @@
-import MetroStatisticsDashboard from "./newStatis";
+'use client'
 
-const Page = () => {
-  return (
-    <div>
-      <MetroStatisticsDashboard />
-    </div>
-  );
-};
+import { loadPage } from '@/lib/load-page'
 
-export default Page;
+const MetroStatisticsDashboard = loadPage(() => import('./newStatis'))
+
+export default function Page() {
+	return <MetroStatisticsDashboard />
+}

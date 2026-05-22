@@ -43,7 +43,12 @@ export default function TransportDirectory() {
       {/* Departments Grid */}
       <div className="container mx-auto px-4 py-6 sm:py-8 lg:py-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
-          {departments.map((dept, index) => (
+          {departments.map((dept, index) => {
+            const imageAlt =
+              [dept?.head, dept?.title].filter(Boolean).join(' — ') ||
+              t('four_hundred_forty_four')
+
+            return (
             <Dialog key={index}>
               <DialogTrigger asChild>
                 <Card className="cursor-pointer hover:shadow-lg transition-all duration-300 group border hover:border-blue-200 h-full">
@@ -54,11 +59,11 @@ export default function TransportDirectory() {
                         <div className="flex-shrink-0 mx-auto sm:mx-0">
                           <div className="w-32 h-40 sm:w-36 sm:h-44 lg:w-40 lg:h-48 rounded-lg overflow-hidden shadow-md group-hover:shadow-lg transition-shadow duration-300">
                             <Image
-                              src={dept.image || "/placeholder.svg"}
-                              alt={dept?.biography}
+                              src={dept.image || '/placeholder.svg'}
+                              alt={imageAlt}
                               width={160}
                               height={192}
-                              className="w-full h-full object-cover"
+                              className='w-full h-full object-cover'
                             />
                           </div>
                         </div>
@@ -125,11 +130,11 @@ export default function TransportDirectory() {
                     <div className="flex-shrink-0 mx-auto lg:mx-0">
                       <div className="w-48 h-60 sm:w-52 sm:h-64 rounded-lg overflow-hidden border-4 border-blue-100 shadow-lg">
                         <Image
-                          src={dept.image || "/placeholder.svg"}
-                          alt={dept.head || "Bo‘lim rahbari rasmi"}
+                          src={dept.image || '/placeholder.svg'}
+                          alt={imageAlt}
                           width={208}
                           height={256}
-                          className="w-full h-full object-cover"
+                          className='w-full h-full object-cover'
                         />
                       </div>
                     </div>
@@ -214,7 +219,8 @@ export default function TransportDirectory() {
                 </div>
               </DialogContent>
             </Dialog>
-          ))}
+            )
+          })}
         </div>
       </div>
 

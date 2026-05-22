@@ -1,11 +1,9 @@
-import TransportDirectory from "./tarkib";
+'use client'
 
-const Page = () => {
-  return (
-    <div>
-      <TransportDirectory />
-    </div>
-  );
-};
+import { loadPage } from '@/lib/load-page'
 
-export default Page;
+const TransportDirectory = loadPage(() => import('./tarkib'))
+
+export default function Page() {
+	return <TransportDirectory />
+}

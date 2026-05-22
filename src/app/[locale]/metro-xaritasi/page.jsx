@@ -1,11 +1,9 @@
-import TashkentMetroMap from "./metroxaritasi";
+'use client'
 
-const Page = () => {
-  return (
-    <div>
-      <TashkentMetroMap />
-    </div>
-  );
-};
+import { loadPage } from '@/lib/load-page'
 
-export default Page;
+const TashkentMetroMap = loadPage(() => import('./metroxaritasi'))
+
+export default function Page() {
+	return <TashkentMetroMap />
+}

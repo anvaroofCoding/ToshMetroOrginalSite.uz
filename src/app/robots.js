@@ -1,13 +1,22 @@
-export default function robots() {
-	const baseUrl = 'https://uzmetro.uz'
+import { SITE } from '@/lib/seo/site'
 
+const NOINDEX_PATHS = [
+	'/uz/kirish',
+	'/ru/kirish',
+	'/en/kirish',
+	'/uz/royxatdan-otish',
+	'/ru/royxatdan-otish',
+	'/en/royxatdan-otish',
+]
+
+export default function robots() {
 	return {
 		rules: {
 			userAgent: '*',
 			allow: '/',
-			disallow: ['/api/', '/login', '/register'],
+			disallow: ['/api/', ...NOINDEX_PATHS],
 		},
-		sitemap: `${baseUrl}/sitemap.xml`,
-		host: baseUrl,
+		sitemap: `${SITE.baseUrl}/sitemap.xml`,
+		host: SITE.baseUrl,
 	}
 }

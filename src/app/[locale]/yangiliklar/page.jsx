@@ -1,11 +1,9 @@
-import { NewsMain } from "./new";
+'use client'
 
-const Page = () => {
-  return (
-    <div>
-      <NewsMain />
-    </div>
-  );
-};
+import { loadPage } from '@/lib/load-page'
 
-export default Page;
+const NewsMain = loadPage(() => import('./new'))
+
+export default function Page() {
+	return <NewsMain />
+}

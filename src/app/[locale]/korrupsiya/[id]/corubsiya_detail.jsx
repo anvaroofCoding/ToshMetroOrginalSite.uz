@@ -3,11 +3,12 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { LikeButton } from '@/components/like-button'
 import {
   useGetCorrubsiyaDetailsQuery,
   useLikedCorrubsiyaMutation,
-} from "@/store/services/api";
-import { IconEye, IconThumbUp, IconThumbUpFilled } from "@tabler/icons-react";
+} from '@/store/services/api'
+import { IconEye } from '@tabler/icons-react'
 import {
   AlertCircle,
   ArrowLeft,
@@ -157,14 +158,6 @@ export default function CorubsiyaDetail() {
     ).padStart(2, "0")}-${d.getFullYear()}`;
   };
 
-  const clickLike = (id) => {
-    try {
-      liked(id).unwrap();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
     <div className="container mx-auto py-8 ">
       <h1 className="text-3xl sm:text-4xl font-bold mb-4">{data?.title}</h1>
@@ -177,19 +170,13 @@ export default function CorubsiyaDetail() {
           </div>
         )}
 
-        <div
-          onClick={() => {
-            clickLike(data?.id);
-          }}
-          className="flex items-center gap-2 bg-blue-100 px-3 rounded-full"
-        >
-          {data?.liked ? (
-            <IconThumbUpFilled stroke={2} />
-          ) : (
-            <IconThumbUp stroke={2} />
-          )}{" "}
-          {data?.like_count}
-        </div>
+        <LikeButton
+          id={data?.id}
+          liked={data?.liked}
+          count={data?.like_count}
+          variant="pill"
+          onLike={id => liked(id).unwrap()}
+        />
 
         <div className="flex items-center gap-2 bg-blue-100 px-3 rounded-full">
           <IconEye size={20} /> {data?.views_count}
