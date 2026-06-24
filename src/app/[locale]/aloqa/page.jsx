@@ -1,11 +1,13 @@
+import { ContactPageJsonLd } from '@/components/seo/json-ld'
 import ContactInfo from './contact'
 
-const Page = () => {
+export default async function Page({ params }) {
+	const { locale } = await params
+
 	return (
-		<div>
+		<>
+			<ContactPageJsonLd locale={locale} />
 			<ContactInfo />
-		</div>
+		</>
 	)
 }
-
-export default Page

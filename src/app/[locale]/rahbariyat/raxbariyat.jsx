@@ -1,4 +1,5 @@
 "use client";
+import { PageLoadingOverlay } from "@/components/page-loading";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -43,11 +44,7 @@ export default function ManagementPage() {
   };
 
   if (isLoading) {
-    return (
-      <div className="w-full h-screen justify-center flex items-center">
-        <p>{t("two_hundred_thirteen")}</p>
-      </div>
-    );
+    return <PageLoadingOverlay label={t("two_hundred_thirteen")} />;
   }
   return (
     <div className="min-h-screen">

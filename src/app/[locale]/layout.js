@@ -1,7 +1,11 @@
 import BgImage from '@/components/bg-main-images/bg-images'
-import { OrganizationJsonLd, WebSiteJsonLd } from '@/components/seo/json-ld'
+import {
+	OrganizationJsonLd,
+	SiteNavigationJsonLd,
+	WebSiteJsonLd,
+} from '@/components/seo/json-ld'
 import { SiteChrome } from '@/components/site-chrome'
-import { metadataFromSegment } from '@/lib/seo/build-metadata'
+import { getPageSeoConfig } from '@/lib/seo/build-metadata'
 import { SITE } from '@/lib/seo/site'
 import { Analytics } from '@vercel/analytics/next'
 import { NextIntlClientProvider } from 'next-intl'
@@ -19,13 +23,12 @@ export async function generateMetadata({ params }) {
 		return {}
 	}
 
-	const homeMeta = metadataFromSegment('home', locale)
+	const homeConfig = getPageSeoConfig('home', locale)
 
 	return {
 		metadataBase: new URL(SITE.baseUrl),
-		...homeMeta,
 		title: {
-			default: homeMeta.title,
+			default: homeConfig?.title ?? SITE.name,
 			template: `%s | TOSHKENT METROPOLITENI DUK`,
 		},
 		applicationName: SITE.legalName,
@@ -61,6 +64,7 @@ export default async function RootLayout({ children, params }) {
 			<body className='roboto' suppressHydrationWarning={true}>
 				<OrganizationJsonLd locale={locale} />
 				<WebSiteJsonLd locale={locale} />
+				<SiteNavigationJsonLd locale={locale} />
 				<Providers>
 					<NextIntlClientProvider locale={locale} messages={messages}>
 						<BgImage>

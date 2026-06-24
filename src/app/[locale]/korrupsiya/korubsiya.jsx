@@ -1,5 +1,6 @@
 'use client'
 
+import { PageLoadingOverlay } from '@/components/page-loading'
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import WheelPagination from '@/components/ui/wheel-pagination'
@@ -14,7 +15,7 @@ import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
-const Corubsiya = () => {
+const Corubsiya = ({ initialData }) => {
 	const [search, setSearch] = useState('')
 	const [page, setPage] = useState(1)
 	const PAGE_SIZE = 12
@@ -22,7 +23,7 @@ const Corubsiya = () => {
 	const t = useTranslations('menu')
 
 	const {
-		data: posts,
+		data: fetchedPosts,
 		isLoading,
 		isFetching,
 	} = useCorrubsiyaQuery({
@@ -32,18 +33,18 @@ const Corubsiya = () => {
 		pageSize: PAGE_SIZE,
 	})
 
+	const posts =
+		fetchedPosts ??
+		(page === 1 && !search ? initialData : undefined)
+
 	const [liked] = useLikedCorrubsiyaMutation()
 
 	useEffect(() => {
 		setPage(1)
 	}, [search])
 
-	if (isLoading) {
-		return (
-			<div className='w-full h-screen flex justify-center items-center'>
-				<Loader className='mx-auto my-20 animate-spin' />
-			</div>
-		)
+	if (isLoading && !posts) {
+		return <PageLoadingOverlay />
 	}
 
 	const totalPages = Math.ceil((posts?.count ?? 0) / PAGE_SIZE)
@@ -52,9 +53,9 @@ const Corubsiya = () => {
 		<section className='py-20'>
 			<div className='container mx-auto flex flex-col items-center gap-16 '>
 				<div className='text-center'>
-					<h2 className='text-pretty text-3xl font-semibold md:text-4xl lg:max-w-3xl lg:text-5xl'>
+					<h1 className='text-pretty text-3xl font-semibold md:text-4xl lg:max-w-3xl lg:text-5xl'>
 						{t('antiCorruption')}
-					</h2>
+					</h1>
 					<div className='border mt-5 rounded-lg overflow-hidden relative bg-white border border-blue-800/30'>
 						<Input
 							className={'pr-10 border-none outline-none'}

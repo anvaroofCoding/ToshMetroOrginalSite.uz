@@ -1,5 +1,6 @@
 "use client";
 
+import { PageLoadingOverlay } from "@/components/page-loading";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -90,7 +91,7 @@ function HighlightText({ text, postId }) {
 
 /* ===================== PAGE ===================== */
 
-export default function NewsArticlePage() {
+export default function NewsArticlePage({ initialData }) {
   const t = useTranslations("menu");
   const path = usePathname();
   const lang = path.split("/")[1];
@@ -99,10 +100,11 @@ export default function NewsArticlePage() {
   const [index, setIndex] = useState(0);
   const thumbnailScrollRef = useRef(null);
 
-  const { data, isLoading, isError } = useGetPopularNewsDetailsQuery({
+  const { data: fetchedData, isLoading, isError } = useGetPopularNewsDetailsQuery({
     lang,
     id,
   });
+  const data = fetchedData ?? initialData;
   const [liked] = useLikedMutation();
 
   useEffect(() => {
@@ -122,16 +124,11 @@ export default function NewsArticlePage() {
     document.body.style.overflow = ""; // scrollni qayta yoqish
   }, []);
 
-  if (isLoading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen text-blue-700">
-        <Loader2 className="w-6 h-6 mr-2 animate-spin" />
-        {t("two_hundred_thirteen")}
-      </div>
-    );
+  if (isLoading && !data) {
+    return <PageLoadingOverlay label={t("two_hundred_thirteen")} />;
   }
 
-  if (isError) {
+  if (isError && !data) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen">
         <AlertCircle className="w-12 h-12 text-red-600 mb-3" />
@@ -159,7 +156,7 @@ export default function NewsArticlePage() {
   };
 
   return (
-    <div className="container mx-auto py-8">
+    <article className="container mx-auto py-8">
       <h1 className="text-3xl sm:text-4xl font-bold mb-4">{data?.title}</h1>
 
       <div className="flex flex-wrap gap-3 mb-8">
@@ -253,7 +250,6 @@ export default function NewsArticlePage() {
         </Card>
       )}
 
-      {/* CONTENT — DIZAYN O'ZGARMADI */}
       <Card>
         <CardContent className="p-8 text-slate-700">
           <HighlightText text={data?.description} postId={data?.id} />
@@ -271,6 +267,6 @@ export default function NewsArticlePage() {
           Orqaga
         </Button>
       </div>
-    </div>
+    </article>
   );
 }

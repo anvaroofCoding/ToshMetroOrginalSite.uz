@@ -1,6 +1,6 @@
 'use client'
 
-import { PageLoading, PageLoadingBar } from '@/components/page-loading'
+import { pageLoadingStore } from '@/components/page-loading'
 import { cn } from '@/lib/utils'
 import { usePathname } from '@/i18n/navigation'
 import { useCallback, useEffect, useRef, useState } from 'react'
@@ -112,35 +112,14 @@ export function NavigationShell({ children, className }) {
 		stopLoading()
 	}, [currentPath, stopLoading])
 
+	useEffect(() => {
+		if (!loading) return
+		return pageLoadingStore.acquire()
+	}, [loading])
+
 	useEffect(() => () => forceStop(), [forceStop])
 
 	return (
-		<>
-			{loading ? <PageLoadingBar /> : null}
-
-			<div
-				className={cn(
-					'relative w-full flex-1',
-					loading && 'min-h-[55vh]',
-					className,
-				)}
-			>
-				{loading ? (
-					<div className='absolute inset-0 z-30 flex min-h-[55vh] items-center justify-center bg-white/70 backdrop-blur-[2px]'>
-						<PageLoading />
-					</div>
-				) : null}
-
-				<div
-					className={cn(
-						'relative w-full',
-						loading &&
-							'pointer-events-none min-h-[55vh] select-none opacity-30',
-					)}
-				>
-					{children}
-				</div>
-			</div>
-		</>
+		<div className={cn('relative w-full flex-1', className)}>{children}</div>
 	)
 }

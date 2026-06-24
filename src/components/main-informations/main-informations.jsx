@@ -5,6 +5,7 @@ import { CreditCard, MapPin, Wallet } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
 import MetroInfoSection from './for-about-metro'
+import { ShowcaseCtaButton } from './showcase-cta-button'
 export default function MetroPagesShowcase() {
 	const t = useTranslations('menu')
 	const [apiStats, setApiStats] = useState([])
@@ -109,12 +110,9 @@ export default function MetroPagesShowcase() {
 						<p className='mb-6 text-sm sm:text-base text-blue-100 max-w-xs'>
 							{t('interactiveMapDescription')}
 						</p>
-						<motion.a
-							href='/metro-xaritasi'
-							className='inline-block px-4 sm:px-6 py-2 sm:py-3 rounded-full bg-white text-blue-900 font-semibold shadow hover:bg-blue-100 transition text-sm sm:text-base'
-						>
+						<ShowcaseCtaButton href='/metro-xaritasi'>
 							{t('goToMapPage')}
-						</motion.a>
+						</ShowcaseCtaButton>
 					</div>
 				</motion.div>
 				<MetroInfoSection />
@@ -435,13 +433,13 @@ function AttoCardsCarousel() {
 					href='/atto-kartalar'
 					whileTap={{ scale: 0.95 }}
 					whileHover={{ scale: 1.05 }}
-					className='inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-gray-900 font-semibold shadow-lg hover:bg-gray-100 transition-all duration-300'
+					className='inline-flex items-center gap-2 px-6 py-3 rounded-full text-white font-semibold shadow-lg hover:brightness-110 transition-all duration-300'
 					style={{
-						background: `linear-gradient(135deg, ${currentCard.color}20, white)`,
-						border: `2px solid ${currentCard.color}40`,
+						background: `linear-gradient(135deg, ${currentCard.color}80, ${currentCard.color}40)`,
+						border: `2px solid ${currentCard.color}`,
 					}}
 				>
-					<Wallet className='w-4 h-4' />
+					<Wallet className='w-4 h-4 text-white' />
 					{t('title')}
 				</motion.a>
 			</motion.div>

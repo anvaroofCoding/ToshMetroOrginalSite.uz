@@ -25,6 +25,7 @@
 .DS_Store
 *.pem
 *.msi
+public/alif/*.msi
 
 # debug
 npm-debug.log*

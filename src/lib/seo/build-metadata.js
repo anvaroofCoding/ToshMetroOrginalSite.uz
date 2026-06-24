@@ -5,11 +5,12 @@ const SITE_TITLE_SUFFIX = 'TOSHKENT METROPOLITENI DUK | Rasmiy veb-sayt'
 
 function languageAlternates(pathSegment) {
 	const path = pathSegment ? `/${pathSegment}` : ''
+	const makeUrl = locale => `${SITE.baseUrl}/${locale}${path}`
 	return {
-		uz: `/uz${path}`,
-		ru: `/ru${path}`,
-		en: `/en${path}`,
-		'x-default': `/uz${path}`,
+		uz: makeUrl('uz'),
+		ru: makeUrl('ru'),
+		en: makeUrl('en'),
+		'x-default': makeUrl('uz'),
 	}
 }
 

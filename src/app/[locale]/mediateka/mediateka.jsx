@@ -113,15 +113,17 @@ function VideoCard({ video, index, onPlay }) {
   );
 }
 
-export default function Mediatekas() {
+export default function Mediatekas({ initialPhotos = [], initialVideos = [] }) {
   const t = useTranslations("menu");
   const { locale } = useParams();
   const [activeTab, setActiveTab] = useState("photos");
   const [selectedPhoto, setSelectedPhoto] = useState(null);
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [isAnimating, setIsAnimating] = useState(false);
-  const { data: photos } = useMediaPhotoQuery({ locale });
-  const { data: videos } = useMediaVideoQuery({ locale });
+  const { data: fetchedPhotos } = useMediaPhotoQuery({ locale });
+  const { data: fetchedVideos } = useMediaVideoQuery({ locale });
+  const photos = fetchedPhotos ?? initialPhotos;
+  const videos = fetchedVideos ?? initialVideos;
   const handleTabChange = (tab) => {
     if (tab !== activeTab) {
       setIsAnimating(true);

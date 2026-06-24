@@ -179,7 +179,7 @@ export const Card = ({ card, index, layout = false }) => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 h-full w-full bg-black/80 backdrop-blur-lg"
+              className="pointer-events-none fixed inset-0 h-full w-full bg-black/80 backdrop-blur-lg"
             />
             <motion.div
               initial={{ opacity: 0 }}
@@ -213,7 +213,16 @@ export const Card = ({ card, index, layout = false }) => {
                 fill={"true"}
                 className="mt-10 object-cover"
               />
-              <div className="py-10">{card.content}</div>
+              <div
+                className="py-10"
+                onClick={(e) => {
+                  if (e.target.closest("a")) {
+                    handleClose();
+                  }
+                }}
+              >
+                {card.content}
+              </div>
             </motion.div>
           </div>
         )}

@@ -1,4 +1,5 @@
 'use client'
+import { CONTACT_INFO } from '@/lib/contact-info'
 import { useGetFoydalanuvchilarQuery } from '@/store/services/api'
 import {
 	Eye,
@@ -58,18 +59,12 @@ const Footer = () => {
 			title: t('receptionPhone'),
 			type: 'phone',
 		},
-		{
+		...CONTACT_INFO.emails.map(email => ({
 			icon: Mail,
-			text: 'tashkent@uzmetro.uz',
-			title: t('corporateEmail'),
+			title: t('email_label'),
 			type: 'email',
-		},
-		{
-			icon: Mail,
-			text: 'tash.metropoliten@mail.ru',
-			title: t('internationalPost'),
-			type: 'email',
-		},
+			text: email,
+		})),
 	]
 	const [totalVisitors, setTotalVisitors] = useState()
 	const [onlineVisitors, setOnlineVisitors] = useState()
@@ -165,9 +160,18 @@ const Footer = () => {
 												<p className='text-xs font-medium text-blue-200'>
 													{item.title}
 												</p>
-												<p className='text-white text-xs break-all'>
-													{item.text}
-												</p>
+												{item.type === 'email' ? (
+													<a
+														href={`mailto:${item.text}`}
+														className='block text-white text-xs break-all hover:underline'
+													>
+														{item.text}
+													</a>
+												) : (
+													<p className='text-white text-xs break-all'>
+														{item.text}
+													</p>
+												)}
 											</div>
 										</div>
 									)

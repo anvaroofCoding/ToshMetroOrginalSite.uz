@@ -1,9 +1,32 @@
-'use client'
+import { ContentDirectory } from '@/components/seo/content-directory'
+import { ItemListJsonLd } from '@/components/seo/json-ld'
+import { fetchNewsList, fetchAllNewsItems } from '@/lib/seo/server-api'
+import { getPageSeoConfig } from '@/lib/seo/build-metadata'
+import NewsMain from './new'
 
-import { loadPage } from '@/lib/load-page'
+export default async function Page({ params }) {
+	const { locale } = await params
+	const [initialData, allItems] = await Promise.all([
+		fetchNewsList(locale, { page: 1, pageSize: 12 }),
+		fetchAllNewsItems(locale),
+	])
+	const seo = getPageSeoConfig('yangiliklar', locale)
 
-const NewsMain = loadPage(() => import('./new'))
-
-export default function Page() {
-	return <NewsMain />
+	return (
+		<>
+			<ItemListJsonLd
+				items={allItems}
+				locale={locale}
+				segment='yangiliklar'
+				listName={seo?.title ?? 'Yangiliklar'}
+			/>
+			<NewsMain initialData={initialData} />
+			<ContentDirectory
+				items={allItems}
+				locale={locale}
+				segment='yangiliklar'
+				heading='Barcha yangiliklar'
+			/>
+		</>
+	)
 }

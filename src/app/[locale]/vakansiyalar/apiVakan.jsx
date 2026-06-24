@@ -1,5 +1,6 @@
 'use client'
 
+import { PageLoadingOverlay } from '@/components/page-loading'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import {
@@ -44,13 +45,8 @@ function ApiVakan() {
 		currentPage * itemsPerPage,
 	)
 
-	if (loading) {
-		return (
-			<div className='flex items-center justify-center h-[100vh]'>
-				<Loader2 className='h-8 w-8 animate-spin mr-2' />
-				<span>{t('two_hundred_thirteen')}</span>
-			</div>
-		)
+	if (loading || isLoading) {
+		return <PageLoadingOverlay label={t('two_hundred_thirteen')} />
 	}
 
 	if (error) {

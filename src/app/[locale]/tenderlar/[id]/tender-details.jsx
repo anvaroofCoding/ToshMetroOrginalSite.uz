@@ -1,5 +1,6 @@
 "use client";
 
+import { PageLoadingOverlay } from "@/components/page-loading";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -90,7 +91,7 @@ function HighlightText({ text, postId }) {
 
 /* ===================== PAGE ===================== */
 
-export default function TenderDetails() {
+export default function TenderDetails({ initialData }) {
   const t = useTranslations("menu");
   const path = usePathname();
   const lang = path.split("/")[1];
@@ -99,10 +100,11 @@ export default function TenderDetails() {
   const [index, setIndex] = useState(0);
   const thumbnailScrollRef = useRef(null);
 
-  const { data, isLoading, isError } = useGetTenderDetailsQuery({
+  const { data: fetchedData, isLoading, isError } = useGetTenderDetailsQuery({
     lang,
     id,
   });
+  const data = fetchedData ?? initialData;
   const [liked] = useLikedRenderMutation();
 
   useEffect(() => {
@@ -122,16 +124,11 @@ export default function TenderDetails() {
     document.body.style.overflow = ""; // scrollni qayta yoqish
   }, []);
 
-  if (isLoading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen text-blue-700">
-        <Loader2 className="w-6 h-6 mr-2 animate-spin" />
-        {t("two_hundred_thirteen")}
-      </div>
-    );
+  if (isLoading && !data) {
+    return <PageLoadingOverlay label={t("two_hundred_thirteen")} />;
   }
 
-  if (isError) {
+  if (isError && !data) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen">
         <AlertCircle className="w-12 h-12 text-red-600 mb-3" />
@@ -253,7 +250,6 @@ export default function TenderDetails() {
         </Card>
       )}
 
-      {/* CONTENT — DIZAYN O'ZGARMADI */}
       <Card>
         <CardContent className="p-8 text-slate-700">
           <HighlightText text={data?.description} postId={data?.id} />

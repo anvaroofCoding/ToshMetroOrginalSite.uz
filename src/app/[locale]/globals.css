@@ -5,14 +5,14 @@
 @custom-variant dark (&:is(.dark *));
 
 .container {
-  width: 80%;
+  width: 90%;
   margin: 0 auto;
   max-width: 1440px;
 }
 
 @media (max-width: 767px) {
   .container {
-    width: 90%;
+    width: 100%;
   }
 }
 

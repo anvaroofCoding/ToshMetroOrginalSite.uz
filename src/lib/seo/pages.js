@@ -168,26 +168,6 @@ export const PAGE_SEO = {
 			keywords: ['FacePay', 'metro face pay'],
 		},
 	},
-	FacePay: {
-		uz: {
-			title: 'FacePay — yuz tanib metro to‘lovi',
-			description:
-				'Toshkent metroda FacePay xizmati: yuz orqali tez va xavfsiz o‘tish. Ulanish va foydalanish bo‘yicha ko‘rsatmalar.',
-			keywords: ['FacePay', 'yuz tanish metro'],
-		},
-		ru: {
-			title: 'FacePay — оплата метро по лицу',
-			description:
-				'Сервис FacePay в метро Ташкента: быстрый проход с биометрической оплатой.',
-			keywords: ['FacePay', 'биометрия метро'],
-		},
-		en: {
-			title: 'FacePay — face recognition metro payment',
-			description:
-				'FacePay service for Tashkent Metro: fast biometric fare payment.',
-			keywords: ['FacePay', 'metro face pay'],
-		},
-	},
 	palmpay: {
 		uz: {
 			title: 'PalmPay — kaft izi orqali metro to‘lovi',
@@ -458,22 +438,22 @@ export const PAGE_SEO = {
 	},
 	haqimizda: {
 		uz: {
-			title: 'Gender tenglik — haqimizda',
+			title: 'Gender tenglik — umumiy ma’lumot',
 			description:
-				'Toshkent metropolitenida gender tengligi siyosati, erkak va ayol xodimlar uchun teng imkoniyatlar.',
-			keywords: ['gender tenglik', 'metro gender', 'teng imkoniyat'],
+				'Toshkent metropolitenida gender tengligi siyosati, erkak va ayol xodimlar uchun teng imkoniyatlar va amalga oshirilayotgan tashabbuslar haqida umumiy ma’lumot.',
+			keywords: ['gender tenglik', 'metro gender', 'teng imkoniyat', 'haqimizda'],
 		},
 		ru: {
-			title: 'Гендерное равенство — о нас',
+			title: 'Гендерное равенство — общая информация',
 			description:
-				'Политика гендерного равенства в Ташкентском метро и равные возможности для сотрудников.',
-			keywords: ['гендерное равенство метро'],
+				'Общая информация о политике гендерного равенства в Ташкентском метро и равных возможностях для сотрудников.',
+			keywords: ['гендерное равенство метро', 'общая информация'],
 		},
 		en: {
-			title: 'Gender equality — about us',
+			title: 'Gender equality — general information',
 			description:
-				'Gender equality policy at Tashkent Metro and equal opportunities for staff.',
-			keywords: ['gender equality metro'],
+				'General information about gender equality policy at Tashkent Metro and equal opportunities for staff.',
+			keywords: ['gender equality metro', 'about gender equality'],
 		},
 	},
 	'gender-tenglik': {
@@ -516,6 +496,46 @@ export const PAGE_SEO = {
 			keywords: ['metro regulations', 'normative documents'],
 		},
 	},
+	'biznes-rivojlanish': {
+		uz: {
+			title: 'Biznes rivojlanish — ochiq ma’lumotlar',
+			description:
+				'Toshkent metropoliteni biznes-rejalari, rivojlanish strategiyasi va korporativ hisobotlari.',
+			keywords: ['biznes rivojlanish', 'metro ochiq ma’lumot', 'korporativ hisobot'],
+		},
+		ru: {
+			title: 'Развитие бизнеса — открытая информация',
+			description:
+				'Бизнес-планы, стратегия развития и корпоративные отчёты Ташкентского метрополитена.',
+			keywords: ['развитие бизнеса', 'открытая информация метро'],
+		},
+		en: {
+			title: 'Business development — open information',
+			description:
+				'Business plans, development strategy and corporate reports of Tashkent Metro.',
+			keywords: ['business development', 'metro open data'],
+		},
+	},
+	'buxgalteriya-balansi': {
+		uz: {
+			title: 'Buxgalteriya balansi va moliyaviy natijalar',
+			description:
+				'Toshkent metropoliteni buxgalteriya balansi, moliyaviy natijalar va audit hisobotlari.',
+			keywords: ['buxgalteriya balansi', 'moliyaviy natijalar', 'metro hisobot'],
+		},
+		ru: {
+			title: 'Бухгалтерский баланс и финансовые результаты',
+			description:
+				'Бухгалтерский баланс, финансовые результаты и аудиторские заключения Ташкентского метрополитена.',
+			keywords: ['бухгалтерский баланс', 'финансовые результаты метро'],
+		},
+		en: {
+			title: 'Accounting balance and financial results',
+			description:
+				'Balance sheet, financial results and audit reports of Tashkent Metro.',
+			keywords: ['balance sheet', 'financial results', 'metro reports'],
+		},
+	},
 	'ai-yordamchi': {
 		uz: {
 			title: 'AI yordamchi — metro bo‘yicha savollar',
@@ -540,24 +560,36 @@ export const PAGE_SEO = {
 		uz: {
 			title: 'Aloqa — metropoliten bilan bog‘lanish',
 			description:
-				'Toshkent metropoliteni aloqa ma’lumotlari: telefon, manzil, ish vaqti va onlayn murojaat kanallari.',
+				'Toshkent metropoliteni: Islom Karimov ko‘chasi 16-A, Shayxontohur tumani, 100027. Qabulxona: +998 (71) 241-65-14, murojaatlar: +998 (71) 245-56-03. Ish vaqti: Dushanba–Juma 8:00–17:00. Email: tashkent@uzmetro.uz',
 			keywords: [
 				'metro aloqa',
 				'metropoliten telefon',
 				'Toshkent metro manzil',
+				'+998 71 241-65-14',
+				'tashkent@uzmetro.uz',
 			],
 		},
 		ru: {
 			title: 'Контакты — связаться с метрополитеном',
 			description:
-				'Контактная информация Ташкентского метро: телефон, адрес, часы работы и онлайн-каналы.',
-			keywords: ['контакты метро', 'метрополитен телефон'],
+				'Ташкентский метрополитен: ул. Ислама Каримова 16-А, Шайхонтохурский район, 100027. Приёмная: +998 (71) 241-65-14, обращения: +998 (71) 245-56-03. Режим работы: Пн–Пт 8:00–17:00. Email: tashkent@uzmetro.uz',
+			keywords: [
+				'контакты метро',
+				'метрополитен телефон',
+				'адрес метро Ташкент',
+				'tashkent@uzmetro.uz',
+			],
 		},
 		en: {
 			title: 'Contact — reach Tashkent Metro',
 			description:
-				'Contact information for Tashkent Metro: phone, address, working hours and online channels.',
-			keywords: ['metro contact', 'Tashkent metro phone'],
+				'Tashkent Metro: 16-A Islam Karimov Street, Shaykhontokhur District, 100027. Reception: +998 (71) 241-65-14, inquiries: +998 (71) 245-56-03. Hours: Mon–Fri 8:00 AM–5:00 PM. Email: tashkent@uzmetro.uz',
+			keywords: [
+				'metro contact',
+				'Tashkent metro phone',
+				'Tashkent metro address',
+				'tashkent@uzmetro.uz',
+			],
 		},
 	},
 	kirish: {

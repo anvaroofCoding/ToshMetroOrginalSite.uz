@@ -1,11 +1,10 @@
-import { Button } from '@/components/ui/button'
 import { useVideoQuery } from '@/store/services/api'
 import { motion } from 'framer-motion'
-import { ArrowRight, BarChart3, TrainFront, Users2 } from 'lucide-react'
+import { BarChart3, TrainFront, Users2 } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-import Link from 'next/link'
 import { useState } from 'react'
 import { AnimatedCounter } from '../animated-counter'
+import { ShowcaseCtaButton } from './showcase-cta-button'
 
 const fadeIn = {
 	hidden: { opacity: 0, y: 15 },
@@ -84,14 +83,9 @@ export default function MetroInfoSection() {
 
 					{/* CTA Button */}
 					<motion.div variants={fadeIn} custom={0.4}>
-						<Link href='/metropoliten-tarixi'>
-							<Button
-								className='gap-2 text-white bg-blue-600 hover:bg-blue-700 shadow-lg'
-								size='lg'
-							>
-								{t('readMore')} <ArrowRight size={18} />
-							</Button>
-						</Link>
+						<ShowcaseCtaButton href='/metropoliten-tarixi'>
+							{t('readMore')}
+						</ShowcaseCtaButton>
 					</motion.div>
 				</div>
 			</motion.div>
@@ -166,14 +160,9 @@ export default function MetroInfoSection() {
 
 				{/* CTA Button */}
 				<motion.div variants={fadeIn} custom={0.4}>
-					<Link href='/metropoliten-tarixi'>
-						<Button
-							className='gap-2 text-white bg-blue-600 hover:bg-blue-700 shadow-lg'
-							size='lg'
-						>
-							{t('readMore')} <ArrowRight size={18} />
-						</Button>
-					</Link>
+					<ShowcaseCtaButton href='/metropoliten-tarixi'>
+						{t('readMore')}
+					</ShowcaseCtaButton>
 				</motion.div>
 			</div>
 		</motion.div>

@@ -4,11 +4,12 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 const baseQuery = fetchBaseQuery({
 	baseUrl: 'http://88.88.0.151:8090/api',
 	prepareHeaders: headers => {
-		// 🔑 tokenni localStorage dan olish
-		const token = localStorage.getItem('token')
+		if (typeof window !== 'undefined') {
+			const token = localStorage.getItem('token')
 
-		if (token) {
-			headers.set('Authorization', `Bearer ${token}`)
+			if (token) {
+				headers.set('Authorization', `Bearer ${token}`)
+			}
 		}
 
 		return headers
@@ -260,6 +261,16 @@ export const api = createApi({
 			query: () => `/videos/`,
 			providesTags: ['Post'],
 		}),
+
+		businessDevelopmentPlans: builder.query({
+			query: () => `/business-plans/accounting-balance/`,
+			providesTags: ['Post'],
+		}),
+
+		financialResultsPlans: builder.query({
+			query: () => `/business-plans/financial-results/`,
+			providesTags: ['Post'],
+		}),
 	}),
 })
 
@@ -300,4 +311,6 @@ export const {
 	useGetFoydalanuvchilarQuery,
 	useGetPopularNewsQuery,
 	useGetPopularNewssQuery,
+	useBusinessDevelopmentPlansQuery,
+	useFinancialResultsPlansQuery,
 } = api

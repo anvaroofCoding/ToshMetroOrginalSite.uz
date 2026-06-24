@@ -79,6 +79,21 @@ const nextConfig = {
 			static: 180,
 		},
 	},
+
+	async redirects() {
+		return [
+			{
+				source: '/:locale/FacePay',
+				destination: '/:locale/facepay',
+				permanent: true,
+			},
+			{
+				source: '/FacePay',
+				destination: '/uz/facepay',
+				permanent: true,
+			},
+		]
+	},
 }
 
 module.exports = withNextIntl(nextConfig)

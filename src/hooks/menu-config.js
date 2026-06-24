@@ -92,6 +92,24 @@ const getMenuItems = t => [
 		],
 	},
 	{
+		label: t('openData'),
+		href: '',
+		dropdown: true,
+		icon: FileText,
+		dropdownItems: [
+			{
+				label: t('businessDevelopment'),
+				href: '/biznes-rivojlanish',
+				icon: TrendingUp,
+			},
+			{
+				label: t('accountingBalance'),
+				href: '/buxgalteriya-balansi',
+				icon: ChartNoAxesCombined,
+			},
+		],
+	},
+	{
 		label: t('contact'),
 		href: '',
 		dropdown: true,

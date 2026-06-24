@@ -21,6 +21,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Tooltip } from '@/components/ui/tooltip'
 import { cn } from '@/lib/utils'
+import { CONTACT_INFO } from '@/lib/contact-info'
 import { useMeQuery } from '@/store/services/api'
 import {
 	IconBrandRumble,
@@ -37,8 +38,11 @@ import {
 	IconFaceId,
 	IconHandStop,
 	IconInfoSquareRounded,
+	IconMail,
+	IconFolderOpen,
 	IconReportMoney,
 	IconSparkles,
+	IconTrendingUp,
 	IconTrain,
 	IconUsers,
 	IconUserSquareRounded,
@@ -66,6 +70,31 @@ import { Link, usePathname, useRouter } from '@/i18n/navigation'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 const LANGUAGES = ['UZ', 'RU', 'EN']
+
+function NavDropdownLink({ sub, className, iconClassName, onClick }) {
+	const Icon = sub.icon
+	const iconClasses = iconClassName ?? 'h-4 w-4 text-blue-600 shrink-0'
+	const content = (
+		<>
+			<Icon className={iconClasses} />
+			{sub.label}
+		</>
+	)
+
+	if (sub.external || sub.href?.startsWith('mailto:')) {
+		return (
+			<a href={sub.href} className={className} onClick={onClick}>
+				{content}
+			</a>
+		)
+	}
+
+	return (
+		<Link href={sub.href} prefetch className={className} onClick={onClick}>
+			{content}
+		</Link>
+	)
+}
 
 function readAuthToken() {
 	if (typeof window === 'undefined') return null
@@ -185,7 +214,6 @@ const getMenuItems = t => [
 		dropdownItems: [
 			{ label: t('news'), href: '/yangiliklar', icon: IconInfoSquareRounded },
 			{ label: t('antiCorruption'), href: '/korrupsiya', icon: IconWorld },
-			{ label: t('tenders'), href: '/tenderlar', icon: IconReportMoney },
 			{ label: t('media'), href: '/mediateka', icon: IconBrandRumble },
 		],
 	},
@@ -237,12 +265,37 @@ const getMenuItems = t => [
 		],
 	},
 	{
+		label: t('openData'),
+		href: '',
+		dropdown: true,
+		icon: IconFolderOpen,
+		dropdownItems: [
+			{
+				label: t('businessDevelopment'),
+				href: '/biznes-rivojlanish',
+				icon: IconTrendingUp,
+			},
+			{
+				label: t('accountingBalance'),
+				href: '/buxgalteriya-balansi',
+				icon: IconReportMoney,
+			},
+			{ label: t('tenders'), href: '/tenderlar', icon: IconReportMoney },
+		],
+	},
+	{
 		label: t('contact'),
 		href: '',
 		dropdown: true,
 		icon: Phone,
 		dropdownItems: [
-			{ label: t('contact'), href: '/aloqa', icon: IconBubbleText },
+			{ label: t('contact_info'), href: '/aloqa', icon: IconBubbleText },
+			...CONTACT_INFO.emails.map(email => ({
+				label: email,
+				href: `mailto:${email}`,
+				icon: IconMail,
+				external: true,
+			})),
 		],
 	},
 ]
@@ -297,20 +350,13 @@ function HoverDropdown({ item }) {
 						className='absolute left-0 top-full pt-2 z-50'
 					>
 						<div className='w-56 bg-white/95 backdrop-blur-md border border-white/20 rounded-xl shadow-xl overflow-hidden'>
-							{item.dropdownItems?.map(sub => {
-								const Icon = sub.icon
-								return (
-									<Link
-										key={sub.label}
-										href={sub.href}
-										prefetch
-										className='flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-700 hover:bg-blue-100 transition-colors'
-									>
-										<Icon className='h-4 w-4 text-blue-600 shrink-0' />
-										{sub.label}
-									</Link>
-								)
-							})}
+							{item.dropdownItems?.map(sub => (
+								<NavDropdownLink
+									key={sub.label}
+									sub={sub}
+									className='flex items-center gap-3 px-4 py-3 text-sm font-medium text-slate-700 hover:bg-blue-100 transition-colors'
+								/>
+							))}
 						</div>
 					</motion.div>
 				)}
@@ -423,7 +469,7 @@ function MobileMenu({
 						animate={{ opacity: 1 }}
 						exit={{ opacity: 0 }}
 						transition={{ duration: 0.3 }}
-						className='fixed inset-0 bg-black/50 z-40 lg:hidden'
+						className='fixed inset-0 bg-black/50 z-40 xl:hidden'
 						onClick={onClose}
 					/>
 
@@ -433,7 +479,7 @@ function MobileMenu({
 						animate={{ x: 0 }}
 						exit={{ x: '100%' }}
 						transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-						className='fixed top-0 right-0 h-full w-[85%] max-w-sm bg-[#173aad] z-50 lg:hidden overflow-y-auto'
+						className='fixed top-0 right-0 h-full w-[85%] max-w-sm bg-[#173aad] z-50 xl:hidden overflow-y-auto'
 					>
 						{/* Pattern overlay */}
 						<div className='absolute inset-0 opacity-20 pointer-events-none'>
@@ -456,7 +502,7 @@ function MobileMenu({
 											onClose()
 										}}
 										variant='default'
-										className='text-white font-bold bg-white/10 hover:bg-white/20 lg:hidden block'
+										className='text-white font-bold bg-white/10 hover:bg-white/20 xl:hidden block'
 									>
 										{t('logout')}
 									</Button>
@@ -464,7 +510,7 @@ function MobileMenu({
 									<Button
 										asChild
 										variant='default'
-										className='text-white font-bold bg-white/10 hover:bg-white/20 lg:hidden block'
+										className='text-white font-bold bg-white/10 hover:bg-white/20 xl:hidden block'
 									>
 										<Link href='/kirish' onClick={onClose}>
 											{t('login')}
@@ -515,21 +561,15 @@ function MobileMenu({
 														className='overflow-hidden'
 													>
 														<div className='pl-6 py-2 space-y-1'>
-															{item.dropdownItems.map(sub => {
-																const Icon = sub.icon
-																return (
-																	<Link
-																		key={sub.label}
-																		href={sub.href}
-																		prefetch
-																		onClick={onClose}
-																		className='flex items-center gap-3 px-3 py-2.5 text-sm text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-colors'
-																	>
-																		<Icon className='h-4 w-4' />
-																		{sub.label}
-																	</Link>
-																)
-															})}
+															{item.dropdownItems.map(sub => (
+																<NavDropdownLink
+																	key={sub.label}
+																	sub={sub}
+																	onClick={onClose}
+																	iconClassName='h-4 w-4 shrink-0'
+																	className='flex items-center gap-3 px-3 py-2.5 text-sm text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-colors'
+																/>
+															))}
 														</div>
 													</motion.div>
 												)}
@@ -753,7 +793,7 @@ export default function Navbar() {
 					<Logo t={t} />
 
 					{/* Desktop navigation */}
-					<nav className='hidden lg:flex items-center gap-1'>
+					<nav className='hidden xl:flex items-center gap-1'>
 						{menuItems.map(item =>
 							item.dropdown ? (
 								<HoverDropdown key={item.label} item={item} />
@@ -785,7 +825,7 @@ export default function Navbar() {
 									: t('loginz')
 							}
 						>
-							<div className='hidden lg:block'>
+							<div className='hidden xl:block'>
 								<AuthNavButton
 									isAuthenticated={isAuthenticated}
 									me={me}
@@ -799,7 +839,7 @@ export default function Navbar() {
 							variant='ghost'
 							size='sm'
 							onClick={() => setMobileOpen(true)}
-							className='lg:hidden hover:bg-white/10'
+							className='xl:hidden hover:bg-white/10'
 							aria-label='Open menu'
 						>
 							<Menu className='h-5 w-5 text-white' />

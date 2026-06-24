@@ -7,7 +7,6 @@ const pairs = [
 	['tolov-usullari', 'tolovUsullariSeo'],
 	['atto-kartalar', 'attoKartalarSeo'],
 	['atto-ilova', 'attoIlovaSeo'],
-	['FacePay', 'facePayFolderSeo'],
 	['palmpay', 'palmpaySeo'],
 	['foydalanish-qoidalari', 'foydalanishQoidalariSeo'],
 	['davlat-ramzlari', 'davlatRamzlariSeo'],

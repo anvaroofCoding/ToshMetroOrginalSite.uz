@@ -1,5 +1,6 @@
 "use client";
 
+import { PageLoadingOverlay } from "@/components/page-loading";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "motion/react";
 import { useTranslations } from "next-intl";
@@ -93,27 +94,24 @@ export const ImagesSlider = ({
   }, [autoplay, interval, handleNext, handlePrevious, loadedImages.length]);
 
   // ==============================
-  // ANIMATION VARIANTS
+  // ANIMATION VARIANTS — crossfade (ustma-ust o'tish)
   // ==============================
-  const slideVariants = {
+  const crossfadeVariants = {
     initial: {
       opacity: 0,
-      x: "100%", // O‘ng tomonda boshlanadi
     },
     visible: {
       opacity: 1,
-      x: 0, // Markazga keladi
       transition: {
-        duration: 0.5,
-        ease: "easeOut",
+        duration: 1.2,
+        ease: "easeInOut",
       },
     },
     exit: {
       opacity: 0,
-      x: "-100%", // Chap tomondan chiqib ketadi
       transition: {
-        duration: 0.4,
-        ease: "easeIn",
+        duration: 1.2,
+        ease: "easeInOut",
       },
     },
   };
@@ -124,13 +122,7 @@ export const ImagesSlider = ({
   const areImagesLoaded = loadedImages?.length > 0;
 
   if (loading) {
-    return (
-      <div className="fixed  w-full h-screen inset-0 z-1030 flex items-center justify-center bg-white text-white">
-        <div className="animate-pulse text-lg tracking-widest text-black">
-          {t("two_hundred_thirteen")}
-        </div>
-      </div>
-    );
+    return <PageLoadingOverlay label={t("two_hundred_thirteen")} />;
   }
   return (
     <div
@@ -157,16 +149,16 @@ export const ImagesSlider = ({
         />
       )}
 
-      {/* SLIDER IMAGE */}
+      {/* SLIDER IMAGE — birinchi rasm ketmasdan ikkinchisi paydo bo'ladi */}
       {areImagesLoaded && (
-        <AnimatePresence mode="wait">
+        <AnimatePresence initial={false}>
           <motion.img
             key={currentIndex}
             src={loadedImages[currentIndex]}
             initial="initial"
             animate="visible"
-            exit={direction === "up" ? "upExit" : "downExit"}
-            variants={slideVariants}
+            exit="exit"
+            variants={crossfadeVariants}
             className="absolute inset-0 h-full w-full object-cover object-center"
           />
         </AnimatePresence>

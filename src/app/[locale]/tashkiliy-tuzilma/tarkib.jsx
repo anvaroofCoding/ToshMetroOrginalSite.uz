@@ -2,6 +2,7 @@
 
 import { useParams } from "next/navigation";
 
+import { PageLoadingOverlay } from "@/components/page-loading";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Dialog,
@@ -21,11 +22,7 @@ export default function TransportDirectory() {
     locale,
   });
   if (isLoading) {
-    return (
-      <div className="w-full h-screen justify-center flex items-center">
-        <p>{t("two_hundred_thirteen")}</p>
-      </div>
-    );
+    return <PageLoadingOverlay label={t("two_hundred_thirteen")} />;
   }
   return (
     <div className="min-h-screen">

@@ -1,4 +1,5 @@
 'use client'
+import { PageLoadingOverlay } from '@/components/page-loading'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import {
@@ -83,11 +84,7 @@ export default function MetroLostItemForm() {
 	}
 
 	if (loadsn) {
-		return (
-			<div className='w-full h-screen justify-center flex items-center'>
-				<p>{t('two_hundred_thirteen')}</p>
-			</div>
-		)
+		return <PageLoadingOverlay label={t('two_hundred_thirteen')} />
 	}
 
 	// Faqat avval murojaat yuborilgan va yangi yuborish taqiqlanganda success ko'rsatiladi
@@ -96,7 +93,8 @@ export default function MetroLostItemForm() {
 
 	if (!hasPendingRequest) {
 		return (
-			<Card className='container bg-white shadow-md border border-blue-100'>
+			<div className='container pt-5'>
+			<Card className='bg-white shadow-md border border-blue-100'>
 				<CardHeader>
 					<CardTitle className='text-blue-900'>{t('send_request')}</CardTitle>
 					<CardDescription className='text-gray-600 leading-relaxed'>
@@ -230,6 +228,7 @@ export default function MetroLostItemForm() {
 					)}
 				</CardFooter>
 			</Card>
+			</div>
 		)
 	} else {
 		return (
