@@ -1,4 +1,3 @@
-import { ContentDirectory } from '@/components/seo/content-directory'
 import { ItemListJsonLd } from '@/components/seo/json-ld'
 import { fetchTendersList, fetchAllTenderItems } from '@/lib/seo/server-api'
 import { getPageSeoConfig } from '@/lib/seo/build-metadata'
@@ -21,12 +20,6 @@ export default async function Page({ params }) {
 				listName={seo?.title ?? 'Tenderlar'}
 			/>
 			<Tender initialData={initialData} />
-			<ContentDirectory
-				items={allItems}
-				locale={locale}
-				segment='tenderlar'
-				heading='Barcha tenderlar'
-			/>
 		</div>
 	)
 }

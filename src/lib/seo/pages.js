@@ -378,9 +378,9 @@ export const PAGE_SEO = {
 	},
 	rahbariyat: {
 		uz: {
-			title: 'Metropoliten rahbariyati',
+			title: 'Toshkent metropoliteni AJ ning rahbariyati',
 			description:
-				'Toshkent metropoliteni rahbariyati: boshqaruv, rahbarlar va mas’ul xodimlar haqida ma’lumot.',
+				'Toshkent metropoliteni AJ ning rahbariyati: boshqaruv, rahbarlar va mas’ul xodimlar haqida ma’lumot.',
 			keywords: ['metro rahbariyat', 'metropoliten boshqaruv'],
 		},
 		ru: {

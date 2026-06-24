@@ -2,6 +2,13 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react'
 
+import {
+	authCardClass,
+	authOtpGroupClass,
+	authOutlineBtnClass,
+	authPrimaryBtnClass,
+	authTitleClass,
+} from '@/components/auth/auth-styles'
 import { Button } from '@/components/ui/button'
 import {
 	Card,
@@ -30,7 +37,6 @@ import { useTranslations } from 'next-intl'
 import { toast } from 'sonner'
 import Dialog01 from './ui/dialog'
 
-const compactBtnClass = 'h-9 gap-1.5 px-4 text-sm font-medium'
 const OTP_LENGTH = 6
 
 export function LoginForm({ className, ...props }) {
@@ -118,20 +124,20 @@ export function LoginForm({ className, ...props }) {
 	return (
 		<div className={cn('flex flex-col gap-6', className)} {...props}>
 			<Dialog01 open={openDialog} onOpenChange={setOpenDialog} />
-			<Card>
-				<CardHeader>
+			<Card className={authCardClass}>
+				<CardHeader className='gap-3 px-5 pb-0 sm:px-6'>
 					{showOTP ? (
-						<CardDescription className='text-center text-base leading-relaxed text-foreground'>
+						<CardDescription className='text-center text-sm leading-relaxed text-blue-900/80 sm:text-base'>
 							{t('smsCodeSentTo', { phone: phoneDisplay })}
 						</CardDescription>
 					) : (
-						<CardTitle>{t('loginTitle')}</CardTitle>
+						<CardTitle className={authTitleClass}>{t('loginTitle')}</CardTitle>
 					)}
 				</CardHeader>
 
-				<CardContent>
+				<CardContent className='px-5 sm:px-6'>
 					{!showOTP ? (
-						<FieldGroup>
+						<FieldGroup className='gap-4'>
 							<Field>
 								<UzPhoneInput
 									id='login-phone'
@@ -140,63 +146,55 @@ export function LoginForm({ className, ...props }) {
 								/>
 							</Field>
 
-							<div className='flex flex-col gap-2 pt-1 sm:flex-row'>
+							<div className='flex flex-col gap-2.5 sm:flex-row'>
 								<Button
 									type='button'
-									size='sm'
 									onClick={requestOtp}
 									disabled={!isValidUzPhone(phones) || isLoading}
-									className={cn(
-										compactBtnClass,
-										'flex-1 bg-blue-800 text-white hover:bg-blue-700 disabled:opacity-50',
-									)}
+									className={cn(authPrimaryBtnClass, 'flex-1')}
 								>
 									{isLoading ? (
-										<Loader2 className='h-3.5 w-3.5 animate-spin' />
+										<Loader2 className='h-4 w-4 animate-spin' />
 									) : (
-										<Send className='h-3.5 w-3.5' />
+										<Send className='h-4 w-4' />
 									)}
 									{t('sendCode')}
 								</Button>
 
 								<Button
 									variant='outline'
-									size='sm'
 									asChild
-									className={cn(
-										compactBtnClass,
-										'flex-1 border-blue-200 text-blue-800 hover:bg-blue-50',
-									)}
+									className={cn(authOutlineBtnClass, 'flex-1')}
 								>
 									<Link href='/royxatdan-otish'>{t('register')}</Link>
 								</Button>
 							</div>
 						</FieldGroup>
 					) : (
-						<FieldGroup>
-							<div className='relative flex justify-center'>
+						<FieldGroup className='gap-4'>
+							<div className='relative flex justify-center py-1'>
 								<InputOTP
 									value={otp}
 									onChange={handleOTPChange}
 									maxLength={OTP_LENGTH}
 									disabled={verifyingOtp}
 								>
-									<InputOTPGroup className='gap-2.5 *:rounded-md *:border'>
+									<InputOTPGroup className={authOtpGroupClass}>
 										{[0, 1, 2, 3, 4, 5].map(i => (
 											<InputOTPSlot key={i} index={i} />
 										))}
 									</InputOTPGroup>
 								</InputOTP>
 								{verifyingOtp ? (
-									<div className='absolute inset-0 flex items-center justify-center rounded-md bg-white/70'>
-										<Loader2 className='h-6 w-6 animate-spin text-blue-800' />
+									<div className='absolute inset-0 flex items-center justify-center rounded-lg bg-white/75'>
+										<Loader2 className='h-6 w-6 animate-spin text-blue-900' />
 									</div>
 								) : null}
 							</div>
 
-							<FieldDescription className='text-center'>
+							<FieldDescription className='text-center text-sm'>
 								{seconds > 0 ? (
-									<span className='text-muted-foreground'>
+									<span className='text-blue-900/50'>
 										{t('resend')} ({seconds}s)
 									</span>
 								) : (
@@ -204,11 +202,11 @@ export function LoginForm({ className, ...props }) {
 										type='button'
 										onClick={handleResend}
 										disabled={isLoading}
-										className='text-primary underline underline-offset-2 disabled:opacity-50'
+										className='font-medium text-blue-900 underline-offset-2 hover:underline disabled:opacity-50'
 									>
 										{isLoading ? (
-											<span className='inline-flex items-center gap-1'>
-												<Loader2 className='h-3.5 w-3.5 animate-spin' />
+											<span className='inline-flex items-center gap-1.5'>
+												<Loader2 className='h-4 w-4 animate-spin' />
 												{t('resend')}
 											</span>
 										) : (

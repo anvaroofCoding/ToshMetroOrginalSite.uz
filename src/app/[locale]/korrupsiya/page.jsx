@@ -1,4 +1,3 @@
-import { ContentDirectory } from '@/components/seo/content-directory'
 import { ItemListJsonLd } from '@/components/seo/json-ld'
 import { fetchKorrupsiyaList, fetchAllKorrupsiyaItems } from '@/lib/seo/server-api'
 import { getPageSeoConfig } from '@/lib/seo/build-metadata'
@@ -21,12 +20,6 @@ export default async function Page({ params }) {
 				listName={seo?.title ?? 'Korrupsiya'}
 			/>
 			<Corubsiya initialData={initialData} />
-			<ContentDirectory
-				items={allItems}
-				locale={locale}
-				segment='korrupsiya'
-				heading='Barcha korrupsiya e’lonlari'
-			/>
 		</div>
 	)
 }

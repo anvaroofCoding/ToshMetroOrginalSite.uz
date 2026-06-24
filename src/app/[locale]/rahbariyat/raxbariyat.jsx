@@ -15,9 +15,10 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 
-export default function ManagementPage() {
+export default function ManagementPage({ initialManagement = [] }) {
   const { locale } = useParams();
-  const { data: managementData, isLoading } = useRahbariyatQuery({ locale });
+  const { data: fetchedManagement, isLoading } = useRahbariyatQuery({ locale });
+  const managementData = fetchedManagement ?? initialManagement;
   const t = useTranslations("menu");
   const formatBiography = (biography) => {
     if (biography === "Aniq emas") {
@@ -43,15 +44,15 @@ export default function ManagementPage() {
     return paragraphs;
   };
 
-  if (isLoading) {
+  if (isLoading && !managementData.length) {
     return <PageLoadingOverlay label={t("two_hundred_thirteen")} />;
   }
   return (
     <div className="min-h-screen">
       {/* Header Section */}
-      <div className="py-8">
+      <div className="pt-16 pb-8 sm:pt-20 sm:pb-10">
         <div className="container">
-          <div className="text-center lg:text-left">
+          <div className="text-center">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-blue-900">
               {t("three_hundred_ninety_six")}
             </h1>
@@ -62,7 +63,7 @@ export default function ManagementPage() {
       {/* Management Grid */}
       <div className="container py-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
-          {managementData.map((member) => (
+          {(managementData ?? []).map((member) => (
             <Card
               key={member.id}
               className="group overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 rounded-xl border-0"
@@ -81,13 +82,13 @@ export default function ManagementPage() {
                           className="w-full h-56 sm:h-64 lg:h-72 object-contain transition-all duration-500 group-hover:scale-110"
                         />
                         {/* Enhanced Hover Overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#0E327F]/90 via-[#0E327F]/50 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end justify-center">
+                        <div className="absolute inset-0 bg-gradient-to-t from-blue-900/90 via-blue-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end justify-center">
                           <div className="text-white w-full text-center opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-6 group-hover:translate-y-0 p-4">
                             <h3 className="text-lg font-bold mb-2 line-clamp-2">
                               {member.lastName} {member.firstName}{" "}
                               {member.middleName}{" "}
                             </h3>
-                            <p className="text-sm text-gray-200 flex justify-center items-center">
+                            <p className="text-sm text-blue-100 flex justify-center items-center">
                               <Eye className="w-4 h-4 mr-2" /> Rasmni
                               kattalashtirish
                             </p>
@@ -117,7 +118,7 @@ export default function ManagementPage() {
                 </div>
 
                 {/* Content Section */}
-                <div className="p-4 lg:p-6 flex flex-col justify-between h-[370px] ">
+                <div className="p-4 lg:p-6 flex flex-col justify-between min-h-[320px]">
                   {/* Name and Position */}
                   <div className="mb-4">
                     <h3 className="text-lg lg:text-xl font-bold text-gray-900 mb-2 line-clamp-2 leading-tight">
@@ -135,15 +136,15 @@ export default function ManagementPage() {
                   {/* Contact Information */}
                   <div className="space-y-3 mb-6">
                     <div className="flex items-start text-sm text-gray-600">
-                      <Phone className="w-4 h-4 mr-3 mt-0.5 text-[#0E327F] flex-shrink-0" />
+                      <Phone className="w-4 h-4 mr-3 mt-0.5 text-blue-900 flex-shrink-0" />
                       <span className="break-all">{member.phone}</span>
                     </div>
                     <div className="flex items-start text-sm text-gray-600">
-                      <Mail className="w-4 h-4 mr-3 mt-0.5 text-[#0E327F] flex-shrink-0" />
+                      <Mail className="w-4 h-4 mr-3 mt-0.5 text-blue-900 flex-shrink-0" />
                       <span className="break-all">{member.email}</span>
                     </div>
                     <div className="flex items-start text-sm text-gray-600">
-                      <Clock className="w-4 h-4 mr-3 mt-0.5 text-[#0E327F] flex-shrink-0" />
+                      <Clock className="w-4 h-4 mr-3 mt-0.5 text-blue-900 flex-shrink-0" />
                       <span>{member.hours}</span>
                     </div>
                   </div>
@@ -153,7 +154,7 @@ export default function ManagementPage() {
                     <DialogTrigger asChild>
                       <Button
                         variant="outline"
-                        className="w-full border-[#0E327F] text-[#0E327F] hover:bg-[#0E327F] hover:text-white transition-all duration-300 font-medium bg-transparent "
+                        className="w-full border-blue-900 text-blue-900 hover:bg-blue-900 hover:text-white transition-all duration-300 font-medium bg-transparent "
                       >
                         <User className="w-4 h-4 mr-2" />
                         Biografiyani ko'rish
@@ -170,9 +171,9 @@ export default function ManagementPage() {
                         </p>
                       </DialogHeader>
                       <div className="mt-6">
-                        <div className="bg-gradient-to-r from-gray-50 to-blue-50 p-6 rounded-xl border-l-4 border-[#0E327F] shadow-inner">
+                        <div className="bg-gradient-to-r from-gray-50 to-blue-50 p-6 rounded-xl border-l-4 border-blue-900 shadow-inner">
                           <h4 className="font-semibold text-gray-900 mb-4 flex items-center">
-                            <User className="w-4 h-4 mr-2 text-[#0E327F]" />
+                            <User className="w-4 h-4 mr-2 text-blue-900" />
                             Biografiya
                           </h4>
                           <div className="space-y-4">

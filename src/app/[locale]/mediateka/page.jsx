@@ -1,5 +1,4 @@
 import { MediaGalleryJsonLd } from '@/components/seo/json-ld'
-import { MediaSeoDirectory } from '@/components/seo/media-seo-directory'
 import { fetchMediaPhotos, fetchMediaVideos } from '@/lib/seo/server-api'
 import Mediatekas from './mediateka'
 
@@ -20,11 +19,6 @@ export default async function Page({ params }) {
 			<Mediatekas
 				initialPhotos={initialPhotos}
 				initialVideos={initialVideos}
-			/>
-			<MediaSeoDirectory
-				photos={initialPhotos}
-				videos={initialVideos}
-				heading='Mediateka — barcha foto va videolar'
 			/>
 		</div>
 	)

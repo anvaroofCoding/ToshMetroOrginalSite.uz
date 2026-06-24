@@ -88,12 +88,12 @@ export function UzPhoneInput({
 	return (
 		<div
 			className={cn(
-				'flex overflow-hidden rounded-md border border-blue-200 bg-white shadow-xs transition-[color,box-shadow] focus-within:border-ring focus-within:ring-[3px] focus-within:ring-ring/50',
+				'flex overflow-hidden rounded-xl border border-blue-200 bg-white shadow-sm transition-[color,box-shadow] focus-within:border-blue-900 focus-within:ring-[3px] focus-within:ring-blue-900/20',
 				className,
 			)}
 		>
-			<div className='flex shrink-0 items-center border-r border-blue-200 bg-slate-50 px-3'>
-				<span className='text-base font-semibold text-gray-800'>+998</span>
+			<div className='flex shrink-0 items-center border-r border-blue-200 bg-blue-50 px-3'>
+				<span className='text-sm font-semibold text-blue-900'>+998</span>
 			</div>
 			<Input
 				id={id}
@@ -107,7 +107,7 @@ export function UzPhoneInput({
 				placeholder={placeholder}
 				maxLength={17}
 				className={cn(
-					'h-11 flex-1 rounded-none border-0 bg-white px-3 text-lg text-gray-900 shadow-none placeholder:text-gray-400 focus-visible:ring-0',
+					'h-11 flex-1 rounded-none border-0 bg-white px-3 text-base text-blue-900 shadow-none placeholder:text-blue-300 focus-visible:ring-0',
 					inputClassName,
 				)}
 			/>

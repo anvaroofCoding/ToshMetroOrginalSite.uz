@@ -1,4 +1,3 @@
-import { ContentDirectory } from '@/components/seo/content-directory'
 import { ItemListJsonLd } from '@/components/seo/json-ld'
 import { fetchNewsList, fetchAllNewsItems } from '@/lib/seo/server-api'
 import { getPageSeoConfig } from '@/lib/seo/build-metadata'
@@ -21,12 +20,6 @@ export default async function Page({ params }) {
 				listName={seo?.title ?? 'Yangiliklar'}
 			/>
 			<NewsMain initialData={initialData} />
-			<ContentDirectory
-				items={allItems}
-				locale={locale}
-				segment='yangiliklar'
-				heading='Barcha yangiliklar'
-			/>
 		</>
 	)
 }

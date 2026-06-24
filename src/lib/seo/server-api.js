@@ -109,3 +109,13 @@ export async function fetchAllKorrupsiyaItems(locale) {
 		`${API_BASE}/korrupsiya/${locale}?search=&page=${page}&page_size=${pageSize}`,
 	)
 }
+
+export async function fetchDepartments(locale) {
+	const data = await fetchJson(`${API_BASE}/departments/${locale}`)
+	return Array.isArray(data) ? data : data?.results ?? []
+}
+
+export async function fetchManagement(locale) {
+	const data = await fetchJson(`${API_BASE}/managements/${locale}`)
+	return Array.isArray(data) ? data : data?.results ?? []
+}

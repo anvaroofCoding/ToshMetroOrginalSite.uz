@@ -170,43 +170,32 @@ export default function Mediatekas({ initialPhotos = [], initialVideos = [] }) {
             {t("mediateka")}
           </h1>
         </div>
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-12 animate-in zoom-in duration-1000 delay-300">
-          {/* Compact Tabs */}
-          <div className="relative bg-white/80 backdrop-blur-sm rounded-xl p-1 shadow-lg border border-blue-100">
-            <div
-              className="absolute top-1 bottom-1 bg-blue-900 rounded-lg transition-all duration-300 ease-out shadow-md"
-              style={{
-                width: "calc(50% - 4px)",
-                left: activeTab === "photos" ? "4px" : "calc(50% + 0px)",
-              }}
-            />
+        <div className="flex flex-wrap items-center justify-start gap-2 sm:gap-3 mb-12 animate-in zoom-in duration-1000 delay-300">
+          <button
+            type="button"
+            onClick={() => handleTabChange("photos")}
+            className={`inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-sm lg:text-base transition-all duration-300 ${
+              activeTab === "photos"
+                ? "bg-blue-900 text-white shadow-lg hover:bg-blue-800"
+                : "bg-white text-blue-900 border border-blue-200 shadow-md hover:bg-blue-50"
+            }`}
+          >
+            <ImageIcon className="w-4 h-4" />
+            <span>{t("photos")}</span>
+          </button>
 
-            <div className="relative flex">
-              <button
-                onClick={() => handleTabChange("photos")}
-                className={`flex items-center gap-2 px-4 py-2.5 lg:px-6 lg:py-3 rounded-lg font-medium text-sm lg:text-base transition-all duration-300 min-w-[120px] lg:min-w-[140px] justify-center ${
-                  activeTab === "photos"
-                    ? "text-white"
-                    : "text-blue-900 hover:text-blue-700"
-                }`}
-              >
-                <ImageIcon className="w-4 h-4" />
-                <span>{t("photos")}</span>
-              </button>
-
-              <button
-                onClick={() => handleTabChange("videos")}
-                className={`flex items-center gap-2 px-4 py-2.5 lg:px-6 lg:py-3 rounded-lg font-medium text-sm lg:text-base transition-all duration-300 min-w-[120px] lg:min-w-[140px] justify-center ${
-                  activeTab === "videos"
-                    ? "text-white"
-                    : "text-blue-900 hover:text-blue-700"
-                }`}
-              >
-                <Video className="w-4 h-4" />
-                <span>{t("videos")}</span>
-              </button>
-            </div>
-          </div>
+          <button
+            type="button"
+            onClick={() => handleTabChange("videos")}
+            className={`inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-sm lg:text-base transition-all duration-300 ${
+              activeTab === "videos"
+                ? "bg-blue-900 text-white shadow-lg hover:bg-blue-800"
+                : "bg-white text-blue-900 border border-blue-200 shadow-md hover:bg-blue-50"
+            }`}
+          >
+            <Video className="w-4 h-4" />
+            <span>{t("videos")}</span>
+          </button>
         </div>
         {/* Animated Tabs */}
 

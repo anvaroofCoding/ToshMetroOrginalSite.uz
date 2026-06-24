@@ -162,6 +162,78 @@ export function ItemListJsonLd({ items = [], locale, segment, listName }) {
 	return <JsonLdScript schema={schema} />
 }
 
+export function DepartmentsListJsonLd({ departments = [], locale, listName }) {
+	if (!departments.length) return null
+
+	const schema = {
+		'@context': 'https://schema.org',
+		'@type': 'ItemList',
+		name: listName,
+		url: `${SITE.baseUrl}/${locale}/tashkiliy-tuzilma`,
+		numberOfItems: departments.length,
+		itemListElement: departments.map((dept, index) => ({
+			'@type': 'ListItem',
+			position: index + 1,
+			item: {
+				'@type': 'Organization',
+				name: dept.title,
+				url: `${SITE.baseUrl}/${locale}/tashkiliy-tuzilma`,
+				...(dept.image ? { image: dept.image } : {}),
+				employee: {
+					'@type': 'Person',
+					name: dept.head,
+					email: dept.email || undefined,
+					telephone: dept.phone || undefined,
+				},
+				description: [dept.schedule, dept.reception].filter(Boolean).join('. '),
+			},
+		})),
+	}
+
+	return <JsonLdScript schema={schema} />
+}
+
+export function ManagementListJsonLd({ members = [], locale, listName }) {
+	if (!members.length) return null
+
+	const schema = {
+		'@context': 'https://schema.org',
+		'@type': 'ItemList',
+		name: listName,
+		url: `${SITE.baseUrl}/${locale}/rahbariyat`,
+		numberOfItems: members.length,
+		itemListElement: members.map((member, index) => {
+			const name = [member.lastName, member.firstName, member.middleName]
+				.filter(Boolean)
+				.join(' ')
+
+			return {
+				'@type': 'ListItem',
+				position: index + 1,
+				item: {
+					'@type': 'Person',
+					name,
+					jobTitle: member.position || undefined,
+					email: member.email || undefined,
+					telephone: member.phone || undefined,
+					image: member.image || undefined,
+					description:
+						member.biography && member.biography !== 'Aniq emas'
+							? member.biography
+							: undefined,
+					worksFor: {
+						'@type': 'Organization',
+						name: SITE.legalName,
+						url: SITE.baseUrl,
+					},
+				},
+			}
+		}),
+	}
+
+	return <JsonLdScript schema={schema} />
+}
+
 export function NewsArticleJsonLd({ data, locale, segment = 'yangiliklar' }) {
 	if (!data?.title) return null
 

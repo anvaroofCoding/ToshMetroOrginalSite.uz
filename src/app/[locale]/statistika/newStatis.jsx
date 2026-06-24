@@ -26,6 +26,7 @@ import {
   Users,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { getStatisticsProxyPath } from "@/lib/statistics-proxy";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import {
@@ -94,10 +95,7 @@ const MetroStatisticsDashboard = () => {
 
       for (const year of years) {
         try {
-          const response = await fetch(
-            `
-https://abbos.uzmetro.uz/api/statistics/${lang}/${year}/1/`,
-          );
+          const response = await fetch(getStatisticsProxyPath(lang, year, "1"));
           if (response.ok) {
             const data = await response.json();
             if (data && data.length > 0) {
@@ -164,8 +162,7 @@ https://abbos.uzmetro.uz/api/statistics/${lang}/${year}/1/`,
       setLoading(true);
       try {
         const response = await fetch(
-          `
-https://abbos.uzmetro.uz/api/statistics/${lang}/${selectedYear}/${selectedQuarter}/`,
+          getStatisticsProxyPath(lang, selectedYear, selectedQuarter),
         );
         if (!response.ok) {
           throw new Error(`HTTP xatolik! Status: ${response.status}`);

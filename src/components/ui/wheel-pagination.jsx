@@ -67,7 +67,7 @@ export default function WheelPagination({
         size="icon"
         onClick={prevPage}
         disabled={active === 0}
-        className="text-gray-400 hover:text-primary disabled:opacity-40 transition-colors">
+        className="text-blue-400 hover:text-blue-900 disabled:opacity-40 transition-colors">
         <ChevronLeft className="w-5 h-5" />
       </Button>
       {/* Page numbers carousel */}
@@ -79,10 +79,10 @@ export default function WheelPagination({
             animate={{ scale: active === p ? 1.3 : 1 }}
             transition={{ type: "spring", stiffness: 300, damping: 25 }}
             className={cn(
-              "w-10 h-10 flex items-center justify-center rounded-full font-medium min-h-[40px]",
+              "w-10 h-10 flex items-center justify-center rounded-full font-medium min-h-[40px] transition-colors",
               active === p
-                ? "bg-primary text-white border border-primary"
-                : "bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200"
+                ? "bg-blue-900 text-white border border-blue-900 shadow-md"
+                : "bg-blue-50 text-blue-900 border border-blue-100 hover:bg-blue-100"
             )}
             onClick={() => setActive(p)}>
             {p + 1}
@@ -95,7 +95,7 @@ export default function WheelPagination({
         size="icon"
         onClick={nextPage}
         disabled={active === totalPages - 1}
-        className="text-gray-400 hover:text-primary disabled:opacity-40 transition-colors">
+        className="text-blue-400 hover:text-blue-900 disabled:opacity-40 transition-colors">
         <ChevronRight className="w-5 h-5" />
       </Button>
     </div>
